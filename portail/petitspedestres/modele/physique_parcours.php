@@ -95,12 +95,12 @@
                                                                 nom,
                                                                 distance,
                                                                 lieu,
-                                                                image)
+                                                                url)
                                                         VALUES(:team,
                                                                :nom,
                                                                :distance,
                                                                :lieu,
-                                                               :image)');
+                                                               :url)');
 
     $req->execute($parcours);
 
@@ -121,7 +121,7 @@
                           SET nom      = :nom,
                               distance = :distance,
                               lieu     = :lieu,
-                              image    = :image
+                              url      = :url
                           WHERE id     = ' . $idParcours);
 
     $req->execute($parcours);

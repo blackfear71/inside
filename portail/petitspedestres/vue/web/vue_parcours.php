@@ -83,8 +83,8 @@
                 echo 'Distance : ' . $parcours->getDistance() . ' km<br/>';
                 echo 'Lieu : ' . $parcours->getLieu();
 
-                if (!empty($parcours->getImage()))
-                  echo '<br/><img src="' . $parcours->getImage() .'" alt="' . $parcours->getNom() . '" class="PP-image" /><br/>';
+                if (!empty($parcours->getUrl()))
+                  echo '<embed src="https://drive.google.com/viewerng/viewer?embedded=true&url=' . $parcours->getUrl() .'" class="PP-pdf">';
               echo '</p>';
             echo '</div>';
           }

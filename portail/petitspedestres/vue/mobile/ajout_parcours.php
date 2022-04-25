@@ -75,9 +75,9 @@
                 echo '<label class="PP-label-parcours">Lieu : </label>';
                 echo '<input type="text" placeholder="Lieu" value="' . $_SESSION['save']['lieu_parcours'] . '" name="location" class="PP-monoligne" />';
 
-                // Lien image
-                echo '<label class="PP-label-parcours">Url image : </label>';
-                echo '<input type="text" placeholder="Url de l\'image" value="' . $_SESSION['save']['image_parcours'] . '" name="picurl" class="PP-monoligne" />';
+                // Lien url
+                echo '<label class="PP-label-parcours">Url : </label>';
+                echo '<input type="text" placeholder="Url" value="' . $_SESSION['save']['url_parcours'] . '" name="url" class="PP-monoligne" />';
               echo '</div>';
 
               echo '<input type="submit" name="modification" value="Valider" class="PP-bouton" />';

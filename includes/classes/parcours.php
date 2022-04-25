@@ -6,7 +6,7 @@
     private $nom;
     private $distance;
     private $lieu;
-    private $image;
+    private $url;
 
     // Constructeur par défaut (objet vide)
     public function __construct()
@@ -16,7 +16,7 @@
       $this->nom      = '';
       $this->distance = 0;
       $this->lieu     = '';
-      $this->image    = '';
+      $this->url    = '';
     }
 
     // Constructeur de l'objet Parcours en fonction de données
@@ -46,8 +46,8 @@
       if (isset($data['lieu']))
         $this->lieu     = $data['lieu'];
 
-      if (isset($data['image']))
-        $this->image    = $data['image'];
+      if (isset($data['url']))
+        $this->url      = $data['url'];
     }
 
     // Sécurisation des données
@@ -57,7 +57,7 @@
       $data->setNom(htmlspecialchars($data->getNom()));
       $data->setDistance(htmlspecialchars($data->getDistance()));
       $data->setLieu(htmlspecialchars($data->getLieu()));
-      $data->setImage(htmlspecialchars($data->getImage()));
+      $data->setUrl(htmlspecialchars($data->getUrl()));
     }
 
     // Getters et Setters pour l'objet Parcours
@@ -116,15 +116,15 @@
       return $this->lieu;
     }
 
-    // Image
-    public function setImage($image)
+    // URL
+    public function setUrl($url)
     {
-      $this->image = $image;
+      $this->url = $url;
     }
 
-    public function getImage()
+    public function getUrl()
     {
-      return $this->image;
+      return $this->url;
     }
   }
 ?>

@@ -79,9 +79,9 @@
                     echo '<label class="PP-label-parcours">Lieu : </label>';
                     echo '<input type="text" value="' . $_SESSION['save']['lieu_parcours'] . '" name="location" class="PP-monoligne" />';
 
-                    // Lien image
-                    echo '<label class="PP-label-parcours">Url image : </label>';
-                    echo '<input type="text" value="' . $_SESSION['save']['image_parcours'] . '" name="picurl" class="PP-monoligne" />';
+                    // Lien url
+                    echo '<label class="PP-label-parcours">Url : </label>';
+                    echo '<input type="text" value="' . $_SESSION['save']['url_parcours'] . '" name="url" class="PP-monoligne" />';
                   }
                   else
                   {
@@ -97,9 +97,9 @@
                     echo '<label class="PP-label-parcours">Lieu : </label>';
                     echo '<input type="text" value="' . $parcours->getLieu() . '" name="location" class="PP-monoligne" />';
                     
-                    // Lien image
-                    echo '<label class="PP-label-parcours">Url image : </label>';
-                    echo '<input type="text" value="' . $parcours->getImage() . '" name="picurl" class="PP-monoligne" />';
+                    // Lien url
+                    echo '<label class="PP-label-parcours">Url : </label>';
+                    echo '<input type="text" value="' . $parcours->getUrl() . '" name="url" class="PP-monoligne" />';
                   }
                 echo '</div>';
 

@@ -13,7 +13,7 @@
       $_SESSION['save']['nom_parcours']      = '';
       $_SESSION['save']['distance_parcours'] = '';
       $_SESSION['save']['lieu_parcours']     = '';
-      $_SESSION['save']['image_parcours']    = '';
+      $_SESSION['save']['url_parcours']      = '';
     }
   }
 
@@ -62,13 +62,13 @@
     $nom      = $post['name'];
     $distance = $post['distance'];
     $lieu     = $post['location'];
-    $image    = $post['picurl'];
+    $url      = $post['url'];
 
     // Sauvegarde en session en cas d'erreur
     $_SESSION['save']['nom_parcours']      = $post['name'];
     $_SESSION['save']['distance_parcours'] = $post['distance'];
     $_SESSION['save']['lieu_parcours']     = $post['location'];
-    $_SESSION['save']['image_parcours']    = $post['picurl'];
+    $_SESSION['save']['url_parcours']    = $post['url'];
 
     // Contrôle distance numérique
     $control_ok = controleDistanceNumerique($distance);
@@ -80,7 +80,7 @@
                         'nom'      => $nom,
                         'distance' => $distance,
                         'lieu'     => $lieu,
-                        'image'    => $image
+                        'url'      => $url
                        );
 
       physiqueInsertionParcours($parcours);
@@ -109,13 +109,13 @@
     $nom      = $post['name'];
     $distance = $post['distance'];
     $lieu     = $post['location'];
-    $image    = $post['picurl'];
+    $url      = $post['url'];
 
     // Sauvegarde en session en cas d'erreur
     $_SESSION['save']['nom_parcours']      = $post['name'];
     $_SESSION['save']['distance_parcours'] = $post['distance'];
     $_SESSION['save']['lieu_parcours']     = $post['location'];
-    $_SESSION['save']['image_parcours']    = $post['picurl'];
+    $_SESSION['save']['url_parcours']      = $post['url'];
 
     // Contrôle distance numérique
     $control_ok = controleDistanceNumerique($distance);
@@ -126,7 +126,7 @@
       $parcours = array('nom'      => $nom,
                         'distance' => $distance,
                         'lieu'     => $lieu,
-                        'image'    => $image
+                        'url'      => $url
                        );
 
       physiqueUpdateParcours($idParcours, $parcours);

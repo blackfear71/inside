@@ -90,8 +90,8 @@
                 echo 'Lieu : ' . $parcours->getLieu();
               echo '</div>';
 
-              if (!empty($parcours->getImage()))
-                echo '<img src="' . $parcours->getImage() .'" alt="' . $parcours->getNom() . '" class="PP-image" />';
+              if (!empty($parcours->getUrl()))
+                echo '<embed src="https://drive.google.com/viewerng/viewer?embedded=true&url=' . $parcours->getUrl() .'" class="PP-pdf">';
             echo '</div>';
           }
         ?>

@@ -105,11 +105,12 @@
 	color: #262626;
 }
 
-.PP-image
+.PP-pdf
 {
-	max-height: 400px;
-	max-width: 100%;
 	display: block;
+	margin-top: 20px;
+	width: 100%;
+	height: 500px;
 	margin-left: auto;
 	margin-right: auto;
 }
