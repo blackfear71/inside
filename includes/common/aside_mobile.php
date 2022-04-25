@@ -31,6 +31,9 @@
                              array('lien'  => '/inside/portail/collector/collector.php?action=goConsulter&page=1&sort=dateDesc&filter=none',
                                    'image' => 'collector',
                                    'titre' => 'COLLECTOR ROOM'),
+                             array('lien'  => '/inside/portail/petitspedestres/parcours.php?action=goConsulterListe',
+                                   'image' => 'petits_pedestres',
+                                   'titre' => 'LES PETITS PÉDESTRES'),
                              array('lien'  => '/inside/portail/calendars/calendars.php?year=' . date('Y') . 'action=goConsulter',
                                    'image' => 'calendars',
                                    'titre' => 'CALENDARS')

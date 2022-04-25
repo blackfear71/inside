@@ -45,6 +45,10 @@
         $contenuCelsius = 'Si tu as des idées et que tu veux en faire part aux autres, n\'hésite pas à en proposer de nouvelles. N\'importe qui peut les prendre en charge afin de devenir un super développeur !';
         break;
 
+      case 'petitspedestres':
+        $contenuCelsius = 'Quelle idée d\'aller courir ? Pourquoi se faire du mal comme ça ? Pour être en bonne santé ? Pour se sentir en forme ? Quel intérêt ? Mer il et fou !';
+        break;
+
       case 'portail':
         $contenuCelsius = 'Bonjour <strong>' . $_SESSION['user']['pseudo'] . '</strong> et bienvenue sur la version mobile du site.
         Je suis <strong>Celsius</strong> et je vais te guider à travers les différentes sections du site. Ici tu peux accéder à la section pour voter pour le repas du midi et celle pour répartir les dépenses.
