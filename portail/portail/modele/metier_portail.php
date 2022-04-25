@@ -77,7 +77,7 @@
                                    'title'     => 'Les Petits Pédestres',
                                    'image'     => '../../includes/icons/common/petits_pedestres.png',
                                    'alt'       => 'petits_pedestres',
-                                   'mobile'    => 'N'),
+                                   'mobile'    => 'Y'),
                              array('categorie' => 'MISSIONS :<br />INSIDER',
                                    'lien'      => '../missions/missions.php?action=goConsulter',
                                    'title'     => 'Missions : Insider',

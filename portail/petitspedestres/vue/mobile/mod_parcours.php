@@ -5,9 +5,9 @@
     <?php
       $titleHead       = 'Les Petits Pédestres';
       $styleHead       = 'stylePP.css';
-      $scriptHead      = '';
+      $scriptHead      = 'scriptPP.js';
       $angularHead     = false;
-      $chatHead        = true;
+      $chatHead        = false;
       $datepickerHead  = false;
       $masonryHead     = false;
       $exifHead        = false;
@@ -18,103 +18,103 @@
     ?>
   </head>
 
-	<body>
+  <body>
     <!-- Entête -->
-		<header>
-      <?php
-        $title = 'Les Petits Pédestres';
-
-        include('../../includes/common/header.php');
-        include('../../includes/common/onglets.php');
-      ?>
-		</header>
+    <header>
+      <?php include('../../includes/common/header_mobile.php'); ?>
+    </header>
 
     <!-- Contenu -->
-		<section>
+    <section>
       <!-- Messages d'alerte -->
       <?php include('../../includes/common/alerts.php'); ?>
 
       <!-- Déblocage succès -->
       <?php include('../../includes/common/success.php'); ?>
 
-			<article>
-        <?php
-          /********************/
-          /* Boutons missions */
-          /********************/
-          $zoneInside = 'article';
-          include('../../includes/common/missions.php');
+      <!-- Menus -->
+      <aside>
+        <?php include('../../includes/common/aside_mobile.php'); ?>
+      </aside>
 
-          /*******************/
-          /* Chargement page */
-          /*******************/
-          echo '<div class="zone_loading_page">';
-            echo '<div id="loading_page" class="loading_page"></div>';
-          echo '</div>';
+      <!-- Chargement page -->
+      <div class="zone_loading_image">
+        <img src="../../includes/icons/common/loading.png" alt="loading" id="loading_image" class="loading_image" />
+      </div>
+
+      <!-- Celsius -->
+      <?php
+        $celsius = 'petitspedestres';
+
+        include('../../includes/common/celsius.php');
+      ?>
+
+      <!-- Contenu -->
+      <article>
+        <?php
+          /*********/
+          /* Titre */
+          /*********/
+          echo '<div class="titre_section_mobile">' . mb_strtoupper($titleHead) . '</div>';
 
           if ($parcoursExistant == true)
           {
             /**********/
             /* Saisie */
             /**********/
-    				echo '<div class="PP-contenu-saisie">';
-    					echo '<form method="post" action="parcours.php?id_parcours=' . $parcours->getId() . '&action=doModifier" class="PP-form-saisie">';
-    						echo '<div class="PP-zone-saisie-avancee-infos">';
+            echo '<div class="PP-contenu-saisie">';
+              echo '<form method="post" action="parcours.php?id_parcours=' . $parcours->getId() . '&action=doModifier" class="PP-form-saisie">';
+                echo '<div class="PP-zone-saisie-avancee-infos">';
                   if (isset($erreurParcours) AND $erreurParcours == true)
                   {
                     // Nom du parcours
-                    echo '<label class="label_parcours">Nom : </label>';
+                    echo '<label class="PP-label-parcours">Nom : </label>';
                     echo '<input type="text" value="' . $_SESSION['save']['nom_parcours'] . '" name="name" class="PP-monoligne" />';
 
                     // Distance
-                    echo '<label class="label_parcours">Distance : </label>';
+                    echo '<label class="PP-label-parcours">Distance : </label>';
                     echo '<input type="text" value="' . $_SESSION['save']['distance_parcours'] . '" name="distance" class="PP-monoligne" />';
 
                     // Lieu
-                    echo '<label class="label_parcours">Lieu : </label>';
+                    echo '<label class="PP-label-parcours">Lieu : </label>';
                     echo '<input type="text" value="' . $_SESSION['save']['lieu_parcours'] . '" name="location" class="PP-monoligne" />';
 
                     // Lien image
-                    echo '<label class="label_parcours">Url image : </label>';
+                    echo '<label class="PP-label-parcours">Url image : </label>';
                     echo '<input type="text" value="' . $_SESSION['save']['image_parcours'] . '" name="picurl" class="PP-monoligne" />';
                   }
                   else
                   {
                     // Nom du parcours
-                    echo '<label class="label_parcours">Nom : </label>';
+                    echo '<label class="PP-label-parcours">Nom : </label>';
                     echo '<input type="text" value="' . $parcours->getNom() . '" name="name" class="PP-monoligne" />';
 
                     // Distance
-                    echo '<label class="label_parcours">Distance : </label>';
+                    echo '<label class="PP-label-parcours">Distance : </label>';
                     echo '<input type="text" value="' . $parcours->getDistance() . '" name="distance" class="PP-monoligne" />';
 
                     // Lieu
-                    echo '<label class="label_parcours">Lieu : </label>';
+                    echo '<label class="PP-label-parcours">Lieu : </label>';
                     echo '<input type="text" value="' . $parcours->getLieu() . '" name="location" class="PP-monoligne" />';
-
+                    
                     // Lien image
-                    echo '<label class="label_parcours">Url image : </label>';
+                    echo '<label class="PP-label-parcours">Url image : </label>';
                     echo '<input type="text" value="' . $parcours->getImage() . '" name="picurl" class="PP-monoligne" />';
                   }
-    						echo '</div>';
-
-                echo '<br /><br />';
+                echo '</div>';
 
                 // Valider
-    						echo '<input type="submit" name="modification" value="Valider" />';
-    					echo '</form>';
+                echo '<input type="submit" name="modification" value="Valider" class="PP-bouton" />';
+              echo '</form>';
             echo '</div>';
           }
         ?>
       </article>
-
-      <!-- Chat -->
-      <?php include('../../includes/common/chat/chat.php'); ?>
     </section>
 
     <!-- Pied de page -->
-		<footer>
-			<?php include('../../includes/common/footer.php'); ?>
-		</footer>
+    <footer>
+      <?php include('../../includes/common/footer_mobile.php'); ?>
+    </footer>
   </body>
 </html>

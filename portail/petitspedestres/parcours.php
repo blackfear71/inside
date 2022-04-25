@@ -118,20 +118,20 @@
       break;
 
     case 'goConsulterListe':
-      include_once('vue/liste_parcours.php');
+      include_once('vue/' . $_SESSION['index']['plateforme'] . '/liste_parcours.php');
       break;
 
     case 'goAjouter':
-      include_once('vue/ajout_parcours.php');
+      include_once('vue/' . $_SESSION['index']['plateforme'] . '/ajout_parcours.php');
       break;
 
     case 'goModifier':
-      include_once('vue/mod_parcours.php');
+      include_once('vue/' . $_SESSION['index']['plateforme'] . '/mod_parcours.php');
       break;
 
     case 'goConsulter':
     default:
-      include_once('vue/vue_parcours.php');
+      include_once('vue/' . $_SESSION['index']['plateforme'] . '/vue_parcours.php');
       break;
   }
 ?>
