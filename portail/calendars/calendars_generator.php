@@ -8,8 +8,6 @@
   - Ajout d'annexe
   **************************/
 
-  @ini_set('display_errors', 'on');
-  
   // Fonctions communes
   include_once('../../includes/functions/metier_commun.php');
   include_once('../../includes/functions/physique_commun.php');
@@ -155,7 +153,7 @@
       break;
 
     case 'doGenerer':
-      // header('location: calendars_generator.php?action=goConsulter');
+      header('location: calendars_generator.php?action=goConsulter');
       break;
 
     case 'doGenererAnnexe':
