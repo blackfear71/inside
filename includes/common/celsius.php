@@ -45,10 +45,18 @@
         $contenuCelsius = 'Si tu as des idées et que tu veux en faire part aux autres, n\'hésite pas à en proposer de nouvelles. N\'importe qui peut les prendre en charge afin de devenir un super développeur !';
         break;
 
+      case 'missions':
+        $contenuCelsius = 'Bonjour agent <strong>' . $_SESSION['user']['pseudo'] . '</strong>, ta mission si tu l\'acceptes, ou si tu le veux bien, ou si tu as le temps, ou si c\'est possible, est de vaincre tes adversaires. L\'amitié a ses limites.';
+        break;
+
+      case 'moviehouse':
+        $contenuCelsius = 'Parce que la culture n\'a pas de prix, parce que ce lieu est l\'origine de ma maison, viens voir quel sera le prochain film que vous allez partager !';
+        break;
+
       case 'petitspedestres':
         $contenuCelsius = 'Quelle idée d\'aller courir ? Pourquoi se faire du mal comme ça ? Pour être en bonne santé ? Pour se sentir en forme ? Quel intérêt ? Mer il et fou !';
         break;
-
+        
       case 'portail':
         $contenuCelsius = 'Bonjour <strong>' . $_SESSION['user']['pseudo'] . '</strong> et bienvenue sur la version mobile du site.
         Je suis <strong>Celsius</strong> et je vais te guider à travers les différentes sections du site. Ici tu peux accéder à la section pour voter pour le repas du midi et celle pour répartir les dépenses.
@@ -58,11 +66,7 @@
       case 'profil':
         $contenuCelsius = 'Voilà tes petites fiertés, tes contributions à toute l\'équipe de joyeux Insiders ! Allez, profite...';
         break;
-
-      case 'moviehouse':
-        $contenuCelsius = 'Parce que la culture n\'a pas de prix, parce que ce lieu est l\'origine de ma maison, viens voir quel sera le prochain film que vous allez partager !';
-        break;
-
+        
       case 'restaurants':
         $contenuCelsius = 'Ajoute tes restaurants favoris ici, allez ne sois pas timide on veut tous en profiter ! Il faut en rajouter un maximum pour que le choix soit le plus grand possible !';
         break;

@@ -1,0 +1,331 @@
+/****************/
+/*** Missions ***/
+/****************/
+
+/*** Accueil Missions ***/
+.zone_missions
+{
+	width: 100%;
+    margin-bottom: -2vh;
+}
+
+/*** Missions à venir ***/
+.zone_mission_default
+{
+	background-color: #ff1937;
+	width: 100%;
+	height: 10vh;
+	overflow: hidden;
+	box-shadow: 0 0 0.5vh #7c7c7c;
+	border-radius: 0.5vh;
+	margin-bottom: 2vh;
+}
+
+.image_mission_default
+{
+	display: inline-block;
+	vertical-align: middle;
+	width: 8vh;
+    padding: 1vh;
+}
+
+.titre_mission_default
+{
+	display: inline-block;
+	width: calc(100% - 10vh);
+	vertical-align: middle;
+	font-family: inside_font_light, Verdana, sans-serif;
+	font-size: 2.5vh;
+	color: white;
+}
+
+/*** Missions en cours ***/
+.zone_mission_accueil
+{
+	display: block;
+	width: 100%;
+	margin-bottom: 2vh;
+	text-decoration: none;
+}
+
+.image_mission_accueil
+{
+	width: 100%;
+	box-shadow: 0 0 0.5vh #7c7c7c;
+	border-radius: 0.5vh;
+}
+
+.titre_mission_accueil
+{
+	font-family: inside_font_light, Verdana, sans-serif;
+	font-size: 100%;
+	color: #262626;
+	text-align: center;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+}
+
+/*** Détails mission ***/
+.zone_details_mission
+{
+	display: block;
+	width: 100%;
+	margin-bottom: 1.5vh;
+}
+
+.zone_details_mission:last-child
+{
+	margin-bottom: 0;
+}
+
+.image_details_mission
+{
+	width: 100%;
+	box-shadow: 0 0 0.5vh #7c7c7c;
+	border-radius: 0.5vh;
+}
+
+.texte_details_mission
+{
+	line-height: 3.5vh;
+	font-family: inside_font_light, Verdana, sans-serif;
+	font-size: 2.5vh;
+	color: #262626;
+	text-align: justify;
+}
+
+.texte_details_mission::first-letter
+{
+	font-size: 6vh;
+	font-family: inside_font_regular, Verdana, sans-serif;
+}
+
+.zone_images_conclusion
+{
+	display: block;
+	margin-top: 2vh;
+	background-color: #e3e3e3;
+	border-radius: 0.5vh;
+	box-shadow: 0 0 0.5vh #7c7c7c;
+}
+
+.img_conclusion_mission_g
+{
+	display: block;
+	height: 8vh;
+}
+
+.img_conclusion_mission_m
+{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	height: 8vh;
+	margin-top: -8vh;
+}
+
+.img_conclusion_mission_d
+{
+	float: right;
+	height: 8vh;
+	margin-top: -8vh;
+}
+
+/*** Classement ***/
+.lien_succes
+{
+	display: block;
+	width: calc(100% - 2vh);
+	padding: 1vh;
+	margin-bottom: 2vh;
+	border: 0;
+	font-family: inside_font_light, Verdana, sans-serif;
+	color: #262626;
+	font-size: 3vh;
+	text-align: center;
+	border-radius: 0.5vh;
+	box-shadow: 0 0 0.5vh #7c7c7c;
+	text-decoration: none;
+	background-color: #e3e3e3; 
+}
+
+.lien_succes:active
+{
+	background-color: #ff1937;
+	color: white;
+}
+
+.zone_classement
+{
+	border-radius: 0.5vh;
+	box-shadow: 0 0 0.5vh #7c7c7c;
+}
+
+.zone_gagnants
+{
+	background-color: #d3d3d3;
+	padding: 1.5vh 1.5vh 0.5vh 1.5vh;
+	background-image: url("/inside/includes/icons/missions/couronne.png");
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.zone_participants
+{
+	background-color: #e3e3e3;
+	padding: 1.5vh 1.5vh 0.5vh 1.5vh;
+}
+
+.zone_titre_gagnants
+{
+	text-align: center;
+	font-family: inside_font_medium, Verdana, sans-serif;
+	color: #262626;
+	margin-bottom: 2vh;
+}
+
+.zone_medals
+{
+	display: inline-block;
+	width: calc(100% - 12vh);
+	margin-left: 1vh;
+}
+
+.medal_rank
+{
+	display: inline-block;
+	width: 5vh;
+	height: 5vh;
+	vertical-align: top;
+	filter: drop-shadow(0 0 0.2vh #5c5c5c);
+}
+
+.score_classement
+{
+	display: inline-block;
+	margin-left: 1vh;
+	vertical-align: top;
+	background-color: #ff1937;
+	width: 5vh;
+	height: 5vh;
+	line-height: 5vh;
+	font-family: inside_font_light, Verdana, sans-serif;
+	color: white;
+	border-radius: 50%;
+	text-align: center;
+	font-size: 100%;
+	box-shadow: 0 0 0.5vh #7c7c7c;
+}
+
+.score_classement_margin
+{
+	margin-left: 5vh;
+}
+
+.avatar_classement
+{
+	display: inline-block;
+	width: 5vh;
+	vertical-align: middle;
+	margin-right: 1vh;
+	margin-bottom: 1vh;
+	border-radius: 50%;
+	background-color: #262626;
+	box-shadow: 0 0 0.5vh #7c7c7c;
+}
+
+/*** Informations ***/
+.zone_info_details_mission
+{
+	display: block;
+	margin-bottom: 1vh;
+}
+
+.logo_details_mission
+{
+	display: inline-block;
+	width: 5vh;
+	vertical-align: middle;
+}
+
+.texte_info_details_mission
+{
+	display: inline-block;
+	vertical-align: middle;
+	font-family: inside_font_light, Verdana, sans-serif;
+	color: #262626;
+	font-size: 3vh;
+	text-align: justify;
+	width: calc(100% - 7vh);
+	margin-left: 2vh;
+}
+
+.fond_avancement_mission
+{
+	display: inline-block;
+	vertical-align: middle;
+	background-color: #e3e3e3;
+	height: 3vh;
+	width: calc(100% - 7vh);
+	border-radius: 3vh;
+	box-shadow: 0 0 0.5 #7c7c7c;
+	overflow: hidden;
+}
+
+.avancement_mission
+{
+	display: block;
+	height: 100%;
+	background-color: #ff1937;
+	border-radius: 0.5vh;
+}
+
+.score_avancement_mission
+{
+	display: inline-block;
+	margin-left: 2vh;
+	vertical-align: middle;
+	background-color: #262626;
+	width: 5vh;
+	height: 5vh;
+	line-height: 5vh;
+	font-family: inside_font_light, Verdana, sans-serif;
+	color: white;
+	border-radius: 50%;
+	text-align: center;
+	font-size: 100%;
+	box-shadow: 0 0 0.5vh #7c7c7c;
+}
+
+.zone_participants_details_missions
+{
+	text-align: center;
+}
+
+.zone_avatar_details_mission
+{
+	display: inline-block;
+	text-align: center;
+	padding: 0 1vh 1vh 1vh;
+	width: 8vh;
+	vertical-align: top;
+}
+
+.avatar_details_mission
+{
+	max-width: 8vh;
+	max-height: 8vh;
+	border-radius: 50%;
+	box-shadow: 0 0 0.5vh #7c7c7c;
+	background-color: #262626;
+}
+
+.pseudo_details_mission
+{
+	font-size: 2vh;
+	font-family: inside_font_regular, Verdana, sans-serif;
+	line-height: 2vh;
+	color: #262626;
+	word-wrap: break-word;
+}

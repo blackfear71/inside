@@ -36,7 +36,10 @@
                                    'titre' => 'LES PETITS PÉDESTRES'),
                              array('lien'  => '/inside/portail/calendars/calendars.php?year=' . date('Y') . 'action=goConsulter',
                                    'image' => 'calendars',
-                                   'titre' => 'CALENDARS')
+                                   'titre' => 'CALENDARS'),
+                             array('lien'  => '/inside/portail/missions/missions.php?action=goConsulter',
+                                   'image' => 'missions',
+                                   'titre' => 'MISSIONS : INSIDER')
                             );
 
   // Menu latéral droit

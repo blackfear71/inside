@@ -100,7 +100,7 @@
   {
     case 'goConsulter':
     default:
-      include_once('vue/vue_details.php');
+      include_once('vue/' . $_SESSION['index']['plateforme'] . '/vue_details.php');
       break;
   }
 ?>

@@ -128,7 +128,6 @@
             echo '<div class="titre_section"><img src="../../includes/icons/missions/missions_in_progress.png" alt="missions_in_progress" class="logo_titre_section" /><div class="texte_titre_section">Rien à signaler</div></div>';
             echo '<div class="empty">Pas encore de missions...</div>';
           }
-
         ?>
 			</article>
 

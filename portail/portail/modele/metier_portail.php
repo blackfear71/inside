@@ -83,14 +83,14 @@
                                    'title'     => 'Missions : Insider',
                                    'image'     => '../../includes/icons/common/missions.png',
                                    'alt'       => 'missions',
-                                   'mobile'    => 'N')/*,
+                                   'mobile'    => 'Y')/*,
                              array('categorie' => 'EVENT<br />MANAGER',
                                    'lien'      => '../eventmanager/eventmanager.php?action=goConsulter',
                                    'title'     => 'Event Manager',
                                    'image'     => '../../includes/icons/common/event_manager.png',
                                    'alt'       => 'event_manager',
                                    'mobile'    => 'N')*/
-                           );
+                            );
 
     // Retour
     return $listeCategories;
