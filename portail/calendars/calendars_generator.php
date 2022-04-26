@@ -153,7 +153,7 @@
       break;
 
     case 'doGenerer':
-      header('location: calendars_generator.php?action=goConsulter');
+      // header('location: calendars_generator.php?action=goConsulter');
       break;
 
     case 'doGenererAnnexe':
