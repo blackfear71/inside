@@ -5,7 +5,7 @@
     <?php
       $titleHead       = 'Les Petits Pédestres';
       $styleHead       = 'stylePP.css';
-      $scriptHead      = 'scriptPP.js';
+      $scriptHead      = '';
       $angularHead     = false;
       $chatHead        = false;
       $datepickerHead  = false;
