@@ -51,7 +51,7 @@
 
       <!-- Contenu -->
       <article>
-        <?php
+        <?php/*missions*/
           /*********/
           /* Titre */
           /*********/

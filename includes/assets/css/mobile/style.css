@@ -1079,6 +1079,153 @@ aside
 	color: #262626;
 }
 
+/*** Icônes des missions (générées) ***/
+.header_left_mission
+{
+	position: absolute;
+	top: 1.5vh;
+	left: 0;
+	height: 7vh;
+	width: 7vh;
+	z-index: 5;
+}
+
+.header_middle_mission
+{
+	position: absolute;
+	top: 3vh;
+	left: calc(50% - 3.5vh);
+	height: 7vh;
+	width: 7vh;
+	z-index: 5;
+}
+
+.header_right_mission
+{
+	position: absolute;
+	top: 1.5vh;
+	right: 0;
+	height: 7vh;
+	width: 7vh;
+	z-index: 5;
+}
+
+.article_top_left_mission, .article_top_left_mission_no_nav
+{
+	position: absolute;
+	top: 2vh;
+	left: 0;
+	height: 7vh;
+	width: 7vh;
+	z-index: 5;
+}
+
+.article_middle_left_mission
+{
+	position: absolute;
+	top: calc(50% - 3.5vh);
+	left: 0;
+	height: 7vh;
+	width: 7vh;
+	z-index: 5;
+}
+
+.article_bottom_left_mission
+{
+	position: absolute;
+	bottom: 2vh;
+	left: 0;
+	height: 7vh;
+	width: 7vh;
+	z-index: 5;
+}
+
+.article_top_right_mission, .article_top_right_mission_no_nav
+{
+	position: absolute;
+	top: 2vh;
+	right: 0;
+	height: 7vh;
+	width: 7vh;
+	z-index: 5;
+}
+
+.article_middle_right_mission
+{
+	position: absolute;
+	top: calc(50% - 3.5vh);
+	right: 0;
+	height: 7vh;
+	width: 7vh;
+	z-index: 5;
+}
+
+.article_bottom_right_mission
+{
+	position: absolute;
+	bottom: 2vh;
+	right: 0;
+	height: 7vh;
+	width: 7vh;
+	z-index: 5;
+}
+
+.footer_left_mission
+{
+	position: absolute;
+	margin-top: 0.5vh;
+	left: 0;
+	height: 6vh;
+	width: 6vh;
+	z-index: 5;
+}
+
+.footer_middle_mission
+{
+	position: absolute;
+	margin-top: 1vh;
+	left: calc(50% - 3vh);
+	height: 6vh;
+	width: 6vh;
+	z-index: 5;
+}
+
+.footer_right_mission
+{
+	position: absolute;
+	margin-top: 0.5vh;
+	right: 0;
+	height: 6vh;
+	width: 6vh;
+	z-index: 5;
+}
+
+.header_left_mission input, .header_middle_mission input, .header_right_mission input,
+.article_top_left_mission input, .article_top_left_mission_no_nav input, .article_middle_left_mission input, .article_bottom_left_mission input,
+.article_top_right_mission input, .article_top_right_mission_no_nav input, .article_middle_right_mission input, .article_bottom_right_mission input
+{
+	border: 0;
+	background-color: transparent;
+	height: 7vh;
+	width: 7vh;
+	background-size: 7vh 7vh;
+	background-repeat: no-repeat;
+	vertical-align: top;
+	cursor: pointer;
+}
+
+.footer_left_mission input, .footer_middle_mission input, .footer_right_mission input
+{
+	border: 0;
+	background-color: transparent;
+	height: 6vh;
+	width: 6vh;
+	background-size: 6vh 6vh;
+	background-repeat: no-repeat;
+	vertical-align: top;
+	cursor: pointer;
+}
+
 /*** Pied de page ***/
 footer
 {

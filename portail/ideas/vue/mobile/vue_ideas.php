@@ -52,6 +52,12 @@
       <!-- Contenu -->
       <article>
         <?php
+          /********************/
+          /* Boutons missions */
+          /********************/
+          $zoneInside = 'article';
+          include('../../includes/common/missions.php');
+          
           /*********/
           /* Titre */
           /*********/

@@ -18,9 +18,9 @@
 	// Modèle de données
 	include_once('portail/index/modele/metier_index.php');
 	include_once('portail/index/modele/controles_index.php');
-  include_once('portail/index/modele/physique_index.php');
+	include_once('portail/index/modele/physique_index.php');
 
-  // Appels métier
+	// Appels métier
 	switch ($_GET['action'])
 	{
 		case 'goConsulter':
@@ -57,9 +57,9 @@
 			break;
 	}
 
-  // Traitements de sécurité avant la vue
-  switch ($_GET['action'])
-  {
+	// Traitements de sécurité avant la vue
+	switch ($_GET['action'])
+	{
 		case 'goConsulter':
 			foreach ($listeEquipes as $equipe)
 			{
@@ -70,13 +70,13 @@
 		case 'doConnecter':
 		case 'doDemanderInscription':
 		case 'doDemanderMdp':
-    default:
-      break;
-  }
+		default:
+			break;
+	}
 
-  // Redirection affichage
-  switch ($_GET['action'])
-  {
+	// Redirection affichage
+	switch ($_GET['action'])
+	{
 		case 'doConnecter':
 			if ($connected == true AND $_SESSION['user']['identifiant'] == 'admin')
 				header('location: administration/portail/portail.php?action=goConsulter');
@@ -92,11 +92,11 @@
 			break;
 
 		case 'goConsulter':
-    default:
+    	default:
 			if (isset($connected) AND $connected == true AND $_SESSION['user']['identifiant'] != 'admin')
 				header('location: portail/portail/portail.php?action=goConsulter');
 			else
 				include_once('portail/index/vue/' . $_SESSION['index']['plateforme'] . '/vue_index.php');
-      break;
-  }
+      		break;
+	}
 ?>

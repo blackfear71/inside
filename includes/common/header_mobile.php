@@ -15,6 +15,10 @@
       echo '<a id="deployAsideUser" class="zone_bandeau_avatar">';
         echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_bandeau" />';
       echo '</a>';
+
+      // Boutons missions
+      $zoneInside = 'header';
+      include($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/common/missions.php');
     }
     else
     {

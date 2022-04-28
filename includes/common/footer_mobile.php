@@ -65,7 +65,7 @@
   // Zone droite
   echo '<div class="zone_footer_right">';
     // Récupération de la plateforme
-    $plateforme = getPlateforme();
+    $plateforme = getPlateforme();    
 
     // Affichage switch version sur mobile
     if ($plateforme == 'mobile')
@@ -78,4 +78,11 @@
     // Copyright
     echo '<div class="copyright">© 2017-' . date('Y') . ' Inside</div>';
   echo '</div>';
+
+  // Boutons missions
+  if (isset($_SESSION['index']['connected']) AND $_SESSION['index']['connected'] == true)
+  {
+    $zoneInside = 'footer';
+    include($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/common/missions.php');
+  }
 ?>
