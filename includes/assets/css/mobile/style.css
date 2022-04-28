@@ -1251,8 +1251,8 @@ footer
 {
 	display: inline-block;
 	line-height: 7vh;
-	padding-left: 2vh;
-	padding-right: 2vh;
+	padding-left: 1vh;
+	padding-right: 1vh;
 	font-family: inside_font_light, Verdana, sans-serif;
 	color: white;
 	font-size: 2vh;
@@ -1263,9 +1263,10 @@ footer
 {
 	display: inline-block;
 	vertical-align: top;
-	width: 8vh;
+	width: 7vh;
 	height: 7vh;
 	background-color: #262626;
+	background-color: blue;
 }
 
 .link_footer:active
@@ -1321,6 +1322,6 @@ footer
 	font-size: 2vh;
 	color: white;
 	text-align: left;
-	padding-left: 2vh;
-	padding-right: 2vh;
+	padding-left: 1vh;
+	padding-right: 1vh;
 }
