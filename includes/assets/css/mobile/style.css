@@ -80,24 +80,12 @@ header
 	margin-left: -4vh;
 }
 
-.zone_bandeau_avatar
+/*** Notifications et recherche ***/
+.zone_bandeau_droite
 {
 	float: right;
-	vertical-align: top;
-	width: 20vh;
-	height: 10vh;
-	background-color: #1b1b1b;
-	text-align: center;
 }
 
-.avatar_bandeau
-{
-	height: 8vh;
-	margin-top: 1vh;
-	border-radius: 50%;
-}
-
-/*** Notifications et recherche ***/
 .zone_boutons_bandeau
 {
 	display: inline-block;
@@ -106,7 +94,7 @@ header
 .zone_notifications_bandeau
 {
 	display: block;
-	width: 5vh;
+	width: 6vh;
 	height: 5vh;
 	background-color: #262626;
 }
@@ -114,7 +102,7 @@ header
 .link_notifications
 {
 	display: block;
-	width: 5vh;
+	width: 6vh;
 	line-height: 5vh;
 	text-align: center;
 }
@@ -129,7 +117,7 @@ header
 {
 	float: left;
 	margin-top: -6.5vh;
-	width: 5vh;
+	width: 6vh;
 	height: 5vh;
 	text-align: center;
 	color: #262626;
@@ -142,7 +130,7 @@ header
 .zone_recherche_bandeau
 {
 	display: block;
-	width: 5vh;
+	width: 6vh;
 	height: 5vh;
 	background-color: #262626;
 	text-align: center;
@@ -231,6 +219,24 @@ header
 .bouton_fermer_recherche:active
 {
 	background-color: #ff1937;
+}
+
+/*** Profil ***/
+.zone_bandeau_avatar
+{
+	display: inline-block;
+	vertical-align: top;
+	width: 14vh;
+	height: 10vh;
+	background-color: #1b1b1b;
+	text-align: center;
+}
+
+.avatar_bandeau
+{
+	height: 8vh;
+	margin-top: 1vh;
+	border-radius: 50%;
 }
 
 /*** Aside ***/
