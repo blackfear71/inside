@@ -52,6 +52,11 @@
       <!-- Contenu -->
       <article>
         <?php/*missions*/
+          /*********************/
+          /* Zone de recherche */
+          /*********************/
+          include('../../includes/common/search_mobile.php');
+
           /*********/
           /* Titre */
           /*********/

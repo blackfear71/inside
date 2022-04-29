@@ -23,6 +23,10 @@ $(function()
   updatePing();
   majPing = setInterval(updatePing, 60000);
 
+  // Mise à jour du compteur des notifications toutes les 60 secondes
+  updateNotifications();
+  majNotifications = setInterval(updateNotifications, 60000);
+
   // Mise à jour du compteur des bugs/évolutions toutes les 60 secondes
   updateBugs();
   majBugs = setInterval(updateBugs, 60000);
@@ -32,6 +36,12 @@ $(function()
     afficherMasquerPopUp('alerte', false);
 
   /*** Actions au clic ***/
+  // Ouverture barre de recherche
+  $('#afficherBarreRecherche, #masquerBarreRecherche').click(function()
+  {
+    afficherMasquerIdWithDelay('searchBar');
+  });
+
   // Ouverture menu latéral gauche
   $('#deployAsidePortail').click(function()
   {
@@ -55,6 +65,10 @@ $(function()
   // Ferme un menu au clic sur le fond
   $(document).on('click', function(event)
   {
+    // Ferme la zone de recherche
+    if ($(event.target).attr('class') == 'fond_recherche')
+      afficherMasquerIdWithDelay('searchBar');
+
     // Ferme le menu latéral gauche
     if ($(event.target).attr('class')   != 'aside_portail'
     &&  $(event.target).attr('class')   != 'lien_aside'
@@ -883,6 +897,66 @@ function updatePing()
     if (userConnected == false)
       clearInterval(majPing);
   });
+}
+
+// Exécute le script php de mise à jour du compteur de notifications
+function updateNotifications()
+{
+  $.get('/inside/includes/functions/script_commun.php', {function: 'countNotifications'}, function(data)
+  {
+    var identifiant             = data.identifiant;
+    var nombreNotificationsJour = data.nombreNotificationsJour;
+    var view                    = data.view;
+    var page                    = data.page;
+    var html                    = '';
+
+    // On n'exécute de manière récurrente que si on n'est pas l'admin
+    if (identifiant != 'admin')
+    {
+      // La première fois on génère la zone
+      if (!$('.link_notifications').length)
+      {
+        html += '<a href="/inside/portail/notifications/notifications.php?view=all&action=goConsulter&page=1" title="Notifications" class="link_notifications">';
+
+          if (nombreNotificationsJour > 0)
+            html += '<img src="/inside/includes/icons/common/notifications.png" alt="notifications" class="icon_notifications" />';
+          else
+            html += '<img src="/inside/includes/icons/common/notifications_blue.png" alt="notifications" class="icon_notifications" />';
+
+          html += '<div class="number_notifications"></div>';
+        html += '</a>';
+
+        $('.zone_notifications_bandeau').html(html);
+      }
+
+      // On met à jour le contenu
+      if (nombreNotificationsJour > 0)
+      {
+        $('.link_notifications').attr('href', '/inside/portail/notifications/notifications.php?view=' + view + '&action=goConsulter' + page)
+        $('.icon_notifications').attr('src', '/inside/includes/icons/common/notifications_blue.png');
+
+        if (nombreNotificationsJour <= 9)
+        {
+          $('.number_notifications').html(nombreNotificationsJour);
+          $('.number_notifications').css('color', 'white');
+        }
+        else
+        {
+          $('.number_notifications').html('9+');
+          $('.number_notifications').css('color', 'white');
+        }
+      }
+      else
+      {
+        $('.link_notifications').attr('href', '/inside/portail/notifications/notifications.php?view=' + view + '&action=goConsulter' + page)
+        $('.icon_notifications').attr('src', '/inside/includes/icons/common/notifications.png');
+        $('.number_notifications').html('0');
+        $('.number_notifications').css('color', '#262626');
+      }
+    }
+    else
+      clearInterval(majNotifications);
+  }, 'json');
 }
 
 // Exécute le script php de mise à jour du compteur de bugs/évolutions

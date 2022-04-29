@@ -96,6 +96,11 @@
           $zoneInside = 'article';
           include('../../includes/common/missions.php');
 
+          /*********************/
+          /* Zone de recherche */
+          /*********************/
+          include('../../includes/common/search_mobile.php');
+
           /*********/
           /* Titre */
           /*********/

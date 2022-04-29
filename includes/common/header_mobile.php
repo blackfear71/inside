@@ -9,6 +9,16 @@
         echo '<img src="/inside/includes/icons/common/inside.png" alt="inside" class="logo_bandeau" />';
       echo '</a>';
 
+      echo '<div class="zone_boutons_bandeau">';
+        // Notifications
+        echo '<div class="zone_notifications_bandeau"></div>';
+
+        // Recherche
+        echo '<div id="afficherBarreRecherche" class="zone_recherche_bandeau">';
+          echo '<img src="/inside/includes/icons/common/search.png" alt="search" title="Rechercher" class="icone_recherche" />';
+        echo '</div>';
+      echo '</div>';
+
       // Avatar
       $avatarFormatted = formatAvatar($_SESSION['user']['avatar'], $_SESSION['user']['pseudo'], 0, 'avatar');
 
