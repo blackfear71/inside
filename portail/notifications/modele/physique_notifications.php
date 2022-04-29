@@ -19,20 +19,20 @@
       case 'me':
         $req = $bdd->query('SELECT COUNT(*) AS nombreNotifications
                             FROM notifications
-                            WHERE (team = "' . $equipe . '" OR team = "") AND (author = "' . $identifiant . '" OR category = "' . $identifiant . '")');
+                            WHERE to_delete = "N" AND (team = "' . $equipe . '" OR team = "") AND (author = "' . $identifiant . '" OR content = "' . $identifiant . '")');
         break;
 
       case 'week':
         $req = $bdd->query('SELECT COUNT(*) AS nombreNotifications
                             FROM notifications
-                            WHERE (team = "' . $equipe . '" OR team = "") AND date <= ' . date('Ymd') . ' AND date > ' . $date);
+                            WHERE to_delete = "N" AND (team = "' . $equipe . '" OR team = "") AND date <= ' . date('Ymd') . ' AND date > ' . $date);
         break;
 
       case 'all':
       default:
         $req = $bdd->query('SELECT COUNT(*) AS nombreNotifications
                             FROM notifications
-                            WHERE team = "' . $equipe . '" OR team = ""');
+                            WHERE to_delete = "N" AND team = "' . $equipe . '" OR team = ""');
         break;
     }
 
@@ -62,7 +62,7 @@
       case 'me':
         $req = $bdd->query('SELECT *
                             FROM notifications
-                            WHERE to_delete = "N" AND (team = "' . $equipe . '" OR team = "") AND (author = "' . $identifiant . '" OR category = "' . $identifiant . '")
+                            WHERE to_delete = "N" AND (team = "' . $equipe . '" OR team = "") AND (author = "' . $identifiant . '" OR content = "' . $identifiant . '")
                             ORDER BY date DESC, time DESC, id DESC
                             LIMIT ' . $premiereEntree . ', ' . $nombreParPage);
         break;

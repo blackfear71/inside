@@ -453,7 +453,10 @@
   function getJavascript($generatorParameters)
   {
     // Initialisations
-    $nomScriptSpecifique = str_replace(' ', '_', trim($generatorParameters->getScript_specifique()));
+    $search  = array(' ', '.js');
+    $replace = array('_', '');
+
+    $nomScriptSpecifique = str_replace($search, $replace, trim($generatorParameters->getScript_specifique()));
     $file                = 'templates/script.js';
     $javascript          = array('filename' => $nomScriptSpecifique . '.js',
                                  'content'  => file_get_contents($file)

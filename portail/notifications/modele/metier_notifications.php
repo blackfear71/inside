@@ -25,7 +25,7 @@
 
     // Lecture du nombre total de notifications en fonction de la vue
     $nombreNotifications = physiqueNombreNotifications($view, $identifiant, $equipe, $dateMoins7);
-
+    
     // Calcul du nombre de pages
     $nombrePages = ceil($nombreNotifications / $nombreParPage);
 

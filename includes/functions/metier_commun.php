@@ -169,9 +169,11 @@
       AND $path != '/inside/portail/missions/details.php'
       AND $path != '/inside/portail/moviehouse/details.php'
       AND $path != '/inside/portail/moviehouse/mailing.php'
-      AND $path != '/inside/portail/moviehouse/moviehouse.php'      
+      AND $path != '/inside/portail/moviehouse/moviehouse.php'
+      AND $path != '/inside/portail/notifications/notifications.php'
       AND $path != '/inside/portail/petitspedestres/parcours.php'
       AND $path != '/inside/portail/portail/portail.php'
+      AND $path != '/inside/portail/search/search.php'
       AND $path != '/inside/portail/profil/profil.php')
         $isAccessibleMobile = false;
     }

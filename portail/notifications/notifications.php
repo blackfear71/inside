@@ -116,7 +116,7 @@
   {
     case 'goConsulter':
     default:
-      include_once('vue/vue_notifications.php');
+      include_once('vue/' . $_SESSION['index']['plateforme'] . '/vue_notifications.php');
       break;
   }
 ?>

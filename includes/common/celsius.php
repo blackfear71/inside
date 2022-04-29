@@ -53,6 +53,10 @@
         $contenuCelsius = 'Parce que la culture n\'a pas de prix, parce que ce lieu est l\'origine de ma maison, viens voir quel sera le prochain film que vous allez partager !';
         break;
 
+      case 'notifications':
+        $contenuCelsius = 'L\'essentiel est là, si tu as raté quelque chose, il est peut-être temps de se rattraper !';
+        break;
+
       case 'petitspedestres':
         $contenuCelsius = 'Quelle idée d\'aller courir ? Pourquoi se faire du mal comme ça ? Pour être en bonne santé ? Pour se sentir en forme ? Quel intérêt ? Mer il et fou !';
         break;
@@ -69,6 +73,10 @@
         
       case 'restaurants':
         $contenuCelsius = 'Ajoute tes restaurants favoris ici, allez ne sois pas timide on veut tous en profiter ! Il faut en rajouter un maximum pour que le choix soit le plus grand possible !';
+        break;
+
+      case 'search':
+        $contenuCelsius = 'TODO';
         break;
 
       case 'settings':

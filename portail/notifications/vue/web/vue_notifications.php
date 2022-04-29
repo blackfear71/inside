@@ -54,7 +54,7 @@
           /***********/
           /* Onglets */
           /***********/
-          include('vue/vue_onglets.php');
+          include('vue/web/vue_onglets.php');
 
           /*****************/
           /* Notifications */
@@ -117,7 +117,7 @@
           /**************/
           /* Pagination */
           /**************/
-          include('vue/vue_pagination.php');
+          include('vue/web/vue_pagination.php');
         ?>
 			</article>
 
