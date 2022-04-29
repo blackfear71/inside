@@ -2,6 +2,62 @@
 /*** Notifications ***/
 /*********************/
 
+/*** Nombre notifications ***/
+.zone_nombre_notifications
+{
+	display: inline-block;
+	vertical-align: middle;
+	width: calc(50% - 2%);
+	height: 8.5vh;
+	margin-bottom: 2vh;
+	text-align: center;
+	border-radius: 0.5vh;
+	box-shadow: 0 0 0.5vh #7c7c7c;
+	text-decoration: none;
+	background-color: #ff1937;
+	border: 0;
+}
+
+.zone_nombre_margin
+{
+	margin-right: 4%;
+}
+
+.nombre_notifications
+{
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: 1vh;
+	margin-right: 1vh;
+	width: 4vh;
+	height: 4vh;
+	line-height: 4vh;
+	background-color: #262626;
+	border-radius: 50%;
+	font-family: inside_font_medium, Verdana, sans-serif;
+    font-size: 2vh;
+	color: white;
+}
+
+.zone_titre_nombre_notifications
+{
+	display: inline-block;
+	margin-top: -0.25vh;
+	width: calc(100% - 6vh);
+	height: 8.5vh;
+	line-height: 8.5vh;
+}
+
+.titre_nombre_notifications
+{
+	display: inline-block;
+	vertical-align: middle;
+    font-family: inside_font_medium, Verdana, sans-serif;
+    font-size: 2vh;
+	color: white;
+	line-height: 3vh;
+}
+
 /*** Notifications ***/
 .zone_notifications
 {

@@ -33,6 +33,9 @@
             header('location: notifications.php?view=' . $_GET['view'] . '&action=goConsulter&page=1');
           else
           {
+            // Récupération du nombre de notifications du jour et de la semaine
+            $nombresNotifications = countNotifications($_SESSION['user']);
+
             // Calcul du nombre de pages
             $nombrePages = getPages($_GET['view'], $_SESSION['user']);
 

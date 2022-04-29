@@ -101,6 +101,33 @@
             }
           echo '</a>';
 
+          /****************************/
+          /* Nombres de notifications */
+          /****************************/
+          // Nombre de notification du jour
+          echo '<div class="zone_nombre_notifications zone_nombre_margin">';
+            echo '<div class="nombre_notifications">' . $nombresNotifications['nombreNotificationsJour'] . '</div>';
+
+            echo '<div class="zone_titre_nombre_notifications">';
+              if ($nombresNotifications['nombreNotificationsJour'] == 1)
+                echo '<div class="titre_nombre_notifications">NOTIFICATION AUJOURD\'HUI</div>';
+              else
+                echo '<div class="titre_nombre_notifications">NOTIFICATIONS AUJOURD\'HUI</div>';
+            echo '</div>';
+          echo '</div>';
+
+          // Nombre de notifications de la semaine
+          echo '<div class="zone_nombre_notifications">';
+            echo '<div class="nombre_notifications">' . $nombresNotifications['nombreNotificationsSemaine'] . '</div>';
+            
+            echo '<div class="zone_titre_nombre_notifications">';
+              if ($nombresNotifications['nombreNotificationsSemaine'] == 1)
+                echo '<div class="titre_nombre_notifications">NOTIFICATION CETTE SEMAINE</div>';
+              else
+                echo '<div class="titre_nombre_notifications">NOTIFICATIONS CETTE SEMAINE</div>';
+            echo '</div>';
+          echo '</div>';
+
           /*****************/
           /* Notifications */
           /*****************/

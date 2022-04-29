@@ -4,6 +4,31 @@
   /****************************************************************************/
   /********************************** SELECT **********************************/
   /****************************************************************************/
+  // PHYSIQUE : Lecture du nombre de notifications entre 2 dates
+  // RETOUR : Nombre de notifications
+  function physiqueNombreNotificationsDates($equipe, $date1, $date2)
+  {
+    // Initialisations
+    $nombreNotifications = 0;
+
+    // Requête
+    global $bdd;
+
+    $req = $bdd->query('SELECT COUNT(*) AS nombreNotifications
+                        FROM notifications
+                        WHERE to_delete = "N" AND (team = "' . $equipe . '" OR team = "") AND (date >= "' . $date1 . '" AND date <= "' . $date2 . '")');
+
+    $data = $req->fetch();
+
+    if ($data['nombreNotifications'] > 0)
+      $nombreNotifications = $data['nombreNotifications'];
+
+    $req->closeCursor();
+
+    // Retour
+    return $nombreNotifications;
+  }
+
   // PHYSIQUE : Lecture du nombre de notifications en fonction de la vue
   // RETOUR : Nombre de notifications
   function physiqueNombreNotifications($vue, $identifiant, $equipe, $date)

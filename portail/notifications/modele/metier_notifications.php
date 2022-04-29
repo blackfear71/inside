@@ -6,6 +6,34 @@
   include_once('../../includes/classes/movies.php');
   include_once('../../includes/classes/notifications.php');
 
+  // METIER : Récupération du détail des notifications
+  // RETOUR : Tableau détails notifications
+  function countNotifications($sessionUser)
+  {
+    // Récupération des données
+    $equipe = $sessionUser['equipe'];
+
+    // Récupération des notifications du jour
+    $nombreNotificationsJour = physiqueNombreNotificationsDates($equipe, date('Ymd'), date('Ymd'));
+
+    // Calcul des dates de la semaine
+    $nombreJoursLundi    = 1 - date('N');
+    $nombreJoursDimanche = 7 - date('N');
+    $lundi               = date('Ymd', strtotime('+' . $nombreJoursLundi . ' days'));
+    $aujourdhui          = date('Ymd', strtotime('+' . $nombreJoursDimanche . ' days'));
+
+    // Récupération des notifications du jour
+    $nombreNotificationsSemaine = physiqueNombreNotificationsDates($equipe, $lundi, $aujourdhui);
+
+    // Concaténation des données
+    $nombresNotifications = array('nombreNotificationsJour'    => $nombreNotificationsJour,
+                                  'nombreNotificationsSemaine' => $nombreNotificationsSemaine
+                                 );
+
+    // Retour
+    return $nombresNotifications;
+  }
+
   // METIER : Lecture nombre de pages en fonction de la vue
   // RETOUR : Nombre de pages
   function getPages($view, $sessionUser)

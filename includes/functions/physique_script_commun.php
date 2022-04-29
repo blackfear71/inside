@@ -4,7 +4,6 @@
   /****************************************************************************/
   /********************************** SELECT **********************************/
   /****************************************************************************/
-
   // PHYSIQUE : Lecture du nombre de notifications entre 2 dates
   // RETOUR : Nombre de notifications
   function physiqueNombreNotificationsDates($equipe, $date1, $date2)
