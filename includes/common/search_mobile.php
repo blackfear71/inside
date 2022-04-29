@@ -5,7 +5,7 @@
             echo '<div class="form_recherche_bandeau">';
                 // Saisie recherche
                 echo '<form method="post" action="/inside/portail/search/search.php?action=doSearch">';
-                    echo '<input type="text" name="text_search" placeholder="Rechercher..." class="recherche_bandeau" />';
+                    echo '<input type="text" name="text_search" placeholder="Rechercher..." id="searchFocus" class="recherche_bandeau" />';
                     echo '<input type="submit" name="search" value="" class="logo_rechercher" />';
                 echo '</form>';
 

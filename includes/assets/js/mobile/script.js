@@ -40,6 +40,7 @@ $(function()
   $('#afficherBarreRecherche, #masquerBarreRecherche').click(function()
   {
     afficherMasquerIdWithDelay('searchBar');
+    $('#searchFocus').focus();
   });
 
   // Ouverture menu latéral gauche
