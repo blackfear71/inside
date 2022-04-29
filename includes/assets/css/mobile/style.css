@@ -37,6 +37,7 @@ article
 a:link, a:visited, a:hover, a:active
 {
 	outline: none;
+	text-decoration: none;
 }
 
 input:focus, textarea:focus
@@ -101,24 +102,28 @@ header
 
 .link_notifications
 {
-	display: block;
+	display: inline-block;
 	width: 6vh;
 	line-height: 5vh;
+	height: 5vh;
 	text-align: center;
 }
 
 .icon_notifications
 {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
 	width: 4vh;
 	margin-top: 0.5vh;
 }
 
 .number_notifications
 {
-	float: left;
-	margin-top: -6.5vh;
+	margin-top: -4.5vh;
 	width: 6vh;
 	height: 5vh;
+	line-height: 4.7vh;
 	text-align: center;
 	color: #262626;
 	position: relative;

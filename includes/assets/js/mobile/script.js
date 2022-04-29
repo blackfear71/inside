@@ -917,7 +917,6 @@ function updateNotifications()
       if (!$('.link_notifications').length)
       {
         html += '<a href="/inside/portail/notifications/notifications.php?view=all&action=goConsulter&page=1" title="Notifications" class="link_notifications">';
-
           if (nombreNotificationsJour > 0)
             html += '<img src="/inside/includes/icons/common/notifications.png" alt="notifications" class="icon_notifications" />';
           else
