@@ -16,6 +16,7 @@
 	text-decoration: none;
 	background-color: #ff1937;
 	border: 0;
+	overflow: hidden;
 }
 
 .zone_nombre_margin
@@ -28,7 +29,7 @@
 	display: inline-block;
 	vertical-align: middle;
 	margin-left: 1vh;
-	margin-right: 1vh;
+	margin-right: 0.5vh;
 	width: 4vh;
 	height: 4vh;
 	line-height: 4vh;
@@ -42,7 +43,8 @@
 .zone_titre_nombre_notifications
 {
 	display: inline-block;
-	margin-top: -0.25vh;
+	margin-top: -0.1vh;
+	margin-right: 0.5vh;
 	width: calc(100% - 6vh);
 	height: 8.5vh;
 	line-height: 8.5vh;
