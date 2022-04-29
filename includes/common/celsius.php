@@ -76,7 +76,7 @@
         break;
 
       case 'search':
-        $contenuCelsius = 'TODO';
+        $contenuCelsius = 'Tu cherches quelque chose ? Tu es au bon endroit mon ami ! On a de tout ici : des bons films, des bons restos, des bonnes balades à pied et des super missions !';
         break;
 
       case 'settings':

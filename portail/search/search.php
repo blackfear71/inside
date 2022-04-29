@@ -83,7 +83,7 @@
 
     case 'goSearch':
     default:
-      include_once('vue/vue_search.php');
+      include_once('vue/' . $_SESSION['index']['plateforme'] . '/vue_search.php');
       break;
   }
 ?>
