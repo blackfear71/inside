@@ -1,92 +1,92 @@
 <?php
-  include_once('../../includes/functions/appel_bdd.php');
+    include_once('../../includes/functions/appel_bdd.php');
 
-  /****************************************************************************/
-  /********************************** SELECT **********************************/
-  /****************************************************************************/
-  // PHYSIQUE : Lecture liste
-  // RETOUR : Liste
-  function physiqueSelect($id)
-  {
-    // Initialisations
-    $retour = array();
-
-    // Requête
-    global $bdd;
-
-    $req = $bdd->query('SELECT *
-                        FROM table
-                        WHERE id = ' . $id . '
-                        ORDER BY id DESC');
-
-    while ($data = $req->fetch())
+    /****************************************************************************/
+    /********************************** SELECT **********************************/
+    /****************************************************************************/
+    // PHYSIQUE : Lecture liste
+    // RETOUR : Liste
+    function physiqueSelect($id)
     {
-      $objet = Class::withData($data);
+        // Initialisations
+        $retour = array();
 
-      array_push($retour, $objet);
+        // Requête
+        global $bdd;
+
+        $req = $bdd->query('SELECT *
+                            FROM table
+                            WHERE id = ' . $id . '
+                            ORDER BY id DESC');
+
+        while ($data = $req->fetch())
+        {
+            $objet = Class::withData($data);
+
+            array_push($retour, $objet);
+        }
+
+        $req->closeCursor();
+
+        // Retour
+        return $retour;
     }
 
-    $req->closeCursor();
+    /****************************************************************************/
+    /********************************** INSERT **********************************/
+    /****************************************************************************/
+    // PHYSIQUE : Insertion
+    // RETOUR : Aucun
+    function physiqueInsert($champ1, $champ2)
+    {
+        // Requête
+        global $bdd;
 
-    // Retour
-    return $retour;
-  }
+        $req = $bdd->prepare('INSERT INTO table(champ1, champ2)
+        VALUES(:champ1, :champ2)');
 
-  /****************************************************************************/
-  /********************************** INSERT **********************************/
-  /****************************************************************************/
-  // PHYSIQUE : Insertion
-  // RETOUR : Aucun
-  function physiqueInsert($champ1, $champ2)
-  {
-    // Requête
-    global $bdd;
+        $req->execute(array(
+            'champ1' => $champ1,
+            'champ2' => $champ2
+        ));
 
-    $req = $bdd->prepare('INSERT INTO table(champ1, champ2)
-                          VALUES(:champ1, :champ2)');
+        $req->closeCursor();
+    }
 
-    $req->execute(array(
-      'champ1' => $champ1,
-      'champ2' => $champ2
-    ));
+    /****************************************************************************/
+    /********************************** UPDATE **********************************/
+    /****************************************************************************/
+    // PHYSIQUE : Mise à jour
+    // RETOUR : Aucun
+    function physiqueUpdate($champ1, $champ2, $id)
+    {
+        // Requête
+        global $bdd;
 
-    $req->closeCursor();
-  }
+        $req = $bdd->prepare('UPDATE table
+                              SET champ1 = :champ1,
+                                  champ2 = :champ2
+                              WHERE id = ' . $id);
 
-  /****************************************************************************/
-  /********************************** UPDATE **********************************/
-  /****************************************************************************/
-  // PHYSIQUE : Mise à jour
-  // RETOUR : Aucun
-  function physiqueUpdate($champ1, $champ2, $id)
-  {
-    // Requête
-    global $bdd;
+        $req->execute(array(
+            'champ1' => $champ1,
+            'champ2' => $champ2
+        ));
 
-    $req = $bdd->prepare('UPDATE table
-                          SET champ1 = :champ1,
-                              champ2 = :champ2
-                          WHERE id = ' . $id);
+        $req->closeCursor();
+    }
 
-    $req->execute(array(
-      'champ1' => $champ1,
-      'champ2' => $champ2
-    ));
+    /****************************************************************************/
+    /********************************** DELETE **********************************/
+    /****************************************************************************/
+    // PHYSIQUE : Suppression
+    // RETOUR : Aucun
+    function physiqueDelete($id)
+    {
+        // Requête
+        global $bdd;
 
-    $req->closeCursor();
-  }
-
-  /****************************************************************************/
-  /********************************** DELETE **********************************/
-  /****************************************************************************/
-  // PHYSIQUE : Suppression
-  // RETOUR : Aucun
-  function physiqueDelete($id)
-  {
-    // Requête
-    global $bdd;
-
-    $req = $bdd->exec('DELETE FROM table
-                       WHERE id = ' . $id);
-  }
+        $req = $bdd->exec('DELETE FROM table
+                           WHERE id = ' . $id);
+    }
 ?>

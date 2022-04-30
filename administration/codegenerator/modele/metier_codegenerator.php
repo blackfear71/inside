@@ -303,7 +303,7 @@
       $vue = str_replace('/*onglets*/', '', $vue);
     else
       $vue = str_replace('/*onglets*/', '
-        include(\'../../includes/common/web/onglets.php\');', $vue);
+                include(\'../../includes/common/web/onglets.php\');', $vue);
 
     // Style balise section sans onglets (hors admin)
     if ($options['admin']->getChecked() != 'Y' AND $options['onglets']->getChecked() == 'N')
@@ -312,8 +312,8 @@
     // Alertes
     if ($options['alerts']->getChecked() == 'Y')
       $vue = str_replace('/*alerts*/', '
-      <!-- Messages d\'alerte -->
-      <?php include(\'../../includes/common/alerts.php\'); ?>
+            <!-- Messages d\'alerte -->
+            <?php include(\'../../includes/common/alerts.php\'); ?>
 ', $vue);
     else
       $vue = str_replace('/*alerts*/', '', $vue);
@@ -321,8 +321,8 @@
     // Déblocage succès (hors admin)
     if ($options['admin']->getChecked() != 'Y' AND $options['success']->getChecked() == 'Y')
       $vue = str_replace('/*success*/', '
-      <!-- Déblocage succès -->
-      <?php include(\'../../includes/common/success.php\'); ?>
+            <!-- Déblocage succès -->
+            <?php include(\'../../includes/common/success.php\'); ?>
 ', $vue);
     else
       $vue = str_replace('/*success*/', '', $vue);
@@ -336,19 +336,19 @@
       $vue = str_replace('/*missions*/', '', $vue);
     else
       $vue = str_replace('/*missions*/', '
-          /********************/
-          /* Boutons missions */
-          /********************/
-          $zoneInside = \'article\';
-          include(\'../../includes/common/missions.php\');
+                    /********************/
+                    /* Boutons missions */
+                    /********************/
+                    $zoneInside = \'article\';
+                    include(\'../../includes/common/missions.php\');
 ', $vue);
 
     // Chat
     if ($options['chat']->getChecked() == 'Y' AND $options['admin']->getChecked() != 'Y')
       $vue = str_replace('/*chat*/', '
 
-      <!-- Chat -->
-      <?php include(\'../../includes/common/chat/chat.php\'); ?>', $vue);
+            <!-- Chat -->
+            <?php include(\'../../includes/common/chat/chat.php\'); ?>', $vue);
     else
       $vue = str_replace('/*chat*/', '', $vue);
 
@@ -389,31 +389,31 @@
     // Titre fonctions communes
     if ($options['common']->getChecked() == 'Y' OR $options['dates']->getChecked() == 'Y' OR $options['regex']->getChecked() == 'Y')
       $controler = str_replace('/*title_common*/', '
-  // Fonctions communes', $controler);
+    // Fonctions communes', $controler);
     else
       $controler = str_replace('/*title_common*/
-  /*common_functions*/', '', $controler);
+    /*common_functions*/', '', $controler);
 
     // Fonctions communes
     if ($options['common']->getChecked() == 'Y')
       $controler = str_replace('/*common_functions*/', 'include_once(\'../../includes/functions/metier_commun.php\');
-  include_once(\'../../includes/functions/physique_commun.php\');
-  /*common_functions*/', $controler);
+    include_once(\'../../includes/functions/physique_commun.php\');
+    /*common_functions*/', $controler);
 
     // Fonctions dates
     if ($options['dates']->getChecked() == 'Y')
       $controler = str_replace('/*common_functions*/', 'include_once(\'../../includes/functions/fonctions_dates.php\');
-  /*common_functions*/', $controler);
+    /*common_functions*/', $controler);
 
     // Fonctions regex
     if ($options['regex']->getChecked() == 'Y')
       $controler = str_replace('/*common_functions*/', 'include_once(\'../../includes/functions/fonctions_regex.php\');
-  /*common_functions*/', $controler);
+    /*common_functions*/', $controler);
 
     // Fonctions dates
     if ($options['images']->getChecked() == 'Y')
       $controler = str_replace('/*common_functions*/', 'include_once(\'../../includes/functions/fonctions_images.php\');
-  /*common_functions*/', $controler);
+    /*common_functions*/', $controler);
 
     // Suppression balise
     $controler = str_replace('/*common_functions*/', '', $controler);
@@ -432,8 +432,8 @@
 
     // Appels métier
     $controler = str_replace('/*functions_calls*/', 'include_once(\'modele/metier_' . $nomTechnique . '.php\');
-  include_once(\'modele/controles_' . $nomTechnique . '.php\');
-  include_once(\'modele/physique_' . $nomTechnique . '.php\');', $controler);
+    include_once(\'modele/controles_' . $nomTechnique . '.php\');
+    include_once(\'modele/physique_' . $nomTechnique . '.php\');', $controler);
 
     // Contrôle action URL renseignée
     $controler = str_replace('/*control_action*/', 'header(\'location: ' . $nomTechnique . '.php?action=goConsulter\');', $controler);
