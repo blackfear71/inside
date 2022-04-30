@@ -45,7 +45,6 @@
       <!-- Celsius -->
       <?php
         $celsius = 'calendars';
-
         include('../../includes/common/mobile/celsius.php');
       ?>
 

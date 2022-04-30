@@ -45,7 +45,6 @@
       <!-- Celsius -->
       <?php
         $celsius = 'missions';
-
         include('../../includes/common/mobile/celsius.php');
       ?>
 

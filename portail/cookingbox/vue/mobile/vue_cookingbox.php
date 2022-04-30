@@ -45,7 +45,6 @@
       <!-- Celsius -->
       <?php
         $celsius = 'cookingbox';
-
         include('../../includes/common/mobile/celsius.php');
       ?>
 

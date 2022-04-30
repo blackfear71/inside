@@ -45,7 +45,6 @@
       <!-- Celsius -->
       <?php
         $celsius = 'restaurants';
-
         include('../../includes/common/mobile/celsius.php');
       ?>
 

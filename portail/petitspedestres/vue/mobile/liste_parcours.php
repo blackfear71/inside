@@ -45,7 +45,6 @@
       <!-- Celsius -->
       <?php
         $celsius = 'petitspedestres';
-
         include('../../includes/common/mobile/celsius.php');
       ?>
 

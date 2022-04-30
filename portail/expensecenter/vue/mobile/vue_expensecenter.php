@@ -45,7 +45,6 @@
       <!-- Celsius -->
       <?php
         $celsius = 'expensecenter';
-
         include('../../includes/common/mobile/celsius.php');
       ?>
 

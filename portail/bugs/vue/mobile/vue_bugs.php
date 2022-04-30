@@ -45,7 +45,6 @@
       <!-- Celsius -->
       <?php
         $celsius = 'bugs';
-
         include('../../includes/common/mobile/celsius.php');
       ?>
 
