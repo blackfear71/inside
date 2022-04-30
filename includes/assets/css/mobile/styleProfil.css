@@ -1035,14 +1035,14 @@
 
 .zone_theme_actions
 {
-	margin-top: 2vh;
+	margin-top: 1vh;
 }
 
 .form_theme
 {
 	display: inline-block;
-	width: calc(50% - 1vh);
-	margin-right: 1vh;
+	width: calc(50% - 0.5vh);
+	margin-right: 0.5vh;
 }
 
 .bouton_theme
@@ -1072,10 +1072,10 @@
 .bouton_apercu
 {
 	display: inline-block;
-	width: calc(50% - 1vh);
+	width: calc(50% - 0.5vh);
 	padding-top: 1vh;
 	padding-bottom: 1vh;
-	margin-left: 1vh;
+	margin-left: 0.5vh;
 	background-color: #e3e3e3;
 	border-radius: 0.5vh;
 	font-family: inside_font_light, Verdana, sans-serif;
