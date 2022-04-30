@@ -110,7 +110,7 @@
     // Thèmes de missions
     echo '<div class="titre_section"><img src="../../includes/icons/profil/missions_grey.png" alt="missions_grey" class="logo_titre_section" />';
       echo '<div class="texte_titre_section">';
-        echo 'Les thèmes de missions';
+        echo 'Les thèmes des missions';
 
         if (!empty($themesMissions))
         {

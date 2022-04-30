@@ -36,6 +36,30 @@ $(function()
     showSuccess(idSuccess);
   });
 
+  // Affiche un aperçu d'un thème
+  $('.apercuTheme').click(function()
+  {
+    var reference;
+    var withLogo  = $(this).attr('id').split('_')[0];
+    var logo;
+
+    if (withLogo == 'nologo')
+      reference = $(this).attr('id').replace('nologo_', '');
+    else
+      reference = $(this).attr('id');
+
+    var background = '/inside/includes/images/themes/backgrounds/' + reference + '.png';
+    var header     = '/inside/includes/images/themes/headers/' + reference + '_h.png';
+    var footer     = '/inside/includes/images/themes/footers/' + reference + '_f.png';
+
+    if (withLogo != 'nologo')
+      logo = '/inside/includes/images/themes/logos/' + reference + '_l.png';
+    else
+      logo = '/inside/includes/icons/common/inside.png';
+
+    changeTheme(background, header, footer, logo);
+  });
+
   /*** Actions au changement ***/
   // Affiche la saisie "Autre" (changement d'équipe)
   $('.select_form_update_team').on('change', function()

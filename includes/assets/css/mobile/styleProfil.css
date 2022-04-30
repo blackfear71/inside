@@ -571,9 +571,9 @@
 .number_exp
 {
 	display: inline-block;
-	width: 4.5vh;
-	height: 4.5vh;
-	line-height: 4.5vh;
+	width: 4vh;
+	height: 4vh;
+	line-height: 4vh;
 	border-radius: 50%;
 	background-color: #ff1937;
 	font-family: inside_font_light, Verdana, sans-serif;
@@ -803,11 +803,53 @@
 	background-color: #d3d3d3;
 }
 
+/*** Thèmes ***/
+.zone_preferences_themes
+{
+	width: 100%;
+}
+
+.zone_preferences_themes:last-child
+{
+	margin-bottom: -3.5vh;
+}
+
+.texte_themes
+{
+	text-align: justify;
+	font-family: inside_font_light, Verdana, sans-serif;
+	color: #262626;
+	margin-bottom: 3vh;
+}
+
+.texte_themes_italique
+{
+	font-style: italic;
+}
+
+.bouton_form_themes
+{
+	display: block;
+	width: 100%;
+	padding-top: 1vh;
+	padding-bottom: 1vh;
+	margin-top: 2vh;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: #e3e3e3;
+	border-radius: 0.5vh;
+	font-family: inside_font_light, Verdana, sans-serif;
+	font-size: 3vh;
+	color: #262626;
+	text-align: center;
+	border: 0;
+	box-shadow: 0 0 0.5vh #7c7c7c;
+}
+
 /*** Polices ***/
 .zone_preferences_police
 {
 	width: 100%;
-	margin-bottom: -3vh;
 }
 
 .form_update_police
@@ -879,4 +921,168 @@
 	margin-bottom: 3vh;
 	text-align: justify;
 	font-size: 2.5vh;
+}
+
+/*** Fonds ***/
+.zone_themes
+{
+	width: 100%;
+	margin-bottom: -2vh;
+}
+
+.zone_theme
+{
+	margin-bottom: 4vh;
+}
+
+.zone_theme_infos
+{
+	border-radius: 0.5vh;
+	overflow: hidden;
+	box-shadow: 0 0 0.5vh #7c7c7c;
+}
+
+.selection_theme
+{
+	float: right;
+	position: relative;
+	z-index: 2;
+	margin-bottom: -5vh;
+	height: 5vh;
+	line-height: 5vh;
+	padding-left: 1vh;
+	padding-right: 1vh;
+	text-align: center;
+	background-color: #70d55d;
+	border-top-right-radius: 0.5vh;
+	border-bottom-left-radius: 0.5vh;
+	font-family: inside_font_light, Verdana, sans-serif;
+	color: white;
+	box-shadow: 0 0 0.5vh #7c7c7c;
+}
+
+.zone_header_theme
+{
+	width: 100%;
+	overflow: hidden;
+}
+
+.theme_header_footer
+{
+	width: 100%;
+	display: block;
+	background-color: #262626;
+}
+
+.theme_logo
+{
+	float: left;
+	height: 20vh;
+	margin-top: -2vh;
+	margin-left: -4vh;
+	margin-bottom: -20vh;
+	position: relative;
+	z-index: 1;
+}
+
+.theme_background
+{
+	width: 100%;
+	display: block;
+	background-color: #fbfbfb;
+}
+
+.theme_infos
+{
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.theme_name_mission
+{
+	width: 100%;
+	background-color: #2eb2f4;
+	padding: 0.5vh 1vh 0.5vh 1vh;
+	font-family: inside_font_light, Verdana, sans-serif;
+	color: white;
+	text-align: justify;
+}
+
+.theme_name
+{
+	width: 60%;
+	background-color: #2eb2f4;
+	padding: 0.5vh 1vh 0.5vh 1vh;
+	font-family: inside_font_light, Verdana, sans-serif;
+	color: white;
+	text-align: justify;
+}
+
+.theme_level
+{
+	width: 40%;
+	background-color: #e3e3e3;
+	padding: 0.5vh 1vh 0.5vh 1vh;
+	font-family: inside_font_light, Verdana, sans-serif;
+	color: #262626;
+	text-align: center;
+}
+
+.zone_theme_actions
+{
+	margin-top: 2vh;
+}
+
+.form_theme
+{
+	display: inline-block;
+	width: calc(50% - 1vh);
+	margin-right: 1vh;
+}
+
+.bouton_theme
+{
+	display: block;
+	width: 100%;
+	padding-top: 1vh;
+	padding-bottom: 1vh;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: #e3e3e3;
+	border-radius: 0.5vh;
+	font-family: inside_font_light, Verdana, sans-serif;
+	font-size: 3vh;
+	color: #262626;
+	text-align: center;
+	border: 0;
+	box-shadow: 0 0 0.5vh #7c7c7c;
+}
+
+.bouton_theme:active
+{
+	color: white;
+	background-color: #70d55d;
+}
+
+.bouton_apercu
+{
+	display: inline-block;
+	width: calc(50% - 1vh);
+	padding-top: 1vh;
+	padding-bottom: 1vh;
+	margin-left: 1vh;
+	background-color: #e3e3e3;
+	border-radius: 0.5vh;
+	font-family: inside_font_light, Verdana, sans-serif;
+	font-size: 3vh;
+	color: #262626;
+	text-align: center;
+	border: 0;
+	box-shadow: 0 0 0.5vh #7c7c7c;
+}
+
+.bouton_apercu:active
+{
+	color: white;
+	background-color: #ff1937;
 }
