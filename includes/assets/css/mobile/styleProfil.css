@@ -811,7 +811,7 @@
 
 .zone_preferences_themes:last-child
 {
-	margin-bottom: -3.5vh;
+	margin-bottom: -2.5vh;
 }
 
 .texte_themes
@@ -819,6 +819,7 @@
 	text-align: justify;
 	font-family: inside_font_light, Verdana, sans-serif;
 	color: #262626;
+	font-size: 3vh;
 	margin-bottom: 3vh;
 }
 
@@ -937,7 +938,7 @@
 
 .zone_theme
 {
-	margin-bottom: 4vh;
+	margin-bottom: 3vh;
 }
 
 .zone_theme_infos
