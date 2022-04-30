@@ -17,7 +17,7 @@
       echo '</div>';
 
       echo '<div class="texte_themes">';
-        echo 'Vous avez le choix de sélectionner soit un thème débloqué par votre niveau <span class="number_exp">' . convertExperience($profil->getExperience()) . '</span> en accumulant de l\'expérience, soit un thème utilisé lors d\'une mission passée.';
+        echo 'Vous avez le choix de sélectionner soit un thème débloqué par votre niveau <span class="niveau_themes">' . convertExperience($profil->getExperience()) . '</span> en accumulant de l\'expérience, soit un thème utilisé lors d\'une mission passée.';
       echo '</div>';
 
       echo '<div class="texte_themes texte_themes_italique">';
@@ -133,7 +133,7 @@
 
                     // Niveau
                     echo '<td class="theme_level">';
-                      echo 'Niveau <span class="number_exp">' . $themeUsers->getLevel() . '</span>';
+                      echo 'Niveau <span class="niveau_themes">' . $themeUsers->getLevel() . '</span>';
                     echo '</td>';
                   echo '</tr>';
                 echo '</table>';

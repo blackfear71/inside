@@ -833,6 +833,22 @@
 	font-style: italic;
 }
 
+.niveau_themes
+{
+	display: inline-block;
+	vertical-align: middle;
+	margin-top: -0.5vh;
+	width: 2.5vh;
+	height: 2.5vh;
+	line-height: 2.5vh;
+	border-radius: 50%;
+	background-color: #ff1937;
+	font-family: inside_font_light, Verdana, sans-serif;
+	color: white;
+	font-size: 2vh;
+	text-align: center;
+}
+
 .bouton_form_themes
 {
 	display: block;
@@ -1027,7 +1043,7 @@
 {
 	width: 60%;
 	background-color: #2eb2f4;
-	padding: 0.5vh 1vh 0.5vh 1vh;
+	padding: 1vh;
 	font-family: inside_font_light, Verdana, sans-serif;
 	color: white;
 	text-align: justify;
