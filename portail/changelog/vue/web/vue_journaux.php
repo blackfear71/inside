@@ -46,7 +46,7 @@
         }
           // Notes
           echo '<div class="notes_changelog">';
-            echo $log->getNotes();
+            echo nl2br($log->getNotes());
           echo '</div>';
 
           // Logs par catégories

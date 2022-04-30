@@ -109,6 +109,17 @@
       echo '</div>';
     echo '</div>';
 
+    // Nom de domaine et certificat SSL
+    echo '<div class="event_history">';
+      echo '<div class="date_history">16 et 20 Avril 2022</div><div class="trait_history"></div>';
+
+      echo '<div class="details_history">';
+        echo 'Deux dates importantes qui marquent un nouveau pas en avant pour Inside. L\'arrivée tant désirée d\'un nom de domaine (contraintes techniques oblige) facilite la vie de tout le monde
+        (et surtout des développeurs !). Et quitte à ne pas se lasser on va pousser le vice un peu plus loin en mettant en place le HTTPS via un certificat SSL hyper simple à mettre en place.
+        Vraiment super simple pour n\'importe quel débutant très expérimenté.';
+      echo '</div>';
+    echo '</div>';
+
     // A vous de jouer
     echo '<div class="event_history">';
       echo '<div class="date_history">' . date('j') . ' ' . formatMonthForDisplay(date('m')) . ' ' . date('Y') . '</div><div class="trait_history"></div>';
