@@ -24,7 +24,7 @@
       <?php
         $title = 'Notifications';
 
-			  include('../../includes/common/header.php');
+			  include('../../includes/common/web/header.php');
       ?>
 		</header>
 
@@ -127,7 +127,7 @@
 
 		<!-- Pied de page -->
 		<footer>
-			<?php include('../../includes/common/footer.php'); ?>
+			<?php include('../../includes/common/web/footer.php'); ?>
 		</footer>
 	</body>
 </html>

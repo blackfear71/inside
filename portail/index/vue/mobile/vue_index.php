@@ -21,7 +21,7 @@
 	<body>
     <!-- Entête -->
     <header>
-      <?php include('includes/common/header_mobile.php'); ?>
+      <?php include('includes/common/mobile/header_mobile.php'); ?>
     </header>
 
     <!-- Contenu -->
@@ -190,7 +190,7 @@
 
     <!-- Pied de page -->
     <footer>
-			<?php include('includes/common/footer_mobile.php'); ?>
+			<?php include('includes/common/mobile/footer_mobile.php'); ?>
 		</footer>
   </body>
 </html>

@@ -24,7 +24,7 @@
       <?php
         $title = /*title*/;
 
-        include('../../includes/common/header.php');/*onglets*/
+        include('../../includes/common/web/header.php');/*onglets*/
       ?>
     </header>
 
@@ -52,7 +52,7 @@
 
     <!-- Pied de page -->
     <footer>
-      <?php include('../../includes/common/footer.php'); ?>
+      <?php include('../../includes/common/web/footer.php'); ?>
     </footer>
   </body>
 </html>

@@ -303,7 +303,7 @@
       $vue = str_replace('/*onglets*/', '', $vue);
     else
       $vue = str_replace('/*onglets*/', '
-        include(\'../../includes/common/onglets.php\');', $vue);
+        include(\'../../includes/common/web/onglets.php\');', $vue);
 
     // Style balise section sans onglets (hors admin)
     if ($options['admin']->getChecked() != 'Y' AND $options['onglets']->getChecked() == 'N')

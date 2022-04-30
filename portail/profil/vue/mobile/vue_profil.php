@@ -41,7 +41,7 @@
 	<body>
     <!-- Entête -->
     <header>
-      <?php include('../../includes/common/header_mobile.php'); ?>
+      <?php include('../../includes/common/mobile/header_mobile.php'); ?>
     </header>
 
     <!-- Contenu -->
@@ -54,7 +54,7 @@
 
       <!-- Menus -->
       <aside>
-        <?php include('../../includes/common/aside_mobile.php'); ?>
+        <?php include('../../includes/common/mobile/aside_mobile.php'); ?>
       </aside>
 
       <!-- Chargement page -->
@@ -85,7 +85,7 @@
             break;
         }
 
-        include('../../includes/common/celsius.php');
+        include('../../includes/common/mobile/celsius.php');
       ?>
 
 			<article>
@@ -99,7 +99,7 @@
           /*********************/
           /* Zone de recherche */
           /*********************/
-          include('../../includes/common/search_mobile.php');
+          include('../../includes/common/mobile/search_mobile.php');
 
           /*********/
           /* Titre */
@@ -135,7 +135,7 @@
 
 		<!-- Pied de page -->
 		<footer>
-			<?php include('../../includes/common/footer_mobile.php'); ?>
+			<?php include('../../includes/common/mobile/footer_mobile.php'); ?>
 		</footer>
 
     <!-- Données JSON -->

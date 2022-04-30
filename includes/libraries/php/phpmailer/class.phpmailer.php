@@ -2767,7 +2767,7 @@ class PHPMailer
      * Encode and wrap long multibyte strings for mail headers
      * without breaking lines within a character.
      * Adapted from a function by paravoid
-     * @link http://www.php.net/manual/en/function.mb-encode-mimeheader.php#60283
+     * @link http://www.php.net/manual/en/function.mb-encode-mimeweb/header.php#60283
      * @access public
      * @param string $str multi-byte text to wrap encode
      * @param string $linebreak string to use as linefeed/end-of-line
