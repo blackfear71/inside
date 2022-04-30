@@ -1381,7 +1381,7 @@ footer
 {
 	float: left;
 	height: 7vh;
-	background-color: #262626;
+	background-color: transparent;
 }
 
 .zone_footer_right
@@ -1389,6 +1389,7 @@ footer
 	float: right;
 	height: 7vh;
 	background-color: #262626;
+	background-color: transparent;
 }
 
 .version
@@ -1408,8 +1409,7 @@ footer
 	display: inline-block;
 	vertical-align: top;
 	width: 7vh;
-	height: 7vh;
-	background-color: #262626;
+	height: 7vh;	
 }
 
 .link_footer:active
