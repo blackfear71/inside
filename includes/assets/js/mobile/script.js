@@ -8,6 +8,10 @@ $(function()
   // Forçage taille écran (viewport)
   fixViewport();
 
+  // Applique le thème utilisateur si présent
+  if (themeUser != null)
+    changeTheme(themeUser.background, themeUser.header, themeUser.footer, themeUser.logo);
+
   // Initialisation de la position Celsius si présente
   if ($('.celsius').length)
     initPositionCelsius();
@@ -253,18 +257,48 @@ function fixViewport()
   viewport.setAttribute('content', 'height=' + viewHeight + 'px, width=' + viewWidth + 'px, initial-scale=1.0, minimum-scale=1, maximum-scale=1.0, user-scalable=no');
 }
 
+// Changement thème
+function changeTheme(background, header, footer, logo)
+{
+  if (background != null)
+  {
+    $('section').css('background-image', 'url(' + background + ')');
+    $('section').css('background-repeat', 'repeat-y');
+    $('section').css('background-size', '100%');
+  }
+
+  if (header != null)
+  {
+    $('.zone_bandeau').css('background-image', 'url(' + header + ')');
+    $('.zone_bandeau').css('background-repeat', 'repeat-x');
+    $('.zone_bandeau').css('background-size', 'auto 100%');
+    $('.zone_bandeau').css('background-position', 'center');
+  }
+
+  if (footer != null)
+  {
+    $('footer').css('background-image', 'url(' + footer + ')');
+    $('footer').css('background-repeat', 'repeat-x');
+    $('footer').css('background-size', 'auto 100%');
+    $('footer').css('background-position', 'center');
+  }
+
+  if (logo != null)
+    $('#logo_inside_header').attr('src', logo);
+}
+
 // Fonction équivalente au $_GET en php
 function $_GET(param)
 {
 	var vars = {};
 
 	window.location.href.replace(location.hash, '').replace(
-    // Expression régulière
+        // Expression régulière
 		/[?&]+([^=&]+)=?([^&]*)?/gi,
 
-    // Fonction retour
+        // Fonction retour
 		function(m, key, value)
-    {
+        {
 			vars[key] = value !== undefined ? value : '';
 		}
 	);
@@ -272,7 +306,7 @@ function $_GET(param)
 	if (param)
 		return vars[param] ? vars[param] : null;
 
-  // Retour
+    // Retour
 	return vars;
 }
 

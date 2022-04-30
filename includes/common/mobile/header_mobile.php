@@ -6,7 +6,7 @@
     {
       // Logo Inside
       echo '<a id="deployAsidePortail" class="zone_bandeau_logo">';
-        echo '<img src="/inside/includes/icons/common/inside.png" alt="inside" class="logo_bandeau" />';
+        echo '<img src="/inside/includes/icons/common/inside.png" alt="inside" class="logo_bandeau" id="logo_inside_header" />';
       echo '</a>';
 
       // Notifications, recherche et profil

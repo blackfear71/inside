@@ -65,7 +65,7 @@
   // Zone droite
   echo '<div class="zone_footer_right">';
     // Récupération de la plateforme
-    $plateforme = getPlateforme();    
+    $plateforme = getPlateforme();
 
     // Affichage switch version sur mobile
     if ($plateforme == 'mobile')
@@ -79,10 +79,21 @@
     echo '<div class="copyright">© 2017-' . date('Y') . ' Inside</div>';
   echo '</div>';
 
-  // Boutons missions
   if (isset($_SESSION['index']['connected']) AND $_SESSION['index']['connected'] == true)
   {
+    // Boutons missions
     $zoneInside = 'footer';
     include($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/common/missions.php');
+
+    // Chargement des données du thème pour le script
+    if (!empty($_SESSION['theme']))
+      $themeUser = json_encode($_SESSION['theme']);
+    else
+      $themeUser = json_encode('');
   }
 ?>
+
+<script>
+  // Récupération du thème pour le script
+  var themeUser = <?php echo $themeUser; ?>;
+</script>
