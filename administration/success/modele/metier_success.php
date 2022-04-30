@@ -598,6 +598,8 @@
             case 'christmas2018_2':
             // Première étoile
             case 'christmas2019':
+            // Paquet livré !
+            case 'delivery':
               // Récupération des données de la mission
               if ($success->getReference() == 'christmas2017' OR $success->getReference() == 'christmas2017_2')
                 $reference = 'noel_2017';
@@ -609,6 +611,8 @@
                 $reference = 'noel_2018';
               elseif ($success->getReference() == 'christmas2019')
                 $reference = 'noel_2019';
+              elseif ($success->getReference() == 'delivery')
+                $reference = 'cigognes_2022';
 
               $mission = physiqueDonneesMission($reference);
 

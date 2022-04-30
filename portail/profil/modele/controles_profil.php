@@ -134,6 +134,10 @@
         $referenceMission = 'noel_2019';
         break;
 
+      case 'delivery':
+        $referenceMission = 'cigognes_2022';
+        break;
+
       default:
         $referenceMission = '';
         break;

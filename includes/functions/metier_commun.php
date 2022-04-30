@@ -839,6 +839,7 @@
       case 'christmas2018':
       case 'christmas2018_2':
       case 'christmas2019':
+      case 'delivery':
         // Récupération de l'ancienne valeur du succès de l'utilisateur
         $ancienneValeur = physiqueAncienneValeurSucces($reference, $identifiant);
 
@@ -1014,6 +1015,10 @@
 
       case 'noel_2019':
         insertOrUpdateSuccesValue('christmas2019', $identifiant, 1);
+        break;
+
+      case 'cigognes_2022':
+        insertOrUpdateSuccesValue('delivery', $identifiant, 1);
         break;
 
       default:
