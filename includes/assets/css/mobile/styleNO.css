@@ -65,6 +65,7 @@
 {
 	display: block;
 	width: 100%;
+	margin-bottom: -0.5vh;
 }
 
 .lien_notification
