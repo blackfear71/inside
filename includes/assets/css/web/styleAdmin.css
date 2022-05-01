@@ -320,8 +320,8 @@
 	float: left;
 	background-color: #ff1937;
 	color: white;
-	border-top-left-radius: 5px;
-	border-bottom-left-radius: 5px;
+	border-top-left-radius: 2px;
+	border-bottom-left-radius: 2px;
 }
 
 .not_beginner
@@ -329,8 +329,8 @@
 	float: left;
 	background-color: white;
 	color: #262626;
-	border-top-left-radius: 5px;
-	border-bottom-left-radius: 5px;
+	border-top-left-radius: 2px;
+	border-bottom-left-radius: 2px;
 }
 
 .developper
@@ -338,8 +338,8 @@
 	float: right;
 	background-color: #ffad01;
 	color: #262626;
-	border-top-right-radius: 5px;
-	border-bottom-right-radius: 5px;
+	border-top-right-radius: 2px;
+	border-bottom-right-radius: 2px;
 }
 
 .not_developper
@@ -347,8 +347,8 @@
 	float: right;
 	background-color: #b3b3b3;
 	color: #262626;
-	border-top-right-radius: 5px;
-	border-bottom-right-radius: 5px;
+	border-top-right-radius: 2px;
+	border-bottom-right-radius: 2px;
 }
 
 .date_infos_users
@@ -660,7 +660,7 @@
 	width: 30px;
 	height: 30px;
 	border: 0;
-	border-radius: 5px;
+	border-radius: 2px;
 	background-color: #ff1937;
 	background-image: url("/inside/includes/icons/common/cancel.png");
 	background-size: 20px 20px;
@@ -679,7 +679,7 @@
 	width: 30px;
 	height: 30px;
 	border: 0;
-	border-radius: 5px;
+	border-radius: 2px;
 	background-color: #ff1937;
 	background-image: url("/inside/includes/icons/common/validate.png");
 	background-size: 25px 25px;
@@ -700,7 +700,7 @@
 	color: #262626;
 	margin-top: 10px;
 	margin-bottom: 10px;
-	border-radius: 5px;
+	border-radius: 2px;
 	padding: 5px 10px 5px 10px;
 	background-color: #e3e3e3;
 }
@@ -717,7 +717,7 @@
 {
 	background-color: #e3e3e3;
 	width: 100%;
-	border-radius: 5px;
+	border-radius: 2px;
 	margin-left: auto;
 	margin-right: auto;
 	padding-bottom: 20px;
@@ -727,7 +727,7 @@
 .zone_autorisations
 {
 	overflow: hidden;
-	border-radius: 5px;
+	border-radius: 2px;
 }
 
 .titre_equipe_autorisations
@@ -780,7 +780,7 @@
 	border: 0;
 	background-color: white;
 	padding: 10px 20px 10px 20px;
-	border-radius: 5px;
+	border-radius: 2px;
 	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
@@ -799,7 +799,7 @@
 	margin-bottom: 20px;
 	padding: 10px 10px 10px 20px;
 	background-color: #e3e3e3;
-	border-radius: 5px;
+	border-radius: 2px;
 }
 
 .titre_periodes_vacances
@@ -843,7 +843,7 @@
 	border-collapse: collapse;
 	border: 0;
 	background-color: white;
-	border-radius: 5px;
+	border-radius: 2px;
 	overflow: hidden;
 	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 100%;
@@ -957,7 +957,7 @@
 	border-collapse: collapse;
 	border: 0;
 	background-color: white;
-	border-radius: 5px;
+	border-radius: 2px;
 	color: #262626;
 	overflow: hidden;
 }
@@ -1007,7 +1007,7 @@
 {
 	margin-left: 10px;
 	height: 30px;
-	border-radius: 5px;
+	border-radius: 2px;
 	border: 0;
 	padding-left: 10px;
 	padding-right: 10px;
@@ -1041,7 +1041,7 @@
 	margin-right: 10px;
 	width: calc(50% - 5px);
 	height: 30px;
-	border-radius: 5px;
+	border-radius: 2px;
 	border: solid 1px #d3d3d3;
 	padding-left: 10px;
 	padding-right: 10px;
@@ -1053,7 +1053,7 @@
 {
 	width: calc(50% - 5px);
 	height: 30px;
-	border-radius: 5px;
+	border-radius: 2px;
 	border: solid 1px #d3d3d3;
 	padding-left: 10px;
 	padding-right: 10px;
@@ -1071,7 +1071,7 @@
 	border: 0;
 	background-color: white;
 	padding: 10px 20px 10px 20px;
-	border-radius: 5px;
+	border-radius: 2px;
 	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
@@ -1089,7 +1089,7 @@
 	width: 300px;
 	margin-top: 10px;
 	margin-bottom: 10px;
-	border-radius: 5px;
+	border-radius: 2px;
 	box-shadow: 0 0 3px #a3a3a3;
 	display: block;
 	margin-left: auto;
@@ -1102,7 +1102,7 @@
 	margin-left: auto;
 	margin-right: auto;
 	background-color: #ffad01;
-	border-radius: 5px;
+	border-radius: 2px;
 	width: 200px;
 }
 
@@ -1138,7 +1138,7 @@
 	border: solid 1px #a3a3a3;
 	line-height: 40px;
 	min-height: 40px;
-	border-radius: 5px;
+	border-radius: 2px;
 	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
@@ -1159,7 +1159,7 @@
 	border: solid 1px #a3a3a3;
 	line-height: 40px;
 	min-height: 40px;
-	border-radius: 5px;
+	border-radius: 2px;
 	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
@@ -1180,7 +1180,7 @@
 	border: solid 1px #a3a3a3;
 	line-height: 40px;
 	min-height: 40px;
-	border-radius: 5px;
+	border-radius: 2px;
 	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
@@ -1201,7 +1201,7 @@
 	border: solid 1px #a3a3a3;
 	line-height: 40px;
 	min-height: 40px;
-	border-radius: 5px;
+	border-radius: 2px;
 	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
@@ -1218,7 +1218,7 @@
 {
 	width: 100%;
 	height: 44px;
-	border-radius: 5px;
+	border-radius: 2px;
 	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
@@ -1265,7 +1265,7 @@
 	background-repeat: no-repeat;
 	background-position: center;
 	cursor: pointer;
-	border-radius: 5px;
+	border-radius: 2px;
 	vertical-align: middle;
 }
 
@@ -1289,7 +1289,7 @@
 	border: solid 1px #a3a3a3;
 	line-height: 40px;
 	min-height: 40px;
-	border-radius: 5px;
+	border-radius: 2px;
 	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
@@ -1310,7 +1310,7 @@
 	border: solid 1px #a3a3a3;
 	line-height: 40px;
 	min-height: 40px;
-	border-radius: 5px;
+	border-radius: 2px;
 	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
@@ -1329,7 +1329,7 @@
 	line-height: 42px;
 	height: 42px;
 	border: solid 1px #a3a3a3;
-	border-radius: 5px;
+	border-radius: 2px;
 	font-family: inside_font_light, Verdana, sans-serif;
 	color: #262626;
 	cursor: pointer;
@@ -1355,7 +1355,7 @@
 	border: solid 1px #a3a3a3;
 	line-height: 40px;
 	min-height: 40px;
-	border-radius: 5px;
+	border-radius: 2px;
 	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
@@ -1397,7 +1397,7 @@
 	color: #262626;
 	background-color: #d3d3d3;
 	border: 0;
-	border-radius: 5px;
+	border-radius: 2px;
 	text-decoration: none;
 	text-align: center;
 }
@@ -1423,7 +1423,7 @@
 	color: #262626;
 	background-color: #d3d3d3;
 	border: 0;
-	border-radius: 5px;
+	border-radius: 2px;
 	cursor: pointer;
 }
 
@@ -1483,7 +1483,7 @@
 	width: 140px;
 	background-color: #ffad01;
 	padding: 10px;
-	border-radius: 5px;
+	border-radius: 2px;
 }
 
 .succes_liste_undefined
@@ -1493,7 +1493,7 @@
 	width: 140px;
 	background-color: #b3b3b3;
 	padding: 10px;
-	border-radius: 5px;
+	border-radius: 2px;
 }
 
 .ordonnancement_succes
@@ -1518,7 +1518,7 @@
 	height: 20px;
 	line-height: 20px;
 	padding: 2px;
-	border-radius: 5px;
+	border-radius: 2px;
 	background-color: #ff1937;
 	font-family: inside_font_light, Verdana, sans-serif;
 	color: white;
@@ -1546,7 +1546,7 @@
 	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 120%;
 	background-color: #ff1937;
-	border-radius: 5px;
+	border-radius: 2px;
 	color: white;
 }
 
@@ -1577,8 +1577,8 @@
 	margin: -10px;
 	margin-top: 0;
 	padding: 10px;
-	border-bottom-left-radius: 5px;
-	border-bottom-right-radius: 5px;
+	border-bottom-left-radius: 2px;
+	border-bottom-right-radius: 2px;
 	font-family: inside_font_light, Verdana, sans-serif;
 	color: #262626;
 }
@@ -1589,8 +1589,8 @@
 	margin: -10px;
 	margin-top: 0;
 	padding: 10px;
-	border-bottom-left-radius: 5px;
-	border-bottom-right-radius: 5px;
+	border-bottom-left-radius: 2px;
+	border-bottom-right-radius: 2px;
 	font-family: inside_font_light, Verdana, sans-serif;
 	color: #262626;
 }
@@ -1617,7 +1617,7 @@
 	width: 300px;
 	background-color: #ffad01;
 	padding: 10px;
-	border-radius: 5px;
+	border-radius: 2px;
 	margin-bottom: 25px;
 }
 
@@ -1666,8 +1666,8 @@
 	background-repeat: no-repeat;
 	background-position: center;
 	cursor: pointer;
-	border-top-right-radius: 5px;
-	border-bottom-right-radius: 5px;
+	border-top-right-radius: 2px;
+	border-bottom-right-radius: 2px;
 }
 
 .number_level
@@ -1704,7 +1704,7 @@
 {
 	border: 0;
 	background-color: white;
-	border-radius: 5px;
+	border-radius: 2px;
 	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 110%;
 	color: #262626;
@@ -1717,7 +1717,7 @@
 {
 	border: 0;
 	background-color: white;
-	border-radius: 5px;
+	border-radius: 2px;
 	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 110%;
 	color: #262626;
@@ -1732,7 +1732,7 @@
 {
 	border: 0;
 	background-color: white;
-	border-radius: 5px;
+	border-radius: 2px;
 	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 110%;
 	color: #262626;
@@ -1757,7 +1757,7 @@
 	color: #262626;
 	background-color: #d3d3d3;
 	border: 0;
-	border-radius: 5px;
+	border-radius: 2px;
 	cursor: pointer;
 }
 
@@ -3093,7 +3093,7 @@
 	padding-left: 10px;
 	padding-right: 10px;
 	height: 44px;
-	border-radius: 5px;
+	border-radius: 2px;
 	border: solid 1px #a3a3a3;
 	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 100%;
@@ -3115,7 +3115,7 @@
 	border: solid 1px #a3a3a3;
 	line-height: 40px;
 	min-height: 40px;
-	border-radius: 5px;
+	border-radius: 2px;
 	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
@@ -3136,7 +3136,7 @@
 	border: solid 1px #a3a3a3;
 	line-height: 40px;
 	min-height: 40px;
-	border-radius: 5px;
+	border-radius: 2px;
 	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
@@ -3156,7 +3156,7 @@
 	border: solid 1px #a3a3a3;
 	height: 22px;
 	min-height: 22px;
-	border-radius: 5px;
+	border-radius: 2px;
 	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
@@ -3180,7 +3180,7 @@
 	background-repeat: no-repeat;
 	background-position: center;
 	cursor: pointer;
-	border-radius: 5px;
+	border-radius: 2px;
 	vertical-align: middle;
 }
 
@@ -3671,7 +3671,7 @@
 	width: 430px;
 	margin-top: 15px;
 	padding: 10px;
-	border-radius: 5px;
+	border-radius: 2px;
 	border: solid 1px #d3d3d3;
 	vertical-align: top;
 }
