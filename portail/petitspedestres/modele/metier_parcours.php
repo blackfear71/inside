@@ -5,8 +5,12 @@
   // RETOUR : Erreur
   function initializeSaveSession()
   {
+    // Initialisations
+    $erreurParcours = false;
+
     // On initialise les champs de saisie s'il n'y a pas d'erreur
-    if (!isset($_SESSION['alerts']['distance_error']) OR $_SESSION['alerts']['distance_error'] != true)
+    if ((!isset($_SESSION['alerts']['distance_error']) OR $_SESSION['alerts']['distance_error'] != true)
+    AND (!isset($_SESSION['alerts']['url_type'])       OR $_SESSION['alerts']['url_type']       != true))
     {
       unset($_SESSION['save']);
 
@@ -15,6 +19,29 @@
       $_SESSION['save']['lieu_parcours']     = '';
       $_SESSION['save']['url_parcours']      = '';
     }
+    else
+      $erreurParcours = true;
+
+    // Retour
+    return $erreurParcours;
+  }
+
+  // METIER : Initialisation champs erreur modification parcours
+  // RETOUR : Parcours sauvegardé
+  function initialisationErreurModificationParcours($sessionSave, $idParcours)
+  {
+    // Récupération des données modifiées
+    $parcours = new Parcours();
+
+    $parcours->setId($idParcours);
+    $parcours->setNom($sessionSave['nom_parcours']);
+    $parcours->setDistance($sessionSave['distance_parcours']);
+    $parcours->setLieu($sessionSave['lieu_parcours']);
+    $parcours->setUrl($sessionSave['url_parcours']);
+    $parcours->setType($sessionSave['type_url_parcours']);
+
+    // Retour
+    return $parcours;
   }
 
   // METIER : Lecture liste des parcours
@@ -63,15 +90,21 @@
     $distance = $post['distance'];
     $lieu     = $post['location'];
     $url      = $post['url'];
+    $type     = $post['type'];
 
     // Sauvegarde en session en cas d'erreur
     $_SESSION['save']['nom_parcours']      = $post['name'];
     $_SESSION['save']['distance_parcours'] = $post['distance'];
     $_SESSION['save']['lieu_parcours']     = $post['location'];
-    $_SESSION['save']['url_parcours']    = $post['url'];
+    $_SESSION['save']['url_parcours']      = $post['url'];
+    $_SESSION['save']['type_url_parcours'] = $post['type'];
 
     // Contrôle distance numérique
     $control_ok = controleDistanceNumerique($distance);
+
+    // Contrôle type URL renseigné
+    if ($control_ok == true)
+      $control_ok = controleTypeLien($url, $type);
 
     // Insertion de l'enregistrement en base
     if ($control_ok == true)
@@ -80,7 +113,8 @@
                         'nom'      => $nom,
                         'distance' => $distance,
                         'lieu'     => $lieu,
-                        'url'      => $url
+                        'url'      => $url,
+                        'type'     => $type
                        );
 
       physiqueInsertionParcours($parcours);
@@ -110,15 +144,21 @@
     $distance = $post['distance'];
     $lieu     = $post['location'];
     $url      = $post['url'];
+    $type     = $post['type'];
 
     // Sauvegarde en session en cas d'erreur
     $_SESSION['save']['nom_parcours']      = $post['name'];
     $_SESSION['save']['distance_parcours'] = $post['distance'];
     $_SESSION['save']['lieu_parcours']     = $post['location'];
     $_SESSION['save']['url_parcours']      = $post['url'];
+    $_SESSION['save']['type_url_parcours'] = $post['type'];
 
     // Contrôle distance numérique
     $control_ok = controleDistanceNumerique($distance);
+
+    // Contrôle type URL renseigné
+    if ($control_ok == true)
+      $control_ok = controleTypeLien($url, $type);
 
     // Modification de l'enregistrement en base
     if ($control_ok == true)
@@ -126,7 +166,8 @@
       $parcours = array('nom'      => $nom,
                         'distance' => $distance,
                         'lieu'     => $lieu,
-                        'url'      => $url
+                        'url'      => $url,
+                        'type'     => $type
                        );
 
       physiqueUpdateParcours($idParcours, $parcours);

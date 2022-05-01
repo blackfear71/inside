@@ -79,13 +79,30 @@
                 echo $parcours->getNom();
               echo '</div>';
 
-              echo '<p>';
-                echo 'Distance : ' . $parcours->getDistance() . ' km<br/>';
-                echo 'Lieu : ' . $parcours->getLieu();
+              echo '<div class="PP-texte">';
+                echo 'Distance : ' . $parcours->getDistance() . ' km';
+              echo '</div>';
 
-                if (!empty($parcours->getUrl()))
-                  echo '<embed src="https://drive.google.com/viewerng/viewer?embedded=true&url=' . $parcours->getUrl() .'" class="PP-pdf">';
-              echo '</p>';
+              echo '<div class="PP-texte">';
+                echo 'Lieu : ' . $parcours->getLieu();
+              echo '</div>';
+
+              if (!empty($parcours->getUrl()))
+              {
+                switch ($parcours->getType())
+                {
+                  case 'image':
+                    echo '<img src="' . $parcours->getUrl() .'" class="PP-image">';
+                    break;
+
+                  case 'pdf':
+                    echo '<embed src="https://drive.google.com/viewerng/viewer?embedded=true&url=' . $parcours->getUrl() .'" class="PP-pdf">';
+                    break;
+
+                  default:
+                    break;
+                }
+              }
             echo '</div>';
           }
         ?>

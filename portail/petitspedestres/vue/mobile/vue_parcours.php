@@ -101,7 +101,21 @@
               echo '</div>';
 
               if (!empty($parcours->getUrl()))
-                echo '<embed src="https://drive.google.com/viewerng/viewer?embedded=true&url=' . $parcours->getUrl() .'" class="PP-pdf">';
+              {
+                switch ($parcours->getType())
+                {
+                  case 'image':
+                    echo '<img src="' . $parcours->getUrl() .'" class="PP-image">';
+                    break;
+
+                  case 'pdf':
+                    echo '<embed src="https://drive.google.com/viewerng/viewer?embedded=true&url=' . $parcours->getUrl() .'" class="PP-pdf">';
+                    break;
+
+                  default:
+                    break;
+                }
+              }
             echo '</div>';
           }
         ?>

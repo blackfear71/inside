@@ -7,6 +7,7 @@
     private $distance;
     private $lieu;
     private $url;
+    private $type;
 
     // Constructeur par défaut (objet vide)
     public function __construct()
@@ -16,7 +17,8 @@
       $this->nom      = '';
       $this->distance = 0;
       $this->lieu     = '';
-      $this->url    = '';
+      $this->url      = '';
+      $this->type     = '';
     }
 
     // Constructeur de l'objet Parcours en fonction de données
@@ -48,6 +50,9 @@
 
       if (isset($data['url']))
         $this->url      = $data['url'];
+
+      if (isset($data['type']))
+        $this->type     = $data['type'];
     }
 
     // Sécurisation des données
@@ -58,6 +63,7 @@
       $data->setDistance(htmlspecialchars($data->getDistance()));
       $data->setLieu(htmlspecialchars($data->getLieu()));
       $data->setUrl(htmlspecialchars($data->getUrl()));
+      $data->setType(htmlspecialchars($data->getType()));
     }
 
     // Getters et Setters pour l'objet Parcours
@@ -125,6 +131,17 @@
     public function getUrl()
     {
       return $this->url;
+    }
+
+    // Type URL
+    public function setType($type)
+    {
+      $this->type = $type;
+    }
+
+    public function getType()
+    {
+      return $this->type;
     }
   }
 ?>

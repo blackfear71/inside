@@ -50,7 +50,7 @@
               echo '<option value="" hidden selected>Choisir...</option>';
               for ($i = date('Y') + 1; $i >= 2016; $i--)
               {
-                echo '<option value="' . $i . '" >' . $i . '-' . ($i + 1) . '</option>';
+                echo '<option value="' . $i . '">' . $i . '-' . ($i + 1) . '</option>';
               }
             echo '</select>';
           echo '</td>';

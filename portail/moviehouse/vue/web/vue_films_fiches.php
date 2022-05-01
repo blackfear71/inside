@@ -118,7 +118,7 @@
                   }
 
                   // Commentaires
-                  echo '<a href="details.php?id_film=' . $film->getId() . '&action=goConsulter&anchor=comments" title="Nombre de commentaires" >';
+                  echo '<a href="details.php?id_film=' . $film->getId() . '&action=goConsulter&anchor=comments" title="Nombre de commentaires">';
                     echo '<img src="../../includes/icons/moviehouse/comments_grey.png" alt="comments_grey" class="icone_fiche_2" />';
                     echo '<div class="nb_commentaires_fiche">' . $film->getNb_comments() . '</div>';
                   echo '</a>';

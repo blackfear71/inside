@@ -36,4 +36,22 @@
     // Retour
     return $control_ok;
   }
+
+  // CONTROLE : Type de lien renseigné
+  // RETOUR : Booléen
+  function controleTypeLien($url, $type)
+  {
+    // Initialisations
+    $control_ok = true;
+
+    // Contrôle
+    if (!empty($url) AND empty($type))
+    {
+      $_SESSION['alerts']['url_type'] = true;
+      $control_ok                     = false;
+    }
+
+    // Retour
+    return $control_ok;
+  }
 ?>

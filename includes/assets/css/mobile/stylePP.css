@@ -78,13 +78,6 @@
 }
 
 /*** Ajout de parcours ***/
-.PP-contenu-saisie
-{
-	width: 100%;
-	background-color: #f3f3f3;
-	border-radius: 0.5vh;
-}
-
 .PP-form-saisie
 {
 	text-align: center;
@@ -101,22 +94,32 @@
 	padding: 1vh;
 }
 
+.PP-zone-saisie-parcours
+{
+	display: block;
+	margin-bottom: 1vh;
+}
+
 .PP-label-parcours
 {
-	line-height: 5vh;
+	display: inline-block;
+	vertical-align: middle;
+	width: 15vh;
 	font-family: inside_font_light, Verdana, sans-serif;
+	font-size: 2.5vh;
 	color: #262626;
+	text-align: left;
 }
 
 .PP-monoligne
 {
-	display: block;
-	width: 90%;
+	display: inline-block;
+	vertical-align: middle;
+	width: calc(100% - 17vh);
 	margin-left: auto;
 	margin-right: auto;
-	margin-bottom: 1vh;
 	line-height: 6vh;
-	min-height: 6vh;
+	height: 6vh;
 	padding-left: 1vh;
 	padding-right: 1vh;
 	border: 0;
@@ -127,7 +130,23 @@
 	color: #262626;
 }
 
-.PP-bouton
+.PP-listbox
+{
+	display: inline-block;
+	width: calc(100% - 15vh);
+	line-height: 6vh;
+	height: 6vh;
+	font-family: inside_font_light_italic, Verdana, sans-serif;
+	font-size: 3vh;
+	color: #262626;
+	background-color: white;
+	border: 0;
+	border-radius: 0.5vh;
+	padding-left: 0.5vh;
+	padding-right: 0.5vh;
+}
+
+.PP-bouton-saisie
 {
 	width: 100%;
 	padding: 1vh;
@@ -143,7 +162,7 @@
 	background-color: #e3e3e3; 
 }
 
-.PP-bouton:active
+.PP-bouton-saisie:active
 {
 	background-color: #ff1937;
 	color: white;
@@ -167,16 +186,25 @@
 .PP-texte
 {
 	font-family: inside_font_light, Verdana, sans-serif;
-	font-size: 100%;
+	font-size: 2.5vh;
 	color: #262626;
 	margin-bottom: 2vh;
+}
+
+.PP-image
+{
+	display: block;
+	width: 100%;
+	margin-top: 2vh;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .PP-pdf
 {
 	display: block;
-	margin-top: 2vh;
 	width: 100%;
+	margin-top: 2vh;
 	height: 70vh;
 	margin-left: auto;
 	margin-right: auto;

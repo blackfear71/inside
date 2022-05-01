@@ -46,14 +46,19 @@
       else
       {
         // Initialisation de la sauvegarde en session
-        initializeSaveSession();
+        $erreurParcours = initializeSaveSession();
 
         // Vérification parcours accessible
         $parcoursExistant = isParcoursDisponible($_GET['id_parcours'], $_SESSION['user']['equipe']);
 
-        // Récupération des détails du parcours
+        // Sauvegarde des données saisies en cas d'erreur ou récupération des détails du parcours
         if ($parcoursExistant == true)
-          $parcours = getParcours($_GET['id_parcours']);
+        {
+          if ($erreurParcours == true)
+            $parcours = initialisationErreurModificationParcours($_SESSION['save'], $_GET['id_parcours']);
+          else
+            $parcours = getParcours($_GET['id_parcours']);
+        }
       }
       break;
 
