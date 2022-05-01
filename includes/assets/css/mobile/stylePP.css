@@ -47,7 +47,7 @@
 .PP-tr
 {
 	background-color: #f3f3f3;
-	border-bottom: solid 0.3vh white;
+	border-top: solid 0.3vh white;
 }
 
 .PP-table-titre
@@ -57,7 +57,6 @@
 	padding-bottom: 1vh;
 	text-align: center;
 	background-color: #ffad01;
-	border-bottom: solid 0.3vh white;
 	font-family: inside_font_regular, Verdana, sans-serif;
 	font-weight: bold;
 	color: #262626;

@@ -48,6 +48,7 @@ article
 a:link, a:visited, a:hover, a:active
 {
 	outline: none;
+	text-decoration: none;
 }
 
 input:focus, textarea:focus
