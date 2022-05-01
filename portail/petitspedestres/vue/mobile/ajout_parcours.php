@@ -75,19 +75,19 @@
               // Nom du parcours
               echo '<div class="PP-zone-saisie-parcours">';
                 echo '<label class="PP-label-parcours">Nom : </label>';
-                echo '<input type="text" placeholder="Nom parcours" value="' . $_SESSION['save']['nom_parcours'] . '" name="name" class="PP-monoligne" />';
+                echo '<input type="text" placeholder="Nom parcours" value="' . $_SESSION['save']['nom_parcours'] . '" name="name" class="PP-monoligne" required />';
               echo '</div>';
 
               // Distance
               echo '<div class="PP-zone-saisie-parcours">';
                 echo '<label class="PP-label-parcours">Distance : </label>';
-                echo '<input type="text" placeholder="Distance (km)" value="' . $_SESSION['save']['distance_parcours'] . '" name="distance" class="PP-monoligne" />';
+                echo '<input type="text" placeholder="Distance (km)" value="' . $_SESSION['save']['distance_parcours'] . '" name="distance" class="PP-monoligne" required />';
               echo '</div>';
 
               // Lieu
               echo '<div class="PP-zone-saisie-parcours">';
                 echo '<label class="PP-label-parcours">Lieu : </label>';
-                echo '<input type="text" placeholder="Lieu" value="' . $_SESSION['save']['lieu_parcours'] . '" name="location" class="PP-monoligne" />';
+                echo '<input type="text" placeholder="Lieu" value="' . $_SESSION['save']['lieu_parcours'] . '" name="location" class="PP-monoligne" required />';
               echo '</div>';
 
               // Lien url

@@ -77,19 +77,19 @@
                 // Nom du parcours
                 echo '<div class="PP-zone-saisie-parcours">';
                   echo '<label class="PP-label-parcours">Nom : </label>';
-                  echo '<input type="text" value="' . $parcours->getNom() . '" name="name" class="PP-monoligne" />';
+                  echo '<input type="text" value="' . $parcours->getNom() . '" name="name" class="PP-monoligne" required />';
                 echo '</div>';
 
                 // Distance
                 echo '<div class="PP-zone-saisie-parcours">';
                   echo '<label class="PP-label-parcours">Distance : </label>';
-                  echo '<input type="text" value="' . $parcours->getDistance() . '" name="distance" class="PP-monoligne" />';
+                  echo '<input type="text" value="' . $parcours->getDistance() . '" name="distance" class="PP-monoligne" required />';
                 echo '</div>';                    
 
                 // Lieu
                 echo '<div class="PP-zone-saisie-parcours">';
                   echo '<label class="PP-label-parcours">Lieu : </label>';
-                  echo '<input type="text" value="' . $parcours->getLieu() . '" name="location" class="PP-monoligne" />';
+                  echo '<input type="text" value="' . $parcours->getLieu() . '" name="location" class="PP-monoligne" required />';
                 echo '</div>';
 
                 // Lien url
