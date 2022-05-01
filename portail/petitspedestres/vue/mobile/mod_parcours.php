@@ -73,7 +73,10 @@
             /* Saisie */
             /**********/
             echo '<form method="post" action="parcours.php?id_parcours=' . $parcours->getId() . '&action=doModifier" class="PP-form-saisie">';
-              echo '<div class="PP-zone-saisie-avancee-infos">';                
+              echo '<div class="PP-zone-saisie-avancee-infos">';
+                // Titre
+                echo '<div class="PP-titre-form">Modifier un parcours</div>';
+
                 // Nom du parcours
                 echo '<div class="PP-zone-saisie-parcours">';
                   echo '<label class="PP-label-parcours">Nom : </label>';

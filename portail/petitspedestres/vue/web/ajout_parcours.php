@@ -57,6 +57,9 @@
           /**********/
           echo '<form method="post" action="parcours.php?action=doAjouter" class="PP-form-saisie">';
             echo '<div class="PP-zone-saisie-avancee-infos">';
+              // Titre
+              echo '<div class="PP-titre-form">Ajouter un parcours</div>';
+
               // Nom du parcours
               echo '<div class="PP-zone-saisie-parcours">';
                 echo '<label class="PP-label-parcours">Nom : </label>';

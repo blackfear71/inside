@@ -83,6 +83,14 @@
 	text-align: center;
 }
 
+.PP-titre-form
+{
+	font-family: inside_font_light, Verdana, sans-serif;
+	font-size: 3vh;
+	color: #262626;
+	padding-bottom: 1vh;
+}
+
 .PP-zone-saisie-avancee-infos
 {
 	display: block;
@@ -97,6 +105,11 @@
 {
 	display: block;
 	margin-bottom: 1vh;
+}
+
+.PP-zone-saisie-parcours:last-child
+{
+	margin-bottom: 0;
 }
 
 .PP-label-parcours
