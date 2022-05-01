@@ -99,6 +99,10 @@
     $_SESSION['save']['url_parcours']      = $post['url'];
     $_SESSION['save']['type_url_parcours'] = $post['type'];
 
+    // Gestion du type d'URL
+    if (empty($url))
+      $type = '';
+
     // Contrôle distance numérique
     $control_ok = controleDistanceNumerique($distance);
 
@@ -152,6 +156,10 @@
     $_SESSION['save']['lieu_parcours']     = $post['location'];
     $_SESSION['save']['url_parcours']      = $post['url'];
     $_SESSION['save']['type_url_parcours'] = $post['type'];
+
+    // Gestion du type d'URL
+    if (empty($url))
+      $type = '';
 
     // Contrôle distance numérique
     $control_ok = controleDistanceNumerique($distance);
