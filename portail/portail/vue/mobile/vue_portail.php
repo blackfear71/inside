@@ -67,9 +67,75 @@
           /*********/
           echo '<div class="titre_section_mobile">' . mb_strtoupper($titleHead) . '</div>';
 
+          /********/
+          /* News */
+          /********/
+          // Titre
+          echo '<div id="titre_news_portail" class="titre_section">';
+            echo '<img src="../../includes/icons/common/inside_red.png" alt="inside_red" class="logo_titre_section" />';
+            echo '<div class="texte_titre_section">INSIDE News (' . count($news) . ')</div>';
+            echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section angle_fleche_titre_section" />';
+          echo '</div>';
+
+          // Boutons news
+          echo '<div id="afficher_news_portail" style="display: none;">';
+            echo '<div class="zone_boutons_news">';
+              $categorieNewsPrecedente = '';
+
+              foreach ($news as $messageNews)
+              {
+                if ($messageNews->getLogo() != $categorieNewsPrecedente)
+                {
+                  echo '<a id="bouton_' . $messageNews->getLogo() . '" class="zone_logo_news">';
+                    echo '<img src="../../includes/icons/common/' . $messageNews->getLogo() . '.png" alt="' . $messageNews->getLogo() . '" class="logo_news" />';
+                  echo '</a>';
+
+                  $categorieNewsPrecedente = $messageNews->getLogo();
+                }
+              }
+            echo '</div>';
+
+            // News
+            echo '<div id="zone_affichage_news" style="display: none;">';
+              foreach ($news as $messageNews)
+              {
+                if (empty($messageNews->getLink()))
+                  echo '<div class="zone_news news_' . $messageNews->getLogo() . '" style="display: none;">';
+                else
+                  echo '<a href="' . $messageNews->getLink() . '" class="zone_news news_' . $messageNews->getLogo() . '" style="display: none;">';
+
+                echo '<img src="../../includes/icons/common/' . $messageNews->getLogo() . '.png" alt="' . $messageNews->getLogo() . '" class="logo_news" />';
+
+                echo '<div class="zone_contenu_news">';
+                  echo '<div class="titre_news">' . $messageNews->getTitle() . '</div>';
+                  echo '<div class="contenu_news">' . $messageNews->getContent() . '</div>';
+                echo '</div>';
+
+                if (!empty($messageNews->getDetails()))
+                {
+                  echo '<div class="zone_details_news">';
+                    echo $messageNews->getDetails();
+                  echo '</div>';
+                }
+
+                if (empty($messageNews->getLink()))
+                  echo '</div>';
+                else
+                  echo '</a>';
+              }
+            echo '</div>';
+          echo '</div>';
+
           /***********/
           /* Portail */
           /***********/
+          // Titre
+          echo '<div class="titre_section">';
+            echo '<img src="../../includes/icons/common/inside_grey.png" alt="inside_grey" class="logo_titre_section" />';
+            echo '<div class="texte_titre_section">Portail</div>';
+          echo '</div>';
+
+          // Portail
           $i = 0;
 
           echo '<div class="zone_portail">';

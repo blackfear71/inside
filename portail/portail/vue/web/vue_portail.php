@@ -77,7 +77,7 @@
                     echo '<a href="' . $messageNews->getLink() . '" class="zone_news">';
                 }
 
-                echo '<img src="/inside/includes/icons/common/' . $messageNews->getLogo() . '.png" alt="' . $messageNews->getLogo() . '" class="logo_news" />';
+                echo '<img src="../../includes/icons/common/' . $messageNews->getLogo() . '.png" alt="' . $messageNews->getLogo() . '" class="logo_news" />';
 
                 echo '<div class="zone_contenu_news">';
                   echo '<div class="titre_news">' . $messageNews->getTitle() . '</div>';
