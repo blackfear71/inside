@@ -46,7 +46,7 @@ function afficherMasquerNews(idBoutonNews, classNews)
     // Masquage des news correspondantes
     $('.zone_news').each(function()
     {
-      $(this).css('display', 'none');
+      $(this).fadeOut(200);
     });
   }
   else
@@ -75,7 +75,7 @@ function afficherMasquerNews(idBoutonNews, classNews)
       else
       {
         if ($(this).css('display') != 'none')
-          $(this).fadeOut(200);
+          $(this).fadeOut(0);
       }
     });
   }
