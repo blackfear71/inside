@@ -555,6 +555,20 @@ aside
 .texte_titre_section
 {
 	display: inline-block;
+	width: calc(100% - 5vh);
+	font-family: inside_font_regular, Verdana, sans-serif;
+	font-size: 3vh;
+	font-weight: bold;
+	line-height: 4vh;
+	color: #262626;
+	text-align: left;
+	word-break: break-word;
+	vertical-align: middle;
+}
+
+.texte_titre_section_fleche
+{
+	display: inline-block;
 	width: calc(100% - 10vh);
 	font-family: inside_font_regular, Verdana, sans-serif;
 	font-size: 3vh;

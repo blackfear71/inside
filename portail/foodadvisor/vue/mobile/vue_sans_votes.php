@@ -4,7 +4,7 @@
     // Titre
     echo '<div id="titre_propositions_sans_vote" class="titre_section">';
       echo '<img src="../../includes/icons/foodadvisor/users_grey.png" alt="users_grey" class="logo_titre_section" />';
-      echo '<div class="texte_titre_section">Ils n\'ont pas voté</div>';
+      echo '<div class="texte_titre_section_fleche">Ils n\'ont pas voté</div>';
       echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section angle_fleche_titre_section" />';
     echo '</div>';
 

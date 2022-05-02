@@ -94,7 +94,7 @@
                 // Titre
                 echo '<div id="titre_recherche_movie_house" class="titre_section">';
                   echo '<img src="../../includes/icons/search/movie_house.png" alt="movie_house" class="logo_titre_section" />';
-                  echo '<div class="texte_titre_section">Movie House<div class="count_search">' . $resultats['nb_movie_house'] . '</div></div>';
+                  echo '<div class="texte_titre_section_fleche">Movie House<div class="count_search">' . $resultats['nb_movie_house'] . '</div></div>';
                   echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section" />';
                 echo '</div>';
 
@@ -127,7 +127,7 @@
                 // Titre
                 echo '<div id="titre_recherche_food_advisor" class="titre_section">';
                   echo '<img src="../../includes/icons/search/restaurants.png" alt="restaurants" class="logo_titre_section" />';
-                  echo '<div class="texte_titre_section">Restaurants<div class="count_search">' . $resultats['nb_food_advisor'] . '</div></div>';
+                  echo '<div class="texte_titre_section_fleche">Restaurants<div class="count_search">' . $resultats['nb_food_advisor'] . '</div></div>';
                   echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section" />';
                 echo '</div>';
 
@@ -157,7 +157,7 @@
                 // Titre
                 echo '<div id="titre_recherche_petits_pedestres" class="titre_section">';
                   echo '<img src="../../includes/icons/search/petits_pedestres.png" alt="petits_pedestres" class="logo_titre_section" />';
-                  echo '<div class="texte_titre_section">Les Petits Pédestres<div class="count_search">' . $resultats['nb_petits_pedestres'] . '</div></div>';
+                  echo '<div class="texte_titre_section_fleche">Les Petits Pédestres<div class="count_search">' . $resultats['nb_petits_pedestres'] . '</div></div>';
                   echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section" />';
                 echo '</div>';
 
@@ -187,7 +187,7 @@
                 // Titre
                 echo '<div id="titre_recherche_missions" class="titre_section">';
                   echo '<img src="../../includes/icons/search/missions.png" alt="missions" class="logo_titre_section" />';
-                  echo '<div class="texte_titre_section">Missions<div class="count_search">' . $resultats['nb_missions'] . '</div></div>';
+                  echo '<div class="texte_titre_section_fleche">Missions<div class="count_search">' . $resultats['nb_missions'] . '</div></div>';
                   echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section" />';
                 echo '</div>';
 

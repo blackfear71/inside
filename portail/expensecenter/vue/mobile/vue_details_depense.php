@@ -16,7 +16,7 @@
           // Titre
           echo '<div id="titre_depenses_infos" class="titre_section">';
             echo '<img src="../../includes/icons/expensecenter/informations_grey.png" alt="informations_grey" class="logo_titre_section" />';
-            echo '<div class="texte_titre_section">Informations</div>';
+            echo '<div class="texte_titre_section_fleche">Informations</div>';
             echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section" />';
           echo '</div>';
 
@@ -47,7 +47,7 @@
           // Titre
           echo '<div id="titre_depenses_parts" class="titre_section">';
             echo '<img src="../../includes/icons/expensecenter/users_grey.png" alt="users_grey" class="logo_titre_section" />';
-            echo '<div class="texte_titre_section">Répartition</div>';
+            echo '<div class="texte_titre_section_fleche">Répartition</div>';
             echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section" />';
           echo '</div>';
 

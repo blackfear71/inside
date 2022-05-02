@@ -25,7 +25,7 @@
           // Titre
           echo '<div id="titre_details_informations" class="titre_section">';
             echo '<img src="../../includes/icons/foodadvisor/informations_grey.png" alt="informations_grey" class="logo_titre_section" />';
-            echo '<div class="texte_titre_section">Informations</div>';
+            echo '<div class="texte_titre_section_fleche">Informations</div>';
             echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section" />';
           echo '</div>';
 
@@ -84,7 +84,7 @@
           // Titre
           echo '<div id="titre_details_description" class="titre_section">';
             echo '<img src="../../includes/icons/foodadvisor/description_grey.png" alt="description_grey" class="logo_titre_section" />';
-            echo '<div class="texte_titre_section">À propos du restaurant</div>';
+            echo '<div class="texte_titre_section_fleche">À propos du restaurant</div>';
             echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section" />';
           echo '</div>';
 

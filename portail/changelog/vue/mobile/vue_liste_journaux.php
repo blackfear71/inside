@@ -8,7 +8,7 @@
         // Titre
         echo '<div id="titre_journal_semaine_' . $log->getWeek() . '" class="titre_section">';
           echo '<img src="../../includes/icons/changelog/change_log_grey.png" alt="change_log_grey" class="logo_titre_section" />';
-          echo '<div class="texte_titre_section">Nouveautés de la semaine ' . formatWeekForDisplay($log->getWeek()) . '</div>';
+          echo '<div class="texte_titre_section_fleche">Nouveautés de la semaine ' . formatWeekForDisplay($log->getWeek()) . '</div>';
 
           if (isset($_GET['anchor']) AND is_numeric($_GET['anchor']))
           {

@@ -63,6 +63,9 @@
           break;
 
         case 'today':
+          // Récupération du nombre de notifications du jour et de la semaine
+          $nombresNotifications = countNotifications($_SESSION['user']);
+
           // Récupération des notifications du jour
           $notifications = getNotifications($_GET['view'], $_SESSION['user'], NULL, NULL);
 

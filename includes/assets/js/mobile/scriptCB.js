@@ -427,7 +427,7 @@ function afficherRecette(link, id)
       // Détails recette
       html += '<div class="zone_texte_zoom">';
         // Nom de la recette
-        html += '<div class="titre_section">';
+        html += '<div class="titre_details">';
           html += '<img src="../../includes/icons/cookingbox/cake.png" alt="cake" class="logo_titre_section" />';
           html += '<div class="texte_titre_section">' + recipe['name'] + '</div>';
         html += '</div>';

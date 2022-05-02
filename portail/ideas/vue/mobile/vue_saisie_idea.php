@@ -10,7 +10,7 @@
           // Titre
           echo '<div id="titre_cycle_de_vie_idee" class="titre_section">';
             echo '<img src="../../includes/icons/ideas/informations_grey.png" alt="informations_grey" class="logo_titre_section" />';
-            echo '<div class="texte_titre_section">Cycle de vie</div>';
+            echo '<div class="texte_titre_section_fleche">Cycle de vie</div>';
             echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section angle_fleche_titre_section" />';
           echo '</div>';
 

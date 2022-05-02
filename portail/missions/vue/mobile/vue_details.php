@@ -107,7 +107,7 @@
               // Histoire
               echo '<div id="titre_histoire_mission" class="titre_section">';
                 echo '<img src="../../includes/icons/missions/story_grey.png" alt="story_grey" class="logo_titre_section" />';
-                echo '<div class="texte_titre_section">Il était une fois...</div>';
+                echo '<div class="texte_titre_section_fleche">Il était une fois...</div>';
                 echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section" />';
               echo '</div>';
 
@@ -124,7 +124,7 @@
               echo '<div class="zone_details_mission">';
                 echo '<div id="titre_conclusion_mission" class="titre_section">';
                   echo '<img src="../../includes/icons/missions/end_grey.png" alt="end_grey" class="logo_titre_section" />';
-                  echo '<div class="texte_titre_section">Le fin mot de l\'histoire</div>';
+                  echo '<div class="texte_titre_section_fleche">Le fin mot de l\'histoire</div>';
                   echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section" />';
                 echo '</div>';
 
@@ -149,7 +149,7 @@
                 // Titre
                 echo '<div id="titre_classement_mission" class="titre_section">';
                   echo '<img src="../../includes/icons/missions/podium_grey.png" alt="podium_grey" class="logo_titre_section" />';
-                  echo '<div class="texte_titre_section">Classement</div>';
+                  echo '<div class="texte_titre_section_fleche">Classement</div>';
                   echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section" />';
                 echo '</div>';
 
@@ -251,7 +251,7 @@
               // Titre
               echo '<div id="titre_infos_mission" class="titre_section">';
                 echo '<img src="../../includes/icons/missions/informations_grey.png" alt="informations_grey" class="logo_titre_section" />';
-                echo '<div class="texte_titre_section">Informations</div>';
+                echo '<div class="texte_titre_section_fleche">Informations</div>';
                 echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section" />';
               echo '</div>';
 
@@ -329,7 +329,7 @@
                 // Titre
                 echo '<div id="titre_participants_mission" class="titre_section">';
                   echo '<img src="../../includes/icons/missions/users_grey.png" alt="users_grey" class="logo_titre_section" />';
-                  echo '<div class="texte_titre_section">Participants</div>';
+                  echo '<div class="texte_titre_section_fleche">Participants</div>';
                   echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section" />';
                 echo '</div>';
 

@@ -717,7 +717,9 @@
 /*** Lieux ***/
 .zone_liens_lieux
 {
-	text-align: center;
+	display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }
 
 .lien_lieu
@@ -726,7 +728,7 @@
 	background-color: #262626;
 	padding: 1vh;
 	border-radius: 0.5vh;
-	margin: 0 1vh 2vh 1vh;
+	margin-bottom: 2vh;
 	-moz-user-select: none;
 	-webkit-user-select: none;
 	-ms-user-select: none;
