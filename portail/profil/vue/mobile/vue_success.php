@@ -109,10 +109,20 @@
         }
         else
         {
-          echo '<div class="zone_titre_succes">';
-            // Titre succès
-            echo '<div class="titre_succes titre_full">' . formatString($success->getTitle(), 20) . '</div>';
-          echo '</div>';
+            if ($success->getUnicity() != 'Y')
+            {
+              echo '<div class="zone_titre_succes">';
+                // Titre succès
+                echo '<div class="titre_succes titre_full">' . formatString($success->getTitle(), 20) . '</div>';
+              echo '</div>';
+            }
+            else
+            {
+              echo '<div class="zone_titre_succes zone_titre_full">';
+                // Titre succès
+                echo '<div class="titre_succes titre_full">' . formatString($success->getTitle(), 30) . '</div>';
+              echo '</div>';
+            }
         }
 
         // Médailles (en excluant ceux qui sont uniques)
