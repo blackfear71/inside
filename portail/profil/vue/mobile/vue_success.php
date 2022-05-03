@@ -86,7 +86,7 @@
           {
             echo '<div class="zone_titre_succes zone_titre_full">';
               // Titre succès
-              echo '<div class="titre_succes">' . formatString($success->getTitle(), 30) . '</div>';
+              echo '<div class="titre_succes">' . formatString($success->getTitle(), 25) . '</div>';
 
               // Barre de progression succès
               if ($success->getValue_user() <= 0)
@@ -103,7 +103,7 @@
           {
             echo '<div class="zone_titre_succes zone_titre_full">';
               // Titre succès
-              echo '<div class="titre_succes titre_full">' . formatString($success->getTitle(), 30) . '</div>';
+              echo '<div class="titre_succes titre_full">' . formatString($success->getTitle(), 25) . '</div>';
             echo '</div>';
           }
         }
