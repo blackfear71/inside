@@ -90,6 +90,7 @@ header
 .zone_boutons_bandeau
 {
 	display: inline-block;
+	background-color: #262626;
 }
 
 .zone_notifications_bandeau
@@ -97,7 +98,6 @@ header
 	display: block;
 	width: 6vh;
 	height: 5vh;
-	background-color: #262626;
 }
 
 .link_notifications
@@ -137,7 +137,6 @@ header
 	display: block;
 	width: 6vh;
 	height: 5vh;
-	background-color: #262626;
 	text-align: center;
 }
 
