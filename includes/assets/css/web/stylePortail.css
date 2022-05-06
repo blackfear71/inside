@@ -91,6 +91,11 @@
 	margin-bottom: 10px;
 }
 
+.contenu_paragraphe:last-child
+{
+	margin-bottom: 0;
+}
+
 .contenu_gras
 {
 	font-family: inside_font_medium, Verdana, sans-serif;
