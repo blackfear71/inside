@@ -397,7 +397,8 @@
                 echo '<div class="titre_explications_calendrier_generator">A propos de la saisie d\'annexes</div>';
 
                 echo '<div class="explications_calendrier_generator">';
-                  echo 'Ceci est l\'outil de mise en ligne d\'annexes aux calendriers. Toutes les saisies sont obligatoires. Les données à saisir sont :';
+                  echo 'Ceci est l\'ancien outil de mise en ligne d\'annexes aux calendriers. Celui-ci fonctionne toujours normalement et permet de mettre en ligne
+                  une annexe personnalisée. Toutes les saisies sont obligatoires. Les données à saisir sont :';
 
                   echo '<ul>';
                     echo '<li>L\'annexe</li>';
