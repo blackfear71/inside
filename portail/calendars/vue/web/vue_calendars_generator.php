@@ -405,10 +405,6 @@
                     echo '<li>Le nom de l\'annexe</li>';
                   echo '</ul>';
                 echo '</div>';
-
-                echo '<div class="explications_calendrier_generator">';
-                  echo 'Un générateur d\'annexes automatisé sera développé prochainement.';
-                echo '</div>';
               echo '</div>';
             echo '</div>';
           }

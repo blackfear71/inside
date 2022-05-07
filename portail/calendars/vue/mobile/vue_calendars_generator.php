@@ -411,10 +411,6 @@
                   echo '</ul>';
                 echo '</div>';
 
-                echo '<div class="explications_calendrier_generator">';
-                  echo 'Un générateur d\'annexes automatisé sera développé prochainement.';
-                echo '</div>';
-
                 // Saisie
                 echo '<div class="zone_saisie_calendrier">';
                   echo '<form method="post" action="calendars_generator.php?action=doAjouterAnnexe" enctype="multipart/form-data" id="form_saisie_annexe">';
