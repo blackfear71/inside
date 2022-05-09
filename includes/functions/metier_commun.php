@@ -831,15 +831,6 @@
       case 'star-chief':
       case 'cooker':
       case 'recipe-master':
-      case 'christmas2017':
-      case 'christmas2017_2':
-      case 'golden-egg':
-      case 'rainbow-egg':
-      case 'wizard':
-      case 'christmas2018':
-      case 'christmas2018_2':
-      case 'christmas2019':
-      case 'delivery':
         // Récupération de l'ancienne valeur du succès de l'utilisateur
         $ancienneValeur = physiqueAncienneValeurSucces($reference, $identifiant);
 
@@ -859,6 +850,27 @@
           if ($value == $limite)
             $_SESSION['success'][$reference] = true;
         }
+        break;
+
+      // Incrémentation de la valeur précédente avec la valeur en entrée pour les missions (cas incoming <= 1)
+      // Dans le cas particulier des missions, le succès ne peut pas être débloqué directement, on doit attendre le lendemain de la date de fin, on ne peut donc jamais l'afficher
+      case 'christmas2017':
+      case 'christmas2017_2':
+      case 'golden-egg':
+      case 'rainbow-egg':
+      case 'wizard':
+      case 'christmas2018':
+      case 'christmas2018_2':
+      case 'christmas2019':
+      case 'delivery':
+        // Récupération de l'ancienne valeur du succès de l'utilisateur
+        $ancienneValeur = physiqueAncienneValeurSucces($reference, $identifiant);
+
+        // Récupération de la nouvelle valeur
+        if (!empty($ancienneValeur))
+          $value = $ancienneValeur + $incoming;
+        else
+          $value = $incoming;
         break;
 
       // Incrémentation de la valeur précédente avec la valeur en entrée (cas incoming > 1)
