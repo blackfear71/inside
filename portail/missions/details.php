@@ -47,7 +47,7 @@
           if (date('Ymd') > $detailsMission->getDate_fin())
           {
             // Récupération des succès de la mission
-            $succesMission = getSuccesMission($detailsMission);
+            $succesMission = getSuccesMission($detailsMission, $_SESSION['user']['identifiant']);
 
             // Récupération du classement des participants
             $ranking = getRankingMission($_GET['id_mission'], $participants);

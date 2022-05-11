@@ -144,41 +144,39 @@
 
   // METIER : Lecture des succès associés à une mission
   // RETOUR : Tableau des succès d'une mission
-  function getSuccesMission($mission)
+  function getSuccesMission($mission, $identifiant)
   {
     // Initialisations
     $succesMission = array();
 
-    // Récupération des données
-    $referenceMission = $mission->getReference();
-
-    switch ($referenceMission)
+    // Récupération des succès
+    switch ($mission->getReference())
     {
       case 'noel_2017':
-        array_push($succesMission, physiqueSucces('christmas2017'));
-        array_push($succesMission, physiqueSucces('christmas2017_2'));
+        array_push($succesMission, physiqueSuccessMissionUser('christmas2017', $identifiant));
+        array_push($succesMission, physiqueSuccessMissionUser('christmas2017_2', $identifiant));
         break;
 
       case 'paques_2018':
-        array_push($succesMission, physiqueSucces('golden-egg'));
-        array_push($succesMission, physiqueSucces('rainbow-egg'));
+        array_push($succesMission, physiqueSuccessMissionUser('golden-egg', $identifiant));
+        array_push($succesMission, physiqueSuccessMissionUser('rainbow-egg', $identifiant));
         break;
 
       case 'halloween_2018':
-        array_push($succesMission, physiqueSucces('wizard'));
+        array_push($succesMission, physiqueSuccessMissionUser('wizard', $identifiant));
         break;
 
       case 'noel_2018':
-        array_push($succesMission, physiqueSucces('christmas2018'));
-        array_push($succesMission, physiqueSucces('christmas2018_2'));
+        array_push($succesMission, physiqueSuccessMissionUser('christmas2018', $identifiant));
+        array_push($succesMission, physiqueSuccessMissionUser('christmas2018_2', $identifiant));
         break;  
         
       case 'noel_2019':
-        array_push($succesMission, physiqueSucces('christmas2019'));
+        array_push($succesMission, physiqueSuccessMissionUser('christmas2019', $identifiant));
         break;    
 
       case 'cigognes_2022':
-        array_push($succesMission, physiqueSucces('delivery'));
+        array_push($succesMission, physiqueSuccessMissionUser('delivery', $identifiant));
         break;
 
       default:

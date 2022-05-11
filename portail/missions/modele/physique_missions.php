@@ -211,6 +211,31 @@
     return $participationUser;
   }
 
+  // PHYSIQUE : Lecture d'un succès
+  // RETOUR : Objet Success
+  function physiqueSuccessMissionUser($referenceSucces, $identifiant)
+  {
+    // Requête
+    global $bdd;
+
+    $req = $bdd->query('SELECT success.*, success_users.value
+                        FROM success
+                        LEFT JOIN success_users
+                        ON (success.reference = success_users.reference AND success_users.identifiant = "' . $identifiant . '")
+                        WHERE success.reference = "' . $referenceSucces . '"');
+
+    $data = $req->fetch();
+
+    // Instanciation d'un objet Success à partir des données remontées de la bdd
+    $succes = Success::withData($data);
+    $succes->setValue_user($data['value']);
+
+    $req->closeCursor();
+
+    // Retour
+    return $succes;
+  }
+
   /****************************************************************************/
   /********************************** INSERT **********************************/
   /****************************************************************************/

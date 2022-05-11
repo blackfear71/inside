@@ -162,7 +162,7 @@
                     foreach ($succesMission as $succes)
                       {
                         // Logo succès
-                        if ($missionUser['event'] >= $succes->getLimit_success())
+                        if ($succes->getValue_user() >= $succes->getLimit_success())
                         {
                           echo '<div class="succes_mission succes_mission_yellow" title="' . $succes->getTitle() . '">';
                             echo '<img src="../../includes/images/profil/success/' . $succes->getReference() . '.png" alt="' . $succes->getReference() . '" class="logo_succes_unlocked" />';

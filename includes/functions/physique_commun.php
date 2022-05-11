@@ -63,9 +63,9 @@
     // Requête
     global $bdd;
 
-    $req  = $bdd->query('SELECT *
-                         FROM success
-                         WHERE reference = "' . $referenceSucces . '"');
+    $req = $bdd->query('SELECT *
+                        FROM success
+                        WHERE reference = "' . $referenceSucces . '"');
 
     $data = $req->fetch();
 
