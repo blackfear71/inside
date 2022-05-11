@@ -145,21 +145,31 @@
 /*** Succès ***/
 .zone_succes_mission
 {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+    display: block;
+	text-align: center;
 }
 
 .succes_mission
 {
 	display: inline-block;
 	text-align: center;
+	margin: 0 10px 20px 10px;
 	margin-bottom: 20px;
 	width: calc(50% - 30px);
 	background-color: #e3e3e3;
 	padding: 10px;
 	border-radius: 2px;
 	box-shadow: 0 0 3px #7c7c7c;
+}
+
+.succes_mission:first-child
+{
+	margin-left: 0;
+}
+
+.succes_mission:last-child
+{
+	margin-right: 0;
 }
 
 .succes_mission_yellow
