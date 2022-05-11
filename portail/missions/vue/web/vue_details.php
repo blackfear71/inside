@@ -129,6 +129,7 @@
                         }
                         else
                           echo '<div class="succes_mission succes_mission_yellow margin_left_10" title="' . $succes->getTitle() . '">';
+
                           echo '<img src="../../includes/images/profil/success/' . $succes->getReference() . '.png" alt="' . $succes->getReference() . '" class="logo_succes_unlocked" />';
                         echo '</div>';
                       }
@@ -143,6 +144,7 @@
                         }
                         else
                           echo '<div class="succes_mission margin_left_10" title="Succès non débloqué">';
+                          
                           echo '<img src="../../includes/icons/profil/hidden_success.png" alt="hidden_success" class="logo_succes_locked" />';
                         echo '</div>';
                       }
