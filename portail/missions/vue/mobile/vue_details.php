@@ -159,7 +159,9 @@
                   if (!empty($succesMission))
                   {
                     echo '<div class="zone_succes_mission">';
-                      $i = 0;
+                      $i         = 0;
+                      $keySucces = array_keys($succesMission);
+                      $lastKey   = end($keySucces);
 
                       foreach ($succesMission as $succes)
                       {
@@ -168,7 +170,7 @@
                         {
                           if ($i % 2 == 0)
                           {
-                            if ($i == array_key_last($succesMission))
+                            if ($i == $lastKey)
                               echo '<div class="succes_mission succes_mission_yellow" title="' . $succes->getTitle() . '">';
                             else
                               echo '<div class="succes_mission succes_mission_yellow margin_right_1vh" title="' . $succes->getTitle() . '">';
@@ -183,14 +185,14 @@
                         {
                           if ($i % 2 == 0)
                           {
-                            if ($i == array_key_last($succesMission))
+                            if ($i == $lastKey)
                               echo '<div class="succes_mission" title="Succès non débloqué">';
                             else
                               echo '<div class="succes_mission margin_right_1vh" title="Succès non débloqué">';
                           }
                           else
                             echo '<div class="succes_mission margin_left_1vh" title="Succès non débloqué">';
-                            
+
                             echo '<img src="../../includes/icons/profil/hidden_success.png" alt="hidden_success" class="logo_succes_locked" />';
                           echo '</div>';
                         }
