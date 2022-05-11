@@ -159,12 +159,14 @@
 
 .logo_succes_unlocked
 {
+	display: block;
 	width: 100%;
 	border-radius: 0.5vh;
 }
 
 .logo_succes_locked
 {
+	display: block;
 	width: 100%;
 }
 
