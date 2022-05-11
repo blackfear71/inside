@@ -1481,3 +1481,19 @@ footer
 	padding-left: 1.5vh;
 	padding-right: 1.5vh;
 }
+
+/*** Tailles ***/
+.margin_right_2vw
+{
+    margin-right: 2vw;
+}
+
+.margin_left_1vh
+{
+	margin-left: 1vh;
+}
+
+.margin_right_1vh
+{
+	margin-right: 1vh;
+}

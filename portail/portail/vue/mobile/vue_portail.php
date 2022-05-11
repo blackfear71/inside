@@ -144,7 +144,7 @@
               if ($lienPortail['mobile'] == 'Y')
               {
                 if ($i % 2 == 0)
-                  echo '<a href="' . $lienPortail['lien'] . '" title="' . $lienPortail['title'] . '" class="lien_portail margin_right_2">';
+                  echo '<a href="' . $lienPortail['lien'] . '" title="' . $lienPortail['title'] . '" class="lien_portail margin_right_2vw">';
                 else
                   echo '<a href="' . $lienPortail['lien'] . '" title="' . $lienPortail['title'] . '" class="lien_portail">';
                   // Logo

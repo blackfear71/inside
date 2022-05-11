@@ -159,21 +159,41 @@
                   if (!empty($succesMission))
                   {
                     echo '<div class="zone_succes_mission">';
-                    foreach ($succesMission as $succes)
+                      $i = 0;
+
+                      foreach ($succesMission as $succes)
                       {
                         // Logo succès
                         if ($succes->getValue_user() >= $succes->getLimit_success())
                         {
-                          echo '<div class="succes_mission succes_mission_yellow" title="' . $succes->getTitle() . '">';
+                          if ($i % 2 == 0)
+                          {
+                            if ($i == array_key_last($succesMission))
+                              echo '<div class="succes_mission succes_mission_yellow" title="' . $succes->getTitle() . '">';
+                            else
+                              echo '<div class="succes_mission succes_mission_yellow margin_right_1vh" title="' . $succes->getTitle() . '">';
+                          }
+                          else
+                            echo '<div class="succes_mission succes_mission_yellow margin_left_1vh" title="' . $succes->getTitle() . '">';
                             echo '<img src="../../includes/images/profil/success/' . $succes->getReference() . '.png" alt="' . $succes->getReference() . '" class="logo_succes_unlocked" />';
                           echo '</div>';
                         }
                         else
                         {
-                          echo '<div class="succes_mission" title="Succès non débloqué">';
+                          if ($i % 2 == 0)
+                          {
+                            if ($i == array_key_last($succesMission))
+                              echo '<div class="succes_mission" title="Succès non débloqué">';
+                            else
+                              echo '<div class="succes_mission margin_right_1vh" title="Succès non débloqué">';
+                          }
+                          else
+                            echo '<div class="succes_mission margin_left_1vh" title="Succès non débloqué">';
                             echo '<img src="../../includes/icons/profil/hidden_success.png" alt="hidden_success" class="logo_succes_locked" />';
                           echo '</div>';
                         }
+
+                        $i++;
                       }
                     echo '</div>';
                   }
