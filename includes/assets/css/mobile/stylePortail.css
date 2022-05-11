@@ -22,9 +22,10 @@
 
 .zone_boutons_news
 {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, 6vh);
+	justify-content: space-between;
+	grid-gap: 1vh;
     margin-bottom: 2vh;
 }
 
