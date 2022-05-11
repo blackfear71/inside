@@ -1483,9 +1483,14 @@ footer
 }
 
 /*** Tailles ***/
-.margin_right_2vw
+.margin_left_0_5vh
 {
-    margin-right: 2vw;
+	margin-left: 0.5vh;
+}
+
+.margin_right_0_5vh
+{
+	margin-right: 0.5vh;
 }
 
 .margin_left_1vh
