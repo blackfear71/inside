@@ -612,7 +612,7 @@ aside
 
 .lien_green:active
 {
-  background-color: #70d55d;
+  	background-color: #70d55d;
 }
 
 .lien_red:active, .lien_form:active .lien_red
@@ -622,12 +622,12 @@ aside
 
 .margin_lien
 {
-	margin-right: 4%;
+	margin-right: 2vh;
 }
 
 .lien_demi
 {
-	width: calc(50% - 2%);
+	width: calc(50% - 1vh);
 }
 
 .lien_form
