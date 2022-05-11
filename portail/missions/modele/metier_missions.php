@@ -1,6 +1,7 @@
 <?php
   include_once('../../includes/classes/missions.php');
   include_once('../../includes/classes/profile.php');
+  include_once('../../includes/classes/success.php');
 
   // METIER : Lecture des missions
   // RETOUR : Liste des missions
@@ -139,6 +140,53 @@
 
     // Retour
     return $avancement;
+  }
+
+  // METIER : Lecture des succès associés à une mission
+  // RETOUR : Tableau des succès d'une mission
+  function getSuccesMission($mission)
+  {
+    // Initialisations
+    $succesMission = array();
+
+    // Récupération des données
+    $referenceMission = $mission->getReference();
+
+    switch ($referenceMission)
+    {
+      case 'noel_2017':
+        array_push($succesMission, physiqueSucces('christmas2017'));
+        array_push($succesMission, physiqueSucces('christmas2017_2'));
+        break;
+
+      case 'paques_2018':
+        array_push($succesMission, physiqueSucces('golden-egg'));
+        array_push($succesMission, physiqueSucces('rainbow-egg'));
+        break;
+
+      case 'halloween_2018':
+        array_push($succesMission, physiqueSucces('wizard'));
+        break;
+
+      case 'noel_2018':
+        array_push($succesMission, physiqueSucces('christmas2018'));
+        array_push($succesMission, physiqueSucces('christmas2018_2'));
+        break;  
+        
+      case 'noel_2019':
+        array_push($succesMission, physiqueSucces('christmas2019'));
+        break;    
+
+      case 'cigognes_2022':
+        array_push($succesMission, physiqueSucces('delivery'));
+        break;
+
+      default:
+        break;
+    }
+
+    // Retour
+    return $succesMission;
   }
 
   // METIER : Lecture du classement des utilisateurs d'une mission

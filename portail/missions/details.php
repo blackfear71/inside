@@ -46,6 +46,9 @@
           // Récupération des résultats
           if (date('Ymd') > $detailsMission->getDate_fin())
           {
+            // Récupération des succès de la mission
+            $succesMission = getSuccesMission($detailsMission);
+
             // Récupération du classement des participants
             $ranking = getRankingMission($_GET['id_mission'], $participants);
 
@@ -83,6 +86,11 @@
 
         if (date('Ymd') > $detailsMission->getDate_fin())
         {
+          foreach ($succesMission as $succes)
+          {
+            Success::secureData($succes);
+          }
+
           foreach ($ranking as $rankUser)
           {
             ParticipantMission::secureData($rankUser);

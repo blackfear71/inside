@@ -142,9 +142,50 @@
               echo '</div>';
             }
 
-            // Classement
+            // Succès et classement
             if (date('Ymd') > $detailsMission->getDate_fin())
             {
+              // Succès
+              echo '<div class="zone_details_mission">';
+                // Titre
+                echo '<div id="titre_succes_mission" class="titre_section">';
+                  echo '<img src="../../includes/icons/missions/success_grey.png" alt="success_grey" class="logo_titre_section" />';
+                  echo '<div class="texte_titre_section_fleche">Succès débloqués</div>';
+                  echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section" />';
+                echo '</div>';
+
+                echo '<div id="afficher_succes_mission">';
+                  // Succès débloqués
+                  if (!empty($succesMission))
+                  {
+                    echo '<div class="zone_succes_mission">';
+                    foreach ($succesMission as $succes)
+                      {
+                        // Logo succès
+                        if ($missionUser['event'] > $succes->getLimit_success())
+                        {
+                          echo '<div class="succes_mission succes_mission_yellow" title="' . $succes->getTitle() . '">';
+                            echo '<img src="../../includes/images/profil/success/' . $succes->getReference() . '.png" alt="' . $succes->getReference() . '" class="logo_succes_unlocked" />';
+                          echo '</div>';
+                        }
+                        else
+                        {
+                          echo '<div class="succes_mission" title="Succès non débloqué">';
+                            echo '<img src="../../includes/icons/profil/hidden_success.png" alt="hidden_success" class="logo_succes_locked" />';
+                          echo '</div>';
+                        }
+                      }
+                    echo '</div>';
+                  }
+                  else
+                    echo '<div class="empty">Aucun succès associé à cette mission</div>';
+
+                  // Lien vers les succès
+                  echo '<a href="../profil/profil.php?view=success&action=goConsulter" class="lien_succes">Voir mes succès</a>';
+                echo '</div>';
+              echo '</div>';
+
+              // Classement
               echo '<div class="zone_details_mission">';
                 // Titre
                 echo '<div id="titre_classement_mission" class="titre_section">';
@@ -154,9 +195,6 @@
                 echo '</div>';
 
                 echo '<div id="afficher_classement_mission">';
-                  // Lien vers les succès
-                  echo '<a href="../profil/profil.php?view=success&action=goConsulter" class="lien_succes">Voir mes succès</a>';
-
                   // Classement des utilisateurs
                   if (!empty($ranking))
                   {

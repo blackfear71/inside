@@ -103,14 +103,42 @@
             echo '</div>';
 
             echo '<div class="zone_details_mission_right">';
-              // Classement
+              // Succès et classement
               if (date('Ymd') > $detailsMission->getDate_fin())
               {
                 // Titre
-                echo '<div class="titre_section"><img src="../../includes/icons/missions/podium_grey.png" alt="podium_grey" class="logo_titre_section" /><div class="texte_titre_section">Classement</div></div>';
+                echo '<div class="titre_section"><img src="../../includes/icons/missions/success_grey.png" alt="success_grey" class="logo_titre_section" /><div class="texte_titre_section">Succès débloqués</div></div>';
+
+                // Succès débloqués
+                if (!empty($succesMission))
+                {
+                  echo '<div class="zone_succes_mission">';
+                  foreach ($succesMission as $succes)
+                    {
+                      // Logo succès
+                      if ($missionUser['event'] > $succes->getLimit_success())
+                      {
+                        echo '<div class="succes_mission succes_mission_yellow" title="' . $succes->getTitle() . '">';
+                          echo '<img src="../../includes/images/profil/success/' . $succes->getReference() . '.png" alt="' . $succes->getReference() . '" class="logo_succes_unlocked" />';
+                        echo '</div>';
+                      }
+                      else
+                      {
+                        echo '<div class="succes_mission" title="Succès non débloqué">';
+                          echo '<img src="../../includes/icons/profil/hidden_success.png" alt="hidden_success" class="logo_succes_locked" />';
+                        echo '</div>';
+                      }
+                    }
+                  echo '</div>';
+                }
+                else
+                  echo '<div class="empty">Aucun succès associé à cette mission</div>';
 
                 // Lien vers les succès
                 echo '<a href="../profil/profil.php?view=success&action=goConsulter" class="lien_succes">Voir mes succès</a>';
+
+                // Titre
+                echo '<div class="titre_section"><img src="../../includes/icons/missions/podium_grey.png" alt="podium_grey" class="logo_titre_section" /><div class="texte_titre_section">Classement</div></div>';
 
                 // Classement des utilisateurs
                 if (!empty($ranking))
