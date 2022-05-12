@@ -142,73 +142,9 @@
               echo '</div>';
             }
 
-            // Succès et classement
+            // Classement et succès
             if (date('Ymd') > $detailsMission->getDate_fin())
-            {
-              // Succès
-              echo '<div class="zone_details_mission">';
-                // Titre
-                echo '<div id="titre_succes_mission" class="titre_section">';
-                  echo '<img src="../../includes/icons/missions/success_grey.png" alt="success_grey" class="logo_titre_section" />';
-                  echo '<div class="texte_titre_section_fleche">Succès débloqués</div>';
-                  echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section" />';
-                echo '</div>';
-
-                echo '<div id="afficher_succes_mission">';
-                  // Succès débloqués
-                  if (!empty($succesMission))
-                  {
-                    echo '<div class="zone_succes_mission">';
-                      $i         = 0;
-                      $keySucces = array_keys($succesMission);
-                      $lastKey   = end($keySucces);
-
-                      foreach ($succesMission as $succes)
-                      {
-                        // Logo succès
-                        if ($succes->getValue_user() >= $succes->getLimit_success())
-                        {
-                          if ($i % 2 == 0)
-                          {
-                            if ($i == $lastKey)
-                              echo '<div class="succes_mission succes_mission_yellow" title="' . $succes->getTitle() . '">';
-                            else
-                              echo '<div class="succes_mission succes_mission_yellow margin_right_1vh" title="' . $succes->getTitle() . '">';
-                          }
-                          else
-                            echo '<div class="succes_mission succes_mission_yellow margin_left_1vh" title="' . $succes->getTitle() . '">';
-
-                            echo '<img src="../../includes/images/profil/success/' . $succes->getReference() . '.png" alt="' . $succes->getReference() . '" class="logo_succes_unlocked" />';
-                          echo '</div>';
-                        }
-                        else
-                        {
-                          if ($i % 2 == 0)
-                          {
-                            if ($i == $lastKey)
-                              echo '<div class="succes_mission" title="Succès non débloqué">';
-                            else
-                              echo '<div class="succes_mission margin_right_1vh" title="Succès non débloqué">';
-                          }
-                          else
-                            echo '<div class="succes_mission margin_left_1vh" title="Succès non débloqué">';
-
-                            echo '<img src="../../includes/icons/profil/hidden_success.png" alt="hidden_success" class="logo_succes_locked" />';
-                          echo '</div>';
-                        }
-
-                        $i++;
-                      }
-                    echo '</div>';
-                  }
-                  else
-                    echo '<div class="empty">Aucun succès associé à cette mission</div>';
-
-                  // Lien vers les succès
-                  echo '<a href="../profil/profil.php?view=success&action=goConsulter" class="lien_succes">Voir mes succès</a>';
-                echo '</div>';
-              echo '</div>';
-
+            {              
               // Classement
               echo '<div class="zone_details_mission">';
                 // Titre
@@ -304,6 +240,70 @@
                   }
                   else
                     echo '<div class="empty">Personne n\'a été classé sur cette mission...</div>';
+                echo '</div>';
+              echo '</div>';
+
+              // Succès
+              echo '<div class="zone_details_mission">';
+                // Titre
+                echo '<div id="titre_succes_mission" class="titre_section">';
+                  echo '<img src="../../includes/icons/missions/success_grey.png" alt="success_grey" class="logo_titre_section" />';
+                  echo '<div class="texte_titre_section_fleche">Succès débloqués</div>';
+                  echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section" />';
+                echo '</div>';
+
+                echo '<div id="afficher_succes_mission">';
+                  // Succès débloqués
+                  if (!empty($succesMission))
+                  {
+                    echo '<div class="zone_succes_mission">';
+                      $i         = 0;
+                      $keySucces = array_keys($succesMission);
+                      $lastKey   = end($keySucces);
+
+                      foreach ($succesMission as $succes)
+                      {
+                        // Logo succès
+                        if ($succes->getValue_user() >= $succes->getLimit_success())
+                        {
+                          if ($i % 2 == 0)
+                          {
+                            if ($i == $lastKey)
+                              echo '<div class="succes_mission succes_mission_yellow" title="' . $succes->getTitle() . '">';
+                            else
+                              echo '<div class="succes_mission succes_mission_yellow margin_right_1vh" title="' . $succes->getTitle() . '">';
+                          }
+                          else
+                            echo '<div class="succes_mission succes_mission_yellow margin_left_1vh" title="' . $succes->getTitle() . '">';
+
+                            echo '<img src="../../includes/images/profil/success/' . $succes->getReference() . '.png" alt="' . $succes->getReference() . '" class="logo_succes_unlocked" />';
+                          echo '</div>';
+                        }
+                        else
+                        {
+                          if ($i % 2 == 0)
+                          {
+                            if ($i == $lastKey)
+                              echo '<div class="succes_mission" title="Succès non débloqué">';
+                            else
+                              echo '<div class="succes_mission margin_right_1vh" title="Succès non débloqué">';
+                          }
+                          else
+                            echo '<div class="succes_mission margin_left_1vh" title="Succès non débloqué">';
+
+                            echo '<img src="../../includes/icons/profil/hidden_success.png" alt="hidden_success" class="logo_succes_locked" />';
+                          echo '</div>';
+                        }
+
+                        $i++;
+                      }
+                    echo '</div>';
+                  }
+                  else
+                    echo '<div class="empty">Aucun succès associé à cette mission</div>';
+
+                  // Lien vers les succès
+                  echo '<a href="../profil/profil.php?view=success&action=goConsulter" class="lien_succes">Voir mes succès</a>';
                 echo '</div>';
               echo '</div>';
             }
