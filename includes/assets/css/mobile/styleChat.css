@@ -98,7 +98,7 @@
 /*** Contenu onglet chat ***/
 .zone_onglet_chat
 {
-	height: 76.8vh;
+	height: 76.7vh;
 	width: 100%;
 	overflow-y: auto;
 	background-color: white;
@@ -107,7 +107,7 @@
 
 .contenu_onglet_chat
 {
-	height: 76.8vh;
+	height: 76.7vh;
 	width: 90vw;
 	padding-left: 1.5vh;
 	padding-right: 1.5vh;
