@@ -27,7 +27,7 @@
       $styleHead       = 'styleProfil.css';
       $scriptHead      = 'scriptProfil.js';
       $angularHead     = false;
-      $chatHead        = false;
+      $chatHead        = true;
       $datepickerHead  = false;
       $masonryHead     = false;
       $exifHead        = true;
@@ -131,6 +131,9 @@
           }
         ?>
 			</article>
+
+      <!-- Chat -->
+      <?php include('../../includes/common/chat/chat.php'); ?>
 		</section>
 
 		<!-- Pied de page -->

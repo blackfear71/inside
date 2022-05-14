@@ -7,7 +7,7 @@
       $styleHead       = 'styleTheBox.css';
       $scriptHead      = 'scriptTheBox.js';
       $angularHead     = false;
-      $chatHead        = false;
+      $chatHead        = true;
       $datepickerHead  = false;
       $masonryHead     = false;
       $exifHead        = false;
@@ -122,6 +122,9 @@
           include('vue/mobile/vue_pagination.php');
         ?>
       </article>
+
+      <!-- Chat -->
+      <?php include('../../includes/common/chat/chat.php'); ?>
     </section>
 
     <!-- Pied de page -->

@@ -7,7 +7,7 @@
       $styleHead       = 'stylePortail.css';
       $scriptHead      = 'scriptPortail.js';
       $angularHead     = false;
-      $chatHead        = false;
+      $chatHead        = true;
       $datepickerHead  = false;
       $masonryHead     = false;
       $exifHead        = false;

@@ -7,7 +7,7 @@
       $styleHead       = 'stylePP.css';
       $scriptHead      = 'scriptPP.js';
       $angularHead     = true;
-      $chatHead        = false;
+      $chatHead        = true;
       $datepickerHead  = false;
       $masonryHead     = false;
       $exifHead        = false;
@@ -85,6 +85,9 @@
             echo '<div class="empty">Aucun parcours disponible...</div>';
         ?>
       </article>
+
+      <!-- Chat -->
+      <?php include('../../includes/common/chat/chat.php'); ?>
     </section>
 
     <!-- Pied de page -->

@@ -5,8 +5,9 @@
 
 
 // TODO : remanier le chat web comme le mobile
-// TODO : ajouter le php dans chaque page + activer le chat à true + mettre à jour le template de code (avec conditonnement)
-
+// TODO : tester chat avec mission pour vérifier la superposition
+// TODO : l'ombre du bas du bouton d'affichage ne doit pas être au dessus du footer (zindex bouton ?)
+// TODO : tester la position de la saisie par rapport au clavier sur mobile
 
 
 

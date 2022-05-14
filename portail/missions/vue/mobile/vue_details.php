@@ -7,7 +7,7 @@
       $styleHead       = 'styleMI.css';
       $scriptHead      = '';
       $angularHead     = false;
-      $chatHead        = false;
+      $chatHead        = true;
       $datepickerHead  = false;
       $masonryHead     = false;
       $exifHead        = false;
@@ -420,6 +420,9 @@
           }
         ?>
       </article>
+
+      <!-- Chat -->
+      <?php include('../../includes/common/chat/chat.php'); ?>
     </section>
 
     <!-- Pied de page -->

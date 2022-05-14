@@ -7,7 +7,7 @@
       $styleHead       = 'styleFA.css';
       $scriptHead      = 'scriptFA.js';
       $angularHead     = false;
-      $chatHead        = false;
+      $chatHead        = true;
       $datepickerHead  = false;
       $masonryHead     = false;
       $exifHead        = false;
@@ -152,6 +152,9 @@
           include('vue/mobile/vue_resume_semaine.php')
         ?>
       </article>
+
+      <!-- Chat -->
+      <?php include('../../includes/common/chat/chat.php'); ?>
     </section>
 
     <!-- Pied de page -->

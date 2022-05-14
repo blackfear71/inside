@@ -7,7 +7,7 @@
       $styleHead       = 'styleFA.css';
       $scriptHead      = 'scriptFA.js';
       $angularHead     = false;
-      $chatHead        = false;
+      $chatHead        = true;
       $datepickerHead  = false;
       $masonryHead     = false;
       $exifHead        = true;
@@ -103,6 +103,9 @@
           include('vue/mobile/vue_fiches_restaurants.php');
         ?>
       </article>
+
+      <!-- Chat -->
+      <?php include('../../includes/common/chat/chat.php'); ?>
     </section>
 
     <!-- Pied de page -->

@@ -77,7 +77,7 @@
                     /* Contenu */
                     /***********/
                 ?>
-            </article>
+            </article>/*chat*/
         </section>
 
         <!-- Pied de page -->

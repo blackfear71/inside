@@ -7,7 +7,7 @@
       $styleHead       = 'stylePP.css';
       $scriptHead      = '';
       $angularHead     = false;
-      $chatHead        = false;
+      $chatHead        = true;
       $datepickerHead  = false;
       $masonryHead     = false;
       $exifHead        = false;
@@ -114,6 +114,9 @@
           echo '</form>';
         ?>
       </article>
+
+      <!-- Chat -->
+      <?php include('../../includes/common/chat/chat.php'); ?>
     </section>
 
     <!-- Pied de page -->
