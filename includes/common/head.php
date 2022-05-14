@@ -13,7 +13,10 @@
     $dateModificationCssSection = filemtime($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/assets/css/' . $_SESSION['index']['plateforme'] . '/' . $styleHead);
 
   if (isset($chatHead) AND $chatHead == true)
+  {
     $dateModificationCssChat = filemtime($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/assets/css/' . $_SESSION['index']['plateforme'] . '/styleChat.css');
+    $dateModificationJsChat  = filemtime($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/assets/js/' . $_SESSION['index']['plateforme'] . '/scriptChat.js');
+  }
 
   if (isset($datepickerHead) AND $datepickerHead == true)
     $dateModificationCssDatepicker = filemtime($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/libraries/css/datepicker.css');
@@ -83,7 +86,7 @@
 <?php } ?>
 
 <?php if (isset($chatHead) AND $chatHead == true) { ?>
-  <script src="/inside/includes/assets/js/<?php echo $_SESSION['index']['plateforme']; ?>/scriptChat.js?version=<?php echo $dateModificationCssChat; ?>"></script>
+  <script src="/inside/includes/assets/js/<?php echo $_SESSION['index']['plateforme']; ?>/scriptChat.js?version=<?php echo $dateModificationJsChat; ?>"></script>
 <?php } ?>
 
 <?php if (isset($masonryHead) AND $masonryHead == true) { ?>

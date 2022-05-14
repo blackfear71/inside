@@ -136,7 +136,7 @@ $(window).on('load', function()
   // Affichage des anciens messages au clic sur le bouton
   $('#fenetres_chat').on('click', '#afficher_anciens_messages', afficherAnciensMessages);
 
-  // Affichage des anciens messages au scroll vers le haut
+  // Affichage des anciens messages au scroll vers le haut (ne fonctionne que si la fenêtre est ouverte au chargement de la page)
   $('#scroll_conversation').scroll(function()
   {
     // Récupération de la position du scroll
@@ -452,11 +452,8 @@ $(window).on('load', function()
   // Fonction de lecture des derniers messages
   function lectureInitialeConversation()
   {
-    // Récupération de l'équipe de l'utilisateur pour déterminer le fichier à récupérer
-    var equipe = $('#reference_equipe_chat').val();
-
     // Gestion de l'affichage (on utilise $.post plutôt que $.get car le GET met en cache le fichier XML)
-    $.post('/inside/includes/common/chat/conversations/content_chat_' + equipe + '.xml', function(display)
+    $.post('/inside/includes/common/chat/conversations/content_chat_' + teamUser + '.xml', function(display)
     {
       // Initialisations
       var previousDate  = '';
@@ -546,15 +543,12 @@ $(window).on('load', function()
     if (scrollDown == true)
       scrollUpdate = true;
 
-    // Récupération de l'équipe de l'utilisateur pour déterminer le fichier à récupérer
-    var equipe = $('#reference_equipe_chat').val();
-
     // Récupération de la date et l'heure du message le plus récent
     var lastDate = $('#conversation_chat .date_chat').last().text();
     var lastTime = $('#conversation_chat .time_chat').last().text();
 
     // Recherche de messages plus récents et affichage
-    $.post('/inside/includes/common/chat/conversations/content_chat_' + equipe + '.xml', function(display)
+    $.post('/inside/includes/common/chat/conversations/content_chat_' + teamUser + '.xml', function(display)
     {
       // Initialisations
       var previousDate = '';
@@ -635,9 +629,6 @@ $(window).on('load', function()
   // Fonction d'affichage des anciens messages
   function afficherAnciensMessages()
   {
-    // Récupération de l'équipe de l'utilisateur pour déterminer le fichier à récupérer
-    var equipe = $('#reference_equipe_chat').val();
-
     // Récupération de la date et l'heure du message le plus ancien
     var firstDate = $('#conversation_chat .date_chat').first().text();
     var firstTime = $('#conversation_chat .time_chat').first().text();
@@ -646,7 +637,7 @@ $(window).on('load', function()
     var scrollDown = isScrollbarDown();
 
     // Gestion de l'affichage (on utilise $.post plutôt que $.get car le GET met en cache le fichier XML)
-    $.post('/inside/includes/common/chat/conversations/content_chat_' + equipe + '.xml', function(display)
+    $.post('/inside/includes/common/chat/conversations/content_chat_' + teamUser + '.xml', function(display)
     {
       // Initialisations
       var previousDate     = '';
@@ -884,12 +875,11 @@ $(window).on('load', function()
   function envoyerMessage()
   {
     var identifiant = $('#identifiant_chat').val();
-    var equipe      = $('#reference_equipe_chat').val();
     var message     = escapeHtml($('#message_chat').val());
 
     // Envoi du message si renseignée et non vide
     if (!$.isEmptyObject($.trim(message)) && !$.isEmptyObject(identifiant))
-      $.post('/inside/includes/common/chat/chat.php?action=doSubmit', {'identifiant': identifiant, 'equipe': equipe, 'message': message}, afficheConversation);
+      $.post('/inside/includes/common/chat/chat.php?action=doSubmit', {'identifiant': identifiant, 'equipe': teamUser, 'message': message}, afficheConversation);
     else
     {
       $('#message_chat').val('');
@@ -911,21 +901,30 @@ $(window).on('load', function()
   // Positionne la scrollbar en bas en cas d'initialisation de l'écran ou d'envoi de messages
   function setScrollbarDown()
   {
-    var height = $('#scroll_conversation')[0].scrollHeight;
-    $('#scroll_conversation').scrollTop(height);
+    if ($('#scroll_conversation').length)
+    {
+      var height = $('#scroll_conversation')[0].scrollHeight;
+      $('#scroll_conversation').scrollTop(height);
+    }
   }
 
   // Conserve la position de la scrollbar à l'affichage d'anciens messages
   function keepScrollbarPosition(oldHeight)
   {
-    var newHeight = $('#scroll_conversation')[0].scrollHeight;
-    $('#scroll_conversation').scrollTop(newHeight - oldHeight);
+    if ($('#scroll_conversation').length)
+    {
+      var newHeight = $('#scroll_conversation')[0].scrollHeight;
+      $('#scroll_conversation').scrollTop(newHeight - oldHeight);
+    }
   }
 
   // Détermine si la scrollabr est en bas
   function isScrollbarDown()
   {
-    var isScrollBottom = $('#scroll_conversation').scrollTop() + Math.ceil($('#scroll_conversation').innerHeight()) >= $('#scroll_conversation')[0].scrollHeight;
+    var isScrollBottom = true;
+
+    if ($('#scroll_conversation').length)
+      isScrollBottom = $('#scroll_conversation').scrollTop() + Math.ceil($('#scroll_conversation').innerHeight()) >= $('#scroll_conversation')[0].scrollHeight;
 
     return isScrollBottom;
   }

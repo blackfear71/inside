@@ -25,6 +25,9 @@
 
       // Récupération de l'utilisateur courant pour le chat
       $_SESSION['chat']['current'] = $_SESSION['user']['identifiant'];
+
+      // Récupération de l'équipe de l'utilisateur pour le chat
+      $_SESSION['chat']['team'] = $_SESSION['user']['equipe'];
       break;
   }
 
@@ -47,6 +50,7 @@
       // Conversion JSON
       $listeUsersChatJson = json_encode($_SESSION['chat']['users']);
       $currentUserJson    = json_encode($_SESSION['chat']['current']);
+      $teamUserJson       = json_encode($_SESSION['chat']['team']);
       $initChat           = json_encode($_SESSION['chat']['show_chat']);
 
       // Suppression session préférence chat après connexion
@@ -61,7 +65,7 @@
       break;
 
     default:
-      include_once('vue/vue_chat.php');
+      include_once('vue/' . $_SESSION['index']['plateforme'] . '/vue_chat.php');
       break;
   }
 ?>

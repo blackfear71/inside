@@ -16,9 +16,6 @@
       echo '</a>';
     echo '</div>';
 
-    // Référence équipe
-    echo '<input type="hidden" id="reference_equipe_chat" value="' . $_SESSION['user']['equipe'] . '" />';
-
     // Fenêtres paramétrées (JS)
     echo '<div id="fenetres_chat"></div>';
   echo '</div>';
@@ -29,5 +26,6 @@
   // Récupération liste utilisateurs, identifiant & initialisation chat pour le script
   var listeUsersChat = <?php echo $listeUsersChatJson; ?>;
   var currentUser    = <?php echo $currentUserJson; ?>;
+  var teamUser       = <?php echo $teamUserJson; ?>;
   var initChat       = <?php echo $initChat; ?>;
 </script>

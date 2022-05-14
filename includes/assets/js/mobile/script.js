@@ -1257,6 +1257,46 @@ function decodeText(chaine)
   return decoded;
 }
 
+// Encodage des caractères spéciaux
+function escapeHtml(str)
+{
+  var map =
+  {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#039;'
+  };
+
+  replace = str.replace(/[&<>"']/g, function(m)
+  {
+    return map[m];
+  });
+
+  return replace;
+}
+
+// Décodage des caractères spéciaux
+function decodeHtml(str)
+{
+  var map =
+  {
+    '&amp;' : '&',
+    '&lt;'  : '<',
+    '&gt;'  : '>',
+    '&quot;': '"',
+    '&#039;': "'"
+  };
+
+  replace = str.replace(/&amp;|&lt;|&gt;|&quot;|&#039;/g, function(m)
+  {
+    return map[m];
+  });
+
+  return replace;
+}
+
 // Définition d'un cookie
 function setCookie(cookieName, cookieValue)
 {
