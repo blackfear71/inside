@@ -53,6 +53,7 @@
 .zone_onglets_chat
 {
 	display: block;
+	height: 6vh;
 	line-height: 6vh;
 	width: 100%;
 	font-family: inside_font_light, Verdana, sans-serif;
@@ -67,7 +68,6 @@
 .titre_onglet
 {
 	display: inline-block;
-	vertical-align: top;
 	width: calc(50% - 5vh);
 	height: 6vh;
 	padding-left: 1vh;
