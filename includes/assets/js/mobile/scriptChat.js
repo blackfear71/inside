@@ -169,14 +169,6 @@ $(window).on('load', function()
   }
 });
 
-
-$(document.body).on('touchmove', function()
-{
-    // Positionnement de la fenêtre de chat en fonction du scroll
-    initPositionChat();
-});
-
-
 // Au scroll du document
 $(window).scroll(function()
 {
@@ -377,7 +369,7 @@ function initCookieWindowChat()
 // Fonction initialisation position chat (aussi présente dans scriptMH.js)
 function initPositionChat()
 {
-  var totalHeight = $('body')[0].scrollHeight - $(window).height();
+  var totalHeight = $('body')[0].scrollHeight - window.innerHeight;
   var difference  = $('footer').height() - (totalHeight - $(window).scrollTop());
 
   if (difference > 0)
