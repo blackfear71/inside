@@ -6,7 +6,7 @@
 
 // TODO : remanier le chat web comme le mobile
 // TODO : tester la position de la saisie par rapport au clavier sur mobile
-
+// TODO : A la connexion le chat s'ouvre parfois ? à initialiser à false par défaut ?
 
 
 
@@ -169,8 +169,8 @@ $(window).on('load', function()
   }
 });
 
-// Au scroll du document
-$(window).scroll(function()
+// Au mouvement du document
+$(window).on('touchmove', function()
 {
   // Positionnement de la fenêtre de chat en fonction du scroll
   initPositionChat();
