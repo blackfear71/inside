@@ -133,6 +133,43 @@
 	margin-top: -8vh;
 }
 
+/*** Succès ***/
+.zone_succes_mission
+{
+    display: block;
+	text-align: center;
+}
+
+.succes_mission
+{
+	display: inline-block;
+	text-align: center;
+	margin-bottom: 2vh;
+	width: calc(50% - 5vh);
+	background-color: #e3e3e3;
+	padding: 2vh;
+	border-radius: 0.5vh;
+	box-shadow: 0 0 0.5vh #7c7c7c;
+}
+
+.succes_mission_yellow
+{
+	background-color: #ffad01;
+}
+
+.logo_succes_unlocked
+{
+	display: block;
+	width: 100%;
+	border-radius: 0.5vh;
+}
+
+.logo_succes_locked
+{
+	display: block;
+	width: 100%;
+}
+
 /*** Classement ***/
 .lien_succes
 {

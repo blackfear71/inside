@@ -612,7 +612,7 @@ aside
 
 .lien_green:active
 {
-  background-color: #70d55d;
+  	background-color: #70d55d;
 }
 
 .lien_red:active, .lien_form:active .lien_red
@@ -622,12 +622,12 @@ aside
 
 .margin_lien
 {
-	margin-right: 4%;
+	margin-right: 2vh;
 }
 
 .lien_demi
 {
-	width: calc(50% - 2%);
+	width: calc(50% - 1vh);
 }
 
 .lien_form
@@ -1480,4 +1480,25 @@ footer
 	text-align: left;
 	padding-left: 1.5vh;
 	padding-right: 1.5vh;
+}
+
+/*** Tailles ***/
+.margin_left_0_5vh
+{
+	margin-left: 0.5vh;
+}
+
+.margin_right_0_5vh
+{
+	margin-right: 0.5vh;
+}
+
+.margin_left_1vh
+{
+	margin-left: 1vh;
+}
+
+.margin_right_1vh
+{
+	margin-right: 1vh;
 }

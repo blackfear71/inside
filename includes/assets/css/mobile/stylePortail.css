@@ -22,9 +22,10 @@
 
 .zone_boutons_news
 {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, 6vh);
+	justify-content: space-between;
+	grid-gap: 1vh;
     margin-bottom: 2vh;
 }
 
@@ -130,27 +131,21 @@
 .lien_portail
 {
     display: inline-block;
-    width: 44vw;
-    height: 44vw;
+    width: calc(50% - 0.5vh);
     overflow: hidden;
     vertical-align: middle;
     text-decoration: none;
-    margin-bottom: 2vw;
+    margin-bottom: 1vh;
     border-radius: 0.5vh;
     background-color: #374650;
     box-shadow: 0 0 0.5vh #7c7c7c;
 }
 
-.margin_right_2
-{
-    margin-right: 2vw;
-}
-
 .icone_lien_portail
 {
     display: block;
-    width: 21vw;
-    padding: 4vw;
+    width: 20vw;
+    padding: 5vw;
     margin-left: auto;
     margin-right: auto;
 }

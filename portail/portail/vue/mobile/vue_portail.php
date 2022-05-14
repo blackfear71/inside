@@ -136,7 +136,9 @@
           echo '</div>';
 
           // Portail
-          $i = 0;
+          $i          = 0;
+          $keyPortail = array_keys($portail);
+          $lastKey    = end($keyPortail);
 
           echo '<div class="zone_portail">';
             foreach ($portail as $lienPortail)
@@ -144,9 +146,14 @@
               if ($lienPortail['mobile'] == 'Y')
               {
                 if ($i % 2 == 0)
-                  echo '<a href="' . $lienPortail['lien'] . '" title="' . $lienPortail['title'] . '" class="lien_portail margin_right_2">';
+                {
+                  if ($i == $lastKey)
+                    echo '<a href="' . $lienPortail['lien'] . '" title="' . $lienPortail['title'] . '" class="lien_portail ">';
+                  else
+                    echo '<a href="' . $lienPortail['lien'] . '" title="' . $lienPortail['title'] . '" class="lien_portail margin_right_0_5vh">';
+                }
                 else
-                  echo '<a href="' . $lienPortail['lien'] . '" title="' . $lienPortail['title'] . '" class="lien_portail">';
+                  echo '<a href="' . $lienPortail['lien'] . '" title="' . $lienPortail['title'] . '" class="lien_portail margin_left_0_5vh">';
                   // Logo
                   echo '<img src="' . $lienPortail['image'] . '" alt="' . $lienPortail['alt'] . '" class="icone_lien_portail" />';
 

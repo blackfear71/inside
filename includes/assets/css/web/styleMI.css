@@ -142,7 +142,43 @@
 	margin-top: -60px;
 }
 
-/*** Classement ***/
+/*** Succès ***/
+.zone_succes_mission
+{
+    display: block;
+	text-align: center;
+}
+
+.succes_mission
+{
+	display: inline-block;
+	text-align: center;
+	margin-bottom: 20px;
+	width: calc(50% - 30px);
+	background-color: #e3e3e3;
+	padding: 10px;
+	border-radius: 2px;
+	box-shadow: 0 0 3px #7c7c7c;
+}
+
+.succes_mission_yellow
+{
+	background-color: #ffad01;
+}
+
+.logo_succes_unlocked
+{
+	display: block;
+	width: 100%;
+	border-radius: 2px;
+}
+
+.logo_succes_locked
+{
+	display: block;
+	width: 100%;
+}
+
 .lien_succes
 {
 	display: block;
@@ -166,6 +202,7 @@
 	color: white;
 }
 
+/*** Classement ***/
 .zone_classement
 {
 	border-radius: 2px;
