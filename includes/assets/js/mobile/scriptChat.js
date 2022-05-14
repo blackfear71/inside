@@ -169,8 +169,16 @@ $(window).on('load', function()
   }
 });
 
-// Au mouvement du document
-$(window).on('touchmove', function()
+
+$(document.body).on('touchmove', function()
+{
+    // Positionnement de la fenêtre de chat en fonction du scroll
+    initPositionChat();
+});
+
+
+// Au scroll du document
+$(window).scroll(function()
 {
   // Positionnement de la fenêtre de chat en fonction du scroll
   initPositionChat();
