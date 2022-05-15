@@ -5,8 +5,6 @@
 
 
 // TODO : Remanier le chat web comme le mobile
-// TODO : A la connexion le chat s'ouvre parfois ? à initialiser à false par défaut ?
-// TODO : A l'initialisation en orientation paysage, ça n'est pas utilisable
 
 
 
@@ -61,29 +59,16 @@ $(function()
   // Envoi de message au clic sur le bouton
   $('#fenetres_chat').on('click', '#send_message_chat', envoyerMessage);
 
-  // Afficher/masquer la fenêtre d'insertion de smileys au clic
-  $('#fenetres_chat').on('click', '#insert_smiley', function()
+  // Afficher/masquer la fenêtre d'insertion de smileys au clic sur le bouton ou en dehors
+  $('#fenetres_chat').on('click', '#insert_smiley, #scroll_conversation, #message_chat, #send_message_chat', function()
   {
-    if ($('.zone_insert_smiley').css('display') == 'none')
-    {
-      $('.zone_insert_smiley').css('display', 'block');
-      $('.triangle_chat_smileys').css('display', 'block');
-    }
-    else
-    {
-      $('.zone_insert_smiley').css('display', 'none');
-      $('.triangle_chat_smileys').css('display', 'none');
-    }
+    afficherMasquerInsertionSmiley(false);
   });
 
   // Repli de la zone d'insertion de smileys au clic en dehors
   $('#fenetres_chat').on('click', '#scroll_conversation, #message_chat, #send_message_chat', function()
   {
-    if ($('.zone_insert_smiley').css('display') == 'block')
-    {
-      $('.zone_insert_smiley').css('display', 'none');
-      $('.triangle_chat_smileys').css('display', 'none');
-    }
+    afficherMasquerInsertionSmiley(true);
   });
 
   // Insertion smiley au clic
@@ -115,14 +100,11 @@ $(function()
   {
     if (e.which == 13)
     {
+      // Envoi du message
       envoyerMessage();
 
       // Eventuel repli de la zone d'insertion de smileys
-      if ($('.zone_insert_smiley').css('display') == 'block')
-      {
-        $('.zone_insert_smiley').css('display', 'none');
-        $('.triangle_chat_smileys').css('display', 'none');
-      }
+      afficherMasquerInsertionSmiley(true);
 
       return false;
     }
@@ -232,18 +214,9 @@ function adaptChatSaisie()
   {
     if (initialHeight > window.innerHeight)
     {
-      if (window.innerHeight <= window.innerWidth)
-      {
-        $('.zone_chat').css('top', '100%');
-        $('.zone_onglet_chat').css('height', '25vh');
-        $('.contenu_onglet_chat').css('height', '25vh');
-      }
-      else
-      {
-        $('.zone_chat').css('top', '100%');
-        $('.zone_onglet_chat').css('height', '30vh');
-        $('.contenu_onglet_chat').css('height', '30vh');
-      }
+      $('.zone_chat').css('top', '100%');
+      $('.zone_onglet_chat').css('height', '25vh');
+      $('.contenu_onglet_chat').css('height', '25vh');
 
       // Scroll vers le bas
       setScrollbarDown();
@@ -430,7 +403,7 @@ function initCookieShowChat()
   // Initialisation cookie état Chat par défaut
   if (cookieShowChat == null)
   {
-    setCookie('chat[showChat]', true);
+    setCookie('chat[showChat]', false);
     cookieShowChat = getCookie('chat[showChat]');
   }
 }
@@ -1022,6 +995,29 @@ function envoyerMessage()
   {
     $('#message_chat').val('');
     $('#message_chat').focus();
+  }
+}
+
+// Affiche ou masque l'insertion de smileys
+function afficherMasquerInsertionSmiley(forceClose)
+{
+  if (forceClose == true)
+  {
+    $('.zone_insert_smiley').css('display', 'none');
+    $('.triangle_chat_smileys').css('display', 'none');
+  }
+  else
+  {
+    if ($('.zone_insert_smiley').css('display') == 'none')
+    {
+      $('.zone_insert_smiley').css('display', 'block');
+      $('.triangle_chat_smileys').css('display', 'block');
+    }
+    else
+    {
+      $('.zone_insert_smiley').css('display', 'none');
+      $('.triangle_chat_smileys').css('display', 'none');
+    }
   }
 }
 
