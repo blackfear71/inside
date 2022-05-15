@@ -190,7 +190,7 @@ $(window).resize(function()
   {
     if (initialHeight > window.innerHeight)
     {
-      $('.zone_chat').css('top', '75%');
+      $('.zone_chat').css('top', '100%');
       $('.zone_chat').css('transform', 'translateY(-50%)');
       $('.zone_onglet_chat').css('height', '30vh');
       $('.contenu_onglet_chat').css('height', '30vh');
