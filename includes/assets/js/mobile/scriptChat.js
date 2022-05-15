@@ -4,11 +4,9 @@
 
 
 
-// TODO : remanier le chat web comme le mobile
-// TODO : tester la position de la saisie par rapport au clavier sur mobile : forcer l'affichage sur mozilla pour tester, pour l'instant ça ne fonctionne pas
-//        les focusin / focusout ne conviennent pas complètement : par exemple au resize, si le focus est sur la saisie alors remettre la taille en plus du focusout
+// TODO : Remanier le chat web comme le mobile
 // TODO : A la connexion le chat s'ouvre parfois ? à initialiser à false par défaut ?
-// TODO : Au changement d'orientation (paysage), ça n'est pas utilisable
+// TODO : A l'initialisation en orientation paysage, ça n'est pas utilisable
 
 
 
@@ -191,7 +189,6 @@ $(window).resize(function()
     if (initialHeight > window.innerHeight)
     {
       $('.zone_chat').css('top', '100%');
-      $('.zone_chat').css('transform', 'translateY(-50%)');
       $('.zone_onglet_chat').css('height', '30vh');
       $('.contenu_onglet_chat').css('height', '30vh');
   
@@ -200,7 +197,6 @@ $(window).resize(function()
     else
     {
       $('.zone_chat').css('top', '50%');
-      $('.zone_chat').css('transform', 'translateY(-50%)');
       $('.zone_onglet_chat').css('height', '77vh');
       $('.contenu_onglet_chat').css('height', '77vh');
   

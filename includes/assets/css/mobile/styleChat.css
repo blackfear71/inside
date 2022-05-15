@@ -122,6 +122,8 @@
 	background-color: #e3e3e3;
 	height: 6vh;
 	width: 100%;
+	border-bottom-left-radius: 0.5vh;
+	border-bottom-right-radius: 0.5vh;
 	overflow: hidden;
 }
 
