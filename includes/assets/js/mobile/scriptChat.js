@@ -129,25 +129,6 @@ $(function()
       return false;
     }
   });
-
-  /*** Actions au focus ***/
-  /*// Diminution de la taille des messages à la saisie
-  $(document).on('focusin', '#message_chat', function()
-  {
-    $('.zone_onglet_chat').css('height', '30vh');
-    $('.contenu_onglet_chat').css('height', '30vh');
-
-    setScrollbarDown();
-  });
-
-  // Réinitialisation de la taille des messages à la fin de la saisie
-  $(document).on('focusout', '#message_chat', function()
-  {
-    $('.zone_onglet_chat').css('height', '77vh');
-    $('.contenu_onglet_chat').css('height', '77vh');
-
-    setScrollbarDown();
-  });*/
 });
 
 // Au chargement du document complet
@@ -209,6 +190,7 @@ $(window).resize(function()
   {
     if (initialHeight > window.innerHeight)
     {
+      $('.fond_chat').css('height', '40vh');
       $('.zone_onglet_chat').css('height', '30vh');
       $('.contenu_onglet_chat').css('height', '30vh');
   
@@ -216,6 +198,7 @@ $(window).resize(function()
     }
     else
     {
+      $('.fond_chat').css('height', '100%');
       $('.zone_onglet_chat').css('height', '77vh');
       $('.contenu_onglet_chat').css('height', '77vh');
   
