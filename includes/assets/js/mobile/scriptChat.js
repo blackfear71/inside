@@ -24,6 +24,7 @@ var intervalRefreshChat  = 4000;
 var intervalOldMessages  = 1000;
 var intervalRefreshUsers = 30000;
 var maximumCountMessages = 100;
+var initialHeight        = window.innerHeight;  
 
 // Au chargement du document
 $(function()
@@ -206,7 +207,7 @@ $(window).resize(function()
 
 
 
-  if ($('#message_chat').is(':focus'))
+  if (initialHeight <= window.innerHeight && $('#message_chat').is(':focus'))
   {
     $('.zone_onglet_chat').css('height', '77vh');
     $('.contenu_onglet_chat').css('height', '77vh');
