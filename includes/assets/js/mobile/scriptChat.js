@@ -5,8 +5,10 @@
 
 
 // TODO : remanier le chat web comme le mobile
-// TODO : tester la position de la saisie par rapport au clavier sur mobile
+// TODO : tester la position de la saisie par rapport au clavier sur mobile : forcer l'affichage sur mozilla pour tester, pour l'instant ça ne fonctionne pas
+//        les focusin / focusout ne conviennent pas complètement : par exemple au resize, si le focus est sur la saisie alors remettre la taille en plus du focusout
 // TODO : A la connexion le chat s'ouvre parfois ? à initialiser à false par défaut ?
+// TODO : Au changement d'orientation (paysage), ça n'est pas utilisable
 
 
 
@@ -133,8 +135,6 @@ $(function()
   {
     $('.zone_onglet_chat').css('height', '30vh');
     $('.contenu_onglet_chat').css('height', '30vh');
-    $('.zone_chat').css('top', '50%');
-    $('.zone_chat').css('transform', 'translateY(-50%)');
 
     setScrollbarDown();
   });
@@ -144,9 +144,7 @@ $(function()
   {
     $('.zone_onglet_chat').css('height', '77vh');
     $('.contenu_onglet_chat').css('height', '77vh');
-    $('.zone_chat').css('top', '50%');
-    $('.zone_chat').css('transform', 'translateY(-50%)');
-    
+
     setScrollbarDown();
   });
 });
@@ -204,6 +202,22 @@ $(window).resize(function()
 {
   // Positionnement de la fenêtre de chat en fonction du redimensionnement de la fenêtre
   initPositionChat();
+
+
+
+
+  if ($('#message_chat').is(':focus'))
+  {
+    $('.zone_onglet_chat').css('height', '77vh');
+    $('.contenu_onglet_chat').css('height', '77vh');
+
+    setScrollbarDown();
+  }
+
+
+
+
+
 });
 
 // Au changement d'orientation
