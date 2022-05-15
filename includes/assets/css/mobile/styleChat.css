@@ -54,14 +54,12 @@
 {
 	display: block;
 	height: 6vh;
-	line-height: 6vh;
 	width: 100%;
 	font-family: inside_font_light, Verdana, sans-serif;
 	color: white;
 	font-size: 2.5vh;
 	text-align: left;
 	background-color: #ff1937;
-	border-bottom: solid 0.3vh #c81932;
 	overflow: hidden;
 }
 
@@ -70,6 +68,7 @@
 	display: inline-block;
 	width: calc(50% - 5vh);
 	height: 6vh;
+	line-height: 6vh;
 	padding-left: 1vh;
 	padding-right: 1vh;
 }
@@ -98,7 +97,7 @@
 /*** Contenu onglet chat ***/
 .zone_onglet_chat
 {
-	height: 76.7vh;
+	height: 77vh;
 	width: 100%;
 	overflow-y: auto;
 	background-color: white;
@@ -107,7 +106,7 @@
 
 .contenu_onglet_chat
 {
-	height: 76.7vh;
+	height: 77vh;
 	width: 90vw;
 	padding-left: 1.5vh;
 	padding-right: 1.5vh;
