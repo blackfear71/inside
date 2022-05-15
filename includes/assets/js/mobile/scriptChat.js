@@ -131,7 +131,7 @@ $(function()
   });
 
   /*** Actions au focus ***/
-  // Diminution de la taille des messages à la saisie
+  /*// Diminution de la taille des messages à la saisie
   $(document).on('focusin', '#message_chat', function()
   {
     $('.zone_onglet_chat').css('height', '30vh');
@@ -147,7 +147,7 @@ $(function()
     $('.contenu_onglet_chat').css('height', '77vh');
 
     setScrollbarDown();
-  });
+  });*/
 });
 
 // Au chargement du document complet
@@ -207,7 +207,14 @@ $(window).resize(function()
   // Adaptation de la taille du chat au masquage du clavier
   if ($('.fond_chat').css('display') != 'none')
   {
-    if (initialHeight <= window.innerHeight && $('#message_chat').is(':focus'))
+    if (initialHeight > window.innerHeight)
+    {
+      $('.zone_onglet_chat').css('height', '30vh');
+      $('.contenu_onglet_chat').css('height', '30vh');
+  
+      setScrollbarDown();
+    }
+    else
     {
       $('.zone_onglet_chat').css('height', '77vh');
       $('.contenu_onglet_chat').css('height', '77vh');
