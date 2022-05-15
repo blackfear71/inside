@@ -149,6 +149,9 @@ $(window).on('load', function()
     
     // Initialisation de la vue du chat
     initView(cookieShowChat, cookieWindowChat);
+
+    // Adaptation du chat selon l'orientation
+    adaptChatOrientation();
   }
 
   // On lance le rafraichissement des messages toujours après l'affichage des zones
@@ -184,6 +187,45 @@ $(window).resize(function()
   initPositionChat();
 
   // Adaptation de la taille du chat à l'affichage / masquage du clavier
+  adaptChatSaisie();
+});
+
+// Au changement d'orientation
+$(window).on('orientationchange', function(e)
+{
+  // Positionnement de la fenêtre de chat en fonction de l'orientation
+  initPositionChat();
+
+  // Adaptation du chat en fonction de l'orientation
+  if (cookieShowChat == 'true')
+    adaptChatOrientation();
+});
+
+/*****************/
+/*** Fonctions ***/
+/*****************/
+// Adaptation du chat selon l'orientation
+function adaptChatOrientation()
+{
+  // Si la hauteur est inférieure ou égale à la largeur, alors on est en paysage
+  setTimeout(function()
+  {
+    if (window.innerHeight <= window.innerWidth)
+    {
+      $('.zone_onglet_chat').css('height', '30vh');
+      $('.contenu_onglet_chat').css('height', '30vh');
+    }
+    else
+    {
+      $('.zone_onglet_chat').css('height', '77vh');
+      $('.contenu_onglet_chat').css('height', '77vh');
+    }
+  }, 350);
+}
+
+// Adaptation du chat à la saisie
+function adaptChatSaisie()
+{
   if ($('.fond_chat').css('display') != 'none')
   {
     if (initialHeight > window.innerHeight)
@@ -203,17 +245,8 @@ $(window).resize(function()
       setScrollbarDown();
     }
   }
-});
+}
 
-// Au changement d'orientation
-$(window).on('orientationchange', function(e)
-{
-  initPositionChat();
-});
-
-/*****************/
-/*** Fonctions ***/
-/*****************/
 // Fonction d'affichage / masquage du chat
 function afficherMasquerChat()
 {
@@ -261,6 +294,9 @@ function afficherMasquerChat()
 
     // Lecture initiale des messages
     initMessagesChat();
+
+    // Adaptation du chat selon l'orientation
+    adaptChatOrientation();
   }
 }
 
@@ -445,18 +481,6 @@ function initView(cookieShowChat, cookieWindowChat)
 
       html += '<button type="button" id="send_message_chat" title="Envoyer" class="bouton_chat"></button>';
     html += '</form>';
-
-    // Si la hauteur est inférieure ou égale à la largeur, alors on est en paysage
-    if (window.innerHeight <= window.innerWidth)
-    {
-      $('.zone_onglet_chat').css('height', '25vh');
-      $('.contenu_onglet_chat').css('height', '25vh');
-    }
-    else
-    {
-      $('.zone_onglet_chat').css('height', '77vh');
-      $('.contenu_onglet_chat').css('height', '77vh');
-    }
   }
   else if (cookieShowChat == 'true' && cookieWindowChat == '2')
   {
