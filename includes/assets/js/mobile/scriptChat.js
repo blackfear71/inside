@@ -185,12 +185,13 @@ $(window).resize(function()
   // Positionnement de la fenêtre de chat en fonction du redimensionnement de la fenêtre
   initPositionChat();
 
-  // Adaptation de la taille du chat au masquage du clavier
+  // Adaptation de la taille du chat à l'affichage / masquage du clavier
   if ($('.fond_chat').css('display') != 'none')
   {
     if (initialHeight > window.innerHeight)
     {
-      $('.fond_chat').css('height', '40vh');
+      $('.zone_chat').css('top', '25%');
+      $('.zone_chat').css('transform', 'translateY(-50%)');
       $('.zone_onglet_chat').css('height', '30vh');
       $('.contenu_onglet_chat').css('height', '30vh');
   
@@ -198,7 +199,8 @@ $(window).resize(function()
     }
     else
     {
-      $('.fond_chat').css('height', '100%');
+      $('.zone_chat').css('top', '50%');
+      $('.zone_chat').css('transform', 'translateY(-50%)');
       $('.zone_onglet_chat').css('height', '77vh');
       $('.contenu_onglet_chat').css('height', '77vh');
   
