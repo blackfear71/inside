@@ -212,11 +212,13 @@ function adaptChatOrientation()
   {
     if (window.innerHeight <= window.innerWidth)
     {
+      $('.zone_chat').css('top', '100%');
       $('.zone_onglet_chat').css('height', '30vh');
       $('.contenu_onglet_chat').css('height', '30vh');
     }
     else
     {
+      $('.zone_chat').css('top', '50%');
       $('.zone_onglet_chat').css('height', '77vh');
       $('.contenu_onglet_chat').css('height', '77vh');
     }
