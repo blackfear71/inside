@@ -130,7 +130,7 @@ $(function()
 });
 
 // Au chargement du document complet
-$(window).on('load', function()
+$(window).on('load', function(e)
 {
   // Initialisation des cookies
   initCookies();
@@ -149,6 +149,12 @@ $(window).on('load', function()
     
     // Initialisation de la vue du chat
     initView(cookieShowChat, cookieWindowChat);
+
+    if (e.orientation == 'landscape')
+    {
+      $('.zone_onglet_chat').css('height', '25vh');
+      $('.contenu_onglet_chat').css('height', '25vh');
+    }
   }
 
   // On lance le rafraichissement des messages toujours après l'affichage des zones
