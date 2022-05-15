@@ -130,7 +130,7 @@ $(function()
 });
 
 // Au chargement du document complet
-$(window).on('load', function(e)
+$(window).on('load', function()
 {
   // Initialisation des cookies
   initCookies();
@@ -149,12 +149,6 @@ $(window).on('load', function(e)
     
     // Initialisation de la vue du chat
     initView(cookieShowChat, cookieWindowChat);
-
-    if (e.orientation == 'landscape')
-    {
-      $('.zone_onglet_chat').css('height', '25vh');
-      $('.contenu_onglet_chat').css('height', '25vh');
-    }
   }
 
   // On lance le rafraichissement des messages toujours après l'affichage des zones
@@ -451,6 +445,18 @@ function initView(cookieShowChat, cookieWindowChat)
 
       html += '<button type="button" id="send_message_chat" title="Envoyer" class="bouton_chat"></button>';
     html += '</form>';
+
+    // Si la hauteur est inférieure ou égale à la largeur, alors on est en paysage
+    if (window.innerHeight <= window.innerWidth)
+    {
+      $('.zone_onglet_chat').css('height', '25vh');
+      $('.contenu_onglet_chat').css('height', '25vh');
+    }
+    else
+    {
+      $('.zone_onglet_chat').css('height', '77vh');
+      $('.contenu_onglet_chat').css('height', '77vh');
+    }
   }
   else if (cookieShowChat == 'true' && cookieWindowChat == '2')
   {
