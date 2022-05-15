@@ -1,15 +1,6 @@
-/***************/
-/*** Actions ***/
-/***************/
-
-
-
-// TODO : Remanier le chat web comme le mobile
-
-
-
-
-
+/***********************/
+/*** Initialisations ***/
+/***********************/
 // Initialisations variables globales
 var refreshChat;
 var refreshUsers;
@@ -22,6 +13,9 @@ var intervalRefreshUsers = 30000;
 var maximumCountMessages = 100;
 var initialHeight        = window.innerHeight;  
 
+/***************/
+/*** Actions ***/
+/***************/
 // Au chargement du document
 $(function()
 {
@@ -60,7 +54,7 @@ $(function()
   $('#fenetres_chat').on('click', '#send_message_chat', envoyerMessage);
 
   // Afficher/masquer la fenêtre d'insertion de smileys au clic sur le bouton ou en dehors
-  $('#fenetres_chat').on('click', '#insert_smiley, #scroll_conversation, #message_chat, #send_message_chat', function()
+  $('#fenetres_chat').on('click', '#insert_smiley', function()
   {
     afficherMasquerInsertionSmiley(false);
   });
@@ -856,50 +850,6 @@ function formatDatesChat(dateToFormat)
   return html;
 }
 
-// Formate une date pour affichage (version texte)
-function formatDateForDisplayChat(date)
-{
-  var dateFormatted;
-
-  if (date.length == 8)
-  {
-    // Liste des jours et mois
-    var days   = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
-    var months = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
-
-    // Récupération de la date
-    var jour  = date.substr(6, 2);
-    var mois  = date.substr(4, 2) - 1;
-    var annee = date.substr(0, 4);
-
-    // Conversion au format JS
-    var jsDate = new Date(annee, mois, jour);
-
-    // Formatage
-    dateFormatted = days[jsDate.getDay()] + ' ' + jour + ' ' + months[jsDate.getMonth()] + ' ' + annee;
-  }
-  else
-    dateFormatted = date;
-
-  // Retour
-  return dateFormatted;
-}
-
-// Formate une heure pour affichage
-function formatTimeForDisplayChat(time)
-{
-  var timeFormatted;
-
-  // Formatage de l'heure
-  if (time.length == 6 || time.length == 4)
-    timeFormatted = time.substr(0, 2) + ':' + time.substr(2, 2);
-  else
-    timeFormatted = time;
-
-  // Retour
-  return timeFormatted;
-}
-
 // Fonction de rafraichissement des utilisateurs
 function rafraichirUtilisateurs()
 {
@@ -990,7 +940,7 @@ function envoyerMessage()
 
   // Envoi du message si renseignée et non vide
   if (!$.isEmptyObject($.trim(message)) && !$.isEmptyObject(identifiant))
-    $.post('/inside/includes/common/chat/chat.php?action=doSubmit', {'identifiant': identifiant, 'equipe': teamUser, 'message': message}, afficheConversation);
+    $.post('/inside/includes/common/chat/chat.php?action=doSubmit', {'identifiant': identifiant, 'equipe': teamUser, 'message': message}, afficherConversation);
   else
   {
     $('#message_chat').val('');
@@ -1022,7 +972,7 @@ function afficherMasquerInsertionSmiley(forceClose)
 }
 
 // Fonction de rafraichissement après saisie message et repositionnement zone de saisie
-function afficheConversation()
+function afficherConversation()
 {
   // On met à jour la conversation après un petit temps
   rafraichirConversation(true);

@@ -1135,6 +1135,50 @@ function formatDateForDisplayMobile(date)
   return dateFormatted;
 }
 
+// Formate une date pour affichage (version texte)
+function formatDateForDisplayChat(date)
+{
+  var dateFormatted;
+
+  if (date.length == 8)
+  {
+    // Liste des jours et mois
+    var days   = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
+    var months = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
+
+    // Récupération de la date
+    var jour  = date.substr(6, 2);
+    var mois  = date.substr(4, 2) - 1;
+    var annee = date.substr(0, 4);
+
+    // Conversion au format JS
+    var jsDate = new Date(annee, mois, jour);
+
+    // Formatage
+    dateFormatted = days[jsDate.getDay()] + ' ' + jour + ' ' + months[jsDate.getMonth()] + ' ' + annee;
+  }
+  else
+    dateFormatted = date;
+
+  // Retour
+  return dateFormatted;
+}
+
+// Formate une heure pour affichage
+function formatTimeForDisplayChat(time)
+{
+  var timeFormatted;
+
+  // Formatage de l'heure
+  if (time.length == 6 || time.length == 4)
+    timeFormatted = time.substr(0, 2) + ':' + time.substr(2, 2);
+  else
+    timeFormatted = time;
+
+  // Retour
+  return timeFormatted;
+}
+
 // Formate un montant pour affichage
 function formatAmountForDisplay(amount, withCurrency)
 {
