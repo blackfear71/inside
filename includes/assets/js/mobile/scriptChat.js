@@ -133,6 +133,8 @@ $(function()
   {
     $('.zone_onglet_chat').css('height', '30vh');
     $('.contenu_onglet_chat').css('height', '30vh');
+    $('.zone_chat').css('top', '50%');
+    $('.zone_chat').css('transform', 'translateY(-50%)');
 
     setScrollbarDown();
   });
@@ -142,7 +144,9 @@ $(function()
   {
     $('.zone_onglet_chat').css('height', '77vh');
     $('.contenu_onglet_chat').css('height', '77vh');
-
+    $('.zone_chat').css('top', '50%');
+    $('.zone_chat').css('transform', 'translateY(-50%)');
+    
     setScrollbarDown();
   });
 });
