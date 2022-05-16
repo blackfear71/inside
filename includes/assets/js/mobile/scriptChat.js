@@ -11,7 +11,6 @@ var intervalRefreshChat  = 4000;
 var intervalOldMessages  = 1000;
 var intervalRefreshUsers = 30000;
 var maximumCountMessages = 100;
-var initialHeight        = window.innerHeight;  
 
 /***************/
 /*** Actions ***/
@@ -180,27 +179,6 @@ $(window).on('orientationchange', function(e)
 /*****************/
 /*** Fonctions ***/
 /*****************/
-// Adaptation du chat selon l'orientation
-function adaptChatOrientation()
-{
-  // Si la hauteur est inférieure ou égale à la largeur, alors on est en paysage
-  setTimeout(function()
-  {
-    if (window.innerHeight <= window.innerWidth)
-    {
-      $('.zone_chat').css('top', '100%');
-      $('.zone_onglet_chat').css('height', '25vh');
-      $('.contenu_onglet_chat').css('height', '25vh');
-    }
-    else
-    {
-      $('.zone_chat').css('top', '50%');
-      $('.zone_onglet_chat').css('height', '77vh');
-      $('.contenu_onglet_chat').css('height', '77vh');
-    }
-  }, 350);
-}
-
 // Adaptation du chat à la saisie
 function adaptChatSaisie()
 {
@@ -234,6 +212,27 @@ function adaptChatSaisie()
       setScrollbarDown();
     }
   }
+}
+
+// Adaptation du chat selon l'orientation
+function adaptChatOrientation()
+{
+  // Si la hauteur est inférieure ou égale à la largeur, alors on est en paysage
+  setTimeout(function()
+  {
+    if (window.innerHeight <= window.innerWidth)
+    {
+      $('.zone_chat').css('top', '100%');
+      $('.zone_onglet_chat').css('height', '25vh');
+      $('.contenu_onglet_chat').css('height', '25vh');
+    }
+    else
+    {
+      $('.zone_chat').css('top', '50%');
+      $('.zone_onglet_chat').css('height', '77vh');
+      $('.contenu_onglet_chat').css('height', '77vh');
+    }
+  }, 350);
 }
 
 // Fonction d'affichage / masquage du chat

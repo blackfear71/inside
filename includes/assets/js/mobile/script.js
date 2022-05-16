@@ -1,3 +1,9 @@
+/***********************/
+/*** Initialisations ***/
+/***********************/
+// Initialisations variables globales
+var initialHeight = window.innerHeight;
+
 /***************/
 /*** Actions ***/
 /***************/
@@ -213,14 +219,24 @@ $(window).on('load', function()
   endLoading();
 });
 
-// Remise en place Celsius au changement d'orientation
+// Au redimensionnement de la fenêtre
+$(window).resize(function()
+{
+  // Adaptation de la taille d'une saisie à l'affichage / masquage du clavier
+  adaptSaisieClavier();
+});
+
+// Au changement d'orientation
 $(window).on('orientationchange', function(e)
 {
   // Forçage taille écran (viewport)
   if (e.orientation == 'landscape')
     fixViewport();
 
-  // Positionnement de Celsius (avec un délai pour éviter les erreurs)
+  // Adaptation de la taille d'une saisie au changement d'orientation
+  adaptSaisieOrientation();
+
+  // Réinitialisation positionnement de Celsius (avec un délai pour éviter les erreurs)
   setTimeout(function()
   {
     if ($('.celsius').length)
@@ -255,6 +271,76 @@ function fixViewport()
   var viewport = document.querySelector('meta[name=viewport]');
 
   viewport.setAttribute('content', 'height=' + viewHeight + 'px, width=' + viewWidth + 'px, initial-scale=1.0, minimum-scale=1, maximum-scale=1.0, user-scalable=no');
+}
+
+// Adaptation de la saisie à l'affichage du clavier
+function adaptSaisieClavier()
+{
+  if ($('.fond_saisie').css('display') != 'none')
+  {
+    if (initialHeight > window.innerHeight)
+    {
+      if ($('.form_saisie').length)
+        $('.form_saisie').css('top', '100%');
+
+      if ($('.div_saisie').length)
+        $('.div_saisie').css('top', '100%');
+
+      $('.zone_contenu_saisie').css('max-height', '25vh');
+    }
+    else
+    {
+      if (window.innerHeight <= window.innerWidth)
+      {
+        if ($('.form_saisie').length)
+        $('.form_saisie').css('top', '100%');
+
+        if ($('.div_saisie').length)
+          $('.div_saisie').css('top', '100%');
+          
+        $('.zone_contenu_saisie').css('height', '25vh');
+      }
+      else
+      {
+        if ($('.form_saisie').length)
+        $('.form_saisie').css('top', '50%');
+
+        if ($('.div_saisie').length)
+          $('.div_saisie').css('top', '50%');
+
+        $('.zone_contenu_saisie').css('height', '65.7vh');
+      }
+    }
+  }
+}
+
+// Adaptation de la saisie selon l'orientation
+function adaptSaisieOrientation()
+{
+  // Si la hauteur est inférieure ou égale à la largeur, alors on est en paysage
+  setTimeout(function()
+  {
+    if (window.innerHeight <= window.innerWidth)
+    {
+      if ($('.form_saisie').length)
+        $('.form_saisie').css('top', '100%');
+
+      if ($('.div_saisie').length)
+        $('.div_saisie').css('top', '100%');
+
+      $('.zone_contenu_saisie').css('height', '25vh');
+    }
+    else
+    {
+      if ($('.form_saisie').length)
+      $('.form_saisie').css('top', '50%');
+
+      if ($('.div_saisie').length)
+        $('.div_saisie').css('top', '50%');
+        
+      $('.zone_contenu_saisie').css('height', '65.7vh');
+    }
+  }, 350);
 }
 
 // Changement thème
