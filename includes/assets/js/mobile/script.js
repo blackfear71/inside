@@ -276,53 +276,55 @@ function fixViewport()
 // Adaptation de la saisie à l'affichage du clavier
 function adaptSaisieClavier()
 {
+  // Vérification saisie affichée
   var saisieAffichee = false;
+  var saisie;
 
   $.each($('.fond_saisie'), function()
   {
-    if ($(this).css('display') != 'none')
+    if ($(this).css('display') != 'none' && ($(this).find('.form_saisie').length || $(this).find('.div_saisie').length))
     {
       saisieAffichee = true;
+      saisie         = $(this);
+
       return false;
     }
   });
 
+  // On adapte la saisie concernée
   if (saisieAffichee)
   {
-    console.log(initialHeight);
-    console.log(window.innerHeight);
-
     if (initialHeight > window.innerHeight)
     {
-      if ($('.form_saisie').length)
-        $('.form_saisie').css('top', '100%');
+      if (saisie.find('.form_saisie').length)
+        $('.form_saisie').css('top', '25%');
 
-      if ($('.div_saisie').length)
-        $('.div_saisie').css('top', '100%');
+      if (saisie.find('.div_saisie').length)
+        $('.div_saisie').css('top', '25%');
 
-      $('.zone_contenu_saisie').css('max-height', '25vh');
+      saisie.find('.zone_contenu_saisie').css('max-height', '25vh');
     }
     else
     {
       if (window.innerHeight <= window.innerWidth)
       {
         if ($('.form_saisie').length)
-        $('.form_saisie').css('top', '100%');
+          saisie.find('.form_saisie').css('top', '25%');
 
-        if ($('.div_saisie').length)
-          $('.div_saisie').css('top', '100%');
+        if (saisie.find('.div_saisie').length)
+          saisie.find('.div_saisie').css('top', '25%');
           
-        $('.zone_contenu_saisie').css('max-height', '25vh');
+        saisie.find('.zone_contenu_saisie').css('max-height', '25vh');
       }
       else
       {
-        if ($('.form_saisie').length)
-        $('.form_saisie').css('top', '50%');
+        if (saisie.find('.form_saisie').length)
+          saisie.find('.form_saisie').css('top', '50%');
 
-        if ($('.div_saisie').length)
-          $('.div_saisie').css('top', '50%');
+        if (saisie.find('.div_saisie').length)
+          saisie.find('.div_saisie').css('top', '50%');
 
-        $('.zone_contenu_saisie').css('max-height', '65.7vh');
+        saisie.find('.zone_contenu_saisie').css('max-height', '65.7vh');
       }
     }
   }
@@ -331,28 +333,43 @@ function adaptSaisieClavier()
 // Adaptation de la saisie selon l'orientation
 function adaptSaisieOrientation()
 {
+  // Vérification saisie affichée
+  var saisieAffichee = false;
+  var saisie;
+
+  $.each($('.fond_saisie'), function()
+  {
+    if ($(this).css('display') != 'none' && ($(this).find('.form_saisie').length || $(this).find('.div_saisie').length))
+    {
+      saisieAffichee = true;
+      saisie         = $(this);
+
+      return false;
+    }
+  });
+
   // Si la hauteur est inférieure ou égale à la largeur, alors on est en paysage
   setTimeout(function()
   {
     if (window.innerHeight <= window.innerWidth)
     {
-      if ($('.form_saisie').length)
-        $('.form_saisie').css('top', '100%');
+      if (saisie.find('.form_saisie').length)
+        saisie.find('.form_saisie').css('top', '100%');
 
-      if ($('.div_saisie').length)
-        $('.div_saisie').css('top', '100%');
+      if (saisie.find('.div_saisie').length)
+        saisie.find('.div_saisie').css('top', '100%');
 
-      $('.zone_contenu_saisie').css('height', '25vh');
+      saisie.find('.zone_contenu_saisie').css('height', '25vh');
     }
     else
     {
-      if ($('.form_saisie').length)
-      $('.form_saisie').css('top', '50%');
+      if (saisie.find('.form_saisie').length)
+        saisie.find('.form_saisie').css('top', '50%');
 
-      if ($('.div_saisie').length)
-        $('.div_saisie').css('top', '50%');
+      if (saisie.find('.div_saisie').length)
+        saisie.find('.div_saisie').css('top', '50%');
         
-      $('.zone_contenu_saisie').css('height', '65.7vh');
+      saisie.find('.zone_contenu_saisie').css('height', '65.7vh');
     }
   }, 350);
 }
