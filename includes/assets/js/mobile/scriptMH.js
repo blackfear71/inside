@@ -20,7 +20,11 @@ $(function()
   // Ouvre ou ferme la zone de saisie d'une dépense
   $('#afficherSaisieFilm, #fermerSaisieFilm').click(function()
   {
+    // Affichage de la saisie
     afficherMasquerIdWithDelay('zone_saisie_film');
+
+    // Adaptation de la saisie selon l'orientation
+    adaptSaisieOrientation();
   });
 
   // Affiche la zone de modification d'un film
