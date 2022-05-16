@@ -295,37 +295,13 @@ function adaptSaisieClavier()
   if (saisieAffichee)
   {
     if (initialHeight > window.innerHeight)
-    {
-      // if (saisie.find('.form_saisie').length)
-      //   $('.form_saisie').css('top', '25%');
-
-      // if (saisie.find('.div_saisie').length)
-      //   $('.div_saisie').css('top', '25%');
-
       saisie.find('.zone_contenu_saisie').css('max-height', '25vh');
-    }
     else
     {
       if (window.innerHeight <= window.innerWidth)
-      {
-        // if ($('.form_saisie').length)
-        //   saisie.find('.form_saisie').css('top', '25%');
-
-        // if (saisie.find('.div_saisie').length)
-        //   saisie.find('.div_saisie').css('top', '25%');
-          
         saisie.find('.zone_contenu_saisie').css('max-height', '25vh');
-      }
       else
-      {
-        // if (saisie.find('.form_saisie').length)
-        //   saisie.find('.form_saisie').css('top', '50%');
-
-        // if (saisie.find('.div_saisie').length)
-        //   saisie.find('.div_saisie').css('top', '50%');
-
         saisie.find('.zone_contenu_saisie').css('max-height', '65.7vh');
-      }
     }
   }
 }
@@ -348,30 +324,18 @@ function adaptSaisieOrientation()
     }
   });
 
-  // Si la hauteur est inférieure ou égale à la largeur, alors on est en paysage
-  setTimeout(function()
+  // On adapte la saisie concernée
+  if (saisieAffichee)
   {
-    if (window.innerHeight <= window.innerWidth)
+    // Si la hauteur est inférieure ou égale à la largeur, alors on est en paysage
+    setTimeout(function()
     {
-      if (saisie.find('.form_saisie').length)
-        saisie.find('.form_saisie').css('top', '100%');
-
-      if (saisie.find('.div_saisie').length)
-        saisie.find('.div_saisie').css('top', '100%');
-
-      saisie.find('.zone_contenu_saisie').css('height', '25vh');
-    }
-    else
-    {
-      if (saisie.find('.form_saisie').length)
-        saisie.find('.form_saisie').css('top', '50%');
-
-      if (saisie.find('.div_saisie').length)
-        saisie.find('.div_saisie').css('top', '50%');
-        
-      saisie.find('.zone_contenu_saisie').css('height', '65.7vh');
-    }
-  }, 350);
+      if (window.innerHeight <= window.innerWidth)
+        saisie.find('.zone_contenu_saisie').css('height', '25vh');
+      else
+        saisie.find('.zone_contenu_saisie').css('height', '65.7vh');
+    }, 350);
+  }
 }
 
 // Changement thème
