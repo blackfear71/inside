@@ -331,9 +331,9 @@ function adaptSaisieOrientation()
     setTimeout(function()
     {
       if (window.innerHeight <= window.innerWidth)
-        saisie.find('.zone_contenu_saisie').css('height', '25vh');
+        saisie.find('.zone_contenu_saisie').css('max-height', '25vh');
       else
-        saisie.find('.zone_contenu_saisie').css('height', '65.7vh');
+        saisie.find('.zone_contenu_saisie').css('max-height', '65.7vh');
     }, 350);
   }
 }
@@ -850,7 +850,13 @@ function afficherMasquerIdNoDelay(id)
 function afficherMasquerIdWithDelay(id)
 {
   if ($('#' + id).css('display') == 'none')
+  {
+    // Affichage de la zone
     $('#' + id).fadeIn(200);
+
+    // Dans le cas d'une saisie, adaptation selon l'orientation
+    adaptSaisieOrientation();
+  }
   else
     $('#' + id).fadeOut(200);
 }
