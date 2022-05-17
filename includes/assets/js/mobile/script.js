@@ -295,13 +295,28 @@ function adaptSaisieClavier()
   if (saisieAffichee)
   {
     if (initialHeight > window.innerHeight)
-      saisie.find('.zone_contenu_saisie').css('max-height', '25vh');
+    {
+      if (saisie.find('.zone_contenu_saisie').length)
+        saisie.find('.zone_contenu_saisie').css('max-height', '25vh');
+      else if (saisie.find('.zone_contenu_saisie_live').length)
+        saisie.find('.zone_contenu_saisie_live').css('max-height', '20vh');
+    }
     else
     {
-      if (window.innerHeight <= window.innerWidth)
-        saisie.find('.zone_contenu_saisie').css('max-height', '25vh');
-      else
-        saisie.find('.zone_contenu_saisie').css('max-height', '65.7vh');
+      if (saisie.find('.zone_contenu_saisie').length)
+      {
+        if (window.innerHeight <= window.innerWidth)
+          saisie.find('.zone_contenu_saisie').css('max-height', '25vh');
+        else
+          saisie.find('.zone_contenu_saisie').css('max-height', '65.7vh');
+      }
+      else if (saisie.find('.zone_contenu_saisie_live').length)
+      {
+        if (window.innerHeight <= window.innerWidth)
+          saisie.find('.zone_contenu_saisie_live').css('max-height', '20vh');
+        else
+          saisie.find('.zone_contenu_saisie_live').css('max-height', '59.7vh');
+      }
     }
   }
 }
@@ -330,10 +345,20 @@ function adaptSaisieOrientation()
     // Si la hauteur est inférieure ou égale à la largeur, alors on est en paysage
     setTimeout(function()
     {
-      if (window.innerHeight <= window.innerWidth)
-        saisie.find('.zone_contenu_saisie').css('max-height', '25vh');
-      else
-        saisie.find('.zone_contenu_saisie').css('max-height', '65.7vh');
+      if (saisie.find('.zone_contenu_saisie').length)
+      {
+        if (window.innerHeight <= window.innerWidth)
+          saisie.find('.zone_contenu_saisie').css('max-height', '25vh');
+        else
+          saisie.find('.zone_contenu_saisie').css('max-height', '65.7vh');
+      }
+      else if (saisie.find('.zone_contenu_saisie_live').length)
+      {
+        if (window.innerHeight <= window.innerWidth)
+          saisie.find('.zone_contenu_saisie_live').css('max-height', '20vh');
+        else
+          saisie.find('.zone_contenu_saisie_live').css('max-height', '59.7vh');
+      }
     }, 350);
   }
 }
