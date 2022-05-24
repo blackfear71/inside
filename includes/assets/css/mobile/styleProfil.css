@@ -763,7 +763,7 @@
 	display: block;
 	width: calc(100% - 4vh);
 	background-color: white;
-	padding: 2vh 2vh 1vh 2vh;
+	padding: 2vh 2vh 0 2vh;
 }
 
 .medaille_classement_zoom
@@ -779,6 +779,7 @@
 {
 	display: inline-block;
 	width: calc(100% - 5vh);
+	margin-bottom: 1vh;
 }
 
 .zone_utilisateur_classement_zoom
