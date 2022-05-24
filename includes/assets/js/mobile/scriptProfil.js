@@ -166,10 +166,15 @@ function showSuccess(id)
                 html += '<div class="zone_classement_medaille_zoom">';
               }
 
-              // Avatar
-              var avatarFormatted = formatAvatar(ranking.avatar, ranking.pseudo, 2, 'avatar');
+              html += '<div class="zone_utilisateur_classement_zoom">';
+                // Avatar
+                var avatarFormatted = formatAvatar(ranking.avatar, ranking.pseudo, 2, 'avatar');
 
-              html += '<img src="' + avatarFormatted['path'] + '" alt="' + avatarFormatted['alt'] + '" title="' + avatarFormatted['title'] + '" class="avatar_classement_zoom" />';
+                html += '<img src="' + avatarFormatted['path'] + '" alt="' + avatarFormatted['alt'] + '" title="' + avatarFormatted['title'] + '" class="avatar_classement_zoom" />';
+                
+                // Pseudo
+                html += '<div class="pseudo_classement_zoom">' + formatString(ranking.pseudo, 20) + '</div>';
+              html += '</div>';
 
               // Séparation et fin de la zone
               if (success.classement[key + 1] == undefined || ranking.rank != success.classement[key + 1].rank)

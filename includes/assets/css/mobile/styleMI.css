@@ -263,16 +263,32 @@
 	margin-left: 6vh;
 }
 
+.zone_utilisateur_classement
+{
+	display: block;
+	margin-bottom: 1vh;
+}
+
 .avatar_classement
 {
 	display: inline-block;
 	width: 5vh;
 	vertical-align: middle;
 	margin-right: 1vh;
-	margin-bottom: 1vh;
 	border-radius: 50%;
 	background-color: #262626;
 	box-shadow: 0 0 0.5vh #7c7c7c;
+}
+
+.pseudo_classement
+{
+	display: inline-block;
+	width: calc(100% - 6vh);
+	vertical-align: middle;
+	font-family: inside_font_light, Verdana, sans-serif;
+	color: #262626;
+	word-break: break-word;
+	text-align: justify;
 }
 
 /*** Informations ***/

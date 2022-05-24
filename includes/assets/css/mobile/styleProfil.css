@@ -763,7 +763,7 @@
 	display: block;
 	width: calc(100% - 4vh);
 	background-color: white;
-	padding: 2vh 2vh 0 2vh;
+	padding: 2vh 2vh 1vh 2vh;
 }
 
 .medaille_classement_zoom
@@ -781,6 +781,12 @@
 	width: calc(100% - 5vh);
 }
 
+.zone_utilisateur_classement_zoom
+{
+	display: block;
+	margin-bottom: 1vh;
+}
+
 .avatar_classement_zoom
 {
 	display: inline-block;
@@ -789,10 +795,20 @@
 	vertical-align: middle;
 	margin-left: 1vh;
 	margin-right: 1vh;
-	margin-bottom: 2vh;
 	border-radius: 50%;
 	background-color: #262626;
 	box-shadow: 0 0 0.5vh #7c7c7c;
+}
+
+.pseudo_classement_zoom
+{
+	display: inline-block;
+	width: calc(100% - 7vh);
+	vertical-align: middle;
+	font-family: inside_font_light, Verdana, sans-serif;
+	color: #262626;
+	word-break: break-word;
+	text-align: justify;
 }
 
 .separation_classement_zoom

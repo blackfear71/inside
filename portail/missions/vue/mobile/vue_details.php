@@ -216,10 +216,15 @@
                           echo '<div class="zone_medals">';
                         }
 
-                        // Avatar
-                        $avatarFormatted = formatAvatar($rankUser->getAvatar(), $rankUser->getPseudo(), 2, 'avatar');
+                        echo '<div class="zone_utilisateur_classement">';
+                          // Avatar
+                          $avatarFormatted = formatAvatar($rankUser->getAvatar(), $rankUser->getPseudo(), 2, 'avatar');
 
-                        echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_classement" />';
+                          echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_classement" />';
+
+                          // Pseudo
+                          echo '<div class="pseudo_classement">' . formatString($rankUser->getPseudo(), 20) . '</div>';
+                        echo '</div>';
 
                         // Fin zone gagnants si moins de 3 médailles présentes
                         if ($rank <= 3 AND $finGagnants == false AND !isset($ranking[$keyRank + 1]))
