@@ -375,7 +375,7 @@
             $user['pseudo'] = physiquePseudoUser($user['identifiant']);
 
             // Total de la mission
-            $user['total'] = physiqueTotalUser($mission->getId(), $user['identifiant'], $user['equipe']);
+            $user['total'] = physiqueTotalUser($mission->getId(), $user['equipe'], $user['identifiant']);
 
             // Récupération du tri sur avancement puis identifiant
             $triTotal[]       = $user['total'];

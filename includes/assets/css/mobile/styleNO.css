@@ -7,7 +7,7 @@
 {
 	display: inline-block;
 	vertical-align: middle;
-	width: calc(50% - 2%);
+	width: calc(50% - 1vh);
 	height: 8.5vh;
 	margin-bottom: 2vh;
 	text-align: center;
@@ -21,7 +21,7 @@
 
 .zone_nombre_margin
 {
-	margin-right: 4%;
+	margin-right: 2vh;
 }
 
 .nombre_notifications

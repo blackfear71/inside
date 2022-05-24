@@ -1,3 +1,9 @@
+/***********************/
+/*** Initialisations ***/
+/***********************/
+// Initialisations variables globales
+var initialHeight = window.innerHeight;
+
 /***************/
 /*** Actions ***/
 /***************/
@@ -213,14 +219,24 @@ $(window).on('load', function()
   endLoading();
 });
 
-// Remise en place Celsius au changement d'orientation
+// Au redimensionnement de la fenêtre
+$(window).resize(function()
+{
+  // Adaptation de la taille d'une saisie à l'affichage / masquage du clavier
+  adaptSaisieClavier();
+});
+
+// Au changement d'orientation
 $(window).on('orientationchange', function(e)
 {
   // Forçage taille écran (viewport)
   if (e.orientation == 'landscape')
     fixViewport();
 
-  // Positionnement de Celsius (avec un délai pour éviter les erreurs)
+  // Adaptation de la taille d'une saisie au changement d'orientation
+  adaptSaisieOrientation();
+
+  // Réinitialisation positionnement de Celsius (avec un délai pour éviter les erreurs)
   setTimeout(function()
   {
     if ($('.celsius').length)
@@ -255,6 +271,96 @@ function fixViewport()
   var viewport = document.querySelector('meta[name=viewport]');
 
   viewport.setAttribute('content', 'height=' + viewHeight + 'px, width=' + viewWidth + 'px, initial-scale=1.0, minimum-scale=1, maximum-scale=1.0, user-scalable=no');
+}
+
+// Adaptation de la saisie à l'affichage du clavier
+function adaptSaisieClavier()
+{
+  // Vérification saisie affichée
+  var saisieAffichee = false;
+  var saisie;
+
+  $.each($('.fond_saisie'), function()
+  {
+    if ($(this).css('display') != 'none' && ($(this).find('.form_saisie').length || $(this).find('.div_saisie').length))
+    {
+      saisieAffichee = true;
+      saisie         = $(this);
+
+      return false;
+    }
+  });
+
+  // On adapte la saisie concernée
+  if (saisieAffichee)
+  {
+    if (initialHeight > window.innerHeight)
+    {
+      if (saisie.find('.zone_contenu_saisie').length)
+        saisie.find('.zone_contenu_saisie').css('max-height', '25vh');
+      else if (saisie.find('.zone_contenu_saisie_live').length)
+        saisie.find('.zone_contenu_saisie_live').css('max-height', '20vh');
+    }
+    else
+    {
+      if (saisie.find('.zone_contenu_saisie').length)
+      {
+        if (window.innerHeight <= window.innerWidth)
+          saisie.find('.zone_contenu_saisie').css('max-height', '25vh');
+        else
+          saisie.find('.zone_contenu_saisie').css('max-height', '65.7vh');
+      }
+      else if (saisie.find('.zone_contenu_saisie_live').length)
+      {
+        if (window.innerHeight <= window.innerWidth)
+          saisie.find('.zone_contenu_saisie_live').css('max-height', '20vh');
+        else
+          saisie.find('.zone_contenu_saisie_live').css('max-height', '59.7vh');
+      }
+    }
+  }
+}
+
+// Adaptation de la saisie selon l'orientation
+function adaptSaisieOrientation()
+{
+  // Vérification saisie affichée
+  var saisieAffichee = false;
+  var saisie;
+
+  $.each($('.fond_saisie'), function()
+  {
+    if ($(this).css('display') != 'none' && ($(this).find('.form_saisie').length || $(this).find('.div_saisie').length))
+    {
+      saisieAffichee = true;
+      saisie         = $(this);
+
+      return false;
+    }
+  });
+
+  // On adapte la saisie concernée
+  if (saisieAffichee)
+  {
+    // Si la hauteur est inférieure ou égale à la largeur, alors on est en paysage
+    setTimeout(function()
+    {
+      if (saisie.find('.zone_contenu_saisie').length)
+      {
+        if (window.innerHeight <= window.innerWidth)
+          saisie.find('.zone_contenu_saisie').css('max-height', '25vh');
+        else
+          saisie.find('.zone_contenu_saisie').css('max-height', '65.7vh');
+      }
+      else if (saisie.find('.zone_contenu_saisie_live').length)
+      {
+        if (window.innerHeight <= window.innerWidth)
+          saisie.find('.zone_contenu_saisie_live').css('max-height', '20vh');
+        else
+          saisie.find('.zone_contenu_saisie_live').css('max-height', '59.7vh');
+      }
+    }, 350);
+  }
 }
 
 // Changement thème
@@ -769,7 +875,13 @@ function afficherMasquerIdNoDelay(id)
 function afficherMasquerIdWithDelay(id)
 {
   if ($('#' + id).css('display') == 'none')
+  {
+    // Affichage de la zone
     $('#' + id).fadeIn(200);
+
+    // Dans le cas d'une saisie, adaptation selon l'orientation
+    adaptSaisieOrientation();
+  }
   else
     $('#' + id).fadeOut(200);
 }
