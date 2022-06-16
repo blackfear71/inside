@@ -59,7 +59,7 @@ $(function()
   // Insertion smiley au clic
   $('#fenetres_chat').on('click', '.click_smiley', function()
   {
-    insertSmiley($(this));
+    insertSmileyChat($(this));
   });
   
   /*** Actions au survol ***/
@@ -1014,7 +1014,7 @@ function changeSmileys(text)
 }
 
 // Insère un smiley dans la zone de saisie
-function insertSmiley(object)
+function insertSmileyChat(object)
 {
   var transco =
   {

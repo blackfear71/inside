@@ -130,7 +130,7 @@ $(function()
     var idComment = idSmiley[idSmiley.length - 1];
     var smiley    = idSmiley[idSmiley.length - 2];
 
-    insertSmiley(smiley, 'textarea_comment_' + idComment);
+    insertSmileyCommentaires(smiley, 'textarea_comment_' + idComment);
   });
 
   /*** Calendriers ***/
@@ -350,7 +350,7 @@ function afficherSaisiePreference(titre, stars, view, year, idFilm)
 }
 
 // Insère un smiley dans la zone de saisie
-function insertSmiley(smiley, id)
+function insertSmileyCommentaires(smiley, id)
 {
   var chars = '';
 
