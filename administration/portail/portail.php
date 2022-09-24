@@ -30,13 +30,14 @@
       $alerteVacances  = getAlerteVacances();
       $alerteCalendars = getAlerteCalendars();
       $alerteAnnexes   = getAlerteAnnexes();
+      $alerteCron      = getAlerteCron();
 
       // Récupération du nombre de bugs et évolutions
 			$nombreBugs  = getNombreBugs();
 			$nombreEvols = getNombreEvols();
 
       // Création du portail administrateur
-      $portail = getPortail($alerteEquipes, $alerteUsers, $alerteFilms, $alerteVacances, $alerteCalendars, $alerteAnnexes, $nombreBugs, $nombreEvols);
+      $portail = getPortail($alerteEquipes, $alerteUsers, $alerteFilms, $alerteVacances, $alerteCalendars, $alerteAnnexes, $alerteCron, $nombreBugs, $nombreEvols);
       break;
 
     case 'doExtract':
