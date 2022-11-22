@@ -7,6 +7,7 @@
   - Ajout de calendrier
   - Ajout d'annexe
   **************************/
+  ini_set('display_errors', 1);	
 
   // Fonctions communes
   include_once('../../includes/functions/metier_commun.php');
@@ -69,7 +70,7 @@
 
       // Insertion de l'image dans un dossier temporaire
       if (!empty($nomImage))
-        insertImageCalendrier($_POST, $_FILES, $nomImage);
+        insertImageCalendrier($_FILES, $nomImage);
       break;
 
     case 'doGenererAnnexe':
@@ -78,7 +79,7 @@
 
       // Insertion de l'image dans un dossier temporaire
       if (!empty($nomImage))
-        insertImageAnnexe($_POST, $_FILES, $nomImage);
+        insertImageAnnexe($_FILES, $nomImage);
       break;
 
     case 'doSauvegarder':
@@ -157,7 +158,7 @@
       break;
 
     case 'doGenererAnnexe':
-      header('location: calendars_generator.php?action=goConsulter&anchor=scrollGenerator');
+      //header('location: calendars_generator.php?action=goConsulter&anchor=scrollGenerator');
       break;
 
     case 'goConsulter':

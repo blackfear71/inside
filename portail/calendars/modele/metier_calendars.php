@@ -511,7 +511,7 @@
 
   // METIER : Insertion de l'image dans un dossier temporaire
   // RETOUR : Aucun
-  function insertImageCalendrier($post, $files, $nom)
+  function insertImageCalendrier($files, $nom)
   {
     // Initialisations
     $control_ok = true;
@@ -540,11 +540,7 @@
 
     // Duplique et rogne l'image originale avec forçage d'une hauteur et d'une largeur
     if ($control_ok == true)
-    {
-      $newName = $fileDatas['new_name'];
-
       imageTrim($dossierTemporaire . '/' . $fileDatas['new_name'], $dossierTemporaire . '/trim_' . $fileDatas['new_name'], 3508, 4461, true);
-    }
   }
 
   // METIER : Sauvegarde du calendrier généré
@@ -673,7 +669,7 @@
 
   // METIER : Insertion de l'image dans un dossier temporaire
   // RETOUR : Aucun
-  function insertImageAnnexe($post, $files, $nom)
+  function insertImageAnnexe($files, $nom)
   {
     // Initialisations
     $control_ok = true;
@@ -693,6 +689,8 @@
     // Contrôles fichier
     $fileDatas = controlsUploadFile($files['picture_annexe'], $nomImage, 'all');
 
+    var_dump($fileDatas);
+    
     // Récupération contrôles
     $control_ok = controleFichier($fileDatas);
 
@@ -702,11 +700,7 @@
 
     // Création miniature avec une hauteur/largeur max de 400px
     if ($control_ok == true)
-    {
-      $newName = $fileDatas['new_name'];
-
       imageThumb($dossierTemporaire . '/' . $fileDatas['new_name'], $dossierTemporaire . '/trim_' . $fileDatas['new_name'], 400, true, true);
-    }
   }
 
   // METIER : Sauvegarde de l'annexe générée
