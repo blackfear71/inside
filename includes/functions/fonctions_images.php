@@ -3,11 +3,19 @@
   // RETOUR : Aucun
   function imageThumb($source, $destination = NULL, $maxSize = 100, $expand = false, $square = false)
   {
+    var_dump($source);
+    var_dump($destination);
+    var_dump($maxSize);
+    var_dump($expand);
+    var_dump($square);
+
     // Traitement si l'image source existe
     if (file_exists($source))
     {
       // Récupèration des infos de l'image
       $fileinfo = getimagesize($source);
+
+      var_dump($fileinfo);
 
       // Traitement si les infos sont disponibles
       if ($fileinfo)
