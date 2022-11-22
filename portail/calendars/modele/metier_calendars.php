@@ -699,6 +699,9 @@
     if ($control_ok == true)
       $control_ok = uploadFile($fileDatas, $dossierTemporaire);
 
+    var_dump($control_ok);
+    var_dump($dossierTemporaire);
+
     // Création miniature avec une hauteur/largeur max de 400px
     if ($control_ok == true)
       imageThumb($dossierTemporaire . '/' . $fileDatas['new_name'], $dossierTemporaire . '/trim_' . $fileDatas['new_name'], 400, true, true);
