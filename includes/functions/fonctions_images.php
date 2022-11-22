@@ -3,19 +3,11 @@
   // RETOUR : Aucun
   function imageThumb($source, $destination = NULL, $maxSize = 100, $expand = false, $square = false)
   {
-    var_dump($source);
-    var_dump($destination);
-    var_dump($maxSize);
-    var_dump($expand);
-    var_dump($square);
-
     // Traitement si l'image source existe
     if (file_exists($source))
     {
       // Récupèration des infos de l'image
       $fileinfo = getimagesize($source);
-
-      var_dump($fileinfo);
 
       // Traitement si les infos sont disponibles
       if ($fileinfo)
@@ -86,22 +78,12 @@
         // Détermination de la fonction à utiliser
         $fonction = 'imagecreatefrom' . $type;
 
-        var_dump($fonction);
-        var_dump(function_exists($fonction));
-        phpinfo();
-        foreach(gd_info() as $key => $value)
-        {
-          echo $key . ': <b>' . $value . '</b><br />';
-        } 
-
         // Traitement de l'image si la fonction existe
         if (function_exists($fonction))
         {
           // Ouverture de l'image originale
           $source   = $fonction($source);
           $newImage = imagecreatetruecolor($newWidth, $newHeight);
-
-          var_dump($newImage);
 
           if ($type == 'png')
           {
@@ -127,8 +109,6 @@
 
           // Enregistrement de l'image
           $fonction = 'image'. $type;
-
-          var_dump($fonction);
 
           if ($destination != NULL)
           {

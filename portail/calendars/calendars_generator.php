@@ -7,7 +7,6 @@
   - Ajout de calendrier
   - Ajout d'annexe
   **************************/
-  ini_set('display_errors', 1);	
 
   // Fonctions communes
   include_once('../../includes/functions/metier_commun.php');
@@ -158,7 +157,7 @@
       break;
 
     case 'doGenererAnnexe':
-      //header('location: calendars_generator.php?action=goConsulter&anchor=scrollGenerator');
+      header('location: calendars_generator.php?action=goConsulter&anchor=scrollGenerator');
       break;
 
     case 'goConsulter':

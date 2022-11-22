@@ -689,18 +689,12 @@
     // Contrôles fichier
     $fileDatas = controlsUploadFile($files['picture_annexe'], $nomImage, 'all');
 
-    var_dump($fileDatas);
-    var_dump($_SESSION['alerts']);
-    
     // Récupération contrôles
     $control_ok = controleFichier($fileDatas);
 
     // Upload fichier
     if ($control_ok == true)
       $control_ok = uploadFile($fileDatas, $dossierTemporaire);
-
-    var_dump($control_ok);
-    var_dump($dossierTemporaire);
 
     // Création miniature avec une hauteur/largeur max de 400px
     if ($control_ok == true)
