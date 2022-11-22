@@ -89,7 +89,11 @@
         var_dump($fonction);
         var_dump(function_exists($fonction));
         phpinfo(INFO_MODULES);
-        
+        foreach(gd_info() as $key => $value)
+        {
+          echo $key . ': <b>' . $value . '</b><br />';
+        } 
+
         // Traitement de l'image si la fonction existe
         if (function_exists($fonction))
         {
