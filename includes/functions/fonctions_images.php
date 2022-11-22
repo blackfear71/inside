@@ -86,12 +86,16 @@
         // Détermination de la fonction à utiliser
         $fonction = 'imagecreatefrom' . $type;
 
+        var_dump($fonction);
+
         // Traitement de l'image si la fonction existe
         if (function_exists($fonction))
         {
           // Ouverture de l'image originale
           $source   = $fonction($source);
           $newImage = imagecreatetruecolor($newWidth, $newHeight);
+
+          var_dump($newImage);
 
           if ($type == 'png')
           {
@@ -117,6 +121,8 @@
 
           // Enregistrement de l'image
           $fonction = 'image'. $type;
+
+          var_dump($fonction);
 
           if ($destination != NULL)
           {
