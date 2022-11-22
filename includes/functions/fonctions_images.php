@@ -88,7 +88,8 @@
 
         var_dump($fonction);
         var_dump(function_exists($fonction));
-
+        phpinfo(INFO_MODULES);
+        
         // Traitement de l'image si la fonction existe
         if (function_exists($fonction))
         {
