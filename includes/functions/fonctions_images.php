@@ -87,6 +87,7 @@
         $fonction = 'imagecreatefrom' . $type;
 
         var_dump($fonction);
+        var_dump(function_exists($fonction));
 
         // Traitement de l'image si la fonction existe
         if (function_exists($fonction))
