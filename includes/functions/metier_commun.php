@@ -1231,6 +1231,8 @@
         $control_ok                         = false;
       }
 
+      var_dump($control_ok);
+
       // Contrôle fichier temporaire existant
       if ($control_ok == true)
       {
@@ -1240,6 +1242,8 @@
           $control_ok                           = false;
         }
       }
+
+      var_dump($control_ok);
 
       // Contrôle type de fichier
       if ($control_ok == true)
@@ -1273,6 +1277,8 @@
             break;
         }
       }
+
+      var_dump($control_ok);
 
       // Récupération des informations du fichier
       if ($control_ok == true)

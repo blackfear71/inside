@@ -690,6 +690,7 @@
     $fileDatas = controlsUploadFile($files['picture_annexe'], $nomImage, 'all');
 
     var_dump($fileDatas);
+    var_dump($_SESSION['alerts']);
     
     // Récupération contrôles
     $control_ok = controleFichier($fileDatas);
