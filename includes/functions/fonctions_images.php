@@ -88,7 +88,7 @@
 
         var_dump($fonction);
         var_dump(function_exists($fonction));
-        phpinfo(INFO_MODULES);
+        phpinfo();
         foreach(gd_info() as $key => $value)
         {
           echo $key . ': <b>' . $value . '</b><br />';
