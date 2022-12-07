@@ -1,6 +1,4 @@
 <?php
-  ini_set('display_errors', 1);	
-
   /*********************************
   ********* Collector Room *********
   **********************************
@@ -71,8 +69,6 @@
 
     case 'doAjouter':
       // Insertion d'une phrase / image culte
-      var_dump($_FILES);
-      
       $idCollector = insertCollector($_POST, $_FILES, $_SESSION['user'], false);
 
       // Récupération du numéro de page
@@ -177,10 +173,10 @@
   {
     case 'doAjouter':
     case 'doAjouterMobile':
-      /*if (!empty($idCollector) AND !empty($numeroPage))
+      if (!empty($idCollector) AND !empty($numeroPage))
         header('location: collector.php?action=goConsulter&page=' . $numeroPage . '&sort=dateDesc&filter=none&anchor=' . $idCollector);
       else
-        header('location: collector.php?action=goConsulter&page=' . $_GET['page'] . '&sort=dateDesc&filter=none');*/
+        header('location: collector.php?action=goConsulter&page=' . $_GET['page'] . '&sort=dateDesc&filter=none');
       break;
 
     case 'doModifier':
