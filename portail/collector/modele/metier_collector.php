@@ -437,6 +437,8 @@
     // Dossier de destination
     $dossier = '../../includes/images/collector';
 
+    var_dump($files);
+
     // Contrôles fichier
     $fileDatas = controlsUploadFile($files['image'], $name, 'all');
 
