@@ -1231,6 +1231,9 @@
         $control_ok                         = false;
       }
 
+      var_dump($file);
+      var_dump($name);
+      var_dump($type);
       var_dump($tmpFile);
 
       // Contrôle fichier temporaire existant
