@@ -71,6 +71,8 @@
 
     case 'doAjouter':
       // Insertion d'une phrase / image culte
+      var_dump($_FILES);
+      
       $idCollector = insertCollector($_POST, $_FILES, $_SESSION['user'], false);
 
       // Récupération du numéro de page
