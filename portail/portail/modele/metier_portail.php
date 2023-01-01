@@ -174,7 +174,7 @@
       else
         $news->setDetails('');
 
-      $news->setLogo('inside');
+      $news->setLogo('calendars');
       $news->setLink('');
 
       array_push($tableauNews, $news);
