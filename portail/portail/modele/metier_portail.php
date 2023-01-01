@@ -158,6 +158,29 @@
     }
 
     /**************/
+    /* Jour férié */
+    /**************/
+    $jourFerie = isJourFerie(date('Ymd'));
+
+    if (!empty($jourFerie))
+    {
+      $news = new News();
+
+      $news->setTitle('Aujourd\'hui c\'est férié !');
+      $news->setContent('Nous célébrons <strong>' . $jourFerie['nom_news'] . '</strong> !');
+
+      if (date('N') <= 5)
+        $news->setDetails('En espérant que vous ne soyez pas venus travailler...');
+      else
+        $news->setDetails('');
+
+      $news->setLogo('inside');
+      $news->setLink('');
+
+      array_push($tableauNews, $news);
+    }
+
+    /**************/
     /* Vote repas */
     /**************/
     if (date('H') < 13 AND date('N') <= 5)
