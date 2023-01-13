@@ -129,7 +129,7 @@
 
   // IMAGE : Création image rognée
   // RETOUR : Aucun
-  function imageTrim($source, $destination = NULL, $maxWidth, $maxHeight, $expand = false)
+  function imageTrim($maxWidth, $maxHeight, $source, $destination = NULL, $expand = false)
   {
     // Traitement si l'image source existe
     if (file_exists($source))

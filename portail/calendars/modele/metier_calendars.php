@@ -540,7 +540,7 @@
 
     // Duplique et rogne l'image originale avec forçage d'une hauteur et d'une largeur
     if ($control_ok == true)
-      imageTrim($dossierTemporaire . '/' . $fileDatas['new_name'], $dossierTemporaire . '/trim_' . $fileDatas['new_name'], 3508, 4461, true);
+      imageTrim(3508, 4461, $dossierTemporaire . '/' . $fileDatas['new_name'], $dossierTemporaire . '/trim_' . $fileDatas['new_name'], true);
   }
 
   // METIER : Sauvegarde du calendrier généré
