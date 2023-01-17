@@ -861,6 +861,7 @@
 	height: calc(2970px - 70px);
 	padding: 50px 20px 20px 50px;
 	background-color: white;
+	overflow: hidden;
 }
 
 .zone_etiquettes_speciales
