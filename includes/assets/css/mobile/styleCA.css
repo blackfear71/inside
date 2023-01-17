@@ -303,7 +303,7 @@
 {
 	position: absolute;
 	left: 0;
-	top: 4px;
+	top: 40px;
 	opacity: 0;
 }
 
@@ -313,6 +313,7 @@
 	width: 3508px;
 	height: 4961px;
 	overflow: hidden;
+	border: solid 10px black;
 }
 
 .zone_entete_calendrier_generator
