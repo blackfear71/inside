@@ -312,6 +312,7 @@
 	display: block;
 	width: 3508px;
 	height: 4961px;
+	overflow: hidden;
 }
 
 .zone_entete_calendrier_generator
