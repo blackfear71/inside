@@ -39,40 +39,40 @@
 			echo '</td>';
 		echo '</tr>';
 
-    if (!empty($listeSuppression))
-    {
-      foreach ($listeSuppression as $film)
-      {
-        echo '<tr class="tr_manage_users">';
-  				echo '<td class="td_manage_users">';
-  					echo $film->getFilm();
-  				echo '</td>';
+		if (!empty($listeSuppression))
+		{
+			foreach ($listeSuppression as $film)
+			{
+				echo '<tr class="tr_manage_users">';
+					echo '<td class="td_manage_users">';
+						echo $film->getFilm();
+					echo '</td>';
 
 					echo '<td class="td_manage_users">';
-  					echo $film->getTeam();
-  				echo '</td>';
+						echo $film->getTeam();
+					echo '</td>';
 
-          echo '<td class="td_manage_users">';
-            if ($film->getTo_delete() == 'Y')
-            {
-    					echo '<form method="post" action="movies.php?action=doDeleteFilm">';
-    						echo '<input type="hidden" name="id_film" value="' . $film->getId() . '" />';
+					echo '<td class="td_manage_users">';
+						if ($film->getTo_delete() == 'Y')
+						{
+							echo '<form method="post" action="movies.php?action=doDeleteFilm">';
+								echo '<input type="hidden" name="id_film" value="' . $film->getId() . '" />';
 								echo '<input type="hidden" name="team_film" value="' . $film->getTeam() . '" />';
 								echo '<input type="submit" name="accepter_suppression_film" value="ACCEPTER" class="bouton_admin" />';
-    					echo '</form>';
-            }
-  				echo '</td>';
+							echo '</form>';
+						}
+					echo '</td>';
 
-          echo '<td class="td_manage_users">';
-            if ($film->getTo_delete() == 'Y')
-            {
-    					echo '<form method="post" action="movies.php?action=doResetFilm">';
+					echo '<td class="td_manage_users">';
+						if ($film->getTo_delete() == 'Y')
+						{
+							echo '<form method="post" action="movies.php?action=doResetFilm">';
 								echo '<input type="hidden" name="id_film" value="' . $film->getId() . '" />';
-    						echo '<input type="hidden" name="team_film" value="' . $film->getTeam() . '" />';
+								echo '<input type="hidden" name="team_film" value="' . $film->getTeam() . '" />';
 								echo '<input type="submit" name="annuler_suppression_film" value="REFUSER" class="bouton_admin" />';
-    					echo '</form>';
-            }
-  				echo '</td>';
+							echo '</form>';
+						}
+					echo '</td>';
 
 					echo '<td class="td_manage_users">';
 						echo formatUnknownUser($film->getPseudo_del(), true, true) . ' (' . $film->getIdentifiant_del() . ')';
@@ -85,13 +85,13 @@
 					echo '<td class="td_manage_users">';
 						echo $film->getNb_users();
 					echo '</td>';
-  			echo '</tr>';
-      }
-    }
-    else
+				echo '</tr>';
+			}
+		}
+		else
 		{
 			echo '<tr>';
-				echo '<td colspan="6" class="empty">Pas de films à supprimer...</td>';
+				echo '<td colspan="7" class="empty">Pas de films à supprimer...</td>';
 			echo '</tr>';
 		}
 
@@ -102,8 +102,8 @@
 			echo '</td>';
 
 			echo '<td colspan="5" class="td_manage_users">';
-        if ($alerteFilms == true)
-          echo '<span class="reset_warning">!</span>';
+				if ($alerteFilms == true)
+					echo '<span class="reset_warning">!</span>';
 			echo '</td>';
 		echo '</tr>';
 	echo '</table>';

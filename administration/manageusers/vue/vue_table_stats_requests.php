@@ -43,84 +43,93 @@
 			echo '</td>';
 		echo '</tr>';
 
-		// Statistiques des utlisateurs inscrits
-		foreach ($tableauStatistiquesIns as $statistiquesIns)
-    {
-      echo '<tr class="tr_manage_users">';
-        echo '<td class="td_manage_users">';
-          echo $statistiquesIns->getIdentifiant();
-        echo '</td>';
+		if (!empty($tableauStatistiquesIns) AND !empty($tableauStatistiquesDes))
+		{
+			// Statistiques des utilisateurs inscrits
+			foreach ($tableauStatistiquesIns as $statistiquesIns)
+			{
+				echo '<tr class="tr_manage_users">';
+					echo '<td class="td_manage_users">';
+						echo $statistiquesIns->getIdentifiant();
+					echo '</td>';
 
-        echo '<td class="td_manage_users">';
-					echo $statistiquesIns->getPseudo();
-        echo '</td>';
+					echo '<td class="td_manage_users">';
+						echo $statistiquesIns->getPseudo();
+					echo '</td>';
 
-        echo '<td class="td_manage_users">';
-					echo $statistiquesIns->getNb_bugs_soumis();
-        echo '</td>';
+					echo '<td class="td_manage_users">';
+						echo $statistiquesIns->getNb_bugs_soumis();
+					echo '</td>';
 
-        echo '<td class="td_manage_users">';
-					echo $statistiquesIns->getNb_bugs_resolus();
-        echo '</td>';
+					echo '<td class="td_manage_users">';
+						echo $statistiquesIns->getNb_bugs_resolus();
+					echo '</td>';
 
-        echo '<td class="td_manage_users">';
-					echo $statistiquesIns->getNb_idees_soumises();
-        echo '</td>';
+					echo '<td class="td_manage_users">';
+						echo $statistiquesIns->getNb_idees_soumises();
+					echo '</td>';
 
-        echo '<td class="td_manage_users">';
-					echo $statistiquesIns->getNb_idees_en_charge();
-        echo '</td>';
+					echo '<td class="td_manage_users">';
+						echo $statistiquesIns->getNb_idees_en_charge();
+					echo '</td>';
 
-        echo '<td class="td_manage_users">';
-					echo $statistiquesIns->getNb_idees_terminees();
-        echo '</td>';
-      echo '</tr>';
-    }
+					echo '<td class="td_manage_users">';
+						echo $statistiquesIns->getNb_idees_terminees();
+					echo '</td>';
+				echo '</tr>';
+			}
 
-		// Séparation utilisateurs
-		if (!empty($tableauStatistiquesDes))
+			// Séparation utilisateurs
+			if (!empty($tableauStatistiquesDes))
+			{
+				echo '<tr>';
+					echo '<td class="table_old_users" colspan="7">';
+						echo '<div class="banderole_left_1"></div><div class="banderole_left_2"></div>';
+						echo 'Anciens utilisateurs';
+						echo '<div class="banderole_left_3"></div><div class="banderole_left_4"></div>';
+					echo '</td>';
+				echo '</tr>';
+			}
+
+			// Statistiques des utilisateurs désinscrits
+			foreach ($tableauStatistiquesDes as $statistiquesDes)
+			{
+				echo '<tr class="tr_manage_users">';
+					echo '<td colspan="2" class="td_manage_users">';
+						echo $statistiquesDes->getIdentifiant();
+					echo '</td>';
+
+					echo '<td class="td_manage_users">';
+						echo $statistiquesDes->getNb_bugs_soumis();
+					echo '</td>';
+
+					echo '<td class="td_manage_users">';
+						echo $statistiquesDes->getNb_bugs_resolus();
+					echo '</td>';
+
+					echo '<td class="td_manage_users">';
+						echo $statistiquesDes->getNb_idees_soumises();
+					echo '</td>';
+
+					echo '<td class="td_manage_users">';
+						if ($statistiquesDes->getNb_idees_en_charge() == 0)
+							echo 'N/A';
+						else
+							echo $statistiquesDes->getNb_idees_en_charge();
+					echo '</td>';
+
+					echo '<td class="td_manage_users">';
+						echo $statistiquesDes->getNb_idees_terminees();
+					echo '</td>';
+				echo '</tr>';
+			}
+		}
+		else
 		{
 			echo '<tr>';
-				echo '<td class="table_old_users" colspan="7">';
-					echo '<div class="banderole_left_1"></div><div class="banderole_left_2"></div>';
-					echo 'Anciens utilisateurs';
-					echo '<div class="banderole_left_3"></div><div class="banderole_left_4"></div>';
-				echo '</td>';
+				echo '<td colspan="7" class="empty">Pas d\'utilisateurs existants...</td>';
 			echo '</tr>';
 		}
-
-		// Statistiques des utlisateurs désinscrits
-		foreach ($tableauStatistiquesDes as $statistiquesDes)
-    {
-      echo '<tr class="tr_manage_users">';
-        echo '<td colspan="2" class="td_manage_users">';
-          echo $statistiquesDes->getIdentifiant();
-        echo '</td>';
-
-        echo '<td class="td_manage_users">';
-          echo $statistiquesDes->getNb_bugs_soumis();
-        echo '</td>';
-
-        echo '<td class="td_manage_users">';
-          echo $statistiquesDes->getNb_bugs_resolus();
-        echo '</td>';
-
-        echo '<td class="td_manage_users">';
-          echo $statistiquesDes->getNb_idees_soumises();
-        echo '</td>';
-
-        echo '<td class="td_manage_users">';
-					if ($statistiquesDes->getNb_idees_en_charge() == 0)
-						echo 'N/A';
-					else
-          	echo $statistiquesDes->getNb_idees_en_charge();
-        echo '</td>';
-
-        echo '<td class="td_manage_users">';
-          echo $statistiquesDes->getNb_idees_terminees();
-        echo '</td>';
-      echo '</tr>';
-    }
 
 		// Total
 		echo '<tr>';
@@ -132,19 +141,19 @@
 				echo $totalStatistiques->getNb_bugs_soumis_total();
 			echo '</td>';
 
-      echo '<td class="td_manage_users">';
+      		echo '<td class="td_manage_users">';
 				echo $totalStatistiques->getNb_bugs_resolus_total();
 			echo '</td>';
 
-      echo '<td class="td_manage_users">';
+      		echo '<td class="td_manage_users">';
 				echo $totalStatistiques->getNb_idees_soumises_total();
 			echo '</td>';
 
-      echo '<td class="td_manage_users">';
+      		echo '<td class="td_manage_users">';
 				echo $totalStatistiques->getNb_idees_en_charge_total();
 			echo '</td>';
 
-      echo '<td class="td_manage_users">';
+      		echo '<td class="td_manage_users">';
 				echo $totalStatistiques->getNb_idees_terminees_total();
 			echo '</td>';
 		echo '</tr>';

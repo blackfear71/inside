@@ -44,6 +44,10 @@
       array_push($listeUsersParEquipe[$team], $user);
     }
 
+    // Suppression du tableau des nouveaux utilisateurs si vide
+    if (empty($listeUsersParEquipe['new_users']))
+      unset($listeUsersParEquipe['new_users']);
+
     // Retour
     return $listeUsersParEquipe;
   }

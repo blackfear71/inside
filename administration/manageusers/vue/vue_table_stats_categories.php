@@ -63,130 +63,139 @@
 			echo '</td>';
 		echo '</tr>';
 
-		// Utilisateurs inscrits
-    foreach ($tableauStatistiquesIns as $statistiquesIns)
-    {
-      echo '<tr class="tr_manage_users">';
-        echo '<td class="td_manage_users">';
-          echo $statistiquesIns->getIdentifiant();
-        echo '</td>';
+		if (!empty($tableauStatistiquesIns) AND !empty($tableauStatistiquesDes))
+		{
+			// Utilisateurs inscrits
+			foreach ($tableauStatistiquesIns as $statistiquesIns)
+			{
+				echo '<tr class="tr_manage_users">';
+					echo '<td class="td_manage_users">';
+						echo $statistiquesIns->getIdentifiant();
+					echo '</td>';
+	
+					echo '<td class="td_manage_users">';
+						echo $statistiquesIns->getPseudo();
+					echo '</td>';
+	
+					echo '<td class="td_manage_users">';
+						echo $statistiquesIns->getNb_films_ajoutes();
+					echo '</td>';
+	
+					echo '<td class="td_manage_users">';
+						echo $statistiquesIns->getNb_films_comments();
+					echo '</td>';
+	
+					echo '<td class="td_manage_users">';
+						echo $statistiquesIns->getNb_collectors();
+					echo '</td>';
+	
+					echo '<td class="td_manage_users">';
+						echo $statistiquesIns->getNb_reservations();
+					echo '</td>';
+	
+					echo '<td class="td_manage_users">';
+						echo $statistiquesIns->getNb_gateaux_semaine();
+					echo '</td>';
+	
+					echo '<td class="td_manage_users">';
+						echo $statistiquesIns->getNb_recettes();
+					echo '</td>';
+	
+					if ($statistiquesIns->getExpenses() <= -6)
+						echo '<td colspan="4" class="td_stats_admin bilan_red">';
+					elseif ($statistiquesIns->getExpenses() > -6 AND $statistiquesIns->getExpenses() <= -3)
+						echo '<td colspan="4" class="td_stats_admin bilan_orange">';
+					elseif ($statistiquesIns->getExpenses() > -3 AND $statistiquesIns->getExpenses() < -0.01)
+						echo '<td colspan="4" class="td_stats_admin bilan_jaune">';
+					elseif ($statistiquesIns->getExpenses() > 0.01 AND $statistiquesIns->getExpenses() < 5)
+						echo '<td colspan="4" class="td_stats_admin bilan_vert">';
+					elseif ($statistiquesIns->getExpenses() >= 5)
+						echo '<td colspan="4" class="td_stats_admin bilan_vert_fonce">';
+					elseif ($statistiquesIns->getExpenses() > -0.01 AND $statistiquesIns->getExpenses() < 0.01)
+						echo '<td colspan="4" class="td_stats_admin">';
+	
+					if ($statistiquesIns->getExpenses() > -0.01 AND $statistiquesIns->getExpenses() < 0.01)
+						echo formatAmountForDisplay('');
+					else
+						echo formatAmountForDisplay($statistiquesIns->getExpenses());
+	
+					echo '</td>';
+				echo '</tr>';
+			}
 
-        echo '<td class="td_manage_users">';
-          echo $statistiquesIns->getPseudo();
-        echo '</td>';
+			// Séparation utilisateurs
+			if (!empty($tableauStatistiquesDes))
+			{
+				echo '<tr>';
+					echo '<td class="table_old_users" colspan="9">';
+						echo '<div class="banderole_left_1"></div><div class="banderole_left_2"></div>';
+						echo 'Anciens utilisateurs';
+						echo '<div class="banderole_left_3"></div><div class="banderole_left_4"></div>';
+					echo '</td>';
+				echo '</tr>';
+			}
 
-				echo '<td class="td_manage_users">';
-					echo $statistiquesIns->getNb_films_ajoutes();
-        echo '</td>';
+			// Utilisateurs désinscrits
+			foreach ($tableauStatistiquesDes as $statistiquesDes)
+			{
+				echo '<tr class="tr_manage_users">';
+					echo '<td colspan="2" class="td_manage_users">';
+						echo $statistiquesDes->getIdentifiant();
+					echo '</td>';
 
-        echo '<td class="td_manage_users">';
-					echo $statistiquesIns->getNb_films_comments();
-        echo '</td>';
+					echo '<td class="td_manage_users">';
+						echo $statistiquesDes->getNb_films_ajoutes();
+					echo '</td>';
 
-				echo '<td class="td_manage_users">';
-					echo $statistiquesIns->getNb_collectors();
-				echo '</td>';
+					echo '<td class="td_manage_users">';
+						echo $statistiquesDes->getNb_films_comments();
+					echo '</td>';
 
-				echo '<td class="td_manage_users">';
-					echo $statistiquesIns->getNb_reservations();
-				echo '</td>';
+					echo '<td class="td_manage_users">';
+						echo $statistiquesDes->getNb_collectors();
+					echo '</td>';
 
-				echo '<td class="td_manage_users">';
-					echo $statistiquesIns->getNb_gateaux_semaine();
-				echo '</td>';
-
-				echo '<td class="td_manage_users">';
-					echo $statistiquesIns->getNb_recettes();
-				echo '</td>';
-
-        if ($statistiquesIns->getExpenses() <= -6)
-					echo '<td colspan="4" class="td_stats_admin bilan_red">';
-				elseif ($statistiquesIns->getExpenses() > -6 AND $statistiquesIns->getExpenses() <= -3)
-					echo '<td colspan="4" class="td_stats_admin bilan_orange">';
-				elseif ($statistiquesIns->getExpenses() > -3 AND $statistiquesIns->getExpenses() < -0.01)
-					echo '<td colspan="4" class="td_stats_admin bilan_jaune">';
-				elseif ($statistiquesIns->getExpenses() > 0.01 AND $statistiquesIns->getExpenses() < 5)
-					echo '<td colspan="4" class="td_stats_admin bilan_vert">';
-				elseif ($statistiquesIns->getExpenses() >= 5)
-					echo '<td colspan="4" class="td_stats_admin bilan_vert_fonce">';
-				elseif ($statistiquesIns->getExpenses() > -0.01 AND $statistiquesIns->getExpenses() < 0.01)
-					echo '<td colspan="4" class="td_stats_admin">';
-
-						if ($statistiquesIns->getExpenses() > -0.01 AND $statistiquesIns->getExpenses() < 0.01)
-							echo formatAmountForDisplay('');
+					echo '<td class="td_manage_users">';
+						if ($statistiquesDes->getNb_reservations() == 0)
+							echo 'N/A';
 						else
-							echo formatAmountForDisplay($statistiquesIns->getExpenses());
+							echo $statistiquesDes->getNb_reservations();
+					echo '</td>';
+
+					echo '<td class="td_manage_users">';
+						echo $statistiquesDes->getNb_gateaux_semaine();
+					echo '</td>';
+
+					echo '<td class="td_manage_users">';
+						echo $statistiquesDes->getNb_recettes();
+					echo '</td>';
+
+					if ($statistiquesDes->getExpenses() <= -6)
+						echo '<td colspan="4" class="td_stats_admin bilan_red">';
+					elseif ($statistiquesDes->getExpenses() > -6 AND $statistiquesDes->getExpenses() <= -3)
+						echo '<td colspan="4" class="td_stats_admin bilan_orange">';
+					elseif ($statistiquesDes->getExpenses() > -3 AND $statistiquesDes->getExpenses() < -0.01)
+						echo '<td colspan="4" class="td_stats_admin bilan_jaune">';
+					elseif ($statistiquesDes->getExpenses() > 0.01 AND $statistiquesDes->getExpenses() < 5)
+						echo '<td colspan="4" class="td_stats_admin bilan_vert">';
+					elseif ($statistiquesDes->getExpenses() >= 5)
+						echo '<td colspan="4" class="td_stats_admin bilan_vert_fonce">';
+					elseif ($statistiquesDes->getExpenses() > -0.01 AND $statistiquesDes->getExpenses() < 0.01)
+						echo '<td colspan="4" class="td_stats_admin">';
+
+					if ($statistiquesDes->getExpenses() > -0.01 AND $statistiquesDes->getExpenses() < 0.01)
+						echo formatAmountForDisplay('');
+					else
+						echo formatAmountForDisplay($statistiquesDes->getExpenses());
 
 					echo '</td>';
-			echo '</tr>';
-    }
-
-		// Séparation utilisateurs
-		if (!empty($tableauStatistiquesDes))
+				echo '</tr>';
+			}
+		}
+		else
 		{
 			echo '<tr>';
-				echo '<td class="table_old_users" colspan="9">';
-					echo '<div class="banderole_left_1"></div><div class="banderole_left_2"></div>';
-					echo 'Anciens utilisateurs';
-					echo '<div class="banderole_left_3"></div><div class="banderole_left_4"></div>';
-				echo '</td>';
-			echo '</tr>';
-		}
-
-		// Utilisateurs désinscrits
-		foreach ($tableauStatistiquesDes as $statistiquesDes)
-		{
-			echo '<tr class="tr_manage_users">';
-				echo '<td colspan="2" class="td_manage_users">';
-					echo $statistiquesDes->getIdentifiant();
-				echo '</td>';
-
-				echo '<td class="td_manage_users">';
-					echo $statistiquesDes->getNb_films_ajoutes();
-				echo '</td>';
-
-				echo '<td class="td_manage_users">';
-					echo $statistiquesDes->getNb_films_comments();
-				echo '</td>';
-
-				echo '<td class="td_manage_users">';
-					echo $statistiquesDes->getNb_collectors();
-				echo '</td>';
-
-				echo '<td class="td_manage_users">';
-					if ($statistiquesDes->getNb_reservations() == 0)
-						echo 'N/A';
-					else
-						echo $statistiquesDes->getNb_reservations();
-				echo '</td>';
-
-				echo '<td class="td_manage_users">';
-					echo $statistiquesDes->getNb_gateaux_semaine();
-				echo '</td>';
-
-				echo '<td class="td_manage_users">';
-					echo $statistiquesDes->getNb_recettes();
-				echo '</td>';
-
-				if ($statistiquesDes->getExpenses() <= -6)
-					echo '<td colspan="4" class="td_stats_admin bilan_red">';
-				elseif ($statistiquesDes->getExpenses() > -6 AND $statistiquesDes->getExpenses() <= -3)
-					echo '<td colspan="4" class="td_stats_admin bilan_orange">';
-				elseif ($statistiquesDes->getExpenses() > -3 AND $statistiquesDes->getExpenses() < -0.01)
-					echo '<td colspan="4" class="td_stats_admin bilan_jaune">';
-				elseif ($statistiquesDes->getExpenses() > 0.01 AND $statistiquesDes->getExpenses() < 5)
-					echo '<td colspan="4" class="td_stats_admin bilan_vert">';
-				elseif ($statistiquesDes->getExpenses() >= 5)
-					echo '<td colspan="4" class="td_stats_admin bilan_vert_fonce">';
-				elseif ($statistiquesDes->getExpenses() > -0.01 AND $statistiquesDes->getExpenses() < 0.01)
-					echo '<td colspan="4" class="td_stats_admin">';
-
-						if ($statistiquesDes->getExpenses() > -0.01 AND $statistiquesDes->getExpenses() < 0.01)
-							echo formatAmountForDisplay('');
-						else
-							echo formatAmountForDisplay($statistiquesDes->getExpenses());
-
-					echo '</td>';
+				echo '<td colspan="9" class="empty">Pas d\'utilisateurs existants...</td>';
 			echo '</tr>';
 		}
 
