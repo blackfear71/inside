@@ -292,10 +292,9 @@
 
 .image_rendu_generator
 {
-	display: block;
 	width: 100%;
 	box-shadow: 0 0 0.5vh #7c7c7c;
-	margin-bottom: 1.5vh;
+	margin-bottom: 1vh;
 	border-radius: 0.5vh;
 }
 
@@ -304,7 +303,7 @@
 {
 	position: absolute;
 	left: 0;
-	top: 0;
+	top: 4px;
 	opacity: 0;
 }
 
