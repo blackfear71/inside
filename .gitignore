@@ -4,9 +4,9 @@
 cron/logs/
 includes/common/chat/conversations/
 includes/datas/
-includes/images/
-!includes/images/moviehouse/cinema.jpg
-!includes/images/ideas/cycle_idee.png
+includes/images/*
+!includes/images/moviehouse/
+!includes/images/ideas/
 server/
 test/
 .idea/
