@@ -459,7 +459,7 @@
     $data = $req->fetch();
 
     // Vérification que l'utilisateur a débloqué le succès pour l'ajouter
-    if ($data['value'] >= $limite)
+    if ($data AND $data['value'] >= $limite)
     {
       // Génération d'un objet Classement
       $rangSuccess = new Classement();
@@ -480,6 +480,9 @@
   // RETOUR : Date
   function physiqueDateFinMission($reference)
   {
+    // Initialisations
+    $dateFinMission = '';
+
     // Requête
     global $bdd;
 
@@ -489,7 +492,8 @@
 
     $data = $req->fetch();
 
-    $dateFinMission = $data['date_fin'];
+    if ($data)
+      $dateFinMission = $data['date_fin'];
 
     $req->closeCursor();
 

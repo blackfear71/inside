@@ -211,7 +211,7 @@
 
     $data = $req->fetch();
 
-    if ($data['nombreCollector'] > 0)
+    if ($data AND $data['nombreCollector'] > 0)
     {
       // Instanciation d'un objet Preferences à partir des données remontées de la bdd
       $collector = Collector::withData($data);
@@ -271,7 +271,7 @@
 
     $data = $req->fetch();
 
-    if ($data['nombreFilms'] > 0)
+    if ($data AND $data['nombreFilms'] > 0)
     {
       // Instanciation d'un objet Preferences à partir des données remontées de la bdd
       $film = Movie::withData($data);

@@ -176,6 +176,9 @@
   // RETOUR : Avancement mission
   function physiqueAvancementMissionUser($idMission, $identifiant)
   {
+    // Initialisations
+    $avancement = 0;
+
     // Requête
     global $bdd;
 
@@ -185,7 +188,8 @@
 
     $data = $req->fetch();
 
-    $avancement = $data['avancement'];
+    if ($data)
+      $avancement = $data['avancement'];
 
     $req->closeCursor();
 
