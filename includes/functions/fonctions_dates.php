@@ -315,6 +315,7 @@
 
     // Calcul des jours fériés variables
     $dimanchePaques    = date('Ymd', easter_date($annee));
+    $vendrediSaint     = date('Ymd', strtotime($dimanchePaques . ' - 2 days'));
     $lundiPaques       = date('Ymd', strtotime($dimanchePaques . ' + 1 days'));
     $ascension         = date('Ymd', strtotime($dimanchePaques . ' + 39 days'));
     $dimanchePentecote = date('Ymd', strtotime($dimanchePaques . ' + 49 days'));
@@ -324,7 +325,7 @@
     $joursFeries = array($annee . '0101'    => array('reference' => 'nouvel_an',
                                                      'nom_jour'  => 'Jour de l\'an',
                                                      'nom_news'  => 'le Jour de l\'an'),
-                         $annee . '0402'    => array('reference' => 'vendredi_saint',
+                         $vendrediSaint     => array('reference' => 'vendredi_saint',
                                                      'nom_jour'  => 'Vendredi Saint',
                                                      'nom_news'  => 'le Vendredi Saint'),
                          $dimanchePaques    => array('reference' => 'dimanche_paques',
