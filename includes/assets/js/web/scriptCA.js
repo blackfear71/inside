@@ -215,7 +215,7 @@ function afficherCalendrierJpeg()
   html2canvas($('.zone_calendrier_generator')[0],
   {
     // Options
-    scale:1
+    scale: 1
   }).then(function(canvas)
   {
     // Conversion du calendrier généré
@@ -241,7 +241,7 @@ function afficherAnnexeJpeg()
   html2canvas($('.zone_annexe_generator')[0],
   {
     // Options
-    scale:1
+    scale: 1
   }).then(function(canvas)
   {
     // Conversion de l'annexe générée

@@ -119,7 +119,8 @@ function afficherCalendrierJpeg()
     html2canvas($('.zone_calendrier_generator')[0],
     {
       // Options
-      scale:1
+      scale: 1,
+      y: '64' // Sur mobile cet offset évite de faire apparaitre un trait blanc en bas de l'image générée
     }).then(function(canvas)
     {
       // Conversion du calendrier généré
@@ -157,7 +158,8 @@ function afficherAnnexeJpeg()
     html2canvas($('.zone_annexe_generator')[0],
     {
       // Options
-      scale:1
+      scale: 1,
+      y: '64' // Sur mobile cet offset évite de faire apparaitre un trait blanc en bas de l'image générée
     }).then(function(canvas)
     {
       // Conversion de l'annexe générée
