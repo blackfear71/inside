@@ -145,43 +145,46 @@
     $listeLogsMissions = array();
 
     // Scan des fichiers présents par ordre décroissant
-    $fichiersQuotidiens = scandir($dossierQuotidien, 1);
-
-    // Suppression des racines du dossier de la liste
-    unset($fichiersQuotidiens[array_search('..', $fichiersQuotidiens)]);
-    unset($fichiersQuotidiens[array_search('.', $fichiersQuotidiens)]);
-
-    // Détermination si la chaîne CRON est déjà passée
-    if (!empty($fichiersQuotidiens))
+    if (is_dir($dossierQuotidien))
     {
-      // Tri sur date
-      foreach ($fichiersQuotidiens as $fichier)
+      $fichiersQuotidiens = scandir($dossierQuotidien, 1);
+
+      // Suppression des racines du dossier de la liste
+      unset($fichiersQuotidiens[array_search('..', $fichiersQuotidiens)]);
+      unset($fichiersQuotidiens[array_search('.', $fichiersQuotidiens)]);
+
+      // Détermination si la chaîne CRON est déjà passée
+      if (!empty($fichiersQuotidiens))
       {
-        $triAnnee[]   = substr($fichier, 12, 4);
-        $triMois[]    = substr($fichier, 9, 2);
-        $triJour[]    = substr($fichier, 6, 2);
-        $triHeure[]   = substr($fichier, 17, 2);
-        $triMinute[]  = substr($fichier, 20, 2);
-        $triSeconde[] = substr($fichier, 23, 2);
-      }
-
-      array_multisort($triAnnee, SORT_DESC, $triMois, SORT_DESC, $triJour, SORT_DESC, $triHeure, SORT_DESC, $triMinute, SORT_DESC, $triSeconde, SORT_DESC, $fichiersQuotidiens);
-
-      // Test si CRON déjà passé
-      foreach ($fichiersQuotidiens as $fichier)
-      {
-        // Récupération de la date du fichier
-        $dateFichier = substr($fichier, 12, 4) . substr($fichier, 9, 2) . substr($fichier, 6, 2);
-
-        // Si le premier fichier est antérieur à la date du jour, on arrête la boucle
-        if ($dateFichier < date('Ymd'))
-          break;
-
-        // Si le fichier date du jour alors on sait qu'on a déjà attribué l'expérience
-        if ($dateFichier == date('Ymd'))
+        // Tri sur date
+        foreach ($fichiersQuotidiens as $fichier)
         {
-          $chaineExecutee = true;
-          break;
+          $triAnnee[]   = substr($fichier, 12, 4);
+          $triMois[]    = substr($fichier, 9, 2);
+          $triJour[]    = substr($fichier, 6, 2);
+          $triHeure[]   = substr($fichier, 17, 2);
+          $triMinute[]  = substr($fichier, 20, 2);
+          $triSeconde[] = substr($fichier, 23, 2);
+        }
+
+        array_multisort($triAnnee, SORT_DESC, $triMois, SORT_DESC, $triJour, SORT_DESC, $triHeure, SORT_DESC, $triMinute, SORT_DESC, $triSeconde, SORT_DESC, $fichiersQuotidiens);
+
+        // Test si CRON déjà passé
+        foreach ($fichiersQuotidiens as $fichier)
+        {
+          // Récupération de la date du fichier
+          $dateFichier = substr($fichier, 12, 4) . substr($fichier, 9, 2) . substr($fichier, 6, 2);
+
+          // Si le premier fichier est antérieur à la date du jour, on arrête la boucle
+          if ($dateFichier < date('Ymd'))
+            break;
+
+          // Si le fichier date du jour alors on sait qu'on a déjà attribué l'expérience
+          if ($dateFichier == date('Ymd'))
+          {
+            $chaineExecutee = true;
+            break;
+          }
         }
       }
     }
