@@ -579,11 +579,11 @@ function resetCelsius()
             $('.celsius').css('visibility', 'visible');
             $('.celsius').css('transform', 'scale(1)');
             $('.celsius').css('transition', 'transform 0.2s ease');
-          }, 200);
-        }, 100);
-      }, 200);
-    }, 10);
-  }, 100);
+          }, 2000);
+        }, 1000);
+      }, 1000);
+    }, 100);
+  }, 1000);
 }
 
 // Initialisations Celsius au clic
