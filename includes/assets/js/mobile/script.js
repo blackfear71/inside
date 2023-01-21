@@ -501,11 +501,11 @@ function initPositionCelsius()
   {
     // Positionnement en fonction de l'orientation
     if (screen.height > screen.width)
-      $('.celsius').css('top', '84vh');
+      $('.celsius').css('top', 'calc(100% - 16vh)');
     else
-      $('.celsius').css('top', '91vh');
+      $('.celsius').css('top', 'calc(100% - 9vh)');
 
-    $('.celsius').css('left', '82vw');
+    $('.celsius').css('left', 'calc(100% - 9vh)');
 
     // Définition des cookies
     setCookie('celsius[positionX]', $('.celsius').offset().left);
@@ -581,7 +581,7 @@ function resetCelsius()
             $('.celsius').css('transition', 'transform 0.2s ease');
           }, 200);
         }, 100);
-      }, 100);
+      }, 200);
     }, 10);
   }, 100);
 }

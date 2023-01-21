@@ -387,7 +387,7 @@ aside
 {
 	display: none;
 	position: fixed;
-	z-index: 5;
+	z-index: 6;
 	width: calc(100% - 4vh);
 	max-height: 50vh;
 	margin-left: 2vh;
