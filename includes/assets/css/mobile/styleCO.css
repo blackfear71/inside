@@ -252,8 +252,8 @@
 
 .zone_avatar_collector
 {
-	float: left;
-	margin-left: calc(50% - 23vh);
+	position: absolute;
+	left: calc(50% - 8.5vh);
 	margin-top: -7.5vh;
 	border: solid 1vh #fbfbfb;
 	border-radius: 50%;
@@ -415,15 +415,17 @@
 	float: left;
 	margin-left: 1.5vh;
 	margin-top: 1.5vh;
-	width: 13vh;
+	width: 12.5vh;
 	height: 6vh;
 }
 
 .form_delete_collector
 {
 	display: inline-block;
+	width: 6vh;
+	height: 6vh;
 	vertical-align: middle;
-	margin-left: 1vh;
+	margin-left: 0.5vh;
 }
 
 .icon_delete_collector
