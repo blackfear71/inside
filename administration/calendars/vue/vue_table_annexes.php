@@ -4,25 +4,25 @@
 	echo '<table class="table_manage_users">';
 		// Entête du tableau
 		echo '<tr class="init_tr_manage_users">';
-			echo '<td rowspan="2" class="init_td_manage_users init_td_manage_users_25">';
+			echo '<td rowspan="2" class="init_td_manage_users width_25">';
 				echo 'Annexe';
 			echo '</td>';
 
-			echo '<td rowspan="2" class="init_td_manage_users init_td_manage_users_25">';
+			echo '<td rowspan="2" class="init_td_manage_users width_25">';
 				echo 'Equipe';
 			echo '</td>';
 
-			echo '<td colspan="2" class="init_td_manage_users init_td_manage_users_50">';
+			echo '<td colspan="2" class="init_td_manage_users width_50">';
 				echo 'Suppression de l\'annexe';
 			echo '</td>';
 		echo '</tr>';
 
 		echo '<tr class="init_tr_manage_users">';
-			echo '<td class="init_td_manage_users init_td_manage_users_25">';
+			echo '<td class="init_td_manage_users width_25">';
 				echo 'Accepter';
 			echo '</td>';
 
-			echo '<td class="init_td_manage_users init_td_manage_users_25">';
+			echo '<td class="init_td_manage_users width_25">';
 				echo 'Refuser';
 			echo '</td>';
 		echo '</tr>';

@@ -4,61 +4,61 @@
 	echo '<table class="table_manage_users">';
 		// Entête du tableau
 		echo '<tr class="init_tr_manage_users">';
-			echo '<td rowspan="2" class="init_td_manage_users init_td_manage_users_10">';
+			echo '<td rowspan="2" class="init_td_manage_users width_10">';
 				echo 'Identifiant';
 			echo '</td>';
 
-			echo '<td rowspan="2" class="init_td_manage_users init_td_manage_users_15">';
+			echo '<td rowspan="2" class="init_td_manage_users width_15">';
 				echo 'Pseudo';
 			echo '</td>';
 
-			echo '<td colspan="2" class="init_td_manage_users init_td_manage_users_20">';
+			echo '<td colspan="2" class="init_td_manage_users width_20">';
 				echo 'Movie House';
 			echo '</td>';
 
-			echo '<td class="init_td_manage_users init_td_manage_users_10">';
+			echo '<td class="init_td_manage_users width_10">';
 				echo 'Collector Room';
 			echo '</td>';
 
-			echo '<td class="init_td_manage_users init_td_manage_users_10">';
+			echo '<td class="init_td_manage_users width_10">';
 				echo 'Les enfants ! À table !';
 			echo '</td>';
 
-			echo '<td colspan="2" class="init_td_manage_users init_td_manage_users_20">';
+			echo '<td colspan="2" class="init_td_manage_users width_20">';
 				echo 'Cooking Box';
 			echo '</td>';
 
-			echo '<td colspan="4" class="init_td_manage_users init_td_manage_users_10">';
+			echo '<td colspan="4" class="init_td_manage_users width_10">';
 				echo 'Expense Center';
 			echo '</td>';
 		echo '</tr>';
 
 		echo '<tr class="init_tr_manage_users">';
-			echo '<td class="init_td_manage_users init_td_manage_users_10">';
+			echo '<td class="init_td_manage_users width_10">';
 				echo 'Films ajoutés';
 			echo '</td>';
 
-			echo '<td class="init_td_manage_users init_td_manage_users_10">';
+			echo '<td class="init_td_manage_users width_10">';
 				echo 'Commentaires';
 			echo '</td>';
 
-			echo '<td class="init_td_manage_users init_td_manage_users_10">';
+			echo '<td class="init_td_manage_users width_10">';
 				echo 'Phrases cultes rapportées';
 			echo '</td>';
 
-			echo '<td class="init_td_manage_users init_td_manage_users_10">';
+			echo '<td class="init_td_manage_users width_10">';
 				echo 'Réservations';
 			echo '</td>';
 
-			echo '<td class="init_td_manage_users init_td_manage_users_10">';
+			echo '<td class="init_td_manage_users width_10">';
 				echo 'Gâteaux de la semaine';
 			echo '</td>';
 
-			echo '<td class="init_td_manage_users init_td_manage_users_10">';
+			echo '<td class="init_td_manage_users width_10">';
 				echo 'Recettes partagées';
 			echo '</td>';
 
-			echo '<td colspan="4" class="init_td_manage_users init_td_manage_users_15">';
+			echo '<td colspan="4" class="init_td_manage_users width_15">';
 				echo 'Bilan des dépenses';
 			echo '</td>';
 		echo '</tr>';

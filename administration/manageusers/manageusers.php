@@ -85,6 +85,10 @@
       resetDesinscription($_POST);
       break;
 
+    case 'doForcerDesinscription':
+      forceDesinscription($_POST);
+      break;
+
     default:
       // Contrôle action renseignée URL
       header('location: manageusers.php?action=goConsulter');
@@ -136,6 +140,7 @@
     case 'doRefuserInscription':
     case 'doAccepterDesinscription':
     case 'doRefuserDesinscription':
+    case 'doForcerDesinscription':
     default:
       break;
   }
@@ -151,6 +156,7 @@
     case 'doRefuserInscription':
     case 'doAccepterDesinscription':
     case 'doRefuserDesinscription':
+    case 'doForcerDesinscription':      
       header('location: manageusers.php?action=goConsulter');
       break;
 

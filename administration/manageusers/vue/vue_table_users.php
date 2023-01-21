@@ -4,30 +4,34 @@
 	echo '<table class="table_manage_users">';
 		// Entête du tableau
 		echo '<tr class="init_tr_manage_users">';
-			echo '<td rowspan="2" class="init_td_manage_users init_td_manage_users_10">';
+			echo '<td rowspan="2" class="init_td_manage_users width_10">';
 				echo 'Identifiant';
 			echo '</td>';
 
-			echo '<td rowspan="2" class="init_td_manage_users init_td_manage_users_15">';
+			echo '<td rowspan="2" class="init_td_manage_users width_15">';
 				echo 'Pseudo';
 			echo '</td>';
 
-			echo '<td rowspan="2" class="init_td_manage_users init_td_manage_users_25">';
+			echo '<td rowspan="2" class="init_td_manage_users width_15">';
 				echo 'Demande';
 			echo '</td>';
 
-			echo '<td colspan="2" class="init_td_manage_users init_td_manage_users_50">';
+			echo '<td colspan="3" class="init_td_manage_users width_60">';
 				echo 'Actions';
 			echo '</td>';
 		echo '</tr>';
 
 		echo '<tr class="init_tr_manage_users">';
-			echo '<td class="init_td_manage_users init_td_manage_users_25">';
+			echo '<td class="init_td_manage_users width_20">';
 				echo 'Accepter';
 			echo '</td>';
 
-			echo '<td class="init_td_manage_users init_td_manage_users_25">';
+			echo '<td class="init_td_manage_users width_20">';
 				echo 'Refuser';
+			echo '</td>';
+
+			echo '<td class="init_td_manage_users width_20">';
+				echo 'Forcer la désinscription';
 			echo '</td>';
 		echo '</tr>';
 
@@ -39,7 +43,7 @@
 				if (!empty($listeUsersParEquipe[$referenceEquipe]))
 				{
 					echo '<tr>';
-						echo '<td class="table_old_users" colspan="5">';
+						echo '<td class="table_old_users" colspan="6">';
 							echo '<div class="banderole_left_1"></div><div class="banderole_left_2"></div>';
 	
 							if ($referenceEquipe == 'new_users')
@@ -122,7 +126,7 @@
 	
 							case 'T':
 								// Validation
-								echo '<td class="td_manage_users init_td_manage_users_25">';
+								echo '<td class="td_manage_users">';
 									echo '<form method="post" action="manageusers.php?action=doAccepterEquipe" class="form_manage_user">';
 										echo '<div class="zone_select_team">';
 											echo '<select name="team" class="select_form_manage_user" required>';
@@ -166,7 +170,7 @@
 								echo '</td>';
 	
 								// Annulation
-								echo '<td class="td_manage_users init_td_manage_users_25">';
+								echo '<td class="td_manage_users">';
 									echo '<form method="post" action="manageusers.php?action=doRefuserEquipe" class="form_manage_user">';
 										echo '<input type="hidden" name="id_user" value="' . $user->getIdentifiant() . '" />';
 										echo '<input type="hidden" name="team_user" value="' . $user->getTeam() . '" />';
@@ -178,7 +182,7 @@
 	
 							case 'I':
 								// Validation
-								echo '<td class="td_manage_users init_td_manage_users_25">';
+								echo '<td class="td_manage_users">';
 									echo '<form method="post" action="manageusers.php?action=doAccepterInscription" class="form_manage_user">';
 										echo '<div class="zone_select_team">';
 											echo '<select name="team" class="select_form_manage_user" required>';
@@ -222,7 +226,7 @@
 								echo '</td>';
 	
 								// Annulation
-								echo '<td class="td_manage_users init_td_manage_users_25">';
+								echo '<td class="td_manage_users">';
 									echo '<form method="post" action="manageusers.php?action=doRefuserInscription" class="form_manage_user">';
 										echo '<input type="hidden" name="id_user" value="' . $user->getIdentifiant() . '" />';
 										echo '<input type="hidden" name="team_user" value="' . $user->getNew_team() . '" />';
@@ -254,6 +258,18 @@
 								echo '<td colspan="2" class="td_manage_users"></td>';
 								break;
 						}
+
+						if ($user->getStatus() != 'I' AND $user->getStatus() != 'D')
+						{
+							echo '<td class="td_manage_users">';
+								echo '<form method="post" action="manageusers.php?action=doForcerDesinscription" class="form_manage_user">';
+									echo '<input type="hidden" name="id_user" value="' . $user->getIdentifiant() . '" />';
+									echo '<input type="submit" name="force_desinscription" title="Forcer la désinscription" value="" class="icone_forcer" />';
+								echo '</form>';
+							echo '</td>';
+						}
+						else
+							echo '<td class="td_manage_users"></td>';
 					echo '</tr>';
 				}
 			}
@@ -261,13 +277,13 @@
 		else
 		{
 			echo '<tr>';
-				echo '<td colspan="5" class="empty">Pas d\'utilisateurs existants...</td>';
+				echo '<td colspan="6" class="empty">Pas d\'utilisateurs existants...</td>';
 			echo '</tr>';
 		}
 
 		// Bas du tableau
 		echo '<tr>';
-			echo '<td colspan="2" class="td_manage_users_important">';
+			echo '<td colspan="3" class="td_manage_users_important">';
 				echo 'Alertes';
 			echo '</td>';
 

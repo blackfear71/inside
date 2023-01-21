@@ -146,6 +146,7 @@
 	box-shadow: 0 0 3px #7c7c7c;
 	margin-bottom: 15px;
 	border-radius: 2px;
+	overflow: hidden;
 }
 
 .titre_gestion_equipe
@@ -399,41 +400,6 @@
 	border: solid 1px #b3b3b3;
 }
 
-.init_td_manage_users_10
-{
-	width: 10%;
-}
-
-.init_td_manage_users_15
-{
-	width: 15%;
-}
-
-.init_td_manage_users_20
-{
-	width: 20%;
-}
-
-.init_td_manage_users_25
-{
-	width: 25%;
-}
-
-.init_td_manage_users_30
-{
-	width: 30%;
-}
-
-.init_td_manage_users_45
-{
-	width: 45%;
-}
-
-.init_td_manage_users_50
-{
-	width: 50%;
-}
-
 .tr_manage_users
 {
 	text-align: center;
@@ -683,6 +649,25 @@
 	background-color: #ff1937;
 	background-image: url("/inside/includes/icons/common/validate.png");
 	background-size: 25px 25px;
+	background-repeat: no-repeat;
+	background-position: center;
+	cursor: pointer;
+	overflow: hidden;
+	vertical-align: middle;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.icone_forcer
+{
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	border: 0;
+	border-radius: 2px;
+	background-color: #ff1937;
+	background-image: url("/inside/includes/icons/admin/exit.png");
+	background-size: 20px 20px;
 	background-repeat: no-repeat;
 	background-position: center;
 	cursor: pointer;

@@ -1226,6 +1226,46 @@ footer
 }
 
 /*** Tailles ***/
+.width_10
+{
+	width: 10%;
+}
+
+.width_15
+{
+	width: 15%;
+}
+
+.width_20
+{
+	width: 20%;
+}
+
+.width_25
+{
+	width: 25%;
+}
+
+.width_30
+{
+	width: 30%;
+}
+
+.width_45
+{
+	width: 45%;
+}
+
+.width_50
+{
+	width: 50%;
+}
+
+.width_60
+{
+	width: 60%;
+}
+
 .width_100
 {
 	width: 100%;

@@ -4,41 +4,41 @@
 	echo '<table class="table_manage_users">';
 		// Entête du tableau
 		echo '<tr class="init_tr_manage_users">';
-			echo '<td rowspan="2" class="init_td_manage_users init_td_manage_users_10">';
+			echo '<td rowspan="2" class="init_td_manage_users width_10">';
 				echo 'Identifiant';
 			echo '</td>';
 
-			echo '<td rowspan="2" class="init_td_manage_users init_td_manage_users_15">';
+			echo '<td rowspan="2" class="init_td_manage_users width_15">';
 				echo 'Pseudo';
 			echo '</td>';
 
-			echo '<td colspan="2" class="init_td_manage_users init_td_manage_users_30">';
+			echo '<td colspan="2" class="init_td_manage_users width_30">';
 				echo 'Bugs / évolutions';
 			echo '</td>';
 
-			echo '<td colspan="3" class="init_td_manage_users init_td_manage_users_45">';
+			echo '<td colspan="3" class="init_td_manage_users width_45">';
 				echo '#TheBox';
 			echo '</td>';
 		echo '</tr>';
 
 		echo '<tr class="init_tr_manage_users">';
-			echo '<td class="init_td_manage_users init_td_manage_users_15">';
+			echo '<td class="init_td_manage_users width_15">';
 				echo 'Nombre de demandes (bugs / évolutions)';
 			echo '</td>';
 
-			echo '<td class="init_td_manage_users init_td_manage_users_15">';
+			echo '<td class="init_td_manage_users width_15">';
 				echo 'Nombre de demandes résolues (bugs / évolutions)';
 			echo '</td>';
 
-			echo '<td class="init_td_manage_users init_td_manage_users_15">';
+			echo '<td class="init_td_manage_users width_15">';
 				echo 'Nombre d\'idées publiées';
 			echo '</td>';
 
-			echo '<td class="init_td_manage_users init_td_manage_users_15">';
+			echo '<td class="init_td_manage_users width_15">';
 				echo 'Nombre d\'idées en charge';
 			echo '</td>';
 
-			echo '<td class="init_td_manage_users init_td_manage_users_15">';
+			echo '<td class="init_td_manage_users width_15">';
 				echo 'Nombre d\'idées terminées ou rejetées';
 			echo '</td>';
 		echo '</tr>';
