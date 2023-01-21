@@ -714,27 +714,14 @@
     }
   }
 
-  // METIER : Refus désinscription
+  // METIER : Mise à jour statut utilisateur (refus désinscription ou forçage désinscription) 
   // RETOUR : Aucun
-  function resetDesinscription($post)
+  function updateStatusUser($post, $status)
   {
     // Récupération des données
     $identifiant = $post['id_user'];
-    $status      = 'U';
 
-    // Mise à jour à "U" du statut
-    physiqueUpdateStatusUser($identifiant, $status);
-  }
-
-  // METIER : Forçage désinscription
-  // RETOUR : Aucun
-  function forceDesinscription($post)
-  {
-    // Récupération des données
-    $identifiant = $post['id_user'];
-    $status      = 'D';
-
-    // Mise à jour à "D" du statut
+    // Mise à jour du statut
     physiqueUpdateStatusUser($identifiant, $status);
   }
 ?>

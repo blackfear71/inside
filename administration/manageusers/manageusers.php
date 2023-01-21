@@ -82,11 +82,11 @@
 
     case 'doRefuserDesinscription':
       // Refus de la désinscription
-      resetDesinscription($_POST);
+      updateStatusUser($_POST, 'U');
       break;
 
     case 'doForcerDesinscription':
-      forceDesinscription($_POST);
+      updateStatusUser($_POST, 'D');
       break;
 
     default:
