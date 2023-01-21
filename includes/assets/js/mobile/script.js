@@ -501,11 +501,11 @@ function initPositionCelsius()
   {
     // Positionnement en fonction de l'orientation
     if (screen.height > screen.width)
-      $('.celsius').css('top', 'calc(100% - 16vh)');
+      $('.celsius').css('top', '84vh');
     else
-      $('.celsius').css('top', 'calc(100% - 9vh)');
+      $('.celsius').css('top', '91vh');
 
-    $('.celsius').css('left', 'calc(100% - 9vh)');
+    $('.celsius').css('left', '82vw');
 
     // Définition des cookies
     setCookie('celsius[positionX]', $('.celsius').offset().left);
