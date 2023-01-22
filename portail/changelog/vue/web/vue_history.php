@@ -120,6 +120,17 @@
       echo '</div>';
     echo '</div>';
 
+    // PHP 7.4
+    echo '<div class="event_history">';
+      echo '<div class="date_history">20 Septembre 2022</div><div class="trait_history"></div>';
+
+      echo '<div class="details_history">';
+        echo 'Horreur ! Le site ne marche presque plus ! Mais que se passe-t-il ??? Alors rassurons-nous ce n\'est pas la fin, seulement le serveur qui devenait petit à petit obsolète... Les contraintes
+        techniques initiales avaient poussé à utiliser une version 5 de PHP qui venait d\'arriver au terme de son support. Heureusement votre serviteur s\'est démené pour mettre à jour la version de PHP en 7.4,
+        ce qui devrait garantir la pérénité du site pendant de nombreuses années encore ! Profitez-en !';
+      echo '</div>';
+    echo '</div>';
+
     // A vous de jouer
     echo '<div class="event_history">';
       echo '<div class="date_history">' . date('j') . ' ' . formatMonthForDisplay(date('m')) . ' ' . date('Y') . '</div><div class="trait_history"></div>';
