@@ -48,11 +48,11 @@
           echo '<div class="titre_section"><img src="../../includes/icons/admin/send_grey.png" alt="send_grey" class="logo_titre_section" /><div class="texte_titre_section">Ajouter une alerte</div></div>';
 
           echo '<form method="post" action="alerts.php?action=doAjouter" class="form_saisie_alert">';
-            echo '<table class="table_saisie_alert">';
+            echo '<table class="table_saisie_alerte">';
               echo '<tr>';
                 // Type
-                echo '<td class="td_saisie_typ">';
-                  echo '<select name="type_alert" class="saisie_alert_typ" required>';
+                echo '<td class="td_saisie_type">';
+                  echo '<select name="type_alert" class="saisie_alerte_type" required>';
                     echo '<option value="" hidden>Type d\'alerte</option>';
 
                     if ($_SESSION['save']['type_alert'] == 'info')
@@ -68,25 +68,25 @@
                 echo '</td>';
 
                 // Catégorie
-                echo '<td class="td_saisie_alert_cat">';
-                  echo '<input type="text" name="category_alert" placeholder="Catégorie" value="' . $_SESSION['save']['category_alert'] . '" maxlength="100" class="saisie_alert_cat" required />';
+                echo '<td class="td_saisie_alerte_categorie">';
+                  echo '<input type="text" name="category_alert" placeholder="Catégorie" value="' . $_SESSION['save']['category_alert'] . '" maxlength="100" class="saisie_alerte_categorie" required />';
                 echo '</td>';
 
                 // Référence
-                echo '<td class="td_saisie_alert_ref">';
-                  echo '<input type="text" name="reference_alert" placeholder="Référence" value="' . $_SESSION['save']['reference_alert'] . '" maxlength="100" class="saisie_alert_ref" required />';
+                echo '<td class="td_saisie_alerte_reference">';
+                  echo '<input type="text" name="reference_alert" placeholder="Référence" value="' . $_SESSION['save']['reference_alert'] . '" maxlength="100" class="saisie_alerte_reference" required />';
                 echo '</td>';
 
                 // Bouton envoi
-                echo '<td rowspan="2" class="td_saisie_alert_env">';
+                echo '<td rowspan="2" class="td_saisie_alerte_envoi">';
                   echo '<input type="submit" name="send" value="" class="send_alert" />';
                 echo '</td>';
               echo '</tr>';
 
               echo '<tr>';
                 // Message
-                echo '<td colspan="3" class="td_saisie_alert_mes">';
-                  echo '<textarea placeholder="Message d\'alerte" name="message_alert" class="saisie_alert_mes" required>' . $_SESSION['save']['message_alert'] . '</textarea>';
+                echo '<td colspan="3" class="td_saisie_alerte_message">';
+                  echo '<textarea placeholder="Message d\'alerte" name="message_alert" class="saisie_alerte_message" required>' . $_SESSION['save']['message_alert'] . '</textarea>';
                 echo '</td>';
               echo '</tr>';
             echo '</table>';
@@ -97,13 +97,13 @@
           /***********************/
           echo '<div class="titre_section"><img src="../../includes/icons/admin/alerts_grey.png" alt="alerts_grey" class="logo_titre_section" /><div class="texte_titre_section">Liste des alertes</div></div>';
 
-          echo '<table class="table_alerts">';
-            echo '<tr class="title_table_alerts">';
-              echo '<td class="title_type_alerts">Type</td>';
-              echo '<td class="title_category_alerts">Catégorie</td>';
-              echo '<td class="title_reference_alerts">Référence</td>';
-              echo '<td class="title_message_alerts">Message</td>';
-              echo '<td class="title_actions_alerts">Actions</td>';
+          echo '<table class="table_alertes">';
+            echo '<tr>';
+              echo '<td class="width_10">Type</td>';
+              echo '<td class="width_15">Catégorie</td>';
+              echo '<td class="width_15">Référence</td>';
+              echo '<td class="width_50">Message</td>';
+              echo '<td class="width_10">Actions</td>';
             echo '</tr>';
 
             if (!empty($listeAlertes))
@@ -115,15 +115,15 @@
                 /***************************************************/
                 echo '<tr id="modifier_alerte_2_' . $alerte->getId() . '">';
                   // Type
-                  echo '<td class="td_type_alerts" id=' . $alerte->getId() . '>';
+                  echo '<td class="td_type_alerte" id=' . $alerte->getId() . '>';
                     switch ($alerte->getType())
                     {
                       case 'info':
-                        echo '<img src="../../includes/icons/common/information.png" alt="information" title="Information" class="img_alert" />';
+                        echo '<img src="../../includes/icons/common/information.png" alt="information" title="Information" class="image_alerte" />';
                         break;
 
                       case 'erreur':
-                        echo '<img src="../../includes/icons/common/alert.png" alt="alert" title="Alerte" class="img_alert" />';
+                        echo '<img src="../../includes/icons/common/alert.png" alt="alert" title="Alerte" class="image_alerte" />';
                         break;
 
                       default:
@@ -132,23 +132,23 @@
                   echo '</td>';
 
                   // Catégorie
-                  echo '<td class="td_alerts">' . $alerte->getCategory() . '</td>';
+                  echo '<td class="td_message_alerte">' . $alerte->getCategory() . '</td>';
 
                   // Référence
-                  echo '<td class="td_reference_alerts">' . $alerte->getAlert() . '</td>';
+                  echo '<td class="td_reference_alerte">' . $alerte->getAlert() . '</td>';
 
                   // Message
-                  echo '<td class="td_alerts">' . $alerte->getMessage() . '</td>';
+                  echo '<td class="td_message_alerte">' . $alerte->getMessage() . '</td>';
 
                   // Boutons d'action
-                  echo '<td class="actions_alerte">';
+                  echo '<td class="td_actions_alerte">';
                     // Modification ligne
-                    echo '<span class="link_action_alerte">';
+                    echo '<span class="lien_action_alerte">';
                       echo '<a id="alerte_' . $alerte->getId() . '" title="Modifier la ligne" class="icone_modifier_alerte modifierAlerte"></a>';
                     echo '</span>';
 
                     // Suppression ligne
-                    echo '<form id="delete_alert_' . $alerte->getId() . '" method="post" action="alerts.php?action=doSupprimer" class="link_action_alerte">';
+                    echo '<form id="delete_alert_' . $alerte->getId() . '" method="post" action="alerts.php?action=doSupprimer" class="lien_action_alerte">';
                       echo '<input type="hidden" name="id_alert" value="' . $alerte->getId() . '" />';
                       echo '<input type="submit" name="delete_alert" value="" title="Supprimer l\'alerte" class="icone_supprimer_alerte eventConfirm" />';
                       echo '<input type="hidden" value="Supprimer l\'alerte "' . $alerte->getAlert() . '" (' . $alerte->getCategory() . ') ?" class="eventMessage" />';
@@ -164,8 +164,8 @@
                     echo '<input type="hidden" name="id_alert" value="' . $alerte->getId() . '" />';
 
                     // Type
-                    echo '<td class="td_type_alerts">';
-                      echo '<select name="type_alert" class="saisie_alert_typ" required>';
+                    echo '<td class="td_type_alerte">';
+                      echo '<select name="type_alert" required>';
                         echo '<option value="" hidden>Type d\'alerte</option>';
 
                         if ($alerte->getType() == 'info')
@@ -181,29 +181,29 @@
                     echo '</td>';
 
                     // Catégorie
-                    echo '<td class="td_alerts">';
-                      echo '<input type="text" name="category_alert" placeholder="Catégorie" value="' . $alerte->getCategory() . '" maxlength="100" class="saisie_alert_cat" required />';
+                    echo '<td class="td_message_alerte">';
+                      echo '<input type="text" name="category_alert" placeholder="Catégorie" value="' . $alerte->getCategory() . '" maxlength="100" required />';
                     echo '</td>';
 
                     // Référence
-                    echo '<td class="td_alerts">';
-                      echo '<input type="text" name="reference_alert" placeholder="Référence" value="' . $alerte->getAlert() . '" maxlength="100" class="saisie_alert_ref" required />';
+                    echo '<td class="td_message_alerte">';
+                      echo '<input type="text" name="reference_alert" placeholder="Référence" value="' . $alerte->getAlert() . '" maxlength="100" required />';
                     echo '</td>';
 
                     // Message
-                    echo '<td class="td_alerts">';
-                      echo '<textarea placeholder="Message d\'alerte" name="message_alert" class="saisie_alert_mes" required>' . $alerte->getMessage() . '</textarea>';
+                    echo '<td class="td_message_alerte">';
+                      echo '<textarea placeholder="Message d\'alerte" name="message_alert" required>' . $alerte->getMessage() . '</textarea>';
                     echo '</td>';
 
                     // Boutons d'action
-                    echo '<td class="actions_alerte">';
+                    echo '<td class="td_actions_alerte">';
                       // Validation modification
-                      echo '<span class="link_action_alerte">';
+                      echo '<span class="lien_action_alerte">';
                         echo '<input type="submit" name="update_alert" value="" title="Valider la modification" class="icone_valider_alerte" />';
                       echo '</span>';
 
                       // Annulation modification ligne
-                      echo '<span class="link_action_alerte">';
+                      echo '<span class="lien_action_alerte">';
                         echo '<a id="annuler_alerte_' . $alerte->getId() . '" title="Annuler la modification" class="icone_annuler_alerte annulerAlerte"></a>';
                       echo '</span>';
                     echo '</td>';
