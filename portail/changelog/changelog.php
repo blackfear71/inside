@@ -44,6 +44,9 @@
     case 'goConsulterHistoire':
       // Récupération des onglets (années)
       $onglets = getOnglets();
+
+      // Récupération de l'histoire du site
+      $histoires = getHistory();
       break;
 
     default:
@@ -83,6 +86,18 @@
       }
 
       unset($year);
+
+      foreach ($histoires as &$histoire)
+      {
+        foreach ($histoire as &$contenu)
+        {
+          $contenu = htmlspecialchars($contenu);
+        }
+
+        unset($contenu);
+      }
+
+      unset($histoire);
       break;
 
     default:
