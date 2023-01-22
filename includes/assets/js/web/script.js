@@ -820,6 +820,40 @@ function loadingForm(zone)
   });
 }
 
+// Affiche ou masque une section
+function afficherMasquerSection(lien, zone)
+{
+  var angle;
+
+  // Calcul de l'angle
+  var fleche = lien.children('.fleche_bouton_fold');
+  var matrix = fleche.css('transform');
+
+  if (matrix !== 'none')
+  {
+    var values = matrix.split('(')[1].split(')')[0].split(',');
+    var a      = values[0];
+    var b      = values[1];
+    angle      = Math.round(Math.atan2(b, a) * (180 / Math.PI));
+
+    if (angle < 0)
+      angle += 360;
+  }
+  else
+    angle = 0;
+
+  fleche.css('transition', 'all ease 0.2s');
+
+  // Gestion de l'affichage
+  if (angle == 0)
+    fleche.css('transform', 'rotate(-90deg)');
+  else
+    fleche.css('transform', 'rotate(0deg)');
+
+  // Affichage ou masquage de la zone
+  afficherMasquerIdWithDelay(zone);
+}
+
 // Affiche le détail des notifications
 function showNotifications()
 {

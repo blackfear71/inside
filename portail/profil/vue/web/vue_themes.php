@@ -34,17 +34,25 @@
   /**********/
   echo '<div class="zone_themes_user" style="display: none;">';
     // Récompenses de niveaux
-    echo '<div class="titre_section"><img src="../../includes/icons/profil/rewards_grey.png" alt="rewards_grey" class="logo_titre_section" />';
-      echo '<div class="texte_titre_section">';
-        echo 'Mes récompenses';
+    echo '<div class="titre_section">';
+      echo '<img src="../../includes/icons/profil/rewards_grey.png" alt="rewards_grey" class="logo_titre_section" />';
+      
+      if (!empty($themesUsers))
+      {
+        echo '<div class="texte_titre_section_fold">';
+          echo 'Mes récompenses';
+        echo '</div>';
 
-        if (!empty($themesUsers))
-        {
-          echo '<div class="zone_actions">';
-            echo '<a id="fold_themes_user" class="bouton_fold">Plier</a>';
-          echo '</div>';
-        }
-      echo '</div>';
+        echo '<a id="fold_themes_user" class="bouton_fold">';
+          echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_bouton_fold" />';
+        echo '</a>';
+      }
+      else
+      {
+        echo '<div class="texte_titre_section">';
+          echo 'Mes récompenses';
+        echo '</div>';
+      }
     echo '</div>';
 
     if (!empty($themesUsers))
@@ -108,17 +116,25 @@
       echo '<div class="empty">Pas de thèmes disponibles, gagnez un peu d\'expérience...</div>';
 
     // Thèmes de missions
-    echo '<div class="titre_section"><img src="../../includes/icons/profil/missions_grey.png" alt="missions_grey" class="logo_titre_section" />';
-      echo '<div class="texte_titre_section">';
-        echo 'Les thèmes des missions';
+    echo '<div class="titre_section">';
+      echo '<img src="../../includes/icons/profil/missions_grey.png" alt="missions_grey" class="logo_titre_section" />';
 
-        if (!empty($themesMissions))
-        {
-          echo '<div class="zone_actions">';
-            echo '<a id="fold_themes_missions" class="bouton_fold">Plier</a>';
-          echo '</div>';
-        }
-      echo '</div>';
+      if (!empty($themesMissions))
+      {
+        echo '<div class="texte_titre_section_fold">';
+          echo 'Les thèmes des missions';
+        echo '</div>';
+
+        echo '<a id="fold_themes_missions" class="bouton_fold">';
+          echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_bouton_fold" />';
+        echo '</a>';
+      }
+      else
+      {
+        echo '<div class="texte_titre_section">';
+          echo 'Les thèmes des missions';
+        echo '</div>';
+      }
     echo '</div>';
 
     if (!empty($themesMissions))

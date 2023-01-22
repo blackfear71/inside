@@ -526,8 +526,7 @@ header
 	display: inline-block;
 	height: 25px;
 	width: 25px;
-	vertical-align: top;
-	margin-top: 5px;
+	vertical-align: middle;
 }
 
 .texte_titre_section
@@ -536,6 +535,34 @@ header
 	width: calc(100% - 35px);
 	margin-left: 10px;
 	vertical-align: middle;
+}
+
+.texte_titre_section_fold
+{
+	display: inline-block;
+	width: calc(100% - 70px);
+	margin-left: 10px;
+	vertical-align: middle;
+}
+
+.bouton_fold
+{
+	display: inline-block;
+	height: 25px;
+	margin-left: 10px;
+	vertical-align: middle;
+	cursor: pointer;
+}
+
+.fleche_bouton_fold
+{
+	height: 25px;
+	width: 25px;
+}
+
+.angle_fleche_bouton_fold
+{
+	transform: rotate(-90deg);
 }
 
 /*** Ombre ancres ***/

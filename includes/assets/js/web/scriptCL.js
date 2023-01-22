@@ -8,9 +8,10 @@ $(function()
   // Plie ou déplie les journaux
   $('.bouton_fold').click(function()
   {
-    var idFold = $(this).attr('id').replace('fold_', '');
+    var idZone = $(this).attr('id').replace('fold_', '');
 
-    afficherMasquerChangeLog(idFold);
+    afficherMasquerSection($(this), idZone);
+    initMasonry(0);
   });
 });
 
@@ -115,22 +116,6 @@ function adaptHistory()
 
     $(this).children('.trait_history').css('width', taille_trait + 'px');
   });
-}
-
-// Affiche ou masque un journal
-function afficherMasquerChangeLog(id)
-{
-  if ($('#' + id).css('display') == 'block')
-  {
-    $('#' + id).css('display', 'none');
-    $('#fold_' + id).html('Déplier');
-  }
-  else
-  {
-    $('#' + id).css('display', 'block');
-    $('#fold_' + id).html('Plier');
-    initMasonry(0);
-  }
 }
 
 // Initialisation manuelle de "Masonry"

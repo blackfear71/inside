@@ -88,9 +88,9 @@ $(function()
   // Plie ou déplie les thèmes
   $('#fold_themes_user, #fold_themes_missions').click(function()
   {
-    var idFold = $(this).attr('id').replace('fold_', '');
+    var idZone = $(this).attr('id').replace('fold_', '');
 
-    afficherMasquerThemes(idFold);
+    afficherMasquerSection($(this), idZone);
   });
 
   // Affiche un aperçu d'un thème
@@ -468,19 +468,4 @@ function showSuccess(id)
   $('body').append(html);
 
   $('#zoom_succes').fadeIn(200);
-}
-
-// Affiche ou masque les thèmes
-function afficherMasquerThemes(id)
-{
-  if ($('#' + id).css('display') == 'block')
-  {
-    $('#' + id).css('display', 'none');
-    $('#fold_' + id).html('Déplier');
-  }
-  else
-  {
-    $('#' + id).css('display', 'block');
-    $('#fold_' + id).html('Plier');
-  }
 }
