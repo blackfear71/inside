@@ -1998,6 +1998,7 @@
 	border-radius: 2px;
 	margin-bottom: 5px;
 	background-color: #262626;
+	box-shadow: 0 0 3px #7c7c7c;
 }
 
 .titre_mission
@@ -2699,15 +2700,20 @@
 	vertical-align: middle;
 }
 
+.zone_theme_saisie
+{
+	display: block;
+	margin-bottom: 8px;
+	box-shadow: 0 0 3px #7c7c7c;
+	border-radius: 2px;
+}
+
 .zone_theme_saisie_titre
 {
 	display: block;
-	margin-top: 8px;
 	width: 480px;
 	background-color: #d3d3d3;
 	padding: 10px;
-	border-top-left-radius: 2px;
-	border-top-right-radius: 2px;
 }
 
 .theme_titre_saisie
@@ -2730,7 +2736,6 @@
 	padding: 10px;
 	width: calc(70% - 20px);
 	background-color: #b3b3b3;
-	border-bottom-left-radius: 2px;
 	font-family: inside_font_regular, Verdana, sans-serif;
 	color: #262626;
 	vertical-align: middle;
@@ -2742,7 +2747,6 @@
 	padding: 10px;
 	width: calc(30% - 20px);
 	background-color: #c3c3c3;
-	border-bottom-right-radius: 2px;
 	font-family: inside_font_regular, Verdana, sans-serif;
 	color: #262626;
 	vertical-align: middle;
@@ -2755,7 +2759,6 @@
 	padding: 10px;
 	width: calc(500px / 3 - 20px);
 	background-color: #b3b3b3;
-	border-bottom-left-radius: 2px;
 	font-family: inside_font_regular, Verdana, sans-serif;
 	color: #262626;
 	vertical-align: middle;
@@ -2767,7 +2770,6 @@
 	padding: 10px;
 	width: calc((500px / 3) * 2 - 20px);
 	background-color: #c3c3c3;
-	border-bottom-right-radius: 2px;
 	font-family: inside_font_regular, Verdana, sans-serif;
 	color: #262626;
 	vertical-align: middle;
@@ -2820,6 +2822,14 @@
 }
 
 /*** Visualisation thème ***/
+.zone_theme_affichage
+{
+	display: block;
+	box-shadow: 0 0 3px #7c7c7c;
+	border-radius: 2px;
+	overflow: hidden;
+}
+
 .zone_header_theme
 {
 	width: 500px;
@@ -2851,15 +2861,21 @@
 	display: block;
 }
 
-.zone_theme_titre
+.zone_theme_infos
 {
 	display: block;
 	margin-top: 5px;
+	box-shadow: 0 0 3px #7c7c7c;
+	border-radius: 2px;
+	overflow: hidden;
+}
+
+.zone_theme_titre
+{
+	display: block;
 	width: 480px;
 	background-color: #d3d3d3;
 	padding: 10px;
-	border-top-left-radius: 2px;
-	border-top-right-radius: 2px;
 }
 
 .theme_titre
@@ -2877,7 +2893,6 @@
 	padding: 10px;
 	width: calc(70% - 20px);
 	background-color: #b3b3b3;
-	border-bottom-left-radius: 2px;
 	font-family: inside_font_regular, Verdana, sans-serif;
 	color: #262626;
 	vertical-align: middle;
@@ -2889,7 +2904,6 @@
 	padding: 10px;
 	width: calc(500px / 3 - 20px);
 	background-color: #b3b3b3;
-	border-bottom-left-radius: 2px;
 	font-family: inside_font_regular, Verdana, sans-serif;
 	color: #262626;
 	vertical-align: middle;
@@ -2901,7 +2915,6 @@
 	padding: 10px;
 	width: calc(30% - 20px);
 	background-color: #c3c3c3;
-	border-bottom-right-radius: 2px;
 	font-family: inside_font_regular, Verdana, sans-serif;
 	color: #262626;
 	vertical-align: middle;
@@ -2927,7 +2940,6 @@
 	padding: 10px;
 	width: calc((500px / 3) * 2 - 20px);
 	background-color: #c3c3c3;
-	border-bottom-right-radius: 2px;
 	font-family: inside_font_regular, Verdana, sans-serif;
 	color: #262626;
 	vertical-align: middle;
@@ -2967,12 +2979,9 @@
 .zone_theme_modification_titre
 {
 	display: block;
-	margin-top: 5px;
 	width: 480px;
 	background-color: #d3d3d3;
 	padding: 7px 10px 7px 10px;
-	border-top-left-radius: 2px;
-	border-top-right-radius: 2px;
 }
 
 .titre_theme_update
@@ -2993,7 +3002,6 @@
 	padding: 7px 10px 7px 10px;
 	width: calc(30% - 20px);
 	background-color: #c3c3c3;
-	border-bottom-right-radius: 2px;
 	font-family: inside_font_regular, Verdana, sans-serif;
 	color: #262626;
 	vertical-align: middle;
@@ -3006,7 +3014,6 @@
 	padding: 7px 10px 7px 10px;
 	width: calc((500px / 3) * 2 - 20px);
 	background-color: #c3c3c3;
-	border-bottom-right-radius: 2px;
 	font-family: inside_font_regular, Verdana, sans-serif;
 	color: #262626;
 	vertical-align: middle;
