@@ -157,7 +157,7 @@
 
   // METIER : Lecture des prochaines sorties cinéma organisées
   // RETOUR : Liste des prochaines sorties cinéma organisées
-  function getSortiesOrganisees($year, $isMobile)
+  function getSortiesOrganisees($year, $equipe, $isMobile)
   {
     // Initialisations
     if ($isMobile == true)
@@ -166,7 +166,7 @@
       $limite = 5;
 
     // Récupération de la liste des films avec une sortie cinéma organisée
-    $listeFilmsSorties = physiqueSortiesOrganisees($year, $limite);
+    $listeFilmsSorties = physiqueSortiesOrganisees($year, $equipe, $limite);
 
     // Retour
     return $listeFilmsSorties;
