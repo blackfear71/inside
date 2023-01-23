@@ -91,6 +91,11 @@ $(function()
     var idZone = $(this).attr('id').replace('fold_', '');
 
     afficherMasquerSection($(this), idZone);
+
+    if ($(this).attr('id') == 'fold_themes_user')
+      initMasonryThemes('#themes_user');
+    else
+      initMasonryThemes('#themes_missions');
   });
 
   // Affiche un aperçu d'un thème
@@ -186,7 +191,14 @@ $(window).on('load', function()
   {
     $('.zone_profil_contributions').masonry().masonry('destroy');
 
-    initMasonry();
+    $('.zone_profil_contributions').masonry({
+      // Options
+      itemSelector: '.zone_contributions',
+      columnWidth: 360,
+      fitWidth: true,
+      gutter: 40,
+      horizontalOrder: true
+    });
 
     // On associe une classe pour y ajouter une transition dans le css
     $('.zone_profil_contributions').addClass('masonry');
@@ -274,17 +286,22 @@ $(window).on('load', function()
 /*****************/
 /*** Fonctions ***/
 /*****************/
-// Initialisation manuelle de "Masonry"
-function initMasonry()
+// Initialisation manuelle de "Masonry" (thèmes)
+function initMasonryThemes(zone)
 {
-  $('.zone_profil_contributions').masonry({
+  $(zone).masonry({
     // Options
-    itemSelector: '.zone_contributions',
-    columnWidth: 360,
+    itemSelector: '.zone_theme',
+    columnWidth: 500,
     fitWidth: true,
-    gutter: 40,
-    horizontalOrder: true
+    gutter: 20,
+    horizontalOrder: true,
+    transitionDuration: 0
   });
+
+  // Evite le clignotement des images à l'application de la masonry
+  $(zone).css('opacity', '0');
+  $(zone).css('transition', 'opacity 0s ease');
 }
 
 // Adaptations du profil sur mobile
