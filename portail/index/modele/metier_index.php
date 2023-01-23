@@ -191,7 +191,7 @@
     if ($post['equipe'] == 'other')
     {
       $newTeam        = 'temp_' . rand();
-      $labelTeam      = $post['autre_equipe'];
+      $labelTeam      = trim($post['autre_equipe']);
       $activationTeam = 'N';
     }
     else

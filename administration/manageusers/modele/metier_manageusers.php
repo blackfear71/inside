@@ -509,8 +509,8 @@
 
     if ($post['team'] == 'other')
     {
-      $teamReference = $post['team_reference'];
-      $nameReference = $post['team_name'];
+      $teamReference = trim($post['team_reference']);
+      $nameReference = trim($post['team_name']);
     }
     else
       $teamReference = $post['team'];

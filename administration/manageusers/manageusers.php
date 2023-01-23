@@ -58,10 +58,12 @@
       break;
 
     case 'doAccepterEquipe':
+      // Validation changement d'équipe
       acceptEquipe($_POST, true);
       break;
 
     case 'doRefuserEquipe':
+      // Annulation changement d'équipe
       declineEquipe($_POST);
       break;
 
@@ -71,7 +73,7 @@
       break;
 
     case 'doRefuserInscription':
-      // Refus de l'inscription
+      // Annulation de l'inscription
       declineInscription($_POST);
       break;
 
@@ -81,11 +83,12 @@
       break;
 
     case 'doRefuserDesinscription':
-      // Refus de la désinscription
+      // Annulation de la désinscription
       updateStatusUser($_POST, 'U');
       break;
 
     case 'doForcerDesinscription':
+      // Forçage de la désinscription
       updateStatusUser($_POST, 'D');
       break;
 
