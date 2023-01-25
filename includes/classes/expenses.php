@@ -41,7 +41,7 @@
       return $expenses;
     }
 
-    protected function fill ($data)
+    protected function fill($data)
     {
       if (isset($data['id']))
         $this->id      = $data['id'];
@@ -253,7 +253,7 @@
       return $expenses;
     }
 
-    protected function fill ($data)
+    protected function fill($data)
     {
       if (isset($data['id']))
         $this->id          = $data['id'];

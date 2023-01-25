@@ -45,7 +45,7 @@
       return $restaurant;
     }
 
-    protected function fill ($data)
+    protected function fill($data)
     {
       if (isset($data['id']))
         $this->id           = $data['id'];
@@ -330,7 +330,7 @@
       return $proposition;
     }
 
-    protected function fill ($data)
+    protected function fill($data)
     {
       if (isset($data['id']))
         $this->id            = $data['id'];
@@ -789,7 +789,7 @@
       return $choix;
     }
 
-    protected function fill ($data)
+    protected function fill($data)
     {
       if (isset($data['id']))
         $this->id            = $data['id'];

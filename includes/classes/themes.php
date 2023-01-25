@@ -33,7 +33,7 @@
       return $theme;
     }
 
-    protected function fill ($data)
+    protected function fill($data)
     {
       if (isset($data['id']))
         $this->id        = $data['id'];

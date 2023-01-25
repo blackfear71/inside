@@ -29,7 +29,7 @@
       return $generatorParameters;
     }
 
-    protected function fill ($data)
+    protected function fill($data)
     {
       if (isset($data['nom_section']))
         $this->nom_section       = $data['nom_section'];
@@ -159,7 +159,7 @@
       return $generatorOptions;
     }
 
-    protected function fill ($data)
+    protected function fill($data)
     {
       if (isset($data['option']))
         $this->option    = $data['option'];

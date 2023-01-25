@@ -49,7 +49,7 @@
       return $profile;
     }
 
-    protected function fill ($data)
+    protected function fill($data)
     {
       if (isset($data['id']))
         $this->id          = $data['id'];
@@ -423,7 +423,7 @@
       return $statistiques;
     }
 
-    protected function fill ($data)
+    protected function fill($data)
     {
       if (isset($data['nb_films_ajoutes']))
         $this->nb_films_ajoutes = $data['nb_films_ajoutes'];
@@ -621,7 +621,7 @@
       return $preferences;
     }
 
-    protected function fill ($data)
+    protected function fill($data)
     {
       if (isset($data['id']))
         $this->id                     = $data['id'];

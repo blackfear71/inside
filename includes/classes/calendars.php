@@ -35,7 +35,7 @@
       return $calendar;
     }
 
-    protected function fill ($data)
+    protected function fill($data)
     {
       if (isset($data['id']))
         $this->id        = $data['id'];
@@ -174,7 +174,7 @@
       return $calendar;
     }
 
-    protected function fill ($data)
+    protected function fill($data)
     {
       if (isset($data['id']))
         $this->id        = $data['id'];
@@ -284,7 +284,7 @@
       return $autorisation;
     }
 
-    protected function fill ($data)
+    protected function fill($data)
     {
       if (isset($data['identifiant']))
         $this->identifiant      = $data['identifiant'];

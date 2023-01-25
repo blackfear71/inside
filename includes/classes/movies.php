@@ -69,7 +69,7 @@
       return $movie;
     }
 
-    protected function fill ($data)
+    protected function fill($data)
     {
       if (isset($data['id']))
         $this->id              = $data['id'];
@@ -502,7 +502,7 @@
       return $stars;
     }
 
-    protected function fill ($data)
+    protected function fill($data)
     {
       if (isset($data['id']))
         $this->id             = $data['id'];
@@ -655,7 +655,7 @@
       return $comments;
     }
 
-    protected function fill ($data)
+    protected function fill($data)
     {
       if (isset($data['id']))
         $this->id      = $data['id'];

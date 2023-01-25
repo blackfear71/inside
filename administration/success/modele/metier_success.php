@@ -572,9 +572,9 @@
             case 'level_5':
             case 'level_10':
               $listeConditions = array(array('operator' => '',
-                                            'column'   => 'identifiant',
-                                            'test'     => '=',
-                                            'value'    => $user->getIdentifiant()));
+                                             'column'   => 'identifiant',
+                                             'test'     => '=',
+                                             'value'    => $user->getIdentifiant()));
 
               $experience = physiqueValueSuccess('users', $listeConditions, 'experience');
 

@@ -27,13 +27,16 @@
       return $news;
     }
 
-    protected function fill ($data)
+    protected function fill($data)
     {
       if (isset($data['title']))
         $this->title   = $data['title'];
 
       if (isset($data['content']))
         $this->content = $data['content'];
+
+      if (isset($data['details']))
+        $this->details = $data['details'];
 
       if (isset($data['logo']))
         $this->logo    = $data['logo'];
