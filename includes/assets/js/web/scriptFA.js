@@ -253,6 +253,21 @@ $(function()
     scrollToId(idLieu, offset, shadow);
   });
 
+  // Plie ou déplie les lieux
+  $('.bouton_fold').click(function()
+  {
+    var idZone = $(this).attr('id').replace('fold_', '');
+
+    afficherMasquerSection($(this), idZone);
+
+    // Réinitialisation Masonry
+    initMasonry();
+
+    // Evite le clignotement des images à l'application de la masonry
+    $('#' + idZone).css('opacity', '0');
+    $('#' + idZone).css('transition', 'opacity 0s ease');
+  });
+
   // Affiche la description longue d'un restaurant
   $('.descriptionRestaurant').click(function()
   {

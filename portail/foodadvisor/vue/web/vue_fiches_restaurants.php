@@ -7,9 +7,18 @@
     {
       foreach ($listeRestaurants as $lieu => $restaurantsParLieux)
       {
-        echo '<div class="titre_section" id="' . formatId($lieu) . '"><img src="../../includes/icons/foodadvisor/location_grey.png" alt="location" class="logo_titre_section" /><div class="texte_titre_section">' . $lieu . '</div></div>';
+        // Titre
+        echo '<div class="titre_section" id="' . formatId($lieu) . '">';
+          echo '<img src="../../includes/icons/foodadvisor/location_grey.png" alt="location" class="logo_titre_section" />';
+          echo '<div class="texte_titre_section_fold">' . $lieu . '</div>';
 
-        echo '<div class="zone_fiches_restaurants">';
+          echo '<a id="fold_fiches_' . formatId($lieu) . '" class="bouton_fold">';
+            echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_bouton_fold" />';
+          echo '</a>';
+        echo '</div>';
+
+        // Fiches
+        echo '<div class="zone_fiches_restaurants" id="fiches_' . formatId($lieu) . '">';
           foreach ($restaurantsParLieux as $restaurant)
           {
             /*********************************************/
