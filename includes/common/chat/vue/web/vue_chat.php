@@ -12,7 +12,7 @@
 
       echo '<a id="zone_hide_chat" class="lien_reduire_chat">';
         echo '<div class="triangle_reduire_chat"></div>';
-        echo '<div id="hide_chat" class="reduire_chat"></div>';
+        echo '<img src="/inside/includes/icons/common/open.png" alt="open" id="hide_chat" class="reduire_chat" />';
       echo '</a>';
     echo '</div>';
 

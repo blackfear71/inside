@@ -74,7 +74,7 @@
           echo '<div id="titre_news_portail" class="titre_section">';
             echo '<img src="../../includes/icons/common/inside_red.png" alt="inside_red" class="logo_titre_section" />';
             echo '<div class="texte_titre_section_fleche">INSIDE News<div class="count_news">' . count($news) . '</div></div>';
-            echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section angle_fleche_titre_section" />';
+            echo '<img src="../../includes/icons/common/open_grey.png" alt="open_grey" class="fleche_titre_section angle_fleche_titre_section" />';
           echo '</div>';
 
           // Boutons news

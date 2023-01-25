@@ -7,7 +7,7 @@
     echo '<div id="titre_preferences_themes" class="titre_section">';
       echo '<img src="../../includes/icons/common/inside_grey.png" alt="inside_grey" class="logo_titre_section" />';
       echo '<div class="texte_titre_section_fleche">Profiter de vos thèmes</div>';
-      echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section" />';
+      echo '<img src="../../includes/icons/common/open_grey.png" alt="open_grey" class="fleche_titre_section" />';
     echo '</div>';
 
     // Explications
@@ -49,7 +49,7 @@
     echo '<div id="titre_preferences_police" class="titre_section">';
       echo '<img src="../../includes/icons/common/edit_grey.png" alt="edit_grey" class="logo_titre_section" />';
       echo '<div class="texte_titre_section_fleche">Polices de caractères</div>';
-      echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section" />';
+      echo '<img src="../../includes/icons/common/open_grey.png" alt="open_grey" class="fleche_titre_section" />';
     echo '</div>';
 
     // Polices
@@ -91,7 +91,7 @@
     echo '<div id="titre_preferences_recompenses" class="titre_section">';
       echo '<img src="../../includes/icons/profil/rewards_grey.png" alt="rewards_grey" class="logo_titre_section" />';
       echo '<div class="texte_titre_section_fleche">Mes récompenses</div>';
-      echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section" />';
+      echo '<img src="../../includes/icons/common/open_grey.png" alt="open_grey" class="fleche_titre_section" />';
     echo '</div>';
 
     // Récompenses
@@ -169,7 +169,7 @@
     echo '<div id="titre_preferences_themes_missions" class="titre_section">';
       echo '<img src="../../includes/icons/profil/missions_grey.png" alt="missions_grey" class="logo_titre_section" />';
       echo '<div class="texte_titre_section_fleche">Les thèmes des missions</div>';
-      echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section" />';
+      echo '<img src="../../includes/icons/common/open_grey.png" alt="open_grey" class="fleche_titre_section" />';
     echo '</div>';
 
     // Thèmes des missions

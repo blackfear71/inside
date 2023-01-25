@@ -7,7 +7,7 @@
     echo '<div id="titre_bugs" class="titre_section">';
       echo '<img src="../../includes/icons/reports/bug.png" alt="bug" class="logo_titre_section" />';
       echo '<div class="texte_titre_section_fleche">Bugs</div>';
-      echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section" />';
+      echo '<img src="../../includes/icons/common/open_grey.png" alt="open_grey" class="fleche_titre_section" />';
     echo '</div>';
 
     // Bugs
@@ -84,7 +84,7 @@
     echo '<div id="titre_evolutions" class="titre_section">';
       echo '<img src="../../includes/icons/reports/evolution.png" alt="evolution" class="logo_titre_section" />';
       echo '<div class="texte_titre_section_fleche">Evolutions</div>';
-      echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section" />';
+      echo '<img src="../../includes/icons/common/open_grey.png" alt="open_grey" class="fleche_titre_section" />';
     echo '</div>';
 
     // Evolutions

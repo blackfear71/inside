@@ -6,7 +6,7 @@
       echo '<div id="titre_propositions_mes_choix" class="titre_section">';
         echo '<img src="../../includes/icons/foodadvisor/menu_grey.png" alt="menu_grey" class="logo_titre_section" />';
         echo '<div class="texte_titre_section_fleche">Mes choix</div>';
-        echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section" />';
+        echo '<img src="../../includes/icons/common/open_grey.png" alt="open_grey" class="fleche_titre_section" />';
       echo '</div>';
 
       // Affichage des choix utilisateur

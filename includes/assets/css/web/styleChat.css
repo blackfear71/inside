@@ -63,17 +63,13 @@
 {
 	display: inline-block;
 	vertical-align: top;
-	width: 20px;
-	height: 40px;
-	padding-right: 10px;
-	padding-left: 5px;
-	font-family: inside_font_light, Verdana, sans-serif;
-	font-size: 120%;
-	color: white;
+	width: 15px;
+	height: 15px;
+	padding: 12.5px 10px 12.5px 5px;
 	background-color: #c81932;
 	text-align: center;
 	line-height: 40px;
-	border-top-right-radius: 2px;
+	transform: rotate(180deg);
 }
 
 .lien_reduire_chat:hover .triangle_reduire_chat

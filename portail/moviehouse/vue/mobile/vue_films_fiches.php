@@ -7,7 +7,7 @@
       echo '<div id="titre_fiches_nc" class="titre_section">';
         echo '<img src="../../includes/icons/moviehouse/movie_house_grey.png" alt="movie_house_grey" class="logo_titre_section" />';
         echo '<div class="texte_titre_section_fleche">Date de sortie inconnue</div>';
-        echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section" />';
+        echo '<img src="../../includes/icons/common/open_grey.png" alt="open_grey" class="fleche_titre_section" />';
       echo '</div>';
 
       // Liste des films (date de sortie non communiquée)
@@ -70,7 +70,7 @@
             echo '<div id="titre_fiches_' . $moisCourant . '" class="titre_section">';
               echo '<img src="../../includes/icons/moviehouse/movie_house_grey.png" alt="movie_house_grey" class="logo_titre_section" />';
               echo '<div class="texte_titre_section_fleche">' . formatMonthForDisplay($moisCourant) . '</div>';
-              echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section" />';
+              echo '<img src="../../includes/icons/common/open_grey.png" alt="open_grey" class="fleche_titre_section" />';
             echo '</div>';
 
             $moisPrecedent = $moisCourant;

@@ -108,7 +108,7 @@
               echo '<div id="titre_histoire_mission" class="titre_section">';
                 echo '<img src="../../includes/icons/missions/story_grey.png" alt="story_grey" class="logo_titre_section" />';
                 echo '<div class="texte_titre_section_fleche">Il était une fois...</div>';
-                echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section" />';
+                echo '<img src="../../includes/icons/common/open_grey.png" alt="open_grey" class="fleche_titre_section" />';
               echo '</div>';
 
               echo '<div id="afficher_histoire_mission">';
@@ -125,7 +125,7 @@
                 echo '<div id="titre_conclusion_mission" class="titre_section">';
                   echo '<img src="../../includes/icons/missions/end_grey.png" alt="end_grey" class="logo_titre_section" />';
                   echo '<div class="texte_titre_section_fleche">Le fin mot de l\'histoire</div>';
-                  echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section" />';
+                  echo '<img src="../../includes/icons/common/open_grey.png" alt="open_grey" class="fleche_titre_section" />';
                 echo '</div>';
 
                 echo '<div id="afficher_conclusion_mission">';
@@ -151,7 +151,7 @@
                 echo '<div id="titre_classement_mission" class="titre_section">';
                   echo '<img src="../../includes/icons/missions/podium_grey.png" alt="podium_grey" class="logo_titre_section" />';
                   echo '<div class="texte_titre_section_fleche">Classement</div>';
-                  echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section" />';
+                  echo '<img src="../../includes/icons/common/open_grey.png" alt="open_grey" class="fleche_titre_section" />';
                 echo '</div>';
 
                 echo '<div id="afficher_classement_mission">';
@@ -254,7 +254,7 @@
                 echo '<div id="titre_succes_mission" class="titre_section">';
                   echo '<img src="../../includes/icons/missions/success_grey.png" alt="success_grey" class="logo_titre_section" />';
                   echo '<div class="texte_titre_section_fleche">Succès débloqués</div>';
-                  echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section" />';
+                  echo '<img src="../../includes/icons/common/open_grey.png" alt="open_grey" class="fleche_titre_section" />';
                 echo '</div>';
 
                 echo '<div id="afficher_succes_mission">';
@@ -319,7 +319,7 @@
               echo '<div id="titre_infos_mission" class="titre_section">';
                 echo '<img src="../../includes/icons/missions/informations_grey.png" alt="informations_grey" class="logo_titre_section" />';
                 echo '<div class="texte_titre_section_fleche">Informations</div>';
-                echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section" />';
+                echo '<img src="../../includes/icons/common/open_grey.png" alt="open_grey" class="fleche_titre_section" />';
               echo '</div>';
 
               echo '<div id="afficher_infos_mission">';
@@ -397,7 +397,7 @@
                 echo '<div id="titre_participants_mission" class="titre_section">';
                   echo '<img src="../../includes/icons/missions/users_grey.png" alt="users_grey" class="logo_titre_section" />';
                   echo '<div class="texte_titre_section_fleche">Participants</div>';
-                  echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section" />';
+                  echo '<img src="../../includes/icons/common/open_grey.png" alt="open_grey" class="fleche_titre_section" />';
                 echo '</div>';
 
                 echo '<div id="afficher_participants_mission">';

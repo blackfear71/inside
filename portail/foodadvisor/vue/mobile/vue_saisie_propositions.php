@@ -32,7 +32,7 @@
               echo '<div id="titre_saisie_' . formatId($lieuRestaurants) . '" class="titre_section">';
                 echo '<img src="../../includes/icons/foodadvisor/location_grey.png" alt="location_grey" class="logo_titre_section" />';
                 echo '<div class="texte_titre_section_fleche">' . $lieuRestaurants . '</div>';
-                echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section" />';
+                echo '<img src="../../includes/icons/common/open_grey.png" alt="open_grey" class="fleche_titre_section" />';
               echo '</div>';
 
               // Restaurants

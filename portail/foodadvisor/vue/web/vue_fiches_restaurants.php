@@ -13,7 +13,7 @@
           echo '<div class="texte_titre_section_fold">' . $lieu . '</div>';
 
           echo '<a id="fold_fiches_' . formatId($lieu) . '" class="bouton_fold">';
-            echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_bouton_fold" />';
+            echo '<img src="../../includes/icons/common/open_grey.png" alt="open_grey" class="fleche_bouton_fold" />';
           echo '</a>';
         echo '</div>';
 

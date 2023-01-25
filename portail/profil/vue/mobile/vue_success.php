@@ -6,7 +6,7 @@
   echo '<div id="titre_niveaux_users" class="titre_section">';
     echo '<img src="../../includes/icons/profil/experience_grey.png" alt="experience_grey" class="logo_titre_section" />';
     echo '<div class="texte_titre_section_fleche">Niveaux</div>';
-    echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section angle_fleche_titre_section" />';
+    echo '<img src="../../includes/icons/common/open_grey.png" alt="open_grey" class="fleche_titre_section angle_fleche_titre_section" />';
   echo '</div>';
 
   // Affichage des niveaux des utilisateurs

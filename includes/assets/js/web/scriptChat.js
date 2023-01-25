@@ -387,10 +387,11 @@ function initView(cookieShowChat, cookieWindowChat)
   if (cookieShowChat == 'true' && cookieWindowChat == '1')
   {
     // Initialisation des affichages
-    hideChatCss    = '-';
-    ongletChatCss  = '#c81932';
-    ongletUsersCss = '#ff1937';
-    cursorCss      = 'pointer';
+    hideChatRotateCss  = '180deg';
+    hideChatPaddingCss = '12.5px 10px 12.5px 5px';
+    ongletChatCss      = '#c81932';
+    ongletUsersCss     = '#ff1937';
+    cursorCss          = 'pointer';
 
     $('#onglet_users').show();
 
@@ -428,10 +429,11 @@ function initView(cookieShowChat, cookieWindowChat)
   else if (cookieShowChat == 'true' && cookieWindowChat == '2')
   {
     // Initialisation des affichages
-    hideChatCss    = '-';
-    ongletChatCss  = '#ff1937';
-    ongletUsersCss = '#c81932';
-    cursorCss      = 'pointer';
+    hideChatRotateCss  = '180deg';
+    hideChatPaddingCss = '12.5px 10px 12.5px 5px';
+    ongletChatCss      = '#ff1937';
+    ongletUsersCss     = '#c81932';
+    cursorCss          = 'pointer';
 
     // On construit la fenêtre des utilisateurs
     html += '<div id="scroll_conversation" class="zone_onglet_users">';
@@ -441,15 +443,17 @@ function initView(cookieShowChat, cookieWindowChat)
   else if (cookieShowChat == 'false' || cookieWindowChat == '3')
   {
     // Initialisation des affichages
-    hideChatCss    = '+';
-    ongletChatCss  = '#ff1937';
-    ongletUsersCss = '#ff1937';
-    cursorCss      = 'default';
+    hideChatRotateCss  = '0deg';
+    hideChatPaddingCss = '12.5px 5px 12.5px 10px';
+    ongletChatCss      = '#ff1937';
+    ongletUsersCss     = '#ff1937';
+    cursorCss          = 'default';
 
     $('#onglet_users').hide();
   }
 
-  $('#hide_chat').html(hideChatCss);
+  $('#hide_chat').css('rotate', hideChatRotateCss);
+  $('#hide_chat').css('padding', hideChatPaddingCss);
   $('#onglet_chat').css('background-color', ongletChatCss);
   $('#onglet_users').css('background-color', ongletUsersCss);
   $('#onglet_chat').css('border-top-left-radius', '2px');

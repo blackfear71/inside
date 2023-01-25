@@ -5,7 +5,7 @@
     echo '<div id="titre_lieux_restaurants" class="titre_section">';
       echo '<img src="../../includes/icons/foodadvisor/solo_grey.png" alt="solo_grey" class="logo_titre_section" />';
       echo '<div class="texte_titre_section_fleche">Les lieux</div>';
-      echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section angle_fleche_titre_section" />';
+      echo '<img src="../../includes/icons/common/open_grey.png" alt="open_grey" class="fleche_titre_section angle_fleche_titre_section" />';
     echo '</div>';
 
     // Affichage des lieux

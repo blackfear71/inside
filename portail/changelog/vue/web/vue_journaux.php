@@ -16,13 +16,13 @@
             if ($log->getWeek() == $_GET['anchor'])
             {
               echo '<a id="fold_changelog_' . $log->getWeek() . '" class="bouton_fold">';
-                echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_bouton_fold" />';
+                echo '<img src="../../includes/icons/common/open_grey.png" alt="open_grey" class="fleche_bouton_fold" />';
               echo '</a>';
             }
             else
             {
               echo '<a id="fold_changelog_' . $log->getWeek() . '" class="bouton_fold">';
-                echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_bouton_fold angle_fleche_bouton_fold" />';
+                echo '<img src="../../includes/icons/common/open_grey.png" alt="open_grey" class="fleche_bouton_fold angle_fleche_bouton_fold" />';
               echo '</a>';
             }
           }
@@ -31,13 +31,13 @@
             if ($keyLog == 0)
             {
               echo '<a id="fold_changelog_' . $log->getWeek() . '" class="bouton_fold">';
-                echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_bouton_fold" />';
+                echo '<img src="../../includes/icons/common/open_grey.png" alt="open_grey" class="fleche_bouton_fold" />';
               echo '</a>';
             }
             else
             {
               echo '<a id="fold_changelog_' . $log->getWeek() . '" class="bouton_fold">';
-                echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_bouton_fold angle_fleche_bouton_fold" />';
+                echo '<img src="../../includes/icons/common/open_grey.png" alt="open_grey" class="fleche_bouton_fold angle_fleche_bouton_fold" />';
               echo '</a>';
             }
           }

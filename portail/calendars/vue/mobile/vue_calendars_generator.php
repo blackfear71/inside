@@ -101,7 +101,7 @@
               echo '<div id="titre_generateur_calendrier" class="titre_section">';
                 echo '<img src="../../includes/icons/calendars/calendars_grey.png" alt="calendars_grey" class="logo_titre_section" />';
                 echo '<div class="texte_titre_section_fleche">Générer un calendrier</div>';
-                echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section angle_fleche_titre_section" />';
+                echo '<img src="../../includes/icons/common/open_grey.png" alt="open_grey" class="fleche_titre_section angle_fleche_titre_section" />';
               echo '</div>';
 
               // Générateur de calendriers
@@ -228,7 +228,7 @@
               echo '<div id="titre_generateur_annexe" class="titre_section">';
                 echo '<img src="../../includes/icons/calendars/annexes_grey.png" alt="annexes_grey" class="logo_titre_section" />';
                 echo '<div class="texte_titre_section_fleche">Générer une annexe</div>';
-                echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section angle_fleche_titre_section" />';
+                echo '<img src="../../includes/icons/common/open_grey.png" alt="open_grey" class="fleche_titre_section angle_fleche_titre_section" />';
               echo '</div>';
 
               // Générateur d'annexes
@@ -323,7 +323,7 @@
               echo '<div id="titre_saisie_calendrier" class="titre_section">';
                 echo '<img src="../../includes/icons/calendars/send_grey.png" alt="send_grey" class="logo_titre_section" />';
                 echo '<div class="texte_titre_section_fleche">Saisir un calendrier</div>';
-                echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section angle_fleche_titre_section" />';
+                echo '<img src="../../includes/icons/common/open_grey.png" alt="open_grey" class="fleche_titre_section angle_fleche_titre_section" />';
               echo '</div>';
 
               // Saisie de calendrier
@@ -393,7 +393,7 @@
               echo '<div id="titre_saisie_annexe" class="titre_section">';
                 echo '<img src="../../includes/icons/calendars/send_grey.png" alt="send_grey" class="logo_titre_section" />';
                 echo '<div class="texte_titre_section_fleche">Saisir une annexe</div>';
-                echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section angle_fleche_titre_section" />';
+                echo '<img src="../../includes/icons/common/open_grey.png" alt="open_grey" class="fleche_titre_section angle_fleche_titre_section" />';
               echo '</div>';
 
               // Saisie d'annexe

@@ -13,16 +13,16 @@
           if (isset($_GET['anchor']) AND is_numeric($_GET['anchor']))
           {
             if ($log->getWeek() == $_GET['anchor'])
-              echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section" />';
+              echo '<img src="../../includes/icons/common/open_grey.png" alt="open_grey" class="fleche_titre_section" />';
             else
-              echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section angle_fleche_titre_section" />';
+              echo '<img src="../../includes/icons/common/open_grey.png" alt="open_grey" class="fleche_titre_section angle_fleche_titre_section" />';
           }
           else
           {
             if ($keyLog == 0)
-              echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section" />';
+              echo '<img src="../../includes/icons/common/open_grey.png" alt="open_grey" class="fleche_titre_section" />';
             else
-              echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section angle_fleche_titre_section" />';
+              echo '<img src="../../includes/icons/common/open_grey.png" alt="open_grey" class="fleche_titre_section angle_fleche_titre_section" />';
           }
         echo '</div>';
 

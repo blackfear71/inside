@@ -17,7 +17,7 @@
           echo '<div id="titre_depenses_infos" class="titre_section">';
             echo '<img src="../../includes/icons/expensecenter/informations_grey.png" alt="informations_grey" class="logo_titre_section" />';
             echo '<div class="texte_titre_section_fleche">Informations</div>';
-            echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section" />';
+            echo '<img src="../../includes/icons/common/open_grey.png" alt="open_grey" class="fleche_titre_section" />';
           echo '</div>';
 
           // Acheteur, frais & commentaires
@@ -48,7 +48,7 @@
           echo '<div id="titre_depenses_parts" class="titre_section">';
             echo '<img src="../../includes/icons/expensecenter/users_grey.png" alt="users_grey" class="logo_titre_section" />';
             echo '<div class="texte_titre_section_fleche">Répartition</div>';
-            echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section" />';
+            echo '<img src="../../includes/icons/common/open_grey.png" alt="open_grey" class="fleche_titre_section" />';
           echo '</div>';
 
           // Répartition des parts

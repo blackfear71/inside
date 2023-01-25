@@ -44,7 +44,7 @@
         echo '</div>';
 
         echo '<a id="fold_themes_user" class="bouton_fold">';
-          echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_bouton_fold" />';
+          echo '<img src="../../includes/icons/common/open_grey.png" alt="open_grey" class="fleche_bouton_fold" />';
         echo '</a>';
       }
       else
@@ -126,7 +126,7 @@
         echo '</div>';
 
         echo '<a id="fold_themes_missions" class="bouton_fold">';
-          echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_bouton_fold" />';
+          echo '<img src="../../includes/icons/common/open_grey.png" alt="open_grey" class="fleche_bouton_fold" />';
         echo '</a>';
       }
       else

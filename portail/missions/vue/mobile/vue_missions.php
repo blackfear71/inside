@@ -88,7 +88,7 @@
                     echo '<div id="titre_missions_a_venir" class="titre_section">';
                       echo '<img src="../../includes/icons/missions/missions_to_come.png" alt="missions_to_come" class="logo_titre_section" />';
                       echo '<div class="texte_titre_section_fleche">Missions à venir</div>';
-                      echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section" />';
+                      echo '<img src="../../includes/icons/common/open_grey.png" alt="open_grey" class="fleche_titre_section" />';
                     echo '</div>';
 
                     // Zone missions à venir
@@ -111,7 +111,7 @@
                     echo '<div id="titre_missions_en_cours" class="titre_section">';
                       echo '<img src="../../includes/icons/missions/missions_in_progress.png" alt="missions_in_progress" class="logo_titre_section" />';
                       echo '<div class="texte_titre_section_fleche">Missions en cours</div>';
-                      echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section" />';
+                      echo '<img src="../../includes/icons/common/open_grey.png" alt="open_grey" class="fleche_titre_section" />';
                     echo '</div>';
 
                     // Zone missions
@@ -134,7 +134,7 @@
                     echo '<div id="titre_missions_terminees" class="titre_section">';
                       echo '<img src="../../includes/icons/missions/missions_ended.png" alt="missions_ended" class="logo_titre_section" />';
                       echo '<div class="texte_titre_section_fleche">Anciennes missions</div>';
-                      echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section" />';
+                      echo '<img src="../../includes/icons/common/open_grey.png" alt="open_grey" class="fleche_titre_section" />';
                     echo '</div>';
 
                     // Zone missions

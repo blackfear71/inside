@@ -4,7 +4,7 @@
     echo '<div id="titre_depenses_utilisateurs" class="titre_section">';
       echo '<img src="../../includes/icons/expensecenter/expenses_grey.png" alt="expenses_grey" class="logo_titre_section" />';
       echo '<div class="texte_titre_section_fleche">Les dépenses de ' . $_GET['year'] . '</div>';
-      echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section angle_fleche_titre_section" />';
+      echo '<img src="../../includes/icons/common/open_grey.png" alt="open_grey" class="fleche_titre_section angle_fleche_titre_section" />';
     echo '</div>';
 
     echo '<div id="afficher_depenses_utilisateurs" class="zone_depenses_users" style="display: none;">';

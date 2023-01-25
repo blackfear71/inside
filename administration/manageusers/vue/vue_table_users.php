@@ -81,7 +81,7 @@
 									if ((isset($listeEquipes[$user->getTeam()])     AND !empty($listeEquipes[$user->getTeam()]->getTeam()))
 									AND (isset($listeEquipes[$user->getNew_team()]) AND !empty($listeEquipes[$user->getNew_team()]->getTeam())))
 									{
-										echo 'Changement d\'équipe (' . $listeEquipes[$user->getTeam()]->getTeam() . '<div class="zone_fleches_equipe"><img src="../../includes/icons/common/open.png" alt="open" class="fleche_equipe" /><img src="../../includes/icons/common/open.png" alt="open" class="fleche_equipe" /><img src="../../includes/icons/common/open.png" alt="open" class="fleche_equipe" /></div>' . $listeEquipes[$user->getNew_team()]->getTeam() . ')';
+										echo 'Changement d\'équipe (' . $listeEquipes[$user->getTeam()]->getTeam() . '<div class="zone_fleches_equipe"><img src="../../includes/icons/common/open_grey.png" alt="open_grey" class="fleche_equipe" /><img src="../../includes/icons/common/open_grey.png" alt="open_grey" class="fleche_equipe" /><img src="../../includes/icons/common/open_grey.png" alt="open_grey" class="fleche_equipe" /></div>' . $listeEquipes[$user->getNew_team()]->getTeam() . ')';
 									}
 									else
 										echo 'Changement d\'équipe';

@@ -146,7 +146,7 @@
                     echo '<div id="titre_notifications_' . $notification->getDate() . '" class="titre_section">';
                       echo '<img src="../../includes/icons/notifications/date_grey.png" alt="date_grey" class="logo_titre_section" />';
                       echo '<div class="texte_titre_section_fleche">' . formatDateForDisplay($notification->getDate()) . '</div>';
-                      echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section" />';
+                      echo '<img src="../../includes/icons/common/open_grey.png" alt="open_grey" class="fleche_titre_section" />';
                     echo '</div>';
 
                     $dateNotification = $notification->getDate();

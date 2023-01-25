@@ -3,7 +3,7 @@
   echo '<div id="titre_depenses_bilan" class="titre_section">';
     echo '<img src="../../includes/icons/expensecenter/total_grey.png" alt="total_grey" class="logo_titre_section" />';
     echo '<div class="texte_titre_section_fleche">Bilan</div>';
-    echo '<img src="../../includes/icons/common/open.png" alt="open" class="fleche_titre_section" />';
+    echo '<img src="../../includes/icons/common/open_grey.png" alt="open_grey" class="fleche_titre_section" />';
   echo '</div>';
 
   // Bilan
