@@ -300,7 +300,6 @@
 .avatar_chat_user
 {
 	float: right;
-	display: inline-block;
 	width: 30px;
 	height: 30px;
 	border-radius: 50%;
@@ -362,7 +361,6 @@
 .avatar_chat_other
 {
 	float: left;
-	display: inline-block;
 	width: 30px;
 	height: 30px;
 	border-radius: 50%;
@@ -462,7 +460,6 @@
 .avatar_chat_connected
 {
 	float: left;
-	display: inline-block;
 	width: 30px;
 	height: 30px;
 	border-radius: 50%;
@@ -481,7 +478,6 @@
 .zone_indicateur
 {
 	float: right;
-	display: inline-block;
 	width: 30px;
 	min-height: 30px;
 }

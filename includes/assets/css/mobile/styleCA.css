@@ -348,7 +348,6 @@
 
 .zone_semaines_calendrier_generator
 {
-	display: inline-block;
 	float: right;
 	position: relative;
 	z-index: 1;
@@ -596,7 +595,6 @@
 
 .zone_signature_calendrier_generator
 {
-	display: inline-block;
 	float: right;
 	height: 250px;
 	opacity: 0.3;
