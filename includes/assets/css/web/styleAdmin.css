@@ -1122,7 +1122,7 @@
 
 .td_saisie_succes_niveau
 {
-	width: 15%;
+	width: 10%;
 	padding-right: 10px;
 	padding-bottom: 10px;
 }
@@ -1136,7 +1136,7 @@
 
 .td_saisie_succes_parcourir
 {
-	width: calc(15% - 10px);
+	width: 15%;
 	padding-right: 10px;
 	padding-bottom: 10px;
 }
@@ -1178,7 +1178,7 @@
 
 .td_saisie_succes_envoyer
 {
-	width: 10%;
+	width: 15%;
 	padding-bottom: 10px;
 }
 
@@ -1205,28 +1205,28 @@
 
 .td_saisie_succes_description
 {
-	width: 60%;
+	width: 55%;
 	padding-right: 10px;
 	padding-bottom: 10px;
 }
 
 .td_saisie_succes_condition
 {
-	width: calc(15% - 10px);
+	width: 15%;
 	padding-right: 10px;
 	padding-bottom: 10px;
 }
 
 .td_saisie_succes_mission
 {
-	width: calc(15% - 10px);
+	width: 15%;
 	padding-right: 10px;
 	padding-bottom: 10px;
 }
 
 .td_saisie_succes_unicite
 {
-	width: 10%;
+	width: 15%;
 	padding-bottom: 10px;
 }
 
@@ -1258,6 +1258,12 @@
 	background-color: white;
 }
 
+.switch_success:hover
+{
+	background-color: #70d55d;
+	color: white;
+}
+
 .switch_success input
 {
 	margin-left: 10px;
@@ -1265,14 +1271,10 @@
 
 .switch_success label
 {
-	width: calc(100% - 42px);
+	padding-left: 0;
+	padding-right: 0;
+	width: calc(100% - 4px);
 	text-align: center;
-}
-
-.switch_success:hover
-{
-	background-color: #70d55d;
-	color: white;
 }
 
 .td_saisie_succes_explications
