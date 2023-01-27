@@ -32,11 +32,17 @@
 
       // Récupération de la liste des succès
 			$listeSuccess = getSuccess();
+
+      // Récupération de la liste des missions
+      $listeMissions = getMissions();
       break;
 
     case 'goModifier':
       // Récupération de la liste des succès
       $listeSuccess = getSuccess();
+
+      // Récupération de la liste des missions
+      $listeMissions = getMissions();
 
 			// Initialisation de la sauvegarde en session et récupération erreur
 			$erreurSuccess = initializeSaveSession($_GET['action']);
@@ -91,6 +97,11 @@
       foreach ($listeSuccess as $success)
       {
 				Success::secureData($success);
+      }
+
+      foreach ($listeMissions as $mission)
+      {
+				Mission::secureData($mission);
       }
       break;
 

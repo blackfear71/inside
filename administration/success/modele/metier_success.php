@@ -1,4 +1,5 @@
 <?php
+  include_once('../../includes/classes/missions.php');
   include_once('../../includes/classes/movies.php');
   include_once('../../includes/classes/profile.php');
   include_once('../../includes/classes/success.php');
@@ -38,6 +39,7 @@
           $_SESSION['save']['reference_success']   = '';
           $_SESSION['save']['level']               = '';
           $_SESSION['save']['unicity']             = '';
+          $_SESSION['save']['mission']             = '';
           $_SESSION['save']['order_success']       = '';
           $_SESSION['save']['title_success']       = '';
           $_SESSION['save']['description_success'] = '';
@@ -66,10 +68,22 @@
   // RETOUR : Liste des succès
   function getSuccess()
   {
+    // Récupération de la liste des succès
     $listeSuccess = physiqueListeSuccess();
 
     // Retour
     return $listeSuccess;
+  }
+
+  // METIER : Lecture liste des mission
+  // RETOUR : Liste des missions
+  function getMissions()
+  {
+    // Récupération de la liste des missions
+    $listeMissions = physiqueListeMissions();
+
+    // Retour
+    return $listeMissions;
   }
 
   // METIER : Insertion nouveau succès
@@ -84,6 +98,7 @@
     $level        = $post['level'];
     $orderSuccess = $post['order_success'];
     $defined      = 'N';
+    $mission      = $post['mission'];
     $title        = $post['title'];
     $description  = $post['description'];
     $limitSuccess = $post['limit_success'];
@@ -98,6 +113,7 @@
     $_SESSION['save']['reference_success']   = $reference;
     $_SESSION['save']['level']               = $level;
     $_SESSION['save']['unicity']             = $unicity;
+    $_SESSION['save']['mission']             = $mission;
     $_SESSION['save']['order_success']       = $orderSuccess;
     $_SESSION['save']['title_success']       = $title;
     $_SESSION['save']['description_success'] = $description;
@@ -152,6 +168,7 @@
                        'order_success' => $orderSuccess,
                        'defined'       => $defined,
                        'unicity'       => $unicity,
+                       'mission'       => $mission,
                        'title'         => $title,
                        'description'   => $description,
                        'limit_success' => $limitSuccess,
@@ -203,6 +220,7 @@
                       'order_success' => $post['order_success'][$id],
                       'defined'       => $post['defined'][$id],
                       'unicity'       => $post['unicity'][$id],
+                      'mission'       => $post['mission'][$id],
                       'title'         => $post['title'][$id],
                       'description'   => $post['description'][$id],
                       'limit_success' => $post['limit_success'][$id],
@@ -268,6 +286,7 @@
       $success->setOrder_success($_SESSION['save']['save_success']['order_success'][$success->getId()]);
       $success->setDefined($_SESSION['save']['save_success']['defined'][$success->getId()]);
       $success->setUnicity($_SESSION['save']['save_success']['unicity'][$success->getId()]);
+      $success->setMission($_SESSION['save']['save_success']['mission'][$success->getId()]);
       $success->setTitle($_SESSION['save']['save_success']['title'][$success->getId()]);
       $success->setDescription($_SESSION['save']['save_success']['description'][$success->getId()]);
       $success->setLimit_success($_SESSION['save']['save_success']['limit_success'][$success->getId()]);
@@ -601,20 +620,7 @@
             // Paquet livré !
             case 'delivery':
               // Récupération des données de la mission
-              if ($success->getReference() == 'christmas2017' OR $success->getReference() == 'christmas2017_2')
-                $reference = 'noel_2017';
-              elseif ($success->getReference() == 'golden-egg' OR $success->getReference() == 'rainbow-egg')
-                $reference = 'paques_2018';
-              elseif ($success->getReference() == 'wizard')
-                $reference = 'halloween_2018';
-              elseif ($success->getReference() == 'christmas2018' OR $success->getReference() == 'christmas2018_2')
-                $reference = 'noel_2018';
-              elseif ($success->getReference() == 'christmas2019')
-                $reference = 'noel_2019';
-              elseif ($success->getReference() == 'delivery')
-                $reference = 'cigognes_2022';
-
-              $mission = physiqueDonneesMission($reference);
+              $mission = physiqueDonneesMission($success->getMission());
 
               if (date('Ymd') > $mission->getDate_fin())
               {

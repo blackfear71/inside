@@ -87,13 +87,45 @@
 
               echo '<tr>';
                 // Description
-                echo '<td colspan="4" class="td_saisie_succes_description">';
+                echo '<td colspan="3" class="td_saisie_succes_description">';
                   echo '<input type="text" name="description" placeholder="Description" value="' . $_SESSION['save']['description_success'] . '" class="saisie_succes" required />';
                 echo '</td>';
 
                 // Condition
                 echo '<td class="td_saisie_succes_condition">';
                   echo '<input type="text" name="limit_success" placeholder="Condition" value="' . $_SESSION['save']['limit_success'] . '" maxlength="3" class="saisie_succes" required />';
+                echo '</td>';
+
+                // Mission liée
+                echo '<td class="td_saisie_succes_mission">';
+                  echo '<select name="mission" class="saisie_succes_mission">';
+                    // Choix par défaut
+                    if (!empty($_SESSION['save']['mission']))
+                      echo '<option value="" selected>Aucune mission liée</option>';
+                    else
+                      echo '<option value="">Aucune mission liée</option>';
+
+                    // Liste des missions
+                    echo '<optgroup label="Missions non terminées">';
+                      $indicateurMissionsTerminees = false;
+
+                      foreach ($listeMissions as $mission)
+                      {
+                        if ($indicateurMissionsTerminees == false AND $mission->getDate_fin() < date('Ymd'))
+                        {
+                          echo '</optgroup>';
+                          echo '<optgroup label="Missions terminées">';
+
+                          $indicateurMissionsTerminees = true;
+                        }
+
+                        if (!empty($_SESSION['save']['mission']) AND $_SESSION['save']['mission'] == $mission->getReference())
+                          echo '<option value="' . $mission->getReference() . '" selected>' . $mission->getMission() . '</option>';
+                        else
+                          echo '<option value="' . $mission->getReference() . '">' . $mission->getMission() . '</option>';
+                      }
+                    echo '</optgroup>';
+                  echo '</select>';
                 echo '</td>';
 
                 // Unicité
@@ -138,9 +170,11 @@
           echo '</div>';
 
           echo '<div class="contenu_explications">';
-            echo 'Si c\'est un succès relatif à une <u>mission</u>, mettre à jour également la fonction <strong>insertOrUpdateSuccesMission()</strong> dans <strong>metier_commun.php</strong>
-            ainsi que les 2 fonctions <strong>getSuccesMission()</strong> dans <strong>metier_missions.php</strong> (utilisateurs et administrateur).
-            Une fois le code ajouté, modifier le succès pour changer son état à "<strong>Défini</strong>".';
+            echo 'Si c\'est un succès relatif à une <u>mission</u>, mettre à jour également chacun ce succès en liant la référence de la mission dans la modification des succès.';
+          echo '</div>';
+
+          echo '<div class="contenu_explications">';
+            echo 'Une fois ces étapes réalisées, modifier le succès pour changer son état à "<strong>Défini</strong>".';
           echo '</div>';
 
           // Indications suppression succès
@@ -156,8 +190,7 @@
           echo '</div>';
 
           echo '<div class="contenu_explications">';
-            echo 'Si c\'est un succès relatif à une <u>mission</u>, mettre à jour également la fonction <strong>insertOrUpdateSuccesMission()</strong> dans <strong>metier_commun.php</strong>
-            ainsi que les 2 fonctions <strong>getSuccesMission()</strong> dans <strong>metier_missions.php</strong> (utilisateurs et administrateur).';
+            echo 'La suppression d\'une <u>mission</u> supprime automatiquement le lien avec le succès.';
           echo '</div>';
 
           /******************/
@@ -246,11 +279,18 @@
                   // Ordonnancement
                   echo '<div class="ordonnancement_succes">' . $success->getOrder_success() . '</div>';
 
-                  // Condition
-                  if ($success->getUnicity() == 'Y')
-                    echo '<div class="condition_succes">Unique</div>';
-                  else
-                    echo '<div class="condition_succes">/ ' . $success->getLimit_success() . '</div>';
+                  // Conditions
+                  echo '<div class="zone_conditions_succes">';
+                    // Mission liée
+                    if (!empty($success->getMission()))
+                      echo '<img src="../../includes/icons/admin/missions_grey.png" alt="missions_grey" title="Mission liée" class="mission_succes" />';
+
+                    // Condition
+                    if ($success->getUnicity() == 'Y')
+                      echo '<div class="condition_succes">Unique</div>';
+                    else
+                      echo '<div class="condition_succes">/ ' . $success->getLimit_success() . '</div>';
+                  echo '</div>';
 
                   // Logo succès
                   echo '<img src="../../includes/images/profil/success/' . $success->getReference() . '.png" alt="' . $success->getReference() . '" class="logo_succes" />';

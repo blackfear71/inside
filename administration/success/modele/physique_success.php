@@ -63,6 +63,35 @@
     return $listeSuccess;
   }
 
+    // PHYSIQUE : Lecture liste des missions
+  // RETOUR : Liste des missions
+  function physiqueListeMissions()
+  {
+    // Initialisations
+    $listeMissions = array();
+
+    // Requête
+    global $bdd;
+
+    $req = $bdd->query('SELECT *
+                        FROM missions
+                        ORDER BY date_fin DESC');
+
+    while ($data = $req->fetch())
+    {
+      // Instanciation d'un objet Mission à partir des données remontées de la bdd
+      $mission = Mission::withData($data);
+
+      // On ajoute la ligne au tableau
+      array_push($listeMissions, $mission);
+    }
+
+    $req->closeCursor();
+
+    // Retour
+    return $listeMissions;
+  }
+
   // PHYSIQUE : Lecture du nombre de références existantes
   // RETOUR : Booléen
   function physiqueReferenceUnique($reference)
@@ -458,6 +487,7 @@
                                               order_success,
                                               defined,
                                               unicity,
+                                              mission,
                                               title,
                                               description,
                                               limit_success,
@@ -467,6 +497,7 @@
                                              :order_success,
                                              :defined,
                                              :unicity,
+                                             :mission,
                                              :title,
                                              :description,
                                              :limit_success,
@@ -515,6 +546,7 @@
                               order_success = :order_success,
                               defined       = :defined,
                               unicity       = :unicity,
+                              mission       = :mission,
                               title         = :title,
                               description   = :description,
                               limit_success = :limit_success,

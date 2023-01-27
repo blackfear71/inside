@@ -7,6 +7,7 @@
     private $order_success;
     private $defined;
     private $unicity;
+    private $mission;
     private $title;
     private $description;
     private $limit_success;
@@ -23,6 +24,7 @@
       $this->order_success = '';
       $this->defined       = '';
       $this->unicity       = '';
+      $this->mission       = '';
       $this->title         = '';
       $this->description   = '';
       $this->limit_success = '';
@@ -61,6 +63,9 @@
       if (isset($data['unicity']))
         $this->unicity       = $data['unicity'];
 
+      if (isset($data['mission']))
+        $this->mission       = $data['mission'];
+
       if (isset($data['title']))
         $this->title         = $data['title'];
 
@@ -82,6 +87,7 @@
       $data->setOrder_success(htmlspecialchars($data->getOrder_success()));
       $data->setDefined(htmlspecialchars($data->getDefined()));
       $data->setUnicity(htmlspecialchars($data->getUnicity()));
+      $data->setMission(htmlspecialchars($data->getMission()));
       $data->setTitle(htmlspecialchars($data->getTitle()));
       $data->setDescription(htmlspecialchars($data->getDescription()));
       $data->setLimit_success(htmlspecialchars($data->getLimit_success()));
@@ -159,6 +165,17 @@
     public function getUnicity()
     {
       return $this->unicity;
+    }
+
+    // Référence mission
+    public function setMission($mission)
+    {
+      $this->mission = $mission;
+    }
+
+    public function getMission()
+    {
+      return $this->mission;
     }
 
     // Titre succès

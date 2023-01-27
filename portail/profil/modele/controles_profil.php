@@ -103,46 +103,12 @@
 
   // CONTROLE : Mission terminée ou autre succès que mission
   // RETOUR : Booléen
-  function controleMissionTermineeOuAutre($referenceSuccess)
+  function controleMissionTermineeOuAutre($referenceMission)
   {
     // Initialisations
     $missionTermineeOuAutre = false;
 
     // Contrôle
-    switch ($referenceSuccess)
-    {
-      case 'christmas2017':
-      case 'christmas2017_2':
-        $referenceMission = 'noel_2017';
-        break;
-
-      case 'golden-egg':
-      case 'rainbow-egg':
-        $referenceMission = 'paques_2018';
-        break;
-
-      case 'wizard':
-        $referenceMission = 'halloween_2018';
-        break;
-
-      case 'christmas2018':
-      case 'christmas2018_2':
-        $referenceMission = 'noel_2018';
-        break;
-
-      case 'christmas2019':
-        $referenceMission = 'noel_2019';
-        break;
-
-      case 'delivery':
-        $referenceMission = 'cigognes_2022';
-        break;
-
-      default:
-        $referenceMission = '';
-        break;
-    }
-
     if (!empty($referenceMission))
     {
       $dateFinMission = physiqueDateFinMission($referenceMission);

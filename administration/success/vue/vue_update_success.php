@@ -123,6 +123,37 @@
                   echo '<div class="titre_succes">Condition :</div>';
                   echo '<input type="text" value="' . $success->getLimit_success() . '" name="limit_success[' . $success->getId() . ']" maxlength="3" class="saisie_modification_succes" required />';
 
+                  // Mission liée
+                  echo '<div class="titre_succes">Mission liée :</div>';
+                  echo '<select name="mission[' . $success->getId() . ']" class="select_modification_succes">';
+                    // Choix par défaut
+                    if (!empty($success->getMission()))
+                      echo '<option value="" selected>Aucune mission liée</option>';
+                    else
+                      echo '<option value="">Aucune mission liée</option>';
+
+                    // Liste des missions
+                    echo '<optgroup label="Missions non terminées">';
+                      $indicateurMissionsTerminees = false;
+
+                      foreach ($listeMissions as $mission)
+                      {
+                        if ($indicateurMissionsTerminees == false AND $mission->getDate_fin() < date('Ymd'))
+                        {
+                          echo '</optgroup>';
+                          echo '<optgroup label="Missions terminées">';
+
+                          $indicateurMissionsTerminees = true;
+                        }
+
+                        if (!empty($success->getMission()) AND $success->getMission() == $mission->getReference())
+                          echo '<option value="' . $mission->getReference() . '" selected>' . $mission->getMission() . '</option>';
+                        else
+                          echo '<option value="' . $mission->getReference() . '">' . $mission->getMission() . '</option>';
+                      }
+                    echo '</optgroup>';
+                  echo '</select>';
+
                   // Code défini
                   echo '<div class="titre_succes">Code défini :</div>';
                   echo '<div class="defined_succes">';

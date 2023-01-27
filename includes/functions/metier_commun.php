@@ -1003,38 +1003,16 @@
   // RETOUR : Aucun
   function insertOrUpdateSuccesMission($reference, $identifiant)
   {
+    // Récupération des succès liés à la mission
+    $listeSuccesMission = physiqueSuccesMission($reference);
+
     // Insertion des succès pour chaque mission concernée
-    switch ($reference)
+    if (!empty($listeSuccesMission))
     {
-      case 'noel_2017':
-        insertOrUpdateSuccesValue('christmas2017', $identifiant, 1);
-        insertOrUpdateSuccesValue('christmas2017_2', $identifiant, 1);
-        break;
-
-      case 'paques_2018':
-        insertOrUpdateSuccesValue('golden-egg', $identifiant, 1);
-        insertOrUpdateSuccesValue('rainbow-egg', $identifiant, 1);
-        break;
-
-      case 'halloween_2018':
-        insertOrUpdateSuccesValue('wizard', $identifiant, 1);
-        break;
-
-      case 'noel_2018':
-        insertOrUpdateSuccesValue('christmas2018', $identifiant, 1);
-        insertOrUpdateSuccesValue('christmas2018_2', $identifiant, 1);
-        break;
-
-      case 'noel_2019':
-        insertOrUpdateSuccesValue('christmas2019', $identifiant, 1);
-        break;
-
-      case 'cigognes_2022':
-        insertOrUpdateSuccesValue('delivery', $identifiant, 1);
-        break;
-
-      default:
-        break;
+      foreach ($listeSuccesMission as $succes)
+      {
+        insertOrUpdateSuccesValue($succes->getReference(), $identifiant, 1);
+      }
     }
   }
 

@@ -86,7 +86,7 @@
 
     $req = $bdd->prepare('UPDATE change_log
                           SET notes = :notes,
-                              logs = :logs
+                              logs  = :logs
                           WHERE year = ' . $year . ' AND week = ' . $week);
 
     $req->execute($changelog);

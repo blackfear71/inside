@@ -211,10 +211,13 @@
     return $participationUser;
   }
 
-  // PHYSIQUE : Lecture d'un succès
-  // RETOUR : Objet Success
-  function physiqueSuccessMissionUser($referenceSucces, $identifiant)
+  // PHYSIQUE : Lecture des succès d'une mission
+  // RETOUR : Liste des succès
+  function physiqueSuccesMissionUser($reference, $identifiant)
   {
+    // Initialisations
+    $listeSuccesMission = array();
+
     // Requête
     global $bdd;
 
@@ -222,18 +225,23 @@
                         FROM success
                         LEFT JOIN success_users
                         ON (success.reference = success_users.reference AND success_users.identifiant = "' . $identifiant . '")
-                        WHERE success.reference = "' . $referenceSucces . '"');
+                        WHERE success.mission = "' . $reference . '" AND success.defined = "Y"
+                        ORDER BY order_success ASC');
 
-    $data = $req->fetch();
+    while ($data = $req->fetch())
+    {
+      // Instanciation d'un objet Success à partir des données remontées de la bdd
+      $succes = Success::withData($data);
+      $succes->setValue_user($data['value']);
 
-    // Instanciation d'un objet Success à partir des données remontées de la bdd
-    $succes = Success::withData($data);
-    $succes->setValue_user($data['value']);
+      // On ajoute la ligne au tableau
+      array_push($listeSuccesMission, $succes);
+    }
 
     $req->closeCursor();
 
     // Retour
-    return $succes;
+    return $listeSuccesMission;
   }
 
   /****************************************************************************/

@@ -110,45 +110,11 @@
   // RETOUR : Tableau des succès d'une mission
   function getSuccesMission($mission)
   {
-    // Initialisations
-    $succesMission = array();
-
-    // Récupération des succès
-    switch ($mission->getReference())
-    {
-      case 'noel_2017':
-        array_push($succesMission, physiqueSuccessMission('christmas2017'));
-        array_push($succesMission, physiqueSuccessMission('christmas2017_2'));
-        break;
-
-      case 'paques_2018':
-        array_push($succesMission, physiqueSuccessMission('golden-egg'));
-        array_push($succesMission, physiqueSuccessMission('rainbow-egg'));
-        break;
-
-      case 'halloween_2018':
-        array_push($succesMission, physiqueSuccessMission('wizard'));
-        break;
-
-      case 'noel_2018':
-        array_push($succesMission, physiqueSuccessMission('christmas2018'));
-        array_push($succesMission, physiqueSuccessMission('christmas2018_2'));
-        break;  
-        
-      case 'noel_2019':
-        array_push($succesMission, physiqueSuccessMission('christmas2019'));
-        break;    
-
-      case 'cigognes_2022':
-        array_push($succesMission, physiqueSuccessMission('delivery'));
-        break;
-
-      default:
-        break;
-    }
+    // Récupération des succès liés à la mission
+    $listeSuccesMission = physiqueSuccesMission($mission->getReference());
 
     // Retour
-    return $succesMission;
+    return $listeSuccesMission;
   }
 
   // METIER : Récupération des participants d'une mission
@@ -617,6 +583,9 @@
 
     // Suppression des participations
     physiqueDeleteMissionUsers($idMission);
+
+    // Mise à jour des références de missions des succès
+    physiqueUpdateSuccesMission($mission->getReference());
 
     // Suppression des notifications
     deleteNotification('start_mission', '', $idMission);

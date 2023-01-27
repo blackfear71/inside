@@ -495,7 +495,7 @@
       if ($valueSuccess != NULL)
       {
         // Contrôle pour les missions que la date de fin soit passée
-        $missionTermineeOuAutre = controleMissionTermineeOuAutre($success->getReference());
+        $missionTermineeOuAutre = controleMissionTermineeOuAutre($success->getMission());
 
         if ($missionTermineeOuAutre == true)
           $success->setValue_user($valueSuccess);
@@ -505,7 +505,7 @@
       if ($success->getDefined() == 'Y' AND $success->getUnicity() != 'Y')
       {
         // Contrôle pour les missions que la date de fin soit passée
-        $missionTermineeOuAutre = controleMissionTermineeOuAutre($success->getReference());
+        $missionTermineeOuAutre = controleMissionTermineeOuAutre($success->getMission());
 
         // Récupération de l'avancement des utilisateurs
         $listeRangSuccess = array();

@@ -142,49 +142,15 @@
     return $avancement;
   }
 
-  // METIER : Lecture des succès associés à une mission
+  // METIER : Lecture des succès associés à une mission pour l'utilisateur
   // RETOUR : Tableau des succès d'une mission
   function getSuccesMission($mission, $identifiant)
   {
-    // Initialisations
-    $succesMission = array();
-
-    // Récupération des succès
-    switch ($mission->getReference())
-    {
-      case 'noel_2017':
-        array_push($succesMission, physiqueSuccessMissionUser('christmas2017', $identifiant));
-        array_push($succesMission, physiqueSuccessMissionUser('christmas2017_2', $identifiant));
-        break;
-
-      case 'paques_2018':
-        array_push($succesMission, physiqueSuccessMissionUser('golden-egg', $identifiant));
-        array_push($succesMission, physiqueSuccessMissionUser('rainbow-egg', $identifiant));
-        break;
-
-      case 'halloween_2018':
-        array_push($succesMission, physiqueSuccessMissionUser('wizard', $identifiant));
-        break;
-
-      case 'noel_2018':
-        array_push($succesMission, physiqueSuccessMissionUser('christmas2018', $identifiant));
-        array_push($succesMission, physiqueSuccessMissionUser('christmas2018_2', $identifiant));
-        break;  
-        
-      case 'noel_2019':
-        array_push($succesMission, physiqueSuccessMissionUser('christmas2019', $identifiant));
-        break;    
-
-      case 'cigognes_2022':
-        array_push($succesMission, physiqueSuccessMissionUser('delivery', $identifiant));
-        break;
-
-      default:
-        break;
-    }
+    // Récupération des succès liés à la mission
+    $listeSuccesMission = physiqueSuccesMissionUser($mission->getReference(), $identifiant);
 
     // Retour
-    return $succesMission;
+    return $listeSuccesMission;
   }
 
   // METIER : Lecture du classement des utilisateurs d'une mission

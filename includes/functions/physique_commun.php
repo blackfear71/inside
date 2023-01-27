@@ -350,6 +350,36 @@
     return $ancienneValeur;
   }
 
+  // PHYSIQUE : Lecture des succès liés à une mission
+  // RETOUR : Liste des succès liés
+  function physiqueSuccesMission($reference)
+  {
+    // Initialisations
+    $listeSuccesMission = array();
+
+    // Requête
+    global $bdd;
+
+    $req = $bdd->query('SELECT *
+                        FROM success
+                        WHERE mission = "' . $reference . '"
+                        ORDER BY order_success ASC');
+
+    while ($data = $req->fetch())
+    {
+      // Instanciation d'un objet Success à partir des données remontées de la bdd
+      $succes = Success::withData($data);
+
+      // On ajoute la ligne au tableau
+      array_push($listeSuccesMission, $succes);
+    }
+
+    $req->closeCursor();
+
+    // Retour
+    return $listeSuccesMission;
+  }
+
   // PHYSIQUE : Lecture de toutes les tables de la base
   // RETOUR : Tables de la base
   function physiqueTablesBdd()

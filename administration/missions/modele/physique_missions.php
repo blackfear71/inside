@@ -54,28 +54,6 @@
     return $mission;
   }
 
-  // PHYSIQUE : Lecture d'un succès
-  // RETOUR : Objet Success
-  function physiqueSuccessMission($referenceSucces)
-  {
-    // Requête
-    global $bdd;
-
-    $req = $bdd->query('SELECT *
-                        FROM success
-                        WHERE success.reference = "' . $referenceSucces . '"');
-
-    $data = $req->fetch();
-
-    // Instanciation d'un objet Success à partir des données remontées de la bdd
-    $succes = Success::withData($data);
-
-    $req->closeCursor();
-
-    // Retour
-    return $succes;
-  }
-
   // PHYSIQUE : Lecture des participants d'une mission
   // RETOUR : Liste des utilisateurs
   function physiqueUsersMission($idMission)
@@ -262,6 +240,24 @@
                           WHERE id = ' . $idMission);
 
     $req->execute($mission);
+
+    $req->closeCursor();
+  }
+
+  // PHYSIQUE : Mise à jour succès lié
+  // RETOUR : Aucun
+  function physiqueUpdateSuccesMission($referenceMission)
+  {
+    // Requête
+    global $bdd;
+
+    $req = $bdd->prepare('UPDATE success
+                          SET mission = :mission
+                          WHERE mission = "' . $referenceMission . '"');
+
+    $req->execute(array(
+      'mission' => ''
+    ));
 
     $req->closeCursor();
   }
