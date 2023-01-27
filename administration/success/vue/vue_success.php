@@ -170,7 +170,7 @@
           echo '</div>';
 
           echo '<div class="contenu_explications">';
-            echo 'Si c\'est un succès relatif à une <u>mission</u>, mettre à jour également chacun ce succès en liant la référence de la mission dans la modification des succès.';
+            echo 'Si c\'est un succès relatif à une <u>mission</u>, mettre à jour également ce succès (dans le cas où cela n\'a pas déjà été fait à la création) en liant la référence de la mission dans la modification des succès.';
           echo '</div>';
 
           echo '<div class="contenu_explications">';
