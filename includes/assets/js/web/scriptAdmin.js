@@ -257,6 +257,11 @@ $(function()
   $('.loadBanner').on('change', function()
   {
     loadFile(event, 'banner', false);
+
+    setTimeout(function()
+    {
+      adaptBannerMission();
+    }, 10);
   });
 
   // Charge le bouton gauche (mission)
@@ -325,6 +330,9 @@ $(window).resize(function()
 // Au chargement du document complet (on lance Masonry et le scroll après avoir chargé les images)
 $(window).on('load', function()
 {
+  // Adaptation de la bannière d'une mission en modification
+  adaptBannerMission();
+
   // Masonry (Portail)
   if ($('.menu_portail').length)
   {
@@ -877,6 +885,24 @@ function hidePeriodesVacances(periode)
 
   // Changement de couleur de la période sélectionnée
   periode.css('background-color', '#262626');
+}
+
+// Adaptation de la zone de saisie de la bannière d'une mission
+function adaptBannerMission()
+{
+  var imageHeight = $('.zone_saisie_image_mission').height();
+
+  console.log(imageHeight);
+  
+  // Adaptation bouton Parcourir
+  $('.bouton_parcourir_banniere_mission').css('height', imageHeight + 'px');
+  $('.bouton_parcourir_banniere_mission').css('margin-top', -imageHeight + 'px');
+
+  // Adaptation infos
+  $('.info_image_mission').css('line-height', imageHeight + 'px');
+
+  // Adaptation affichage image
+  $('#banner').css('margin-top', -imageHeight + 'px');
 }
 
 // Ajoute une entrée à la saisie d'un journal
