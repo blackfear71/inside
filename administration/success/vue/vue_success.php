@@ -157,7 +157,7 @@
 
           echo '<div class="contenu_explications">';
             echo 'Si c\'est un succès relatif à une <u>mission</u>, mettre à jour également la fonction <strong>insertOrUpdateSuccesMission()</strong> dans <strong>metier_commun.php</strong>
-            ainsi que la fonction <strong>getSuccesMission()</strong> dans <strong>metier_missions.php</strong>..';
+            ainsi que la fonction <strong>getSuccesMission()</strong> dans <strong>metier_missions.php</strong>.';
           echo '</div>';
 
           /******************/
