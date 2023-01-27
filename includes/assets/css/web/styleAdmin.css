@@ -1332,7 +1332,6 @@
 	min-height: 40px;
 	width: calc(100% - 195px);
 	margin-left: 15px;
-	margin-top: 5px;
 	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 120%;
 	color: #262626;
@@ -1596,6 +1595,7 @@
 	font-size: 120%;
 	color: #262626;
 	text-align: justify;
+	line-height: 30px;
 }
 
 .saisie_modification_succes
@@ -1769,18 +1769,22 @@
 
 .zone_logs
 {
-	margin-top: 15px;
+	margin-bottom: -10px;
 }
 
 .zone_log
 {
 	width: 100%;
 	border-collapse: collapse;
-	margin-top: 5px;
+	margin-bottom: 10px;
+	border-radius: 2px;
+	overflow: hidden;
+	box-shadow: 0 0 3px #7c7c7c;
 }
 
 .log_ok
 {
+	display: inline-block;
 	background-color: #2ecc71;
 	width: 40px;
 	height: 40px;
@@ -1788,11 +1792,12 @@
 	text-align: center;
 	font-family: inside_font_medium, Verdana, sans-serif;
 	color: white;
-	margin-top: 5px;
+	vertical-align: middle;
 }
 
 .log_ko
 {
+	display: inline-block;
 	background-color: #ff1937;
 	width: 40px;
 	height: 40px;
@@ -1800,27 +1805,33 @@
 	text-align: center;
 	font-family: inside_font_medium, Verdana, sans-serif;
 	color: white;
-	margin-top: 5px;
+	vertical-align: middle;
 }
 
 .titre_log
 {
+	display: inline-block;
+	background-color: #d3d3d3;
+	width: calc(100% - 100px);
+	height: 40px;
 	line-height: 40px;
 	padding-left: 10px;
 	padding-right: 10px;
-	background-color: #d3d3d3;
 	font-family: inside_font_light, Verdana, sans-serif;
 	color: #262626;
+	vertical-align: middle;
 }
 
 .voir_log
 {
+	display: inline-block;
 	background-color: #e3e3e3;
-	cursor: pointer;
 	width: 40px;
 	height: 40px;
 	line-height: 40px;
 	text-align: center;
+	cursor: pointer;
+	vertical-align: middle;
 }
 
 .see_log
@@ -1831,7 +1842,7 @@
 	padding: 10px;
 }
 
-.log
+.contenu_log
 {
 	font-family: Courier, Verdana, sans-serif;
 	color: #262626;

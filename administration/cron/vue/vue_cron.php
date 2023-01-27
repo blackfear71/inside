@@ -112,32 +112,30 @@
                   {
                     $lines = file('../../cron/logs/daily/' . $fileJ);
 
-                    // Tableau statut / titre / flèche
-                    echo '<table class="zone_log">';
-                      echo '<tr>';
-                        if (substr($lines[6], 30, 2) == 'OK')
-                          echo '<td class="log_ok">OK</td>';
-                        else
-                          echo '<td class="log_ko">KO</td>';
+                    echo '<div class="zone_log">';
+                      // Entête statut / titre / flèche
+                      if (substr($lines[6], 30, 2) == 'OK')
+                        echo '<div class="log_ok">OK</div>';
+                      else
+                        echo '<div class="log_ko">KO</div>';
 
-                        echo '<td class="titre_log">';
-                          echo $fileJ;
-                        echo '</td>';
+                      echo '<div class="titre_log">';
+                        echo $fileJ;
+                      echo '</div>';
 
-                        echo '<td class="voir_log">';
-                          echo '<a class="detailsLogs">';
-                            echo '<img src="../../includes/icons/common/open_grey.png" alt="open_grey" class="see_log" id="daily_arrow_' . $i . '" />';
-                          echo '</a>';
-                        echo '</td>';
-                      echo '</tr>';
-                    echo '</table>';
+                      echo '<div class="voir_log">';
+                        echo '<a class="detailsLogs">';
+                          echo '<img src="../../includes/icons/common/open_grey.png" alt="open_grey" class="see_log" id="daily_arrow_' . $i . '" />';
+                        echo '</a>';
+                      echo '</div>';
 
-                    // Log
-                    echo '<div class="log" id="daily_log_' . $i . '" style="display: none;">';
-                      foreach ($lines as $line)
-                      {
-                        echo nl2br($line);
-                      }
+                      // Log
+                      echo '<div class="contenu_log" id="daily_log_' . $i . '" style="display: none;">';
+                        foreach ($lines as $line)
+                        {
+                          echo nl2br($line);
+                        }
+                      echo '</div>';
                     echo '</div>';
 
                     $i++;
@@ -165,32 +163,30 @@
                   {
                     $lines = file('../../cron/logs/weekly/' . $fileH);
 
-                    // Tableau statut / titre / flèche
-                    echo '<table class="zone_log">';
-                      echo '<tr>';
-                        if (substr($lines[6], 30, 2) == 'OK')
-                          echo '<td class="log_ok">OK</td>';
-                        else
-                          echo '<td class="log_ko">KO</td>';
+                    echo '<div class="zone_log">';
+                      // Entête statut / titre / flèche
+                      if (substr($lines[6], 30, 2) == 'OK')
+                        echo '<div class="log_ok">OK</div>';
+                      else
+                        echo '<div class="log_ko">KO</div>';
 
-                        echo '<td class="titre_log">';
-                          echo $fileH;
-                        echo '</td>';
+                      echo '<div class="titre_log">';
+                        echo $fileH;
+                      echo '</div>';
 
-                        echo '<td class="voir_log">';
-                          echo '<a class="detailsLogs">';
-                            echo '<img src="../../includes/icons/common/open_grey.png" alt="open_grey" class="see_log" id="weekly_arrow_' . $j . '" />';
-                          echo '</a>';
-                        echo '</td>';
-                      echo '</tr>';
-                    echo '</table>';
+                      echo '<div class="voir_log">';
+                        echo '<a class="detailsLogs">';
+                          echo '<img src="../../includes/icons/common/open_grey.png" alt="open_grey" class="see_log" id="weekly_arrow_' . $j . '" />';
+                        echo '</a>';
+                      echo '</div>';
 
-                    // Log
-                    echo '<div class="log" id="weekly_log_' . $j . '" style="display: none;">';
-                      foreach ($lines as $line)
-                      {
-                        echo nl2br($line);
-                      }
+                      // Log
+                      echo '<div class="contenu_log" id="weekly_log_' . $j . '" style="display: none;">';
+                        foreach ($lines as $line)
+                        {
+                          echo nl2br($line);
+                        }
+                      echo '</div>';
                     echo '</div>';
 
                     $j++;
