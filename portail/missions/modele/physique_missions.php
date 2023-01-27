@@ -226,7 +226,7 @@
                         LEFT JOIN success_users
                         ON (success.reference = success_users.reference AND success_users.identifiant = "' . $identifiant . '")
                         WHERE success.mission = "' . $reference . '" AND success.defined = "Y"
-                        ORDER BY order_success ASC');
+                        ORDER BY level ASC, order_success ASC');
 
     while ($data = $req->fetch())
     {

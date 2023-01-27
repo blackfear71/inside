@@ -363,7 +363,7 @@
     $req = $bdd->query('SELECT *
                         FROM success
                         WHERE mission = "' . $reference . '"
-                        ORDER BY order_success ASC');
+                        ORDER BY level ASC, order_success ASC');
 
     while ($data = $req->fetch())
     {
