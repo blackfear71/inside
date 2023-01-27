@@ -5,7 +5,7 @@
     switch ($changeLogParameters->getAction())
     {
       case 'M':
-        echo '<form method="post" action="changelog.php?action=doModifier">';
+        echo '<form method="post" action="changelog.php?action=doModifier" class="form_edition_changelog">';
           // Période
           echo '<input type="hidden" name="saisie_annee_changelog" value="' . $changeLog->getYear() . '" />';
           echo '<input type="hidden" name="saisie_semaine_changelog" value="' . $changeLog->getWeek() . '" />';
@@ -100,7 +100,7 @@
           echo '<div class="zone_boutons_changelog">';
             // Supprimer le journal
             echo '<div class="zone_bouton_valider_journal">';
-              echo '<input type="submit" name="delete_changelog" value="Supprimer le journal" id="bouton_suppression_journal" class="bouton_validation_journal" />';
+              echo '<input type="submit" name="delete_changelog" value="Supprimer le journal" id="bouton_suppression_journal" class="bouton_validation_journal bouton_validation_journal_gris" />';
             echo '</div>';
           echo '</div>';
         echo '</form>';
@@ -108,7 +108,7 @@
 
       case 'A':
       default:
-        echo '<form method="post" action="changelog.php?action=doAjouter">';
+        echo '<form method="post" action="changelog.php?action=doAjouter" class="form_edition_changelog">';
           // Période
           echo '<input type="hidden" name="saisie_annee_changelog" value="' . $changeLogParameters->getYear() . '" />';
           echo '<input type="hidden" name="saisie_semaine_changelog" value="' . $changeLogParameters->getWeek() . '" />';
@@ -139,8 +139,6 @@
 
           // Boutons
           echo '<div class="zone_boutons_changelog">';
-
-
             // Ajouter une entrée
             echo '<a id="ajouter_entree_changelog" class="bouton_ajouter_entree">';
               echo '<span class="fond_plus">+</span>';

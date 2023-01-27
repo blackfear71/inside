@@ -1841,39 +1841,6 @@
 	text-align: left;
 }
 
-.zone_no_logs
-{
-	display: inline-block;
-	width: 100%;
-	box-shadow: 0 0 3px #7c7c7c;
-	text-align: justify;
-	border-radius: 2px;
-	overflow: hidden;
-}
-
-.titre_no_logs
-{
-	padding-left: 20px;
-	padding-right: 20px;
-	line-height: 50px;
-	background-color: #ff1937;
-	font-family: inside_font_medium, Verdana, sans-serif;
-	font-size: 140%;
-	color: white;
-	border-bottom: solid 2px #c81932;
-}
-
-.contenu_no_logs
-{
-	line-height: 20px;
-	background-color: #ff1937;
-	padding: 20px;
-	font-family: inside_font_light, Verdana, sans-serif;
-	font-size: 100%;
-	color: white;
-	border-top: solid 1px #ff4961;
-}
-
 /*** Missions ***/
 .zone_missions
 {
@@ -3432,6 +3399,14 @@
 	width: 100%;
 }
 
+.form_edition_changelog
+{
+	background-color: #e3e3e3;
+	border-radius: 2px;
+	padding: 10px;
+	box-shadow: 0 0 3px #7c7c7c;
+}
+
 .zone_boutons_changelog
 {
 	display: block;
@@ -3443,7 +3418,7 @@
 	display: inline-block;
 	width: 270px;
 	vertical-align: middle;
-	background-color: #e3e3e3;
+	background-color: white;
 	padding-top: 5px;
 	padding-bottom: 5px;
 	border-radius: 2px;
@@ -3452,6 +3427,7 @@
 	color: #262626;
 	cursor: pointer;
 	text-align: center;
+	box-shadow: 0 0 3px #7c7c7c;
 }
 
 .bouton_ajouter_entree:hover
@@ -3491,7 +3467,7 @@
 .bouton_validation_journal
 {
 	width: 100%;
-	background-color: #e3e3e3;
+	background-color: white;
 	padding-top: 5px;
 	padding-bottom: 5px;
 	border-radius: 2px;
@@ -3501,6 +3477,12 @@
 	cursor: pointer;
 	text-align: center;
 	border: 0;
+	box-shadow: 0 0 3px #7c7c7c;
+}
+
+.bouton_validation_journal_gris
+{
+	background-color: #e3e3e3;
 }
 
 .bouton_validation_journal:hover
@@ -3520,8 +3502,7 @@
 	border-radius: 2px;
 	background-color: white;
 	border: 0;
-	box-shadow: 0 0 3px #7c7c7c;
-	margin-bottom: 20px;
+	margin-bottom: 10px;
 	font-family: inside_font_light, Verdana, sans-serif;
 	color: #262626;
 }
@@ -3534,15 +3515,14 @@
 .saisie_entree_changelog
 {
 	display: inline-block;
-	width: calc(100% - 300px);
-	margin-right: 20px;
+	width: calc(100% - 290px);
+	margin-right: 10px;
+	margin-bottom: 10px;
 	resize: vertical;
 	padding: 5px 10px 5px 10px;
 	border-radius: 2px;
 	background-color: white;
 	border: 0;
-	box-shadow: 0 0 3px #7c7c7c;
-	margin-bottom: 20px;
 	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
@@ -3552,14 +3532,13 @@
 {
 	display: inline-block;
 	width: 260px;
-	padding: 4px 5px 4px 5px;
+	padding: 5px 10px;
 	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
 	border: 0;
 	border-radius: 2px;
-	background-color: #e3e3e3;
-	box-shadow: 0 0 3px #7c7c7c;
+	background-color: white;
 }
 
 .notes_changelog
@@ -3599,8 +3578,8 @@
 	margin-top: 15px;
 	padding: 10px;
 	border-radius: 2px;
-	border: solid 1px #d3d3d3;
 	vertical-align: top;
+	box-shadow: 0 0 3px #7c7c7c;
 }
 
 .titre_categorie

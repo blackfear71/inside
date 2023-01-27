@@ -145,14 +145,8 @@
                 }
                 else
                 {
-                  echo '<div class="zone_no_logs">';
-                    echo '<div class="titre_no_logs">';
-                      echo 'Pas encore de logs journaliers';
-                    echo '</div>';
-
-                    echo '<div class="contenu_no_logs">';
-                      echo 'Aucun log journalier n\'a encore été généré par les tâches CRON. Veuillez patienter que des tâches soient exécutées automatiquement ou bien lancez-les manuellement.<br />';
-                    echo '</div>';
+                  echo '<div class="empty">';
+                    echo 'Aucun log journalier n\'a encore été généré par les tâches CRON. Veuillez patienter que des tâches soient exécutées automatiquement ou bien lancez-les manuellement.<br />';
                   echo '</div>';
                 }
               echo '</div>';
@@ -204,13 +198,8 @@
                 }
                 else
                 {
-                  echo '<div class="zone_no_logs">';
-                    echo '<div class="titre_no_logs">';
-                      echo 'Pas encore de logs hebdomadaires';
-                    echo '</div>';
-                    echo '<div class="contenu_no_logs">';
-                      echo 'Aucun log hebdomadaire n\'a encore été généré par les tâches CRON. Veuillez patienter que des tâches soient exécutées automatiquement ou bien lancez-les manuellement.<br />';
-                    echo '</div>';
+                  echo '<div class="empty">';
+                    echo 'Aucun log hebdomadaire n\'a encore été généré par les tâches CRON. Veuillez patienter que des tâches soient exécutées automatiquement ou bien lancez-les manuellement.<br />';
                   echo '</div>';
                 }
               echo '</div>';
