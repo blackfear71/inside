@@ -139,7 +139,7 @@
 
           echo '<div class="contenu_explications">';
             echo 'Si c\'est un succès relatif à une <u>mission</u>, mettre à jour également la fonction <strong>insertOrUpdateSuccesMission()</strong> dans <strong>metier_commun.php</strong>
-            ainsi que la fonction <strong>getSuccesMission()</strong> dans <strong>metier_missions.php</strong>.
+            ainsi que les 2 fonctions <strong>getSuccesMission()</strong> dans <strong>metier_missions.php</strong> (utilisateurs et administrateur).
             Une fois le code ajouté, modifier le succès pour changer son état à "<strong>Défini</strong>".';
           echo '</div>';
 
@@ -157,7 +157,7 @@
 
           echo '<div class="contenu_explications">';
             echo 'Si c\'est un succès relatif à une <u>mission</u>, mettre à jour également la fonction <strong>insertOrUpdateSuccesMission()</strong> dans <strong>metier_commun.php</strong>
-            ainsi que la fonction <strong>getSuccesMission()</strong> dans <strong>metier_missions.php</strong>.';
+            ainsi que les 2 fonctions <strong>getSuccesMission()</strong> dans <strong>metier_missions.php</strong> (utilisateurs et administrateur).';
           echo '</div>';
 
           /******************/

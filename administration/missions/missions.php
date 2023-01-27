@@ -66,6 +66,9 @@
         else
           $detailsMission = initialisationModificationMission($_GET['id_mission']);
 
+        // Récupération des succès de la mission
+        $succesMission = getSuccesMission($detailsMission);
+
         // Récupération du classement des participants
         $listeParticipantsParEquipes = getParticipants($_GET['id_mission']);
 
@@ -108,6 +111,11 @@
     case 'goModifier':
       Mission::secureData($detailsMission);
 
+      foreach ($succesMission as $succes)
+      {
+        Success::secureData($succes);
+      }
+      
       foreach ($listeParticipantsParEquipes as $participantsParEquipes)
       {
         foreach ($participantsParEquipes as $participant)

@@ -2247,14 +2247,51 @@
 	color: white;
 }
 
-/*** Classement ***/
-.zone_classement_mission
+/*** Succès missions ***/
+.zone_mission_droite
 {
 	display: inline-block;
 	width: calc(30% - 20px);
-	margin-left: 20px;
-	margin-top: 9px;
 	vertical-align: top;
+	margin-top: 9px;
+	margin-left: 20px;
+}
+
+.zone_succes_associes_mission
+{
+	display: block;
+	margin-bottom: -20px;
+}
+
+.zone_succes_mission
+{
+    display: block;
+	text-align: center;
+}
+
+.succes_mission
+{
+	display: inline-block;
+	text-align: center;
+	margin-bottom: 20px;
+	width: calc(50% - 30px);
+	background-color: #ffad01;
+	padding: 10px;
+	border-radius: 2px;
+	box-shadow: 0 0 3px #7c7c7c;
+}
+
+.logo_succes_mission
+{
+	display: block;
+	width: 100%;
+	border-radius: 2px;
+}
+
+/*** Classement ***/
+.zone_classement_mission
+{
+	display: block;
 }
 
 .zone_titre_equipe

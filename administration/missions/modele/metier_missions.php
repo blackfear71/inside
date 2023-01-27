@@ -106,6 +106,51 @@
     return $mission;
   }
 
+  // METIER : Lecture des succès associés à une mission
+  // RETOUR : Tableau des succès d'une mission
+  function getSuccesMission($mission)
+  {
+    // Initialisations
+    $succesMission = array();
+
+    // Récupération des succès
+    switch ($mission->getReference())
+    {
+      case 'noel_2017':
+        array_push($succesMission, physiqueSuccessMission('christmas2017'));
+        array_push($succesMission, physiqueSuccessMission('christmas2017_2'));
+        break;
+
+      case 'paques_2018':
+        array_push($succesMission, physiqueSuccessMission('golden-egg'));
+        array_push($succesMission, physiqueSuccessMission('rainbow-egg'));
+        break;
+
+      case 'halloween_2018':
+        array_push($succesMission, physiqueSuccessMission('wizard'));
+        break;
+
+      case 'noel_2018':
+        array_push($succesMission, physiqueSuccessMission('christmas2018'));
+        array_push($succesMission, physiqueSuccessMission('christmas2018_2'));
+        break;  
+        
+      case 'noel_2019':
+        array_push($succesMission, physiqueSuccessMission('christmas2019'));
+        break;    
+
+      case 'cigognes_2022':
+        array_push($succesMission, physiqueSuccessMission('delivery'));
+        break;
+
+      default:
+        break;
+    }
+
+    // Retour
+    return $succesMission;
+  }
+
   // METIER : Récupération des participants d'une mission
   // RETOUR : Liste des participants
   function getParticipants($idMission)

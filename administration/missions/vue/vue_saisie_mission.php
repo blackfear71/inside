@@ -203,36 +203,77 @@
       echo '<input type="submit" name="update_mission" value="Modifier la mission" class="bouton_saisie_mission" />';
   echo '</form>';
 
-  // Classement (uniquement sur les missions existantes)
+  // Succès et classement (sur les missions existantes)
   if ($_GET['action'] == 'goModifier')
   {
-    echo '<div class="zone_classement_mission">';
-      echo '<div class="titre_section">';
-        echo '<img src="../../includes/icons/missions/podium_grey.png" alt="podium_grey" class="logo_titre_section" />';
-        echo '<div class="texte_titre_section">Classement</div>';
-      echo '</div>';
-    
-      if (!empty($listeParticipantsParEquipes))
-      {
-        foreach ($listeParticipantsParEquipes as $equipe => $participantsParEquipes)
-        {
-          echo '<div class="zone_titre_equipe">';
-            echo '<img src="../../includes/icons/admin/users.png" alt="users" class="image_titre_equipe" />';
-            echo '<div class="texte_titre_equipe">' . $listeEquipesParticipants[$equipe]->getTeam() . '</div>';
-          echo '</div>';
+    echo '<div class="zone_mission_droite">';
+      // Succès associés
+      echo '<div class="zone_succes_associes_mission">';
+        echo '<div class="titre_section">';
+          echo '<img src="../../includes/icons/missions/success_grey.png" alt="success_grey" class="logo_titre_section" />';
+          echo '<div class="texte_titre_section">Succès associés</div>';
+        echo '</div>';
 
-          foreach ($participantsParEquipes as $participant)
+        if (!empty($succesMission))
+        {
+          echo '<div class="zone_succes_mission">';
+            $i         = 0;
+            $keySucces = array_keys($succesMission);
+            $lastKey   = end($keySucces);
+
+            foreach ($succesMission as $succes)
+            {
+              // Logo succès
+              if ($i % 2 == 0)
+              {
+                if ($i == $lastKey)
+                  echo '<div class="succes_mission" title="' . $succes->getTitle() . '">';
+                else
+                  echo '<div class="succes_mission margin_right_10" title="' . $succes->getTitle() . '">';
+              }
+              else
+                echo '<div class="succes_mission margin_left_10" title="' . $succes->getTitle() . '">';
+
+                echo '<img src="../../includes/images/profil/success/' . $succes->getReference() . '.png" alt="' . $succes->getReference() . '" class="logo_succes_mission" />';
+              echo '</div>';
+
+              $i++;
+            }
+          echo '</div>';
+        }
+        else
+          echo '<div class="empty">Aucun succès associé à cette mission...</div>';
+      echo '</div>';
+
+      // Classement
+      echo '<div class="zone_classement_mission">';
+        echo '<div class="titre_section">';
+          echo '<img src="../../includes/icons/missions/podium_grey.png" alt="podium_grey" class="logo_titre_section" />';
+          echo '<div class="texte_titre_section">Classement</div>';
+        echo '</div>';
+      
+        if (!empty($listeParticipantsParEquipes))
+        {
+          foreach ($listeParticipantsParEquipes as $equipe => $participantsParEquipes)
           {
-            echo '<div class="classement_user">';
-              echo '<div class="rang_classement">' . $participant->getRank() . '</div>';
-              echo '<div class="pseudo_classement">' . formatUnknownUser($participant->getPseudo(), true, false) . '</div>';
-              echo '<div class="total_classement">' . $participant->getTotal() . '</div>';
+            echo '<div class="zone_titre_equipe">';
+              echo '<img src="../../includes/icons/admin/users.png" alt="users" class="image_titre_equipe" />';
+              echo '<div class="texte_titre_equipe">' . $listeEquipesParticipants[$equipe]->getTeam() . '</div>';
             echo '</div>';
+
+            foreach ($participantsParEquipes as $participant)
+            {
+              echo '<div class="classement_user">';
+                echo '<div class="rang_classement">' . $participant->getRank() . '</div>';
+                echo '<div class="pseudo_classement">' . formatUnknownUser($participant->getPseudo(), true, false) . '</div>';
+                echo '<div class="total_classement">' . $participant->getTotal() . '</div>';
+              echo '</div>';
+            }
           }
         }
-      }
-      else
-        echo '<div class="empty">Pas encore de participants...</div>';
+        else
+          echo '<div class="empty">Pas encore de participants...</div>';
+      echo '</div>';
     echo '</div>';
   }
 ?>
