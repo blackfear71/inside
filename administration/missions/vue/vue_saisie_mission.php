@@ -39,14 +39,15 @@
         echo '<div class="info_icone_mission">Icône gauche (500 x 500 px)</div>';
 
         if ($_GET['action'] == 'goAjouter')
+        {
           echo '<input type="file" accept=".png" name="mission_icone_g" class="bouton_parcourir_icone_mission loadLeft" required />';
-        else
-          echo '<input type="file" accept=".png" name="mission_icone_g" class="bouton_parcourir_icone_mission loadLeft" />';
-
-        if (!empty($detailsMission->getReference()))
-          echo '<img src="../../includes/images/missions/buttons/' . $detailsMission->getReference() . '_g.png" alt="' . $detailsMission->getReference() . '_g" id="button_g" class="preview_icone_mission" />';
-        else
           echo '<img id="button_g" alt="" class="preview_icone_mission" />';
+        }
+        else
+        {
+          echo '<input type="file" accept=".png" name="mission_icone_g" class="bouton_parcourir_icone_mission loadLeft" />';
+          echo '<img src="../../includes/images/missions/buttons/' . $detailsMission->getReference() . '_g.png" alt="' . $detailsMission->getReference() . '_g" id="button_g" class="preview_icone_mission" />';
+        }
       echo '</div>';
     echo '</div>';
 
@@ -56,14 +57,15 @@
         echo '<div class="info_icone_mission">Icône milieu (500 x 500 px)</div>';
 
         if ($_GET['action'] == 'goAjouter')
+        {
           echo '<input type="file" accept=".png" name="mission_icone_m" class="bouton_parcourir_icone_mission loadMiddle" required />';
-        else
-          echo '<input type="file" accept=".png" name="mission_icone_m" class="bouton_parcourir_icone_mission loadMiddle" />';
-
-        if (!empty($detailsMission->getReference()))
-          echo '<img src="../../includes/images/missions/buttons/' . $detailsMission->getReference() . '_m.png" alt="' . $detailsMission->getReference() . '_m" id="button_m" class="preview_icone_mission" />';
-        else
           echo '<img id="button_m" alt="" class="preview_icone_mission" />';
+        }
+        else
+        {
+          echo '<input type="file" accept=".png" name="mission_icone_m" class="bouton_parcourir_icone_mission loadMiddle" />';
+          echo '<img src="../../includes/images/missions/buttons/' . $detailsMission->getReference() . '_m.png" alt="' . $detailsMission->getReference() . '_m" id="button_m" class="preview_icone_mission" />';
+        }
       echo '</div>';
     echo '</div>';
 
@@ -73,14 +75,15 @@
         echo '<div class="info_icone_mission">Icône droite (500 x 500 px)</div>';
 
         if ($_GET['action'] == 'goAjouter')
+        {
           echo '<input type="file" accept=".png" name="mission_icone_d" class="bouton_parcourir_icone_mission loadRight" required />';
-        else
-          echo '<input type="file" accept=".png" name="mission_icone_d" class="bouton_parcourir_icone_mission loadRight" />';
-
-        if (!empty($detailsMission->getReference()))
-          echo '<img src="../../includes/images/missions/buttons/' . $detailsMission->getReference() . '_d.png" alt="' . $detailsMission->getReference() . '_d" id="button_d" class="preview_icone_mission" />';
-        else
           echo '<img id="button_d" alt="" class="preview_icone_mission" />';
+        }
+        else
+        {
+          echo '<input type="file" accept=".png" name="mission_icone_d" class="bouton_parcourir_icone_mission loadRight" />';
+          echo '<img src="../../includes/images/missions/buttons/' . $detailsMission->getReference() . '_d.png" alt="' . $detailsMission->getReference() . '_d" id="button_d" class="preview_icone_mission" />';
+        }
       echo '</div>';
     echo '</div>';
 
