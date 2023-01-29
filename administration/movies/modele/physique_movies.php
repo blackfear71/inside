@@ -14,7 +14,7 @@
     // Requête
     global $bdd;
 
-    $req = $bdd->query('SELECT id, film, to_delete, team, identifiant_add, identifiant_del
+    $req = $bdd->query('SELECT id, film, to_delete, team, identifiant_add, identifiant_del, poster
                         FROM movie_house
                         WHERE to_delete = "Y"
                         ORDER BY id ASC');
