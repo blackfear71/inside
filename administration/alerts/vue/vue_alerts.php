@@ -102,8 +102,8 @@
               echo '<td class="width_10">Type</td>';
               echo '<td class="width_15">Catégorie</td>';
               echo '<td class="width_15">Référence</td>';
-              echo '<td class="width_45">Message</td>';
-              echo '<td class="width_15">Actions</td>';
+              echo '<td class="width_40">Message</td>';
+              echo '<td class="width_20">Actions</td>';
             echo '</tr>';
 
             if (!empty($listeAlertes))

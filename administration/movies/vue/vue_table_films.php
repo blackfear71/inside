@@ -10,7 +10,7 @@
 				echo 'Affiche';
 			echo '</td>';
 
-			echo '<td class="width_25">';
+			echo '<td class="width_20">';
 				echo 'Film';
 			echo '</td>';
 
@@ -30,7 +30,7 @@
 				echo 'Personnes intéressées';
 			echo '</td>';
 
-			echo '<td class="width_15">';
+			echo '<td class="width_20">';
 				echo 'Actions';
 			echo '</td>';
 		echo '</tr>';

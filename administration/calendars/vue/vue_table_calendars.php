@@ -10,7 +10,7 @@
 				echo 'Calendrier';
 			echo '</td>';
 
-			echo '<td class="width_45">';
+			echo '<td class="width_40">';
 				echo 'Période';
 			echo '</td>';
 
@@ -18,7 +18,7 @@
 				echo 'Equipe';
 			echo '</td>';
 
-			echo '<td class="width_15">';
+			echo '<td class="width_20">';
 				echo 'Actions';
 			echo '</td>';
 		echo '</tr>';

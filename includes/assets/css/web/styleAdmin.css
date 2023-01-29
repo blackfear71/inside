@@ -186,6 +186,7 @@
 {
 	font-family: inside_font_bold, Verdana, sans-serif;
 	color: #262626;
+	text-align: justify;
 	background-color: #e3e3e3;
 }
 
@@ -201,6 +202,7 @@
 {
 	font-family: inside_font_regular, Verdana, sans-serif;
 	color: #262626;
+	text-align: justify;
 	background-color: #e3e3e3;
 }
 
