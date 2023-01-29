@@ -70,13 +70,13 @@
 						echo '<form method="post" action="movies.php?action=doDeleteFilm" class="lien_action_film">';
 							echo '<input type="hidden" name="id_film" value="' . $film->getId() . '" />';
 							echo '<input type="hidden" name="team_film" value="' . $film->getTeam() . '" />';
-							echo '<input type="submit" name="accepter_suppression_film" value="" class="icone_valider_film" />';
+							echo '<input type="submit" name="accepter_suppression_film" value="" title="Accepter" class="icone_valider_film" />';
 						echo '</form>';
 
 						echo '<form method="post" action="movies.php?action=doResetFilm" class="lien_action_film">';
 							echo '<input type="hidden" name="id_film" value="' . $film->getId() . '" />';
 							echo '<input type="hidden" name="team_film" value="' . $film->getTeam() . '" />';
-							echo '<input type="submit" name="annuler_suppression_film" value="" class="icone_annuler_film" />';
+							echo '<input type="submit" name="annuler_suppression_film" value="" title="Refuser" class="icone_annuler_film" />';
 						echo '</form>';
 					echo '</td>';
 				echo '</tr>';
