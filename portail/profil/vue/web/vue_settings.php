@@ -1,4 +1,5 @@
 <?php
+  // Titre
   echo '<div class="titre_section"><img src="../../includes/icons/common/inside_grey.png" alt="inside_grey" class="logo_titre_section" /><div class="texte_titre_section">Mes informations</div></div>';
 
   // Avatar actuel & suppression
