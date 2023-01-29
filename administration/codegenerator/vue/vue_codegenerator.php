@@ -123,14 +123,14 @@
 
                 if ($generatorOption->getChecked() == 'Y')
                 {
-                  echo '<div id="switch_' . $generatorOption->getOption() . '" class="switch_generator switch_checked">';
+                  echo '<div id="switch_' . $generatorOption->getOption() . '" class="switch_saisie_admin switch_checked">';
                     echo '<input type="checkbox" id="checkbox_' . $generatorOption->getOption() . '" name="' . $generatorOption->getOption() . '" value="' . $generatorOption->getOption() . '" checked />';
                     echo '<label for="checkbox_' . $generatorOption->getOption() . '" id="label_' . $generatorOption->getOption() . '" class="label_switch">' . $generatorOption->getTitre() . '</label>';
                   echo '</div>';
                 }
                 else
                 {
-                  echo '<div id="switch_' . $generatorOption->getOption() . '" class="switch_generator">';
+                  echo '<div id="switch_' . $generatorOption->getOption() . '" class="switch_saisie_admin">';
                     echo '<input type="checkbox" id="checkbox_' . $generatorOption->getOption() . '" name="' . $generatorOption->getOption() . '" value="' . $generatorOption->getOption() . '" />';
                     echo '<label for="checkbox_' . $generatorOption->getOption() . '" id="label_' . $generatorOption->getOption() . '" class="label_switch">' . $generatorOption->getTitre() . '</label>';
                   echo '</div>';
@@ -138,7 +138,7 @@
               }
 
               // Bouton
-              echo '<input type="submit" name="generate_code" value="Générer le code" class="bouton_generator" />';
+              echo '<input type="submit" name="generate_code" value="Générer le code" class="bouton_saisie_blanc" />';
             echo '</form>';
           echo '</div>';
 

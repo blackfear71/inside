@@ -2,121 +2,6 @@
 /*** Administration ***/
 /**********************/
 
-/*** Menu ***/
-.menu_portail
-{
-	width: 100%;
-	margin-left: auto;
-	margin-right: auto;
-	margin-bottom: -40px;
-	opacity: 0;
-	transition: opacity 0.2s;
-}
-
-.menu_portail.masonry
-{
-	opacity: 1;
-}
-
-.lien_portail
-{
-	text-decoration: none;
-	display: block;
-	height: 250px;
-	width: 250px;
-	background-color: #374650;
-	overflow: hidden;
-	margin-bottom: 10px;
-	border-radius: 2px;
-	box-shadow: 0 0 3px #7c7c7c;
-}
-
-.lien_portail_alerte
-{
-	background-color: #ff1937;
-}
-
-.icone_alerte_lien_portail
-{
-	position: absolute;
-	width: 20px;
-	margin-left: 220px;
-	margin-top: 10px;
-}
-
-.zone_image_portail
-{
-	display: block;
-	width: 100%;
-	height: 175px;
-}
-
-.image_lien_portail
-{
-	display: block;
-	height: 125px;
-	margin-left: auto;
-	margin-right: auto;
-	padding: 25px;
-}
-
-.zone_texte_portail
-{
-	display: block;
-	width: 100%;
-	height: 75px;
-	line-height: 70px;
-	background-color: #2c3840;
-	text-align: center;
-	pointer-events: none;
-}
-
-.zone_texte_portail_alerte
-{
-	background-color: #c81932;
-}
-
-.texte_portail
-{
-	display: inline-block;
-	vertical-align: middle;
-	line-height: 30px;
-	font-family: inside_font_thin, Verdana, sans-serif;
-	color: white;
-	font-size: 180%;
-}
-
-.export_bdd
-{
-	display: block;
-	margin-top: -250px;
-	line-height: 100%;
-	font-family: inside_font_thin, Verdana, sans-serif;
-	color: white;
-	font-size: 180%;
-	height: 250px;
-	width: 250px;
-	border: 0;
-	background-color: transparent;
-	border-radius: 2px;
-	cursor: pointer;
-}
-
-.nombre_lien_portail
-{
-	display: inline-block;
-	vertical-align: middle;
-	margin-top: -5px;
-	width: 30px;
-	height: 30px;
-	line-height: 30px;
-	border-radius: 50%;
-	background-color: white;
-	color: #262626;
-	font-family: inside_font_medium, Verdana, sans-serif;
-	font-size: 70%;
-}
-
 /*** Tableaux (commun) ***/
 .table_admin
 {
@@ -360,6 +245,193 @@
 	overflow: hidden;
 	vertical-align: middle;
 	box-shadow: 0 0 3px #7c7c7c;
+}
+
+/*** Boutons (commun) ***/
+.bouton_saisie_blanc
+{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 5px 30px 5px 30px;
+	margin-top: 10px;
+	border-radius: 2px;
+	border: 0;
+	font-family: inside_font_light, Verdana, sans-serif;
+	font-size: 100%;
+	color: #262626;
+	background-color: white;
+	cursor: pointer;
+	box-shadow: 0 0 3px #7c7c7c;
+}
+
+.bouton_saisie_gris
+{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 5px 30px 5px 30px;
+	margin-top: 10px;
+	border-radius: 2px;
+	border: 0;
+	font-family: inside_font_light, Verdana, sans-serif;
+	font-size: 100%;
+	color: #262626;
+	background-color: #e3e3e3;
+	cursor: pointer;
+	box-shadow: 0 0 3px #7c7c7c;
+}
+
+.bouton_saisie_blanc:hover, .bouton_saisie_gris:hover
+{
+	background-color: #ff1937;
+	color: white;
+}
+
+/*** Switch (commun) ***/
+.switch_saisie_admin
+{
+	display: inline-block;
+	margin-right: 10px;
+	margin-bottom: 10px;
+	height: 35px;
+	line-height: 35px;
+	border-radius: 2px;
+	font-family: inside_font_light, Verdana, sans-serif;
+	color: #262626;
+	padding-left: 5px;
+	cursor: pointer;
+	background-color: white;
+}
+
+.switch_checked, .switch_saisie_admin:hover
+{
+	background-color: #70d55d;
+	color: white;
+}
+
+.label_switch
+{
+	display: inline-block;
+	margin-left: -25px;
+	padding-left: 30px;
+	padding-right: 10px;
+	cursor: pointer;
+}
+
+/*** Menu ***/
+.menu_portail
+{
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: -40px;
+	opacity: 0;
+	transition: opacity 0.2s;
+}
+
+.menu_portail.masonry
+{
+	opacity: 1;
+}
+
+.lien_portail
+{
+	text-decoration: none;
+	display: block;
+	height: 250px;
+	width: 250px;
+	background-color: #374650;
+	overflow: hidden;
+	margin-bottom: 10px;
+	border-radius: 2px;
+	box-shadow: 0 0 3px #7c7c7c;
+}
+
+.lien_portail_alerte
+{
+	background-color: #ff1937;
+}
+
+.icone_alerte_lien_portail
+{
+	position: absolute;
+	width: 20px;
+	margin-left: 220px;
+	margin-top: 10px;
+}
+
+.zone_image_portail
+{
+	display: block;
+	width: 100%;
+	height: 175px;
+}
+
+.image_lien_portail
+{
+	display: block;
+	height: 125px;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 25px;
+}
+
+.zone_texte_portail
+{
+	display: block;
+	width: 100%;
+	height: 75px;
+	line-height: 70px;
+	background-color: #2c3840;
+	text-align: center;
+	pointer-events: none;
+}
+
+.zone_texte_portail_alerte
+{
+	background-color: #c81932;
+}
+
+.texte_portail
+{
+	display: inline-block;
+	vertical-align: middle;
+	line-height: 30px;
+	font-family: inside_font_thin, Verdana, sans-serif;
+	color: white;
+	font-size: 180%;
+}
+
+.export_bdd
+{
+	display: block;
+	margin-top: -250px;
+	line-height: 100%;
+	font-family: inside_font_thin, Verdana, sans-serif;
+	color: white;
+	font-size: 180%;
+	height: 250px;
+	width: 250px;
+	border: 0;
+	background-color: transparent;
+	border-radius: 2px;
+	cursor: pointer;
+}
+
+.nombre_lien_portail
+{
+	display: inline-block;
+	vertical-align: middle;
+	margin-top: -5px;
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	border-radius: 50%;
+	background-color: white;
+	color: #262626;
+	font-family: inside_font_medium, Verdana, sans-serif;
+	font-size: 70%;
 }
 
 /*** Infos équipes ***/
@@ -989,6 +1061,7 @@
 {
 	margin-left: auto;
 	margin-right: auto;
+	margin-bottom: -10px;
 	width: 100%;
 	opacity: 0;
 	transition: opacity 0.2s;
@@ -1026,56 +1099,7 @@
 .zone_autorisations_membres
 {
 	display: block;
-	padding: 0 5px 10px 5px;
-}
-
-.switch_autorisation
-{
-	display: inline-block;
-	margin: 10px 5px 0 5px;
-	line-height: 35px;
-	border-radius: 2px;
-	box-shadow: 0 0 3px #7c7c7c;
-	font-family: inside_font_light, Verdana, sans-serif;
-	color: #262626;
-	padding-left: 5px;
-	cursor: pointer;
-	background-color: white;
-	word-break: break-word;
-}
-
-.switch_autorisation input
-{
-	cursor: pointer;
-}
-
-.switch_autorisation:hover
-{
-	background-color: #70d55d;
-	color: white;
-}
-
-.bouton_saisie_autorisations
-{
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-	padding: 5px 30px 5px 30px;
-	margin-bottom: 10px;
-	border-radius: 2px;
-	border: 0;
-	font-family: inside_font_light, Verdana, sans-serif;
-	font-size: 100%;
-	color: #262626;
-	background-color: #e3e3e3;
-	cursor: pointer;
-	box-shadow: 0 0 3px #7c7c7c;
-}
-
-.bouton_saisie_autorisations:hover
-{
-	background-color: #ff1937;
-	color: white;
+	padding: 0 10px 10px 10px;
 }
 
 .zone_periodes_vacances
@@ -1346,29 +1370,6 @@
 	font-size: 100%;
 }
 
-.bouton_saisie_vacances
-{
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-	padding: 5px 30px 5px 30px;
-	margin-top: 10px;
-	border-radius: 2px;
-	border: 0;
-	font-family: inside_font_light, Verdana, sans-serif;
-	font-size: 100%;
-	color: #262626;
-	background-color: white;
-	cursor: pointer;
-	box-shadow: 0 0 3px #7c7c7c;
-}
-
-.bouton_saisie_vacances:hover
-{
-	background-color: #ff1937;
-	color: white;
-}
-
 /*** Saisie succès ***/
 .form_saisie_succes
 {
@@ -1601,19 +1602,18 @@
 {
 	display: inline-block;
 	vertical-align: top;
-	height: 40px;
-	line-height: 40px;
+	padding-top: 5px;
+	padding-bottom: 5px;
 	width: 180px;
+	border-radius: 2px;
+	border: 0;
 	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 100%;
 	color: #262626;
-	background-color: #d3d3d3;
-	border: 0;
-	border-radius: 2px;
-	text-decoration: none;
 	text-align: center;
-	box-shadow: 0 0 3px #7c7c7c;
+	background-color: #e3e3e3;
 	cursor: pointer;
+	box-shadow: 0 0 3px #7c7c7c;
 }
 
 .bouton_gestion_succes:hover
@@ -1811,7 +1811,7 @@
 	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
-	margin-bottom: -25px;
+	margin-bottom: -15px;
 	opacity: 0;
 	transition: opacity 0.2s;
 }
@@ -1969,29 +1969,6 @@
 	padding: 5px 10px 5px 10px;
 	width: 100%;
 	margin-top: 10px;
-}
-
-.bouton_modification_succes
-{
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-	padding: 5px 30px 5px 30px;
-	margin-top: 20px;
-	border-radius: 2px;
-	border: 0;
-	font-family: inside_font_light, Verdana, sans-serif;
-	font-size: 100%;
-	color: #262626;
-	background-color: #e3e3e3;
-	cursor: pointer;
-	box-shadow: 0 0 3px #7c7c7c;
-}
-
-.bouton_modification_succes:hover
-{
-	background-color: #ff1937;
-	color: white;
 }
 
 /*** Tâches CRON ***/
@@ -2524,6 +2501,7 @@
 	display: inline-block;
 	width: calc(50% - 10px);
 	margin-right: 10px;
+	margin-bottom: 10px;
 	vertical-align: top;
 }
 
@@ -2532,6 +2510,7 @@
 	display: inline-block;
 	width: calc(50% - 10px);
 	margin-left: 10px;
+	margin-bottom: 10px;
 	vertical-align: top;
 }
 
@@ -2551,29 +2530,6 @@
 	color: #262626;
 	background-color: white;
 	resize: vertical;
-}
-
-.bouton_saisie_mission
-{
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-	padding: 5px 30px 5px 30px;
-	margin-top: 20px;
-	border-radius: 2px;
-	border: 0;
-	font-family: inside_font_light, Verdana, sans-serif;
-	font-size: 100%;
-	color: #262626;
-	background-color: #e3e3e3;
-	cursor: pointer;
-	box-shadow: 0 0 3px #7c7c7c;
-}
-
-.bouton_saisie_mission:hover
-{
-	background-color: #ff1937;
-	color: white;
 }
 
 /*** Succès missions ***/
@@ -3102,7 +3058,7 @@
 .zone_theme_infos
 {
 	display: block;
-	margin-top: 5px;
+	margin-top: 10px;
 	box-shadow: 0 0 3px #7c7c7c;
 	border-radius: 2px;
 	overflow: hidden;
@@ -3834,59 +3790,6 @@
 	font-size: 100%;
 	color: #262626;
 	line-height: 32px;
-}
-
-.switch_generator
-{
-	display: inline-block;
-	margin-right: 10px;
-	margin-bottom: 10px;
-	height: 35px;
-	line-height: 35px;
-	border-radius: 2px;
-	font-family: inside_font_light, Verdana, sans-serif;
-	color: #262626;
-	padding-left: 5px;
-	cursor: pointer;
-	background-color: white;
-}
-
-.switch_checked, .switch_generator:hover
-{
-	background-color: #70d55d;
-	color: white;
-}
-
-.label_switch
-{
-	display: inline-block;
-	margin-left: -25px;
-	padding-left: 30px;
-	padding-right: 10px;
-	cursor: pointer;
-}
-
-.bouton_generator
-{
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-	padding: 5px 30px 5px 30px;
-	margin-top: 10px;
-	border-radius: 2px;
-	border: 0;
-	font-family: inside_font_light, Verdana, sans-serif;
-	font-size: 100%;
-	color: #262626;
-	background-color: white;
-	cursor: pointer;
-	box-shadow: 0 0 3px #7c7c7c;
-}
-
-.bouton_generator:hover
-{
-	background-color: #ff1937;
-	color: white;
 }
 
 .zone_generated_left, .zone_generated_middle, .zone_generated_right

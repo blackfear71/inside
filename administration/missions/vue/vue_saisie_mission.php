@@ -201,9 +201,9 @@
 
     // Bouton ajout ou modification
     if ($_GET['action'] == 'goAjouter')
-      echo '<input type="submit" name="create_mission" value="Créer la mission" class="bouton_saisie_mission" />';
+      echo '<input type="submit" name="create_mission" value="Créer la mission" class="bouton_saisie_gris" />';
     else
-      echo '<input type="submit" name="update_mission" value="Modifier la mission" class="bouton_saisie_mission" />';
+      echo '<input type="submit" name="update_mission" value="Modifier la mission" class="bouton_saisie_gris" />';
   echo '</form>';
 
   // Succès et classement (sur les missions existantes)

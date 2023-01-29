@@ -184,7 +184,7 @@
               }
             }
 
-            echo '<input type="submit" value="Mettre à jour les succès" class="bouton_modification_succes" />';
+            echo '<input type="submit" value="Mettre à jour les succès" class="bouton_saisie_gris" />';
           echo '</form>';
         ?>
 			</article>

@@ -117,7 +117,7 @@
       echo '</table>';
 
       // Bouton validation
-      echo '<input type="submit" name="saisie_vacances" value="Valider les périodes de vacances" class="bouton_saisie_vacances" />';
+      echo '<input type="submit" name="saisie_vacances" value="Valider les périodes de vacances" class="bouton_saisie_blanc" />';
     echo '</form>';
   echo '</div>';
 ?>
