@@ -78,14 +78,14 @@
                 echo '</td>';
 
                 // Bouton envoi
-                echo '<td rowspan="2" class="td_saisie_alerte_envoi">';
-                  echo '<input type="submit" name="send" value="" class="send_alert" />';
+                echo '<td class="td_saisie_alerte_envoyer">';
+                  echo '<input type="submit" name="send" value="" class="bouton_saisie_alerte" />';
                 echo '</td>';
               echo '</tr>';
 
               echo '<tr>';
                 // Message
-                echo '<td colspan="3" class="td_saisie_alerte_message">';
+                echo '<td colspan="4" class="td_saisie_alerte_message">';
                   echo '<textarea placeholder="Message d\'alerte" name="message_alert" class="saisie_alerte_message" required>' . $_SESSION['save']['message_alert'] . '</textarea>';
                 echo '</td>';
               echo '</tr>';

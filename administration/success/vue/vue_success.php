@@ -81,7 +81,7 @@
 
                 // Bouton envoi
                 echo '<td class="td_saisie_succes_envoyer">';
-                  echo '<input type="submit" name="send" value="" class="send_succes" />';
+                  echo '<input type="submit" name="send" value="" class="bouton_saisie_succes" />';
                 echo '</td>';
               echo '</tr>';
 
