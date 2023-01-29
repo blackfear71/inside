@@ -2681,9 +2681,20 @@
 }
 
 /*** Saisie thème ***/
+.zone_theme_saisie
+{
+	display: block;
+	margin-bottom: 8px;
+	box-shadow: 0 0 3px #7c7c7c;
+	border-radius: 2px;
+}
+
 .zone_parcourir_header
 {
-	width: 494px;
+	display: block;
+	margin-right: auto;
+	margin-left: auto;
+	width: calc(100% - 6px);
 	height: 75.5px;
 	border-style: dashed;
 	border-width: 3px;
@@ -2730,14 +2741,17 @@
 .img_header
 {
 	margin-top: -3px;
-	height: 75.5px;
+	max-height: 75.5px;
 	max-width: 494px;
 	vertical-align: middle;
 }
 
 .zone_parcourir_background
 {
-	width: 494px;
+	display: block;
+	margin-right: auto;
+	margin-left: auto;
+	width: calc(100% - 6px);
 	height: 278px;
 	border-style: dashed;
 	border-width: 3px;
@@ -2781,13 +2795,17 @@
 .img_background
 {
 	margin-top: -3px;
-	width: 494px;
+	max-height: 278px;
+	max-width: 494px;
 	vertical-align: middle;
 }
 
 .zone_parcourir_footer
 {
-	width: 494px;
+	display: block;
+	margin-right: auto;
+	margin-left: auto;
+	width: calc(100% - 6px);
 	height: 45.5px;
 	border-style: dashed;
 	border-width: 3px;
@@ -2834,7 +2852,7 @@
 .img_footer
 {
 	margin-top: -3px;
-	height: 45.5px;
+	max-height: 45.5px;
 	max-width: 494px;
 	vertical-align: middle;
 }
@@ -2893,14 +2911,6 @@
 	max-height: 44px;
 	max-width: 44px;
 	vertical-align: middle;
-}
-
-.zone_theme_saisie
-{
-	display: block;
-	margin-bottom: 8px;
-	box-shadow: 0 0 3px #7c7c7c;
-	border-radius: 2px;
 }
 
 .zone_theme_saisie_titre
