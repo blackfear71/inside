@@ -5,41 +5,43 @@
 	if (!empty($listeAutorisationsParEquipe))
 	{
 		// Formulaire de gestion des autorisations
-		echo '<form method="post" action="calendars.php?action=doUpdateAutorisations" class="form_autorisations">';
-			echo '<div class="zone_autorisations">';
+		echo '<form method="post" action="calendars.php?action=doUpdateAutorisations">';
+			echo '<div class="zone_autorisations_equipes">';
 				foreach ($listeAutorisationsParEquipe as $referenceEquipe => $equipeAutorisations)
 				{
 					if (!empty($referenceEquipe))
 					{
-						// Nom de l'équipe
-						echo '<div class="titre_equipe_autorisations">' . $listeEquipes[$referenceEquipe]->getTeam() . '</div>';
+						echo '<div class="zone_autorisations_equipe">';
+							// Nom de l'équipe
+							echo '<div class="titre_autorisations_equipe">' . $listeEquipes[$referenceEquipe]->getTeam() . '</div>';
 
-						// Autorisations
-						echo '<div class="zone_equipe_autorisations">';
-							foreach ($equipeAutorisations as $autorisation)
-							{
-								if ($autorisation->getManage_calendars() == 'Y')
+							// Autorisations
+							echo '<div class="zone_autorisations_membres">';
+								foreach ($equipeAutorisations as $autorisation)
 								{
-									echo '<div id="bouton_autorisation_' . $autorisation->getIdentifiant() . '" class="switch_autorisation switch_checked">';
-										echo '<input id="autorisation_' . $autorisation->getIdentifiant() . '" type="checkbox" name="autorization[' . $autorisation->getIdentifiant() . ']" checked />';
-										echo '<label for="autorisation_' . $autorisation->getIdentifiant() . '" class="label_switch">' . formatString($autorisation->getPseudo(), 100) . '</label>';
-									echo '</div>';
+									if ($autorisation->getManage_calendars() == 'Y')
+									{
+										echo '<div id="bouton_autorisation_' . $autorisation->getIdentifiant() . '" class="switch_autorisation switch_checked">';
+											echo '<input id="autorisation_' . $autorisation->getIdentifiant() . '" type="checkbox" name="autorization[' . $autorisation->getIdentifiant() . ']" checked />';
+											echo '<label for="autorisation_' . $autorisation->getIdentifiant() . '" class="label_switch">' . formatString($autorisation->getPseudo(), 70) . '</label>';
+										echo '</div>';
+									}
+									else
+									{
+										echo '<div id="bouton_autorisation_' . $autorisation->getIdentifiant() . '" class="switch_autorisation">';
+											echo '<input id="autorisation_' . $autorisation->getIdentifiant() . '" type="checkbox" name="autorization[' . $autorisation->getIdentifiant() . ']" />';
+											echo '<label for="autorisation_' . $autorisation->getIdentifiant() . '" class="label_switch">' . formatString($autorisation->getPseudo(), 70) . '</label>';
+										echo '</div>';
+									}
 								}
-								else
-								{
-									echo '<div id="bouton_autorisation_' . $autorisation->getIdentifiant() . '" class="switch_autorisation">';
-										echo '<input id="autorisation_' . $autorisation->getIdentifiant() . '" type="checkbox" name="autorization[' . $autorisation->getIdentifiant() . ']" />';
-										echo '<label for="autorisation_' . $autorisation->getIdentifiant() . '" class="label_switch">' . formatString($autorisation->getPseudo(), 100) . '</label>';
-									echo '</div>';
-								}
-							}
+							echo '</div>';
 						echo '</div>';
 					}
 				}
-
-				// Bouton validation
-				echo '<input type="submit" name="saisie_autorisations" value="Mettre à jour" class="saisie_autorisations" />';
 			echo '</div>';
+
+			// Bouton validation
+			echo '<input type="submit" name="saisie_autorisations" value="Mettre à jour" class="bouton_saisie_autorisations" />';
 		echo '</form>';
 	}
 	else

@@ -213,7 +213,7 @@
             }
             else
             {
-              echo '<tr>';
+              echo '<tr class="tr_alertes_empty">';
                 echo '<td colspan="5" class="empty">Pas d\'alertes paramétrées...</td>';
               echo '</tr>';
             }

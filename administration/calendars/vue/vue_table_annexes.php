@@ -1,87 +1,67 @@
 <?php
+	// Titre
 	echo '<div class="titre_section"><img src="../../includes/icons/admin/annexes_grey.png" alt="annexes_grey" class="logo_titre_section" /><div class="texte_titre_section">Demandes de suppression des annexes</div></div>';
 
-	echo '<table class="table_manage_users">';
+	// Tableau des annexes à supprimer
+	echo '<table class="table_calendriers">';
 		// Entête du tableau
-		echo '<tr class="init_tr_manage_users">';
-			echo '<td rowspan="2" class="init_td_manage_users width_25">';
+		echo '<tr>';
+			echo '<td class="width_10">';
 				echo 'Annexe';
 			echo '</td>';
 
-			echo '<td rowspan="2" class="init_td_manage_users width_25">';
+			echo '<td class="width_30">';
+				echo 'Titre';
+			echo '</td>';
+
+			echo '<td class="width_30">';
 				echo 'Equipe';
 			echo '</td>';
 
-			echo '<td colspan="2" class="init_td_manage_users width_50">';
-				echo 'Suppression de l\'annexe';
+			echo '<td class="width_30">';
+				echo 'Actions';
 			echo '</td>';
 		echo '</tr>';
 
-		echo '<tr class="init_tr_manage_users">';
-			echo '<td class="init_td_manage_users width_25">';
-				echo 'Accepter';
-			echo '</td>';
-
-			echo '<td class="init_td_manage_users width_25">';
-				echo 'Refuser';
-			echo '</td>';
-		echo '</tr>';
-
+		// Contenu du tableau
 		if (!empty($listeSuppressionAnnexes))
 		{
 			foreach ($listeSuppressionAnnexes as $annexes)
 			{
-				echo '<tr class="tr_manage_users">';
-					echo '<td class="td_manage_users">';
-						echo '<img src="../../includes/images/calendars/annexes/mini/' . $annexes->getAnnexe() . '" alt="calendrier" title="' . $annexes->getTitle() . '" class="calendar_to_delete" />';
-						echo '<div class="title_calendar_to_delete">' . $annexes->getTitle() . '</div>';
+				echo '<tr>';
+					echo '<td class="td_calendrier">';
+						echo '<img src="../../includes/images/calendars/annexes/mini/' . $annexes->getAnnexe() . '" alt="calendrier" title="' . $annexes->getTitle() . '" class="calendrier_a_supprimer" />';
 					echo '</td>';
 
-					echo '<td class="td_manage_users">';
+					echo '<td class="td_periode_calendrier">';
+						echo $annexes->getTitle();
+					echo '</td>';
+
+					echo '<td class="td_equipe_calendrier">';
 						echo $annexes->getTeam();
 					echo '</td>';
 
-					echo '<td class="td_manage_users">';
-						if ($annexes->getTo_delete() == 'Y')
-						{
-							echo '<form method="post" action="calendars.php?action=doDeleteAnnexe">';
-								echo '<input type="hidden" name="id_annexe" value="' . $annexes->getId() . '" />';
-								echo '<input type="hidden" name="team_annexe" value="' . $annexes->getTeam() . '" />';
-								echo '<input type="submit" name="accepter_suppression_annexe" value="ACCEPTER" class="bouton_admin" />';
-							echo '</form>';
-						}
-					echo '</td>';
+					echo '<td class="td_actions_calendrier">';
+						echo '<form method="post" action="calendars.php?action=doDeleteAnnexe" class="lien_action_alerte">';
+							echo '<input type="hidden" name="id_annexe" value="' . $annexes->getId() . '" />';
+							echo '<input type="hidden" name="team_annexe" value="' . $annexes->getTeam() . '" />';
+							echo '<input type="submit" name="accepter_suppression_annexe" value="" title="Accepter" class="icone_valider_calendrier" />';
+						echo '</form>';
 
-					echo '<td class="td_manage_users">';
-						if ($annexes->getTo_delete() == 'Y')
-						{
-							echo '<form method="post" action="calendars.php?action=doResetAnnexe">';
-								echo '<input type="hidden" name="id_annexe" value="' . $annexes->getId() . '" />';
-								echo '<input type="hidden" name="team_annexe" value="' . $annexes->getTeam() . '" />';
-								echo '<input type="submit" name="annuler_suppression_annexe" value="REFUSER" class="bouton_admin" />';
-							echo '</form>';
-						}
+						echo '<form method="post" action="calendars.php?action=doResetAnnexe" class="lien_action_alerte">';
+							echo '<input type="hidden" name="id_annexe" value="' . $annexes->getId() . '" />';
+							echo '<input type="hidden" name="team_annexe" value="' . $annexes->getTeam() . '" />';
+							echo '<input type="submit" name="annuler_suppression_annexe" value="" title="Refuser" class="icone_annuler_calendrier" />';
+						echo '</form>';
 					echo '</td>';
 				echo '</tr>';
 			}
 		}
 		else
 		{
-			echo '<tr>';
+			echo '<tr class="tr_calendriers_empty">';
 				echo '<td colspan="4" class="empty">Pas d\'annexes à supprimer...</td>';
 			echo '</tr>';
 		}
-
-		// Bas du tableau
-		echo '<tr>';
-			echo '<td colspan="2" class="td_manage_users_important">';
-				echo 'Alertes';
-			echo '</td>';
-
-			echo '<td colspan="2" class="td_manage_users">';
-        		if ($alerteAnnexes == true)
-          			echo '<span class="reset_warning">!</span>';
-			echo '</td>';
-		echo '</tr>';
 	echo '</table>';
 ?>

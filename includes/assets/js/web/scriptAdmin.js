@@ -408,6 +408,27 @@ $(window).on('load', function()
     $('.zone_themes').addClass('masonry');
   }
 
+  // On n'affiche la zone des autorisations qu'à ce moment là, sinon le premier titre apparait puis la suite de la page
+  $('.zone_calendriers_admin').css('display', 'block');
+
+  // Masonry (Autorisations des calendriers)
+  if ($('.zone_autorisations_equipes').length)
+  {
+    $('.zone_autorisations_equipes').masonry().masonry('destroy');
+
+    $('.zone_autorisations_equipes').masonry({
+      // Options
+      itemSelector: '.zone_autorisations_equipe',
+      columnWidth: 500,
+      fitWidth: true,
+      gutter: 20,
+      horizontalOrder: true
+    });
+
+    // On associe une classe pour y ajouter une transition dans le css
+    $('.zone_autorisations_equipes').addClass('masonry');
+  }
+
   // On n'affiche la zone des succès qu'à ce moment là, sinon le premier titre apparait puis la suite de la page
   $('.zone_succes_admin').css('display', 'block');
 
@@ -890,19 +911,20 @@ function hidePeriodesVacances(periode)
 // Adaptation de la zone de saisie de la bannière d'une mission
 function adaptBannerMission()
 {
-  var imageHeight = $('.zone_saisie_image_mission').height();
+  if ($('.zone_saisie_image_mission').length)
+  {
+    var imageHeight = $('.zone_saisie_image_mission').height();
 
-  console.log(imageHeight);
+    // Adaptation bouton Parcourir
+    $('.bouton_parcourir_banniere_mission').css('height', imageHeight + 'px');
+    $('.bouton_parcourir_banniere_mission').css('margin-top', -imageHeight + 'px');
   
-  // Adaptation bouton Parcourir
-  $('.bouton_parcourir_banniere_mission').css('height', imageHeight + 'px');
-  $('.bouton_parcourir_banniere_mission').css('margin-top', -imageHeight + 'px');
-
-  // Adaptation infos
-  $('.info_image_mission').css('line-height', imageHeight + 'px');
-
-  // Adaptation affichage image
-  $('#banner').css('margin-top', -imageHeight + 'px');
+    // Adaptation infos
+    $('.info_image_mission').css('line-height', imageHeight + 'px');
+  
+    // Adaptation affichage image
+    $('#banner').css('margin-top', -imageHeight + 'px');
+  }
 }
 
 // Ajoute une entrée à la saisie d'un journal

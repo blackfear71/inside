@@ -351,17 +351,6 @@
     return $listeCalendarsToDelete;
   }
 
-  // METIER : Contrôle alertes Calendars
-  // RETOUR : Booléen
-  function getAlerteCalendars()
-  {
-    // Appel physique
-    $alert = physiqueAlerteCalendars();
-
-    // Retour
-    return $alert;
-  }
-
   // METIER : Lecture des annexes à supprimer
   // RETOUR : Liste des annexes à supprimer
   function getAnnexesToDelete()
@@ -371,17 +360,6 @@
 
     // Retour
     return $listeAnnexesToDelete;
-  }
-
-  // METIER : Contrôle alertes Annexes
-  // RETOUR : Booléen
-  function getAlerteAnnexes()
-  {
-    // Appel physique
-    $alert = physiqueAlerteAnnexes();
-
-    // Retour
-    return $alert;
   }
 
   // METIER : Supprime un calendrier de la base

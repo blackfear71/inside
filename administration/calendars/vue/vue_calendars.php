@@ -9,7 +9,7 @@
       $angularHead     = false;
       $chatHead        = false;
       $datepickerHead  = false;
-      $masonryHead     = false;
+      $masonryHead     = true;
       $exifHead        = false;
       $html2canvasHead = false;
       $jqueryCsv       = true;
@@ -42,25 +42,27 @@
             echo '<div id="loading_page" class="loading_page"></div>';
           echo '</div>';
 
-          /**********************************************/
-          /* Formulaire autorisation saisie calendriers */
-          /**********************************************/
-          include('vue/vue_autorisations.php');
+          echo '<div class="zone_calendriers_admin" style="display: none;">';
+            /**********************************************/
+            /* Formulaire autorisation saisie calendriers */
+            /**********************************************/
+            include('vue/vue_autorisations.php');
 
-          /********************************************/
-          /* Formulaire création périodes de vacances */
-          /********************************************/
-          include('vue/vue_vacances.php');
+            /********************************************/
+            /* Formulaire création périodes de vacances */
+            /********************************************/
+            include('vue/vue_vacances.php');
 
-          /*******************************************************/
-          /* Tableau des demandes de suppression des calendriers */
-          /*******************************************************/
-					include('vue/vue_table_calendars.php');
+            /*******************************************************/
+            /* Tableau des demandes de suppression des calendriers */
+            /*******************************************************/
+            include('vue/vue_table_calendars.php');
 
-          /***************************************************/
-          /* Tableau des demandes de suppression des annexes */
-          /***************************************************/
-          include('vue/vue_table_annexes.php');
+            /***************************************************/
+            /* Tableau des demandes de suppression des annexes */
+            /***************************************************/
+            include('vue/vue_table_annexes.php');
+          echo '</div>';
 				?>
 			</article>
 		</section>

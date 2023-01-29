@@ -42,11 +42,9 @@
 
       // Récupération des calendriers à supprimer
 			$listeSuppression = getCalendarsToDelete($listeMois);
-			$alerteCalendars  = getAlerteCalendars();
 
       // Récupération des annexes à supprimer
       $listeSuppressionAnnexes = getAnnexesToDelete();
-      $alerteAnnexes           = getAlerteAnnexes();
       break;
 
     case 'doUpdateAutorisations':

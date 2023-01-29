@@ -179,56 +179,6 @@
     return $listeAnnexesToDelete;
   }
 
-  // PHYSIQUE : Lecture alerte calendriers
-  // RETOUR : Booléen
-  function physiqueAlerteCalendars()
-  {
-    // Initialisations
-    $alert = false;
-
-    // Requête
-    global $bdd;
-
-    $req = $bdd->query('SELECT COUNT(*) AS nombreCalendarsToDelete
-                        FROM calendars
-                        WHERE to_delete = "Y"');
-
-    $data = $req->fetch();
-
-    if ($data['nombreCalendarsToDelete'] > 0)
-      $alert = true;
-
-    $req->closeCursor();
-
-    // Retour
-    return $alert;
-  }
-
-  // PHYSIQUE : Lecture alerte annexes
-  // RETOUR : Booléen
-  function physiqueAlerteAnnexes()
-  {
-    // Initialisations
-    $alert = false;
-
-    // Requête
-    global $bdd;
-
-    $req = $bdd->query('SELECT COUNT(*) AS nombreAnnexesToDelete
-                        FROM calendars_annexes
-                        WHERE to_delete = "Y"');
-
-    $data = $req->fetch();
-
-    if ($data['nombreAnnexesToDelete'] > 0)
-      $alert = true;
-
-    $req->closeCursor();
-
-    // Retour
-    return $alert;
-  }
-
   // PHYSIQUE : Lecture données élément Calendars
   // RETOUR : Objet Calendars ou Annexe
   function physiqueDonneesCalendars($idCalendars, $table)
