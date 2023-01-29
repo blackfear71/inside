@@ -1108,7 +1108,8 @@
 .zone_autorisations_membres
 {
 	display: block;
-	padding: 0 10px 10px 10px;
+	padding-left: 10px;
+	padding-right: 10px;
 }
 
 .zone_periodes_vacances
