@@ -739,7 +739,7 @@
 .zone_autorisations_membres
 {
 	display: block;
-	padding: 5px 10px 15px 10px;
+	padding: 0 5px 10px 5px;
 }
 
 .switch_autorisation
