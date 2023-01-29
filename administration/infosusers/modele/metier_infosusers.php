@@ -112,6 +112,18 @@
     insertOrUpdateSuccesValue('developper', $identifiant, $value);
   }
 
+  // METIER : Mise à jour d'une équipe
+  // RETOUR : Aucun
+  function updateEquipe($post)
+  {
+    // Récupération des données
+    $reference = $post['reference'];
+    $team      = $post['team'];
+
+    // Mise à jour du nom de l'équipe
+    physiqueUpdateEquipe($reference, $team);
+  }
+
   // METIER : Suppression d'une équipe
   // RETOUR : Aucun
   function deleteEquipe($post)

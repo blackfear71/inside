@@ -151,14 +151,102 @@
 
 .titre_gestion_equipe
 {
-	width: 100%;
+	display: inline-block;
+	vertical-align: top;
+	width: calc(100% - 100px);
+	margin-left: 40px;
 	font-family: inside_font_thin, Verdana, sans-serif;
 	color: #262626;
 	font-size: 150%;
 	font-weight: bold;
 	line-height: 30px;
-	padding-top: 10px;
-	padding-bottom: 10px;
+	padding: 10px;
+}
+
+.saisie_titre_gestion_equipe
+{
+	display: inline-block;
+	vertical-align: top;
+	width: calc(100% - 100px);
+	margin-left: 40px;
+	font-family: inside_font_thin, Verdana, sans-serif;
+	color: #262626;
+	font-size: 120%;
+	font-weight: bold;
+	line-height: 32px;
+	padding-left: 10px;
+	padding-right: 10px;
+	border: 0;
+	border-radius: 2px;
+	background-color: white;
+	margin-top: 10px;
+
+}
+
+.zone_boutons_actions_equipe
+{
+	position: relative;
+	z-index: 1;
+	float: right;
+	width: 40px;
+	text-align: right;
+	vertical-align: top;
+}
+
+.icone_modifier_equipe
+{
+	display: block;
+	width: 40px;
+	height: 40px;
+	background-image: url("/inside/includes/icons/common/edit_grey.png");
+	background-size: 20px 20px;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-color: transparent;
+	cursor: pointer;
+}
+
+.icone_supprimer_equipe
+{
+	display: block;
+	width: 40px;
+	height: 40px;
+	background-image: url("/inside/includes/icons/common/delete_grey.png");
+	background-size: 20px 20px;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-color: transparent;
+	cursor: pointer;
+	margin-bottom: -40px;
+	border: 0;
+}
+
+.icone_valider_equipe
+{
+	display: block;
+	width: 40px;
+	height: 40px;
+	background-image: url("/inside/includes/icons/common/validate_grey.png");
+	background-size: 25px 25px;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-color: transparent;
+	cursor: pointer;
+	border: 0;
+}
+
+.icone_annuler_equipe
+{
+	display: block;
+	width: 40px;
+	height: 40px;
+	background-image: url("/inside/includes/icons/common/cancel_grey.png");
+	background-size: 20px 20px;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-color: transparent;
+	cursor: pointer;
+	margin-bottom: -40px;
 }
 
 .zone_membres_equipe
@@ -186,31 +274,6 @@
 	font-family: inside_font_light, Verdana, sans-serif;
 	color: #262626;
 	font-size: 100%;
-}
-
-.form_suppression_equipe
-{
-	display: block;
-	width: 100%;
-}
-
-.bouton_suppression_equipe
-{
-	width: 100%;
-	background-color: #c3c3c3;
-	border: 0;
-	padding-top: 5px;
-	padding-bottom: 5px;
-	font-family: inside_font_regular, Verdana, sans-serif;
-	color: #262626;
-	font-size: 100%;
-	cursor: pointer;
-}
-
-.bouton_suppression_equipe:hover
-{
-	background-color: #ff1937;
-	color: white;
 }
 
 /*** Infos utilisateurs ***/

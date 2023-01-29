@@ -266,7 +266,7 @@
 
                 echo '<div class="zone_fiche_right">';
                   // Validation modification
-                  echo '<div id="zone_bouton_validation_' . $restaurant->getId() . '" class="zone_bouton_validation">';
+                  echo '<div class="zone_bouton_validation">';
                     echo '<input type="submit" name="update_restaurant_' . $restaurant->getId() . '" value="" title="Valider" id="bouton_validation_restaurant_' . $restaurant->getId() . '" class="icon_validate_restaurant" />';
                   echo '</div>';
 

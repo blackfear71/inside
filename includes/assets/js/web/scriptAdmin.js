@@ -9,40 +9,28 @@ $(function()
   adaptGenerator();
 
   /*** Actions au clic ***/
-  // Affiche les détails d'un log et applique une rotation à la flèche
-  $('.detailsLogs').click(function()
+  // Affiche la zone de modification d'une équipe
+  $('.modifierEquipe').click(function()
   {
-    var time;
-    var num;
-    var idImage = $(this).children('img').attr('id');
+    var idEquipe = $(this).parent().attr('id').replace('modifier_', '');
 
-    if (idImage.search('daily') != -1)
-      time = 'daily';
-    else
-      time = 'weekly';
-
-    num = idImage.replace(time + '_arrow_', '');
-
-    afficherMasquerIdNoDelay(time + '_log_' + num);
-    rotateIcon(time + '_arrow_' + num);
+    afficherMasquerIdNoDelay('modifier_' + idEquipe);
+    afficherMasquerIdNoDelay('visualiser_equipe_' + idEquipe);
+    afficherMasquerIdNoDelay('modifier_equipe_' + idEquipe);
+    initMasonry();
   });
 
-  // Affiche la ligne de modification d'une alerte
-  $('.modifierAlerte').click(function()
+    // Masque la zone de modification d'une équipe
+  $('.annulerEquipe').click(function()
   {
-    var idAlerte = $(this).attr('id').replace('alerte_', '');
+    console.log('test');
 
-    afficherMasquerIdRow('modifier_alerte_' + idAlerte);
-    afficherMasquerIdRow('modifier_alerte_2_' + idAlerte);
-  });
+    var idEquipe = $(this).attr('id').replace('annuler_', '');
 
-  // Masque la ligne de modification d'une alerte
-  $('.annulerAlerte').click(function()
-  {
-    var idAlerte = $(this).attr('id').replace('annuler_alerte_', '');
-
-    afficherMasquerIdRow('modifier_alerte_' + idAlerte);
-    afficherMasquerIdRow('modifier_alerte_2_' + idAlerte);
+    afficherMasquerIdNoDelay('modifier_' + idEquipe);
+    afficherMasquerIdNoDelay('visualiser_equipe_' + idEquipe);
+    afficherMasquerIdNoDelay('modifier_equipe_' + idEquipe);
+    initMasonry();
   });
 
   // Affiche la zone de modification d'un thème
@@ -63,6 +51,76 @@ $(function()
     afficherMasquerIdNoDelay('modifier_theme_' + idTheme);
     afficherMasquerIdNoDelay('modifier_theme_2_' + idTheme);
     initMasonry();
+  });
+
+  // Recherche et affichage des périodes de vacances
+  $('.periode_vacances').click(function()
+  {
+    // Affichage ou masquage de la période concernée
+    if ($('#zone_affichage_periodes_vacances').css('display') == 'none')
+    {
+      // Affichage de la période concernée
+      showPeriodesVacances($(this), $(this).text());
+    }
+    else
+    {
+      // Détermination si ouverture d'une autre période
+      var autrePeriode = false;
+      var nomFichier   = $(this).text();
+      var periode      = $(this);
+
+      if ($(this).css('background-color') == 'rgb(38, 38, 38)')
+        autrePeriode = true;
+
+      // Masquage de toutes les périodes
+      $('.periode_vacances').each(function()
+      {
+        hidePeriodesVacances($(this));
+      });
+
+      // Affichage de la période concernée
+      setTimeout(function()
+      {
+        if (autrePeriode == true)
+          showPeriodesVacances(periode, nomFichier);
+      }, 100);
+    }
+  });
+  
+  // Affiche la ligne de modification d'une alerte
+  $('.modifierAlerte').click(function()
+  {
+    var idAlerte = $(this).attr('id').replace('alerte_', '');
+
+    afficherMasquerIdRow('modifier_alerte_' + idAlerte);
+    afficherMasquerIdRow('modifier_alerte_2_' + idAlerte);
+  });
+
+  // Masque la ligne de modification d'une alerte
+  $('.annulerAlerte').click(function()
+  {
+    var idAlerte = $(this).attr('id').replace('annuler_alerte_', '');
+
+    afficherMasquerIdRow('modifier_alerte_' + idAlerte);
+    afficherMasquerIdRow('modifier_alerte_2_' + idAlerte);
+  });
+
+  // Affiche les détails d'un log et applique une rotation à la flèche
+  $('.detailsLogs').click(function()
+  {
+    var time;
+    var num;
+    var idImage = $(this).children('img').attr('id');
+
+    if (idImage.search('daily') != -1)
+      time = 'daily';
+    else
+      time = 'weekly';
+
+    num = idImage.replace(time + '_arrow_', '');
+
+    afficherMasquerIdNoDelay(time + '_log_' + num);
+    rotateIcon(time + '_arrow_' + num);
   });
 
   // Change la couleur des switch (calendriers & générateur de code)
@@ -134,40 +192,6 @@ $(function()
 
     $('#code_' + id).select();
     document.execCommand('copy');
-  });
-
-  // Recherche et affichage des périodes de vacances
-  $('.periode_vacances').click(function()
-  {
-    // Affichage ou masquage de la période concernée
-    if ($('#zone_affichage_periodes_vacances').css('display') == 'none')
-    {
-      // Affichage de la période concernée
-      showPeriodesVacances($(this), $(this).text());
-    }
-    else
-    {
-      // Détermination si ouverture d'une autre période
-      var autrePeriode = false;
-      var nomFichier   = $(this).text();
-      var periode      = $(this);
-
-      if ($(this).css('background-color') == 'rgb(38, 38, 38)')
-        autrePeriode = true;
-
-      // Masquage de toutes les périodes
-      $('.periode_vacances').each(function()
-      {
-        hidePeriodesVacances($(this));
-      });
-
-      // Affichage de la période concernée
-      setTimeout(function()
-      {
-        if (autrePeriode == true)
-          showPeriodesVacances(periode, nomFichier);
-      }, 100);
-    }
   });
 
   /*** Actions au changement ***/
@@ -620,7 +644,17 @@ function adaptCron()
 // Initialisation manuelle de "Masonry"
 function initMasonry()
 {
-  // On lance Masonry
+  // On lance Masonry pour les équipes
+  $('.zone_gestion_equipes').masonry({
+    // Options
+    itemSelector: '.zone_gestion_equipe',
+    columnWidth: 280,
+    fitWidth: true,
+    gutter: 20,
+    horizontalOrder: true
+  });
+
+  // On lance Masonry pour les thèmes
   $('.zone_themes').masonry({
     // Options
     itemSelector: '.zone_theme',

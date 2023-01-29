@@ -30,6 +30,16 @@
 			$listeUsersParEquipe = getUsers();
       break;
 
+    case 'doModifier':
+      // Modification d'une équipe
+      updateEquipe($_POST);
+      break;
+
+    case 'doSupprimer':
+      // Suppression d'une équipe
+      deleteEquipe($_POST);
+      break;
+
     case 'changeBeginnerStatus':
       // Mise à jour du succès "beginner"
       changeBeginner($_POST);
@@ -39,12 +49,7 @@
       // Mise à jour du succès "developper"
       changeDevelopper($_POST);
       break;
-
-    case 'doSupprimer':
-      // Suppression d'une équipe
-      deleteEquipe($_POST);
-      break;
-
+      
     default:
       // Contrôle action renseignée URL
       header('location: infosusers.php?action=goConsulter');
@@ -69,9 +74,10 @@
 			}
       break;
 
+    case 'doModifier':
+    case 'doSupprimer':
     case 'changeBeginnerStatus':
     case 'changeDevelopperStatus':
-    case 'doSupprimer':
     default:
       break;
   }
@@ -79,9 +85,10 @@
   // Redirection affichage
   switch ($_GET['action'])
   {
+    case 'doModifier':
+    case 'doSupprimer':    
     case 'changeBeginnerStatus':
     case 'changeDevelopperStatus':
-    case 'doSupprimer':
       header('location: infosusers.php?action=goConsulter');
       break;
 

@@ -143,6 +143,27 @@
   }
 
   /****************************************************************************/
+  /********************************** UPDATE **********************************/
+  /****************************************************************************/
+  // PHYSIQUE : Mise à jour nom équipe
+  // RETOUR : Aucun
+  function physiqueUpdateEquipe($reference, $team)
+  {
+    // Requête
+    global $bdd;
+
+    $req = $bdd->prepare('UPDATE teams
+                          SET team = :team
+                          WHERE reference = "' . $reference . '"');
+
+    $req->execute(array(
+      'team' => $team
+    ));
+
+    $req->closeCursor();
+  }
+
+  /****************************************************************************/
   /********************************** DELETE **********************************/
   /****************************************************************************/
   // PHYSIQUE : Suppression des données d'une table pour une équipe

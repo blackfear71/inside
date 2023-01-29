@@ -152,9 +152,9 @@
               echo '<input type="hidden" name="id_collector" value="' . $collector->getId() . '" />';
 
               // Boutons d'action
-              echo '<div id="zone_bouton_validation_' . $collector->getId() . '" class="zone_bouton_validation">';
+              echo '<div class="zone_bouton_validation">';
                 // Validation modification
-                echo '<input type="submit" name="update_collector" value="" title="Valider" id="bouton_validation_collector_' . $collector->getId() . '" class="icon_validate_collector" />';
+                echo '<input type="submit" name="update_collector" value="" title="Valider" class="icon_validate_collector" />';
 
                 // Annulation modification
                 echo '<a id="annuler_update_collector_' . $collector->getId() . '" title="Annuler" class="icone_cancel_collector annulerCollector"></a>';
