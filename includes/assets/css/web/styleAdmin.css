@@ -995,7 +995,7 @@
 {
 	display: inline-block;
 	width: 116px;
-	padding-right: 10px;
+	padding-right: 15px;
 	vertical-align: top;
 }
 
@@ -1056,7 +1056,7 @@
 .zone_saisie_donnees_succes
 {
 	display: inline-block;
-	width: calc(100% - 126px);
+	width: calc(100% - 131px);
 	vertical-align: top;
 }
 
