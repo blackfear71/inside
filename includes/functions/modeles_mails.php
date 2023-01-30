@@ -398,6 +398,7 @@
           display: block;
           width: 100%;
           text-align: center;
+          margin-bottom: 10px;
         }
 
         .zone_nombre_demandes_mail
@@ -407,7 +408,8 @@
           height: 200px;
           border-radius: 2px;
           overflow: hidden;
-          margin: 0 20px 20px 20px;
+          margin: 0 10px 10px 10px;
+          box-shadow: 0 0 3px #7c7c7c;
         }
 
         .titre_demandes_mail
