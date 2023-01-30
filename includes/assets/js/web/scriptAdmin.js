@@ -23,8 +23,6 @@ $(function()
     // Masque la zone de modification d'une équipe
   $('.annulerEquipe').click(function()
   {
-    console.log('test');
-
     var idEquipe = $(this).attr('id').replace('annuler_', '');
 
     afficherMasquerIdNoDelay('modifier_' + idEquipe);
@@ -86,6 +84,12 @@ $(function()
       }, 100);
     }
   });
+
+  // Charge le succès
+  $('.loadImageSucces').on('change', function()
+  {
+    loadFile(event, 'image_succes', false);
+  });
   
   // Affiche la ligne de modification d'une alerte
   $('.modifierAlerte').click(function()
@@ -127,7 +131,7 @@ $(function()
   $('.label_switch').click(function()
   {
     var idBouton = $(this).closest('div').attr('id');
-
+   
     changeCheckedColor(idBouton);
   });
 

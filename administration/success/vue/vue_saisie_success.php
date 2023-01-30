@@ -4,83 +4,92 @@
 
     // Saisie du succès
     echo '<form method="post" action="success.php?action=doAjouter" class="form_saisie_admin" enctype="multipart/form-data">';
-        // Titre
-        echo '<input type="text" name="title" placeholder="Titre" value="' . $_SESSION['save']['title_success'] . '" class="saisie_succes_titre" required />';
+        // Image
+        echo '<div class="zone_saisie_image_succes">';
+            echo '<input type="hidden" name="MAX_FILE_SIZE" value="15728640" />';
 
-        // Référence
-        echo '<input type="text" name="reference" placeholder="Référence" value="' . $_SESSION['save']['reference_success'] . '" maxlength="255" class="saisie_succes_reference" required />';
+            echo '<div class="zone_parcourir_succes">';
+                echo '<img src="../../includes/icons/common/picture.png" alt="picture" class="logo_saisie_image" />';
+                echo '<input type="file" accept=".png" name="success" class="bouton_parcourir_succes loadImageSucces" required />';
+            echo '</div>';
 
-        // Niveau
-        echo '<input type="text" name="level" placeholder="Niveau" value="' . $_SESSION['save']['level'] . '" maxlength="4" class="saisie_succes_niveau" required />';
-
-        // Ordonnancement
-        echo '<input type="text" name="order_success" placeholder="Ordonnancement" value="' . $_SESSION['save']['order_success'] . '" maxlength="3" class="saisie_succes_ordonnancement" required />';
-
-        // Bouton parcourir
-        echo '<input type="hidden" name="MAX_FILE_SIZE" value="15728640" />';
-
-        echo '<div class="zone_parcourir_succes">';
-            echo '<div class="label_parcourir">Parcourir</div>';
-            echo '<input type="file" accept=".png" name="success" class="bouton_parcourir_succes" required />';
+            echo '<div class="mask_succes">';
+                echo '<img id="image_succes" alt="" class="image_succes" />';
+            echo '</div>';
         echo '</div>';
 
-        // Bouton d'envoi
-        echo '<input type="submit" name="send" value="" class="bouton_saisie_succes" />';
+        // Autres données
+        echo '<div class="zone_saisie_donnees_succes">';
+            // Titre
+            echo '<input type="text" name="title" placeholder="Titre" value="' . $_SESSION['save']['title_success'] . '" class="saisie_succes_titre" required />';
 
-        // Description
-        echo '<input type="text" name="description" placeholder="Description" value="' . $_SESSION['save']['description_success'] . '" class="saisie_succes_description" required />';
+            // Référence
+            echo '<input type="text" name="reference" placeholder="Référence" value="' . $_SESSION['save']['reference_success'] . '" maxlength="255" class="saisie_succes_reference" required />';
 
-        // Condition
-        echo '<input type="text" name="limit_success" placeholder="Condition" value="' . $_SESSION['save']['limit_success'] . '" maxlength="3" class="saisie_succes_condition" required />';
+            // Niveau
+            echo '<input type="text" name="level" placeholder="Niveau" value="' . $_SESSION['save']['level'] . '" maxlength="4" class="saisie_succes_niveau" required />';
 
-        // Mission liée
-        echo '<select name="mission" class="saisie_succes_mission">';
-            // Choix par défaut
-            if (!empty($_SESSION['save']['mission']))
-                echo '<option value="" selected>Aucune mission liée</option>';
+            // Ordonnancement
+            echo '<input type="text" name="order_success" placeholder="Ordonnancement" value="' . $_SESSION['save']['order_success'] . '" maxlength="3" class="saisie_succes_ordonnancement" required />';
+
+            // Condition
+            echo '<input type="text" name="limit_success" placeholder="Condition" value="' . $_SESSION['save']['limit_success'] . '" maxlength="3" class="saisie_succes_condition" required />';
+
+            // Unicité
+            if ($_SESSION['save']['unicity'] == 'Y')
+            {
+                echo '<div id="switch_success" class="switch_success_unicite switch_checked">';
+                    echo '<input type="checkbox" id="checkbox_unicity" name="unicity" checked />';
+                    echo '<label for="checkbox_unicity" id="label_checkbox_unicity" class="label_switch">Unique</label>';
+                echo '</div>';
+            }
             else
-                echo '<option value="">Aucune mission liée</option>';
+            {
+                echo '<div id="switch_success" class="switch_success_unicite">';
+                    echo '<input type="checkbox" id="checkbox_unicity" name="unicity" />';
+                    echo '<label for="checkbox_unicity" id="label_checkbox_unicity" class="label_switch">Unique</label>';
+                echo '</div>';
+            }
 
-            // Liste des missions
-            echo '<optgroup label="Missions non terminées">';
-                $indicateurMissionsTerminees = false;
+            // Description
+            echo '<input type="text" name="description" placeholder="Description" value="' . $_SESSION['save']['description_success'] . '" class="saisie_succes_description" required />';
 
-                foreach ($listeMissions as $mission)
-                {
-                    if ($indicateurMissionsTerminees == false AND $mission->getDate_fin() < date('Ymd'))
+            // Mission liée
+            echo '<select name="mission" class="saisie_succes_mission">';
+                // Choix par défaut
+                if (!empty($_SESSION['save']['mission']))
+                    echo '<option value="" selected>Aucune mission liée</option>';
+                else
+                    echo '<option value="">Aucune mission liée</option>';
+
+                // Liste des missions
+                echo '<optgroup label="Missions non terminées">';
+                    $indicateurMissionsTerminees = false;
+
+                    foreach ($listeMissions as $mission)
                     {
-                        echo '</optgroup>';
-                        echo '<optgroup label="Missions terminées">';
+                        if ($indicateurMissionsTerminees == false AND $mission->getDate_fin() < date('Ymd'))
+                        {
+                            echo '</optgroup>';
+                            echo '<optgroup label="Missions terminées">';
 
-                        $indicateurMissionsTerminees = true;
+                            $indicateurMissionsTerminees = true;
+                        }
+
+                        if (!empty($_SESSION['save']['mission']) AND $_SESSION['save']['mission'] == $mission->getReference())
+                            echo '<option value="' . $mission->getReference() . '" selected>' . $mission->getMission() . '</option>';
+                        else
+                            echo '<option value="' . $mission->getReference() . '">' . $mission->getMission() . '</option>';
                     }
+                echo '</optgroup>';
+            echo '</select>';
+            
+            // Explications
+            echo '<input type="text" name="explanation" placeholder="Explications (utiliser %limit%)" value="' . $_SESSION['save']['explanation_success'] . '" class="saisie_succes_explications" required />';
 
-                    if (!empty($_SESSION['save']['mission']) AND $_SESSION['save']['mission'] == $mission->getReference())
-                        echo '<option value="' . $mission->getReference() . '" selected>' . $mission->getMission() . '</option>';
-                    else
-                        echo '<option value="' . $mission->getReference() . '">' . $mission->getMission() . '</option>';
-                }
-            echo '</optgroup>';
-        echo '</select>';
-        
-        // Unicité
-        if ($_SESSION['save']['unicity'] == 'Y')
-        {
-            echo '<div class="switch_success_unicite switch_checked">';
-                echo '<input type="checkbox" id="checkbox_unicity" name="unicity" checked/>';
-                echo '<label for="checkbox_unicity" id="label_checkbox_unicity" class="label_switch">Unique</label>';
-            echo '</div>';
-        }
-        else
-        {
-            echo '<div class="switch_success_unicite">';
-                echo '<input type="checkbox" id="checkbox_unicity" name="unicity" />';
-                echo '<label for="checkbox_unicity" id="label_checkbox_unicity" class="label_switch">Unique</label>';
-            echo '</div>';
-        }
-
-        // Explications
-        echo '<input type="text" name="explanation" placeholder="Explications (utiliser %limit%)" value="' . $_SESSION['save']['explanation_success'] . '" class="saisie_succes_explications" required />';
+            // Bouton d'envoi
+            echo '<input type="submit" name="send" value="" class="bouton_saisie_succes" />';
+        echo '</div>';
     echo '</form>';
 
     // Indications ajout succès
