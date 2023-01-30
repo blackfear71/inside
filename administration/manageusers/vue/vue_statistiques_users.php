@@ -50,7 +50,8 @@
         echo '</a>';
 
         // Expense Center
-        if ($totalStatistiques->getExpenses_total() < -0.01 OR $totalStatistiques->getExpenses_total() > 0.01)
+        if ($totalStatistiques->getExpenses_no_parts() < -0.01 OR $totalStatistiques->getExpenses_no_parts() > 0.01
+        OR  $totalStatistiques->getExpenses_total()    < -0.01 OR $totalStatistiques->getExpenses_total()    > 0.01)
             echo '<a id="statistiques_depenses" class="zone_statistiques_categorie zone_statistiques_categorie_alerte afficherDetailsStatistiques">';
         else
             echo '<a id="statistiques_depenses" class="zone_statistiques_categorie afficherDetailsStatistiques">';
