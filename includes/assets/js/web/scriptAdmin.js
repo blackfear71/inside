@@ -948,7 +948,10 @@ function showDetailsStatistiques(typeStatistique)
                   else
                     html += '<td class="td_table_admin_centre">';
 
-                    html += formatAmountForDisplay(tableauStatistiquesInsJson[key][this.data], true);
+                    if (tableauStatistiquesInsJson[key][this.data] > -0.01 && tableauStatistiquesInsJson[key][this.data] < 0.01)
+                      html += formatAmountForDisplay('0', true);
+                    else
+                      html += formatAmountForDisplay(tableauStatistiquesInsJson[key][this.data], true);
                   html += '</td>';
                 }
                 else
@@ -985,29 +988,44 @@ function showDetailsStatistiques(typeStatistique)
                 // Données
                 $.each(colonnesCategorie, function()
                 {
-                  if (this.data == 'expenses')
+                  switch (this.data)
                   {
-                    if (tableauStatistiquesDesJson[key][this.data] <= -6)
-                      html += '<td class="td_table_admin_centre td_table_admin_rouge">';
-                    else if (tableauStatistiquesDesJson[key][this.data] > -6 && tableauStatistiquesDesJson[key][this.data] < -3)
-                      html += '<td class="td_table_admin_centre td_table_admin_orange">';
-                    else if (tableauStatistiquesDesJson[key][this.data] > -3 && tableauStatistiquesDesJson[key][this.data] < -0.01)
-                      html += '<td class="td_table_admin_centre td_table_admin_jaune">';
-                    else if (tableauStatistiquesDesJson[key][this.data] > 0.01 && tableauStatistiquesDesJson[key][this.data] < 5)
-                      html += '<td class="td_table_admin_centre td_table_admin_vert">';
-                    else if (tableauStatistiquesDesJson[key][this.data] >= 5)
-                      html += '<td class="td_table_admin_centre td_table_admin_vert_fonce">';
-                    else
+                    case 'nb_reservations':
+                    case 'nb_idees_en_charge':
                       html += '<td class="td_table_admin_centre">';
+                        if (tableauStatistiquesDesJson[key][this.data] == 0)
+                          html += 'N/A';
+                        else
+                          html += tableauStatistiquesDesJson[key][this.data];
+                      html += '</td>';
+                      break;
 
-                      html += formatAmountForDisplay(tableauStatistiquesDesJson[key][this.data], true);
-                    html += '</td>';
-                  }
-                  else
-                  {
-                    html += '<td class="td_table_admin_centre">';
-                      html += tableauStatistiquesDesJson[key][this.data];
-                    html += '</td>';
+                    case 'expenses':
+                      if (tableauStatistiquesDesJson[key][this.data] <= -6)
+                        html += '<td class="td_table_admin_centre td_table_admin_rouge">';
+                      else if (tableauStatistiquesDesJson[key][this.data] > -6 && tableauStatistiquesDesJson[key][this.data] < -3)
+                        html += '<td class="td_table_admin_centre td_table_admin_orange">';
+                      else if (tableauStatistiquesDesJson[key][this.data] > -3 && tableauStatistiquesDesJson[key][this.data] < -0.01)
+                        html += '<td class="td_table_admin_centre td_table_admin_jaune">';
+                      else if (tableauStatistiquesDesJson[key][this.data] > 0.01 && tableauStatistiquesDesJson[key][this.data] < 5)
+                        html += '<td class="td_table_admin_centre td_table_admin_vert">';
+                      else if (tableauStatistiquesDesJson[key][this.data] >= 5)
+                        html += '<td class="td_table_admin_centre td_table_admin_vert_fonce">';
+                      else
+                        html += '<td class="td_table_admin_centre">';
+
+                        if (tableauStatistiquesDesJson[key][this.data] > -0.01 && tableauStatistiquesDesJson[key][this.data] < 0.01)
+                          html += formatAmountForDisplay('0', true);
+                        else
+                          html += formatAmountForDisplay(tableauStatistiquesDesJson[key][this.data], true);
+                      html += '</td>';
+                      break;
+
+                    default:
+                      html += '<td class="td_table_admin_centre">';
+                        html += tableauStatistiquesDesJson[key][this.data];
+                      html += '</td>';
+                      break;
                   }
                 });
               html += '</tr>';
