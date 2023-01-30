@@ -39,20 +39,14 @@
       
       if (!empty($themesUsers))
       {
-        echo '<div class="texte_titre_section_fold">';
-          echo 'Mes récompenses';
-        echo '</div>';
+        echo '<div class="texte_titre_section_fold">Mes récompenses</div>';
 
         echo '<a id="fold_themes_user" class="bouton_fold">';
           echo '<img src="../../includes/icons/common/open_grey.png" alt="open_grey" class="fleche_bouton_fold" />';
         echo '</a>';
       }
       else
-      {
-        echo '<div class="texte_titre_section">';
-          echo 'Mes récompenses';
-        echo '</div>';
-      }
+        echo '<div class="texte_titre_section">Mes récompenses</div>';
     echo '</div>';
 
     if (!empty($themesUsers))
@@ -121,20 +115,14 @@
 
       if (!empty($themesMissions))
       {
-        echo '<div class="texte_titre_section_fold">';
-          echo 'Les thèmes des missions';
-        echo '</div>';
+        echo '<div class="texte_titre_section_fold">Les thèmes des missions</div>';
 
         echo '<a id="fold_themes_missions" class="bouton_fold">';
           echo '<img src="../../includes/icons/common/open_grey.png" alt="open_grey" class="fleche_bouton_fold" />';
         echo '</a>';
       }
       else
-      {
-        echo '<div class="texte_titre_section">';
-          echo 'Les thèmes des missions';
-        echo '</div>';
-      }
+        echo '<div class="texte_titre_section">Les thèmes des missions</div>';
     echo '</div>';
 
     if (!empty($themesMissions))

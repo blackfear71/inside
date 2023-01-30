@@ -1,12 +1,21 @@
 <?php
     echo '<div class="zone_infos_equipes">';
+        $i = 0;
+
         foreach ($listeUsersParEquipe as $referenceEquipe => $usersParEquipe)
         {
             // Titre
-            echo '<div class="titre_section"><img src="../../includes/icons/admin/users_grey.png" alt="users_grey" class="logo_titre_section" /><div class="texte_titre_section">' . $listeEquipes[$referenceEquipe]->getTeam() . '</div></div>';
+            echo '<div class="titre_section">';
+                echo '<img src="../../includes/icons/admin/users_grey.png" alt="users_grey" class="logo_titre_section" />';
+                echo '<div class="texte_titre_section_fold">' . $listeEquipes[$referenceEquipe]->getTeam() . '</div>';
+
+                echo '<a id="fold_zone_infos_' . $i . '" class="bouton_fold">';
+                    echo '<img src="../../includes/icons/common/open_grey.png" alt="open_grey" class="fleche_bouton_fold" />';
+                echo '</a>';
+            echo '</div>';
 
             // Liste des équipes par équipe
-            echo '<div class="zone_infos">';
+            echo '<div id="zone_infos_' . $i . '" class="zone_infos">';
                 foreach ($usersParEquipe as $user)
                 {
                     echo '<div class="zone_infos_user">';
@@ -70,6 +79,8 @@
                     echo '</div>';
                 }
             echo '</div>';
+
+            $i++;
         }
     echo '</div>';
 ?>

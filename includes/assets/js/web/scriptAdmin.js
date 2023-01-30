@@ -31,6 +31,21 @@ $(function()
     initMasonry();
   });
 
+  // Plie ou déplie les utilisateurs d'une équipe
+  $('.bouton_fold').click(function()
+  {
+    var idZone = $(this).attr('id').replace('fold_', '');
+
+    afficherMasquerSection($(this), idZone);
+
+    // Réinitialisation Masonry
+    initMasonry();
+
+    // Evite le clignotement des images à l'application de la masonry
+    $('#' + idZone).css('opacity', '0');
+    $('#' + idZone).css('transition', 'opacity 0s ease');
+  });
+
   // Affiche la zone de modification d'un thème
   $('.modifierTheme').click(function()
   {
@@ -653,6 +668,16 @@ function initMasonry()
     // Options
     itemSelector: '.zone_gestion_equipe',
     columnWidth: 280,
+    fitWidth: true,
+    gutter: 20,
+    horizontalOrder: true
+  });
+
+  // On lance Masonry pour les informations utilisateurs
+  $('.zone_infos').masonry({
+    // Options
+    itemSelector: '.zone_infos_user',
+    columnWidth: 300,
     fitWidth: true,
     gutter: 20,
     horizontalOrder: true
