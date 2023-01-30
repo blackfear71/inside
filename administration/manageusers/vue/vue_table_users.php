@@ -107,7 +107,7 @@
 
 								case 'T':
 									// Validation
-									echo '<form method="post" action="manageusers.php?action=doAccepterEquipe" class="form_selection_equipe">';
+									echo '<form method="post" action="manageusers.php?action=doAccepterEquipe" class="form_selection_equipe_changement">';
 										echo '<div class="zone_selection_equipe">';
 											echo '<select name="team" class="selection_equipe" required>';
 												foreach ($listeEquipes as $equipe)
@@ -158,7 +158,7 @@
 
 								case 'I':
 									// Validation
-									echo '<form method="post" action="manageusers.php?action=doAccepterInscription" class="form_selection_equipe">';
+									echo '<form method="post" action="manageusers.php?action=doAccepterInscription" class="form_selection_equipe_inscription">';
 										echo '<div class="zone_selection_equipe">';
 											echo '<select name="team" class="selection_equipe" required>';
 												foreach ($listeEquipes as $equipe)
