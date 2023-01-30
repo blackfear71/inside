@@ -24,17 +24,6 @@
     return $listeFilmsToDelete;
   }
 
-  // METIER : Contrôle alertes Movie House
-  // RETOUR : Booléen
-  function getAlerteFilms()
-  {
-    // Appel physique
-    $alert = physiqueAlerteFilms();
-
-    // Retour
-    return $alert;
-  }
-
   // METIER : Supprime un film de la base
   // RETOUR : Aucun
   function deleteFilm($post)

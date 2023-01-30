@@ -23,9 +23,6 @@
     case 'goConsulter':
       // Récupération de la liste des films à supprimer
 			$listeSuppression = getFilmsToDelete();
-
-      // Récupération de l'alerte
-			$alerteFilms = getAlerteFilms();
       break;
 
 		case 'doDeleteFilm':

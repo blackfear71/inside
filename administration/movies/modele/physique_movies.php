@@ -79,30 +79,6 @@
     return $count;
   }
 
-  // PHYSIQUE : Lecture alerte films
-  // RETOUR : Booléen
-  function physiqueAlerteFilms()
-  {
-    // Initialisations
-    $alert = false;
-
-    // Requête
-    global $bdd;
-
-    $req = $bdd->query('SELECT COUNT(*) AS nombreFilmsToDelete
-                        FROM movie_house
-                        WHERE to_delete = "Y"');
-    $data = $req->fetch();
-
-    if ($data['nombreFilmsToDelete'] > 0)
-      $alert = true;
-
-    $req->closeCursor();
-
-    // Retour
-    return $alert;
-  }
-
   // PHYSIQUE : Lecture identifiant ajout film
   // RETOUR : Identifiant
   function physiqueIdentifiantAjoutFilm($idFilm)
