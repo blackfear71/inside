@@ -20,7 +20,7 @@ $(function()
     initMasonry();
   });
 
-    // Masque la zone de modification d'une équipe
+  // Masque la zone de modification d'une équipe
   $('.annulerEquipe').click(function()
   {
     var idEquipe = $(this).attr('id').replace('annuler_', '');
@@ -44,6 +44,31 @@ $(function()
     // Evite le clignotement des images à l'application de la masonry
     $('#' + idZone).css('opacity', '0');
     $('#' + idZone).css('transition', 'opacity 0s ease');
+  });
+
+  // Affiche les détails des statistiques utilisateurs
+  $('.afficherDetailsStatistiques').click(function()
+  {
+    var typeStatistique = $(this).attr('id').replace('statistiques_', '');
+
+    // Affiche les détails d'une catégorie
+    showDetailsStatistiques(typeStatistique);
+  });
+
+  // Ferme les détails des statistiques
+  $(document).on('click', '#fermerDetails', function()
+  {
+    closeDetailsStatistiques('zone_details');
+  });
+
+  // Ferme au clic sur le fond
+  $(document).on('click', function(event)
+  {
+    // Ferme les détails d'une catégorie
+    if ($(event.target).attr('class') == 'fond_details_statistiques')
+    {
+      closeDetailsStatistiques('zone_details');
+    }
   });
 
   // Affiche la zone de modification d'un thème
@@ -215,9 +240,9 @@ $(function()
 
   /*** Actions au changement ***/
   // Affiche la saisie "Autre" (nouvelle équipe)
-  $('.select_form_manage_user').on('change', function()
+  $('.selection_equipe').on('change', function()
   {
-    afficherAutreEquipe($(this), 'input_form_manage_user');
+    afficherAutreEquipe($(this), 'saisie_nouvelle_equipe');
   });
 
   // Charge le thème (header utilisateurs)
@@ -428,6 +453,24 @@ $(window).on('load', function()
 
     // On associe une classe pour y ajouter une transition dans le css
     $('.zone_infos').addClass('masonry');
+  }
+
+  // Masonry (Statistiques utilisateurs)
+  if ($('.zone_statistiques_categories').length)
+  {
+    $('.zone_statistiques_categories').masonry().masonry('destroy');
+
+    $('.zone_statistiques_categories').masonry({
+      // Options
+      itemSelector: '.zone_statistiques_categorie',
+      columnWidth: 360,
+      fitWidth: true,
+      gutter: 40,
+      horizontalOrder: true
+    });
+
+    // On associe une classe pour y ajouter une transition dans le css
+    $('.zone_statistiques_categories').addClass('masonry');
   }
 
   // On n'affiche la zone des thèmes qu'à ce moment là, sinon le premier titre apparait puis la suite de la page
@@ -764,6 +807,231 @@ function afficherAutreEquipe(select, required)
       $(this).css('display', 'none');
       $(this).prop('required', false);
     });
+  }
+}
+
+// Affiche les détails d'une catégorie
+function showDetailsStatistiques(typeStatistique)
+{
+  // Récupération des données à afficher
+  var titreDetails;
+  var logoDetails;
+  var colonnesCategorie = [];
+
+  switch (typeStatistique)
+  {
+    case 'films':
+      titreDetails = 'MOVIE HOUSE';
+      logoDetails  = 'movie_house_grey';
+
+      colonnesCategorie.push({name: 'Films ajoutés', data: 'nb_films_ajoutes'});
+      colonnesCategorie.push({name: 'Commentaires', data: 'nb_films_comments'});
+      break;
+
+    case 'restaurants':
+      titreDetails = 'LES ENFANTS ! À TABLE !';
+      logoDetails  = 'food_advisor_grey';
+
+      colonnesCategorie.push({name: 'Réservations', data: 'nb_reservations'});
+      break;
+
+    case 'gateaux':
+      titreDetails = 'COOKING BOX';
+      logoDetails  = 'cooking_box_grey';
+
+      colonnesCategorie.push({name: 'Gâteaux de la semaine', data: 'nb_gateaux_semaine'});
+      colonnesCategorie.push({name: 'Recettes partagées', data: 'nb_recettes'});
+      break;
+
+    case 'depenses':
+      titreDetails = 'EXPENSE CENTER';
+      logoDetails  = 'expense_center_grey';
+
+      colonnesCategorie.push({name: 'Bilan des dépenses', data: 'expenses'});
+      break;
+
+    case 'cultes':
+      titreDetails = 'COLLECTOR ROOM';
+      logoDetails  = 'collector_grey';
+
+      colonnesCategorie.push({name: 'Phrases cultes rapportées', data: 'nb_collectors'});
+      break;
+
+    case 'bugs':
+      titreDetails = 'BUGS & ÉVOLUTIONS';
+      logoDetails  = 'alerts_grey';
+
+      colonnesCategorie.push({name: 'Nombre de demandes (bugs / évolutions)', data: 'nb_bugs_soumis'});
+      colonnesCategorie.push({name: 'Nombre de demandes résolues (bugs / évolutions)', data: 'nb_bugs_resolus'});
+      break;
+
+    case 'idees':
+      titreDetails = '#THEBOX';
+      logoDetails  = 'ideas_grey';
+
+      colonnesCategorie.push({name: 'Nombre d\'idées publiées', data: 'nb_idees_soumises'});
+      colonnesCategorie.push({name: 'Nombre d\'idées en charge', data: 'nb_idees_en_charge'});
+      colonnesCategorie.push({name: 'Nombre d\'idées terminées ou rejetées', data: 'nb_idees_terminees'});
+      break;
+
+    default:
+      break;
+  }
+
+  var nombreColonnes = colonnesCategorie.length;
+
+  // Génération des détails
+  if (nombreColonnes > 0)
+  {
+    var html = '';
+
+    html += '<div id="zone_details" class="fond_details_statistiques">';
+      html += '<div class="zone_details_statistiques">';
+        // Titre
+        html += '<div class="titre_section">';
+          html += '<img src="../../includes/icons/admin/' + logoDetails + '.png" alt="stats_grey" class="logo_titre_section" />';
+          html += '<div class="texte_titre_section">' + titreDetails + '</div>';
+          
+          // Bouton fermeture
+          html += '<a id="fermerDetails" class="fermer_details"><img src="../../includes/icons/common/close_grey.png" alt="close_grey" title="Fermer" class="image_fermer" /></a>';
+        html += '</div>';
+  
+        // Tableau des statistiques
+        html += '<table class="table_admin table_admin_details">';
+          // Entête du tableau
+          html += '<tr>';
+            html += '<td class="width_10">';
+              html += 'Identifiant';
+            html += '</td>';
+        
+            html += '<td class="width_25">';
+              html += 'Pseudo';
+            html += '</td>';
+
+            $.each(colonnesCategorie, function()
+            {
+              html += '<td style="width: ' + (65 / nombreColonnes) + '%;">';
+                html += this.name;
+              html += '</td>';
+            });
+          html += '</tr>';
+
+          // Statistiques utilisateurs inscrits
+          $.each(tableauStatistiquesInsJson, function(key, value)
+          {
+            html += '<tr>';
+              // Identifiant
+              html += '<td class="td_table_admin_premier">';
+                html += value.identifiant;
+              html += '</td>';
+
+              // Pseudo
+              html += '<td class="td_table_admin_normal">';
+                html += value.pseudo;
+              html += '</td>';
+
+              // Données
+              $.each(colonnesCategorie, function()
+              {
+                if (this.data == 'expenses')
+                {
+                  if (tableauStatistiquesInsJson[key][this.data] <= -6)
+                    html += '<td class="td_table_admin_centre td_table_admin_rouge">';
+                  else if (tableauStatistiquesInsJson[key][this.data] > -6 && tableauStatistiquesInsJson[key][this.data] < -3)
+                    html += '<td class="td_table_admin_centre td_table_admin_orange">';
+                  else if (tableauStatistiquesInsJson[key][this.data] > -3 && tableauStatistiquesInsJson[key][this.data] < -0.01)
+                    html += '<td class="td_table_admin_centre td_table_admin_jaune">';
+                  else if (tableauStatistiquesInsJson[key][this.data] > 0.01 && tableauStatistiquesInsJson[key][this.data] < 5)
+                    html += '<td class="td_table_admin_centre td_table_admin_vert">';
+                  else if (tableauStatistiquesInsJson[key][this.data] >= 5)
+                    html += '<td class="td_table_admin_centre td_table_admin_vert_fonce">';
+                  else
+                    html += '<td class="td_table_admin_centre">';
+
+                    html += formatAmountForDisplay(tableauStatistiquesInsJson[key][this.data], true);
+                  html += '</td>';
+                }
+                else
+                {
+                  html += '<td class="td_table_admin_centre">';
+                    html += tableauStatistiquesInsJson[key][this.data];
+                  html += '</td>';
+                }
+              });
+            html += '</tr>';
+          });
+
+          if (tableauStatistiquesDesJson.length > 0)
+          {
+            // Séparation
+            html += '<tr>';
+              html += '<td class="td_table_admin_fusion" colspan="' + (nombreColonnes + 2) + '">Anciens utilisateurs</td>';
+            html += '</tr>';
+
+            // Statistiques utilisateurs désinscrits
+            $.each(tableauStatistiquesDesJson, function(key, value)
+            {
+              html += '<tr>';
+                // Identifiant
+                html += '<td class="td_table_admin_premier">';
+                  html += value.identifiant;
+                html += '</td>';
+  
+                // Pseudo
+                html += '<td class="td_table_admin_normal">';
+                  html += value.pseudo;
+                html += '</td>';
+  
+                // Données
+                $.each(colonnesCategorie, function()
+                {
+                  if (this.data == 'expenses')
+                  {
+                    if (tableauStatistiquesDesJson[key][this.data] <= -6)
+                      html += '<td class="td_table_admin_centre td_table_admin_rouge">';
+                    else if (tableauStatistiquesDesJson[key][this.data] > -6 && tableauStatistiquesDesJson[key][this.data] < -3)
+                      html += '<td class="td_table_admin_centre td_table_admin_orange">';
+                    else if (tableauStatistiquesDesJson[key][this.data] > -3 && tableauStatistiquesDesJson[key][this.data] < -0.01)
+                      html += '<td class="td_table_admin_centre td_table_admin_jaune">';
+                    else if (tableauStatistiquesDesJson[key][this.data] > 0.01 && tableauStatistiquesDesJson[key][this.data] < 5)
+                      html += '<td class="td_table_admin_centre td_table_admin_vert">';
+                    else if (tableauStatistiquesDesJson[key][this.data] >= 5)
+                      html += '<td class="td_table_admin_centre td_table_admin_vert_fonce">';
+                    else
+                      html += '<td class="td_table_admin_centre">';
+
+                      html += formatAmountForDisplay(tableauStatistiquesDesJson[key][this.data], true);
+                    html += '</td>';
+                  }
+                  else
+                  {
+                    html += '<td class="td_table_admin_centre">';
+                      html += tableauStatistiquesDesJson[key][this.data];
+                    html += '</td>';
+                  }
+                });
+              html += '</tr>';
+            });
+          }
+        html += '</table>';
+      html += '</div>';
+    html += '</div>';
+  
+    // Ajout à la page
+    $('body').append(html);
+  
+    // Affichage de la zone
+    $('#zone_details').fadeIn(200);
+  }
+}
+    
+// Ferme les détails des statistiques
+function closeDetailsStatistiques(id)
+{
+  if ($('#' + id).css('display') != 'none')
+  {
+    afficherMasquerIdWithDelay(id);
+    $('#' + id).remove();
   }
 }
 

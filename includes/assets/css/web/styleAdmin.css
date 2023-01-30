@@ -425,124 +425,46 @@
 }
 
 /*** Gestion des utilisateurs ***/
-.form_manage_user
+.zone_reinitialisation_mdp
 {
-	display: inline-block;
-	padding: 3px;
-}
-
-.table_manage_users
-{
-	border-collapse: collapse;
-	width: 100%;
+	width: 50%;
 	margin-left: auto;
 	margin-right: auto;
-	background-color: white;
+	background-color: #e3e3e3;
+	border-radius: 2px;
+	padding-top: 10px;
+	padding-bottom: 10px;
 	margin-bottom: 20px;
-}
-
-.table_manage_users td
-{
-	border: 1px solid #b3b3b3;
-}
-
-.init_tr_manage_users
-{
-	text-align: center;
-	background-color: #e3e3e3;
-	font-family: inside_font_regular, Verdana, sans-serif;
-	font-weight: bold;
-	color: #262626;
-}
-
-.init_td_manage_users
-{
-	padding-left: 20px;
-	padding-right: 20px;
-	border: solid 1px #b3b3b3;
-}
-
-.tr_manage_users
-{
+	box-shadow: 0 0 3px #7c7c7c;
 	text-align: center;
 }
 
-.tr_manage_users:hover
+.message_reinitialisation_mdp
 {
-	background-color: #fffd4c;
-}
-
-.td_manage_users
-{
-	text-align: center;
-	padding: 5px;
-	font-family: inside_font_light, Verdana, sans-serif;
-	color: #262626;
-	border: solid 1px #b3b3b3;
-	word-break: break-word;
-}
-
-.td_manage_users_important
-{
-	text-align: center;
-	padding: 5px;
-	font-family: inside_font_regular, Verdana, sans-serif;
-	color: #262626;
-	border: solid 1px #b3b3b3;
-	word-break: break-word;
-	background-color: #e3e3e3;
-	font-weight: bold;
-}
-
-.td_manage_users_red
-{
-	text-align: center;
-	padding: 5px;
-	font-family: inside_font_light, Verdana, sans-serif;
-	color: #262626;
-	border: solid 1px #b3b3b3;
-	word-break: break-word;
-	background-color: #ee4949;
-}
-
-.reseted
-{
-	width: 100%;
-	text-align: center;
-	margin-left: auto;
-	margin-right: auto;
 	font-family: inside_font_light, Verdana, sans-serif;
 	font-size: 120%;
 	color: #262626;
-	margin-bottom: 30px;
 }
 
-.reseted_2
+.mdp_reinitialisation_mdp
 {
-	width: 20%;
-	text-align: center;
+	width: 50%;
+	margin-top: 10px;;
 	margin-left: auto;
 	margin-right: auto;
-	font-family: inside_font_light, Verdana, sans-serif;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	font-family: inside_font_medium, Verdana, sans-serif;
 	font-size: 140%;
 	color: #262626;
-	background-color: #e3e3e3;
-	padding: 10px;
+	background-color: white;
 	border-radius: 2px;
-	margin-bottom: 50px;
-}
-
-.reset_warning
-{
-	font-family: inside_font_medium, Verdana, sans-serif;
-	color: #ff1937;
-	font-size: 150%;
 }
 
 .zone_fleches_equipe
 {
 	display: inline-block;
-	margin-left: 10px;
+	margin-left: 8px;
 	margin-right: 8px;
 }
 
@@ -554,20 +476,27 @@
 	margin-right: -4px;
 }
 
-.zone_select_team
+.form_selection_equipe
+{
+	display: inline-block;
+	width: calc(100% - 110px);
+}
+
+.zone_selection_equipe
 {
 	display: inline-block;
 	vertical-align: middle;
-	width: 80%;
+	margin-left: 10px;
+	margin-right: 10px;
+	width: calc(100% - 70px);
 }
 
-.select_form_manage_user
+.selection_equipe
 {
 	display: block;
 	width: 100%;
-	padding: 5px;
+	height: 34px;
 	border: 0;
-	box-shadow: 0 0 3px #7c7c7c;
 	border-radius: 2px;
 	font-family: inside_font_light, Verdana, sans-serif;
 	color: #262626;
@@ -575,168 +504,169 @@
 	background-color: white;
 }
 
-.input_form_manage_user
-{
-	display: block;
-	width: calc(100% - 20px);
-	margin-top: 5px;
-	padding: 5px 10px 5px 10px;
-	border: 0;
-	box-shadow: 0 0 3px #7c7c7c;
-	border-radius: 2px;
-	font-family: inside_font_light, Verdana, sans-serif;
-	color: #262626;
-	font-size: 100%;
-	background-color: white;
-}
-
-.zone_validate_team
+.saisie_nouvelle_equipe
 {
 	display: inline-block;
-	vertical-align: middle;
-	width: 20%;
-}
-
-.td_stats_admin
-{
-	padding: 5px;
-	border: solid 1px #b3b3b3;
+	width: calc(100% - 20px);
+	margin-top: 5px;
+	padding-left: 10px;
+	padding-right: 10px;
+	border: 0;
+	line-height: 32px;
+	border-radius: 2px;
 	font-family: inside_font_light, Verdana, sans-serif;
+	font-size: 100%;
 	color: #262626;
+	background-color: white;
 }
 
-.bilan_red
+.zone_statistiques_categories
+{
+	margin-left: auto;
+	margin-right: auto;
+	width: 100%;
+	opacity: 0;
+	transition: opacity 0.2s;
+}
+
+.zone_statistiques_categories.masonry
+{
+	opacity: 1;
+}
+
+.zone_statistiques_categorie
+{
+	display: block;
+	width: 360px;
+	text-align: center;
+	background-color: white;
+	box-shadow: 0 0 3px #7c7c7c;
+	margin-bottom: 20px;
+	border-radius: 2px;
+	cursor: pointer;
+}
+
+.zone_statistiques_categorie_alerte
 {
 	background-color: #ee4949;
 }
 
-.bilan_orange
+.titre_statistiques_categorie
 {
-	background-color: #ff9147;
+	width: 100%;
+	font-family: inside_font_thin, Verdana, sans-serif;
+	color: #262626;
+	font-size: 150%;
+	font-weight: bold;
+	line-height: 30px;
+	padding-top: 10px;
+	padding-bottom: 10px;
 }
 
-.bilan_jaune
+.logo_titre_statistiques_categorie
 {
-	background-color: #fffd4c;
+	height: 25px;
+	vertical-align: middle;
+	margin-top: -5px;
+	margin-right: 10px;
 }
 
-.bilan_vert
+.zone_statistique
 {
-	background-color: #b6fc78;
+	display: inline-block;
+	width: 169.5px;
+	padding: 5px;
+	margin-bottom: 10px;
+	text-align: center;
+	vertical-align: top;
 }
 
-.bilan_vert_fonce
+.zone_statistique_petit
 {
-	background-color: #71d058;
+	width: 108px;
 }
 
-.table_old_users
+.zone_statistique_large
 {
-	line-height: 40px;
+	width: calc(100% - 10px);
+}
+
+.border_left
+{
+	border-left: solid 1px #b3b3b3;
+}
+
+.valeur_statistique
+{
+	display: block;
+	font-family: inside_font_thin, Verdana, sans-serif;
+	color: #262626;
+	font-size: 500%;
+	line-height: 80px;
+}
+
+.valeur_statistique_petit
+{
+	font-size: 350%;
+}
+
+.texte_statistique
+{
+	display: block;
 	font-family: inside_font_light, Verdana, sans-serif;
-	background-color: #2eb2f4;
-	color: white;
+	color: #262626;
+	font-size: 100%;
+}
+
+.fond_details_statistiques
+{
+	display: none;
+	background-color: rgb(0, 0, 0, 0.5);
+	position: fixed;
+	z-index: 10;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+}
+
+.zone_details_statistiques
+{
+	width: calc(85% - 40px);
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 75px;
+	padding-left: 20px;
+	padding-right: 20px;
+	border-radius: 2px;
+	background-color: white;
+	max-height: calc(100vh - 150px);
+	overflow-y: auto;
+}
+
+.fermer_details
+{
+	float: right;
+	width: 30px;
+	height: 30px;
+	margin-top: -30px;
+	cursor: pointer;
 	text-align: center;
 }
 
-.banderole_left_1
+.image_fermer
 {
-	height: 42px;
-	width: 10px;
-	position: absolute;
-	background-color: #2eb2f4;
-	margin-left: -11px;
-	margin-top: -1px;
+	width: 20px;
+	padding: 5px;
+	transform: rotate(0deg);
+	transition: transform 0.2s ease;
 }
 
-.banderole_left_2
+.image_fermer:hover
 {
-	height: 10px;
-	width: 10px;
-	position: absolute;
-	background: linear-gradient(to left bottom, #262626 50%, transparent 50%);
-	margin-left: -11px;
-	margin-top: 41px;
-	z-index: 0;
-}
-
-.banderole_left_3
-{
-	height: 42px;
-	width: 10px;
-	float: right;
-	background-color: #2eb2f4;
-	margin-right: -11px;
-	margin-top: -1px;
-	margin-bottom: -1px;
-}
-
-.banderole_left_4
-{
-	height: 10px;
-	width: 10px;
-	float: right;
-	background: linear-gradient(to right bottom, #262626 50%, transparent 50%);
-	margin-right: -11px;
-	margin-top: 41px;
-	margin-bottom: -11px;
-}
-
-.icone_annuler
-{
-	display: inline-block;
-	width: 30px;
-	height: 30px;
-	border: 0;
-	border-radius: 2px;
-	background-color: #ff1937;
-	background-image: url("/inside/includes/icons/common/cancel.png");
-	background-size: 20px 20px;
-	background-repeat: no-repeat;
-	background-position: center;
-	cursor: pointer;
-	overflow: hidden;
-	vertical-align: middle;
-	margin-left: 10px;
-	margin-right: 10px;
-}
-
-.icone_accepter
-{
-	display: inline-block;
-	width: 30px;
-	height: 30px;
-	border: 0;
-	border-radius: 2px;
-	background-color: #ff1937;
-	background-image: url("/inside/includes/icons/common/validate.png");
-	background-size: 25px 25px;
-	background-repeat: no-repeat;
-	background-position: center;
-	cursor: pointer;
-	overflow: hidden;
-	vertical-align: middle;
-	margin-left: 10px;
-	margin-right: 10px;
-}
-
-.icone_forcer
-{
-	display: inline-block;
-	width: 30px;
-	height: 30px;
-	border: 0;
-	border-radius: 2px;
-	background-color: #ff1937;
-	background-image: url("/inside/includes/icons/admin/exit.png");
-	background-size: 20px 20px;
-	background-repeat: no-repeat;
-	background-position: center;
-	cursor: pointer;
-	overflow: hidden;
-	vertical-align: middle;
-	margin-left: 10px;
-	margin-right: 10px;
+	transform: rotate(90deg);
+	transition: transform 0.2s ease;
 }
 
 /*** Gestion calendriers ***/
@@ -3585,6 +3515,11 @@
 	margin-top: -10px;
 }
 
+.table_admin_details
+{
+	margin-bottom: 10px;
+}
+
 .table_admin tr
 {
 	box-shadow: 0 0 3px #7c7c7c;
@@ -3606,7 +3541,7 @@
 }
 
 .table_admin tr:first-child td:first-child,
-.table_admin tr:first-child td:last-child
+.table_admin:not(.table_admin_details) tr:first-child td:last-child
 {
 	background-color: #c81932;
 }
@@ -3626,7 +3561,7 @@
 .table_admin tr:not(:first-child):hover .td_table_admin_important,
 .table_admin tr:not(:first-child):hover .td_table_admin_important_centre,
 .table_admin tr:not(:first-child):hover .td_table_admin_normal,
-.table_admin tr:not(:first-child):hover .td_table_admin_centre
+.table_admin tr:not(:first-child):hover .td_table_admin_centre:not(.td_table_admin_rouge):not(.td_table_admin_orange):not(.td_table_admin_jaune):not(.td_table_admin_vert):not(.td_table_admin_vert_fonce)
 {
 	background-color: #fffd4c;
 }
@@ -3634,12 +3569,15 @@
 .tr_table_admin_empty
 {
 	background-color: #e3e3e3;
+	line-height: 100px;
 }
 
 .td_table_admin_premier
 {
-	background-color: #d3d3d3;
+	font-family: inside_font_bold, Verdana, sans-serif;
+	color: #262626;
 	text-align: center;
+	background-color: #d3d3d3;
 }
 
 .td_table_admin_important
@@ -3674,10 +3612,44 @@
 	background-color: #e3e3e3;
 }
 
+.td_table_admin_fusion
+{
+	line-height: 40px;
+	font-family: inside_font_light, Verdana, sans-serif;
+	background-color: #2eb2f4;
+	color: white;
+	text-align: center;
+}
+
 .td_table_admin_actions
 {
 	text-align: center;
 	background-color: #d3d3d3;
+}
+
+.td_table_admin_rouge
+{
+	background-color: #ee4949;
+}
+
+.td_table_admin_orange
+{
+	background-color: #ff9147;
+}
+
+.td_table_admin_jaune
+{
+	background-color: #fffd4c;
+}
+
+.td_table_admin_vert
+{
+	background-color: #b6fc78;
+}
+
+.td_table_admin_vert_fonce
+{
+	background-color: #71d058;
 }
 
 .image_table_admin
@@ -3813,6 +3785,24 @@
 	border-radius: 2px;
 	background-color: #ff1937;
 	background-image: url("/inside/includes/icons/common/cancel.png");
+	background-size: 20px 20px;
+	background-repeat: no-repeat;
+	background-position: center;
+	cursor: pointer;
+	overflow: hidden;
+	vertical-align: middle;
+	box-shadow: 0 0 3px #7c7c7c;
+}
+
+.icone_forcer_table_admin
+{
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	border: 0;
+	border-radius: 2px;
+	background-color: #ff1937;
+	background-image: url("/inside/includes/icons/admin/exit.png");
 	background-size: 20px 20px;
 	background-repeat: no-repeat;
 	background-position: center;

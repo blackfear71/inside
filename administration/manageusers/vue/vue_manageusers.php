@@ -9,7 +9,7 @@
       $angularHead     = false;
       $chatHead        = false;
       $datepickerHead  = false;
-      $masonryHead     = false;
+      $masonryHead     = true;
       $exifHead        = false;
       $html2canvasHead = false;
       $jqueryCsv       = false;
@@ -49,8 +49,10 @@
 					AND isset($_SESSION['save']['user_ask_name']) AND !empty($_SESSION['save']['user_ask_name'])
 					AND isset($_SESSION['save']['new_password'])  AND !empty($_SESSION['save']['new_password']))
 					{
-						echo '<div class="reseted">Le mot de passe a été réinitialisé pour l\'utilisateur <b>' . $_SESSION['save']['user_ask_id'] . ' / ' . $_SESSION['save']['user_ask_name'] . '</b> : </div>';
-						echo '<p class="reseted_2"><b>' . $_SESSION['save']['new_password'] . '</b></p>';
+            echo '<div class="zone_reinitialisation_mdp">';
+              echo '<div class="message_reinitialisation_mdp">Le mot de passe a été réinitialisé pour l\'utilisateur <b>' . $_SESSION['save']['user_ask_id'] . ' / ' . $_SESSION['save']['user_ask_name'] . '</b> : </div>';
+              echo '<div class="mdp_reinitialisation_mdp">' . $_SESSION['save']['new_password'] . '</div>';
+            echo '</div>';
 
 						$_SESSION['save']['user_ask_id']   = '';
 						$_SESSION['save']['user_ask_name'] = '';
@@ -62,15 +64,10 @@
           /****************************/
 					include('vue/vue_table_users.php');
 
-          /*******************************************/
-          /* Tableau des statistiques des catégories */
-          /*******************************************/
-					include('vue/vue_table_stats_categories.php');
-
-          /*************************************/
-          /* Tableau des statistiques demandes */
-          /*************************************/
-					include('vue/vue_table_stats_requests.php');
+          /****************************/
+          /* Tableau des statistiques */
+          /****************************/
+					include('vue/vue_statistiques_users.php');
 				?>
 
 			</article>
@@ -80,5 +77,12 @@
 		<footer>
 			<?php include('../../includes/common/web/footer.php'); ?>
 		</footer>
+
+    <!-- Données JSON -->
+    <script>
+      // Récupération de la liste des statistiques cultes pour le script
+      var tableauStatistiquesInsJson = <?php if (isset($tableauStatistiquesInsJson) AND !empty($tableauStatistiquesInsJson)) echo $tableauStatistiquesInsJson; else echo '{}'; ?>;
+      var tableauStatistiquesDesJson = <?php if (isset($tableauStatistiquesDesJson) AND !empty($tableauStatistiquesDesJson)) echo $tableauStatistiquesDesJson; else echo '{}'; ?>;
+    </script>
   </body>
 </html>

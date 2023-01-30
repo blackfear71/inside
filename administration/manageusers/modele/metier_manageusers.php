@@ -124,17 +124,6 @@
     return $listeEquipes;
   }
 
-  // METIER : Contrôle alertes utilisateurs
-  // RETOUR : Booléen
-  function getAlerteUsers()
-  {
-    // Appel physique
-    $alert = physiqueAlerteUsers();
-
-    // Retour
-    return $alert;
-  }
-
   // METIER : Lecture statistiques catégories des utilisateurs inscrits
   // RETOUR : Tableau des statistiques
   function getStatistiquesInscrits($listeUsersParEquipe)
@@ -439,6 +428,39 @@
 
     // Retour
     return $totalStatistiques;
+  }
+
+  // METIER : Conversion de la liste d'objets des statistiques en tableau simple pour JSON
+  // RETOUR : Tableau des statistiques
+  function convertForJsonStatistiques($tableauStatistiques)
+  {
+    // Initialisations
+    $listeStatistiquesAConvertir = array();
+
+    // Conversion de la liste d'objets en tableau pour envoyer au Javascript
+    foreach ($tableauStatistiques as $statistiquesAConvertir)
+    {
+      $statistique = array('identifiant'        => $statistiquesAConvertir->getIdentifiant(),
+                           'pseudo'             => $statistiquesAConvertir->getPseudo(),
+                           'nb_films_ajoutes'   => $statistiquesAConvertir->getNb_films_ajoutes(),
+                           'nb_films_comments'  => $statistiquesAConvertir->getNb_films_comments(),
+                           'nb_collectors'      => $statistiquesAConvertir->getNb_collectors(),
+                           'nb_reservations'    => $statistiquesAConvertir->getNb_reservations(),
+                           'nb_gateaux_semaine' => $statistiquesAConvertir->getNb_gateaux_semaine(),
+                           'nb_recettes'        => $statistiquesAConvertir->getNb_recettes(),
+                           'expenses'           => $statistiquesAConvertir->getExpenses(),
+                           'nb_bugs_soumis'     => $statistiquesAConvertir->getNb_bugs_soumis(),
+                           'nb_bugs_resolus'    => $statistiquesAConvertir->getNb_bugs_resolus(),
+                           'nb_idees_soumises'  => $statistiquesAConvertir->getNb_idees_soumises(),
+                           'nb_idees_en_charge' => $statistiquesAConvertir->getNb_idees_en_charge(),
+                           'nb_idees_terminees' => $statistiquesAConvertir->getNb_idees_terminees()
+                          );
+
+      array_push($listeStatistiquesAConvertir, $statistique);
+    }
+
+    // Retour
+    return $listeStatistiquesAConvertir;
   }
 
   // METIER : Réinitialisation mot de passe

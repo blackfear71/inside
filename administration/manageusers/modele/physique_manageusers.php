@@ -237,32 +237,7 @@
     // Retour
     return $listeEquipes;
   }
-
-  // PHYSIQUE : Lecture alerte utilisateurs
-  // RETOUR : Booléen
-  function physiqueAlerteUsers()
-  {
-    // Initialisations
-    $alert = false;
-
-    global $bdd;
-
-    // Requête
-    $req = $bdd->query('SELECT COUNT(*) AS nombre_status_users
-                        FROM users
-                        WHERE identifiant != "admin" AND (status = "P" OR status = "I" OR status = "D"  OR status = "T")
-                        ORDER BY identifiant ASC');
-    $data = $req->fetch();
-
-    if ($data['nombre_status_users'] > 0)
-      $alert = true;
-
-    $req->closeCursor();
-
-    // Retour
-    return $alert;
-  }
-
+  
   // PHYSIQUE : Lecture du nombre de films ajoutés
   // RETOUR : Nombre de films ajoutés
   function physiqueFilmsAjoutesUser($identifiant)

@@ -12,7 +12,7 @@
         if ($user->getTeam() == $_SESSION['user']['equipe'])
         {
           if ($user->getExpenses() <= -6)
-            echo '<div class="zone_bilan_user bilan_red">';
+            echo '<div class="zone_bilan_user bilan_rouge">';
           elseif ($user->getExpenses() <= -3 AND $user->getExpenses() > -6)
             echo '<div class="zone_bilan_user bilan_orange">';
           elseif ($user->getExpenses() < -0.01 AND $user->getExpenses() > -3)

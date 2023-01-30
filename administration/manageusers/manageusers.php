@@ -36,9 +36,6 @@
 			$listeUsersParEquipe = getUsers();
       $listeUsersDes       = getUsersDes($listeUsersParEquipe);
 
-      // Récupération alerte gestion des utilisateurs
-			$alerteUsers = getAlerteUsers();
-
       // Récupération des statistiques par catégories et des statistiques de demandes et publications
       $tableauStatistiquesIns = getStatistiquesInscrits($listeUsersParEquipe);
 			$tableauStatistiquesDes = getStatistiquesDesinscrits($listeUsersDes);
@@ -133,6 +130,10 @@
 			}
 
       TotalStatistiquesAdmin::secureData($totalStatistiques);
+
+      // Conversion JSON
+      $tableauStatistiquesInsJson = json_encode(convertForJsonStatistiques($tableauStatistiquesIns));
+      $tableauStatistiquesDesJson = json_encode(convertForJsonStatistiques($tableauStatistiquesDes));
       break;
 
     case 'doChangerMdp':

@@ -437,12 +437,12 @@
 	width: calc(85% - 40px);
 	margin-left: auto;
 	margin-right: auto;
-	margin-top: 100px;
+	margin-top: 75px;
 	padding-left: 20px;
 	padding-right: 20px;
 	border-radius: 2px;
 	background-color: white;
-	max-height: calc(100vh - 250px);
+	max-height: calc(100vh - 150px);
 	overflow-y: auto;
 }
 
