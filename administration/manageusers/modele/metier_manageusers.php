@@ -239,10 +239,11 @@
       // Recettes partagées
       $nombreRecettes = physiqueRecettesUser($userDes);
 
+      // Récupération de la liste des dépenses où l'utilisateur désinscrit était acheteur ou participant
+      $listeExpenses = physiqueDepensesDesinscrit($userDes);
+
       // Calcul du bilan des dépenses (non stocké)
       $bilanUser = 0;
-
-      $listeExpenses = physiqueDepenses();
 
       foreach ($listeExpenses as $expense)
       {
@@ -371,15 +372,11 @@
     // Récupération des dépenses sans parts
 		$expensesNoParts = 0;
 
-    $listeExpenses = physiqueDepenses();
+    $listeExpenses = physiqueDepensesSansParts();
 
     foreach ($listeExpenses as $expense)
     {
-      // Vérification s'il n'y a pas de parts
-      $sansParts = physiqueDepenseSansParts($expense->getId());
-
-      if ($sansParts == true)
-        $expensesNoParts += $expense->getPrice();
+      $expensesNoParts += $expense->getPrice();
     }
 
     $regularisations = -1 * $expensesNoParts;

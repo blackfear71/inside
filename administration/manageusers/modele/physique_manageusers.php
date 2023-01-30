@@ -406,9 +406,9 @@
     return $nombreRecettes;
   }
 
-  // PHYSIQUE : Lecture de la liste des dépenses
+  // PHYSIQUE : Lecture de la liste des dépenses liées à un utilisateur désinscrit
   // RETOUR : Liste des dépenses
-  function physiqueDepenses()
+  function physiqueDepensesDesinscrit($identifiant)
   {
     // Initialisations
     $listeExpenses = array();
@@ -416,8 +416,44 @@
     // Requête
     global $bdd;
 
-    $req = $bdd->query('SELECT *
+    $req = $bdd->query('SELECT expense_center.*
                         FROM expense_center
+                        LEFT JOIN expense_center_users ON expense_center.id = expense_center_users.id_expense
+                        WHERE expense_center.buyer = "' . $identifiant . '" OR expense_center_users.identifiant = "' . $identifiant . '"
+                        GROUP BY expense_center.id
+                        ORDER BY id ASC');
+
+    while ($data = $req->fetch())
+    {
+      // Instanciation d'un objet Expenses à partir des données remontées de la bdd
+      $expense = Expenses::withData($data);
+
+      // On ajoute la ligne au tableau
+      array_push($listeExpenses, $expense);
+    }
+
+    $req->closeCursor();
+
+    // Retour
+    return $listeExpenses;
+  }
+
+  // PHYSIQUE : Lecture de la liste des dépenses sans parts
+  // RETOUR : Liste des dépenses
+  function physiqueDepensesSansParts()
+  {
+    // Initialisations
+    $listeExpenses = array();
+
+    // Requête
+    global $bdd;
+
+    $req = $bdd->query('SELECT expense_center.*
+                        FROM expense_center
+                        LEFT JOIN expense_center_users ON expense_center.id = expense_center_users.id_expense
+                        WHERE NOT EXISTS (SELECT id, id_expense
+                                          FROM expense_center_users
+                                          WHERE expense_center.id = expense_center_users.id_expense)
                         ORDER BY id ASC');
 
     while ($data = $req->fetch())
@@ -610,31 +646,6 @@
 
     // Retour
     return $nombreRecettes;
-  }
-
-  // PHYSIQUE : Lecture des dépenses sans parts
-  // RETOUR : Booléen
-  function physiqueDepenseSansParts($idExpense)
-  {
-    // Initialisations
-    $noParts = false;
-
-    // Requête
-    global $bdd;
-
-    $req = $bdd->query('SELECT COUNT(*) AS nombreParts
-                        FROM expense_center_users
-                        WHERE id_expense = ' . $idExpense);
-
-    $data = $req->fetch();
-
-    if ($data['nombreParts'] == 0)
-      $noParts = true;
-
-    $req->closeCursor();
-
-    // Retour
-    return $noParts;
   }
 
   // PHYSIQUE : Lecture du nombre de bugs soumis d'un utilisateur

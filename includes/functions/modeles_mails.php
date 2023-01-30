@@ -409,7 +409,6 @@
           border-radius: 2px;
           overflow: hidden;
           margin: 0 10px 10px 10px;
-          box-shadow: 0 0 3px #7c7c7c;
         }
 
         .titre_demandes_mail
