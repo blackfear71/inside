@@ -2979,6 +2979,7 @@
 .saisie_alerte_type
 {
 	display: inline-block;
+	vertical-align: top;
 	width: calc(30% - 10px);
 	margin-right: 10px;
 	margin-bottom: 10px;
@@ -2996,6 +2997,7 @@
 .saisie_alerte_donnee
 {
 	display: inline-block;
+	vertical-align: top;
 	width: calc(30% - 30px);
 	margin-right: 10px;
 	margin-bottom: 10px;
@@ -3029,6 +3031,7 @@
 .bouton_saisie_alerte
 {
 	display: inline-block;
+	vertical-align: top;
 	margin-bottom: 10px;
 	height: 34px;
 	width: 10%;
