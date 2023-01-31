@@ -6,6 +6,10 @@
     echo '<div class="zone_statistiques_categories">';
         // Movie House
         echo '<a id="statistiques_films" class="zone_statistiques_categorie afficherDetailsStatistiques">';
+            echo '<div class="zone_lien_plus">';
+                echo '<span class="lien_plus">+</span>';
+            echo '</div>';
+
             echo '<div class="titre_statistiques_categorie"><img src="../../includes/icons/admin/movie_house_grey.png" alt="movie_house_grey" class="logo_titre_statistiques_categorie" />MOVIE HOUSE</div>';
 
             // Films ajoutés
@@ -23,6 +27,10 @@
 
         // Food Advisor
         echo '<a id="statistiques_restaurants" class="zone_statistiques_categorie afficherDetailsStatistiques">';
+            echo '<div class="zone_lien_plus">';
+                echo '<span class="lien_plus">+</span>';
+            echo '</div>';
+
             echo '<div class="titre_statistiques_categorie"><img src="../../includes/icons/admin/food_advisor_grey.png" alt="food_advisor_grey" class="logo_titre_statistiques_categorie" />LES ENFANTS ! À TABLE !</div>';
 
             // Réservations
@@ -34,6 +42,10 @@
 
         // Cooking Box
         echo '<a id="statistiques_gateaux" class="zone_statistiques_categorie afficherDetailsStatistiques">';
+            echo '<div class="zone_lien_plus">';
+                echo '<span class="lien_plus">+</span>';
+            echo '</div>';
+
             echo '<div class="titre_statistiques_categorie"><img src="../../includes/icons/admin/cooking_box_grey.png" alt="cooking_box_grey" class="logo_titre_statistiques_categorie" />COOKING BOX</div>';
 
             // Gâteaux faits
@@ -55,6 +67,10 @@
             echo '<a id="statistiques_depenses" class="zone_statistiques_categorie zone_statistiques_categorie_alerte afficherDetailsStatistiques">';
         else
             echo '<a id="statistiques_depenses" class="zone_statistiques_categorie afficherDetailsStatistiques">';
+
+            echo '<div class="zone_lien_plus">';
+                echo '<span class="lien_plus">+</span>';
+            echo '</div>';
 
             echo '<div class="titre_statistiques_categorie"><img src="../../includes/icons/admin/expense_center_grey.png" alt="expense_center_grey" class="logo_titre_statistiques_categorie" />EXPENSE CENTER</div>';
 
@@ -81,6 +97,10 @@
 
         // Collector Room
         echo '<a id="statistiques_cultes" class="zone_statistiques_categorie afficherDetailsStatistiques">';
+            echo '<div class="zone_lien_plus">';
+                echo '<span class="lien_plus">+</span>';
+            echo '</div>';
+
             echo '<div class="titre_statistiques_categorie"><img src="../../includes/icons/admin/collector_grey.png" alt="collector_grey" class="logo_titre_statistiques_categorie" />COLLECTOR ROOM</div>';
 
             // Phrases cultes rapportées
@@ -92,6 +112,10 @@
 
         // Bugs / évolutions
         echo '<a id="statistiques_bugs" class="zone_statistiques_categorie afficherDetailsStatistiques">';
+            echo '<div class="zone_lien_plus">';
+                echo '<span class="lien_plus">+</span>';
+            echo '</div>';
+
             echo '<div class="titre_statistiques_categorie"><img src="../../includes/icons/admin/alerts_grey.png" alt="alerts_grey" class="logo_titre_statistiques_categorie" />BUGS & ÉVOLUTIONS</div>';
 
             // Nombre de demandes
@@ -109,6 +133,10 @@
 
         // #THEBOX
         echo '<a id="statistiques_idees" class="zone_statistiques_categorie afficherDetailsStatistiques">';
+            echo '<div class="zone_lien_plus">';
+                echo '<span class="lien_plus">+</span>';
+            echo '</div>';
+            
             echo '<div class="titre_statistiques_categorie"><img src="../../includes/icons/admin/ideas_grey.png" alt="ideas_grey" class="logo_titre_statistiques_categorie" />#THEBOX</div>';
 
             // Nombre d'idées publiées
