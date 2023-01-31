@@ -381,15 +381,6 @@
 
     $regularisations = -1 * $expensesNoParts;
 
-    // Retrait des dépenses sans parts de la somme des bilans
-		$sommeBilans = $sommeBilans - $expensesNoParts;
-
-    // Alerte si bilan non nul (proche de 0 à cause de l'arrondi)
-    if ($sommeBilans < -0.01 OR $sommeBilans > 0.01)
-      $alerteBilan = true;
-    else
-      $alerteBilan = false;
-
     // Nombre de demandes (bugs/évolutions)
     $nombreBugsSoumis = physiqueBugsSoumisTotal();
 
@@ -416,7 +407,6 @@
     $totalStatistiques->setNb_recettes_total($nombreRecettes);
     $totalStatistiques->setExpenses_no_parts($regularisations);
     $totalStatistiques->setExpenses_total($sommeBilans);
-    $totalStatistiques->setAlerte_expenses($alerteBilan);
     $totalStatistiques->setNb_bugs_soumis_total($nombreBugsSoumis);
     $totalStatistiques->setNb_bugs_resolus_total($nombreBugsResolus);
     $totalStatistiques->setNb_idees_soumises_total($nombreTheBox);

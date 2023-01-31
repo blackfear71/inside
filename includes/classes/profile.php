@@ -1001,7 +1001,6 @@
     private $nb_recettes_total;
     private $expenses_no_parts;
     private $expenses_total;
-    private $alerte_expenses;
     private $nb_bugs_soumis_total;
     private $nb_bugs_resolus_total;
     private $nb_idees_soumises_total;
@@ -1019,7 +1018,6 @@
       $this->nb_recettes_total        = 0;
       $this->expenses_no_parts        = 0;
       $this->expenses_total           = 0;
-      $this->alerte_expenses          = false;
       $this->nb_bugs_soumis_total     = 0;
       $this->nb_bugs_resolus_total    = 0;
       $this->nb_idees_soumises_total  = 0;
@@ -1132,17 +1130,6 @@
     public function getExpenses_total()
     {
       return $this->expenses_total;
-    }
-
-    // Alerte bilan
-    public function setAlerte_expenses($alerte_expenses)
-    {
-      $this->alerte_expenses = $alerte_expenses;
-    }
-
-    public function getAlerte_expenses()
-    {
-      return $this->alerte_expenses;
     }
 
     // Nombre de bugs soumis
