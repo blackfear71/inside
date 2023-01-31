@@ -1048,8 +1048,14 @@ function closeDetailsStatistiques(id)
 {
   if ($('#' + id).css('display') != 'none')
   {
+    // Masquage de la zone
     afficherMasquerIdWithDelay(id);
-    $('#' + id).remove();
+
+    // Suppression de la zone
+    setTimeout(function()
+    {
+      $('#' + id).remove();
+    }, 200);
   }
 }
 
