@@ -1463,7 +1463,7 @@ function setCookie(cookieName, cookieValue)
   expires.setTime(today.getTime() + (60 * 60 * 24 * 365));
 
   // Cookie global (path=/)
-  document.cookie = cookieName + '=' + encodeURIComponent(cookieValue) + ';expires=' + expires.toGMTString() + ';path=/;SameSite=Lax';
+  document.cookie = cookieName + '=' + encodeURIComponent(cookieValue) + ';expires=' + expires.toGMTString() + ';path=/;domain=' + location.host + ';SameSite=Lax';
 }
 
 // Lecture d'un cookie
@@ -1492,5 +1492,5 @@ function getCookie(cookieName)
 // Suppression d'un cookie
 function deleteCookie(cookieName)
 {
-  document.cookie = cookieName + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/; domain=' + location.host;
+  document.cookie = cookieName + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/;domain=' + location.host;
 }
