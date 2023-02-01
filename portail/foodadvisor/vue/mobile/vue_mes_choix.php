@@ -33,7 +33,7 @@
             echo '</div>';
 
             // Nom restaurant
-            echo '<div class="nom_proposition nom_normal">' . formatString($monChoix->getName(), 20) . '</div>';
+            echo '<div class="nom_proposition">' . formatString($monChoix->getName(), 20) . '</div>';
 
             // Suppression choix
             if ($actions['choix'] == true)

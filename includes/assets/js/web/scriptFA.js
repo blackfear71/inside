@@ -754,14 +754,12 @@ function changeCheckedColorProposition(zone)
   {
     zone.css('background-color', '#96e687');
     zone.find('.zone_image_proposition').css('background-color', '#70d55d');
-    zone.find('.nom_proposition').css('color', 'white');
     zone.find('.zone_checkbox_proposition').css('background-color', '#70d55d');
   }
   else
   {
     zone.css('background-color', '#e3e3e3');
     zone.find('.zone_image_proposition').css('background-color', '#d3d3d3');
-    zone.find('.nom_proposition').css('color', '#262626');
     zone.find('.zone_checkbox_proposition').css('background-color', '#d3d3d3');
   }
 }

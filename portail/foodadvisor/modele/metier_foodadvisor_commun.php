@@ -49,134 +49,141 @@
   // RETOUR : Liste des choix du jour (tous)
   function getPropositions($equipe, $recuperationDetails)
   {
-    // Récupération des différents restaurants proposés
-    $listePropositions = physiquePropositions($equipe);
+    // Initialisations
+    $listePropositions = array();
 
-    // Récupération des données de chaque restaurant
-    foreach ($listePropositions as $proposition)
+    // On ne récupère les propositions que si on est un jour de la semaine
+    if (date('N') <= 5)
     {
-      // Lecture des données restaurant
-      $restaurant = physiqueDonneesRestaurant($proposition->getId_restaurant());
+      // Récupération des différents restaurants proposés
+      $listePropositions = physiquePropositions($equipe);
 
-      // Ajout des données restaurant à la proposition
-      $proposition->setName($restaurant->getName());
-      $proposition->setPicture($restaurant->getPicture());
-      $proposition->setLocation($restaurant->getLocation());
-      $proposition->setTypes($restaurant->getTypes());
-      $proposition->setPhone($restaurant->getPhone());
-      $proposition->setWebsite($restaurant->getWebsite());
-      $proposition->setPlan($restaurant->getPlan());
-      $proposition->setLafourchette($restaurant->getLafourchette());
-      $proposition->setOpened($restaurant->getOpened());
-      $proposition->setMin_price(str_replace('.', ',', $restaurant->getMin_price()));
-      $proposition->setMax_price(str_replace('.', ',', $restaurant->getMax_price()));
-      $proposition->setDescription($restaurant->getDescription());
-
-      // Contrôle restaurant disponible ce jour
-      $availableDay   = true;
-      $explodedOpened = explode(';', $proposition->getOpened());
-
-      foreach ($explodedOpened as $keyOpened => $opened)
+      // Récupération des données de chaque restaurant
+      foreach ($listePropositions as $proposition)
       {
-        if (!empty($opened))
+        // Lecture des données restaurant
+        $restaurant = physiqueDonneesRestaurant($proposition->getId_restaurant());
+
+        // Ajout des données restaurant à la proposition
+        $proposition->setName($restaurant->getName());
+        $proposition->setPicture($restaurant->getPicture());
+        $proposition->setLocation($restaurant->getLocation());
+        $proposition->setTypes($restaurant->getTypes());
+        $proposition->setPhone($restaurant->getPhone());
+        $proposition->setWebsite($restaurant->getWebsite());
+        $proposition->setPlan($restaurant->getPlan());
+        $proposition->setLafourchette($restaurant->getLafourchette());
+        $proposition->setOpened($restaurant->getOpened());
+        $proposition->setMin_price(str_replace('.', ',', $restaurant->getMin_price()));
+        $proposition->setMax_price(str_replace('.', ',', $restaurant->getMax_price()));
+        $proposition->setDescription($restaurant->getDescription());
+
+        // Contrôle restaurant disponible ce jour
+        $availableDay   = true;
+        $explodedOpened = explode(';', $proposition->getOpened());
+
+        foreach ($explodedOpened as $keyOpened => $opened)
         {
-          if (date('N') == $keyOpened + 1 AND $opened == 'N')
+          if (!empty($opened))
           {
-            $availableDay = false;
-            break;
+            if (date('N') == $keyOpened + 1 AND $opened == 'N')
+            {
+              $availableDay = false;
+              break;
+            }
+          }
+        }
+
+        // Récupération des données si restaurant ouvert
+        if ($availableDay == true)
+        {
+          // Nombre de participants
+          $proposition->setNb_participants(physiqueNombreParticipants($proposition->getId_restaurant(), date('Ymd')));
+
+          // Vérification proposition déterminée
+          $propositionDeterminee = physiquePropositionDeterminee($proposition->getId_restaurant());
+
+          // Récupération des données de la proposition déterminée
+          if (!empty($propositionDeterminee))
+          {
+            // Lecture des données proposition déterminée
+            $proposition->setDetermined('Y');
+            $proposition->setCaller($propositionDeterminee->getCaller());
+            $proposition->setReserved($propositionDeterminee->getReserved());
+
+            // Recherche pseudo et avatar appelant
+            if (!empty($proposition->getCaller()))
+            {
+              $appelant = physiqueUser($proposition->getCaller());
+
+              $proposition->setPseudo($appelant->getPseudo());
+              $proposition->setAvatar($appelant->getAvatar());
+            }
+          }
+
+          // Récupération détails proposition
+          if ($recuperationDetails == true)
+          {
+            // Lecture détail de chaque utilisateur
+            $detailsProposition = physiqueDetailsProposition($proposition->getId_restaurant());
+
+            // Recherche pseudo et avatar utilisateur
+            foreach ($detailsProposition as $detail)
+            {
+              $user = physiqueUser($detail->getIdentifiant());
+
+              $detail->setPseudo($user->getPseudo());
+              $detail->setAvatar($user->getAvatar());
+            }
+
+            // Récupération des détails
+            $proposition->setDetails($detailsProposition);
           }
         }
       }
 
-      // Récupération des données si restaurant ouvert
-      if ($availableDay == true)
+      // Tris
+      if (!empty($listePropositions))
       {
-        // Nombre de participants
-        $proposition->setNb_participants(physiqueNombreParticipants($proposition->getId_restaurant(), date('Ymd')));
-
-        // Vérification proposition déterminée
-        $propositionDeterminee = physiquePropositionDeterminee($proposition->getId_restaurant());
-
-        // Récupération des données de la proposition déterminée
-        if (!empty($propositionDeterminee))
+        // Tri par nombre de participants pour affecter le classement
+        foreach ($listePropositions as $proposition)
         {
-          // Lecture des données proposition déterminée
-          $proposition->setDetermined('Y');
-          $proposition->setCaller($propositionDeterminee->getCaller());
-          $proposition->setReserved($propositionDeterminee->getReserved());
-
-          // Recherche pseudo et avatar appelant
-          if (!empty($proposition->getCaller()))
-          {
-            $appelant = physiqueUser($proposition->getCaller());
-
-            $proposition->setPseudo($appelant->getPseudo());
-            $proposition->setAvatar($appelant->getAvatar());
-          }
+          $triNombreParticipants[] = $proposition->getNb_participants();
         }
 
-        // Récupération détails proposition
-        if ($recuperationDetails == true)
+        // Tri
+        array_multisort($triNombreParticipants, SORT_DESC, $listePropositions);
+
+        unset($triNombreParticipants);
+
+        // Affectation du classement
+        $prevNombreParticpants = 0;
+        $currentClassement     = 0;
+
+        foreach ($listePropositions as $proposition)
         {
-          // Lecture détail de chaque utilisateur
-          $detailsProposition = physiqueDetailsProposition($proposition->getId_restaurant());
+          $currentNombreParticipants = $proposition->getNb_participants();
 
-          // Recherche pseudo et avatar utilisateur
-          foreach ($detailsProposition as $detail)
+          if ($currentNombreParticipants != $prevNombreParticpants)
           {
-            $user = physiqueUser($detail->getIdentifiant());
-
-            $detail->setPseudo($user->getPseudo());
-            $detail->setAvatar($user->getAvatar());
+            $currentClassement    += 1;
+            $prevNombreParticpants = $currentNombreParticipants;
           }
 
-          // Récupération des détails
-          $proposition->setDetails($detailsProposition);
+          // On enregistre le rang
+          $proposition->setClassement($currentClassement);
         }
-      }
-    }
 
-    // Tris
-    if (!empty($listePropositions))
-    {
-      // Tri par nombre de participants pour affecter le classement
-      foreach ($listePropositions as $proposition)
-      {
-        $triNombreParticipants[] = $proposition->getNb_participants();
-      }
-
-      // Tri
-      array_multisort($triNombreParticipants, SORT_DESC, $listePropositions);
-
-      unset($triNombreParticipants);
-
-      // Affectation du classement
-      $prevNombreParticpants = 0;
-      $currentClassement     = 0;
-
-      foreach ($listePropositions as $proposition)
-      {
-        $currentNombreParticipants = $proposition->getNb_participants();
-
-        if ($currentNombreParticipants != $prevNombreParticpants)
+        // Tri par détermination puis par nombre de participants pour affichage
+        foreach ($listePropositions as $proposition)
         {
-          $currentClassement    += 1;
-          $prevNombreParticpants = $currentNombreParticipants;
+          $triDetermined[]         = $proposition->getDetermined();
+          $triNombreParticipants[] = $proposition->getNb_participants();
         }
 
-        // On enregistre le rang
-        $proposition->setClassement($currentClassement);
+        // Tri
+        array_multisort($triDetermined, SORT_DESC, $triNombreParticipants, SORT_DESC, $listePropositions);
       }
-
-      // Tri par détermination puis par nombre de participants pour affichage
-      foreach ($listePropositions as $proposition)
-      {
-        $triDetermined[]         = $proposition->getDetermined();
-        $triNombreParticipants[] = $proposition->getNb_participants();
-      }
-
-      // Tri
-      array_multisort($triDetermined, SORT_DESC, $triNombreParticipants, SORT_DESC, $listePropositions);
     }
 
     // Retour
@@ -276,22 +283,29 @@
   // RETOUR : Liste des choix du jour (utilisateur)
   function getMyChoices($sessionUser)
   {
-    // Récupération des données
-    $identifiant = $sessionUser['identifiant'];
-    $equipe      = $sessionUser['equipe'];
+    // Initialisations
+    $listeChoix = array();
 
-    // Récupération des choix de l'utilisateur
-    $listeChoix = physiqueListeChoix($identifiant, $equipe);
-
-    // Ajout des informations des restaurants
-    foreach ($listeChoix as $monChoix)
+    // On ne récupère les choix de l'utilisateur que si on est un jour de la semaine
+    if (date('N') <= 5)
     {
-      $restaurant = physiqueDonneesRestaurant($monChoix->getId_restaurant());
+      // Récupération des données
+      $identifiant = $sessionUser['identifiant'];
+      $equipe      = $sessionUser['equipe'];
 
-      $monChoix->setName($restaurant->getName());
-      $monChoix->setPicture($restaurant->getPicture());
-      $monChoix->setLocation($restaurant->getLocation());
-      $monChoix->setOpened($restaurant->getOpened());
+      // Récupération des choix de l'utilisateur
+      $listeChoix = physiqueListeChoix($identifiant, $equipe);
+
+      // Ajout des informations des restaurants
+      foreach ($listeChoix as $monChoix)
+      {
+        $restaurant = physiqueDonneesRestaurant($monChoix->getId_restaurant());
+
+        $monChoix->setName($restaurant->getName());
+        $monChoix->setPicture($restaurant->getPicture());
+        $monChoix->setLocation($restaurant->getLocation());
+        $monChoix->setOpened($restaurant->getOpened());
+      }
     }
 
     // Retour

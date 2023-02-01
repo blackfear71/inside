@@ -213,14 +213,18 @@
     // Initialisations
     $solos = array();
 
-    // Récupération de la liste des utilisateurs
-    $identifiantsSolos = physiqueIdentifiantsSolos($equipe);
-
-    // Récupération des données utilisateurs
-    foreach ($identifiantsSolos as $identifiantSolo)
+    // On ne récupère les utilisateurs qui font bande à part que si on est un jour de la semaine
+    if (date('N') <= 5)
     {
-      // On ajoute la ligne au tableau
-      array_push($solos, physiqueUser($identifiantSolo));
+      // Récupération de la liste des utilisateurs
+      $identifiantsSolos = physiqueIdentifiantsSolos($equipe);
+
+      // Récupération des données utilisateurs
+      foreach ($identifiantsSolos as $identifiantSolo)
+      {
+        // On ajoute la ligne au tableau
+        array_push($solos, physiqueUser($identifiantSolo));
+      }
     }
 
     // Retour

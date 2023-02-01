@@ -50,8 +50,7 @@
                       echo '</div>';
 
                       // Nom restaurant
-                      echo '<div class="nom_proposition nom_normal">' . formatString($restaurant->getName(), 20) . '</div>';
-                      echo '<div class="nom_proposition_complet">' . $restaurant->getName() . '</div>';
+                      echo '<div class="nom_proposition">' . formatString($restaurant->getName(), 20) . '</div>';
 
                       // Radio bouton
                       echo '<div class="zone_checkbox_proposition">';

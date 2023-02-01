@@ -337,14 +337,12 @@ function changeCheckedColor(label)
   {
     label.find('.image_normal').css('background-color', '#70d55d');
     label.find('.proposition_normal').css('background-color', '#96e687');
-    label.find('.nom_normal').css('color', 'white');
     label.find('.zone_checkbox_proposition').css('background-color', '#70d55d');
   }
   else
   {
     label.find('.image_normal').css('background-color', '#d3d3d3');
     label.find('.proposition_normal').css('background-color', '#e3e3e3');
-    label.find('.nom_normal').css('color', '#262626');
     label.find('.zone_checkbox_proposition').css('background-color', '#d3d3d3');
   }
 }
@@ -359,7 +357,6 @@ function changeRadioColor(idForm, label)
 
     $(this).find('.image_normal').css('background-color', '#d3d3d3');
     $(this).find('.proposition_normal').css('background-color', '#e3e3e3');
-    $(this).find('.nom_normal').css('color', '#262626');
     $(this).find('.zone_checkbox_proposition').css('background-color', '#d3d3d3');
   });
 
@@ -368,7 +365,6 @@ function changeRadioColor(idForm, label)
 
   $('#' + idForm).find(label).find('.image_normal').css('background-color', '#70d55d');
   $('#' + idForm).find(label).find('.proposition_normal').css('background-color', '#96e687');
-  $('#' + idForm).find(label).find('.nom_normal').css('color', 'white');
   $('#' + idForm).find(label).find('.zone_checkbox_proposition').css('background-color', '#70d55d');
 }
 

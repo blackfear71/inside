@@ -199,14 +199,9 @@
 	color: white;
 }
 
-.nom_top, .nom_normal
+.nom_top
 {
 	color: #262626;
-}
-
-.nom_proposition_complet
-{
-	display: none;
 }
 
 .caller_proposition
