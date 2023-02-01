@@ -682,18 +682,18 @@
 .zone_details_description_bottom
 {
 	display: inline-block;
-	width: calc(30% - 10px);
+	width: calc(32% - 10px);
 	vertical-align: top;
 	margin-right: 20px;
-	margin-top: 40px;
+	margin-top: 20px;
 }
 
 .zone_details_menus_bottom
 {
 	display: inline-block;
-	width: calc(70% - 10px);
+	width: calc(68% - 10px);
 	vertical-align: top;
-	margin-top: 40px;
+	margin-top: 20px;
 }
 
 .titre_details_bottom

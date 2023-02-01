@@ -626,12 +626,12 @@ function adaptDetails()
     &&  $('.zone_details_description_bottom').css('display') != 'none')
     {
       $('.zone_details_description_bottom').css('display', 'inline-block');
-      $('.zone_details_description_bottom').css('width', 'calc(30% - 10px)');
+      $('.zone_details_description_bottom').css('width', 'calc(32% - 10px)');
       $('.zone_details_description_bottom').css('margin-right', '20px');
 
       $('.zone_details_menus_bottom').css('display', 'inline-block');
-      $('.zone_details_menus_bottom').css('width', 'calc(70% - 10px)');
-      $('.zone_details_menus_bottom').css('margin-top', '40px');
+      $('.zone_details_menus_bottom').css('width', 'calc(68% - 10px)');
+      $('.zone_details_menus_bottom').css('margin-top', '20px');
     }
   }
 }
@@ -1407,7 +1407,7 @@ function showDetails(zone, id)
     $('.zone_details_description').append(description);
 
     $('.zone_details_description_bottom').css('display', 'inline-block');
-    $('.zone_details_menus_bottom').css('width', 'calc(70% - 10px)');
+    $('.zone_details_menus_bottom').css('width', 'calc(68% - 10px)');
   }
   else
   {
