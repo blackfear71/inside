@@ -404,17 +404,20 @@
         .zone_nombre_demandes_mail
         {
           display: inline-block;
-          width: 200px;
+          width: 250px;
           height: 200px;
           border-radius: 2px;
           overflow: hidden;
           margin: 0 10px 10px 10px;
+          border: solid 1px #d3d3d3;
         }
 
         .titre_demandes_mail
         {
           display: block;
           width: calc(100% - 20px);
+          height: 40px;
+          line-height: 40px;
           font-family: Calibri, Verdana, sans-serif;
           font-size: 120%;
           padding: 10px;
