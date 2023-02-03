@@ -1,5 +1,17 @@
 <?php
   include_once('../../includes/classes/movies.php');
+  include_once('../../includes/classes/teams.php');
+
+  // METIER : Lecture de la liste des équipes
+  // RETOUR : Liste des équipes
+  function getListeEquipes()
+  {
+    // Lecture de la liste des équipes
+    $listeEquipes = physiqueListeEquipes();
+
+    // Retour
+    return $listeEquipes;
+  }
 
   // METIER : Lecture des films à supprimer
   // RETOUR : Liste des films à supprimer

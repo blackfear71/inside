@@ -4,6 +4,36 @@
   /****************************************************************************/
   /********************************** SELECT **********************************/
   /****************************************************************************/
+  // PHYSIQUE : Lecture de la liste des équipes activées
+  // RETOUR : Liste des équipes
+  function physiqueListeEquipes()
+  {
+    // Initialisations
+    $listeEquipes = array();
+
+    // Requête
+    global $bdd;
+
+    $req = $bdd->query('SELECT *
+                        FROM teams
+                        WHERE activation = "Y"
+                        ORDER BY team ASC');
+
+    while ($data = $req->fetch())
+    {
+      // Instanciation d'un objet Team à partir des données remontées de la bdd
+      $equipe = Team::withData($data);
+
+      // On ajoute la ligne au tableau
+      $listeEquipes[$equipe->getReference()] = $equipe;
+    }
+
+    $req->closeCursor();
+
+    // Retour
+    return $listeEquipes;
+  }
+
   // PHYSIQUE : Lecture liste des films à supprimer
   // RETOUR : Liste des films à supprimer
   function physiqueFilmsToDelete()

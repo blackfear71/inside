@@ -30,7 +30,7 @@
 			{
 				echo '<tr>';
 					echo '<td class="td_table_admin_premier">';
-						echo '<img src="../../includes/images/calendars/annexes/mini/' . $annexes->getAnnexe() . '" alt="calendrier" title="' . $annexes->getTitle() . '" class="image_table_admin" />';
+						echo '<img src="../../includes/images/calendars/annexes/mini/' . $annexes->getAnnexe() . '" alt="annexe" title="' . $annexes->getTitle() . '" class="image_table_admin" />';
 					echo '</td>';
 
 					echo '<td class="td_table_admin_important_centre">';
@@ -38,7 +38,7 @@
 					echo '</td>';
 
 					echo '<td class="td_table_admin_centre">';
-						echo $annexes->getTeam();
+						echo $listeEquipes[$annexes->getTeam()]->getTeam() . ' (' . $annexes->getTeam() . ')';
 					echo '</td>';
 
 					echo '<td class="td_table_admin_actions">';

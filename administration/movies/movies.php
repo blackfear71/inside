@@ -21,6 +21,9 @@
   switch ($_GET['action'])
   {
     case 'goConsulter':
+      // Récupération de la liste des équipes
+      $listeEquipes = getListeEquipes();
+
       // Récupération de la liste des films à supprimer
 			$listeSuppression = getFilmsToDelete();
       break;
@@ -45,6 +48,11 @@
   switch ($_GET['action'])
   {
     case 'goConsulter':
+      foreach ($listeEquipes as $equipe)
+      {
+        Team::secureData($equipe);
+      }
+      
 			foreach ($listeSuppression as $film)
 			{
         Movie::secureData($film);

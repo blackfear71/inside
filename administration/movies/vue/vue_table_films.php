@@ -51,7 +51,7 @@
 					echo '</td>';
 
 					echo '<td class="td_table_admin_centre">';
-						echo $film->getTeam();
+						echo $listeEquipes[$film->getTeam()]->getTeam() . ' (' . $film->getTeam() . ')';
 					echo '</td>';
 
 					echo '<td class="td_table_admin_normal">';

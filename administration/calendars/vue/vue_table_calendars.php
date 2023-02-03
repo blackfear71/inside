@@ -38,7 +38,7 @@
 					echo '</td>';
 
 					echo '<td class="td_table_admin_centre">';
-						echo $calendrier->getTeam();
+						echo $listeEquipes[$calendrier->getTeam()]->getTeam() . ' (' . $calendrier->getTeam() . ')';
   					echo '</td>';
 
           			echo '<td class="td_table_admin_actions">';
