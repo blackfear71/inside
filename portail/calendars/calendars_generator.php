@@ -144,11 +144,8 @@
       header('location: calendars.php?year=' . $year . '&action=goConsulter');
       break;
 
-    case 'doSauvegarderAnnexe':
-      header('location: calendars.php?action=goConsulterAnnexes');
-      break;
-
     case 'doAjouterAnnexe':
+    case 'doSauvegarderAnnexe':
       header('location: calendars.php?action=goConsulterAnnexes');
       break;
 

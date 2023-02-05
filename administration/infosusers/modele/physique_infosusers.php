@@ -212,7 +212,7 @@
 
   // PHYSIQUE : Suppression des commentaires film
   // RETOUR : Aucun
-  function physiqueDeleteCommentairesFilm($idFilm, $equipe)
+  function physiqueDeleteCommentairesFilm($idFilm)
   {
     // Requête
     global $bdd;
@@ -223,7 +223,7 @@
 
   // PHYSIQUE : Suppression des votes film
   // RETOUR : Aucun
-  function physiqueDeleteVotesFilm($idFilm, $equipe)
+  function physiqueDeleteVotesFilm($idFilm)
   {
     // Requête
     global $bdd;

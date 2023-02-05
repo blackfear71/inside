@@ -257,6 +257,7 @@
             break;
 
           default:
+            $nomVacances = '';
             break;
         }
 

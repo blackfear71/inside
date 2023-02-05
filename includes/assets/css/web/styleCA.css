@@ -605,7 +605,7 @@
 .ligne_jours_calendrier_generator td
 {
 	width: calc(100% - 100px);
-	padding: 0px 50px 20px 50px;
+	padding: 0 50px 20px 50px;
 	vertical-align: text-bottom;
 }
 

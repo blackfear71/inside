@@ -787,8 +787,8 @@ function afficherAnciensMessages()
 function formatMessagesChat(currentUser, identifiant, text, date, time)
 {
   // Initialisations
-  var html = '';
-  var avatar;
+  var html   = '';
+  var avatar = '';
 
   // Formatage pseudo à partir du tableau php récupéré
   var pseudo = formatUnknownUser('', true, false);

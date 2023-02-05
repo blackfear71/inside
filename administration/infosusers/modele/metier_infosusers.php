@@ -276,10 +276,10 @@
       foreach ($listeFilms as $film)
       {
         // Suppression des commentaires
-        physiqueDeleteCommentairesFilm($film->getId(), $equipe);
+        physiqueDeleteCommentairesFilm($film->getId());
 
         // Suppression des votes
-        physiqueDeleteVotesFilm($film->getId(), $equipe);
+        physiqueDeleteVotesFilm($film->getId());
 
         // Suppression de l'enregistrement en base
         physiqueDeleteTableEquipe('movie_house', $film->getId(), $equipe);

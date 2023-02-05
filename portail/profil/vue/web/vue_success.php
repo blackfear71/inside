@@ -84,7 +84,7 @@
           if ($success->getUnicity() != 'Y')
           {
             if ($success->getValue_user() <= 0)
-              echo '<div class="fond_progression_succes"><div class="progression_succes" style="width: 0%;"></div></div>';
+              echo '<div class="fond_progression_succes"><div class="progression_succes" style="width: 0;"></div></div>';
             elseif ($success->getValue_user() < $success->getLimit_success())
             {
               $poucentageSucces = ($success->getValue_user() * 100) / $success->getLimit_success();

@@ -325,7 +325,7 @@
 	height: 3vh;
 	width: calc(100% - 7vh);
 	border-radius: 3vh;
-	box-shadow: 0 0 0.5 #7c7c7c;
+	box-shadow: 0 0 0.5vh #7c7c7c;
 	overflow: hidden;
 }
 

@@ -639,7 +639,7 @@
     global $bdd;
 
     $req = $bdd->exec('DELETE FROM notifications
-                       WHERE category = "' . $categorie . '" AND content = "' . $contenu . '"');
+                       WHERE category = "' . $categorie . '" AND team = "' . $equipe . '" AND content = "' . $contenu . '"');
   }
 
   // PHYSIQUE : Suppression d'une valeur succès utilisateur
