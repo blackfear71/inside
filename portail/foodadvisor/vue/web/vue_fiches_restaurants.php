@@ -277,8 +277,7 @@
                 echo '<div class="zone_fiche_bottom">';
                   // Types
                   echo '<div id="update_types_restaurants_' . $restaurant->getId() . '" class="zone_update_types">';
-                    echo '<a id="type_update_' . $restaurant->getId() . '" class="bouton_update_type_autre addTypeUpdate"><span class="fond_plus">+</span>Autre</a>';
-
+                    // Types existants
                     $explodedTypes = explode(';', $restaurant->getTypes());
                     $k             = 0;
 
@@ -313,6 +312,9 @@
 
                       $k++;
                     }
+
+                    // Bouton "Autre"
+                    echo '<a id="type_update_' . $restaurant->getId() . '" class="bouton_update_type_autre addTypeUpdate"><span class="fond_plus">+</span>Autre</a>';
                   echo '</div>';
 
                   // Site web

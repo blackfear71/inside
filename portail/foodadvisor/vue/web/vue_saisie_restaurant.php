@@ -96,12 +96,6 @@
 
           // Types
           echo '<div id="types_restaurants">';
-            // Bouton "Autre"
-            echo '<a id="addType" class="bouton_type_autre">';
-              echo '<span class="fond_plus">+</span>';
-              echo 'Autre';
-            echo '</a>';
-
             $i = 0;
 
             // Types existants
@@ -169,6 +163,12 @@
                 }
               }
             }
+
+            // Bouton "Autre"
+            echo '<a id="addType" class="bouton_type_autre">';
+              echo '<span class="fond_plus">+</span>';
+              echo 'Autre';
+            echo '</a>';
           echo '</div>';
         echo '</div>';
 

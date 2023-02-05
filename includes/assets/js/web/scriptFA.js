@@ -254,7 +254,10 @@ $(function()
   // Ajoute un champ de saisie libre type de restaurant (saisie restaurant)
   $('#addType').click(function()
   {
-    addOtherType('types_restaurants');
+    var idBouton = $(this).attr('id');
+    var idParent = 'types_restaurants';
+
+    addOtherType(idBouton, idParent);
   });
 
   // Change la couleur des checkbox types de restaurant (saisie & modification restaurant)
@@ -333,9 +336,10 @@ $(function()
   // Ajoute un champ de saisie libre type de restaurant (modification restaurant)
   $('.addTypeUpdate').click(function()
   {
+    var idBouton     = $(this).attr('id');
     var idRestaurant = $(this).attr('id').replace('type_update_', '');
 
-    addOtherType('update_types_restaurants_' + idRestaurant);
+    addOtherType(idBouton, 'update_types_restaurants_' + idRestaurant);
   });
 
   // Ferme au clic sur le fond
@@ -1519,6 +1523,8 @@ function cacherListboxRestaurantsResume(numeroJour, zone, boutonValider, boutonA
 // Change la couleur des types de restaurants (saisie et modification restaurant)
 function changeCheckedColorType(input)
 {
+  console.log('<' + $('#' + input).children('input').prop('checked') + '>');
+
   if ($('#' + input).children('input').prop('checked'))
     $('#' + input).removeClass('bouton_checked');
   else
@@ -1541,16 +1547,16 @@ function changeTypeColor(id)
 }
 
 // Génère une nouvelle zone pour saisir un type
-function addOtherType(id)
+function addOtherType(idBouton, idParent)
 {
   var html      = '';
-  var length    = $('#' + id + ' input').length;
+  var length    = $('#' + idParent + ' input').length;
   var newLength = length + 1;
-  var idType    = id + '_' + newLength;
+  var idType    = idParent + '_' + newLength;
 
-  html += '<input type="text" placeholder="Type" value="" id="' + idType + '" name="' + id + '[' + newLength + ']" class="type_other saisieType" />';
+  html += '<input type="text" placeholder="Type" value="" id="' + idType + '" name="' + idParent + '[' + newLength + ']" class="type_other saisieType" />';
 
-  $('#' + id).append(html);
+  $('#' + idBouton).before(html);
 }
 
 // Affiche ou masque la zone de saisie lieu "Autre" (insertion)
