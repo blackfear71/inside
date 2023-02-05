@@ -126,7 +126,7 @@ $(function()
   });
 
   // Charge le succès
-  $('.loadImageSucces').on('change', function()
+  $('.loadImageSucces').on('change', function(event)
   {
     loadFile(event, 'image_succes', false);
   });
@@ -246,49 +246,49 @@ $(function()
   });
 
   // Charge le thème (header utilisateurs)
-  $('.loadHeaderUsers').on('change', function()
+  $('.loadHeaderUsers').on('change', function(event)
   {
     loadFile(event, 'theme_header_users', false);
   });
 
   // Charge le thème (background utilisateurs)
-  $('.loadBackgroundUsers').on('change', function()
+  $('.loadBackgroundUsers').on('change', function(event)
   {
     loadFile(event, 'theme_background_users', false);
   });
 
   // Charge le thème (footer utilisateurs)
-  $('.loadFooterUsers').on('change', function()
+  $('.loadFooterUsers').on('change', function(event)
   {
     loadFile(event, 'theme_footer_users', false);
   });
 
   // Charge le thème (logo utilisateurs)
-  $('.loadLogoUsers').on('change', function()
+  $('.loadLogoUsers').on('change', function(event)
   {
     loadFile(event, 'theme_logo_users', false);
   });
 
   // Charge le thème (header mission)
-  $('.loadHeaderMission').on('change', function()
+  $('.loadHeaderMission').on('change', function(event)
   {
     loadFile(event, 'theme_header_mission', false);
   });
 
   // Charge le thème (background mission)
-  $('.loadBackgroundMission').on('change', function()
+  $('.loadBackgroundMission').on('change', function(event)
   {
     loadFile(event, 'theme_background_mission', false);
   });
 
   // Charge le thème (footer mission)
-  $('.loadFooterMission').on('change', function()
+  $('.loadFooterMission').on('change', function(event)
   {
     loadFile(event, 'theme_footer_mission', false);
   });
 
   // Charge le thème (logo mission)
-  $('.loadLogoMission').on('change', function()
+  $('.loadLogoMission').on('change', function(event)
   {
     loadFile(event, 'theme_logo_mission', false);
   });
@@ -322,7 +322,7 @@ $(function()
   });
 
   // Charge la bannière (mission)
-  $('.loadBanner').on('change', function()
+  $('.loadBanner').on('change', function(event)
   {
     loadFile(event, 'banner', false);
 
@@ -333,19 +333,19 @@ $(function()
   });
 
   // Charge le bouton gauche (mission)
-  $('.loadLeft').on('change', function()
+  $('.loadLeft').on('change', function(event)
   {
     loadFile(event, 'button_g', false);
   });
 
   // Charge le bouton milieu (mission)
-  $('.loadMiddle').on('change', function()
+  $('.loadMiddle').on('change', function(event)
   {
     loadFile(event, 'button_m', false);
   });
 
   // Charge le bouton droite (mission)
-  $('.loadRight').on('change', function()
+  $('.loadRight').on('change', function(event)
   {
     loadFile(event, 'button_d', false);
   });

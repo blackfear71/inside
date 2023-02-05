@@ -135,7 +135,7 @@ $(function()
 
   /*** Actions au changement ***/
   // Charge l'avatar
-  $('.loadAvatar').on('change', function()
+  $('.loadAvatar').on('change', function(event)
   {
     loadFile(event, 'avatar', false);
   });

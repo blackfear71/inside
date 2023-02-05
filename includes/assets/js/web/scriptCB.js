@@ -119,7 +119,7 @@ $(function()
 
   /*** Actions au changement ***/
   // Charge l'image (saisie)
-  $('.loadSaisieRecette').on('change', function()
+  $('.loadSaisieRecette').on('change', function(event)
   {
     loadFile(event, 'image_recette', true);
   });

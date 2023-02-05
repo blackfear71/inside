@@ -183,7 +183,7 @@ $(function()
   });
 
   // Charge l'image (saisie)
-  $('.loadSaisieCollector').on('change', function()
+  $('.loadSaisieCollector').on('change', function(event)
   {
     loadFile(event, 'image_collector', true);
   });
@@ -197,7 +197,7 @@ $(function()
   });
 
   // Charge l'image (modification)
-  $('.loadModifierCollector').on('change', function()
+  $('.loadModifierCollector').on('change', function(event)
   {
     var idImage = $(this).attr('id').replace('fichier_', '');
 

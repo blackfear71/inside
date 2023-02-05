@@ -428,7 +428,7 @@ $(function()
   });
 
   // Charge l'image (saisie restaurant)
-  $('.loadSaisieRestaurant').on('change', function()
+  $('.loadSaisieRestaurant').on('change', function(event)
   {
     loadFile(event, 'image_restaurant_saisie', true);
   });
@@ -442,7 +442,7 @@ $(function()
   });
 
   // Charge l'image (modification restaurant)
-  $('.loadModifierRestaurant').on('change', function()
+  $('.loadModifierRestaurant').on('change', function(event)
   {
     var idRestaurant = $(this).attr('id').replace('modifier_image_', '');
 

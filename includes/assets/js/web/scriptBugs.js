@@ -60,7 +60,7 @@ $(function()
 
   /*** Actions au changement ***/
   // Charge l'image (saisie)
-  $('.loadSaisieReport').on('change', function()
+  $('.loadSaisieReport').on('change', function(event)
   {
     loadFile(event, 'image_report', true);
   });

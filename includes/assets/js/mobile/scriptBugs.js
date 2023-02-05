@@ -41,7 +41,7 @@ $(function()
 
   /*** Actions au changement ***/
   // Charge l'image dans la zone de saisie
-  $('.loadSaisieRapport').on('change', function()
+  $('.loadSaisieRapport').on('change', function(event)
   {
     loadFile(event, 'image_report', true);
   });

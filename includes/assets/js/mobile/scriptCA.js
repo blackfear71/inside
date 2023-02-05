@@ -13,25 +13,25 @@ $(function()
 
   /*** Actions au changement ***/
   // Charge le calendrier à générer
-  $('.loadCalendrierGenere').on('change', function()
+  $('.loadCalendrierGenere').on('change', function(event)
   {
     loadFile(event, 'image_calendars_generated', false);
   });
 
   // Charge l'annexe à générer
-  $('.loadAnnexeGeneree').on('change', function()
+  $('.loadAnnexeGeneree').on('change', function(event)
   {
     loadFile(event, 'image_annexe_generated', false);
   });
 
   // Charge le calendrier
-  $('.loadCalendrier').on('change', function()
+  $('.loadCalendrier').on('change', function(event)
   {
     loadFile(event, 'image_calendars', false);
   });
 
   // Charge l'annexe
-  $('.loadAnnexe').on('change', function()
+  $('.loadAnnexe').on('change', function(event)
   {
     loadFile(event, 'image_annexes', false);
   });
