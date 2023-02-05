@@ -35,7 +35,7 @@
 .zone_saisie_film
 {
 	width: 85%;
-	margin-top: 100px;
+	margin-top: 50px;
 	margin-left: auto;
 	margin-right: auto;
 	border-radius: 2px;
@@ -90,7 +90,7 @@
 	background-color: white;
 	border-top: solid 1px #d3d3d3;
 	color: #262626;
-	max-height: calc(100vh - 250px);
+	max-height: calc(100vh - 150px);
 	overflow-y: auto;
 }
 

@@ -81,7 +81,7 @@
 .zone_saisie_idea
 {
 	width: 85%;
-	margin-top: 100px;
+	margin-top: 50px;
 	margin-left: auto;
 	margin-right: auto;
 	overflow: auto;
@@ -135,7 +135,7 @@
 	text-align: center;
 	background-color: white;
 	border-top: solid 1px #d3d3d3;
-	max-height: calc(100vh - 250px);
+	max-height: calc(100vh - 150px);
 	overflow-y: auto;
 }
 
