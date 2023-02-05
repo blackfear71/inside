@@ -511,202 +511,6 @@
   function insertChoices($post, $isSolo, $sessionUser)
   {
     // Initialisations
-    $maxChoices = 5;
-    $control_ok = true;
-
-    // Récupération des données
-    $identifiant = $sessionUser['identifiant'];
-    $equipe      = $sessionUser['equipe'];
-
-    // Contrôle date de saisie
-    $control_ok = controleDateSaisie('week_end_input');
-
-    // Contrôle heure de saisie
-    if ($control_ok == true)
-      $control_ok = controleHeureSaisie('input_time');
-
-    // Contrôle bande à part
-    if ($control_ok == true)
-      $control_ok = controleSoloSaisie($isSolo);
-
-    // Contrôle choix saisi en double (non bloquant)
-    if ($control_ok == true)
-    {
-      // On parcourt tous les choix
-      for ($i = 1; $i <= $maxChoices; $i++)
-      {
-        if (isset($post['select_lieu'][$i])       AND !empty($post['select_lieu'][$i])
-        AND isset($post['select_restaurant'][$i]) AND !empty($post['select_restaurant'][$i]))
-        {
-          // On parcourt à nouveau les choix à partir du courant pour contrôler
-          for ($j = $i; $j <= $maxChoices; $j++)
-          {
-            if (isset($post['select_lieu'][$j])       AND !empty($post['select_lieu'][$j])
-            AND isset($post['select_restaurant'][$j]) AND !empty($post['select_restaurant'][$j]))
-            {
-              if ($j > $i)
-              {
-                // Contrôle doublon
-                $doublon = controleVoteDoublon($post['select_lieu'][$i], $post['select_lieu'][$j], $post['select_restaurant'][$i], $post['select_restaurant'][$j]);
-
-                // On supprime la ligne du tableau si en double
-                if ($doublon == true)
-                {
-                  unset($post['select_lieu'][$j]);
-                  unset($post['select_restaurant'][$j]);
-                  unset($post['select_heures'][$j]);
-                  unset($post['select_minutes'][$j]);
-                  unset($post['checkbox_feet'][$j]);
-                  unset($post['checkbox_bike'][$j]);
-                  unset($post['checkbox_tram'][$j]);
-                  unset($post['checkbox_car'][$j]);
-                  unset($post['saisie_entree'][$j]);
-                  unset($post['saisie_plat'][$j]);
-                  unset($post['saisie_dessert'][$j]);
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-
-    // Contrôle choix déjà existant (non bloquant)
-    if ($control_ok == true)
-    {
-      // On parcourt tous les choix
-      for ($i = 1; $i <= $maxChoices; $i++)
-      {
-        if (isset($post['select_lieu'][$i])       AND !empty($post['select_lieu'][$i])
-        AND isset($post['select_restaurant'][$i]) AND !empty($post['select_restaurant'][$i]))
-        {
-          // Contrôle choix existant
-          $choixNonExistant = controleChoixExistant($post['select_restaurant'][$i], $identifiant, $equipe, 'wrong_choice_already');
-
-          // On supprime la ligne du tableau si déjà saisi
-          if ($choixNonExistant == false)
-          {
-            unset($post['select_lieu'][$i]);
-            unset($post['select_restaurant'][$i]);
-            unset($post['select_heures'][$i]);
-            unset($post['select_minutes'][$i]);
-            unset($post['checkbox_feet'][$i]);
-            unset($post['checkbox_bike'][$i]);
-            unset($post['checkbox_tram'][$i]);
-            unset($post['checkbox_car'][$i]);
-            unset($post['saisie_entree'][$i]);
-            unset($post['saisie_plat'][$i]);
-            unset($post['saisie_dessert'][$i]);
-          }
-        }
-      }
-    }
-
-    // Contrôle restaurant ouvert (non bloquant)
-    if ($control_ok == true)
-    {
-      for ($i = 1; $i <= $maxChoices; $i++)
-      {
-        if (isset($post['select_lieu'][$i])       AND !empty($post['select_lieu'][$i])
-        AND isset($post['select_restaurant'][$i]) AND !empty($post['select_restaurant'][$i]))
-        {
-          // Lecture des données du restaurant
-          $restaurant = physiqueDonneesRestaurant($post['select_restaurant'][$i]);
-
-          // Contrôle restaurant ouvert
-          $restaurantOuvert = controleRestaurantOuvert($restaurant->getOpened());
-
-          // On supprime la ligne du tableau si le restaurant n'est pas ouvert
-          if ($restaurantOuvert == false)
-          {
-            unset($post['select_lieu'][$i]);
-            unset($post['select_restaurant'][$i]);
-            unset($post['select_heures'][$i]);
-            unset($post['select_minutes'][$i]);
-            unset($post['checkbox_feet'][$i]);
-            unset($post['checkbox_bike'][$i]);
-            unset($post['checkbox_tram'][$i]);
-            unset($post['checkbox_car'][$i]);
-            unset($post['saisie_entree'][$i]);
-            unset($post['saisie_plat'][$i]);
-            unset($post['saisie_dessert'][$i]);
-          }
-        }
-      }
-    }
-
-    // Récupération des données et insertion des enregistrements en base
-    if ($control_ok == true)
-    {
-      for ($i = 1; $i <= $maxChoices; $i++)
-      {
-        if (isset($post['select_lieu'][$i])       AND !empty($post['select_lieu'][$i])
-        AND isset($post['select_restaurant'][$i]) AND !empty($post['select_restaurant'][$i]))
-        {
-          // Id restaurant
-          $idRestaurant = $post['select_restaurant'][$i];
-
-          // Date de saisie
-          $date = date('Ymd');
-
-          // Heure choisie
-          if (isset($post['select_heures'][$i])  AND !empty($post['select_heures'][$i])
-          AND isset($post['select_minutes'][$i]) AND !empty($post['select_minutes'][$i]))
-            $time = $post['select_heures'][$i] . $post['select_minutes'][$i];
-          else
-            $time = '';
-
-          // Transports choisis
-          $transports = '';
-
-          if (isset($post['checkbox_feet'][$i]) AND $post['checkbox_feet'][$i] == 'F')
-            $transports .= $post['checkbox_feet'][$i] . ';';
-
-          if (isset($post['checkbox_bike'][$i]) AND $post['checkbox_bike'][$i] == 'B')
-            $transports .= $post['checkbox_bike'][$i] . ';';
-
-          if (isset($post['checkbox_tram'][$i]) AND $post['checkbox_tram'][$i] == 'T')
-            $transports .= $post['checkbox_tram'][$i] . ';';
-
-          if (isset($post['checkbox_car'][$i])  AND $post['checkbox_car'][$i]  == 'C')
-            $transports .= $post['checkbox_car'][$i] . ';';
-
-          // Menu saisi
-          $menu = '';
-
-          if (!isset($post['saisie_entree'][$i]) AND !isset($post['saisie_plat'][$i]) AND !isset($post['saisie_dessert'][$i]))
-            $menu .= ';;;';
-          else
-          {
-            $menu .= str_replace(';', ' ', $post['saisie_entree'][$i]) . ';';
-            $menu .= str_replace(';', ' ', $post['saisie_plat'][$i]) . ';';
-            $menu .= str_replace(';', ' ', $post['saisie_dessert'][$i]) . ';';
-          }
-
-          // Insertion de l'enregistrement en base
-          $choix = array('id_restaurant' => $idRestaurant,
-                         'team'          => $equipe,
-                         'identifiant'   => $identifiant,
-                         'date'          => $date,
-                         'time'          => $time,
-                         'transports'    => $transports,
-                         'menu'          => $menu
-                        );
-
-          physiqueInsertionChoix($choix);
-
-          // Relance de la détermination si besoin
-          relanceDetermination($sessionUser);
-        }
-      }
-    }
-  }
-
-  // METIER : Insère un ou plusieurs choix utilisateur
-  // RETOUR : Aucun
-  function insertChoicesMobile($post, $isSolo, $sessionUser)
-  {
-    // Initialisations
     $control_ok = true;
 
     // Récupération des données
@@ -775,12 +579,39 @@
 
           // Heure choisie
           $time = '';
+          
+          if (isset($post['select_heures'][$idRestaurant])  AND !empty($post['select_heures'][$idRestaurant])
+          AND isset($post['select_minutes'][$idRestaurant]) AND !empty($post['select_minutes'][$idRestaurant]))
+            $time = $post['select_heures'][$idRestaurant] . $post['select_minutes'][$idRestaurant];
+          else
+            $time = '';
 
           // Transports choisis
           $transports = '';
 
+          if (isset($post['checkbox_feet'][$idRestaurant]) AND $post['checkbox_feet'][$idRestaurant] == 'F')
+            $transports .= $post['checkbox_feet'][$idRestaurant] . ';';
+
+          if (isset($post['checkbox_bike'][$idRestaurant]) AND $post['checkbox_bike'][$idRestaurant] == 'B')
+            $transports .= $post['checkbox_bike'][$idRestaurant] . ';';
+
+          if (isset($post['checkbox_tram'][$idRestaurant]) AND $post['checkbox_tram'][$idRestaurant] == 'T')
+            $transports .= $post['checkbox_tram'][$idRestaurant] . ';';
+
+          if (isset($post['checkbox_car'][$idRestaurant])  AND $post['checkbox_car'][$idRestaurant]  == 'C')
+            $transports .= $post['checkbox_car'][$idRestaurant] . ';';
+
           // Menu
-          $menu = ';;;';
+          $menu = '';
+
+          if (!isset($post['saisie_entree'][$idRestaurant]) AND !isset($post['saisie_plat'][$idRestaurant]) AND !isset($post['saisie_dessert'][$idRestaurant]))
+            $menu .= ';;;';
+          else
+          {
+            $menu .= str_replace(';', ' ', $post['saisie_entree'][$idRestaurant]) . ';';
+            $menu .= str_replace(';', ' ', $post['saisie_plat'][$idRestaurant]) . ';';
+            $menu .= str_replace(';', ' ', $post['saisie_dessert'][$idRestaurant]) . ';';
+          }
 
           // Insertion de l'enregistrement en base
           $choix = array('id_restaurant' => $idRestaurant,

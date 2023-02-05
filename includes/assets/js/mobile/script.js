@@ -1277,7 +1277,7 @@ function formatDateForDisplayChat(date)
 }
 
 // Formate une heure pour affichage
-function formatTimeForDisplayChat(time)
+function formatTimeForDisplayLight(time)
 {
   var timeFormatted;
 

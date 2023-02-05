@@ -821,7 +821,7 @@ function loadingForm(zone)
 }
 
 // Affiche ou masque une section
-function afficherMasquerSection(lien, zone)
+function afficherMasquerSection(lien, zone, forcage)
 {
   var angle;
 
@@ -844,14 +844,39 @@ function afficherMasquerSection(lien, zone)
 
   fleche.css('transition', 'all ease 0.2s');
 
-  // Gestion de l'affichage
-  if (angle == 0)
-    fleche.css('transform', 'rotate(-90deg)');
-  else
-    fleche.css('transform', 'rotate(0deg)');
+  // Gestion de l'affichage en fonction du forçage
+  switch (forcage)
+  {
+    case 'open':     
+      if (angle != 0)
+      {
+        fleche.css('transform', 'rotate(0deg)');
 
-  // Affichage ou masquage de la zone
-  afficherMasquerIdWithDelay(zone);
+        // Affichage ou masquage de la zone
+        afficherMasquerIdNoDelay(zone);
+      }
+      break;
+
+    case 'close':
+      if (angle == 0)
+      {
+        fleche.css('transform', 'rotate(-90deg)');
+
+        // Affichage ou masquage de la zone
+        afficherMasquerIdNoDelay(zone);
+      }
+      break;
+
+    default:
+      if (angle == 0)
+        fleche.css('transform', 'rotate(-90deg)');
+      else
+        fleche.css('transform', 'rotate(0deg)');
+
+      // Affichage ou masquage de la zone
+      afficherMasquerIdWithDelay(zone);
+      break;
+  }
 }
 
 // Affiche le détail des notifications
@@ -961,7 +986,7 @@ function formatDateForDisplayChat(date)
 }
 
 // Formate une heure pour affichage
-function formatTimeForDisplayChat(time)
+function formatTimeForDisplayLight(time)
 {
   var timeFormatted;
 

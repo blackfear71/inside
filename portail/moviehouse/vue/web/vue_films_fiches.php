@@ -12,9 +12,9 @@
 
         if ($_GET['year'] != 'none' AND !empty($listeFilms))
         {
-          echo '<div class="zone_actions">';
-            echo '<a id="fold_all" class="bouton_fold">Tout plier</a>';
-            echo '<a id="unfold_all" class="bouton_fold">Tout déplier</a>';
+          echo '<div class="zone_actions_films">';
+            echo '<a id="fold_all" class="bouton_fold_films">Tout plier</a>';
+            echo '<a id="unfold_all" class="bouton_fold_films">Tout déplier</a>';
           echo '</div>';
         }
       echo '</div>';

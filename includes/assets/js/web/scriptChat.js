@@ -778,7 +778,7 @@ function formatMessagesChat(currentUser, identifiant, text, date, time)
     html += '<div class="zone_chat_user">';
       html += '<img src="' + avatarFormatted['path'] + '" alt="' + avatarFormatted['alt'] + '" title="' + avatarFormatted['title'] + '" class="avatar_chat_user" />';
       html += '<div class="triangle_chat_user"></div>';
-      html += '<div class="time_chat_user">' + formatTimeForDisplayChat(time) + '</div>';
+      html += '<div class="time_chat_user">' + formatTimeForDisplayLight(time) + '</div>';
       html += '<div class="text_chat_user">' + text + '</div>';
       html += '<div class="date_chat">' + date + '</div>';
       html += '<div class="time_chat">' + time + '</div>';
@@ -790,7 +790,7 @@ function formatMessagesChat(currentUser, identifiant, text, date, time)
       html += '<img src="' + avatarFormatted['path'] + '" alt="' + avatarFormatted['alt'] + '" title="' + avatarFormatted['title'] + '" class="avatar_chat_other" />';
       html += '<div class="triangle_chat_other"></div>';
       html += '<div class="text_chat_other">' + text + '</div>';
-      html += '<div class="time_chat_other">' + formatTimeForDisplayChat(time) + '</div>';
+      html += '<div class="time_chat_other">' + formatTimeForDisplayLight(time) + '</div>';
       html += '<div class="date_chat">' + date + '</div>';
       html += '<div class="time_chat">' + time + '</div>';
     html += '</div>';

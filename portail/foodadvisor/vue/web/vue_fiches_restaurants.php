@@ -266,12 +266,12 @@
 
                 echo '<div class="zone_fiche_right">';
                   // Validation modification
-                  echo '<div class="zone_bouton_validation">';
-                    echo '<input type="submit" name="update_restaurant_' . $restaurant->getId() . '" value="" title="Valider" id="bouton_validation_restaurant_' . $restaurant->getId() . '" class="icon_validate_restaurant" />';
+                  echo '<div id="zone_bouton_validation_' . $restaurant->getId() . '" class="zone_bouton_validation">';
+                    echo '<input type="submit" name="update_restaurant_' . $restaurant->getId() . '" value="" title="Valider" id="bouton_validation_restaurant_' . $restaurant->getId() . '" class="icone_valider_restaurant" />';
                   echo '</div>';
 
                   // Annulation modification
-                  echo '<a id="annuler_update_restaurant_' . $restaurant->getId() . '" title="Annuler" class="icone_cancel_restaurant annulerRestaurant"></a>';
+                  echo '<a id="annuler_update_restaurant_' . $restaurant->getId() . '" title="Annuler" class="icone_annuler_restaurant annulerRestaurant"></a>';
                 echo '</div>';
 
                 echo '<div class="zone_fiche_bottom">';

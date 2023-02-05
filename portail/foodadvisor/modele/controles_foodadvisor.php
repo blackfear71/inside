@@ -53,24 +53,6 @@
     return $control_ok;
   }
 
-  // CONTROLE : Vote en double
-  // RETOUR : Booléen
-  function controleVoteDoublon($lieu1, $lieu2, $restaurant1, $restaurant2)
-  {
-    // Initialisations
-    $doublon = false;
-
-    // Contrôle
-    if ($lieu1 == $lieu2 AND $restaurant1 == $restaurant2)
-    {
-      $_SESSION['alerts']['wrong_choice'] = true;
-      $doublon                            = true;
-    }
-
-    // Retour
-    return $doublon;
-  }
-
   // CONTROLE : Choix existant à date
   // RETOUR : Booléen
   function controleChoixExistantDate($date, $equipe)

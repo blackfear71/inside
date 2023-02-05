@@ -90,7 +90,7 @@ $(function()
   {
     var idZone = $(this).attr('id').replace('fold_', '');
 
-    afficherMasquerSection($(this), idZone);
+    afficherMasquerSection($(this), idZone, '');
 
     if ($(this).attr('id') == 'fold_themes_user')
       initMasonryThemes('#themes_user');

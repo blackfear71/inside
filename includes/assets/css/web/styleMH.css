@@ -476,18 +476,18 @@
 	display: none;
 }
 
-.zone_actions
+.zone_actions_films
 {
 	float: right;
 	margin-top: -2px;
 }
 
-.bouton_fold
+.bouton_fold_films
 {
 	border: 0;
 	background-color: #d3d3d3;
 	margin-left: 10px;
-	padding: 0 10px 5px 10px;
+	padding: 5px 10px 5px 10px;
 	border-radius: 2px;
 	font-family: inside_font_regular, Verdana, sans-serif;
 	font-size: 60%;
@@ -499,7 +499,7 @@
 	user-select: none;
 }
 
-.bouton_fold:hover
+.bouton_fold_films:hover
 {
 	background-color: #ff1937;
 	color: white;

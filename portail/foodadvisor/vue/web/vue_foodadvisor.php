@@ -69,7 +69,7 @@
           /* Saisie choix */
           /****************/
           if ($actions['saisir_choix'] == true)
-            include('vue/web/vue_saisie_choix.php');
+            include('vue/web/vue_saisie_propositions.php');
 
           /*******************/
           /* Chargement page */

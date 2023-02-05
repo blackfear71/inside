@@ -7,7 +7,6 @@
   - Bande à part
   - Utilisateurs en attente
   - Ajout de propositions
-  - Ajout de propositions sur mobile
   - Modification de propositions
   - Suppression de propositions
   - Consultation détails propositions
@@ -141,14 +140,6 @@
       insertChoices($_POST, $isSolo, $_SESSION['user']);
       break;
 
-    case 'doAjouterMobile':
-      // Détermination si bande à part
-      $isSolo = getSolo($_SESSION['user']);
-
-      // Insertion choix (mobile)
-      insertChoicesMobile($_POST, $isSolo, $_SESSION['user']);
-      break;
-
     case 'doModifier':
       // Modification d'un choix
       updateChoice($_POST, $_SESSION['user']['identifiant']);
@@ -268,7 +259,6 @@
     case 'doAnnulerReserver':
     case 'doComplet':
     case 'doAjouter':
-    case 'doAjouterMobile':
     case 'doModifier':
     case 'doSupprimer':
     case 'doSupprimerChoix':
@@ -289,7 +279,6 @@
     case 'doAnnulerReserver':
     case 'doComplet':
     case 'doAjouter':
-    case 'doAjouterMobile':
     case 'doModifier':
     case 'doSupprimer':
     case 'doSupprimerChoix':

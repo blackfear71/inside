@@ -9,11 +9,11 @@
       echo '<div class="texte_titre_section">';
         echo 'Les propositions du jour';
 
-        echo '<div class="zone_actions">';
+        echo '<div class="zone_actions_propositions">';
           // Lancer la détermination
           if ($actions['determiner'] == true)
           {
-            echo '<form method="post" action="foodadvisor.php?action=doDeterminer" class="form_action">';
+            echo '<form method="post" action="foodadvisor.php?action=doDeterminer" class="form_action_propositions">';
               echo '<input type="submit" name="determiner" value="Lancer la détermination" class="bouton_determination" />';
             echo '</form>';
           }

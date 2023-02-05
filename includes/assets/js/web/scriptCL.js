@@ -10,7 +10,7 @@ $(function()
   {
     var idZone = $(this).attr('id').replace('fold_', '');
 
-    afficherMasquerSection($(this), idZone);
+    afficherMasquerSection($(this), idZone, '');
     initMasonry(0);
   });
 });
