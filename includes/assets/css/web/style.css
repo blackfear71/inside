@@ -772,7 +772,7 @@ header
 {
 	display: block;
 	max-width: calc(100vw - 100px);
-	max-height: calc(100vh - 150px);
+	max-height: calc(100vh - 100px);
 	border-radius: 2px;
 }
 
@@ -780,14 +780,14 @@ header
 {
 	display: block;
 	max-width: calc(100vw - 515px);
-	max-height: calc(100vh - 150px);
+	max-height: calc(100vh - 100px);
 	border-radius: 2px;
 }
 
 .zone_texte_zoom
 {
 	display: inline-block;
-	max-height: calc(100vh - 150px);
+	max-height: calc(100vh - 100px);
 	width: 400px;
 	vertical-align: middle;
 	margin-left: 15px;
