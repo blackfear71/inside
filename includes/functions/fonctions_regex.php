@@ -224,14 +224,10 @@
 		// Supprime tout le reste
 		$formatted = preg_replace('#&[^;]+;#', '', $formatted);
 
-		// Remplace les espaces
-		$formatted = str_replace(' ', '_', $formatted);
-
-		// Remplace les points virgules
-		$formatted = str_replace(';', '_', $formatted);
-
-		// Remplace les slash
-		$formatted = str_replace('/', '_', $formatted);
+		// Remplace les caractères inutiles
+		$search    = array(' ', ',', '?', ';', '.', ':', '/', '!');
+		$replace   = array('_', '_', '', '_', '_', '', '', '_');
+		$formatted = str_replace($search, $replace, $formatted);
 
 		// Passe en minuscule
 		$formatted = strtolower($formatted);
