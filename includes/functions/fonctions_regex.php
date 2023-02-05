@@ -226,7 +226,7 @@
 
 		// Remplace les caractères inutiles
 		$search    = array(' ', ',', '?', ';', '.', ':', '/', '!');
-		$replace   = array('_', '_', '', '_', '_', '', '', '_');
+		$replace   = array('_', '_', '_', '_', '_', '_', '_', '_');
 		$formatted = str_replace($search, $replace, $formatted);
 
 		// Passe en minuscule

@@ -40,61 +40,6 @@
     return $listeUsers;
   }
 
-  // PHYSIQUE : Lecture restaurants ouverts par lieu
-  // RETOUR : Liste restaurants
-  function physiqueRestaurantsOuvertsParLieux($equipe, $lieu)
-  {
-    // Initialisations
-    $listeRestaurantsParLieux = array();
-
-    // Requête
-    global $bdd;
-
-    $req = $bdd->query('SELECT *
-                        FROM food_advisor_restaurants
-                        WHERE team = "' . $equipe . '" AND location = "' . $lieu . '"
-                        ORDER BY name ASC');
-
-    while ($data = $req->fetch())
-    {
-      // Initialisation ouverture
-      $availableDay = true;
-
-      // Vérification restaurant ouvert ce jour
-      $explodedOpened = explode(';', $data['opened']);
-
-      foreach ($explodedOpened as $keyOpened => $opened)
-      {
-        if (!empty($opened))
-        {
-          if (date('N') == $keyOpened + 1 AND $opened == 'N')
-          {
-            $availableDay = false;
-            break;
-          }
-        }
-      }
-
-      // Récupération des données si ouvert
-      if ($availableDay == true)
-      {
-        // Instanciation d'un objet Restaurant à partir des données remontées de la bdd
-        $restaurant = Restaurant::withData($data);
-
-        $restaurant->setMin_price(str_replace('.', ',', $restaurant->getMin_price()));
-        $restaurant->setMax_price(str_replace('.', ',', $restaurant->getMax_price()));
-
-        // On ajoute la ligne au tableau
-        array_push($listeRestaurantsParLieux, $restaurant);
-      }
-    }
-
-    $req->closeCursor();
-
-    // Retour
-    return $listeRestaurantsParLieux;
-  }
-
   // PHYSIQUE : Lecture bande à part
   // RETOUR : Liste identifiants
   function physiqueIdentifiantsSolos($equipe)

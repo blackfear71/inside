@@ -1,22 +1,27 @@
 <?php
   // METIER : Récupération et filtrage la liste des restaurants ouverts
   // RETOUR : Liste des restaurants filtrés
-  function getListeRestaurantsOuverts($listeLieux, $equipe)
+  function getListeRestaurantsOuverts($listeRestaurantsResume, $equipe)
   {
     // Initialisations
     $listeRestaurants = array();
 
-    // Récupération de la liste des restaurants ouverts pour chaque lieu
-    foreach ($listeLieux as $lieu)
+    // Filtrage de la liste des restaurants ouverts pour chaque lieu
+    foreach ($listeRestaurantsResume as $lieu => $restaurantsParLieux)
     {
-      $listeRestaurants[htmlspecialchars($lieu)] = physiqueRestaurantsOuvertsParLieux($equipe, $lieu);
-    }
+      foreach ($restaurantsParLieux as $restaurant)
+      {
+        // Vérification restaurant ouvert ce jour
+        $explodedOpened = array_filter(explode(';', $restaurant->getOpened()));
 
-    // Filtrage des restaurants
-    foreach ($listeRestaurants as $keyRestaurant => $restaurantsParLieux)
-    {
-      if (empty($restaurantsParLieux))
-        unset($listeRestaurants[$keyRestaurant]);
+        if (isset($explodedOpened[date('N') - 1]) AND $explodedOpened[date('N') - 1] == 'Y')
+        {
+          if (!isset($listeRestaurants[$lieu]))
+            $listeRestaurants[$lieu] = array();
+
+          array_push($listeRestaurants[$lieu], $restaurant);
+        }
+      }
     }
 
     // Retour
@@ -27,15 +32,8 @@
   // RETOUR : Liste des lieux filtrés
   function getLieuxFiltres($listeRestaurants)
   {
-    // Initialisations
-    $listeLieux = array();
-
     // Récupération des lieux ayant au moins 1 restaurant ouvert
-    foreach ($listeRestaurants as $keyRestaurant => $restaurantsParLieux)
-    {
-      if (!empty($restaurantsParLieux))
-        array_push($listeLieux, $keyRestaurant);
-    }
+    $listeLieux = array_keys($listeRestaurants);
 
     // Retour
     return $listeLieux;

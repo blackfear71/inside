@@ -40,11 +40,11 @@
       // Récupération de tous les lieux
       $listeLieuxDisponibles = getLieux($_SESSION['user']['equipe']);
 
-      // Récupération et filtrage de la liste des restaurants (ouverts)
-      $listeRestaurants = getListeRestaurantsOuverts($listeLieuxDisponibles, $_SESSION['user']['equipe']);
-
       // Récupération de tous les restaurants (existants)
       $listeRestaurantsResume = getListeRestaurants($listeLieuxDisponibles, $_SESSION['user']['equipe']);
+
+      // Filtrage de la liste des restaurants (ouverts)
+      $listeRestaurants = getListeRestaurantsOuverts($listeRestaurantsResume, $_SESSION['user']['equipe']);
 
       // Filtrage de la liste des lieux (restaurants ouverts)
       $listeLieux = getLieuxFiltres($listeRestaurants);
@@ -190,17 +190,17 @@
 
       unset($lieu);
 
-      foreach ($listeRestaurants as $restaurantsParLieux)
+      foreach ($listeRestaurantsResume as $restaurantsParLieuxResume)
       {
-        foreach ($restaurantsParLieux as $restaurant)
+        foreach ($restaurantsParLieuxResume as $restaurant)
         {
           Restaurant::secureData($restaurant);
         }
       }
 
-      foreach ($listeRestaurantsResume as $restaurantsParLieuxResume)
+      foreach ($listeRestaurants as $restaurantsParLieux)
       {
-        foreach ($restaurantsParLieuxResume as $restaurant)
+        foreach ($restaurantsParLieux as $restaurant)
         {
           Restaurant::secureData($restaurant);
         }
