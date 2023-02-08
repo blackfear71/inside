@@ -30,6 +30,8 @@ Ne pas toucher aux fichiers suivants lors de vos développements :
 
 Si des différences sont constatées, veuillez les annuler.
 
+Une procédure d'installation de la solution en local est fournie à la racine du projet.
+
 ## Les langages utilisés
 Au travers de l'architecture MVC (Modèle-Vue-Contrôleur) utilisée, plusieurs langages sont appliqués afin de correspondre aux différents besoins du site.
 ### HTML
