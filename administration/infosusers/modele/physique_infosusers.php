@@ -1,245 +1,245 @@
 <?php
-  include_once('../../includes/functions/appel_bdd.php');
+    include_once('../../includes/functions/appel_bdd.php');
 
-  /****************************************************************************/
-  /********************************** SELECT **********************************/
-  /****************************************************************************/
-  // PHYSIQUE : Lecture de la liste des équipes activées
-  // RETOUR : Liste des équipes
-  function physiqueListeEquipes()
-  {
-    // Initialisations
-    $listeEquipes = array();
-
-    // Requête
-    global $bdd;
-
-    $req = $bdd->query('SELECT *
-                        FROM teams
-                        WHERE activation = "Y"
-                        ORDER BY team ASC');
-
-    while ($data = $req->fetch())
+    /****************************************************************************/
+    /********************************** SELECT **********************************/
+    /****************************************************************************/
+    // PHYSIQUE : Lecture de la liste des équipes activées
+    // RETOUR : Liste des équipes
+    function physiqueListeEquipes()
     {
-      // Instanciation d'un objet Team à partir des données remontées de la bdd
-      $equipe = Team::withData($data);
+        // Initialisations
+        $listeEquipes = array();
 
-      // On ajoute la ligne au tableau
-      $listeEquipes[$equipe->getReference()] = $equipe;
+        // Requête
+        global $bdd;
+
+        $req = $bdd->query('SELECT *
+                            FROM teams
+                            WHERE activation = "Y"
+                            ORDER BY team ASC');
+
+        while ($data = $req->fetch())
+        {
+            // Instanciation d'un objet Team à partir des données remontées de la bdd
+            $equipe = Team::withData($data);
+
+            // On ajoute la ligne au tableau
+            $listeEquipes[$equipe->getReference()] = $equipe;
+        }
+
+        $req->closeCursor();
+
+        // Retour
+        return $listeEquipes;
     }
 
-    $req->closeCursor();
-
-    // Retour
-    return $listeEquipes;
-  }
-
-  // PHYSIQUE : Lecture du nombre d'utilisateurs d'une équipe
-  // RETOUR : Nombre d'utilisateurs
-  function physiqueNombreUsersEquipe($equipe)
-  {
-    // Initialisations
-    $nombreUsers = 0;
-
-    // Requête
-    global $bdd;
-
-    $req = $bdd->query('SELECT COUNT(*) AS nombreUsers
-                        FROM users
-                        WHERE team = "' . $equipe . '"');
-
-    $data = $req->fetch();
-
-    $nombreUsers = $data['nombreUsers'];
-
-    $req->closeCursor();
-
-    // Retour
-    return $nombreUsers;
-  }
-
-  // PHYSIQUE : Lecture des utilisateurs
-  // RETOUR : Tableau des utilisateurs
-  function physiqueUsers()
-  {
-    // Initialisations
-    $listeUsers = array();
-
-    global $bdd;
-
-    // Requête
-    $req = $bdd->query('SELECT id, identifiant, team, ping, status, pseudo, avatar, email, anniversary, experience
-                        FROM users
-                        WHERE identifiant != "admin" AND status != "I"
-                        ORDER BY identifiant ASC');
-
-    while ($data = $req->fetch())
+    // PHYSIQUE : Lecture du nombre d'utilisateurs d'une équipe
+    // RETOUR : Nombre d'utilisateurs
+    function physiqueNombreUsersEquipe($equipe)
     {
-      // Instanciation d'un objet Profile à partir des données remontées de la bdd
-      $user = Profile::withData($data);
+        // Initialisations
+        $nombreUsers = 0;
 
-      // On ajoute la ligne au tableau
-      array_push($listeUsers, $user);
+        // Requête
+        global $bdd;
+
+        $req = $bdd->query('SELECT COUNT(*) AS nombreUsers
+                            FROM users
+                            WHERE team = "' . $equipe . '"');
+
+        $data = $req->fetch();
+
+        $nombreUsers = $data['nombreUsers'];
+
+        $req->closeCursor();
+
+        // Retour
+        return $nombreUsers;
     }
 
-    $req->closeCursor();
-
-    // Retour
-    return $listeUsers;
-  }
-
-  // PHYSIQUE : Lecture des succès administrateur
-  // RETOUR : Valeur succès
-  function physiqueSuccessAdmin($success, $identifiant)
-  {
-    // Initialisation
-    $value = 0;
-
-    // Requête
-    global $bdd;
-
-    $req = $bdd->query('SELECT *, COUNT(*) AS nombreLignes
-                        FROM success_users
-                        WHERE reference = "' . $success . '" AND identifiant = "' . $identifiant . '"');
-
-    $data = $req->fetch();
-
-    if ($data['nombreLignes'] > 0)
-      $value = $data['value'];
-
-    $req->closeCursor();
-
-    // Retour
-    return $value;
-  }
-
-  // PHYSIQUE : Lecture d'une table pour une équipe
-  // RETOUR : Liste des données de la table
-  function physiqueTableEquipe($table, $champs, $objet, $equipe)
-  {
-    // Initialisations
-    $listeElementsTable = array();
-
-    // Requête
-    global $bdd;
-
-    $req = $bdd->query('SELECT ' . $champs . '
-                        FROM ' . $table . '
-                        WHERE team = "' . $equipe . '"');
-
-    while ($data = $req->fetch())
+    // PHYSIQUE : Lecture des utilisateurs
+    // RETOUR : Tableau des utilisateurs
+    function physiqueUsers()
     {
-      // Instanciation d'un objet $objet à partir des données remontées de la bdd
-      $elementTable = $objet::withData($data);
+        // Initialisations
+        $listeUsers = array();
 
-      // On ajoute la ligne au tableau
-      array_push($listeElementsTable, $elementTable);
+        global $bdd;
+
+        // Requête
+        $req = $bdd->query('SELECT id, identifiant, team, ping, status, pseudo, avatar, email, anniversary, experience
+                            FROM users
+                            WHERE identifiant != "admin" AND status != "I"
+                            ORDER BY identifiant ASC');
+
+        while ($data = $req->fetch())
+        {
+            // Instanciation d'un objet Profile à partir des données remontées de la bdd
+            $user = Profile::withData($data);
+
+            // On ajoute la ligne au tableau
+            array_push($listeUsers, $user);
+        }
+
+        $req->closeCursor();
+
+        // Retour
+        return $listeUsers;
     }
 
-    $req->closeCursor();
+    // PHYSIQUE : Lecture des succès administrateur
+    // RETOUR : Valeur succès
+    function physiqueSuccessAdmin($success, $identifiant)
+    {
+        // Initialisation
+        $value = 0;
 
-    // Retour
-    return $listeElementsTable;
-  }
+        // Requête
+        global $bdd;
 
-  /****************************************************************************/
-  /********************************** UPDATE **********************************/
-  /****************************************************************************/
-  // PHYSIQUE : Mise à jour nom équipe
-  // RETOUR : Aucun
-  function physiqueUpdateEquipe($reference, $team)
-  {
-    // Requête
-    global $bdd;
+        $req = $bdd->query('SELECT *, COUNT(*) AS nombreLignes
+                            FROM success_users
+                            WHERE reference = "' . $success . '" AND identifiant = "' . $identifiant . '"');
 
-    $req = $bdd->prepare('UPDATE teams
-                          SET team = :team
-                          WHERE reference = "' . $reference . '"');
+        $data = $req->fetch();
 
-    $req->execute(array(
-      'team' => $team
-    ));
+        if ($data['nombreLignes'] > 0)
+            $value = $data['value'];
 
-    $req->closeCursor();
-  }
+        $req->closeCursor();
 
-  /****************************************************************************/
-  /********************************** DELETE **********************************/
-  /****************************************************************************/
-  // PHYSIQUE : Suppression des données d'une table pour une équipe
-  // RETOUR : Aucun
-  function physiqueDeleteTableEquipe($table, $idElement, $equipe)
-  {
-    // Requête
-    global $bdd;
+        // Retour
+        return $value;
+    }
 
-    $req = $bdd->exec('DELETE FROM ' . $table . '
-                       WHERE id = ' . $idElement . ' AND team = "' . $equipe . '"');
-  }
+    // PHYSIQUE : Lecture d'une table pour une équipe
+    // RETOUR : Liste des données de la table
+    function physiqueTableEquipe($table, $champs, $objet, $equipe)
+    {
+        // Initialisations
+        $listeElementsTable = array();
 
-  // PHYSIQUE : Suppression des données d'une table pour une équipe (simple)
-  // RETOUR : Aucun
-  function physiqueDeleteTableEquipeLight($table, $equipe)
-  {
-    // Requête
-    global $bdd;
+        // Requête
+        global $bdd;
 
-    $req = $bdd->exec('DELETE FROM ' . $table . '
-                       WHERE team = "' . $equipe . '"');
-  }
+        $req = $bdd->query('SELECT ' . $champs . '
+                            FROM ' . $table . '
+                            WHERE team = "' . $equipe . '"');
 
-  // PHYSIQUE : Suppression des votes Collector
-  // RETOUR : Aucun
-  function physiqueDeleteVotesCollector($idCollector, $equipe)
-  {
-    // Requête
-    global $bdd;
+        while ($data = $req->fetch())
+        {
+            // Instanciation d'un objet $objet à partir des données remontées de la bdd
+            $elementTable = $objet::withData($data);
 
-    $req = $bdd->exec('DELETE FROM collector_users
-                       WHERE id_collector = ' . $idCollector . ' AND team = "' . $equipe . '"');
-  }
+            // On ajoute la ligne au tableau
+            array_push($listeElementsTable, $elementTable);
+        }
 
-  // PHYSIQUE : Suppression des parts des dépenses
-  // RETOUR : Aucun
-  function physiqueDeletePartsDepenses($idDepense, $equipe)
-  {
-    // Requête
-    global $bdd;
+        $req->closeCursor();
 
-    $req = $bdd->exec('DELETE FROM expense_center_users
-                       WHERE id_expense = ' . $idDepense . ' AND team = "' . $equipe . '"');
-  }
+        // Retour
+        return $listeElementsTable;
+    }
 
-  // PHYSIQUE : Suppression des commentaires film
-  // RETOUR : Aucun
-  function physiqueDeleteCommentairesFilm($idFilm)
-  {
-    // Requête
-    global $bdd;
+    /****************************************************************************/
+    /********************************** UPDATE **********************************/
+    /****************************************************************************/
+    // PHYSIQUE : Mise à jour nom équipe
+    // RETOUR : Aucun
+    function physiqueUpdateEquipe($reference, $team)
+    {
+        // Requête
+        global $bdd;
 
-    $req = $bdd->exec('DELETE FROM movie_house_comments
-                       WHERE id_film = ' . $idFilm);
-  }
+        $req = $bdd->prepare('UPDATE teams
+                              SET team = :team
+                              WHERE reference = "' . $reference . '"');
 
-  // PHYSIQUE : Suppression des votes film
-  // RETOUR : Aucun
-  function physiqueDeleteVotesFilm($idFilm)
-  {
-    // Requête
-    global $bdd;
+        $req->execute(array(
+            'team' => $team
+        ));
 
-    $req = $bdd->exec('DELETE FROM movie_house_users
-                       WHERE id_film = ' . $idFilm);
-  }
+        $req->closeCursor();
+    }
 
-  // PHYSIQUE : Suppression d'une équipe
-  // RETOUR : Aucun
-  function physiqueDeleteEquipe($reference)
-  {
-    // Requête
-    global $bdd;
+    /****************************************************************************/
+    /********************************** DELETE **********************************/
+    /****************************************************************************/
+    // PHYSIQUE : Suppression des données d'une table pour une équipe
+    // RETOUR : Aucun
+    function physiqueDeleteTableEquipe($table, $idElement, $equipe)
+    {
+        // Requête
+        global $bdd;
 
-    $req = $bdd->exec('DELETE FROM teams
-                       WHERE reference = "' . $reference . '"');
-  }
+        $req = $bdd->exec('DELETE FROM ' . $table . '
+                           WHERE id = ' . $idElement . ' AND team = "' . $equipe . '"');
+    }
+
+    // PHYSIQUE : Suppression des données d'une table pour une équipe (simple)
+    // RETOUR : Aucun
+    function physiqueDeleteTableEquipeLight($table, $equipe)
+    {
+        // Requête
+        global $bdd;
+
+        $req = $bdd->exec('DELETE FROM ' . $table . '
+                           WHERE team = "' . $equipe . '"');
+    }
+
+    // PHYSIQUE : Suppression des votes Collector
+    // RETOUR : Aucun
+    function physiqueDeleteVotesCollector($idCollector, $equipe)
+    {
+        // Requête
+        global $bdd;
+
+        $req = $bdd->exec('DELETE FROM collector_users
+                           WHERE id_collector = ' . $idCollector . ' AND team = "' . $equipe . '"');
+    }
+
+    // PHYSIQUE : Suppression des parts des dépenses
+    // RETOUR : Aucun
+    function physiqueDeletePartsDepenses($idDepense, $equipe)
+    {
+        // Requête
+        global $bdd;
+
+        $req = $bdd->exec('DELETE FROM expense_center_users
+                           WHERE id_expense = ' . $idDepense . ' AND team = "' . $equipe . '"');
+    }
+
+    // PHYSIQUE : Suppression des commentaires film
+    // RETOUR : Aucun
+    function physiqueDeleteCommentairesFilm($idFilm)
+    {
+        // Requête
+        global $bdd;
+
+        $req = $bdd->exec('DELETE FROM movie_house_comments
+                           WHERE id_film = ' . $idFilm);
+    }
+
+    // PHYSIQUE : Suppression des votes film
+    // RETOUR : Aucun
+    function physiqueDeleteVotesFilm($idFilm)
+    {
+        // Requête
+        global $bdd;
+
+        $req = $bdd->exec('DELETE FROM movie_house_users
+                           WHERE id_film = ' . $idFilm);
+    }
+
+    // PHYSIQUE : Suppression d'une équipe
+    // RETOUR : Aucun
+    function physiqueDeleteEquipe($reference)
+    {
+        // Requête
+        global $bdd;
+
+        $req = $bdd->exec('DELETE FROM teams
+                           WHERE reference = "' . $reference . '"');
+    }
 ?>

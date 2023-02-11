@@ -1,100 +1,100 @@
 <?php
-  /********************************
-  *** Informations utilisateurs ***
-  *********************************
-  Fonctionnalités :
-  - Consultation utilisateurs
-  - Attribution succès
-  ********************************/
+    /********************************
+    *** Informations utilisateurs ***
+    *********************************
+    Fonctionnalités :
+    - Consultation utilisateurs
+    - Attribution succès
+    ********************************/
 
-  // Fonctions communes
-  include_once('../../includes/functions/metier_commun.php');
-  include_once('../../includes/functions/physique_commun.php');
-  include_once('../../includes/functions/fonctions_dates.php');
+    // Fonctions communes
+    include_once('../../includes/functions/metier_commun.php');
+    include_once('../../includes/functions/physique_commun.php');
+    include_once('../../includes/functions/fonctions_dates.php');
 
-  // Contrôles communs Administrateur
-  controlsAdmin();
+    // Contrôles communs Administrateur
+    controlsAdmin();
 
-  // Modèle de données
-  include_once('modele/metier_infosusers.php');
-  include_once('modele/physique_infosusers.php');
+    // Modèle de données
+    include_once('modele/metier_infosusers.php');
+    include_once('modele/physique_infosusers.php');
 
-  // Appels métier
-  switch ($_GET['action'])
-  {
-    case 'goConsulter':
-      // Récupération de la liste des équipes
-      $listeEquipes = getListeEquipes();
+    // Appels métier
+    switch ($_GET['action'])
+    {
+        case 'goConsulter':
+            // Récupération de la liste des équipes
+            $listeEquipes = getListeEquipes();
 
-      // Récupération de la liste des utilisateurs inscrits
-			$listeUsersParEquipe = getUsers();
-      break;
+            // Récupération de la liste des utilisateurs inscrits
+            $listeUsersParEquipe = getUsers();
+            break;
 
-    case 'doModifier':
-      // Modification d'une équipe
-      updateEquipe($_POST);
-      break;
+        case 'doModifier':
+            // Modification d'une équipe
+            updateEquipe($_POST);
+            break;
 
-    case 'doSupprimer':
-      // Suppression d'une équipe
-      deleteEquipe($_POST);
-      break;
+        case 'doSupprimer':
+            // Suppression d'une équipe
+            deleteEquipe($_POST);
+            break;
 
-    case 'changeBeginnerStatus':
-      // Mise à jour du succès "beginner"
-      changeBeginner($_POST);
-      break;
+        case 'changeBeginnerStatus':
+            // Mise à jour du succès "beginner"
+            changeBeginner($_POST);
+            break;
 
-    case 'changeDevelopperStatus':
-      // Mise à jour du succès "developper"
-      changeDevelopper($_POST);
-      break;
-      
-    default:
-      // Contrôle action renseignée URL
-      header('location: infosusers.php?action=goConsulter');
-      break;
-  }
+        case 'changeDevelopperStatus':
+            // Mise à jour du succès "developper"
+            changeDevelopper($_POST);
+            break;
 
-  // Traitements de sécurité avant la vue
-  switch ($_GET['action'])
-  {
-    case 'goConsulter':
-      foreach ($listeEquipes as $equipe)
-      {
-        Team::secureData($equipe);
-      }
+        default:
+            // Contrôle action renseignée URL
+            header('location: infosusers.php?action=goConsulter');
+            break;
+    }
 
-			foreach ($listeUsersParEquipe as $usersParEquipe)
-			{
-        foreach ($usersParEquipe as $user)
-        {
-          Profile::secureData($user);
-        }
-			}
-      break;
+    // Traitements de sécurité avant la vue
+    switch ($_GET['action'])
+    {
+        case 'goConsulter':
+            foreach ($listeEquipes as $equipe)
+            {
+                Team::secureData($equipe);
+            }
 
-    case 'doModifier':
-    case 'doSupprimer':
-    case 'changeBeginnerStatus':
-    case 'changeDevelopperStatus':
-    default:
-      break;
-  }
+            foreach ($listeUsersParEquipe as $usersParEquipe)
+            {
+                foreach ($usersParEquipe as $user)
+                {
+                    Profile::secureData($user);
+                }
+            }
+            break;
 
-  // Redirection affichage
-  switch ($_GET['action'])
-  {
-    case 'doModifier':
-    case 'doSupprimer':    
-    case 'changeBeginnerStatus':
-    case 'changeDevelopperStatus':
-      header('location: infosusers.php?action=goConsulter');
-      break;
+        case 'doModifier':
+        case 'doSupprimer':
+        case 'changeBeginnerStatus':
+        case 'changeDevelopperStatus':
+        default:
+            break;
+    }
 
-    case 'goConsulter':
-    default:
-      include_once('vue/vue_infosusers.php');
-      break;
-  }
+    // Redirection affichage
+    switch ($_GET['action'])
+    {
+        case 'doModifier':
+        case 'doSupprimer':
+        case 'changeBeginnerStatus':
+        case 'changeDevelopperStatus':
+            header('location: infosusers.php?action=goConsulter');
+            break;
+
+        case 'goConsulter':
+        default:
+            include_once('vue/vue_infosusers.php');
+            break;
+    }
 ?>
