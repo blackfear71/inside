@@ -6,7 +6,7 @@
     function initializeSaveSession()
     {
         // On initialise les champs de saisie s'il n'y a pas d'erreur
-        if ((!isset($_SESSION['alerts']['already_referenced']) or $_SESSION['alerts']['already_referenced'] != true))
+        if ((!isset($_SESSION['alerts']['already_referenced']) OR $_SESSION['alerts']['already_referenced'] != true))
         {
             unset($_SESSION['save']);
 

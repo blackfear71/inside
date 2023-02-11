@@ -70,7 +70,7 @@
   {
 		case 'doDeleteFilm':
 		case 'doResetFilm':
-			header ('location: movies.php?action=goConsulter');
+			header('location: movies.php?action=goConsulter');
 			break;
 
     case 'goConsulter':

@@ -84,13 +84,13 @@
     case 'doAjouter':
     case 'doModifier':
       if (!empty($idTheme))
-        header ('location: themes.php?action=goConsulter&anchorTheme=' . $idTheme);
+        header('location: themes.php?action=goConsulter&anchorTheme=' . $idTheme);
       else
-        header ('location: themes.php?action=goConsulter');
+        header('location: themes.php?action=goConsulter');
       break;
 
 		case 'doSupprimer':
-			header ('location: themes.php?action=goConsulter');
+			header('location: themes.php?action=goConsulter');
 			break;
 
     case 'goConsulter':
