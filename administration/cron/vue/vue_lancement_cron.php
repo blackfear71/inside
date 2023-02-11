@@ -1,5 +1,6 @@
 <?php
     echo '<div class="zone_cron_asynchrone">';
+        // Titre
         echo '<div class="titre_section"><img src="../../includes/icons/admin/send_grey.png" alt="send_grey" class="logo_titre_section" /><div class="texte_titre_section">Lancement asynchrone des tâches CRON</div></div>';
 
         // CRON journalier

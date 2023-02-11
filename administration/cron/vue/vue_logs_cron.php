@@ -2,8 +2,10 @@
     echo '<div class="zone_cron_logs">';
         // Logs journaliers
         echo '<div class="zone_jlog">';
+            // Titre
             echo '<div class="titre_section"><img src="../../includes/icons/admin/datas_grey.png" alt="datas_grey" class="logo_titre_section" /><div class="texte_titre_section">Logs journaliers</div></div>';
 
+            // Logs
             echo '<div class="zone_logs">';
                 if (!empty($files['daily']))
                 {
@@ -53,8 +55,10 @@
 
         // Logs hebdomadaires
         echo '<div class="zone_hlog">';
+            // Titre
             echo '<div class="titre_section"><img src="../../includes/icons/admin/datas_grey.png" alt="datas_grey" class="logo_titre_section" /><div class="texte_titre_section">Logs hebdomadaires</div></div>';
 
+            // Logs
             echo '<div class="zone_logs">';
                 if (!empty($files['weekly']))
                 {
