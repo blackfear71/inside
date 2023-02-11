@@ -1,6 +1,7 @@
 <?php
     if (!empty($generatorParameters->getNom_section()) AND !empty($generatorParameters->getNom_technique()))
     {
+        // Titre
         echo '<div class="titre_section"><img src="../../includes/icons/common/inside_grey.png" alt="inside_grey" class="logo_titre_section" /><div class="texte_titre_section">Code généré</div></div>';
 
         // Code généré

@@ -23,6 +23,7 @@
         <header>
             <?php
                 $title = /*title*/;
+                
                 include('../../includes/common/web/header.php');/*onglets*/                
             ?>
         </header>
