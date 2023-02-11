@@ -1,153 +1,153 @@
 <?php
-  include_once('../../includes/functions/appel_bdd.php');
+    include_once('../../includes/functions/appel_bdd.php');
 
-  /****************************************************************************/
-  /********************************** SELECT **********************************/
-  /****************************************************************************/
-  // PHYSIQUE : Lecture liste des alertes
-  // RETOUR : Liste alertes
-  function physiqueListeAlertes()
-  {
-    // Initialisations
-    $alertes = array();
-
-    // Requête
-    global $bdd;
-
-    $req = $bdd->query('SELECT *
-                        FROM alerts
-                        ORDER BY category ASC, type DESC, alert ASC');
-
-    while ($data = $req->fetch())
+    /****************************************************************************/
+    /********************************** SELECT **********************************/
+    /****************************************************************************/
+    // PHYSIQUE : Lecture liste des alertes
+    // RETOUR : Liste alertes
+    function physiqueListeAlertes()
     {
-      // Instanciation d'un objet Alerte à partir des données remontées de la bdd
-      $alerte = Alerte::withData($data);
+        // Initialisations
+        $alertes = array();
 
-      // On ajoute la ligne au tableau
-      array_push($alertes, $alerte);
+        // Requête
+        global $bdd;
+
+        $req = $bdd->query('SELECT *
+                            FROM alerts
+                            ORDER BY category ASC, type DESC, alert ASC');
+
+        while ($data = $req->fetch())
+        {
+            // Instanciation d'un objet Alerte à partir des données remontées de la bdd
+            $alerte = Alerte::withData($data);
+
+            // On ajoute la ligne au tableau
+            array_push($alertes, $alerte);
+        }
+
+        $req->closeCursor();
+
+        // Retour
+        return $alertes;
     }
 
-    $req->closeCursor();
+    // PHYSIQUE : Lecture du nombre de références existantes
+    // RETOUR : Booléen
+    function physiqueReferenceUnique($reference)
+    {
+        // Initialisations
+        $isUnique = true;
 
-    // Retour
-    return $alertes;
-  }
+        // Requête
+        global $bdd;
 
-  // PHYSIQUE : Lecture du nombre de références existantes
-  // RETOUR : Booléen
-  function physiqueReferenceUnique($reference)
-  {
-    // Initialisations
-    $isUnique = true;
+        $req = $bdd->query('SELECT COUNT(*) AS nombreReferences
+                            FROM alerts
+                            WHERE alert = "' . $reference . '"');
 
-    // Requête
-    global $bdd;
+        $data = $req->fetch();
 
-    $req = $bdd->query('SELECT COUNT(*) AS nombreReferences
-                        FROM alerts
-                        WHERE alert = "' . $reference . '"');
+        if ($data['nombreReferences'] > 0)
+            $isUnique = false;
 
-    $data = $req->fetch();
+        $req->closeCursor();
 
-    if ($data['nombreReferences'] > 0)
-      $isUnique = false;
+        // Retour
+        return $isUnique;
+    }
 
-    $req->closeCursor();
+    // PHYSIQUE : Lecture du nombre de références existantes
+    // RETOUR : Booléen
+    function physiqueReferenceUniqueUpdate($reference, $idAlert)
+    {
+        // Initialisations
+        $isUnique = true;
 
-    // Retour
-    return $isUnique;
-  }
+        // Requête
+        global $bdd;
 
-  // PHYSIQUE : Lecture du nombre de références existantes
-  // RETOUR : Booléen
-  function physiqueReferenceUniqueUpdate($reference, $idAlert)
-  {
-    // Initialisations
-    $isUnique = true;
+        $req = $bdd->query('SELECT COUNT(*) AS nombreReferences
+                            FROM alerts
+                            WHERE alert = "' . $reference . '" AND id != ' . $idAlert);
 
-    // Requête
-    global $bdd;
+        $data = $req->fetch();
 
-    $req = $bdd->query('SELECT COUNT(*) AS nombreReferences
-                        FROM alerts
-                        WHERE alert = "' . $reference . '" AND id != ' . $idAlert);
+        if ($data['nombreReferences'] > 0)
+            $isUnique = false;
 
-    $data = $req->fetch();
+        $req->closeCursor();
 
-    if ($data['nombreReferences'] > 0)
-      $isUnique = false;
+        // Retour
+        return $isUnique;
+    }
 
-    $req->closeCursor();
+    /****************************************************************************/
+    /********************************** INSERT **********************************/
+    /****************************************************************************/
+    // PHYSIQUE : Insertion nouvelle alerte
+    // RETOUR : Id alerte
+    function physiqueInsertionAlerte($alerte)
+    {
+        // Initialisations
+        $newId = NULL;
 
-    // Retour
-    return $isUnique;
-  }
+        // Requête
+        global $bdd;
 
-  /****************************************************************************/
-  /********************************** INSERT **********************************/
-  /****************************************************************************/
-  // PHYSIQUE : Insertion nouvelle alerte
-  // RETOUR : Id alerte
-  function physiqueInsertionAlerte($alerte)
-  {
-    // Initialisations
-    $newId = NULL;
+        $req = $bdd->prepare('INSERT INTO alerts(category,
+                                                 type,
+                                                 alert,
+                                                 message)
+                                         VALUES(:category,
+                                                :type,
+                                                :alert,
+                                                :message)');
 
-    // Requête
-    global $bdd;
+        $req->execute($alerte);
 
-    $req = $bdd->prepare('INSERT INTO alerts(category,
-                                             type,
-                                             alert,
-                                             message)
-                                     VALUES(:category,
-                                            :type,
-                                            :alert,
-                                            :message)');
+        $req->closeCursor();
 
-    $req->execute($alerte);
+        $newId = $bdd->lastInsertId();
 
-    $req->closeCursor();
+        // Retour
+        return $newId;
+    }
 
-    $newId = $bdd->lastInsertId();
+    /****************************************************************************/
+    /********************************** UPDATE **********************************/
+    /****************************************************************************/
+    // PHYSIQUE : Mise à jour alerte
+    // RETOUR : Aucun
+    function physiqueUpdateAlerte($alerte, $idAlert)
+    {
+        // Requête
+        global $bdd;
 
-    // Retour
-    return $newId;
-  }
+        $req = $bdd->prepare('UPDATE alerts
+                              SET category = :category,
+                                  type     = :type,
+                                  alert    = :alert,
+                                  message  = :message
+                              WHERE id = ' . $idAlert);
 
-  /****************************************************************************/
-  /********************************** UPDATE **********************************/
-  /****************************************************************************/
-  // PHYSIQUE : Mise à jour alerte
-  // RETOUR : Aucun
-  function physiqueUpdateAlerte($alerte, $idAlert)
-  {
-    // Requête
-    global $bdd;
+        $req->execute($alerte);
 
-    $req = $bdd->prepare('UPDATE alerts
-                          SET category = :category,
-                              type     = :type,
-                              alert    = :alert,
-                              message  = :message
-                          WHERE id = ' . $idAlert);
+        $req->closeCursor();
+    }
 
-    $req->execute($alerte);
+    /****************************************************************************/
+    /********************************** DELETE **********************************/
+    /****************************************************************************/
+    // PHYSIQUE : Suppression alerte
+    // RETOUR : Aucun
+    function physiqueDeleteAlerte($idAlert)
+    {
+        // Requête
+        global $bdd;
 
-    $req->closeCursor();
-  }
-
-  /****************************************************************************/
-  /********************************** DELETE **********************************/
-  /****************************************************************************/
-  // PHYSIQUE : Suppression alerte
-  // RETOUR : Aucun
-  function physiqueDeleteAlerte($idAlert)
-  {
-    // Requête
-    global $bdd;
-
-    $req = $bdd->exec('DELETE FROM alerts
-                       WHERE id = ' . $idAlert);
-  }
+        $req = $bdd->exec('DELETE FROM alerts
+                        WHERE id = ' . $idAlert);
+    }
 ?>
