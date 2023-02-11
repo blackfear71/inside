@@ -1,644 +1,643 @@
 <?php
-  include_once('../../includes/functions/appel_bdd.php');
+    include_once('../../includes/functions/appel_bdd.php');
 
-  /****************************************************************************/
-  /********************************** SELECT **********************************/
-  /****************************************************************************/
-  // PHYSIQUE : Lecture liste des utilisateurs
-  // RETOUR : Liste des utilisateurs
-  function physiqueUsers()
-  {
-    // Initialisations
-    $listeUsers = array();
-
-    // Requête
-    global $bdd;
-
-    $req = $bdd->query('SELECT id, identifiant, team, status, pseudo, avatar, email, anniversary, experience
-                        FROM users
-                        WHERE identifiant != "admin"
-                        ORDER BY identifiant ASC');
-
-    while ($data = $req->fetch())
+    /****************************************************************************/
+    /********************************** SELECT **********************************/
+    /****************************************************************************/
+    // PHYSIQUE : Lecture liste des utilisateurs
+    // RETOUR : Liste des utilisateurs
+    function physiqueUsers()
     {
-      // Instanciation d'un objet Profile à partir des données remontées de la bdd
-      $user = Profile::withData($data);
+        // Initialisations
+        $listeUsers = array();
 
-      // On ajoute la ligne au tableau
-      array_push($listeUsers, $user);
+        // Requête
+        global $bdd;
+
+        $req = $bdd->query('SELECT id, identifiant, team, status, pseudo, avatar, email, anniversary, experience
+                            FROM users
+                            WHERE identifiant != "admin"
+                            ORDER BY identifiant ASC');
+
+        while ($data = $req->fetch())
+        {
+            // Instanciation d'un objet Profile à partir des données remontées de la bdd
+            $user = Profile::withData($data);
+
+            // On ajoute la ligne au tableau
+            array_push($listeUsers, $user);
+        }
+
+        $req->closeCursor();
+
+        // Retour
+        return $listeUsers;
     }
 
-    $req->closeCursor();
-
-    // Retour
-    return $listeUsers;
-  }
-
-  // PHYSIQUE : Lecture liste des succès
-  // RETOUR : Liste des succès
-  function physiqueListeSuccess()
-  {
-    // Initialisations
-    $listeSuccess = array();
-
-    // Requête
-    global $bdd;
-
-    $req = $bdd->query('SELECT *
-                        FROM success
-                        ORDER BY level ASC, order_success ASC');
-
-    while ($data = $req->fetch())
+    // PHYSIQUE : Lecture liste des succès
+    // RETOUR : Liste des succès
+    function physiqueListeSuccess()
     {
-      // Instanciation d'un objet Success à partir des données remontées de la bdd
-      $success = Success::withData($data);
+        // Initialisations
+        $listeSuccess = array();
 
-      // On ajoute la ligne au tableau
-      array_push($listeSuccess, $success);
+        // Requête
+        global $bdd;
+
+        $req = $bdd->query('SELECT *
+                            FROM success
+                            ORDER BY level ASC, order_success ASC');
+
+        while ($data = $req->fetch())
+        {
+            // Instanciation d'un objet Success à partir des données remontées de la bdd
+            $success = Success::withData($data);
+
+            // On ajoute la ligne au tableau
+            array_push($listeSuccess, $success);
+        }
+
+        $req->closeCursor();
+
+        // Retour
+        return $listeSuccess;
     }
-
-    $req->closeCursor();
-
-    // Retour
-    return $listeSuccess;
-  }
 
     // PHYSIQUE : Lecture liste des missions
-  // RETOUR : Liste des missions
-  function physiqueListeMissions()
-  {
-    // Initialisations
-    $listeMissions = array();
-
-    // Requête
-    global $bdd;
-
-    $req = $bdd->query('SELECT *
-                        FROM missions
-                        ORDER BY date_fin DESC');
-
-    while ($data = $req->fetch())
+    // RETOUR : Liste des missions
+    function physiqueListeMissions()
     {
-      // Instanciation d'un objet Mission à partir des données remontées de la bdd
-      $mission = Mission::withData($data);
+        // Initialisations
+        $listeMissions = array();
 
-      // On ajoute la ligne au tableau
-      array_push($listeMissions, $mission);
+        // Requête
+        global $bdd;
+
+        $req = $bdd->query('SELECT *
+                            FROM missions
+                            ORDER BY date_fin DESC');
+
+        while ($data = $req->fetch())
+        {
+            // Instanciation d'un objet Mission à partir des données remontées de la bdd
+            $mission = Mission::withData($data);
+
+            // On ajoute la ligne au tableau
+            array_push($listeMissions, $mission);
+        }
+
+        $req->closeCursor();
+
+        // Retour
+        return $listeMissions;
     }
 
-    $req->closeCursor();
-
-    // Retour
-    return $listeMissions;
-  }
-
-  // PHYSIQUE : Lecture du nombre de références existantes
-  // RETOUR : Booléen
-  function physiqueReferenceUnique($reference)
-  {
-    // Initialisations
-    $isUnique = true;
-
-    // Requête
-    global $bdd;
-
-    $req = $bdd->query('SELECT COUNT(*) AS nombreReferences
-                        FROM success
-                        WHERE reference = "' . $reference . '"');
-
-    $data = $req->fetch();
-
-    if ($data['nombreReferences'] > 0)
-      $isUnique = false;
-
-    $req->closeCursor();
-
-    // Retour
-    return $isUnique;
-  }
-
-  // PHYSIQUE : Lecture du nombre d'ordonnancements existants
-  // RETOUR : Booléen
-  function physiqueOrdonnancementUnique($niveau, $ordre)
-  {
-    // Initialisations
-    $isUnique = true;
-
-    // Requête
-    global $bdd;
-
-    $req = $bdd->query('SELECT COUNT(*) AS nombreOrdres
-                        FROM success
-                        WHERE level = "' . $niveau . '" AND order_success = "' . $ordre . '"');
-
-    $data = $req->fetch();
-
-    if ($data['nombreOrdres'] > 0)
-      $isUnique = false;
-
-    $req->closeCursor();
-
-    // Retour
-    return $isUnique;
-  }
-
-  // PHYSIQUE : Lecture données succès
-  // RETOUR : Objet Success
-  function physiqueSuccess($idSuccess)
-  {
-    // Requête
-    global $bdd;
-
-    $req = $bdd->query('SELECT *
-                        FROM success
-                        WHERE id = ' . $idSuccess);
-
-    $data = $req->fetch();
-
-    // Instanciation d'un objet Success à partir des données remontées de la bdd
-    $success = Success::withData($data);
-
-    $req->closeCursor();
-
-    // Retour
-    return $success;
-  }
-
-  // PHYSIQUE : Lecture valeur succès
-  // RETOUR : Valeur du succès
-  function physiqueValueSuccess($table, $listeConditions, $valueColumn)
-  {
-    // Initialisations
-    $value = NULL;
-    $where = '';
-
-    // Construction de la requête
-    foreach ($listeConditions as $condition)
+    // PHYSIQUE : Lecture du nombre de références existantes
+    // RETOUR : Booléen
+    function physiqueReferenceUnique($reference)
     {
-      if (!empty($condition['operator']))
-        $where .= ' ' . $condition['operator'] . ' ' . $condition['column'] . ' ' . $condition['test'] . ' "' . $condition['value'] . '"';
-      else
-        $where .= $condition['column'] . ' ' . $condition['test'] . ' "' . $condition['value'] . '"';
+        // Initialisations
+        $isUnique = true;
+
+        // Requête
+        global $bdd;
+
+        $req = $bdd->query('SELECT COUNT(*) AS nombreReferences
+                            FROM success
+                            WHERE reference = "' . $reference . '"');
+
+        $data = $req->fetch();
+
+        if ($data['nombreReferences'] > 0)
+            $isUnique = false;
+
+        $req->closeCursor();
+
+        // Retour
+        return $isUnique;
     }
 
-    // Requête
-    global $bdd;
-
-    $req = $bdd->query('SELECT *, COUNT(*) AS nombreLignes
-                        FROM ' . $table . '
-                        WHERE ' . $where);
-
-    $data = $req->fetch();
-
-    if ($data['nombreLignes'] > 0)
-      $value = $data[$valueColumn];
-
-    $req->closeCursor();
-
-    // Retour
-    return $value;
-  }
-
-  // PHYSIQUE : Comptage de lignes pour un succès
-  // RETOUR : Nombre de lignes
-  function physiqueCountSuccess($table, $listeConditions)
-  {
-    // Initialisations
-    $value = 0;
-    $where = '';
-
-    // Construction de la requête
-    foreach ($listeConditions as $condition)
+    // PHYSIQUE : Lecture du nombre d'ordonnancements existants
+    // RETOUR : Booléen
+    function physiqueOrdonnancementUnique($niveau, $ordre)
     {
-      if (!empty($condition['operator']))
-      {
-        if ($condition['column'] == 'id')
-          $where .= ' ' . $condition['operator'] . ' ' . $condition['column'] . ' ' . $condition['test'] . ' ' . $condition['value'];
-        else
-          $where .= ' ' . $condition['operator'] . ' ' . $condition['column'] . ' ' . $condition['test'] . ' "' . $condition['value'] . '"';
-      }
-      else
-      {
-        if ($condition['column'] == 'id')
-          $where .= $condition['column'] . ' ' . $condition['test'] . ' ' . $condition['value'];
-        else
-          $where .= $condition['column'] . ' ' . $condition['test'] . ' "' . $condition['value'] . '"';
-      }
+        // Initialisations
+        $isUnique = true;
+
+        // Requête
+        global $bdd;
+
+        $req = $bdd->query('SELECT COUNT(*) AS nombreOrdres
+                            FROM success
+                            WHERE level = "' . $niveau . '" AND order_success = "' . $ordre . '"');
+
+        $data = $req->fetch();
+
+        if ($data['nombreOrdres'] > 0)
+            $isUnique = false;
+
+        $req->closeCursor();
+
+        // Retour
+        return $isUnique;
     }
 
-    // Requête
-    global $bdd;
-
-    $req = $bdd->query('SELECT COUNT(*) AS nombreLignes
-                        FROM ' . $table . '
-                        WHERE ' . $where);
-
-    $data = $req->fetch();
-
-    $value = $data['nombreLignes'];
-
-    $req->closeCursor();
-
-    // Retour
-    return $value;
-  }
-
-  // PHYSIQUE : Somme de lignes pour un succès
-  // RETOUR : Somme des lignes
-  function physiqueSumSuccess($table, $listeConditions, $sumColumn)
-  {
-    // Initialisations
-    $value = 0;
-    $where = '';
-
-    // Construction de la requête
-    foreach ($listeConditions as $condition)
+    // PHYSIQUE : Lecture données succès
+    // RETOUR : Objet Success
+    function physiqueSuccess($idSuccess)
     {
-      if (!empty($condition['operator']))
-      {
-        if ($condition['column'] == 'id')
-          $where .= ' ' . $condition['operator'] . ' ' . $condition['column'] . ' ' . $condition['test'] . ' ' . $condition['value'];
-        else
-          $where .= ' ' . $condition['operator'] . ' ' . $condition['column'] . ' ' . $condition['test'] . ' "' . $condition['value'] . '"';
-      }
-      else
-      {
-        if ($condition['column'] == 'id')
-          $where .= $condition['column'] . ' ' . $condition['test'] . ' ' . $condition['value'];
-        else
-          $where .= $condition['column'] . ' ' . $condition['test'] . ' "' . $condition['value'] . '"';
-      }
+        // Requête
+        global $bdd;
+
+        $req = $bdd->query('SELECT *
+                            FROM success
+                            WHERE id = ' . $idSuccess);
+
+        $data = $req->fetch();
+
+        // Instanciation d'un objet Success à partir des données remontées de la bdd
+        $success = Success::withData($data);
+
+        $req->closeCursor();
+
+        // Retour
+        return $success;
     }
 
-    // Requête
-    global $bdd;
-
-    $req = $bdd->query('SELECT *
-                        FROM ' . $table . '
-                        WHERE ' . $where);
-
-    while ($data = $req->fetch())
+    // PHYSIQUE : Lecture valeur succès
+    // RETOUR : Valeur du succès
+    function physiqueValueSuccess($table, $listeConditions, $valueColumn)
     {
-      $value += $data[$sumColumn];
+        // Initialisations
+        $value = NULL;
+        $where = '';
+
+        // Construction de la requête
+        foreach ($listeConditions as $condition)
+        {
+            if (!empty($condition['operator']))
+                $where .= ' ' . $condition['operator'] . ' ' . $condition['column'] . ' ' . $condition['test'] . ' "' . $condition['value'] . '"';
+            else
+                $where .= $condition['column'] . ' ' . $condition['test'] . ' "' . $condition['value'] . '"';
+        }
+
+        // Requête
+        global $bdd;
+
+        $req = $bdd->query('SELECT *, COUNT(*) AS nombreLignes
+                            FROM ' . $table . '
+                            WHERE ' . $where);
+
+        $data = $req->fetch();
+
+        if ($data['nombreLignes'] > 0)
+            $value = $data[$valueColumn];
+
+        $req->closeCursor();
+
+        // Retour
+        return $value;
     }
 
-    $req->closeCursor();
-
-    // Retour
-    return $value;
-  }
-
-  // PHYSIQUE : Récupération du succès "eater"
-  // RETOUR : Valeur du succès
-  function physiqueEaterSuccess($identifiant)
-  {
-    // Initialisations
-    $value = 0;
-
-    // Requête
-    global $bdd;
-
-    $req = $bdd->query('SELECT expense_center.type, expense_center_users.*
-                        FROM expense_center_users
-                        INNER JOIN expense_center
-                        ON (expense_center.id = expense_center_users.id_expense AND expense_center_users.identifiant = "' . $identifiant . '")');
-
-    while ($data = $req->fetch())
+    // PHYSIQUE : Comptage de lignes pour un succès
+    // RETOUR : Nombre de lignes
+    function physiqueCountSuccess($table, $listeConditions)
     {
-      if ($data['type'] == 'M')
-        $value += 1;
-      else
-        $value += $data['parts'];
+        // Initialisations
+        $value = 0;
+        $where = '';
+
+        // Construction de la requête
+        foreach ($listeConditions as $condition)
+        {
+            if (!empty($condition['operator']))
+            {
+                if ($condition['column'] == 'id')
+                    $where .= ' ' . $condition['operator'] . ' ' . $condition['column'] . ' ' . $condition['test'] . ' ' . $condition['value'];
+                else
+                    $where .= ' ' . $condition['operator'] . ' ' . $condition['column'] . ' ' . $condition['test'] . ' "' . $condition['value'] . '"';
+            }
+            else
+            {
+                if ($condition['column'] == 'id')
+                    $where .= $condition['column'] . ' ' . $condition['test'] . ' ' . $condition['value'];
+                else
+                    $where .= $condition['column'] . ' ' . $condition['test'] . ' "' . $condition['value'] . '"';
+            }
+        }
+
+        // Requête
+        global $bdd;
+
+        $req = $bdd->query('SELECT COUNT(*) AS nombreLignes
+                            FROM ' . $table . '
+                            WHERE ' . $where);
+
+        $data = $req->fetch();
+
+        $value = $data['nombreLignes'];
+
+        $req->closeCursor();
+
+        // Retour
+        return $value;
     }
 
-    $req->closeCursor();
+    // PHYSIQUE : Somme de lignes pour un succès
+    // RETOUR : Somme des lignes
+    function physiqueSumSuccess($table, $listeConditions, $sumColumn)
+    {
+        // Initialisations
+        $value = 0;
+        $where = '';
 
-    // Retour
-    return $value;
-  }
+        // Construction de la requête
+        foreach ($listeConditions as $condition)
+        {
+            if (!empty($condition['operator']))
+            {
+                if ($condition['column'] == 'id')
+                    $where .= ' ' . $condition['operator'] . ' ' . $condition['column'] . ' ' . $condition['test'] . ' ' . $condition['value'];
+                else
+                    $where .= ' ' . $condition['operator'] . ' ' . $condition['column'] . ' ' . $condition['test'] . ' "' . $condition['value'] . '"';
+            }
+            else
+            {
+                if ($condition['column'] == 'id')
+                    $where .= $condition['column'] . ' ' . $condition['test'] . ' ' . $condition['value'];
+                else
+                    $where .= $condition['column'] . ' ' . $condition['test'] . ' "' . $condition['value'] . '"';
+            }
+        }
 
-  // PHYSIQUE : Récupération du succès "self-satisfied"
-  // RETOUR : Valeur du succès
-  function physiqueSelfSatisfiedSuccess($identifiant)
-  {
-    // Initialisations
-    $value = 0;
+        // Requête
+        global $bdd;
 
-    // Requête
-    global $bdd;
+        $req = $bdd->query('SELECT *
+                            FROM ' . $table . '
+                            WHERE ' . $where);
 
-    $req = $bdd->query('SELECT collector.*, COUNT(collector_users.id) AS nombreAutoVotes
-                        FROM collector
-                        LEFT JOIN collector_users
-                        ON (collector.id = collector_users.id_collector AND collector_users.identifiant = "' . $identifiant . '")
-                        WHERE collector.speaker = "' . $identifiant . '"');
+        while ($data = $req->fetch())
+        {
+            $value += $data[$sumColumn];
+        }
 
-    $data = $req->fetch();
+        $req->closeCursor();
 
-    $value = $data['nombreAutoVotes'];
+        // Retour
+        return $value;
+    }
 
-    $req->closeCursor();
+    // PHYSIQUE : Récupération du succès "eater"
+    // RETOUR : Valeur du succès
+    function physiqueEaterSuccess($identifiant)
+    {
+        // Initialisations
+        $value = 0;
 
-    // Retour
-    return $value;
-  }
+        // Requête
+        global $bdd;
 
-  // PHYSIQUE : Récupération du succès "buyer"
-  // RETOUR : Valeur du succès
-  function physiqueBuyerSuccess($identifiant)
-  {
-    // Initialisations
-    $value = 0;
+        $req = $bdd->query('SELECT expense_center.type, expense_center_users.*
+                            FROM expense_center_users
+                            INNER JOIN expense_center
+                            ON (expense_center.id = expense_center_users.id_expense AND expense_center_users.identifiant = "' . $identifiant . '")');
 
-    // Requête
-    global $bdd;
+        while ($data = $req->fetch())
+        {
+            if ($data['type'] == 'M')
+                $value += 1;
+            else
+                $value += $data['parts'];
+        }
 
-    $req = $bdd->query('SELECT COUNT(expense_center.id) AS nombreAchats
-                        FROM expense_center
-                        WHERE (expense_center.buyer = "' . $identifiant . '" AND expense_center.price > 0)
-                        AND EXISTS (SELECT *
-                                    FROM expense_center_users
-                                    WHERE (expense_center.id = expense_center_users.id_expense))');
+        $req->closeCursor();
 
-    $data = $req->fetch();
+        // Retour
+        return $value;
+    }
 
-    $value = $data['nombreAchats'];
+    // PHYSIQUE : Récupération du succès "self-satisfied"
+    // RETOUR : Valeur du succès
+    function physiqueSelfSatisfiedSuccess($identifiant)
+    {
+        // Initialisations
+        $value = 0;
 
-    $req->closeCursor();
+        // Requête
+        global $bdd;
 
-    // Retour
-    return $value;
-  }
+        $req = $bdd->query('SELECT collector.*, COUNT(collector_users.id) AS nombreAutoVotes
+                            FROM collector
+                            LEFT JOIN collector_users
+                            ON (collector.id = collector_users.id_collector AND collector_users.identifiant = "' . $identifiant . '")
+                            WHERE collector.speaker = "' . $identifiant . '"');
 
-  // PHYSIQUE : Récupération du succès "generous"
-  // RETOUR : Valeur du succès
-  function physiqueGenerousSuccess($identifiant)
-  {
-    // Initialisations
-    $value = 0;
+        $data = $req->fetch();
 
-    // Requête
-    global $bdd;
+        $value = $data['nombreAutoVotes'];
 
-    $req = $bdd->query('SELECT COUNT(expense_center.id) AS nombreDepensesSansParts
-                        FROM expense_center
-                        WHERE (expense_center.buyer = "' . $identifiant . '" AND expense_center.price > 0)
-                        AND NOT EXISTS (SELECT *
+        $req->closeCursor();
+
+        // Retour
+        return $value;
+    }
+
+    // PHYSIQUE : Récupération du succès "buyer"
+    // RETOUR : Valeur du succès
+    function physiqueBuyerSuccess($identifiant)
+    {
+        // Initialisations
+        $value = 0;
+
+        // Requête
+        global $bdd;
+
+        $req = $bdd->query('SELECT COUNT(expense_center.id) AS nombreAchats
+                            FROM expense_center
+                            WHERE (expense_center.buyer = "' . $identifiant . '" AND expense_center.price > 0)
+                            AND EXISTS (SELECT *
                                         FROM expense_center_users
-                                        WHERE (expense_center.id = expense_center_users.id_expense AND expense_center_users.identifiant = "' . $identifiant . '"))');
+                                        WHERE (expense_center.id = expense_center_users.id_expense))');
 
-    $data = $req->fetch();
+        $data = $req->fetch();
 
-    $value = $data['nombreDepensesSansParts'];
+        $value = $data['nombreAchats'];
 
-    $req->closeCursor();
+        $req->closeCursor();
 
-    // Retour
-    return $value;
-  }
-
-  // PHYSIQUE : Récupération du bilan d'un utilisateur
-  // RETOUR : Bilan des dépenses
-  function physiqueBilanUser($identifiant)
-  {
-    // Initialisations
-    $bilan = 0;
-
-    // Requête
-    global $bdd;
-
-    $req = $bdd->query('SELECT id, identifiant, expenses
-                        FROM users
-                        WHERE identifiant = "' . $identifiant . '"');
-
-    $data = $req->fetch();
-
-    $bilan = $data['expenses'];
-
-    $req->closeCursor();
-
-    // Retour
-    return $bilan;
-  }
-
-  // PHYSIQUE : Recherche film
-  // RETOUR : Objet Movie
-  function physiqueRechercheFilms($titreFilm, $equipe)
-  {
-    // Initialisations
-    $listeFilm = array();
-
-    // Requête
-    global $bdd;
-
-    $req = $bdd->query('SELECT *
-                        FROM movie_house
-                        WHERE film LIKE "%' . $titreFilm . '%" AND team = "' . $equipe . '"');
-
-    while ($data = $req->fetch())
-    {
-      // Instanciation d'un objet Movie à partir des données remontées de la bdd
-      $film = Movie::withData($data);
-
-      // On ajoute la ligne au tableau
-      array_push($listeFilm, $film);
+        // Retour
+        return $value;
     }
 
-    $req->closeCursor();
+    // PHYSIQUE : Récupération du succès "generous"
+    // RETOUR : Valeur du succès
+    function physiqueGenerousSuccess($identifiant)
+    {
+        // Initialisations
+        $value = 0;
 
-    // Retour
-    return $listeFilm;
-  }
+        // Requête
+        global $bdd;
 
-  // PHYSIQUE : Récupération données mission
-  // RETOUR : Objet Mission
-  function physiqueDonneesMission($reference)
-  {
-    // Requête
-    global $bdd;
+        $req = $bdd->query('SELECT COUNT(expense_center.id) AS nombreDepensesSansParts
+                            FROM expense_center
+                            WHERE (expense_center.buyer = "' . $identifiant . '" AND expense_center.price > 0)
+                            AND NOT EXISTS (SELECT *
+                                            FROM expense_center_users
+                                            WHERE (expense_center.id = expense_center_users.id_expense AND expense_center_users.identifiant = "' . $identifiant . '"))');
 
-    $req = $bdd->query('SELECT *
-                        FROM missions
-                        WHERE reference = "' . $reference . '"');
+        $data = $req->fetch();
 
-    $data = $req->fetch();
+        $value = $data['nombreDepensesSansParts'];
 
-    // Instanciation d'un objet Mission à partir des données remontées de la bdd
-    $mission = Mission::withData($data);
+        $req->closeCursor();
 
-    $req->closeCursor();
+        // Retour
+        return $value;
+    }
 
-    // Retour
-    return $mission;
-  }
+    // PHYSIQUE : Récupération du bilan d'un utilisateur
+    // RETOUR : Bilan des dépenses
+    function physiqueBilanUser($identifiant)
+    {
+        // Initialisations
+        $bilan = 0;
 
-  /****************************************************************************/
-  /********************************** INSERT **********************************/
-  /****************************************************************************/
-  // PHYSIQUE : Insertion nouveau succès
-  // RETOUR : Aucun
-  function physiqueInsertionSuccess($success)
-  {
-    // Requête
-    global $bdd;
+        // Requête
+        global $bdd;
 
-    $req = $bdd->prepare('INSERT INTO success(reference,
-                                              level,
-                                              order_success,
-                                              defined,
-                                              unicity,
-                                              mission,
-                                              title,
-                                              description,
-                                              limit_success,
-                                              explanation)
-                                      VALUES(:reference,
-                                             :level,
-                                             :order_success,
-                                             :defined,
-                                             :unicity,
-                                             :mission,
-                                             :title,
-                                             :description,
-                                             :limit_success,
-                                             :explanation)');
+        $req = $bdd->query('SELECT id, identifiant, expenses
+                            FROM users
+                            WHERE identifiant = "' . $identifiant . '"');
 
-    $req->execute($success);
+        $data = $req->fetch();
 
-    $req->closeCursor();
-  }
+        $bilan = $data['expenses'];
 
-  // PHYSIQUE : Insertion valeur succès utilisateur
-  // RETOUR : Aucun
-  function physiqueInsertionSuccessUser($successUser)
-  {
-    // Requête
-    global $bdd;
+        $req->closeCursor();
 
-    $req = $bdd->prepare('INSERT INTO success_users(reference,
-                                                    identifiant,
-                                                    value)
-                                            VALUES(:reference,
-                                                   :identifiant,
-                                                   :value)');
+        // Retour
+        return $bilan;
+    }
 
-    $req->execute($successUser);
+    // PHYSIQUE : Recherche film
+    // RETOUR : Objet Movie
+    function physiqueRechercheFilms($titreFilm, $equipe)
+    {
+        // Initialisations
+        $listeFilm = array();
 
-    $req->closeCursor();
-  }
+        // Requête
+        global $bdd;
 
-  /****************************************************************************/
-  /********************************** UPDATE **********************************/
-  /****************************************************************************/
-  // PHYSIQUE : Mise à jour succès
-  // RETOUR : Aucun
-  function physiqueUpdateSuccess($success)
-  {
-    // Initialisations
-    $idSuccess = $success['id'];
-    unset($success['id']);
+        $req = $bdd->query('SELECT *
+                            FROM movie_house
+                            WHERE film LIKE "%' . $titreFilm . '%" AND team = "' . $equipe . '"');
 
-    // Requête
-    global $bdd;
+        while ($data = $req->fetch())
+        {
+            // Instanciation d'un objet Movie à partir des données remontées de la bdd
+            $film = Movie::withData($data);
 
-    $req = $bdd->prepare('UPDATE success
-                          SET level         = :level,
-                              order_success = :order_success,
-                              defined       = :defined,
-                              unicity       = :unicity,
-                              mission       = :mission,
-                              title         = :title,
-                              description   = :description,
-                              limit_success = :limit_success,
-                              explanation   = :explanation
-                          WHERE id = ' . $idSuccess);
+            // On ajoute la ligne au tableau
+            array_push($listeFilm, $film);
+        }
 
-    $req->execute($success);
+        $req->closeCursor();
 
-    $req->closeCursor();
-  }
+        // Retour
+        return $listeFilm;
+    }
 
-  // PHYSIQUE : Mise à jour valeur succès utilisateur
-  // RETOUR : Aucun
-  function physiqueUpdateSuccessUser($reference, $identifiant, $value)
-  {
-    // Requête
-    global $bdd;
+    // PHYSIQUE : Récupération données mission
+    // RETOUR : Objet Mission
+    function physiqueDonneesMission($reference)
+    {
+        // Requête
+        global $bdd;
 
-    $req = $bdd->prepare('UPDATE success_users
-                          SET value = :value
-                          WHERE reference = "' . $reference . '" AND identifiant = "' . $identifiant . '"');
+        $req = $bdd->query('SELECT *
+                            FROM missions
+                            WHERE reference = "' . $reference . '"');
 
-    $req->execute(array(
-      'value' => $value
-    ));
+        $data = $req->fetch();
 
-    $req->closeCursor();
-  }
+        // Instanciation d'un objet Mission à partir des données remontées de la bdd
+        $mission = Mission::withData($data);
 
-  // PHYSIQUE : Rénumérotation des id
-  // RETOUR : Aucun
-  function physiqueRenumerotationSuccess()
-  {
-    // Requête
-    global $bdd;
+        $req->closeCursor();
 
-    $req = $bdd->exec('SET @new_id = 0;
-                       UPDATE success_users
-                       SET id = (@new_id := @new_id + 1);
-                       ALTER TABLE success_users
-                       AUTO_INCREMENT = 1;');
-  }
+        // Retour
+        return $mission;
+    }
 
-  /****************************************************************************/
-  /********************************** DELETE **********************************/
-  /****************************************************************************/
-  // PHYSIQUE : Suppression données utilisateurs d'un succès
-  // RETOUR : Aucun
-  function physiqueDeleteSuccessUsers($reference)
-  {
-    // Requête
-    global $bdd;
+    /****************************************************************************/
+    /********************************** INSERT **********************************/
+    /****************************************************************************/
+    // PHYSIQUE : Insertion nouveau succès
+    // RETOUR : Aucun
+    function physiqueInsertionSuccess($success)
+    {
+        // Requête
+        global $bdd;
 
-    $req = $bdd->exec('DELETE FROM success_users
-                       WHERE reference = "' . $reference . '"');
-  }
+        $req = $bdd->prepare('INSERT INTO success(reference,
+                                                  level,
+                                                  order_success,
+                                                  defined,
+                                                  unicity,
+                                                  mission,
+                                                  title,
+                                                  description,
+                                                  limit_success,
+                                                  explanation)
+                                          VALUES(:reference,
+                                                 :level,
+                                                 :order_success,
+                                                 :defined,
+                                                 :unicity,
+                                                 :mission,
+                                                 :title,
+                                                 :description,
+                                                 :limit_success,
+                                                 :explanation)');
 
-  // PHYSIQUE : Suppression succès
-  // RETOUR : Aucun
-  function physiqueDeleteSuccess($reference)
-  {
-    // Requête
-    global $bdd;
+        $req->execute($success);
 
-    $req = $bdd->exec('DELETE FROM success
-                       WHERE reference = "' . $reference . '"');
-  }
+        $req->closeCursor();
+    }
 
-  // PHYSIQUE : Suppression des succès (sauf exceptions)
-  // RETOUR : Aucun
-  function physiqueDeleteSuccessAdmin()
-  {
-    // Requête
-    global $bdd;
+    // PHYSIQUE : Insertion valeur succès utilisateur
+    // RETOUR : Aucun
+    function physiqueInsertionSuccessUser($successUser)
+    {
+        // Requête
+        global $bdd;
 
-    $req = $bdd->exec('DELETE FROM success_users
-                       WHERE reference != "beginning"
-                         AND reference != "developper"
-                         AND reference != "padawan"
-                         AND reference != "greedy"
-                         AND reference != "restaurant-finder"');
-  }
+        $req = $bdd->prepare('INSERT INTO success_users(reference,
+                                                        identifiant,
+                                                        value)
+                                                VALUES(:reference,
+                                                       :identifiant,
+                                                       :value)');
 
-  // PHYSIQUE : Suppression succès valeur nulle
-  // RETOUR : Aucun
-  function physiqueDeleteSuccessNoValue()
-  {
-    // Requête
-    global $bdd;
+        $req->execute($successUser);
 
-    $req = $bdd->exec('DELETE FROM success_users
-                       WHERE value = 0');
+        $req->closeCursor();
+    }
 
-  }
+    /****************************************************************************/
+    /********************************** UPDATE **********************************/
+    /****************************************************************************/
+    // PHYSIQUE : Mise à jour succès
+    // RETOUR : Aucun
+    function physiqueUpdateSuccess($success)
+    {
+        // Initialisations
+        $idSuccess = $success['id'];
+        unset($success['id']);
+
+        // Requête
+        global $bdd;
+
+        $req = $bdd->prepare('UPDATE success
+                              SET level         = :level,
+                                  order_success = :order_success,
+                                  defined       = :defined,
+                                  unicity       = :unicity,
+                                  mission       = :mission,
+                                  title         = :title,
+                                  description   = :description,
+                                  limit_success = :limit_success,
+                                  explanation   = :explanation
+                              WHERE id = ' . $idSuccess);
+
+        $req->execute($success);
+
+        $req->closeCursor();
+    }
+
+    // PHYSIQUE : Mise à jour valeur succès utilisateur
+    // RETOUR : Aucun
+    function physiqueUpdateSuccessUser($reference, $identifiant, $value)
+    {
+        // Requête
+        global $bdd;
+
+        $req = $bdd->prepare('UPDATE success_users
+                              SET value = :value
+                              WHERE reference = "' . $reference . '" AND identifiant = "' . $identifiant . '"');
+
+        $req->execute(array(
+            'value' => $value
+        ));
+
+        $req->closeCursor();
+    }
+
+    // PHYSIQUE : Rénumérotation des id
+    // RETOUR : Aucun
+    function physiqueRenumerotationSuccess()
+    {
+        // Requête
+        global $bdd;
+
+        $req = $bdd->exec('SET @new_id = 0;
+                           UPDATE success_users
+                           SET id = (@new_id := @new_id + 1);
+                           ALTER TABLE success_users
+                           AUTO_INCREMENT = 1;');
+    }
+
+    /****************************************************************************/
+    /********************************** DELETE **********************************/
+    /****************************************************************************/
+    // PHYSIQUE : Suppression données utilisateurs d'un succès
+    // RETOUR : Aucun
+    function physiqueDeleteSuccessUsers($reference)
+    {
+        // Requête
+        global $bdd;
+
+        $req = $bdd->exec('DELETE FROM success_users
+                           WHERE reference = "' . $reference . '"');
+    }
+
+    // PHYSIQUE : Suppression succès
+    // RETOUR : Aucun
+    function physiqueDeleteSuccess($reference)
+    {
+        // Requête
+        global $bdd;
+
+        $req = $bdd->exec('DELETE FROM success
+                           WHERE reference = "' . $reference . '"');
+    }
+
+    // PHYSIQUE : Suppression des succès (sauf exceptions)
+    // RETOUR : Aucun
+    function physiqueDeleteSuccessAdmin()
+    {
+        // Requête
+        global $bdd;
+
+        $req = $bdd->exec('DELETE FROM success_users
+                           WHERE reference != "beginning"
+                             AND reference != "developper"
+                             AND reference != "padawan"
+                             AND reference != "greedy"
+                             AND reference != "restaurant-finder"');
+    }
+
+    // PHYSIQUE : Suppression succès valeur nulle
+    // RETOUR : Aucun
+    function physiqueDeleteSuccessNoValue()
+    {
+        // Requête
+        global $bdd;
+
+        $req = $bdd->exec('DELETE FROM success_users
+                           WHERE value = 0');
+    }
 ?>
