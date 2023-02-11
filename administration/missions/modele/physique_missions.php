@@ -1,289 +1,289 @@
 <?php
-  include_once('../../includes/functions/appel_bdd.php');
+    include_once('../../includes/functions/appel_bdd.php');
 
-  /****************************************************************************/
-  /********************************** SELECT **********************************/
-  /****************************************************************************/
-  // PHYSIQUE : Lecture liste des missions
-  // RETOUR : Liste missions
-  function physiqueListeMissions()
-  {
-    // Initialisations
-    $listeMissions = array();
-
-    // Requête
-    global $bdd;
-
-    $req = $bdd->query('SELECT *
-                        FROM missions');
-
-    while ($data = $req->fetch())
+    /****************************************************************************/
+    /********************************** SELECT **********************************/
+    /****************************************************************************/
+    // PHYSIQUE : Lecture liste des missions
+    // RETOUR : Liste missions
+    function physiqueListeMissions()
     {
-      // Instanciation d'un objet Mission à partir des données remontées de la bdd
-      $mission = Mission::withData($data);
+        // Initialisations
+        $listeMissions = array();
 
-      // On ajoute la ligne au tableau
-      array_push($listeMissions, $mission);
+        // Requête
+        global $bdd;
+
+        $req = $bdd->query('SELECT *
+                            FROM missions');
+
+        while ($data = $req->fetch())
+        {
+            // Instanciation d'un objet Mission à partir des données remontées de la bdd
+            $mission = Mission::withData($data);
+
+            // On ajoute la ligne au tableau
+            array_push($listeMissions, $mission);
+        }
+
+        $req->closeCursor();
+
+        // Retour
+        return $listeMissions;
     }
 
-    $req->closeCursor();
-
-    // Retour
-    return $listeMissions;
-  }
-
-  // PHYSIQUE : Lecture des détails d'une mission
-  // RETOUR : Objet mission
-  function physiqueMission($idMission)
-  {
-    // Requête
-    global $bdd;
-
-    $req = $bdd->query('SELECT *
-                        FROM missions
-                        WHERE id = ' . $idMission);
-
-    $data = $req->fetch();
-
-    // Instanciation d'un objet Mission à partir des données remontées de la bdd
-    $mission = Mission::withData($data);
-
-    $req->closeCursor();
-
-    // Retour
-    return $mission;
-  }
-
-  // PHYSIQUE : Lecture des participants d'une mission
-  // RETOUR : Liste des utilisateurs
-  function physiqueUsersMission($idMission)
-  {
-    // Initialisations
-    $listeUsersParEquipes = array();
-
-    // Requête
-    global $bdd;
-
-    $req = $bdd->query('SELECT id, team, identifiant
-                        FROM missions_users
-                        WHERE id_mission = ' . $idMission . '
-                        GROUP BY identifiant
-                        ORDER BY team ASC, identifiant ASC');
-
-    while ($data = $req->fetch())
+    // PHYSIQUE : Lecture des détails d'une mission
+    // RETOUR : Objet mission
+    function physiqueMission($idMission)
     {
-      // Récupération des identifiants
-      $user = new ParticipantMission();
+        // Requête
+        global $bdd;
 
-      $user->setIdentifiant($data['identifiant']);
-      $user->setTeam($data['team']);
+        $req = $bdd->query('SELECT *
+                            FROM missions
+                            WHERE id = ' . $idMission);
 
-      // On ajoute la ligne au tableau
-      if (!isset($listeUsersParEquipes[$user->getTeam()]))
-        $listeUsersParEquipes[$user->getTeam()] = array();
+        $data = $req->fetch();
 
-      array_push($listeUsersParEquipes[$user->getTeam()], $user);
+        // Instanciation d'un objet Mission à partir des données remontées de la bdd
+        $mission = Mission::withData($data);
+
+        $req->closeCursor();
+
+        // Retour
+        return $mission;
     }
 
-    $req->closeCursor();
-
-    // Retour
-    return $listeUsersParEquipes;
-  }
-
-  // PHYSIQUE : Lecture des informations utilisateur
-  // RETOUR : Pseudo utilisateur
-  function physiquePseudoUser($identifiant)
-  {
-    // Requête
-    global $bdd;
-
-    $req = $bdd->query('SELECT id, identifiant, pseudo
-                        FROM users
-                        WHERE identifiant = "' . $identifiant . '"');
-
-    $data = $req->fetch();
-
-    $pseudo = $data['pseudo'];
-
-    $req->closeCursor();
-
-    // Retour
-    return $pseudo;
-  }
-
-  // PHYSIQUE : Lecture des informations utilisateur de la mission
-  // RETOUR : Total utilisateur
-  function physiqueTotalUser($idMission, $identifiant)
-  {
-    // Initialisations
-    $totalMission = 0;
-
-    // Requête
-    global $bdd;
-
-    $req = $bdd->query('SELECT *
-                        FROM missions_users
-                        WHERE id_mission = ' . $idMission . ' AND identifiant = "' . $identifiant . '"');
-
-    while ($data = $req->fetch())
+    // PHYSIQUE : Lecture des participants d'une mission
+    // RETOUR : Liste des utilisateurs
+    function physiqueUsersMission($idMission)
     {
-      $totalMission += $data['avancement'];
+        // Initialisations
+        $listeUsersParEquipes = array();
+
+        // Requête
+        global $bdd;
+
+        $req = $bdd->query('SELECT id, team, identifiant
+                            FROM missions_users
+                            WHERE id_mission = ' . $idMission . '
+                            GROUP BY identifiant
+                            ORDER BY team ASC, identifiant ASC');
+
+        while ($data = $req->fetch())
+        {
+            // Récupération des identifiants
+            $user = new ParticipantMission();
+
+            $user->setIdentifiant($data['identifiant']);
+            $user->setTeam($data['team']);
+
+            // On ajoute la ligne au tableau
+            if (!isset($listeUsersParEquipes[$user->getTeam()]))
+                $listeUsersParEquipes[$user->getTeam()] = array();
+
+            array_push($listeUsersParEquipes[$user->getTeam()], $user);
+        }
+
+        $req->closeCursor();
+
+        // Retour
+        return $listeUsersParEquipes;
     }
 
-    $req->closeCursor();
+    // PHYSIQUE : Lecture des informations utilisateur
+    // RETOUR : Pseudo utilisateur
+    function physiquePseudoUser($identifiant)
+    {
+        // Requête
+        global $bdd;
 
-    // Retour
-    return $totalMission;
-  }
+        $req = $bdd->query('SELECT id, identifiant, pseudo
+                            FROM users
+                            WHERE identifiant = "' . $identifiant . '"');
 
-  // PHYSIQUE : Lecture du nombre de références existantes
-  // RETOUR : Booléen
-  function physiqueReferenceUnique($reference)
-  {
-    // Initialisations
-    $isUnique = true;
+        $data = $req->fetch();
 
-    // Requête
-    global $bdd;
+        $pseudo = $data['pseudo'];
 
-    $req = $bdd->query('SELECT COUNT(*) AS nombreReferences
-                        FROM missions
-                        WHERE reference = "' . $reference . '"');
+        $req->closeCursor();
 
-    $data = $req->fetch();
+        // Retour
+        return $pseudo;
+    }
 
-    if ($data['nombreReferences'] > 0)
-      $isUnique = false;
+    // PHYSIQUE : Lecture des informations utilisateur de la mission
+    // RETOUR : Total utilisateur
+    function physiqueTotalUser($idMission, $identifiant)
+    {
+        // Initialisations
+        $totalMission = 0;
 
-    $req->closeCursor();
+        // Requête
+        global $bdd;
 
-    // Retour
-    return $isUnique;
-  }
+        $req = $bdd->query('SELECT *
+                            FROM missions_users
+                            WHERE id_mission = ' . $idMission . ' AND identifiant = "' . $identifiant . '"');
 
-  // PHYSIQUE : Lecture des données d'une équipe
-  // RETOUR : Objet Team
-  function physiqueEquipeParticipants($equipe)
-  {
-    // Requête
-    global $bdd;
+        while ($data = $req->fetch())
+        {
+            $totalMission += $data['avancement'];
+        }
 
-    $req = $bdd->query('SELECT *
-                        FROM teams
-                        WHERE reference = "' . $equipe . '"');
+        $req->closeCursor();
 
-    $data = $req->fetch();
+        // Retour
+        return $totalMission;
+    }
 
-    // Instanciation d'un objet Team à partir des données remontées de la bdd
-    $team = Team::withData($data);
+    // PHYSIQUE : Lecture du nombre de références existantes
+    // RETOUR : Booléen
+    function physiqueReferenceUnique($reference)
+    {
+        // Initialisations
+        $isUnique = true;
 
-    $req->closeCursor();
+        // Requête
+        global $bdd;
 
-    // Retour
-    return $team;
-  }
+        $req = $bdd->query('SELECT COUNT(*) AS nombreReferences
+                            FROM missions
+                            WHERE reference = "' . $reference . '"');
 
-  /****************************************************************************/
-  /********************************** INSERT **********************************/
-  /****************************************************************************/
-  // PHYSIQUE : Insertion nouvelle mission
-  // RETOUR : Aucun
-  function physiqueInsertionMission($mission)
-  {
-    // Requête
-    global $bdd;
+        $data = $req->fetch();
 
-    $req = $bdd->prepare('INSERT INTO missions(mission,
-                                               reference,
-                                               date_deb,
-                                               date_fin,
-                                               heure,
-                                               objectif,
-                                               description,
-                                               explications,
-                                               conclusion)
-                                       VALUES(:mission,
-                                              :reference,
-                                              :date_deb,
-                                              :date_fin,
-                                              :heure,
-                                              :objectif,
-                                              :description,
-                                              :explications,
-                                              :conclusion)');
+        if ($data['nombreReferences'] > 0)
+            $isUnique = false;
 
-    $req->execute($mission);
+        $req->closeCursor();
 
-    $req->closeCursor();
-  }
+        // Retour
+        return $isUnique;
+    }
 
-  /****************************************************************************/
-  /********************************** UPDATE **********************************/
-  /****************************************************************************/
-  // PHYSIQUE : Mise à jour mission existante
-  // RETOUR : Aucun
-  function physiqueUpdateMission($idMission, $mission)
-  {
-    // Requête
-    global $bdd;
+    // PHYSIQUE : Lecture des données d'une équipe
+    // RETOUR : Objet Team
+    function physiqueEquipeParticipants($equipe)
+    {
+        // Requête
+        global $bdd;
 
-    $req = $bdd->prepare('UPDATE missions
-                          SET mission      = :mission,
-                              date_deb     = :date_deb,
-                              date_fin     = :date_fin,
-                              heure        = :heure,
-                              objectif     = :objectif,
-                              description  = :description,
-                              explications = :explications,
-                              conclusion   = :conclusion
-                          WHERE id = ' . $idMission);
+        $req = $bdd->query('SELECT *
+                            FROM teams
+                            WHERE reference = "' . $equipe . '"');
 
-    $req->execute($mission);
+        $data = $req->fetch();
 
-    $req->closeCursor();
-  }
+        // Instanciation d'un objet Team à partir des données remontées de la bdd
+        $team = Team::withData($data);
 
-  // PHYSIQUE : Mise à jour succès lié
-  // RETOUR : Aucun
-  function physiqueUpdateSuccesMission($referenceMission)
-  {
-    // Requête
-    global $bdd;
+        $req->closeCursor();
 
-    $req = $bdd->prepare('UPDATE success
-                          SET mission = :mission
-                          WHERE mission = "' . $referenceMission . '"');
+        // Retour
+        return $team;
+    }
 
-    $req->execute(array(
-      'mission' => ''
-    ));
+    /****************************************************************************/
+    /********************************** INSERT **********************************/
+    /****************************************************************************/
+    // PHYSIQUE : Insertion nouvelle mission
+    // RETOUR : Aucun
+    function physiqueInsertionMission($mission)
+    {
+        // Requête
+        global $bdd;
 
-    $req->closeCursor();
-  }
+        $req = $bdd->prepare('INSERT INTO missions(mission,
+                                                   reference,
+                                                   date_deb,
+                                                   date_fin,
+                                                   heure,
+                                                   objectif,
+                                                   description,
+                                                   explications,
+                                                   conclusion)
+                                           VALUES(:mission,
+                                                  :reference,
+                                                  :date_deb,
+                                                  :date_fin,
+                                                  :heure,
+                                                  :objectif,
+                                                  :description,
+                                                  :explications,
+                                                  :conclusion)');
 
-  /****************************************************************************/
-  /********************************** DELETE **********************************/
-  /****************************************************************************/
-  // PHYSIQUE : Suppression mission
-  // RETOUR : Aucun
-  function physiqueDeleteMission($idMission)
-  {
-    // Requête
-    global $bdd;
+        $req->execute($mission);
 
-    $req = $bdd->exec('DELETE FROM missions
-                       WHERE id = ' . $idMission);
-  }
+        $req->closeCursor();
+    }
 
-  // PHYSIQUE : Suppression participations mission
-  // RETOUR : Aucun
-  function physiqueDeleteMissionUsers($idMission)
-  {
-    // Requête
-    global $bdd;
+    /****************************************************************************/
+    /********************************** UPDATE **********************************/
+    /****************************************************************************/
+    // PHYSIQUE : Mise à jour mission existante
+    // RETOUR : Aucun
+    function physiqueUpdateMission($idMission, $mission)
+    {
+        // Requête
+        global $bdd;
 
-    $req = $bdd->exec('DELETE FROM missions_users
-                       WHERE id_mission = ' . $idMission);
-  }
+        $req = $bdd->prepare('UPDATE missions
+                              SET mission      = :mission,
+                                  date_deb     = :date_deb,
+                                  date_fin     = :date_fin,
+                                  heure        = :heure,
+                                  objectif     = :objectif,
+                                  description  = :description,
+                                  explications = :explications,
+                                  conclusion   = :conclusion
+                              WHERE id = ' . $idMission);
+
+        $req->execute($mission);
+
+        $req->closeCursor();
+    }
+
+    // PHYSIQUE : Mise à jour succès lié
+    // RETOUR : Aucun
+    function physiqueUpdateSuccesMission($referenceMission)
+    {
+        // Requête
+        global $bdd;
+
+        $req = $bdd->prepare('UPDATE success
+                              SET mission = :mission
+                              WHERE mission = "' . $referenceMission . '"');
+
+        $req->execute(array(
+            'mission' => ''
+        ));
+
+        $req->closeCursor();
+    }
+
+    /****************************************************************************/
+    /********************************** DELETE **********************************/
+    /****************************************************************************/
+    // PHYSIQUE : Suppression mission
+    // RETOUR : Aucun
+    function physiqueDeleteMission($idMission)
+    {
+        // Requête
+        global $bdd;
+
+        $req = $bdd->exec('DELETE FROM missions
+                           WHERE id = ' . $idMission);
+    }
+
+    // PHYSIQUE : Suppression participations mission
+    // RETOUR : Aucun
+    function physiqueDeleteMissionUsers($idMission)
+    {
+        // Requête
+        global $bdd;
+
+        $req = $bdd->exec('DELETE FROM missions_users
+                           WHERE id_mission = ' . $idMission);
+    }
 ?>

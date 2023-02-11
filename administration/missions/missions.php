@@ -1,169 +1,169 @@
 <?php
-  /*****************************
-  **** Gestion des missions ****
-  ******************************
-  Fonctionnalités :
-  - Création des missions
-  - Modification des missions
-  - Suppression des missions
-  - Consultation des classements
-  *****************************/
+    /*****************************
+    **** Gestion des missions ****
+    ******************************
+    Fonctionnalités :
+    - Création des missions
+    - Modification des missions
+    - Suppression des missions
+    - Consultation des classements
+    *****************************/
 
-  // Fonctions communes
-  include_once('../../includes/functions/metier_commun.php');
-  include_once('../../includes/functions/physique_commun.php');
-  include_once('../../includes/functions/fonctions_dates.php');
-  include_once('../../includes/functions/fonctions_regex.php');
+    // Fonctions communes
+    include_once('../../includes/functions/metier_commun.php');
+    include_once('../../includes/functions/physique_commun.php');
+    include_once('../../includes/functions/fonctions_dates.php');
+    include_once('../../includes/functions/fonctions_regex.php');
 
-  // Contrôles communs Administrateur
-  controlsAdmin();
+    // Contrôles communs Administrateur
+    controlsAdmin();
 
-  // Modèle de données
-  include_once('modele/metier_missions.php');
-  include_once('modele/controles_missions.php');
-  include_once('modele/physique_missions.php');
+    // Modèle de données
+    include_once('modele/metier_missions.php');
+    include_once('modele/controles_missions.php');
+    include_once('modele/physique_missions.php');
 
-  // Appels métier
-  switch ($_GET['action'])
-  {
-    case 'goConsulter':
-      // Initialisation de la sauvegarde en session et récupération erreur
-      $erreurMission = initializeSaveSession();
+    // Appels métier
+    switch ($_GET['action'])
+    {
+        case 'goConsulter':
+            // Initialisation de la sauvegarde en session et récupération erreur
+            $erreurMission = initializeSaveSession();
 
-      // Récupération de la liste des missions
-      $listeMissions = getMissions();
-      break;
+            // Récupération de la liste des missions
+            $listeMissions = getMissions();
+            break;
 
-    case 'goAjouter':
-      // Initialisation de la sauvegarde en session et récupération erreur
-      $erreurMission = initializeSaveSession();
+        case 'goAjouter':
+            // Initialisation de la sauvegarde en session et récupération erreur
+            $erreurMission = initializeSaveSession();
 
-      // Initialisation de l'écran d'ajout de mission
-      if (isset($erreurMission) AND $erreurMission == true)
-      {
-        $detailsMission = initialisationErreurMission($_SESSION['save']['new_mission']['post'], NULL);
-        unset($erreurMission);
-      }
-      else
-        $detailsMission = initialisationAjoutMission();
-      break;
+            // Initialisation de l'écran d'ajout de mission
+            if (isset($erreurMission) AND $erreurMission == true)
+            {
+                $detailsMission = initialisationErreurMission($_SESSION['save']['new_mission']['post'], NULL);
+                unset($erreurMission);
+            }
+            else
+                $detailsMission = initialisationAjoutMission();
+            break;
 
-    case 'goModifier':
-      // Contrôle si l'id est renseignée et numérique
-      if (!isset($_GET['id_mission']) OR !is_numeric($_GET['id_mission']))
-        header('location: missions.php?action=goConsulter');
-      else
-      {
-        // Initialisation de la sauvegarde en session et récupération erreur
-        $erreurMission = initializeSaveSession();
+        case 'goModifier':
+            // Contrôle si l'id est renseignée et numérique
+            if (!isset($_GET['id_mission']) OR !is_numeric($_GET['id_mission']))
+                header('location: missions.php?action=goConsulter');
+            else
+            {
+                // Initialisation de la sauvegarde en session et récupération erreur
+                $erreurMission = initializeSaveSession();
 
-        // Initialisation de l'écran de modification de mission
-        if (isset($erreurMission) AND $erreurMission == true)
-        {
-          $detailsMission = initialisationErreurMission($_SESSION['save']['old_mission']['post'], $_GET['id_mission']);
-          unset($erreurMission);
-        }
-        else
-          $detailsMission = initialisationModificationMission($_GET['id_mission']);
+                // Initialisation de l'écran de modification de mission
+                if (isset($erreurMission) AND $erreurMission == true)
+                {
+                    $detailsMission = initialisationErreurMission($_SESSION['save']['old_mission']['post'], $_GET['id_mission']);
+                    unset($erreurMission);
+                }
+                else
+                    $detailsMission = initialisationModificationMission($_GET['id_mission']);
 
-        // Récupération des succès de la mission
-        $succesMission = getSuccesMission($detailsMission);
+                // Récupération des succès de la mission
+                $succesMission = getSuccesMission($detailsMission);
 
-        // Récupération du classement des participants
-        $listeParticipantsParEquipes = getParticipants($_GET['id_mission']);
+                // Récupération du classement des participants
+                $listeParticipantsParEquipes = getParticipants($_GET['id_mission']);
 
-        // Récupération des équipes des participants
-        $listeEquipesParticipants = getEquipesParticipants($listeParticipantsParEquipes);
-      }
-      break;
+                // Récupération des équipes des participants
+                $listeEquipesParticipants = getEquipesParticipants($listeParticipantsParEquipes);
+            }
+            break;
 
-    case 'doAjouter':
-      // Ajout d'une mission
-      $erreurMission = insertMission($_POST, $_FILES);
-      break;
+        case 'doAjouter':
+            // Ajout d'une mission
+            $erreurMission = insertMission($_POST, $_FILES);
+            break;
 
-    case 'doModifier':
-      // Modification d'une mission
-      $idMission = updateMission($_POST, $_FILES);
-      break;
+        case 'doModifier':
+            // Modification d'une mission
+            $idMission = updateMission($_POST, $_FILES);
+            break;
 
-    case 'doSupprimer':
-      // Suppression d'une mission
-      deleteMission($_POST);
-      break;
+        case 'doSupprimer':
+            // Suppression d'une mission
+            deleteMission($_POST);
+            break;
 
-    default:
-      // Contrôle action renseignée URL
-      header('location: missions.php?action=goConsulter');
-      break;
-  }
+        default:
+            // Contrôle action renseignée URL
+            header('location: missions.php?action=goConsulter');
+            break;
+    }
 
-  // Traitements de sécurité avant la vue
-  switch ($_GET['action'])
-  {
-    case 'goConsulter':
-      foreach ($listeMissions as $mission)
-      {
-        Mission::secureData($mission);
-      }
-      break;
+    // Traitements de sécurité avant la vue
+    switch ($_GET['action'])
+    {
+        case 'goConsulter':
+            foreach ($listeMissions as $mission)
+            {
+                Mission::secureData($mission);
+            }
+            break;
 
-    case 'goModifier':
-      Mission::secureData($detailsMission);
+        case 'goModifier':
+            Mission::secureData($detailsMission);
 
-      foreach ($succesMission as $succes)
-      {
-        Success::secureData($succes);
-      }
-      
-      foreach ($listeParticipantsParEquipes as $participantsParEquipes)
-      {
-        foreach ($participantsParEquipes as $participant)
-        {
-          ParticipantMission::secureData($participant);
-        }
-      }
+            foreach ($succesMission as $succes)
+            {
+                Success::secureData($succes);
+            }
 
-      foreach ($listeEquipesParticipants as $equipe)
-      {
-        Team::secureData($equipe);
-      }
-      break;
+            foreach ($listeParticipantsParEquipes as $participantsParEquipes)
+            {
+                foreach ($participantsParEquipes as $participant)
+                {
+                    ParticipantMission::secureData($participant);
+                }
+            }
 
-    case 'goAjouter':
-      Mission::secureData($detailsMission);
-      break;
+            foreach ($listeEquipesParticipants as $equipe)
+            {
+                Team::secureData($equipe);
+            }
+            break;
 
-    case 'doAjouter':
-    case 'doModifier':
-    case 'doSupprimer':
-    default:
-      break;
-  }
+        case 'goAjouter':
+            Mission::secureData($detailsMission);
+            break;
 
-  // Redirection affichage
-  switch ($_GET['action'])
-  {
-    case 'doAjouter':
-      if ($erreurMission == true)
-        header('location: missions.php?action=goAjouter');
-      else
-        header('location: missions.php?action=goConsulter');
-      break;
+        case 'doAjouter':
+        case 'doModifier':
+        case 'doSupprimer':
+        default:
+            break;
+    }
 
-    case 'doModifier':
-      header('location: missions.php?id_mission=' . $idMission . '&action=goModifier');
-      break;
+    // Redirection affichage
+    switch ($_GET['action'])
+    {
+        case 'doAjouter':
+            if ($erreurMission == true)
+                header('location: missions.php?action=goAjouter');
+            else
+                header('location: missions.php?action=goConsulter');
+            break;
 
-    case 'doSupprimer':
-      header('location: missions.php?action=goConsulter');
-      break;
+        case 'doModifier':
+            header('location: missions.php?id_mission=' . $idMission . '&action=goModifier');
+            break;
 
-    case 'goAjouter':
-    case 'goModifier':
-    case 'goConsulter':
-    default:
-      include_once('vue/vue_missions.php');
-      break;
-  }
+        case 'doSupprimer':
+            header('location: missions.php?action=goConsulter');
+            break;
+
+        case 'goAjouter':
+        case 'goModifier':
+        case 'goConsulter':
+        default:
+            include_once('vue/vue_missions.php');
+            break;
+    }
 ?>
