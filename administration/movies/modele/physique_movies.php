@@ -1,191 +1,191 @@
 <?php
-  include_once('../../includes/functions/appel_bdd.php');
+    include_once('../../includes/functions/appel_bdd.php');
 
-  /****************************************************************************/
-  /********************************** SELECT **********************************/
-  /****************************************************************************/
-  // PHYSIQUE : Lecture de la liste des équipes activées
-  // RETOUR : Liste des équipes
-  function physiqueListeEquipes()
-  {
-    // Initialisations
-    $listeEquipes = array();
-
-    // Requête
-    global $bdd;
-
-    $req = $bdd->query('SELECT *
-                        FROM teams
-                        WHERE activation = "Y"
-                        ORDER BY team ASC');
-
-    while ($data = $req->fetch())
+    /****************************************************************************/
+    /********************************** SELECT **********************************/
+    /****************************************************************************/
+    // PHYSIQUE : Lecture de la liste des équipes activées
+    // RETOUR : Liste des équipes
+    function physiqueListeEquipes()
     {
-      // Instanciation d'un objet Team à partir des données remontées de la bdd
-      $equipe = Team::withData($data);
+        // Initialisations
+        $listeEquipes = array();
 
-      // On ajoute la ligne au tableau
-      $listeEquipes[$equipe->getReference()] = $equipe;
+        // Requête
+        global $bdd;
+
+        $req = $bdd->query('SELECT *
+                            FROM teams
+                            WHERE activation = "Y"
+                            ORDER BY team ASC');
+
+        while ($data = $req->fetch())
+        {
+            // Instanciation d'un objet Team à partir des données remontées de la bdd
+            $equipe = Team::withData($data);
+
+            // On ajoute la ligne au tableau
+            $listeEquipes[$equipe->getReference()] = $equipe;
+        }
+
+        $req->closeCursor();
+
+        // Retour
+        return $listeEquipes;
     }
 
-    $req->closeCursor();
-
-    // Retour
-    return $listeEquipes;
-  }
-
-  // PHYSIQUE : Lecture liste des films à supprimer
-  // RETOUR : Liste des films à supprimer
-  function physiqueFilmsToDelete()
-  {
-    // Initialisations
-    $listeFilmsToDelete = array();
-
-    // Requête
-    global $bdd;
-
-    $req = $bdd->query('SELECT id, film, to_delete, team, identifiant_add, identifiant_del, poster
-                        FROM movie_house
-                        WHERE to_delete = "Y"
-                        ORDER BY id ASC');
-
-    while ($data = $req->fetch())
+    // PHYSIQUE : Lecture liste des films à supprimer
+    // RETOUR : Liste des films à supprimer
+    function physiqueFilmsToDelete()
     {
-      // Instanciation d'un objet Movie à partir des données remontées de la bdd
-      $film = Movie::withData($data);
+        // Initialisations
+        $listeFilmsToDelete = array();
 
-      // On ajoute la ligne au tableau
-      array_push($listeFilmsToDelete, $film);
+        // Requête
+        global $bdd;
+
+        $req = $bdd->query('SELECT id, film, to_delete, team, identifiant_add, identifiant_del, poster
+                            FROM movie_house
+                            WHERE to_delete = "Y"
+                            ORDER BY id ASC');
+
+        while ($data = $req->fetch())
+        {
+            // Instanciation d'un objet Movie à partir des données remontées de la bdd
+            $film = Movie::withData($data);
+
+            // On ajoute la ligne au tableau
+            array_push($listeFilmsToDelete, $film);
+        }
+
+        $req->closeCursor();
+
+        // Retour
+        return $listeFilmsToDelete;
     }
 
-    $req->closeCursor();
+    // PHYSIQUE : Lecture des informations utilisateur
+    // RETOUR : Pseudo utilisateur
+    function physiquePseudoUser($identifiant)
+    {
+        // Requête
+        global $bdd;
 
-    // Retour
-    return $listeFilmsToDelete;
-  }
+        $req = $bdd->query('SELECT id, identifiant, pseudo
+                            FROM users
+                            WHERE identifiant = "' . $identifiant . '"');
 
-  // PHYSIQUE : Lecture des informations utilisateur
-  // RETOUR : Pseudo utilisateur
-  function physiquePseudoUser($identifiant)
-  {
-    // Requête
-    global $bdd;
+        $data = $req->fetch();
 
-    $req = $bdd->query('SELECT id, identifiant, pseudo
-                        FROM users
-                        WHERE identifiant = "' . $identifiant . '"');
+        $pseudo = $data['pseudo'];
 
-    $data = $req->fetch();
+        $req->closeCursor();
 
-    $pseudo = $data['pseudo'];
+        // Retour
+        return $pseudo;
+    }
 
-    $req->closeCursor();
+    // PHYSIQUE : Comptage du nombre de participants
+    // RETOUR : Nombre de participants
+    function physiqueNombreParticipants($idFilm)
+    {
+        // Initialisations
+        $count = 0;
 
-    // Retour
-    return $pseudo;
-  }
+        // Requête
+        global $bdd;
 
-  // PHYSIQUE : Comptage du nombre de participants
-  // RETOUR : Nombre de participants
-  function physiqueNombreParticipants($idFilm)
-  {
-    // Initialisations
-    $count = 0;
+        $req = $bdd->query('SELECT COUNT(*) AS nombreUsers
+                            FROM movie_house_users
+                            WHERE id_film = ' . $idFilm);
 
-    // Requête
-    global $bdd;
+        $data = $req->fetch();
 
-    $req = $bdd->query('SELECT COUNT(*) AS nombreUsers
-                        FROM movie_house_users
-                        WHERE id_film = ' . $idFilm);
+        $count = $data['nombreUsers'];
 
-    $data = $req->fetch();
+        $req->closeCursor();
 
-    $count = $data['nombreUsers'];
+        // Retour
+        return $count;
+    }
 
-    $req->closeCursor();
+    // PHYSIQUE : Lecture identifiant ajout film
+    // RETOUR : Identifiant
+    function physiqueIdentifiantAjoutFilm($idFilm)
+    {
+        // Requête
+        global $bdd;
 
-    // Retour
-    return $count;
-  }
+        $req = $bdd->query('SELECT *
+                            FROM movie_house
+                            WHERE id = ' . $idFilm);
 
-  // PHYSIQUE : Lecture identifiant ajout film
-  // RETOUR : Identifiant
-  function physiqueIdentifiantAjoutFilm($idFilm)
-  {
-    // Requête
-    global $bdd;
+        $data = $req->fetch();
 
-    $req = $bdd->query('SELECT *
-                        FROM movie_house
-                        WHERE id = ' . $idFilm);
+        $identifiant = $data['identifiant_add'];
 
-    $data = $req->fetch();
+        $req->closeCursor();
 
-    $identifiant = $data['identifiant_add'];
+        // Retour
+        return $identifiant;
+    }
 
-    $req->closeCursor();
+    /****************************************************************************/
+    /********************************** UPDATE **********************************/
+    /****************************************************************************/
+    // PHYSIQUE : Mise à jour statut film
+    // RETOUR : Aucun
+    function physiqueResetFilm($idFilm, $toDelete, $identifiantDel)
+    {
+        // Requête
+        global $bdd;
 
-    // Retour
-    return $identifiant;
-  }
+        $req = $bdd->prepare('UPDATE movie_house
+                              SET to_delete = :to_delete,
+                                  identifiant_del = :identifiant_del
+                              WHERE id = ' . $idFilm);
 
-  /****************************************************************************/
-  /********************************** UPDATE **********************************/
-  /****************************************************************************/
-  // PHYSIQUE : Mise à jour statut film
-  // RETOUR : Aucun
-  function physiqueResetFilm($idFilm, $toDelete, $identifiantDel)
-  {
-    // Requête
-    global $bdd;
+        $req->execute(array(
+            'to_delete'       => $toDelete,
+            'identifiant_del' => $identifiantDel
+        ));
 
-    $req = $bdd->prepare('UPDATE movie_house
-                          SET to_delete = :to_delete,
-                              identifiant_del = :identifiant_del
-                          WHERE id = ' . $idFilm);
+        $req->closeCursor();
+    }
 
-    $req->execute(array(
-      'to_delete'       => $toDelete,
-      'identifiant_del' => $identifiantDel
-    ));
+    /****************************************************************************/
+    /********************************** DELETE **********************************/
+    /****************************************************************************/
+    // PHYSIQUE : Suppression avis film
+    // RETOUR : Aucun
+    function physiqueDeleteAvisFilms($idFilm)
+    {
+        // Requête
+        global $bdd;
 
-    $req->closeCursor();
-  }
+        $req = $bdd->exec('DELETE FROM movie_house_users
+                           WHERE id_film = ' . $idFilm);
+    }
 
-  /****************************************************************************/
-  /********************************** DELETE **********************************/
-  /****************************************************************************/
-  // PHYSIQUE : Suppression avis film
-  // RETOUR : Aucun
-  function physiqueDeleteAvisFilms($idFilm)
-  {
-    // Requête
-    global $bdd;
+    // PHYSIQUE : Suppression commentaires film
+    // RETOUR : Aucun
+    function physiqueDeleteCommentsFilms($idFilm)
+    {
+        // Requête
+        global $bdd;
 
-    $req = $bdd->exec('DELETE FROM movie_house_users
-                       WHERE id_film = ' . $idFilm);
-  }
+        $req = $bdd->exec('DELETE FROM movie_house_comments
+                           WHERE id_film = ' . $idFilm);
+    }
 
-  // PHYSIQUE : Suppression commentaires film
-  // RETOUR : Aucun
-  function physiqueDeleteCommentsFilms($idFilm)
-  {
-    // Requête
-    global $bdd;
+    // PHYSIQUE : Suppression film
+    // RETOUR : Aucun
+    function physiqueDeleteFilms($idFilm)
+    {
+        // Requête
+        global $bdd;
 
-    $req = $bdd->exec('DELETE FROM movie_house_comments
-                       WHERE id_film = ' . $idFilm);
-  }
-
-  // PHYSIQUE : Suppression film
-  // RETOUR : Aucun
-  function physiqueDeleteFilms($idFilm)
-  {
-    // Requête
-    global $bdd;
-
-    $req = $bdd->exec('DELETE FROM movie_house
-                       WHERE id = ' . $idFilm );
-  }
+        $req = $bdd->exec('DELETE FROM movie_house
+                           WHERE id = ' . $idFilm);
+    }
 ?>
