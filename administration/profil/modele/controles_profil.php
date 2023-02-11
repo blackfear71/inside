@@ -1,19 +1,19 @@
 <?php
-  // CONTROLE : Correspondance mot de passe
-  // RETOUR : Booléen
-  function controleCorrespondancePassword($saisie, $base)
-  {
-    // Initialisations
-    $control_ok = true;
-
-    // Contrôle
-    if ($saisie != $base)
+    // CONTROLE : Correspondance mot de passe
+    // RETOUR : Booléen
+    function controleCorrespondancePassword($saisie, $base)
     {
-      $_SESSION['alerts']['wrong_password'] = true;
-      $control_ok                           = false;
-    }
+        // Initialisations
+        $control_ok = true;
 
-    // Retour
-    return $control_ok;
-  }
+        // Contrôle
+        if ($saisie != $base)
+        {
+            $_SESSION['alerts']['wrong_password'] = true;
+            $control_ok                           = false;
+        }
+
+        // Retour
+        return $control_ok;
+    }
 ?>
