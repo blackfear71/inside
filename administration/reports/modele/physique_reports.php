@@ -1,169 +1,170 @@
 <?php
-  include_once('../../includes/functions/appel_bdd.php');
+    include_once('../../includes/functions/appel_bdd.php');
 
-  /****************************************************************************/
-  /********************************** SELECT **********************************/
-  /****************************************************************************/
-  // PHYSIQUE : Lecture données utilisateurs
-  // RETOUR : Aucun
-  function physiqueListeUsers()
-  {
-    // Initialisations
-    $listeUsers = array();
-
-    // Requête
-    global $bdd;
-
-    $req = $bdd->query('SELECT identifiant, pseudo, avatar
-                        FROM users');
-
-    $data = $req->fetch();
-
-    while ($data = $req->fetch())
+    /****************************************************************************/
+    /********************************** SELECT **********************************/
+    /****************************************************************************/
+    // PHYSIQUE : Lecture données utilisateurs
+    // RETOUR : Aucun
+    function physiqueListeUsers()
     {
-      $listeUsers[$data['identifiant']] = array('pseudo' => $data['pseudo'],
-                                                'avatar' => $data['avatar'],
-                                               );
+        // Initialisations
+        $listeUsers = array();
+
+        // Requête
+        global $bdd;
+
+        $req = $bdd->query('SELECT identifiant, pseudo, avatar
+                            FROM users');
+
+        $data = $req->fetch();
+
+        while ($data = $req->fetch())
+        {
+            $listeUsers[$data['identifiant']] = array(
+                'pseudo' => $data['pseudo'],
+                'avatar' => $data['avatar'],
+            );
+        }
+
+        $req->closeCursor();
+
+        // Retour
+        return $listeUsers;
     }
 
-    $req->closeCursor();
-
-    // Retour
-    return $listeUsers;
-  }
-
-  // PHYSIQUE : Lecture de la liste des équipes
-  // RETOUR : Liste des équipes
-  function physiqueListeEquipes()
-  {
-    // Initialisations
-    $listeEquipes = array();
-
-    // Requête
-    global $bdd;
-
-    $req = $bdd->query('SELECT *
-                        FROM teams
-                        WHERE activation = "Y"
-                        ORDER BY team ASC');
-
-    while ($data = $req->fetch())
+    // PHYSIQUE : Lecture de la liste des équipes
+    // RETOUR : Liste des équipes
+    function physiqueListeEquipes()
     {
-      // Instanciation d'un objet Team à partir des données remontées de la bdd
-      $equipe = Team::withData($data);
+        // Initialisations
+        $listeEquipes = array();
 
-      // On ajoute la ligne au tableau
-      $listeEquipes[$equipe->getReference()] = $equipe;
+        // Requête
+        global $bdd;
+
+        $req = $bdd->query('SELECT *
+                            FROM teams
+                            WHERE activation = "Y"
+                            ORDER BY team ASC');
+
+        while ($data = $req->fetch())
+        {
+            // Instanciation d'un objet Team à partir des données remontées de la bdd
+            $equipe = Team::withData($data);
+
+            // On ajoute la ligne au tableau
+            $listeEquipes[$equipe->getReference()] = $equipe;
+        }
+
+        $req->closeCursor();
+
+        // Retour
+        return $listeEquipes;
     }
 
-    $req->closeCursor();
-
-    // Retour
-    return $listeEquipes;
-  }
-
-  // PHYSIQUE : Lecture liste des rapports
-  // RETOUR : Liste rapports
-  function physiqueListeRapports($view, $type)
-  {
-    // Initialisations
-    $rapports = array();
-
-    // Requête
-    global $bdd;
-
-    switch ($view)
+    // PHYSIQUE : Lecture liste des rapports
+    // RETOUR : Liste rapports
+    function physiqueListeRapports($view, $type)
     {
-      case 'resolved':
+        // Initialisations
+        $rapports = array();
+
+        // Requête
+        global $bdd;
+
+        switch ($view)
+        {
+            case 'resolved':
+                $req = $bdd->query('SELECT *
+                                    FROM bugs
+                                    WHERE type = "' . $type . '" AND (resolved = "Y" OR resolved = "R")
+                                    ORDER BY date DESC, id DESC');
+                break;
+
+            case 'unresolved':
+                $req = $bdd->query('SELECT *
+                                    FROM bugs
+                                    WHERE type = "' . $type . '" AND resolved = "N"
+                                    ORDER BY date DESC, id DESC');
+                break;
+
+            default:
+                $req = $bdd->query('SELECT *
+                                    FROM bugs
+                                    WHERE type = "' . $type . '"
+                                    ORDER BY date DESC, id DESC');
+        }
+
+        while ($data = $req->fetch())
+        {
+            // Instanciation d'un objet BugEvolution à partir des données remontées de la bdd
+            $rapport = BugEvolution::withData($data);
+
+            // On ajoute la ligne au tableau
+            array_push($rapports, $rapport);
+        }
+
+        $req->closeCursor();
+
+        // Retour
+        return $rapports;
+    }
+
+    // PHYSIQUE : Lecture données rapport
+    // RETOUR : Objet bugs
+    function physiqueRapport($idRapport)
+    {
+        // Requête
+        global $bdd;
+
         $req = $bdd->query('SELECT *
                             FROM bugs
-                            WHERE type = "' . $type . '" AND (resolved = "Y" OR resolved = "R")
-                            ORDER BY date DESC, id DESC');
-        break;
+                            WHERE id = ' . $idRapport);
 
-      case 'unresolved':
-        $req = $bdd->query('SELECT *
-                            FROM bugs
-                            WHERE type = "' . $type . '" AND resolved = "N"
-                            ORDER BY date DESC, id DESC');
-        break;
+        $data = $req->fetch();
 
-      default:
-        $req = $bdd->query('SELECT *
-                            FROM bugs
-                            WHERE type = "' . $type . '"
-                            ORDER BY date DESC, id DESC');
+        // Instanciation d'un objet BugEvolution à partir des données remontées de la bdd
+        $rapport = BugEvolution::withData($data);
+
+        $req->closeCursor();
+
+        // Retour
+        return $rapport;
     }
 
-    while ($data = $req->fetch())
+    /****************************************************************************/
+    /********************************** UPDATE **********************************/
+    /****************************************************************************/
+    // PHYSIQUE : Mise à jour statut rapport
+    // RETOUR : Aucun
+    function physiqueUpdateRapport($idRapport, $resolved)
     {
-      // Instanciation d'un objet BugEvolution à partir des données remontées de la bdd
-      $rapport = BugEvolution::withData($data);
+        // Requête
+        global $bdd;
 
-      // On ajoute la ligne au tableau
-      array_push($rapports, $rapport);
+        $req = $bdd->prepare('UPDATE bugs
+                              SET resolved = :resolved
+                              WHERE id = ' . $idRapport);
+
+        $req->execute(array(
+            'resolved' => $resolved
+        ));
+
+        $req->closeCursor();
     }
 
-    $req->closeCursor();
+    /****************************************************************************/
+    /********************************** DELETE **********************************/
+    /****************************************************************************/
+    // PHYSIQUE : Suppression rapport
+    // RETOUR : Aucun
+    function physiqueDeleteRapport($idRapport)
+    {
+        // Requête
+        global $bdd;
 
-    // Retour
-    return $rapports;
-  }
-
-  // PHYSIQUE : Lecture données rapport
-  // RETOUR : Objet bugs
-  function physiqueRapport($idRapport)
-  {
-    // Requête
-    global $bdd;
-
-    $req = $bdd->query('SELECT *
-                        FROM bugs
-                        WHERE id = ' . $idRapport);
-
-    $data = $req->fetch();
-
-    // Instanciation d'un objet BugEvolution à partir des données remontées de la bdd
-    $rapport = BugEvolution::withData($data);
-
-    $req->closeCursor();
-
-    // Retour
-    return $rapport;
-  }
-
-  /****************************************************************************/
-  /********************************** UPDATE **********************************/
-  /****************************************************************************/
-  // PHYSIQUE : Mise à jour statut rapport
-  // RETOUR : Aucun
-  function physiqueUpdateRapport($idRapport, $resolved)
-  {
-    // Requête
-    global $bdd;
-
-    $req = $bdd->prepare('UPDATE bugs
-                          SET resolved = :resolved
-                          WHERE id = ' . $idRapport);
-
-    $req->execute(array(
-      'resolved' => $resolved
-    ));
-
-    $req->closeCursor();
-  }
-
-  /****************************************************************************/
-  /********************************** DELETE **********************************/
-  /****************************************************************************/
-  // PHYSIQUE : Suppression rapport
-  // RETOUR : Aucun
-  function physiqueDeleteRapport($idRapport)
-  {
-    // Requête
-    global $bdd;
-
-    $req = $bdd->exec('DELETE FROM bugs
-                       WHERE id = ' . $idRapport);
-  }
+        $req = $bdd->exec('DELETE FROM bugs
+                           WHERE id = ' . $idRapport);
+    }
 ?>
