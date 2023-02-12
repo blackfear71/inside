@@ -3,9 +3,10 @@
 var parcoursApp = angular.module('parcoursApp', ['ngSanitize']);
 
 parcoursApp.component('parcoursList', {
-  templateUrl: 'vue/web/template/parcourslisttemplate.html',
-  controller : function ParcoursListController() {
-      this.listeParcours = listeParcoursJson;
-      // this.orderProp = 'nom';
-  }
+    templateUrl: 'vue/web/template/parcourslisttemplate.html',
+    controller: function ParcoursListController()
+    {
+        this.listeParcours = listeParcoursJson;
+        // this.orderProp = 'nom';
+    }
 });

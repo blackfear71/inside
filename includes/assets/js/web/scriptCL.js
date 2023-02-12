@@ -2,77 +2,78 @@
 /*** Actions ***/
 /***************/
 // Au chargement du document
-$(function()
+$(function ()
 {
-  /*** Actions au clic ***/
-  // Plie ou déplie les journaux
-  $('.bouton_fold').click(function()
-  {
-    var idZone = $(this).attr('id').replace('fold_', '');
+    /*** Actions au clic ***/
+    // Plie ou déplie les journaux
+    $('.bouton_fold').click(function ()
+    {
+        var idZone = $(this).attr('id').replace('fold_', '');
 
-    afficherMasquerSection($(this), idZone, '');
-    initMasonry(0);
-  });
+        afficherMasquerSection($(this), idZone, '');
+        initMasonry(0);
+    });
 });
 
 // Au redimensionnement de la fenêtre
-$(window).resize(function()
+$(window).resize(function ()
 {
-  // Adaptation mobile
-  adaptChangelog();
-  adaptHistory();
+    // Adaptation mobile
+    adaptChangelog();
+    adaptHistory();
 
-  // Relance masonry
-  initMasonry('0.4s');
+    // Relance masonry
+    initMasonry('0.4s');
 });
 
 /***************/
 /*** Masonry ***/
 /***************/
 // Au chargement du document complet
-$(window).on('load', function()
+$(window).on('load', function ()
 {
-  // Adaptation mobile
-  adaptChangelog();
-  adaptHistory();
+    // Adaptation mobile
+    adaptChangelog();
+    adaptHistory();
 
-  // On n'affiche la zone qu'à ce moment là, sinon le premier titre apparait puis la suite de la page
-  $('.zone_changelog_right').css('display', 'inline-block');
+    // On n'affiche la zone qu'à ce moment là, sinon le premier titre apparait puis la suite de la page
+    $('.zone_changelog_right').css('display', 'inline-block');
 
-  // Masonry (Logs par catégories)
-  if ($('.zone_logs_semaine').length)
-  {
-    $('.zone_logs_semaine').masonry().masonry('destroy');
+    // Masonry (Logs par catégories)
+    if ($('.zone_logs_semaine').length)
+    {
+        $('.zone_logs_semaine').masonry().masonry('destroy');
 
-    $('.zone_logs_semaine').masonry({
-      // Options
-      itemSelector: '.zone_logs_categorie',
-      columnWidth: 450,
-      fitWidth: true,
-      gutter: 20,
-      horizontalOrder: true
-    });
+        $('.zone_logs_semaine').masonry(
+        {
+            // Options
+            itemSelector: '.zone_logs_categorie',
+            columnWidth: 450,
+            fitWidth: true,
+            gutter: 20,
+            horizontalOrder: true
+        });
 
-    // On associe une classe pour y ajouter une transition dans le css
-    $('.zone_logs_semaine').addClass('masonry');
-  }
+        // On associe une classe pour y ajouter une transition dans le css
+        $('.zone_logs_semaine').addClass('masonry');
+    }
 
-  // Déclenchement du scroll : on récupère l'id de l'ancre dans l'url (fonction JS)
-  if ($_GET('anchor') != null)
-  {
-    var id;
+    // Déclenchement du scroll : on récupère l'id de l'ancre dans l'url (fonction JS)
+    if ($_GET('anchor') != null)
+    {
+        var id;
 
-    if ($_GET('anchor').length < 2 && $_GET('anchor') < 10)
-      id = 'changelog_0' + $_GET('anchor');
-    else
-      id = 'changelog_' + $_GET('anchor');
+        if ($_GET('anchor').length < 2 && $_GET('anchor') < 10)
+            id = 'changelog_0' + $_GET('anchor');
+        else
+            id = 'changelog_' + $_GET('anchor');
 
-    var offset = 70;
-    var shadow = false;
+        var offset = 70;
+        var shadow = false;
 
-    // Scroll vers l'id
-    scrollToId(id, offset, shadow);
-  }
+        // Scroll vers l'id
+        scrollToId(id, offset, shadow);
+    }
 });
 
 /*****************/
@@ -81,54 +82,55 @@ $(window).on('load', function()
 // Adaptations des journaux de modification sur mobile
 function adaptChangelog()
 {
-  if ($(window).width() < 1080)
-  {
-    // Affichage de la page
-    $('.zone_changelog_left').css('display', 'block');
-    $('.zone_changelog_left').css('width', '100%');
+    if ($(window).width() < 1080)
+    {
+        // Affichage de la page
+        $('.zone_changelog_left').css('display', 'block');
+        $('.zone_changelog_left').css('width', '100%');
 
-    $('.zone_changelog_right').css('display', 'block');
-    $('.zone_changelog_right').css('width', '100%');
-    $('.zone_changelog_right').css('margin-left', '0');
-  }
-  else
-  {
-    // Affichage de la page
-    $('.zone_changelog_left').css('display', 'inline-block');
-    $('.zone_changelog_left').css('width', '200px');
+        $('.zone_changelog_right').css('display', 'block');
+        $('.zone_changelog_right').css('width', '100%');
+        $('.zone_changelog_right').css('margin-left', '0');
+    }
+    else
+    {
+        // Affichage de la page
+        $('.zone_changelog_left').css('display', 'inline-block');
+        $('.zone_changelog_left').css('width', '200px');
 
-    $('.zone_changelog_right').css('display', 'inline-block');
-    $('.zone_changelog_right').css('width', 'calc(100% - 220px)');
-    $('.zone_changelog_right').css('margin-left', '20px');
-  }
+        $('.zone_changelog_right').css('display', 'inline-block');
+        $('.zone_changelog_right').css('width', 'calc(100% - 220px)');
+        $('.zone_changelog_right').css('margin-left', '20px');
+    }
 }
 
 // Adaptation des traits de l'histoire du site
 function adaptHistory()
 {
-  var taille_totale = $('.zone_changelog_right').width();
+    var taille_totale = $('.zone_changelog_right').width();
 
-  // Calcul de la taille de chaque trait
-  $('.event_history').each(function()
-  {
-    var taille_date  = $(this).children('.date_history').width();
-    var taille_trait = taille_totale - taille_date - 15;
+    // Calcul de la taille de chaque trait
+    $('.event_history').each(function ()
+    {
+        var taille_date  = $(this).children('.date_history').width();
+        var taille_trait = taille_totale - taille_date - 15;
 
-    $(this).children('.trait_history').css('width', taille_trait + 'px');
-  });
+        $(this).children('.trait_history').css('width', taille_trait + 'px');
+    });
 }
 
 // Initialisation manuelle de "Masonry"
 function initMasonry(duration)
 {
-  // On lance Masonry
-  $('.zone_logs_semaine').masonry({
-    // Options
-    itemSelector: '.zone_logs_categorie',
-    columnWidth: 450,
-    fitWidth: true,
-    gutter: 20,
-    horizontalOrder: true,
-    transitionDuration: duration
-  });
+    // On lance Masonry
+    $('.zone_logs_semaine').masonry(
+    {
+        // Options
+        itemSelector: '.zone_logs_categorie',
+        columnWidth: 450,
+        fitWidth: true,
+        gutter: 20,
+        horizontalOrder: true,
+        transitionDuration: duration
+    });
 }
