@@ -25,8 +25,8 @@
     {
         case 'goConsulter':
             // Si on n'est pas connecté et que les cookies de connexion sont présent, on lance la connexion automatique, sinon on affiche la page de connexion
-			if (isset($_SESSION['index']['connected']) AND $_SESSION['index']['connected'] != true
-			AND isset($_COOKIE['index'])               AND !empty($_COOKIE['index']))
+            if (isset($_SESSION['index']['connected']) AND $_SESSION['index']['connected'] != true
+            AND isset($_COOKIE['index'])               AND !empty($_COOKIE['index']))
                 $connected = connectUser($_COOKIE['index'], true);
 
             // Initialisation de la sauvegarde en session
@@ -78,9 +78,9 @@
     switch ($_GET['action'])
     {
         case 'doConnecter':
-			if ($connected == true AND $_SESSION['user']['identifiant'] == 'admin')
+            if ($connected == true AND $_SESSION['user']['identifiant'] == 'admin')
                 header('location: administration/portail/portail.php?action=goConsulter');
-			elseif ($connected == true AND $_SESSION['user']['identifiant'] != 'admin')
+            elseif ($connected == true AND $_SESSION['user']['identifiant'] != 'admin')
                 header('location: portail/portail/portail.php?action=goConsulter');
             else
                 header('location: index.php?action=goConsulter');
@@ -93,7 +93,7 @@
 
         case 'goConsulter':
         default:
-			if (isset($connected) AND $connected == true AND $_SESSION['user']['identifiant'] != 'admin')
+            if (isset($connected) AND $connected == true AND $_SESSION['user']['identifiant'] != 'admin')
                 header('location: portail/portail/portail.php?action=goConsulter');
             else
                 include_once('portail/index/vue/' . $_SESSION['index']['plateforme'] . '/vue_index.php');

@@ -136,7 +136,7 @@
         $montantFormat = str_replace(',', '.', htmlspecialchars($montant));
 
         // Formatage
-		if (!empty($montantFormat) AND is_numeric($montantFormat))
+        if (!empty($montantFormat) AND is_numeric($montantFormat))
             $montantFormat = str_replace('.', ',', number_format(round($montantFormat, 2), 2, ',', '')) . ' €';
         else
             $montantFormat = '0,00 €';

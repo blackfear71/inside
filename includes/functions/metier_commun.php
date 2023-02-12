@@ -67,7 +67,7 @@
             session_start();
 
         // Contrôle non administrateur
-  	    if (isset($_SESSION['index']['connected']) AND $_SESSION['index']['connected'] == true AND $_SESSION['user']['identifiant'] == 'admin')
+        if (isset($_SESSION['index']['connected']) AND $_SESSION['index']['connected'] == true AND $_SESSION['user']['identifiant'] == 'admin')
             header('location: /inside/administration/portail/portail.php?action=goConsulter');
 
         // Contrôle utilisateur connecté
