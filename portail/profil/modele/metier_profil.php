@@ -1,707 +1,715 @@
 <?php
-  include_once('../../includes/classes/profile.php');
-  include_once('../../includes/classes/success.php');
-  include_once('../../includes/classes/teams.php');
+    include_once('../../includes/classes/profile.php');
+    include_once('../../includes/classes/success.php');
+    include_once('../../includes/classes/teams.php');
 
-  // METIER : Lecture des données profil
-  // RETOUR : Objet Profile
-  function getProfile($identifiant)
-  {
-    // Récupération des données du profil
-    $profil = physiqueProfil($identifiant);
-
-    // Retour
-    return $profil;
-  }
-
-  // METIER : Lecture des données équipe
-  // RETOUR : Objet Team
-  function getEquipe($reference)
-  {
-    // Récupération des données de l'équipe
-    $equipe = physiqueEquipe($reference);
-
-    // Retour
-    return $equipe;
-  }
-
-  // METIER : Lecture des données statistiques profil
-  // RETOUR : Objet Statistiques
-  function getStatistiques($identifiant)
-  {
-    // Films ajoutés
-    $nombreFilms = physiqueFilmsAjoutesUser($identifiant);
-
-    // Commentaires films
-    $nombreComments = physiqueCommentairesFilmsUser($identifiant);
-
-    // Réservations de restaurants
-    $nombreReservations = physiqueReservationsUser($identifiant);
-
-    // Gâteaux de la semaine
-    $nombreGateauxSemaine = physiqueGateauxSemaineUser($identifiant);
-
-    // Recettes partagées
-    $nombreRecettes = physiqueRecettesUser($identifiant);
-
-    // Bilan des dépenses
-    $bilanUser = physiqueBilanDepensesUser($identifiant);
-
-    // Phrases et images cultes ajoutées
-    $nombreCollector = physiqueCollectorAjoutesUser($identifiant);
-
-    // Nombre d'idées publiées
-    $nombreTheBox = physiqueTheBoxUser($identifiant);
-
-    // Bugs soumis
-    $nombreBugsSoumis = physiqueBugsEvolutionsSoumisUser($identifiant, 'B');
-
-    // Evolutions soumises
-    $nombreEvolutionsSoumises = physiqueBugsEvolutionsSoumisUser($identifiant, 'E');
-
-    // Génération d'un objet StatistiquesProfil
-    $statistiques = array('nb_films_ajoutes' => $nombreFilms,
-                          'nb_comments'      => $nombreComments,
-                          'nb_collectors'    => $nombreCollector,
-                          'nb_reservations'  => $nombreReservations,
-                          'nb_gateaux'       => $nombreGateauxSemaine,
-                          'nb_recettes'      => $nombreRecettes,
-                          'expenses'         => $bilanUser,
-                          'nb_ideas'         => $nombreTheBox,
-                          'nb_bugs'          => $nombreBugsSoumis,
-                          'nb_evolutions'    => $nombreEvolutionsSoumises
-                         );
-
-    $tableauStatistiques = StatistiquesProfil::withData($statistiques);
-
-    // Retour
-    return $tableauStatistiques;
-  }
-
-  // METIER : Lecture des données préférences
-  // RETOUR : Objet Preferences
-  function getPreferences($identifiant)
-  {
-    // Récupération des données préférences
-    $preferences = physiquePreferences($identifiant);
-
-    // Retour
-    return $preferences;
-  }
-
-  // METIER : Lecture de la liste des équipes
-  // RETOUR : Liste des équipes
-  function getListeEquipes()
-  {
-    // Lecture de la liste des équipes
-    $listeEquipes = physiqueListeEquipes();
-
-    // Retour
-    return $listeEquipes;
-  }
-
-  // METIER : Récupération des données de progression
-  // RETOUR : Tableau des données de progression
-  function getProgress($experience)
-  {
-    // Calcul de la progression
-    $niveau   = convertExperience($experience);
-    $expMin   = 10 * $niveau ** 2;
-    $expMax   = 10 * ($niveau + 1) ** 2;
-    $expLvl   = $expMax - $expMin;
-    $progress = $experience - $expMin;
-    $percent  = floor($progress * 100 / $expLvl);
-
-    // Génération d'un objet Progression
-    $progression = new Progression();
-
-    $progression->setNiveau($niveau);
-    $progression->setExperience_min($expMin);
-    $progression->setExperience_max($expMax);
-    $progression->setExperience_niveau($expLvl);
-    $progression->setProgression($progress);
-    $progression->setPourcentage($percent);
-
-    // Retour
-    return $progression;
-  }
-
-  // METIER : Mise à jour de l'avatar (base + fichier)
-  // RETOUR : Aucun
-  function updateAvatar($identifiant, $files)
-  {
-    // Initialisations
-    $control_ok = true;
-    $avatar     = rand();
-
-    // Dossier de destination
-    $dossier = '../../includes/images/profil/avatars';
-
-    // Contrôles fichier
-    $fileDatas = controlsUploadFile($files['avatar'], $avatar, 'all');
-
-    // Récupération contrôles
-    $control_ok = controleFichier($fileDatas);
-
-    // Upload fichier
-    if ($control_ok == true)
-      $control_ok = uploadFile($fileDatas, $dossier);
-
-    if ($control_ok == true)
+    // METIER : Lecture des données profil
+    // RETOUR : Objet Profile
+    function getProfile($identifiant)
     {
-      $newName = $fileDatas['new_name'];
+        // Récupération des données du profil
+        $profil = physiqueProfil($identifiant);
 
-      // Création miniature avec une hauteur/largeur max de 400px
-      imageThumb($dossier . '/' . $newName, $dossier . '/' . $newName, 400, false, true);
-
-      // Suppression de l'ancien avatar si présent
-      $oldAvatar = physiqueAvatarUser($identifiant);
-
-      if (!empty($oldAvatar))
-        unlink($dossier . '/' . $oldAvatar . '');
-
-      // Modification de l'enregistrement en base
-      physiqueUpdateAvatarUser($identifiant, $newName);
-
-      // Mise à jour de la session
-      $_SESSION['user']['avatar'] = $newName;
-
-      // Message d'alerte
-      $_SESSION['alerts']['avatar_updated'] = true;
-    }
-  }
-
-  // METIER : Suppression de l'avatar
-  // RETOUR : Aucun
-  function deleteAvatar($identifiant)
-  {
-    // Dossier de destination
-    $dossier = '../../includes/images/profil/avatars/';
-
-    // Suppression de l'ancien avatar si présent
-    $oldAvatar = physiqueAvatarUser($identifiant);
-
-    if (!empty($oldAvatar))
-      unlink($dossier . $oldAvatar . '');
-
-    // Modification de l'enregistrement en base
-    physiqueUpdateAvatarUser($identifiant, '');
-
-    // Mise à jour de la session
-    $_SESSION['user']['avatar'] = '';
-
-    // Message d'alerte
-    $_SESSION['alerts']['avatar_deleted'] = true;
-  }
-
-  // METIER : Mise à jour des informations
-  // RETOUR : Aucun
-  function updateInfos($identifiant, $post, $isMobile)
-  {
-    // Initialisations
-    $control_ok = true;
-
-    // Récupération des données
-    $email = $post['email'];
-
-    if (isset($post['pseudo']) AND !empty($post['pseudo']))
-      $pseudo = trim($post['pseudo']);
-    else
-      $pseudo = $_SESSION['user']['pseudo'];
-
-    if (isset($post['anniversaire']) AND !empty($post['anniversaire']))
-    {
-      if ($isMobile == true)
-        $anniversary = formatDateForInsertMobile($post['anniversaire']);
-      else
-        $anniversary = formatDateForInsert($post['anniversaire']);
-    }
-    else
-      $anniversary = '';
-
-    // Contrôles date d'anniversaire
-    if (isset($post['anniversaire']) AND !empty($post['anniversaire']))
-    {
-      // Contrôle format date
-      $control_ok = controleFormatDate($post['anniversaire'], $isMobile);
-
-      // Contrôle date dans le futur
-      if ($control_ok == true)
-        $control_ok = controleDateFutur($anniversary);
+        // Retour
+        return $profil;
     }
 
-    // Modification de l'enregistrement en base
-    if ($control_ok == true)
+    // METIER : Lecture des données équipe
+    // RETOUR : Objet Team
+    function getEquipe($reference)
     {
-      $user = array('pseudo'      => $pseudo,
-                    'email'       => $email,
-                    'anniversary' => $anniversary
-                   );
+        // Récupération des données de l'équipe
+        $equipe = physiqueEquipe($reference);
 
-      physiqueUpdateUser($user, $identifiant);
-
-      // Mise à jour de la session
-      $_SESSION['user']['pseudo'] = htmlspecialchars($pseudo);
-
-      // Message d'alerte
-      $_SESSION['alerts']['infos_updated'] = true;
-    }
-  }
-
-  // METIER : Mise à jour des préférences
-  // RETOUR : Aucun
-  function updatePreferences($identifiant, $post)
-  {
-    // Initialisations
-    $categoriesMovieHouse = '';
-
-    // Récupération des données
-    $viewNotifications = $post['notifications_view'];
-		$viewMovieHouse    = $post['movie_house_view'];
-    $viewTheBox        = $post['the_box_view'];
-    $initChat          = $post['inside_room_view'];
-    $celsius           = $post['celsius_view'];
-
-    if (isset($post['films_semaine']))
-			$categoriesMovieHouse .= 'Y;';
-		else
-			$categoriesMovieHouse .= 'N;';
-
-		if (isset($post['films_waited']))
-			$categoriesMovieHouse .= 'Y;';
-		else
-			$categoriesMovieHouse .= 'N;';
-
-		if (isset($post['films_way_out']))
-			$categoriesMovieHouse .= 'Y;';
-		else
-			$categoriesMovieHouse .= 'N;';
-
-    // Réinitialisation des cookies de position Celsius
-    if ($celsius == 'N')
-    {
-      setcookie('celsius[positionX]', null, -1, '/');
-      setcookie('celsius[positionY]', null, -1, '/');
+        // Retour
+        return $equipe;
     }
 
-    // Modification de l'enregistrement en base
-    $preferences = array('init_chat'              => $initChat,
-                         'celsius'                => $celsius,
-                         'view_movie_house'       => $viewMovieHouse,
-                         'categories_movie_house' => $categoriesMovieHouse,
-                         'view_the_box'           => $viewTheBox,
-                         'view_notifications'     => $viewNotifications
-                        );
-
-    physiqueUpdatePreferences($preferences, $identifiant);
-
-    // Mise à jour de la session
-    $_SESSION['user']['celsius']            = $celsius;
-    $_SESSION['user']['view_movie_house']   = $viewMovieHouse;
-    $_SESSION['user']['view_the_box']       = $viewTheBox;
-    $_SESSION['user']['view_notifications'] = $viewNotifications;
-
-    // Message d'alerte
-    $_SESSION['alerts']['preferences_updated'] = true;
-  }
-
-  // METIER : Mise à jour du mot de passe
-  // RETOUR : Aucun
-  function updatePassword($identifiant, $post)
-  {
-    // Initialisations
-    $control_ok = true;
-
-    // Si on a saisi toutes les données
-    if (!empty($post['old_password'])
-    AND !empty($post['new_password'])
-    AND !empty($post['confirm_new_password']))
+    // METIER : Lecture des données statistiques profil
+    // RETOUR : Objet Statistiques
+    function getStatistiques($identifiant)
     {
-      // Récupération des données du mot de passe
-      $crypt = physiqueDonneesPasswordUser($identifiant);
+        // Films ajoutés
+        $nombreFilms = physiqueFilmsAjoutesUser($identifiant);
 
-      // Cryptage ancien mot de passe saisi
-      $oldPassword = htmlspecialchars(hash('sha1', $post['old_password'] . $crypt['salt']));
+        // Commentaires films
+        $nombreComments = physiqueCommentairesFilmsUser($identifiant);
 
-      // Contrôle correspondance ancien mot de passe
-      $control_ok = controleCorrespondancePassword($oldPassword, $crypt['password']);
+        // Réservations de restaurants
+        $nombreReservations = physiqueReservationsUser($identifiant);
 
-      // Contrôle correspondance nouveau mot de passe
-      if ($control_ok == true)
-      {
-        $salt               = rand();
-        $newPassword        = htmlspecialchars(hash('sha1', $post['new_password'] . $salt));
-        $confirmNewPassword = htmlspecialchars(hash('sha1', $post['confirm_new_password'] . $salt));
+        // Gâteaux de la semaine
+        $nombreGateauxSemaine = physiqueGateauxSemaineUser($identifiant);
 
-        $control_ok = controleCorrespondancePassword($confirmNewPassword, $newPassword);
-      }
+        // Recettes partagées
+        $nombreRecettes = physiqueRecettesUser($identifiant);
 
-      // Modification de l'enregistrement en base
-      if ($control_ok == true)
-      {
-        physiqueUpdatePasswordUser($salt, $newPassword, $identifiant);
+        // Bilan des dépenses
+        $bilanUser = physiqueBilanDepensesUser($identifiant);
 
-        // Réinitialisation des cookies de connexion
-        setcookie('index[identifiant]', null, -1, '/');
-        setcookie('index[password]', null, -1, '/');
+        // Phrases et images cultes ajoutées
+        $nombreCollector = physiqueCollectorAjoutesUser($identifiant);
 
-        // Définition des nouveaux cookies de connexion
-        setCookie('index[identifiant]', $identifiant, time() + 60 * 60 * 24 * 365, '/');
-        setCookie('index[password]', $newPassword, time() + 60 * 60 * 24 * 365, '/');
+        // Nombre d'idées publiées
+        $nombreTheBox = physiqueTheBoxUser($identifiant);
+
+        // Bugs soumis
+        $nombreBugsSoumis = physiqueBugsEvolutionsSoumisUser($identifiant, 'B');
+
+        // Evolutions soumises
+        $nombreEvolutionsSoumises = physiqueBugsEvolutionsSoumisUser($identifiant, 'E');
+
+        // Génération d'un objet StatistiquesProfil
+        $statistiques = array(
+            'nb_films_ajoutes' => $nombreFilms,
+            'nb_comments'      => $nombreComments,
+            'nb_collectors'    => $nombreCollector,
+            'nb_reservations'  => $nombreReservations,
+            'nb_gateaux'       => $nombreGateauxSemaine,
+            'nb_recettes'      => $nombreRecettes,
+            'expenses'         => $bilanUser,
+            'nb_ideas'         => $nombreTheBox,
+            'nb_bugs'          => $nombreBugsSoumis,
+            'nb_evolutions'    => $nombreEvolutionsSoumises
+        );
+
+        $tableauStatistiques = StatistiquesProfil::withData($statistiques);
+
+        // Retour
+        return $tableauStatistiques;
+    }
+
+    // METIER : Lecture des données préférences
+    // RETOUR : Objet Preferences
+    function getPreferences($identifiant)
+    {
+        // Récupération des données préférences
+        $preferences = physiquePreferences($identifiant);
+
+        // Retour
+        return $preferences;
+    }
+
+    // METIER : Lecture de la liste des équipes
+    // RETOUR : Liste des équipes
+    function getListeEquipes()
+    {
+        // Lecture de la liste des équipes
+        $listeEquipes = physiqueListeEquipes();
+
+        // Retour
+        return $listeEquipes;
+    }
+
+    // METIER : Récupération des données de progression
+    // RETOUR : Tableau des données de progression
+    function getProgress($experience)
+    {
+        // Calcul de la progression
+        $niveau   = convertExperience($experience);
+        $expMin   = 10 * $niveau ** 2;
+        $expMax   = 10 * ($niveau + 1) ** 2;
+        $expLvl   = $expMax - $expMin;
+        $progress = $experience - $expMin;
+        $percent  = floor($progress * 100 / $expLvl);
+
+        // Génération d'un objet Progression
+        $progression = new Progression();
+
+        $progression->setNiveau($niveau);
+        $progression->setExperience_min($expMin);
+        $progression->setExperience_max($expMax);
+        $progression->setExperience_niveau($expLvl);
+        $progression->setProgression($progress);
+        $progression->setPourcentage($percent);
+
+        // Retour
+        return $progression;
+    }
+
+    // METIER : Mise à jour de l'avatar (base + fichier)
+    // RETOUR : Aucun
+    function updateAvatar($identifiant, $files)
+    {
+        // Initialisations
+        $control_ok = true;
+        $avatar     = rand();
+
+        // Dossier de destination
+        $dossier = '../../includes/images/profil/avatars';
+
+        // Contrôles fichier
+        $fileDatas = controlsUploadFile($files['avatar'], $avatar, 'all');
+
+        // Récupération contrôles
+        $control_ok = controleFichier($fileDatas);
+
+        // Upload fichier
+        if ($control_ok == true)
+            $control_ok = uploadFile($fileDatas, $dossier);
+
+        if ($control_ok == true)
+        {
+            $newName = $fileDatas['new_name'];
+
+            // Création miniature avec une hauteur/largeur max de 400px
+            imageThumb($dossier . '/' . $newName, $dossier . '/' . $newName, 400, false, true);
+
+            // Suppression de l'ancien avatar si présent
+            $oldAvatar = physiqueAvatarUser($identifiant);
+
+            if (!empty($oldAvatar))
+                unlink($dossier . '/' . $oldAvatar . '');
+
+            // Modification de l'enregistrement en base
+            physiqueUpdateAvatarUser($identifiant, $newName);
+
+            // Mise à jour de la session
+            $_SESSION['user']['avatar'] = $newName;
+
+            // Message d'alerte
+            $_SESSION['alerts']['avatar_updated'] = true;
+        }
+    }
+
+    // METIER : Suppression de l'avatar
+    // RETOUR : Aucun
+    function deleteAvatar($identifiant)
+    {
+        // Dossier de destination
+        $dossier = '../../includes/images/profil/avatars/';
+
+        // Suppression de l'ancien avatar si présent
+        $oldAvatar = physiqueAvatarUser($identifiant);
+
+        if (!empty($oldAvatar))
+            unlink($dossier . $oldAvatar . '');
+
+        // Modification de l'enregistrement en base
+        physiqueUpdateAvatarUser($identifiant, '');
+
+        // Mise à jour de la session
+        $_SESSION['user']['avatar'] = '';
 
         // Message d'alerte
-        $_SESSION['alerts']['password_updated'] = true;
-      }
-    }
-  }
-
-  // METIER : Changement d'équipe
-  // RETOUR : Aucun
-  function updateEquipe($sessionUser, $post)
-  {
-    // Initialisations
-    $control_ok = true;
-    $status     = 'T';
-
-    // Récupération des données
-    $identifiant = $sessionUser['identifiant'];
-    $oldTeam     = $sessionUser['equipe'];
-
-    if ($post['equipe'] == 'other')
-    {
-      $newTeam        = 'temp_' . rand();
-      $labelTeam      = $post['autre_equipe'];
-      $activationTeam = 'N';
-    }
-    else
-      $newTeam = $post['equipe'];
-
-    // Récupération des données utilisateur
-    $user = physiqueProfil($identifiant);
-
-    // Contrôle équipe différente
-    $control_ok = controleAncienneEquipe($oldTeam, $newTeam);
-
-    // Contrôle dépenses nulles
-    if ($control_ok == true)
-      $control_ok = controleDepensesNonNulles($user->getExpenses());
-
-    // Création d'une nouvelle équipe si besoin
-    if ($control_ok == true)
-    {
-      if ($post['equipe'] == 'other')
-      {
-        $team = array('reference'  => $newTeam,
-                      'team'       => $labelTeam,
-                      'activation' => $activationTeam
-                     );
-
-        physiqueInsertionEquipe($team);
-      }
+        $_SESSION['alerts']['avatar_deleted'] = true;
     }
 
-    // Modification de l'enregistrement en base
-    if ($control_ok == true)
+    // METIER : Mise à jour des informations
+    // RETOUR : Aucun
+    function updateInfos($identifiant, $post, $isMobile)
     {
-      $equipeUser = array('new_team' => $newTeam,
-                          'status'   => $status
-                         );
+        // Initialisations
+        $control_ok = true;
 
-      physiqueUpdateEquipeUser($equipeUser, $identifiant);
+        // Récupération des données
+        $email = $post['email'];
 
-      // Message d'alerte
-      $_SESSION['alerts']['ask_team'] = true;
-    }
-  }
+        if (isset($post['pseudo']) AND !empty($post['pseudo']))
+            $pseudo = trim($post['pseudo']);
+        else
+            $pseudo = $_SESSION['user']['pseudo'];
 
-  // METIER : Mise à jour du statut par l'utilisateur (désinscription, mot de passe)
-  // RETOUR : Aucun
-  function updateStatus($identifiant, $status)
-  {
-    // Modification de l'enregistrement en base
-    physiqueUpdateStatusUser($identifiant, $status);
-
-    // Message d'alerte
-    switch ($status)
-    {
-      case 'D':
-        $_SESSION['alerts']['ask_desinscription'] = true;
-        break;
-
-      case 'U':
-        $_SESSION['alerts']['cancel_status'] = true;
-        break;
-
-      default:
-        break;
-    }
-  }
-
-  // METIER : Lecture liste des utilisateurs
-  // RETOUR : Liste des utilisateurs
-  function getUsers($equipe)
-  {
-    // Récupération liste des utilisateurs
-    $listeUsers = physiqueUsers($equipe);
-
-    // Récupération des données complémentaires
-    foreach ($listeUsers as $user)
-    {
-      // Récupération du niveau
-      $level = convertExperience($user->getExperience());
-      $user->setLevel($level);
-    }
-
-    // Tri sur expérience puis identifiant
-    if (!empty($listeUsers))
-    {
-      foreach ($listeUsers as $user)
-      {
-        $triExp[] = $user->getExperience();
-        $triId[]  = $user->getIdentifiant();
-      }
-
-      array_multisort($triExp, SORT_DESC, $triId, SORT_ASC, $listeUsers);
-    }
-
-    // Retour
-    return $listeUsers;
-  }
-
-  // METIER : Lecture liste des succès
-  // RETOUR : Liste des succès et déblocages
-  function getSuccess($identifiant, $listeUsers)
-  {
-    // Création tableau de correspondance identifiant / pseudo / avatar
-    $tableauUsers = array();
-
-    foreach ($listeUsers as $user)
-    {
-      $tableauUsers[$user->getIdentifiant()] = array('identifiant' => $user->getIdentifiant(),
-                                                     'pseudo' => htmlspecialchars($user->getPseudo()),
-                                                     'avatar' => htmlspecialchars($user->getAvatar())
-                                                    );
-    }
-
-    // Récupération de la liste des succès
-    $listeSuccess = physiqueListeSuccess();
-
-    // Récupération des classements des succès
-    foreach ($listeSuccess as $success)
-    {
-      // Récupération valeur succès
-      $valueSuccess = physiqueSuccessUser($success->getReference(), $identifiant);
-
-      if ($valueSuccess != NULL)
-      {
-        // Contrôle pour les missions que la date de fin soit passée
-        $missionTermineeOuAutre = controleMissionTermineeOuAutre($success->getMission());
-
-        if ($missionTermineeOuAutre == true)
-          $success->setValue_user($valueSuccess);
-      }
-
-      // Récupération du classement des utilisateurs
-      if ($success->getDefined() == 'Y' AND $success->getUnicity() != 'Y')
-      {
-        // Contrôle pour les missions que la date de fin soit passée
-        $missionTermineeOuAutre = controleMissionTermineeOuAutre($success->getMission());
-
-        // Récupération de l'avancement des utilisateurs
-        $listeRangSuccess = array();
-
-        if ($missionTermineeOuAutre == true)
+        if (isset($post['anniversaire']) AND !empty($post['anniversaire']))
         {
-          foreach ($tableauUsers as $user)
-          {
-            $rangSuccess = physiqueSuccessUsers($success->getReference(), $success->getLimit_success(), $user);
+            if ($isMobile == true)
+                $anniversary = formatDateForInsertMobile($post['anniversaire']);
+            else
+                $anniversary = formatDateForInsert($post['anniversaire']);
+        }
+        else
+            $anniversary = '';
 
-            // On ajoute la ligne au tableau
-            if (!empty($rangSuccess))
-              array_push($listeRangSuccess, $rangSuccess);
-          }
+        // Contrôles date d'anniversaire
+        if (isset($post['anniversaire']) AND !empty($post['anniversaire']))
+        {
+            // Contrôle format date
+            $control_ok = controleFormatDate($post['anniversaire'], $isMobile);
+
+            // Contrôle date dans le futur
+            if ($control_ok == true)
+                $control_ok = controleDateFutur($anniversary);
         }
 
-        // Tri sur la valeur du succès des utilisateurs
-        if (!empty($listeRangSuccess))
+        // Modification de l'enregistrement en base
+        if ($control_ok == true)
         {
-          foreach ($listeRangSuccess as &$rangSuccessUser)
-          {
-            $triSuccess[] = $rangSuccessUser->getValue();
-          }
+            $user = array(
+                'pseudo'      => $pseudo,
+                'email'       => $email,
+                'anniversary' => $anniversary
+            );
 
-          unset($rangSuccessUser);
+            physiqueUpdateUser($user, $identifiant);
 
-          // Tri
-          array_multisort($triSuccess, SORT_DESC, $listeRangSuccess);
+            // Mise à jour de la session
+            $_SESSION['user']['pseudo'] = htmlspecialchars($pseudo);
 
-          unset($triSuccess);
+            // Message d'alerte
+            $_SESSION['alerts']['infos_updated'] = true;
+        }
+    }
+
+    // METIER : Mise à jour des préférences
+    // RETOUR : Aucun
+    function updatePreferences($identifiant, $post)
+    {
+        // Initialisations
+        $categoriesMovieHouse = '';
+
+        // Récupération des données
+        $viewNotifications = $post['notifications_view'];
+        $viewMovieHouse    = $post['movie_house_view'];
+        $viewTheBox        = $post['the_box_view'];
+        $initChat          = $post['inside_room_view'];
+        $celsius           = $post['celsius_view'];
+
+        if (isset($post['films_semaine']))
+            $categoriesMovieHouse .= 'Y;';
+        else
+            $categoriesMovieHouse .= 'N;';
+
+        if (isset($post['films_waited']))
+            $categoriesMovieHouse .= 'Y;';
+        else
+            $categoriesMovieHouse .= 'N;';
+
+        if (isset($post['films_way_out']))
+            $categoriesMovieHouse .= 'Y;';
+        else
+            $categoriesMovieHouse .= 'N;';
+
+        // Réinitialisation des cookies de position Celsius
+        if ($celsius == 'N')
+        {
+            setcookie('celsius[positionX]', null, -1, '/');
+            setcookie('celsius[positionY]', null, -1, '/');
         }
 
-        // Filtrage du tableau
-        if (!empty($listeRangSuccess))
+        // Modification de l'enregistrement en base
+        $preferences = array(
+            'init_chat'              => $initChat,
+            'celsius'                => $celsius,
+            'view_movie_house'       => $viewMovieHouse,
+            'categories_movie_house' => $categoriesMovieHouse,
+            'view_the_box'           => $viewTheBox,
+            'view_notifications'     => $viewNotifications
+        );
+
+        physiqueUpdatePreferences($preferences, $identifiant);
+
+        // Mise à jour de la session
+        $_SESSION['user']['celsius']            = $celsius;
+        $_SESSION['user']['view_movie_house']   = $viewMovieHouse;
+        $_SESSION['user']['view_the_box']       = $viewTheBox;
+        $_SESSION['user']['view_notifications'] = $viewNotifications;
+
+        // Message d'alerte
+        $_SESSION['alerts']['preferences_updated'] = true;
+    }
+
+    // METIER : Mise à jour du mot de passe
+    // RETOUR : Aucun
+    function updatePassword($identifiant, $post)
+    {
+        // Initialisations
+        $control_ok = true;
+
+        // Si on a saisi toutes les données
+        if (!empty($post['old_password'])
+        AND !empty($post['new_password'])
+        AND !empty($post['confirm_new_password']))
         {
-          // Affectation du rang et suppression si rang > 3 (médaille de bronze)
-          $rangPrecedent = $listeRangSuccess[0]->getValue();
-          $rangCourant   = 1;
+            // Récupération des données du mot de passe
+            $crypt = physiqueDonneesPasswordUser($identifiant);
 
-          foreach ($listeRangSuccess as $key => $rangSuccessUser)
-          {
-            $currentTotal = $rangSuccessUser->getValue();
+            // Cryptage ancien mot de passe saisi
+            $oldPassword = htmlspecialchars(hash('sha1', $post['old_password'] . $crypt['salt']));
 
-            if ($currentTotal != $rangPrecedent)
+            // Contrôle correspondance ancien mot de passe
+            $control_ok = controleCorrespondancePassword($oldPassword, $crypt['password']);
+
+            // Contrôle correspondance nouveau mot de passe
+            if ($control_ok == true)
             {
-              $rangCourant += 1;
-              $rangPrecedent = $rangSuccessUser->getValue();
+                $salt               = rand();
+                $newPassword        = htmlspecialchars(hash('sha1', $post['new_password'] . $salt));
+                $confirmNewPassword = htmlspecialchars(hash('sha1', $post['confirm_new_password'] . $salt));
+
+                $control_ok = controleCorrespondancePassword($confirmNewPassword, $newPassword);
             }
 
-            // Suppression des rangs > 3 sinon on enregistre le rang
-            if ($rangCourant > 3)
-              unset($listeRangSuccess[$key]);
-            else
-              $rangSuccessUser->setRank($rangCourant);
-          }
-        }
+            // Modification de l'enregistrement en base
+            if ($control_ok == true)
+            {
+                physiqueUpdatePasswordUser($salt, $newPassword, $identifiant);
 
-        // Récupération du classement
-        $success->setClassement($listeRangSuccess);
-      }
+                // Réinitialisation des cookies de connexion
+                setcookie('index[identifiant]', null, -1, '/');
+                setcookie('index[password]', null, -1, '/');
+
+                // Définition des nouveaux cookies de connexion
+                setCookie('index[identifiant]', $identifiant, time() + 60 * 60 * 24 * 365, '/');
+                setCookie('index[password]', $newPassword, time() + 60 * 60 * 24 * 365, '/');
+
+                // Message d'alerte
+                $_SESSION['alerts']['password_updated'] = true;
+            }
+        }
     }
 
-    // Retour
-    return $listeSuccess;
-  }
-
-  // METIER : Conversion de la liste d'objets des succès en tableau simple pour JSON
-  // RETOUR : Tableau des succès
-  function convertForJsonListeSucces($listeSucces)
-  {
-    // Initialisations
-    $listeSuccesAConvertir = array();
-
-    // Conversion de la liste d'objets en tableau pour envoyer au Javascript
-    foreach ($listeSucces as $succes)
+    // METIER : Changement d'équipe
+    // RETOUR : Aucun
+    function updateEquipe($sessionUser, $post)
     {
-      if ($succes->getDefined() == 'Y' AND $succes->getValue_user() >= $succes->getLimit_success())
-      {
-        $succesAConvertir = array('id'            => $succes->getId(),
-                                  'reference'     => $succes->getReference(),
-                                  'title'         => $succes->getTitle(),
-                                  'description'   => $succes->getDescription(),
-                                  'limit_success' => $succes->getLimit_success(),
-                                  'explanation'   => $succes->getExplanation(),
-                                  'classement'    => array()
-                                 );
+        // Initialisations
+        $control_ok = true;
+        $status     = 'T';
 
-        $classementSucces = array();
+        // Récupération des données
+        $identifiant = $sessionUser['identifiant'];
+        $oldTeam     = $sessionUser['equipe'];
 
-        foreach ($succes->getClassement() as $classement)
+        if ($post['equipe'] == 'other')
         {
-          $classementUser = array('identifiant' => $classement->getIdentifiant(),
-                                  'pseudo'      => $classement->getPseudo(),
-                                  'avatar'      => $classement->getAvatar(),
-                                  'value'       => $classement->getValue(),
-                                  'rank'        => $classement->getRank()
-                                 );
+            $newTeam        = 'temp_' . rand();
+            $labelTeam      = $post['autre_equipe'];
+            $activationTeam = 'N';
+        }
+        else
+            $newTeam = $post['equipe'];
 
-          array_push($classementSucces, $classementUser);
+        // Récupération des données utilisateur
+        $user = physiqueProfil($identifiant);
+
+        // Contrôle équipe différente
+        $control_ok = controleAncienneEquipe($oldTeam, $newTeam);
+
+        // Contrôle dépenses nulles
+        if ($control_ok == true)
+            $control_ok = controleDepensesNonNulles($user->getExpenses());
+
+        // Création d'une nouvelle équipe si besoin
+        if ($control_ok == true)
+        {
+            if ($post['equipe'] == 'other')
+            {
+                $team = array(
+                    'reference'  => $newTeam,
+                    'team'       => $labelTeam,
+                    'activation' => $activationTeam
+                );
+
+                physiqueInsertionEquipe($team);
+            }
         }
 
-        $succesAConvertir['classement'] = $classementSucces;
-        $listeSuccesAConvertir[$succes->getId()] = $succesAConvertir;
-      }
+        // Modification de l'enregistrement en base
+        if ($control_ok == true)
+        {
+            $equipeUser = array(
+                'new_team' => $newTeam,
+                'status'   => $status
+            );
+
+            physiqueUpdateEquipeUser($equipeUser, $identifiant);
+
+            // Message d'alerte
+            $_SESSION['alerts']['ask_team'] = true;
+        }
     }
 
-    // Retour
-    return $listeSuccesAConvertir;
-  }
+    // METIER : Mise à jour du statut par l'utilisateur (désinscription, mot de passe)
+    // RETOUR : Aucun
+    function updateStatus($identifiant, $status)
+    {
+        // Modification de l'enregistrement en base
+        physiqueUpdateStatusUser($identifiant, $status);
 
-  // METIER : Lecture des polices de caractères existantes
-  // RETOUR : Liste des polices
-  function getPolicesCaracteres()
-  {
-    // Récupération des dossiers de polices
-    $polices = scandir('../../includes/fonts');
+        // Message d'alerte
+        switch ($status)
+        {
+            case 'D':
+                $_SESSION['alerts']['ask_desinscription'] = true;
+                break;
 
-    // Suppression des racines de dossier
-    unset($polices[array_search('..', $polices)]);
-    unset($polices[array_search('.', $polices)]);
+            case 'U':
+                $_SESSION['alerts']['cancel_status'] = true;
+                break;
 
-    // Retour
-    return $polices;
-  }
+            default:
+                break;
+        }
+    }
 
-  // METIER : Lecture des thèmes existants par type
-  // RETOUR : Liste des thèmes
-  function getThemes($type, $experience)
-  {
-    // Initialisations
-    $niveau = '';
+    // METIER : Lecture liste des utilisateurs
+    // RETOUR : Liste des utilisateurs
+    function getUsers($equipe)
+    {
+        // Récupération liste des utilisateurs
+        $listeUsers = physiqueUsers($equipe);
 
-    // Récupération du niveau
-    if ($type == 'U')
-      $niveau = convertExperience($experience);
+        // Récupération des données complémentaires
+        foreach ($listeUsers as $user)
+        {
+            // Récupération du niveau
+            $level = convertExperience($user->getExperience());
+            $user->setLevel($level);
+        }
 
-    // Récupération de la liste des thèmes
-    $listeThemes = physiqueThemes($type, $niveau);
+        // Tri sur expérience puis identifiant
+        if (!empty($listeUsers))
+        {
+            foreach ($listeUsers as $user)
+            {
+                $triExp[] = $user->getExperience();
+                $triId[]  = $user->getIdentifiant();
+            }
 
-    // Retour
-    return $listeThemes;
-  }
+            array_multisort($triExp, SORT_DESC, $triId, SORT_ASC, $listeUsers);
+        }
 
-  // METIER : Détermine si on a un thème de mission en cours
-  // RETOUR : Booléen
-  function getThemeMission()
-  {
-    // Détermination si thème mission en cours
-    $isThemeMission = physiqueThemeMission();
+        // Retour
+        return $listeUsers;
+    }
 
-    // Retour
-    return $isThemeMission;
-  }
+    // METIER : Lecture liste des succès
+    // RETOUR : Liste des succès et déblocages
+    function getSuccess($identifiant, $listeUsers)
+    {
+        // Création tableau de correspondance identifiant / pseudo / avatar
+        $tableauUsers = array();
 
-  // METIER : Mise à jour de la préférence police de caractères utilisateur
-  // RETOUR : Aucun
-  function updateFont($identifiant, $post)
-  {
-    // Récupération des données
-    $police = $post['police'];
+        foreach ($listeUsers as $user)
+        {
+            $tableauUsers[$user->getIdentifiant()] = array(
+                'identifiant' => $user->getIdentifiant(),
+                'pseudo' => htmlspecialchars($user->getPseudo()),
+                'avatar' => htmlspecialchars($user->getAvatar())
+            );
+        }
 
-    // Modification de l'enregistrement en base
-    physiqueUpdateFont($identifiant, $police);
+        // Récupération de la liste des succès
+        $listeSuccess = physiqueListeSuccess();
 
-    // Mise à jour de la session
-    $_SESSION['user']['font'] = $police;
-    
-    // Message d'alerte
-    $_SESSION['alerts']['font_updated'] = true;
-  }
+        // Récupération des classements des succès
+        foreach ($listeSuccess as $success)
+        {
+            // Récupération valeur succès
+            $valueSuccess = physiqueSuccessUser($success->getReference(), $identifiant);
 
-  // METIER : Mise à jour de la préférence thème utilisateur
-  // RETOUR : Aucun
-  function updateTheme($identifiant, $post)
-  {
-    // Récupération des données
-    $idTheme = $post['id_theme'];
+            if ($valueSuccess != NULL)
+            {
+                // Contrôle pour les missions que la date de fin soit passée
+                $missionTermineeOuAutre = controleMissionTermineeOuAutre($success->getMission());
 
-    // Lecture de la référence du thème
-    $referenceTheme = physiqueReferenceTheme($idTheme);
+                if ($missionTermineeOuAutre == true)
+                    $success->setValue_user($valueSuccess);
+            }
 
-    // Modification de l'enregistrement en base
-    physiqueUpdateTheme($identifiant, $referenceTheme);
+            // Récupération du classement des utilisateurs
+            if ($success->getDefined() == 'Y' AND $success->getUnicity() != 'Y')
+            {
+                // Contrôle pour les missions que la date de fin soit passée
+                $missionTermineeOuAutre = controleMissionTermineeOuAutre($success->getMission());
 
-    // Message d'alerte
-    $_SESSION['alerts']['theme_updated'] = true;
-  }
+                // Récupération de l'avancement des utilisateurs
+                $listeRangSuccess = array();
 
-  // METIER : Supprime la préférence thème utilisateur
-  // RETOUR : Aucun
-  function deleteTheme($identifiant)
-  {
-    // Modification de l'enregistrement en base
-    physiqueUpdateTheme($identifiant, '');
+                if ($missionTermineeOuAutre == true)
+                {
+                    foreach ($tableauUsers as $user)
+                    {
+                        $rangSuccess = physiqueSuccessUsers($success->getReference(), $success->getLimit_success(), $user);
 
-    // Message d'alerte
-    $_SESSION['alerts']['theme_deleted'] = true;
-  }
+                        // On ajoute la ligne au tableau
+                        if (!empty($rangSuccess))
+                            array_push($listeRangSuccess, $rangSuccess);
+                    }
+                }
+
+                // Tri sur la valeur du succès des utilisateurs
+                if (!empty($listeRangSuccess))
+                {
+                    foreach ($listeRangSuccess as &$rangSuccessUser)
+                    {
+                        $triSuccess[] = $rangSuccessUser->getValue();
+                    }
+
+                    unset($rangSuccessUser);
+
+                    // Tri
+                    array_multisort($triSuccess, SORT_DESC, $listeRangSuccess);
+
+                    unset($triSuccess);
+                }
+
+                // Filtrage du tableau
+                if (!empty($listeRangSuccess))
+                {
+                    // Affectation du rang et suppression si rang > 3 (médaille de bronze)
+                    $rangPrecedent = $listeRangSuccess[0]->getValue();
+                    $rangCourant   = 1;
+
+                    foreach ($listeRangSuccess as $key => $rangSuccessUser)
+                    {
+                        $currentTotal = $rangSuccessUser->getValue();
+
+                        if ($currentTotal != $rangPrecedent)
+                        {
+                            $rangCourant += 1;
+                            $rangPrecedent = $rangSuccessUser->getValue();
+                        }
+
+                        // Suppression des rangs > 3 sinon on enregistre le rang
+                        if ($rangCourant > 3)
+                            unset($listeRangSuccess[$key]);
+                        else
+                            $rangSuccessUser->setRank($rangCourant);
+                    }
+                }
+
+                // Récupération du classement
+                $success->setClassement($listeRangSuccess);
+            }
+        }
+
+        // Retour
+        return $listeSuccess;
+    }
+
+    // METIER : Conversion de la liste d'objets des succès en tableau simple pour JSON
+    // RETOUR : Tableau des succès
+    function convertForJsonListeSucces($listeSucces)
+    {
+        // Initialisations
+        $listeSuccesAConvertir = array();
+
+        // Conversion de la liste d'objets en tableau pour envoyer au Javascript
+        foreach ($listeSucces as $succes)
+        {
+            if ($succes->getDefined() == 'Y' AND $succes->getValue_user() >= $succes->getLimit_success())
+            {
+                $succesAConvertir = array(
+                    'id'            => $succes->getId(),
+                    'reference'     => $succes->getReference(),
+                    'title'         => $succes->getTitle(),
+                    'description'   => $succes->getDescription(),
+                    'limit_success' => $succes->getLimit_success(),
+                    'explanation'   => $succes->getExplanation(),
+                    'classement'    => array()
+                );
+
+                $classementSucces = array();
+
+                foreach ($succes->getClassement() as $classement)
+                {
+                    $classementUser = array(
+                        'identifiant' => $classement->getIdentifiant(),
+                        'pseudo'      => $classement->getPseudo(),
+                        'avatar'      => $classement->getAvatar(),
+                        'value'       => $classement->getValue(),
+                        'rank'        => $classement->getRank()
+                    );
+
+                    array_push($classementSucces, $classementUser);
+                }
+
+                $succesAConvertir['classement'] = $classementSucces;
+                $listeSuccesAConvertir[$succes->getId()] = $succesAConvertir;
+            }
+        }
+
+        // Retour
+        return $listeSuccesAConvertir;
+    }
+
+    // METIER : Lecture des polices de caractères existantes
+    // RETOUR : Liste des polices
+    function getPolicesCaracteres()
+    {
+        // Récupération des dossiers de polices
+        $polices = scandir('../../includes/fonts');
+
+        // Suppression des racines de dossier
+        unset($polices[array_search('..', $polices)]);
+        unset($polices[array_search('.', $polices)]);
+
+        // Retour
+        return $polices;
+    }
+
+    // METIER : Lecture des thèmes existants par type
+    // RETOUR : Liste des thèmes
+    function getThemes($type, $experience)
+    {
+        // Initialisations
+        $niveau = '';
+
+        // Récupération du niveau
+        if ($type == 'U')
+            $niveau = convertExperience($experience);
+
+        // Récupération de la liste des thèmes
+        $listeThemes = physiqueThemes($type, $niveau);
+
+        // Retour
+        return $listeThemes;
+    }
+
+    // METIER : Détermine si on a un thème de mission en cours
+    // RETOUR : Booléen
+    function getThemeMission()
+    {
+        // Détermination si thème mission en cours
+        $isThemeMission = physiqueThemeMission();
+
+        // Retour
+        return $isThemeMission;
+    }
+
+    // METIER : Mise à jour de la préférence police de caractères utilisateur
+    // RETOUR : Aucun
+    function updateFont($identifiant, $post)
+    {
+        // Récupération des données
+        $police = $post['police'];
+
+        // Modification de l'enregistrement en base
+        physiqueUpdateFont($identifiant, $police);
+
+        // Mise à jour de la session
+        $_SESSION['user']['font'] = $police;
+
+        // Message d'alerte
+        $_SESSION['alerts']['font_updated'] = true;
+    }
+
+    // METIER : Mise à jour de la préférence thème utilisateur
+    // RETOUR : Aucun
+    function updateTheme($identifiant, $post)
+    {
+        // Récupération des données
+        $idTheme = $post['id_theme'];
+
+        // Lecture de la référence du thème
+        $referenceTheme = physiqueReferenceTheme($idTheme);
+
+        // Modification de l'enregistrement en base
+        physiqueUpdateTheme($identifiant, $referenceTheme);
+
+        // Message d'alerte
+        $_SESSION['alerts']['theme_updated'] = true;
+    }
+
+    // METIER : Supprime la préférence thème utilisateur
+    // RETOUR : Aucun
+    function deleteTheme($identifiant)
+    {
+        // Modification de l'enregistrement en base
+        physiqueUpdateTheme($identifiant, '');
+
+        // Message d'alerte
+        $_SESSION['alerts']['theme_deleted'] = true;
+    }
 ?>

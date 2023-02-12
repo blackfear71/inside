@@ -1,763 +1,763 @@
 <?php
-  include_once('../../includes/functions/appel_bdd.php');
-
-  /****************************************************************************/
-  /********************************** SELECT **********************************/
-  /****************************************************************************/
-  // PHYSIQUE : Lecture profil
-  // RETOUR : Objet Profile
-  function physiqueProfil($identifiant)
-  {
-    // Requête
-    global $bdd;
-
-    $req = $bdd->query('SELECT *
-                        FROM users
-                        WHERE identifiant = "' . $identifiant . '"');
-
-    $data = $req->fetch();
-
-    // Instanciation d'un objet Profile à partir des données remontées de la bdd
-    $profil = Profile::withData($data);
-
-    $req->closeCursor();
-
-    // Retour
-    return $profil;
-  }
-
-  // PHYSIQUE : Lecture équipe
-  // RETOUR : Objet Team
-  function physiqueEquipe($reference)
-  {
-    // Requête
-    global $bdd;
-
-    $req = $bdd->query('SELECT *
-                        FROM teams
-                        WHERE reference = "' . $reference . '"');
-
-    $data = $req->fetch();
-
-    // Instanciation d'un objet Team à partir des données remontées de la bdd
-    $equipe = Team::withData($data);
-
-    $req->closeCursor();
-
-    // Retour
-    return $equipe;
-  }
-
-  // PHYSIQUE : Lecture du nombre de films ajoutés
-  // RETOUR : Nombre de films ajoutés
-  function physiqueFilmsAjoutesUser($identifiant)
-  {
-    // Initialisations
-    $nombreAjouts = 0;
-
-    // Requête
-    global $bdd;
-
-    $req = $bdd->query('SELECT COUNT(*) AS nombreAjouts
-                        FROM movie_house
-                        WHERE identifiant_add = "' . $identifiant . '"');
-
-    $data = $req->fetch();
-
-    $nombreAjouts = $data['nombreAjouts'];
-
-    $req->closeCursor();
-
-    // Retour
-    return $nombreAjouts;
-  }
-
-  // PHYSIQUE : Lecture du nombre de commentaires de films ajoutés
-  // RETOUR : Nombre de commentaires ajoutés
-  function physiqueCommentairesFilmsUser($identifiant)
-  {
-    // Initialisations
-    $nombreComments = 0;
-
-    // Requête
-    global $bdd;
-
-    $req = $bdd->query('SELECT COUNT(*) AS nombreComments
-                        FROM movie_house_comments
-                        WHERE author = "' . $identifiant . '"');
-
-    $data = $req->fetch();
-
-    $nombreComments = $data['nombreComments'];
-
-    $req->closeCursor();
-
-    // Retour
-    return $nombreComments;
-  }
-
-  // PHYSIQUE : Lecture du nombre de phrases cultes ajoutées
-  // RETOUR : Nombre de phrases cultes ajoutés
-  function physiqueCollectorAjoutesUser($identifiant)
-  {
-    // Initialisations
-    $nombreCollector = 0;
-
-    // Requête
-    global $bdd;
-
-    $req = $bdd->query('SELECT COUNT(*) AS nombreCollector
-                        FROM collector
-                        WHERE author = "' . $identifiant . '"');
-
-    $data = $req->fetch();
-
-    $nombreCollector = $data['nombreCollector'];
-
-    $req->closeCursor();
-
-    // Retour
-    return $nombreCollector;
-  }
-
-  // PHYSIQUE : Lecture du nombre de réservations de restaurants
-  // RETOUR : Nombre de réservations
-  function physiqueReservationsUser($identifiant)
-  {
-    // Initialisations
-    $nombreReservations = 0;
-
-    // Requête
-    global $bdd;
-
-    $req = $bdd->query('SELECT COUNT(*) AS nombreReservations
-                        FROM food_advisor_choices
-                        WHERE caller = "' . $identifiant . '"');
-
-    $data = $req->fetch();
-
-    $nombreReservations = $data['nombreReservations'];
-
-    $req->closeCursor();
-
-    // Retour
-    return $nombreReservations;
-  }
-
-  // PHYSIQUE : Lecture du nombre de gâteaux de la semaine
-  // RETOUR : Nombre de gâteaux de la semaine
-  function physiqueGateauxSemaineUser($identifiant)
-  {
-    // Initialisations
-    $nombreGateauxSemaine = 0;
-
-    // Requête
-    global $bdd;
-
-    $req = $bdd->query('SELECT COUNT(*) AS nombreGateauxSemaine
-                        FROM cooking_box
-                        WHERE identifiant = "' . $identifiant . '" AND cooked = "Y"');
-
-    $data = $req->fetch();
-
-    $nombreGateauxSemaine = $data['nombreGateauxSemaine'];
-
-    $req->closeCursor();
-
-    // Retour
-    return $nombreGateauxSemaine;
-  }
-
-  // PHYSIQUE : Lecture du nombre de recettes partagées
-  // RETOUR : Nombre de recettes partagées
-  function physiqueRecettesUser($identifiant)
-  {
-    // Initialisations
-    $nombreRecettes = 0;
-
-    // Requête
-    global $bdd;
-
-    $req = $bdd->query('SELECT COUNT(*) AS nombreRecettes
-                        FROM cooking_box
-                        WHERE identifiant = "' . $identifiant . '" AND name != "" AND picture != ""');
-
-    $data = $req->fetch();
-
-    $nombreRecettes = $data['nombreRecettes'];
-
-    $req->closeCursor();
-
-    // Retour
-    return $nombreRecettes;
-  }
-
-  // PHYSIQUE : Lecture du bilan des dépenses d'un utilisateur
-  // RETOUR : Bilan des dépenses de l'utilisateur
-  function physiqueBilanDepensesUser($identifiant)
-  {
-    // Initialisations
-    $bilanUser = 0;
-
-    // Requête
-    global $bdd;
-
-    $req = $bdd->query('SELECT id, identifiant, expenses
-                        FROM users
-                        WHERE identifiant = "' . $identifiant . '"');
-
-    $data = $req->fetch();
-
-    $bilanUser = $data['expenses'];
-
-    $req->closeCursor();
-
-    // Retour
-    return $bilanUser;
-  }
-
-  // PHYSIQUE : Lecture du nombre d'idées #TheBox soumises d'un utilisateur
-  // RETOUR : Nombre d'idées soumises de l'utilisateur
-  function physiqueTheBoxUser($identifiant)
-  {
-    // Initialisations
-    $nombreTheBox = 0;
-
-    // Requête
-    global $bdd;
-
-    $req = $bdd->query('SELECT COUNT(*) AS nombreTheBox
-                        FROM ideas
-                        WHERE author = "' . $identifiant . '"');
-
-    $data = $req->fetch();
-
-    $nombreTheBox = $data['nombreTheBox'];
-
-    $req->closeCursor();
-
-    // Retour
-    return $nombreTheBox;
-  }
-
-  // PHYSIQUE : Lecture du nombre de bugs / évolutions soumis d'un utilisateur
-  // RETOUR : Nombre de bugs / évolutions soumis de l'utilisateur
-  function physiqueBugsEvolutionsSoumisUser($identifiant, $type)
-  {
-    // Initialisations
-    $nombreSoumis = 0;
-
-    // Requête
-    global $bdd;
-
-    $req = $bdd->query('SELECT COUNT(*) AS nombreSoumis
-                        FROM bugs
-                        WHERE author = "' . $identifiant . '" AND type = "' . $type . '"');
-
-    $data = $req->fetch();
-
-    $nombreSoumis = $data['nombreSoumis'];
-
-    $req->closeCursor();
-
-    // Retour
-    return $nombreSoumis;
-  }
-
-  // PHYSIQUE : Lecture préférences
-  // RETOUR : Objet Preferences
-  function physiquePreferences($identifiant)
-  {
-    // Requête
-    global $bdd;
-
-    $req = $bdd->query('SELECT *
-                        FROM preferences
-                        WHERE identifiant = "' . $identifiant . '"');
-
-    $data = $req->fetch();
-
-    // Instanciation d'un objet Preferences à partir des données remontées de la bdd
-    $preferences = Preferences::withData($data);
-
-    $req->closeCursor();
-
-    // Retour
-    return $preferences;
-  }
-
-  // PHYSIQUE : Lecture de la liste des équipes
-  // RETOUR : Liste des équipes
-  function physiqueListeEquipes()
-  {
-    // Initialisations
-    $listeEquipes = array();
-
-    // Requête
-    global $bdd;
-
-    $req = $bdd->query('SELECT *
-                        FROM teams
-                        WHERE activation = "Y"
-                        ORDER BY team ASC');
-
-    while ($data = $req->fetch())
+    include_once('../../includes/functions/appel_bdd.php');
+
+    /****************************************************************************/
+    /********************************** SELECT **********************************/
+    /****************************************************************************/
+    // PHYSIQUE : Lecture profil
+    // RETOUR : Objet Profile
+    function physiqueProfil($identifiant)
     {
-      // Instanciation d'un objet Team à partir des données remontées de la bdd
-      $equipe = Team::withData($data);
+        // Requête
+        global $bdd;
 
-      // On ajoute la ligne au tableau
-      array_push($listeEquipes, $equipe);
+        $req = $bdd->query('SELECT *
+                            FROM users
+                            WHERE identifiant = "' . $identifiant . '"');
+
+        $data = $req->fetch();
+
+        // Instanciation d'un objet Profile à partir des données remontées de la bdd
+        $profil = Profile::withData($data);
+
+        $req->closeCursor();
+
+        // Retour
+        return $profil;
     }
 
-    $req->closeCursor();
-
-    // Retour
-    return $listeEquipes;
-  }
-
-  // PHYSIQUE : Lecture avatar utilisateur
-  // RETOUR : Avatar
-  function physiqueAvatarUser($identifiant)
-  {
-    // Requête
-    global $bdd;
-
-    $req = $bdd->query('SELECT identifiant, avatar
-                        FROM users
-                        WHERE identifiant = "' . $identifiant . '"');
-
-    $data = $req->fetch();
-
-    $avatar = $data['avatar'];
-
-    $req->closeCursor();
-
-    // Retour
-    return $avatar;
-  }
-
-  // PHYSIQUE : Lecture données mot de passe utilisateur
-  // RETOUR : Données mot de passe
-  function physiqueDonneesPasswordUser($identifiant)
-  {
-    // Requête
-    global $bdd;
-
-    $req = $bdd->query('SELECT id, identifiant, salt, password
-                        FROM users
-                        WHERE identifiant = "' . $identifiant . '"');
-
-    $data = $req->fetch();
-
-    $crypt = array('salt' => $data['salt'], 'password' => $data['password']);
-
-    $req->closeCursor();
-
-    // Retour
-    return $crypt;
-  }
-
-  // PHYSIQUE : Lecture des utilisateurs
-  // RETOUR : Tableau des utilisateurs
-  function physiqueUsers($equipe)
-  {
-    // Initialisations
-    $listeUsers = array();
-
-    global $bdd;
-
-    // Requête
-    $req = $bdd->query('SELECT id, identifiant, team, status, pseudo, avatar, email, experience
-                        FROM users
-                        WHERE identifiant != "admin" AND team = "' . $equipe . '" AND status != "I"
-                        ORDER BY identifiant ASC');
-
-    while ($data = $req->fetch())
+    // PHYSIQUE : Lecture équipe
+    // RETOUR : Objet Team
+    function physiqueEquipe($reference)
     {
-      // Instanciation d'un objet Profile à partir des données remontées de la bdd
-      $user = Profile::withData($data);
+        // Requête
+        global $bdd;
 
-      // On ajoute la ligne au tableau
-      array_push($listeUsers, $user);
+        $req = $bdd->query('SELECT *
+                            FROM teams
+                            WHERE reference = "' . $reference . '"');
+
+        $data = $req->fetch();
+
+        // Instanciation d'un objet Team à partir des données remontées de la bdd
+        $equipe = Team::withData($data);
+
+        $req->closeCursor();
+
+        // Retour
+        return $equipe;
     }
 
-    $req->closeCursor();
-
-    // Retour
-    return $listeUsers;
-  }
-
-  // PHYSIQUE : Lecture des succès
-  // RETOUR : Liste des succès
-  function physiqueListeSuccess()
-  {
-    // Initialisations
-    $listeSuccess = array();
-
-    // Requête
-    global $bdd;
-
-    $req = $bdd->query('SELECT *
-                        FROM success
-                        ORDER BY level ASC, order_success ASC');
-
-    while ($data = $req->fetch())
+    // PHYSIQUE : Lecture du nombre de films ajoutés
+    // RETOUR : Nombre de films ajoutés
+    function physiqueFilmsAjoutesUser($identifiant)
     {
-      // Instanciation d'un objet Success à partir des données remontées de la bdd
-      $success = Success::withData($data);
+        // Initialisations
+        $nombreAjouts = 0;
 
-      // On ajoute la ligne au tableau
-      array_push($listeSuccess, $success);
+        // Requête
+        global $bdd;
+
+        $req = $bdd->query('SELECT COUNT(*) AS nombreAjouts
+                            FROM movie_house
+                            WHERE identifiant_add = "' . $identifiant . '"');
+
+        $data = $req->fetch();
+
+        $nombreAjouts = $data['nombreAjouts'];
+
+        $req->closeCursor();
+
+        // Retour
+        return $nombreAjouts;
     }
 
-    $req->closeCursor();
-
-    // Retour
-    return $listeSuccess;
-  }
-
-  // PHYSIQUE : Lecture des succès de l'utilisateur
-  // RETOUR : Valeur succès
-  function physiqueSuccessUser($reference, $identifiant)
-  {
-    // Initialisations
-    $value = NULL;
-
-    // Requête
-    global $bdd;
-
-    $req = $bdd->query('SELECT *, COUNT(*) AS nombreLignes
-                        FROM success_users
-                        WHERE reference = "' . $reference . '" AND identifiant = "' . $identifiant . '"');
-
-    $data = $req->fetch();
-
-    if ($data['nombreLignes'] > 0)
-      $value = $data['value'];
-
-    $req->closeCursor();
-
-    // Retour
-    return $value;
-  }
-
-  // PHYSIQUE : Lecture des succès des utilisateurs
-  // RETOUR : Liste des utilisateurs
-  function physiqueSuccessUsers($reference, $limite, $user)
-  {
-    // Initialisations
-    $rangSuccess = NULL;
-
-    // Requête
-    global $bdd;
-
-    $req = $bdd->query('SELECT *
-                        FROM success_users
-                        WHERE reference = "' . $reference . '" AND identifiant = "' . $user['identifiant'] . '"');
-
-    $data = $req->fetch();
-
-    // Vérification que l'utilisateur a débloqué le succès pour l'ajouter
-    if ($data AND $data['value'] >= $limite)
+    // PHYSIQUE : Lecture du nombre de commentaires de films ajoutés
+    // RETOUR : Nombre de commentaires ajoutés
+    function physiqueCommentairesFilmsUser($identifiant)
     {
-      // Génération d'un objet Classement
-      $rangSuccess = new Classement();
+        // Initialisations
+        $nombreComments = 0;
 
-      $rangSuccess->setIdentifiant($data['identifiant']);
-      $rangSuccess->setPseudo($user['pseudo']);
-      $rangSuccess->setAvatar($user['avatar']);
-      $rangSuccess->setValue($data['value']);
+        // Requête
+        global $bdd;
+
+        $req = $bdd->query('SELECT COUNT(*) AS nombreComments
+                            FROM movie_house_comments
+                            WHERE author = "' . $identifiant . '"');
+
+        $data = $req->fetch();
+
+        $nombreComments = $data['nombreComments'];
+
+        $req->closeCursor();
+
+        // Retour
+        return $nombreComments;
     }
 
-    $req->closeCursor();
-
-    // Retour
-    return $rangSuccess;
-  }
-
-  // PHYSIQUE : Lecture date de fin de mission
-  // RETOUR : Date
-  function physiqueDateFinMission($reference)
-  {
-    // Initialisations
-    $dateFinMission = '';
-
-    // Requête
-    global $bdd;
-
-    $req = $bdd->query('SELECT *
-                        FROM missions
-                        WHERE reference = "' . $reference . '"');
-
-    $data = $req->fetch();
-
-    if ($data)
-      $dateFinMission = $data['date_fin'];
-
-    $req->closeCursor();
-
-    // Retour
-    return $dateFinMission;
-  }
-
-  // PHYSIQUE : Lecture liste des thèmes
-  // RETOUR : Liste des thèmes
-  function physiqueThemes($type, $niveau)
-  {
-    // Initialisations
-    $listeThemes = array();
-
-    // Requête
-    global $bdd;
-
-    if ($type == 'U')
+    // PHYSIQUE : Lecture du nombre de phrases cultes ajoutées
+    // RETOUR : Nombre de phrases cultes ajoutés
+    function physiqueCollectorAjoutesUser($identifiant)
     {
-      $req = $bdd->query('SELECT *
-                          FROM themes
-                          WHERE type = "' . $type . '" AND level <= ' . $niveau . '
-                          ORDER BY CAST(level AS UNSIGNED) ASC');
-    }
-    else
-    {
-      $req = $bdd->query('SELECT *
-                          FROM themes
-                          WHERE type = "' . $type . '" AND date_deb <= ' . date('Ymd') . '
-                          ORDER BY date_deb DESC');
+        // Initialisations
+        $nombreCollector = 0;
+
+        // Requête
+        global $bdd;
+
+        $req = $bdd->query('SELECT COUNT(*) AS nombreCollector
+                            FROM collector
+                            WHERE author = "' . $identifiant . '"');
+
+        $data = $req->fetch();
+
+        $nombreCollector = $data['nombreCollector'];
+
+        $req->closeCursor();
+
+        // Retour
+        return $nombreCollector;
     }
 
-    while ($data = $req->fetch())
+    // PHYSIQUE : Lecture du nombre de réservations de restaurants
+    // RETOUR : Nombre de réservations
+    function physiqueReservationsUser($identifiant)
     {
-      // Instanciation d'un objet Theme à partir des données remontées de la bdd
-      $theme = Theme::withData($data);
+        // Initialisations
+        $nombreReservations = 0;
 
-      // On ajoute la ligne au tableau
-      array_push($listeThemes, $theme);
+        // Requête
+        global $bdd;
+
+        $req = $bdd->query('SELECT COUNT(*) AS nombreReservations
+                            FROM food_advisor_choices
+                            WHERE caller = "' . $identifiant . '"');
+
+        $data = $req->fetch();
+
+        $nombreReservations = $data['nombreReservations'];
+
+        $req->closeCursor();
+
+        // Retour
+        return $nombreReservations;
     }
 
-    $req->closeCursor();
+    // PHYSIQUE : Lecture du nombre de gâteaux de la semaine
+    // RETOUR : Nombre de gâteaux de la semaine
+    function physiqueGateauxSemaineUser($identifiant)
+    {
+        // Initialisations
+        $nombreGateauxSemaine = 0;
 
-    // Retour
-    return $listeThemes;
-  }
+        // Requête
+        global $bdd;
 
-  // PHYSIQUE : Détermination thème mission en cours
-  // RETOUR : Booléen
-  function physiqueThemeMission()
-  {
-    // Initialisations
-    $isThemeMission = false;
+        $req = $bdd->query('SELECT COUNT(*) AS nombreGateauxSemaine
+                            FROM cooking_box
+                            WHERE identifiant = "' . $identifiant . '" AND cooked = "Y"');
 
-    // Requête
-    global $bdd;
+        $data = $req->fetch();
 
-    $req = $bdd->query('SELECT COUNT(*) AS nombreLignes
-                        FROM themes
-                        WHERE type = "M" AND date_deb <= ' . date('Ymd') . ' AND date_fin >= ' . date('Ymd') . '
-                        ORDER BY id ASC');
+        $nombreGateauxSemaine = $data['nombreGateauxSemaine'];
 
-    $data = $req->fetch();
+        $req->closeCursor();
 
-    if ($data['nombreLignes'] > 0)
-      $isThemeMission = true;
+        // Retour
+        return $nombreGateauxSemaine;
+    }
 
-    $req->closeCursor();
+    // PHYSIQUE : Lecture du nombre de recettes partagées
+    // RETOUR : Nombre de recettes partagées
+    function physiqueRecettesUser($identifiant)
+    {
+        // Initialisations
+        $nombreRecettes = 0;
 
-    // Retour
-    return $isThemeMission;
-  }
+        // Requête
+        global $bdd;
 
-  // PHYSIQUE : Lecture référence thème
-  // RETOUR : Référence thème
-  function physiqueReferenceTheme($idTheme)
-  {
-    // Requête
-    global $bdd;
+        $req = $bdd->query('SELECT COUNT(*) AS nombreRecettes
+                            FROM cooking_box
+                            WHERE identifiant = "' . $identifiant . '" AND name != "" AND picture != ""');
 
-    $req = $bdd->query('SELECT *
-                        FROM themes
-                        WHERE id = ' . $idTheme);
+        $data = $req->fetch();
 
-    $data = $req->fetch();
+        $nombreRecettes = $data['nombreRecettes'];
 
-    $referenceTheme = $data['reference'];
+        $req->closeCursor();
 
-    $req->closeCursor();
+        // Retour
+        return $nombreRecettes;
+    }
 
-    // Retour
-    return $referenceTheme;
-  }
+    // PHYSIQUE : Lecture du bilan des dépenses d'un utilisateur
+    // RETOUR : Bilan des dépenses de l'utilisateur
+    function physiqueBilanDepensesUser($identifiant)
+    {
+        // Initialisations
+        $bilanUser = 0;
 
-  /****************************************************************************/
-  /********************************** INSERT **********************************/
-  /****************************************************************************/
-  // PHYSIQUE : Insertion nouvelle équipe
-  // RETOUR : Aucun
-  function physiqueInsertionEquipe($equipe)
-  {
-    // Requête
-    global $bdd;
+        // Requête
+        global $bdd;
 
-    $req = $bdd->prepare('INSERT INTO teams(reference,
-                                            team,
-                                            activation)
-                                    VALUES(:reference,
-                                           :team,
-                                           :activation)');
+        $req = $bdd->query('SELECT id, identifiant, expenses
+                            FROM users
+                            WHERE identifiant = "' . $identifiant . '"');
 
-    $req->execute($equipe);
+        $data = $req->fetch();
 
-    $req->closeCursor();
-  }
+        $bilanUser = $data['expenses'];
 
-  /****************************************************************************/
-  /********************************** UPDATE **********************************/
-  /****************************************************************************/
-  // PHYSIQUE : Mise à jour avatar
-  // RETOUR : Aucun
-  function physiqueUpdateAvatarUser($identifiant, $avatar)
-  {
-    // Requête
-    global $bdd;
+        $req->closeCursor();
 
-    $req = $bdd->prepare('UPDATE users
-                          SET avatar = :avatar
-                          WHERE identifiant = "' . $identifiant . '"');
+        // Retour
+        return $bilanUser;
+    }
 
-    $req->execute(array(
-      'avatar' => $avatar
-    ));
+    // PHYSIQUE : Lecture du nombre d'idées #TheBox soumises d'un utilisateur
+    // RETOUR : Nombre d'idées soumises de l'utilisateur
+    function physiqueTheBoxUser($identifiant)
+    {
+        // Initialisations
+        $nombreTheBox = 0;
 
-    $req->closeCursor();
-  }
+        // Requête
+        global $bdd;
 
-  // PHYSIQUE : Mise à jour utilisateur
-  // RETOUR : Aucun
-  function physiqueUpdateUser($user, $identifiant)
-  {
-    // Requête
-    global $bdd;
+        $req = $bdd->query('SELECT COUNT(*) AS nombreTheBox
+                            FROM ideas
+                            WHERE author = "' . $identifiant . '"');
 
-    $req = $bdd->prepare('UPDATE users
-                          SET pseudo      = :pseudo,
-                              email       = :email,
-                              anniversary = :anniversary
-                          WHERE identifiant = "' . $identifiant . '"');
+        $data = $req->fetch();
 
-    $req->execute($user);
+        $nombreTheBox = $data['nombreTheBox'];
 
-    $req->closeCursor();
-  }
+        $req->closeCursor();
 
-  // PHYSIQUE : Changement équipe utilisateur
-  // RETOUR : Aucun
-  function physiqueUpdateEquipeUser($equipeUser, $identifiant)
-  {
-    // Requête
-    global $bdd;
+        // Retour
+        return $nombreTheBox;
+    }
 
-    $req = $bdd->prepare('UPDATE users
-                          SET new_team = :new_team,
-                              status   = :status
-                          WHERE identifiant = "' . $identifiant . '"');
+    // PHYSIQUE : Lecture du nombre de bugs / évolutions soumis d'un utilisateur
+    // RETOUR : Nombre de bugs / évolutions soumis de l'utilisateur
+    function physiqueBugsEvolutionsSoumisUser($identifiant, $type)
+    {
+        // Initialisations
+        $nombreSoumis = 0;
 
-    $req->execute($equipeUser);
+        // Requête
+        global $bdd;
 
-    $req->closeCursor();
-  }
+        $req = $bdd->query('SELECT COUNT(*) AS nombreSoumis
+                            FROM bugs
+                            WHERE author = "' . $identifiant . '" AND type = "' . $type . '"');
 
-  // PHYSIQUE : Mise à jour préférences
-  // RETOUR : Aucun
-  function physiqueUpdatePreferences($preferences, $identifiant)
-  {
-    // Requête
-    global $bdd;
+        $data = $req->fetch();
 
-    $req = $bdd->prepare('UPDATE preferences
-                          SET init_chat              = :init_chat,
-                              celsius                = :celsius,
-                              view_movie_house       = :view_movie_house,
-                              categories_movie_house = :categories_movie_house,
-                              view_the_box           = :view_the_box,
-                              view_notifications     = :view_notifications
-                          WHERE identifiant = "' . $identifiant . '"');
+        $nombreSoumis = $data['nombreSoumis'];
 
-    $req->execute($preferences);
+        $req->closeCursor();
 
-    $req->closeCursor();
-  }
+        // Retour
+        return $nombreSoumis;
+    }
 
-  // PHYSIQUE : Mise à jour mot de passe
-  // RETOUR : Aucun
-  function physiqueUpdatePasswordUser($salt, $password, $identifiant)
-  {
-    // Requête
-    global $bdd;
+    // PHYSIQUE : Lecture préférences
+    // RETOUR : Objet Preferences
+    function physiquePreferences($identifiant)
+    {
+        // Requête
+        global $bdd;
 
-    $req = $bdd->prepare('UPDATE users
-                          SET salt     = :salt,
-                              password = :password
-                          WHERE identifiant = "' . $identifiant . '"');
+        $req = $bdd->query('SELECT *
+                            FROM preferences
+                            WHERE identifiant = "' . $identifiant . '"');
 
-    $req->execute(array(
-      'salt'     => $salt,
-      'password' => $password
-    ));
+        $data = $req->fetch();
 
-    $req->closeCursor();
-  }
+        // Instanciation d'un objet Preferences à partir des données remontées de la bdd
+        $preferences = Preferences::withData($data);
 
-  // PHYSIQUE : Mise à jour statut utilisateur
-  // RETOUR : Aucun
-  function physiqueUpdateStatusUser($identifiant, $status)
-  {
-    // Requête
-    global $bdd;
+        $req->closeCursor();
 
-    $req = $bdd->prepare('UPDATE users
-                          SET status = :status
-                          WHERE identifiant = "' . $identifiant . '"');
+        // Retour
+        return $preferences;
+    }
 
-    $req->execute(array(
-      'status' => $status
-    ));
+    // PHYSIQUE : Lecture de la liste des équipes
+    // RETOUR : Liste des équipes
+    function physiqueListeEquipes()
+    {
+        // Initialisations
+        $listeEquipes = array();
 
-    $req->closeCursor();
-  }
+        // Requête
+        global $bdd;
 
-  // PHYSIQUE : Mise à jour police utilisateur
-  // RETOUR : Aucun
-  function physiqueUpdateFont($identifiant, $police)
-  {
-    // Requête
-    global $bdd;
+        $req = $bdd->query('SELECT *
+                            FROM teams
+                            WHERE activation = "Y"
+                            ORDER BY team ASC');
 
-    $req = $bdd->prepare('UPDATE preferences
-                          SET font = :font
-                          WHERE identifiant = "' . $identifiant . '"');
+        while ($data = $req->fetch())
+        {
+            // Instanciation d'un objet Team à partir des données remontées de la bdd
+            $equipe = Team::withData($data);
 
-    $req->execute(array(
-      'font' => $police
-    ));
+            // On ajoute la ligne au tableau
+            array_push($listeEquipes, $equipe);
+        }
 
-    $req->closeCursor();
-  }
+        $req->closeCursor();
 
-  // PHYSIQUE : Mise à jour thème utilisateur
-  // RETOUR : Aucun
-  function physiqueUpdateTheme($identifiant, $referenceTheme)
-  {
-    // Requête
-    global $bdd;
+        // Retour
+        return $listeEquipes;
+    }
 
-    $req = $bdd->prepare('UPDATE preferences
-                          SET ref_theme = :ref_theme
-                          WHERE identifiant = "' . $identifiant . '"');
+    // PHYSIQUE : Lecture avatar utilisateur
+    // RETOUR : Avatar
+    function physiqueAvatarUser($identifiant)
+    {
+        // Requête
+        global $bdd;
 
-    $req->execute(array(
-      'ref_theme' => $referenceTheme
-    ));
+        $req = $bdd->query('SELECT identifiant, avatar
+                            FROM users
+                            WHERE identifiant = "' . $identifiant . '"');
 
-    $req->closeCursor();
-  }
+        $data = $req->fetch();
+
+        $avatar = $data['avatar'];
+
+        $req->closeCursor();
+
+        // Retour
+        return $avatar;
+    }
+
+    // PHYSIQUE : Lecture données mot de passe utilisateur
+    // RETOUR : Données mot de passe
+    function physiqueDonneesPasswordUser($identifiant)
+    {
+        // Requête
+        global $bdd;
+
+        $req = $bdd->query('SELECT id, identifiant, salt, password
+                            FROM users
+                            WHERE identifiant = "' . $identifiant . '"');
+
+        $data = $req->fetch();
+
+        $crypt = array('salt' => $data['salt'], 'password' => $data['password']);
+
+        $req->closeCursor();
+
+        // Retour
+        return $crypt;
+    }
+
+    // PHYSIQUE : Lecture des utilisateurs
+    // RETOUR : Tableau des utilisateurs
+    function physiqueUsers($equipe)
+    {
+        // Initialisations
+        $listeUsers = array();
+
+        global $bdd;
+
+        // Requête
+        $req = $bdd->query('SELECT id, identifiant, team, status, pseudo, avatar, email, experience
+                            FROM users
+                            WHERE identifiant != "admin" AND team = "' . $equipe . '" AND status != "I"
+                            ORDER BY identifiant ASC');
+
+        while ($data = $req->fetch())
+        {
+            // Instanciation d'un objet Profile à partir des données remontées de la bdd
+            $user = Profile::withData($data);
+
+            // On ajoute la ligne au tableau
+            array_push($listeUsers, $user);
+        }
+
+        $req->closeCursor();
+
+        // Retour
+        return $listeUsers;
+    }
+
+    // PHYSIQUE : Lecture des succès
+    // RETOUR : Liste des succès
+    function physiqueListeSuccess()
+    {
+        // Initialisations
+        $listeSuccess = array();
+
+        // Requête
+        global $bdd;
+
+        $req = $bdd->query('SELECT *
+                            FROM success
+                            ORDER BY level ASC, order_success ASC');
+
+        while ($data = $req->fetch())
+        {
+            // Instanciation d'un objet Success à partir des données remontées de la bdd
+            $success = Success::withData($data);
+
+            // On ajoute la ligne au tableau
+            array_push($listeSuccess, $success);
+        }
+
+        $req->closeCursor();
+
+        // Retour
+        return $listeSuccess;
+    }
+
+    // PHYSIQUE : Lecture des succès de l'utilisateur
+    // RETOUR : Valeur succès
+    function physiqueSuccessUser($reference, $identifiant)
+    {
+        // Initialisations
+        $value = NULL;
+
+        // Requête
+        global $bdd;
+
+        $req = $bdd->query('SELECT *, COUNT(*) AS nombreLignes
+                            FROM success_users
+                            WHERE reference = "' . $reference . '" AND identifiant = "' . $identifiant . '"');
+
+        $data = $req->fetch();
+
+        if ($data['nombreLignes'] > 0)
+            $value = $data['value'];
+
+        $req->closeCursor();
+
+        // Retour
+        return $value;
+    }
+
+    // PHYSIQUE : Lecture des succès des utilisateurs
+    // RETOUR : Liste des utilisateurs
+    function physiqueSuccessUsers($reference, $limite, $user)
+    {
+        // Initialisations
+        $rangSuccess = NULL;
+
+        // Requête
+        global $bdd;
+
+        $req = $bdd->query('SELECT *
+                            FROM success_users
+                            WHERE reference = "' . $reference . '" AND identifiant = "' . $user['identifiant'] . '"');
+
+        $data = $req->fetch();
+
+        // Vérification que l'utilisateur a débloqué le succès pour l'ajouter
+        if ($data AND $data['value'] >= $limite)
+        {
+            // Génération d'un objet Classement
+            $rangSuccess = new Classement();
+
+            $rangSuccess->setIdentifiant($data['identifiant']);
+            $rangSuccess->setPseudo($user['pseudo']);
+            $rangSuccess->setAvatar($user['avatar']);
+            $rangSuccess->setValue($data['value']);
+        }
+
+        $req->closeCursor();
+
+        // Retour
+        return $rangSuccess;
+    }
+
+    // PHYSIQUE : Lecture date de fin de mission
+    // RETOUR : Date
+    function physiqueDateFinMission($reference)
+    {
+        // Initialisations
+        $dateFinMission = '';
+
+        // Requête
+        global $bdd;
+
+        $req = $bdd->query('SELECT *
+                            FROM missions
+                            WHERE reference = "' . $reference . '"');
+
+        $data = $req->fetch();
+
+        if ($data)
+            $dateFinMission = $data['date_fin'];
+
+        $req->closeCursor();
+
+        // Retour
+        return $dateFinMission;
+    }
+
+    // PHYSIQUE : Lecture liste des thèmes
+    // RETOUR : Liste des thèmes
+    function physiqueThemes($type, $niveau)
+    {
+        // Initialisations
+        $listeThemes = array();
+
+        // Requête
+        global $bdd;
+
+        if ($type == 'U')
+        {
+            $req = $bdd->query('SELECT *
+                            FROM themes
+                            WHERE type = "' . $type . '" AND level <= ' . $niveau . '
+                            ORDER BY CAST(level AS UNSIGNED) ASC');
+        }
+        else
+        {
+            $req = $bdd->query('SELECT *
+                            FROM themes
+                            WHERE type = "' . $type . '" AND date_deb <= ' . date('Ymd') . '
+                            ORDER BY date_deb DESC');
+        }
+
+        while ($data = $req->fetch())
+        {
+            // Instanciation d'un objet Theme à partir des données remontées de la bdd
+            $theme = Theme::withData($data);
+
+            // On ajoute la ligne au tableau
+            array_push($listeThemes, $theme);
+        }
+
+        $req->closeCursor();
+
+        // Retour
+        return $listeThemes;
+    }
+
+    // PHYSIQUE : Détermination thème mission en cours
+    // RETOUR : Booléen
+    function physiqueThemeMission()
+    {
+        // Initialisations
+        $isThemeMission = false;
+
+        // Requête
+        global $bdd;
+
+        $req = $bdd->query('SELECT COUNT(*) AS nombreLignes
+                            FROM themes
+                            WHERE type = "M" AND date_deb <= ' . date('Ymd') . ' AND date_fin >= ' . date('Ymd') . '
+                            ORDER BY id ASC');
+
+        $data = $req->fetch();
+
+        if ($data['nombreLignes'] > 0)
+            $isThemeMission = true;
+
+        $req->closeCursor();
+
+        // Retour
+        return $isThemeMission;
+    }
+
+    // PHYSIQUE : Lecture référence thème
+    // RETOUR : Référence thème
+    function physiqueReferenceTheme($idTheme)
+    {
+        // Requête
+        global $bdd;
+
+        $req = $bdd->query('SELECT *
+                            FROM themes
+                            WHERE id = ' . $idTheme);
+
+        $data = $req->fetch();
+
+        $referenceTheme = $data['reference'];
+
+        $req->closeCursor();
+
+        // Retour
+        return $referenceTheme;
+    }
+
+    /****************************************************************************/
+    /********************************** INSERT **********************************/
+    /****************************************************************************/
+    // PHYSIQUE : Insertion nouvelle équipe
+    // RETOUR : Aucun
+    function physiqueInsertionEquipe($equipe)
+    {
+        // Requête
+        global $bdd;
+
+        $req = $bdd->prepare('INSERT INTO teams(reference,
+                                                team,
+                                                activation)
+                                        VALUES(:reference,
+                                            :team,
+                                            :activation)');
+
+        $req->execute($equipe);
+
+        $req->closeCursor();
+    }
+
+    /****************************************************************************/
+    /********************************** UPDATE **********************************/
+    /****************************************************************************/
+    // PHYSIQUE : Mise à jour avatar
+    // RETOUR : Aucun
+    function physiqueUpdateAvatarUser($identifiant, $avatar)
+    {
+        // Requête
+        global $bdd;
+
+        $req = $bdd->prepare('UPDATE users
+                              SET avatar = :avatar
+                              WHERE identifiant = "' . $identifiant . '"');
+
+        $req->execute(array(
+            'avatar' => $avatar
+        ));
+
+        $req->closeCursor();
+    }
+
+    // PHYSIQUE : Mise à jour utilisateur
+    // RETOUR : Aucun
+    function physiqueUpdateUser($user, $identifiant)
+    {
+        // Requête
+        global $bdd;
+
+        $req = $bdd->prepare('UPDATE users
+                              SET pseudo      = :pseudo,
+                                  email       = :email,
+                                  anniversary = :anniversary
+                              WHERE identifiant = "' . $identifiant . '"');
+
+        $req->execute($user);
+
+        $req->closeCursor();
+    }
+
+    // PHYSIQUE : Changement équipe utilisateur
+    // RETOUR : Aucun
+    function physiqueUpdateEquipeUser($equipeUser, $identifiant)
+    {
+        // Requête
+        global $bdd;
+
+        $req = $bdd->prepare('UPDATE users
+                              SET new_team = :new_team,
+                                  status   = :status
+                              WHERE identifiant = "' . $identifiant . '"');
+
+        $req->execute($equipeUser);
+
+        $req->closeCursor();
+    }
+
+    // PHYSIQUE : Mise à jour préférences
+    // RETOUR : Aucun
+    function physiqueUpdatePreferences($preferences, $identifiant)
+    {
+        // Requête
+        global $bdd;
+
+        $req = $bdd->prepare('UPDATE preferences
+                              SET init_chat              = :init_chat,
+                                  celsius                = :celsius,
+                                  view_movie_house       = :view_movie_house,
+                                  categories_movie_house = :categories_movie_house,
+                                  view_the_box           = :view_the_box,
+                                  view_notifications     = :view_notifications
+                              WHERE identifiant = "' . $identifiant . '"');
+
+        $req->execute($preferences);
+
+        $req->closeCursor();
+    }
+
+    // PHYSIQUE : Mise à jour mot de passe
+    // RETOUR : Aucun
+    function physiqueUpdatePasswordUser($salt, $password, $identifiant)
+    {
+        // Requête
+        global $bdd;
+
+        $req = $bdd->prepare('UPDATE users
+                              SET salt     = :salt,
+                                  password = :password
+                              WHERE identifiant = "' . $identifiant . '"');
+
+        $req->execute(array(
+            'salt'     => $salt,
+            'password' => $password
+        ));
+
+        $req->closeCursor();
+    }
+
+    // PHYSIQUE : Mise à jour statut utilisateur
+    // RETOUR : Aucun
+    function physiqueUpdateStatusUser($identifiant, $status)
+    {
+        // Requête
+        global $bdd;
+
+        $req = $bdd->prepare('UPDATE users
+                              SET status = :status
+                              WHERE identifiant = "' . $identifiant . '"');
+
+        $req->execute(array(
+            'status' => $status
+        ));
+
+        $req->closeCursor();
+    }
+
+    // PHYSIQUE : Mise à jour police utilisateur
+    // RETOUR : Aucun
+    function physiqueUpdateFont($identifiant, $police)
+    {
+        // Requête
+        global $bdd;
+
+        $req = $bdd->prepare('UPDATE preferences
+                              SET font = :font
+                              WHERE identifiant = "' . $identifiant . '"');
+
+        $req->execute(array(
+            'font' => $police
+        ));
+
+        $req->closeCursor();
+    }
+
+    // PHYSIQUE : Mise à jour thème utilisateur
+    // RETOUR : Aucun
+    function physiqueUpdateTheme($identifiant, $referenceTheme)
+    {
+        // Requête
+        global $bdd;
+
+        $req = $bdd->prepare('UPDATE preferences
+                              SET ref_theme = :ref_theme
+                              WHERE identifiant = "' . $identifiant . '"');
+
+        $req->execute(array(
+            'ref_theme' => $referenceTheme
+        ));
+
+        $req->closeCursor();
+    }
 ?>
