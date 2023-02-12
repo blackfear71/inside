@@ -22,10 +22,10 @@
         <!-- Entête -->
         <header>
             <?php
-            $title = 'Missions : Insider';
+                $title = 'Missions : Insider';
 
-            include('../../includes/common/web/header.php');
-            include('../../includes/common/web/onglets.php');
+                include('../../includes/common/web/header.php');
+                include('../../includes/common/web/onglets.php');
             ?>
         </header>
 
