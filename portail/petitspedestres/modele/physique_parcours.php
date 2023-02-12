@@ -1,134 +1,134 @@
 <?php
-  include_once('../../includes/functions/appel_bdd.php');
+    include_once('../../includes/functions/appel_bdd.php');
 
-  /****************************************************************************/
-  /********************************** SELECT **********************************/
-  /****************************************************************************/
-  // PHYSIQUE : Lecture liste des parcours
-  // RETOUR : Liste des parcours
-  function physiqueListeParcours($equipe)
-  {
-    // Initialisations
-    $listeParcours = array();
-
-    // Requête
-    global $bdd;
-
-    $req = $bdd->query('SELECT *
-                        FROM petits_pedestres_parcours
-                        WHERE team = "' . $equipe . '"
-                        ORDER BY nom ASC');
-
-    while ($data = $req->fetch())
+    /****************************************************************************/
+    /********************************** SELECT **********************************/
+    /****************************************************************************/
+    // PHYSIQUE : Lecture liste des parcours
+    // RETOUR : Liste des parcours
+    function physiqueListeParcours($equipe)
     {
-      // Instanciation d'un objet Parcours à partir des données remontées de la bdd
-      $parcours = Parcours::withData($data);
+        // Initialisations
+        $listeParcours = array();
 
-      // On ajoute la ligne au tableau
-      array_push($listeParcours, $parcours);
+        // Requête
+        global $bdd;
+
+        $req = $bdd->query('SELECT *
+                            FROM petits_pedestres_parcours
+                            WHERE team = "' . $equipe . '"
+                            ORDER BY nom ASC');
+
+        while ($data = $req->fetch())
+        {
+            // Instanciation d'un objet Parcours à partir des données remontées de la bdd
+            $parcours = Parcours::withData($data);
+
+            // On ajoute la ligne au tableau
+            array_push($listeParcours, $parcours);
+        }
+
+        $req->closeCursor();
+
+        // Retour
+        return $listeParcours;
     }
 
-    $req->closeCursor();
+    // PHYSIQUE : Lecture parcours disponible
+    // RETOUR : Booléen
+    function physiqueParcoursDisponible($idParcours, $equipe)
+    {
+        // Initialisations
+        $parcoursExistant = false;
 
-    // Retour
-    return $listeParcours;
-  }
+        // Requête
+        global $bdd;
 
-  // PHYSIQUE : Lecture parcours disponible
-  // RETOUR : Booléen
-  function physiqueParcoursDisponible($idParcours, $equipe)
-  {
-    // Initialisations
-    $parcoursExistant = false;
+        $req = $bdd->query('SELECT COUNT(*) AS nombreLignes
+                            FROM petits_pedestres_parcours
+                            WHERE id = ' . $idParcours . ' AND team = "' . $equipe . '"');
 
-    // Requête
-    global $bdd;
+        $data = $req->fetch();
 
-    $req = $bdd->query('SELECT COUNT(*) AS nombreLignes
-                        FROM petits_pedestres_parcours
-                        WHERE id = ' . $idParcours . ' AND team = "' . $equipe . '"');
+        if ($data['nombreLignes'] > 0)
+            $parcoursExistant = true;
 
-    $data = $req->fetch();
+        $req->closeCursor();
 
-    if ($data['nombreLignes'] > 0)
-      $parcoursExistant = true;
+        // Retour
+        return $parcoursExistant;
+    }
 
-    $req->closeCursor();
+    // PHYSIQUE : Lecture d'un parcours
+    // RETOUR : Objet parcours
+    function physiqueParcours($idParcours)
+    {
+        // Requête
+        global $bdd;
 
-    // Retour
-    return $parcoursExistant;
-  }
+        $req = $bdd->query('SELECT *
+                            FROM petits_pedestres_parcours
+                            WHERE id = ' . $idParcours);
 
-  // PHYSIQUE : Lecture d'un parcours
-  // RETOUR : Objet parcours
-  function physiqueParcours($idParcours)
-  {
-    // Requête
-    global $bdd;
+        $data = $req->fetch();
 
-    $req = $bdd->query('SELECT *
-                        FROM petits_pedestres_parcours
-                        WHERE id = ' . $idParcours);
+        // Instanciation d'un objet Parcours à partir des données remontées de la bdd
+        $parcours = Parcours::withData($data);
 
-    $data = $req->fetch();
+        $req->closeCursor();
 
-    // Instanciation d'un objet Parcours à partir des données remontées de la bdd
-    $parcours = Parcours::withData($data);
+        // Retour
+        return $parcours;
+    }
 
-    $req->closeCursor();
+    /****************************************************************************/
+    /********************************** INSERT **********************************/
+    /****************************************************************************/
+    // PHYSIQUE : Insertion nouveau parcours
+    // RETOUR : Aucun
+    function physiqueInsertionParcours($parcours)
+    {
+        // Requête
+        global $bdd;
 
-    // Retour
-    return $parcours;
-  }
+        $req = $bdd->prepare('INSERT INTO petits_pedestres_parcours(team,
+                                                                    nom,
+                                                                    distance,
+                                                                    lieu,
+                                                                    url,
+                                                                    type)
+                                                            VALUES(:team,
+                                                                   :nom,
+                                                                   :distance,
+                                                                   :lieu,
+                                                                   :url,
+                                                                   :type)');
 
-  /****************************************************************************/
-  /********************************** INSERT **********************************/
-  /****************************************************************************/
-  // PHYSIQUE : Insertion nouveau parcours
-  // RETOUR : Aucun
-  function physiqueInsertionParcours($parcours)
-  {
-    // Requête
-    global $bdd;
+        $req->execute($parcours);
 
-    $req = $bdd->prepare('INSERT INTO petits_pedestres_parcours(team,
-                                                                nom,
-                                                                distance,
-                                                                lieu,
-                                                                url,
-                                                                type)
-                                                        VALUES(:team,
-                                                               :nom,
-                                                               :distance,
-                                                               :lieu,
-                                                               :url,
-                                                               :type)');
+        $req->closeCursor();
+    }
 
-    $req->execute($parcours);
+    /****************************************************************************/
+    /********************************** UPDATE **********************************/
+    /****************************************************************************/
+    // PHYSIQUE : Mise à jour parcours
+    // RETOUR : Aucun
+    function physiqueUpdateParcours($idParcours, $parcours)
+    {
+        // Requête
+        global $bdd;
 
-    $req->closeCursor();
-  }
+        $req = $bdd->prepare('UPDATE petits_pedestres_parcours
+                              SET nom      = :nom,
+                                  distance = :distance,
+                                  lieu     = :lieu,
+                                  url      = :url,
+                                  type     = :type
+                              WHERE id     = ' . $idParcours);
 
-  /****************************************************************************/
-  /********************************** UPDATE **********************************/
-  /****************************************************************************/
-  // PHYSIQUE : Mise à jour parcours
-  // RETOUR : Aucun
-  function physiqueUpdateParcours($idParcours, $parcours)
-  {
-    // Requête
-    global $bdd;
+        $req->execute($parcours);
 
-    $req = $bdd->prepare('UPDATE petits_pedestres_parcours
-                          SET nom      = :nom,
-                              distance = :distance,
-                              lieu     = :lieu,
-                              url      = :url,
-                              type     = :type
-                          WHERE id     = ' . $idParcours);
-
-    $req->execute($parcours);
-
-    $req->closeCursor();
-  }
+        $req->closeCursor();
+    }
 ?>
