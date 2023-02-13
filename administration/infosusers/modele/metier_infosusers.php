@@ -72,7 +72,12 @@
                 $listeUsersParEquipe[$user->getTeam()] = array();
 
             array_push($listeUsersParEquipe[$user->getTeam()], $user);
+            
+            $triEquipe[] = $user->getTeam();
         }
+
+        // Tri
+        array_multisort($triEquipe, SORT_ASC, $listeUsersParEquipe);
 
         // Retour
         return $listeUsersParEquipe;

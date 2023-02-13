@@ -46,6 +46,9 @@
                             echo '</form>';
                         echo '</div>';
 
+                        // Référence de l'équipe
+                        echo '<div class="sous_titre_gestion_equipe">(' . $equipe->getReference() . ')</div>';
+
                         // Nombre de membres
                         echo '<div class="zone_membres_equipe">';
                             echo '<div class="nombre_membres_equipes">' . $equipe->getNombre_users() . '</div>';
