@@ -38,15 +38,21 @@
             else
                 $team = 'new_users';
 
+            // Ajout de l'utilisateur à son équipe
             if (!isset($listeUsersParEquipe[$team]))
                 $listeUsersParEquipe[$team] = array();
 
             array_push($listeUsersParEquipe[$team], $user);
+
+            $triEquipe[] = $user->getTeam();
         }
 
         // Suppression du tableau des nouveaux utilisateurs si vide
         if (empty($listeUsersParEquipe['new_users']))
             unset($listeUsersParEquipe['new_users']);
+
+        // Tri
+        array_multisort($triEquipe, SORT_ASC, $listeUsersParEquipe);
 
         // Retour
         return $listeUsersParEquipe;
