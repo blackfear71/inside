@@ -5,2824 +5,2824 @@
 /*** Commun ***/
 .zone_propositions_determination
 {
-	width: 100%;
-	margin-left: auto;
-	margin-right: auto;
-	display: none;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    display: none;
 }
 
 .zone_actions_propositions
 {
-	float: right;
-	margin-top: -5px;
+    float: right;
+    margin-top: -5px;
 }
 
 .form_action_propositions
 {
-	display: inline-block;
+    display: inline-block;
 }
 
 .bouton_determination
 {
-	border: 0;
-	background-color: #d3d3d3;
-	margin-left: 10px;
-	padding: 5px 10px 5px 10px;
-	border-radius: 2px;
-	font-family: inside_font_medium, Verdana, sans-serif;
-	font-size: 60%;
-	color: #262626;
-	cursor: pointer;
+    border: 0;
+    background-color: #d3d3d3;
+    margin-left: 10px;
+    padding: 5px 10px 5px 10px;
+    border-radius: 2px;
+    font-family: inside_font_medium, Verdana, sans-serif;
+    font-size: 60%;
+    color: #262626;
+    cursor: pointer;
 }
 
 .bouton_determination:hover
 {
-	background-color: #ff1937;
-	color: white;
+    background-color: #ff1937;
+    color: white;
 }
 
 .image_refresh
 {
-	vertical-align: middle;
-	width: 29px;
-	margin-top: 2px;
-	margin-left: 10px;
-	transform: rotate(0deg);
-	transition: transform 0.2s ease;
+    vertical-align: middle;
+    width: 29px;
+    margin-top: 2px;
+    margin-left: 10px;
+    transform: rotate(0deg);
+    transition: transform 0.2s ease;
 }
 
 .image_refresh:hover
 {
-	transform: rotate(135deg);
-	transition: transform 0.2s ease;
+    transform: rotate(135deg);
+    transition: transform 0.2s ease;
 }
 
 .zone_propositions
 {
-	margin-left: auto;
-	margin-right: auto;
-	width: 100%;
-	opacity: 0;
-	transition: opacity 0.2s;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    opacity: 0;
+    transition: opacity 0.2s;
 }
 
 .zone_propositions.masonry
 {
-	opacity: 1;
+    opacity: 1;
 }
 
 .zone_proposition
 {
-	width: 180px;
-	vertical-align: top;
-	margin-bottom: 20px;
-	border-radius: 2px;
-	box-shadow: 0 0 3px #7c7c7c;
-	overflow: hidden;
-	padding-left: 10px;
-	padding-right: 10px;
-	text-align: center;
-	background-color: white;
+    width: 180px;
+    vertical-align: top;
+    margin-bottom: 20px;
+    border-radius: 2px;
+    box-shadow: 0 0 3px #7c7c7c;
+    overflow: hidden;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: center;
+    background-color: white;
 }
 
 .close_add
 {
-	float: right;
-	width: 30px;
-	height: 30px;
-	margin-top: -40px;
-	margin-right: 10px;
-	cursor: pointer;
-	text-align: center;
+    float: right;
+    width: 30px;
+    height: 30px;
+    margin-top: -40px;
+    margin-right: 10px;
+    cursor: pointer;
+    text-align: center;
 }
 
 .close_img
 {
-	width: 20px;
-	padding: 5px;
-	transform: rotate(0deg);
-	transition: transform 0.2s ease;
+    width: 20px;
+    padding: 5px;
+    transform: rotate(0deg);
+    transition: transform 0.2s ease;
 }
 
 .close_img:hover
 {
-	transform: rotate(90deg);
-	transition: transform 0.2s ease;
+    transform: rotate(90deg);
+    transition: transform 0.2s ease;
 }
 
 /*** Saisie propositions ***/
 .zone_saisie_propositions
 {
-	width: 85%;
-	margin-top: 50px;
-	margin-left: auto;
-	margin-right: auto;
-	border-radius: 2px;
-	overflow: hidden;
+    width: 85%;
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 2px;
+    overflow: hidden;
 }
 
 .form_saisie_propositions
 {
-	width: 100%;
-	margin-left: auto;
-	margin-right: auto;
-	background-color: white;
-	border-top: solid 1px #d3d3d3;
-	color: #262626;
-	max-height: calc(100vh - 150px);
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: white;
+    border-top: solid 1px #d3d3d3;
+    color: #262626;
+    max-height: calc(100vh - 150px);
 }
 
 .form_saisie_propositions .zone_loading_form
 {
-	width: 30%;
-	margin-left: auto;
-	margin-right: auto;
-	padding-top: 28.5px;
-	padding-bottom: 28.5px;
+    width: 30%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 28.5px;
+    padding-bottom: 28.5px;
 }
 
 .zone_saisie_proposition
 {
-	display: block;
-	width: 100%;
-	min-height: 60px;
-	margin-bottom: 10px;
-	border-radius: 2px;
-	box-shadow: 0 0 3px #7c7c7c;
-	overflow: hidden;
-	background-color: #e3e3e3;
+    display: block;
+    width: 100%;
+    min-height: 60px;
+    margin-bottom: 10px;
+    border-radius: 2px;
+    box-shadow: 0 0 3px #7c7c7c;
+    overflow: hidden;
+    background-color: #e3e3e3;
 }
 
 .zone_image_proposition
 {
-	display: inline-block;
-	vertical-align: middle;
-	text-align: center;
-	width: 50px;
-	height: 50px;
-	line-height: 45px;
-	padding: 5px;
-	background-color: #d3d3d3;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+    width: 50px;
+    height: 50px;
+    line-height: 45px;
+    padding: 5px;
+    background-color: #d3d3d3;
 }
 
 .image_proposition
 {
-	vertical-align: middle;
-	width: 40px;
-	height: 40px;
-	filter: drop-shadow(0 0 1px #7c7c7c);
+    vertical-align: middle;
+    width: 40px;
+    height: 40px;
+    filter: drop-shadow(0 0 1px #7c7c7c);
 }
 
 .image_rounded
 {
-	border-radius: 50%;
+    border-radius: 50%;
 }
 
 .nom_proposition
 {
-	display: inline-block;
-	vertical-align: middle;
-	width: calc(100% - 140px);
-	padding-left: 10px;
-	padding-right: 10px;
-	font-family: inside_font_light, Verdana, sans-serif;
-	color: #262626;
-	font-size: 100%;
-	text-align: justify;
-	word-break: break-word;
+    display: inline-block;
+    vertical-align: middle;
+    width: calc(100% - 140px);
+    padding-left: 10px;
+    padding-right: 10px;
+    font-family: inside_font_light, Verdana, sans-serif;
+    color: #262626;
+    font-size: 100%;
+    text-align: justify;
+    word-break: break-word;
 }
 
 .zone_bouton_option_proposition
 {
-	display: inline-block;
-	width: calc(25% - 35px);
-	vertical-align: middle;
+    display: inline-block;
+    width: calc(25% - 35px);
+    vertical-align: middle;
 }
 
 .bouton_option_proposition
 {
-	display: block;
-	width: calc(100% - 30px);
-	background-color: #e3e3e3;
-	padding: 5px 10px 5px 10px;
-	margin-right: 10px;
-	border-radius: 2px;
-	font-family: inside_font_light, Verdana, sans-serif;
-	color: #262626;
-	cursor: pointer;
-	text-align: center;
-	-moz-user-select: none;
-	-webkit-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
+    display: block;
+    width: calc(100% - 30px);
+    background-color: #e3e3e3;
+    padding: 5px 10px 5px 10px;
+    margin-right: 10px;
+    border-radius: 2px;
+    font-family: inside_font_light, Verdana, sans-serif;
+    color: #262626;
+    cursor: pointer;
+    text-align: center;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .bouton_option_proposition:hover
 {
-	background-color: #ff1937;
-	color: white;
+    background-color: #ff1937;
+    color: white;
 }
 
 .bouton_option_proposition:hover .fond_plus
 {
-	background-color: white;
-	color: #262626;
+    background-color: white;
+    color: #262626;
 }
 
 .fond_plus
 {
-	display: inline-block;
-	margin-right: 8px;
-	width: 20px;
-	height: 20px;
-	background-color: #70d55d;
-	border-radius: 50%;
-	font-family: inside_font_light, Verdana, sans-serif;
-	color: white;
-	text-align: center;
-	line-height: 20px;
+    display: inline-block;
+    margin-right: 8px;
+    width: 20px;
+    height: 20px;
+    background-color: #70d55d;
+    border-radius: 50%;
+    font-family: inside_font_light, Verdana, sans-serif;
+    color: white;
+    text-align: center;
+    line-height: 20px;
 }
 
 .listbox_horaires
 {
-	display: inline-block;
-	vertical-align: middle;
-	height: 32px;
-	width: calc((100% / 3) - 15px);
-	padding-left: 5px;
-	padding-right: 5px;
-	margin-left: 10px;
-	border-radius: 2px;
-	border: 0;
-	box-shadow: 0 0 3px #7c7c7c;
-	font-family: inside_font_regular, Verdana, sans-serif;
-	font-size: 100%;
-	color: #262626;
-	background-color: white;
+    display: inline-block;
+    vertical-align: middle;
+    height: 32px;
+    width: calc((100% / 3) - 15px);
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-left: 10px;
+    border-radius: 2px;
+    border: 0;
+    box-shadow: 0 0 3px #7c7c7c;
+    font-family: inside_font_regular, Verdana, sans-serif;
+    font-size: 100%;
+    color: #262626;
+    background-color: white;
 }
 
 .zone_transports
 {
-	display: inline-block;
-	width: calc(100% * (2 / 3) - 10px);
-	vertical-align: middle;
-	padding-top: 5px;
+    display: inline-block;
+    width: calc(100% * (2 / 3) - 10px);
+    vertical-align: middle;
+    padding-top: 5px;
 }
 
 .switch_transport
 {
-	display: inline-block;
-	width: calc(50% - 15px);
-	margin: 0 0 5px 10px;
-	height: 35px;
-	line-height: 35px;
-	border-radius: 2px;
-	font-family: inside_font_light, Verdana, sans-serif;
-	color: #262626;
-	padding-left: 5px;
-	cursor: pointer;
-	background-color: #e3e3e3;
+    display: inline-block;
+    width: calc(50% - 15px);
+    margin: 0 0 5px 10px;
+    height: 35px;
+    line-height: 35px;
+    border-radius: 2px;
+    font-family: inside_font_light, Verdana, sans-serif;
+    color: #262626;
+    padding-left: 5px;
+    cursor: pointer;
+    background-color: #e3e3e3;
 }
 
 .switch_transport_2
 {
-	display: inline-block;
-	width: calc(50% - 10px);
-	margin-bottom: 5px;
-	height: 35px;
-	line-height: 35px;
-	border-radius: 2px;
-	font-family: inside_font_light, Verdana, sans-serif;
-	color: #262626;
-	padding-left: 5px;
-	cursor: pointer;
-	background-color: #e3e3e3;
+    display: inline-block;
+    width: calc(50% - 10px);
+    margin-bottom: 5px;
+    height: 35px;
+    line-height: 35px;
+    border-radius: 2px;
+    font-family: inside_font_light, Verdana, sans-serif;
+    color: #262626;
+    padding-left: 5px;
+    cursor: pointer;
+    background-color: #e3e3e3;
 }
 
 .switch_transport input, .switch_transport_2 input
 {
-	cursor: pointer;
+    cursor: pointer;
 }
 
 .switch_transport:hover, .switch_transport_2:hover
 {
-	background-color: #fffd4c;
-	color: white;
+    background-color: #fffd4c;
+    color: white;
 }
 
 .label_switch_transport
 {
-	display: inline-block;
-	text-align: center;
-	width: calc(100% - 40px);
-	margin-left: -25px;
-	padding-left: 30px;
-	padding-right: 10px;
-	cursor: pointer;
+    display: inline-block;
+    text-align: center;
+    width: calc(100% - 40px);
+    margin-left: -25px;
+    padding-left: 30px;
+    padding-right: 10px;
+    cursor: pointer;
 }
 
 .icone_checkbox_transport
 {
-	vertical-align: middle;
-	max-height: 30px;
-	max-width: 100%;
-	margin-bottom: 2.5px;
+    vertical-align: middle;
+    max-height: 30px;
+    max-width: 100%;
+    margin-bottom: 2.5px;
 }
 
 .bouton_transport_checked
 {
-	background-color: #fffd4c;
-	color: white;
+    background-color: #fffd4c;
+    color: white;
 }
 
 .zone_saisie_menu
 {
-	display: inline-block;
-	vertical-align: middle;
-	width: calc(100% * (2 / 3) - 20px);
-	padding-top: 5px;
-	margin-left: 10px;
+    display: inline-block;
+    vertical-align: middle;
+    width: calc(100% * (2 / 3) - 20px);
+    padding-top: 5px;
+    margin-left: 10px;
 }
 
 .saisie_menu
 {
-	display: block;
-	width: calc(100% - 20px);
-	height: 20px;
-	margin-bottom: 5px;
-	padding-left: 10px;
-	padding-right: 10px;
-	background-color: white;
-	border-radius: 2px;
-	border: 0;
-	box-shadow: 0 0 3px #7c7c7c;
-	font-family: inside_font_regular, Verdana, sans-serif;
-	font-size: 100%;
-	color: #262626;
+    display: block;
+    width: calc(100% - 20px);
+    height: 20px;
+    margin-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: white;
+    border-radius: 2px;
+    border: 0;
+    box-shadow: 0 0 3px #7c7c7c;
+    font-family: inside_font_regular, Verdana, sans-serif;
+    font-size: 100%;
+    color: #262626;
 }
 
 .bouton_annuler_proposition
 {
-	display: inline-block;
-	vertical-align: middle;
-	width: calc((100% / 3) - 30px);
-	margin-left: 10px;
-	margin-top: 10px;
-	margin-bottom: 10px;
-	background-color: #e3e3e3;
-	padding: 5px 10px 5px 10px;
-	border-radius: 2px;
-	border: 0;
-	box-shadow: 0 0 3px #7c7c7c;
-	font-family: inside_font_light, Verdana, sans-serif;
-	font-size: 100%;
-	color: #262626;
-	cursor: pointer;
-	text-align: center;
-	-moz-user-select: none;
-	-webkit-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
+    display: inline-block;
+    vertical-align: middle;
+    width: calc((100% / 3) - 30px);
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: #e3e3e3;
+    padding: 5px 10px 5px 10px;
+    border-radius: 2px;
+    border: 0;
+    box-shadow: 0 0 3px #7c7c7c;
+    font-family: inside_font_light, Verdana, sans-serif;
+    font-size: 100%;
+    color: #262626;
+    cursor: pointer;
+    text-align: center;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .bouton_annuler_proposition:hover
 {
-	color: white;
-	background-color: #ff1937;
+    color: white;
+    background-color: #ff1937;
 }
 
 .zone_checkbox_proposition
 {
-	display: inline-block;
-	vertical-align: middle;
-	text-align: center;
-	width: 60px;
-	height: 60px;
-	line-height: 55px;
-	background-color: #d3d3d3;
-	cursor: pointer;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+    width: 60px;
+    height: 60px;
+    line-height: 55px;
+    background-color: #d3d3d3;
+    cursor: pointer;
 }
 
 .checkbox_proposition
 {
-	vertical-align: middle;
+    vertical-align: middle;
 }
 
 .zone_boutons_saisie_propositions
 {
-	display: block;
-	line-height: 60px;
-	text-align: center;
-	background-color: #d3d3d3;
+    display: block;
+    line-height: 60px;
+    text-align: center;
+    background-color: #d3d3d3;
 }
 
 .bouton_saisie_propositions
 {
-	display: inline-block;
-	vertical-align: middle;
-	padding: 5px 20px 5px 20px;
-	border-radius: 2px;
-	font-family: inside_font_light, Verdana, sans-serif;
-	font-size: 100%;
-	color: #262626;
-	cursor: pointer;
-	text-align: center;
-	border: 0;
-	background-color: white;
-	box-shadow: 0 0 3px #7c7c7c;
+    display: inline-block;
+    vertical-align: middle;
+    padding: 5px 20px 5px 20px;
+    border-radius: 2px;
+    font-family: inside_font_light, Verdana, sans-serif;
+    font-size: 100%;
+    color: #262626;
+    cursor: pointer;
+    text-align: center;
+    border: 0;
+    background-color: white;
+    box-shadow: 0 0 3px #7c7c7c;
 }
 
 .bouton_saisie_propositions:hover
 {
-	color: white;
-	background-color: #ff1937;
+    color: white;
+    background-color: #ff1937;
 }
 
 /*** Recherche live ***/
 .zone_recherche_live
 {
-	display: block;
-	height: 40px;
-	background-color: #e3e3e3;
+    display: block;
+    height: 40px;
+    background-color: #e3e3e3;
 }
 
 .logo_recherche_live
 {
-	display: inline-block;
-	vertical-align: middle;
-	width: 25px;
-	height: 25px;
-	padding: 7.5px;
-	background-color: #d3d3d3;
+    display: inline-block;
+    vertical-align: middle;
+    width: 25px;
+    height: 25px;
+    padding: 7.5px;
+    background-color: #d3d3d3;
 }
 
 .size_logo_recherche_live
 {
-	width: 20px;
-	height: 20px;
-	padding: 10px;
+    width: 20px;
+    height: 20px;
+    padding: 10px;
 }
 
 .input_recherche_live
 {
-	display: inline-block;
-	vertical-align: middle;
-	padding-left: 10px;
-	padding-right: 10px;
-	line-height: 38px;
-	width: calc(100% - 100px);
-	border: 0;
-	background-color: #e3e3e3;
-	font-family: inside_font_light, Verdana, sans-serif;
-	color: #262626;
-	font-size: 110%;
+    display: inline-block;
+    vertical-align: middle;
+    padding-left: 10px;
+    padding-right: 10px;
+    line-height: 38px;
+    width: calc(100% - 100px);
+    border: 0;
+    background-color: #e3e3e3;
+    font-family: inside_font_light, Verdana, sans-serif;
+    color: #262626;
+    font-size: 110%;
 }
 
 .zone_contenu_saisie_live
 {
-	width: 100%;
-	max-height: calc(100vh - 260px);
-	padding-bottom: 10px;
-	overflow-y: auto;
-	background-color: white;
+    width: 100%;
+    max-height: calc(100vh - 260px);
+    padding-bottom: 10px;
+    overflow-y: auto;
+    background-color: white;
 }
 
 .contenu_saisie
 {
-	display: block;
-	width: calc(100% - 40px);
-	margin-left: auto;
-	margin-right: auto;
-	padding: 10px 20px 0 20px;
+    display: block;
+    width: calc(100% - 40px);
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px 20px 0 20px;
 }
 
 .empty_recherche_live
 {
-	display: none;
-	padding-top: 40px;
-	padding-bottom: 40px;
-	font-family: inside_font_light, Verdana, sans-serif;
-	color: #262626;
-	font-size: 150%;
-	text-align: center;
+    display: none;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    font-family: inside_font_light, Verdana, sans-serif;
+    color: #262626;
+    font-size: 150%;
+    text-align: center;
 }
 
 /*** Détails proposition ***/
 .zone_details_proposition
 {
-	width: calc(85% - 40px);
-	margin-left: auto;
-	margin-right: auto;
-	margin-top: 50px;
-	padding-left: 20px;
-	padding-right: 20px;
-	border-radius: 2px;
-	background-color: white;
-	max-height: calc(100vh - 100px);
-	overflow-y: auto;
+    width: calc(85% - 40px);
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 2px;
+    background-color: white;
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
 }
 
 .zone_details_proposition_left
 {
-	display: inline-block;
-	width: 230px;
-	padding-right: 40px;
-	margin-top: 20px;
-	margin-bottom: 20px;
-	text-align: center;
+    display: inline-block;
+    width: 230px;
+    padding-right: 40px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center;
 }
 
 .nom_restaurant_details
 {
-	padding-top: 10px;
-	margin-bottom: 10px;
-	text-align: center;
-	font-family: inside_font_medium, Verdana, sans-serif;
-	color: #262626;
+    padding-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+    font-family: inside_font_medium, Verdana, sans-serif;
+    color: #262626;
 }
 
 .zone_price_details
 {
-	display: block;
+    display: block;
 }
 
 .price_details
 {
-	display: inline-block;
-	margin-left: 10px;
-	margin-right: 10px;
-	margin-bottom: 10px;
-	font-family: inside_font_light, Verdana, sans-serif;
-	font-size: 80%;
-	color: #262626;
-	line-height: 15px;
+    display: inline-block;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    font-family: inside_font_light, Verdana, sans-serif;
+    font-size: 80%;
+    color: #262626;
+    line-height: 15px;
 }
 
 .zone_types_details
 {
-	border-top: solid 1px #c3c3c3;
-	padding-top: 10px;
+    border-top: solid 1px #c3c3c3;
+    padding-top: 10px;
 }
 
 .zone_caller_details
 {
-	font-family: inside_font_light, Verdana, sans-serif;
-	color: white;
-	border-top: solid 1px #c3c3c3;
-	padding-top: 10px;
-	margin-bottom: 10px;
-	text-align: center;
+    font-family: inside_font_light, Verdana, sans-serif;
+    color: white;
+    border-top: solid 1px #c3c3c3;
+    padding-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
 }
 
 .icone_telephone_details
 {
-	display: inline-block;
-	vertical-align: middle;
-	width: 30px;
-	padding-left: 10px;
-	padding-right: 10px;
+    display: inline-block;
+    vertical-align: middle;
+    width: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .telephone_details
 {
-	display: inline-block;
-	vertical-align: middle;
-	line-height: 50px;
-	padding-right: 10px;
-	color: #262626;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 50px;
+    padding-right: 10px;
+    color: #262626;
 }
 
 .zone_avatar_details
 {
-	display: inline-block;
-	border-left: solid 1px #c3c3c3;
+    display: inline-block;
+    border-left: solid 1px #c3c3c3;
 }
 
 .avatar_caller_details
 {
-	vertical-align: middle;
-	width: 50px;
-	border-radius: 50%;
-	margin-left: 10px;
-	background-color: #262626;
-	box-shadow: 0 0 3px #7c7c7c;
+    vertical-align: middle;
+    width: 50px;
+    border-radius: 50%;
+    margin-left: 10px;
+    background-color: #262626;
+    box-shadow: 0 0 3px #7c7c7c;
 }
 
 .zone_liens_details
 {
-	border-top: solid 1px #c3c3c3;
-	padding-top: 10px;
-	padding-bottom: 10px;
+    border-top: solid 1px #c3c3c3;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .icone_lien_details
 {
-	display: inline-block;
-	width: 40px;
-	margin-left: 10px;
-	margin-right: 10px;
-	margin-bottom: -4px;
+    display: inline-block;
+    width: 40px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: -4px;
 }
 
 .zone_details_proposition_right
 {
-	display: inline-block;
-	vertical-align: top;
-	width: calc(100% - 270px);
-	margin-top: 20px;
-	margin-bottom: 20px;
+    display: inline-block;
+    vertical-align: top;
+    width: calc(100% - 270px);
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .icon_fast_proposition
 {
-	display: inline-block;
-	vertical-align: middle;
-	margin-left: 10px;
-	margin-top: -3px;
-	margin-bottom: -3px;
-	width: 30px;
-	height: 30px;
-	border: 0;
-	border-radius: 50%;
-	background-image: url("/inside/includes/icons/common/food_advisor.png");
-	background-size: 20px 20px;
-	background-repeat: no-repeat;
-	background-position: center;
-	background-color: #c3c3c3;
-	cursor: pointer;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 10px;
+    margin-top: -3px;
+    margin-bottom: -3px;
+    width: 30px;
+    height: 30px;
+    border: 0;
+    border-radius: 50%;
+    background-image: url("/inside/includes/icons/common/food_advisor.png");
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #c3c3c3;
+    cursor: pointer;
 }
 
 .close_details
 {
-	float: right;
-	width: 30px;
-	height: 30px;
-	margin-top: -45px;
-	cursor: pointer;
-	text-align: center;
+    float: right;
+    width: 30px;
+    height: 30px;
+    margin-top: -45px;
+    cursor: pointer;
+    text-align: center;
 }
 
 .titre_details_top
 {
-	width: 100%;
-	margin-left: auto;
-	margin-right: auto;
-	margin-top: -10px;
-	font-family: inside_font_regular, Verdana, sans-serif;
-	font-size: 150%;
-	font-weight: bold;
-	border-bottom: solid 1px #262626;
-	line-height: 30px;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	color: #262626;
-	text-align: left;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -10px;
+    font-family: inside_font_regular, Verdana, sans-serif;
+    font-size: 150%;
+    font-weight: bold;
+    border-bottom: solid 1px #262626;
+    line-height: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: #262626;
+    text-align: left;
 }
 
 .zone_details_description_bottom
 {
-	display: inline-block;
-	width: calc(32% - 10px);
-	vertical-align: top;
-	margin-right: 20px;
-	margin-top: 20px;
+    display: inline-block;
+    width: calc(32% - 10px);
+    vertical-align: top;
+    margin-right: 20px;
+    margin-top: 20px;
 }
 
 .zone_details_menus_bottom
 {
-	display: inline-block;
-	width: calc(68% - 10px);
-	vertical-align: top;
-	margin-top: 20px;
+    display: inline-block;
+    width: calc(68% - 10px);
+    vertical-align: top;
+    margin-top: 20px;
 }
 
 .titre_details_bottom
 {
-	display: inline-block;
-	width: 100%;
-	margin-left: auto;
-	margin-right: auto;
-	font-family: inside_font_regular, Verdana, sans-serif;
-	font-size: 150%;
-	font-weight: bold;
-	border-bottom: solid 1px #262626;
-	line-height: 30px;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	color: #262626;
-	text-align: left;
+    display: inline-block;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: inside_font_regular, Verdana, sans-serif;
+    font-size: 150%;
+    font-weight: bold;
+    border-bottom: solid 1px #262626;
+    line-height: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: #262626;
+    text-align: left;
 }
 
 .zone_details_user_top
 {
-	padding-top: 5px;
-	padding-bottom: 5px;
-	border-bottom: solid 1px #c3c3c3;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-bottom: solid 1px #c3c3c3;
 }
 
 .avatar_details
 {
-	display: inline-block;
-	vertical-align: middle;
-	width: 40px;
-	border-radius: 50%;
-	margin-right: 10px;
-	background-color: #262626;
-	box-shadow: 0 0 3px #7c7c7c;
+    display: inline-block;
+    vertical-align: middle;
+    width: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+    background-color: #262626;
+    box-shadow: 0 0 3px #7c7c7c;
 }
 
 .pseudo_details
 {
-	display: inline-block;
-	vertical-align: middle;
-	width: calc(40% - 70px);
-	margin-right: 10px;
-	font-family: inside_font_regular, Verdana, sans-serif;
-	color: #262626;
-	text-align: justify;
-	word-wrap: break-word;
+    display: inline-block;
+    vertical-align: middle;
+    width: calc(40% - 70px);
+    margin-right: 10px;
+    font-family: inside_font_regular, Verdana, sans-serif;
+    color: #262626;
+    text-align: justify;
+    word-wrap: break-word;
 }
 
 .zone_details_transports
 {
-	display: inline-block;
-	vertical-align: middle;
-	width: calc(60% - 50px);
-	min-height: 40px;
+    display: inline-block;
+    vertical-align: middle;
+    width: calc(60% - 50px);
+    min-height: 40px;
 }
 
 .icone_details
 {
-	display: inline-block;
-	height: 30px;
-	margin-top: 6px;
-	margin-left: 10px;
-	margin-right: 10px;
+    display: inline-block;
+    height: 30px;
+    margin-top: 6px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .horaire_details
 {
-	display: inline-block;
-	width: 40px;
-	margin-top: 5px;
-	background-color: #70d55d;
-	margin-left: 10px;
-	padding: 5px;
-	border-radius: 2px;
-	font-family: inside_font_light, Verdana, sans-serif;
-	color: white;
-	text-align: center;
+    display: inline-block;
+    width: 40px;
+    margin-top: 5px;
+    background-color: #70d55d;
+    margin-left: 10px;
+    padding: 5px;
+    border-radius: 2px;
+    font-family: inside_font_light, Verdana, sans-serif;
+    color: white;
+    text-align: center;
 }
 
 .zone_details_menus
 {
-	margin-bottom: 10px;
+    margin-bottom: 10px;
 }
 
 .zone_details_user_menu
 {
-	display: inline-block;
-	vertical-align: top;
-	width: 200px;
-	margin-right: -1px;
-	margin-top: 15px;
-	padding: 0 10px 5px 10px;
-	border-right: solid 1px #c3c3c3;
-	border-left: solid 1px #c3c3c3;
+    display: inline-block;
+    vertical-align: top;
+    width: 200px;
+    margin-right: -1px;
+    margin-top: 15px;
+    padding: 0 10px 5px 10px;
+    border-right: solid 1px #c3c3c3;
+    border-left: solid 1px #c3c3c3;
 }
 
 .avatar_menus
 {
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-	margin-top: 5px;
-	margin-bottom: 20px;
-	width: 40px;
-	border-radius: 50%;
-	background-color: #262626;
-	box-shadow: 0 0 3px #7c7c7c;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    width: 40px;
+    border-radius: 50%;
+    background-color: #262626;
+    box-shadow: 0 0 3px #7c7c7c;
 }
 
 .zone_details_description
 {
-	display: block;
+    display: block;
 }
 
 .details_description
 {
-	font-family: inside_font_regular, Verdana, sans-serif;
-	color: #262626;
-	text-align: justify;
-	padding-top: 10px;
-	padding-bottom: 10px;
+    font-family: inside_font_regular, Verdana, sans-serif;
+    color: #262626;
+    text-align: justify;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .expand_details_description
 {
-	float: right;
-	width: 15px;
-	margin-top: 5px;
-	line-height: 10px;
-	text-align: center;
-	padding: 5px;
-	border-radius: 2px;
-	cursor: pointer;
+    float: right;
+    width: 15px;
+    margin-top: 5px;
+    line-height: 10px;
+    text-align: center;
+    padding: 5px;
+    border-radius: 2px;
+    cursor: pointer;
 }
 
 .expand_details_description:hover
 {
-	background-color: #e3e3e3;
+    background-color: #e3e3e3;
 }
 
 /*** Affichage propositions ***/
 .zone_propositions_left
 {
-	display: inline-block;
-	width: 200px;
-	vertical-align: top;
+    display: inline-block;
+    width: 200px;
+    vertical-align: top;
 }
 
 .zone_propositions_right
 {
-	display: inline-block;
-	width: calc(100% - 220px);
-	margin-left: 20px;
-	vertical-align: top;
+    display: inline-block;
+    width: calc(100% - 220px);
+    margin-left: 20px;
+    vertical-align: top;
 }
 
 .zone_proposition_determined
 {
-	width: 180px;
-	vertical-align: top;
-	margin-bottom: 20px;
-	background-color: #ff1937;
-	border-radius: 2px;
-	box-shadow: 0 0 3px #7c7c7c;
-	overflow: hidden;
-	padding-left: 10px;
-	padding-right: 10px;
-	text-align: center;
+    width: 180px;
+    vertical-align: top;
+    margin-bottom: 20px;
+    background-color: #ff1937;
+    border-radius: 2px;
+    box-shadow: 0 0 3px #7c7c7c;
+    overflow: hidden;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: center;
 }
 
 .nom_proposition_determined
 {
-	padding-top: 10px;
-	margin-bottom: 10px;
-	text-align: center;
-	font-family: inside_font_medium, Verdana, sans-serif;
-	color: white;
+    padding-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+    font-family: inside_font_medium, Verdana, sans-serif;
+    color: white;
 }
 
 .zone_proposition_top
 {
-	width: 180px;
-	vertical-align: top;
-	margin-bottom: 20px;
-	background-color: #e3e3e3;
-	border-radius: 2px;
-	box-shadow: 0 0 3px #7c7c7c;
-	overflow: hidden;
-	padding-left: 10px;
-	padding-right: 10px;
-	text-align: center;
+    width: 180px;
+    vertical-align: top;
+    margin-bottom: 20px;
+    background-color: #e3e3e3;
+    border-radius: 2px;
+    box-shadow: 0 0 3px #7c7c7c;
+    overflow: hidden;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: center;
 }
 
 .bouton_solo
 {
-	display: block;
-	margin-bottom: 20px;
-	width: 100%;
-	border: 0;
-	background-color: #d3d3d3;
-	padding: 5px 10px 5px 10px;
-	border-radius: 2px;
-	font-family: inside_font_medium, Verdana, sans-serif;
-	font-size: 100%;
-	color: #262626;
-	cursor: pointer;
+    display: block;
+    margin-bottom: 20px;
+    width: 100%;
+    border: 0;
+    background-color: #d3d3d3;
+    padding: 5px 10px 5px 10px;
+    border-radius: 2px;
+    font-family: inside_font_medium, Verdana, sans-serif;
+    font-size: 100%;
+    color: #262626;
+    cursor: pointer;
 }
 
 .bouton_solo:hover
 {
-	background-color: #ff1937;
-	color: white;
+    background-color: #ff1937;
+    color: white;
 }
 
 .zone_proposition_solo_no_votes
 {
-	width: calc(100% - 20px);
-	vertical-align: top;
-	margin-bottom: 20px;
-	background-color: #e3e3e3;
-	border-radius: 2px;
-	box-shadow: 0 0 3px #7c7c7c;
-	overflow: hidden;
-	padding-left: 10px;
-	padding-right: 10px;
-	text-align: center;
+    width: calc(100% - 20px);
+    vertical-align: top;
+    margin-bottom: 20px;
+    background-color: #e3e3e3;
+    border-radius: 2px;
+    box-shadow: 0 0 3px #7c7c7c;
+    overflow: hidden;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: center;
 }
 
 .titre_solo
 {
-	font-family: inside_font_medium, Verdana, sans-serif;
-	color: #262626;
-	text-align: center;
-	padding-top: 10px;
-	padding-bottom: 10px;
+    font-family: inside_font_medium, Verdana, sans-serif;
+    color: #262626;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .titre_solo_choix
 {
-	font-family: inside_font_medium, Verdana, sans-serif;
-	color: #262626;
-	text-align: justify;
-	padding-top: 10px;
-	padding-bottom: 10px;
+    font-family: inside_font_medium, Verdana, sans-serif;
+    color: #262626;
+    text-align: justify;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .zone_solo
 {
-	margin-bottom: 10px;
-	text-align: justify;
-	min-height: 30px;
+    margin-bottom: 10px;
+    text-align: justify;
+    min-height: 30px;
 }
 
 .avatar_solo
 {
-	display: inline-block;
-	vertical-align: middle;
-	width: 30px;
-	border-radius: 50%;
-	background-color: #262626;
-	box-shadow: 0 0 3px #7c7c7c;
+    display: inline-block;
+    vertical-align: middle;
+    width: 30px;
+    border-radius: 50%;
+    background-color: #262626;
+    box-shadow: 0 0 3px #7c7c7c;
 }
 
 .pseudo_solo
 {
-	display: inline-block;
-	width: calc(100% - 40px);
-	margin-left: 10px;
-	vertical-align: middle;
-	font-family: inside_font_light, Verdana, sans-serif;
-	color: #262626;
-	word-break: break-word;
+    display: inline-block;
+    width: calc(100% - 40px);
+    margin-left: 10px;
+    vertical-align: middle;
+    font-family: inside_font_light, Verdana, sans-serif;
+    color: #262626;
+    word-break: break-word;
 }
 
 .bouton_delete_solo
 {
-	width: 100%;
-	margin-bottom: 10px;
-	padding: 5px;
-	font-family: inside_font_light, Verdana, sans-serif;
-	color: #262626;
-	border: 0;
-	border-radius: 2px;
-	background-color: #e3e3e3;
-	text-align: center;
-	font-size: 90%;
-	line-height: 20px;
-	cursor: pointer;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 5px;
+    font-family: inside_font_light, Verdana, sans-serif;
+    color: #262626;
+    border: 0;
+    border-radius: 2px;
+    background-color: #e3e3e3;
+    text-align: center;
+    font-size: 90%;
+    line-height: 20px;
+    cursor: pointer;
 }
 
 .bouton_delete_solo:hover
 {
-	color: white;
-	background-color: #ff1937;
+    color: white;
+    background-color: #ff1937;
 }
 
 .zone_no_vote
 {
-	display: inline-block;
-	text-align: center;
-	vertical-align: top;
-	width: 55px;
-	margin: 5px 2.5px 5px 2.5px;
+    display: inline-block;
+    text-align: center;
+    vertical-align: top;
+    width: 55px;
+    margin: 5px 2.5px 5px 2.5px;
 }
 
 .avatar_no_vote
 {
-	width: 30px;
-	border-radius: 50%;
-	background-color: #262626;
-	box-shadow: 0 0 3px #7c7c7c;
+    width: 30px;
+    border-radius: 50%;
+    background-color: #262626;
+    box-shadow: 0 0 3px #7c7c7c;
 }
 
 .pseudo_no_vote
 {
-	display: block;
-	font-family: inside_font_light, Verdana, sans-serif;
-	font-size: 60%;
-	color: #262626;
-	word-break: break-word;
+    display: block;
+    font-family: inside_font_light, Verdana, sans-serif;
+    font-size: 60%;
+    color: #262626;
+    word-break: break-word;
 }
 
 .lien_details_determined
 {
-	float: right;
-	margin-right: -10px;
-	margin-bottom: -40px;
-	cursor: pointer;
-	width: 0;
-	height: 0;
-	border-style: solid;
-	border-width: 0 40px 40px 0;
-	border-color: transparent #c81932 transparent transparent;
-	color: white;
+    float: right;
+    margin-right: -10px;
+    margin-bottom: -40px;
+    cursor: pointer;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 40px 40px 0;
+    border-color: transparent #c81932 transparent transparent;
+    color: white;
 }
 
 .lien_details_determined:hover
 {
-	border-color: transparent #e3e3e3 transparent transparent;
-	color: #262626;
+    border-color: transparent #e3e3e3 transparent transparent;
+    color: #262626;
 }
 
 .lien_details_top
 {
-	float: right;
-	margin-right: -10px;
-	margin-bottom: -40px;
-	cursor: pointer;
-	width: 0;
-	height: 0;
-	border-style: solid;
-	border-width: 0 40px 40px 0;
-	border-color: transparent #262626 transparent transparent;
-	color: white;
+    float: right;
+    margin-right: -10px;
+    margin-bottom: -40px;
+    cursor: pointer;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 40px 40px 0;
+    border-color: transparent #262626 transparent transparent;
+    color: white;
 }
 
 .lien_details_top:hover
 {
-	border-color: transparent #c3c3c3 transparent transparent;
-	color: #262626;
+    border-color: transparent #c3c3c3 transparent transparent;
+    color: #262626;
 }
 
 .lien_plus
 {
-	font-family: inside_font_light, Verdana, sans-serif;
-	font-size: 120%;
-	margin-left: 23px;
-	line-height: 26px;
+    font-family: inside_font_light, Verdana, sans-serif;
+    font-size: 120%;
+    margin-left: 23px;
+    line-height: 26px;
 }
 
 .lien_proposition_top
 {
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-	margin-top: 10px;
-	width: 150px;
-	height: 150px;
-	border-radius: 50%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
 }
 
 .image_proposition_top
 {
-	width: 150px;
-	filter: drop-shadow(0px 0px 1px #7c7c7c);
+    width: 150px;
+    filter: drop-shadow(0px 0px 1px #7c7c7c);
 }
 
 .image_lieu_proposition
 {
-	display: inline-block;
-	vertical-align: middle;
-	margin-top: -3px;
-	margin-right: 5px;
-	width: 20px;
-	height: 20px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: -3px;
+    margin-right: 5px;
+    width: 20px;
+    height: 20px;
 }
 
 .lieu_proposition
 {
-	display: inline-block;
-	background-color: #2eb2f4;
-	margin: 0 5px 10px 5px;
-	padding: 5px;
-	border-radius: 2px;
-	font-family: inside_font_light, Verdana, sans-serif;
-	color: white;
-	max-width: calc(100% - 20px);
-	word-wrap: break-word;
+    display: inline-block;
+    background-color: #2eb2f4;
+    margin: 0 5px 10px 5px;
+    padding: 5px;
+    border-radius: 2px;
+    font-family: inside_font_light, Verdana, sans-serif;
+    color: white;
+    max-width: calc(100% - 20px);
+    word-wrap: break-word;
 }
 
 .horaire_proposition
 {
-	display: inline-block;
-	background-color: #70d55d;
-	margin-left: 5px;
-	margin-right: 5px;
-	margin-bottom: 10px;
-	padding: 5px;
-	border-radius: 2px;
-	font-family: inside_font_light, Verdana, sans-serif;
-	color: white;
+    display: inline-block;
+    background-color: #70d55d;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 10px;
+    padding: 5px;
+    border-radius: 2px;
+    font-family: inside_font_light, Verdana, sans-serif;
+    color: white;
 }
 
 .caller
 {
-	font-family: inside_font_light, Verdana, sans-serif;
-	color: white;
-	padding-top: 10px;
-	margin-bottom: 10px;
-	border-top: solid 1px #c3c3c3;
+    font-family: inside_font_light, Verdana, sans-serif;
+    color: white;
+    padding-top: 10px;
+    margin-bottom: 10px;
+    border-top: solid 1px #c3c3c3;
 }
 
 .icone_telephone
 {
-	width: 30px;
-	padding-left: 10px;
-	padding-right: 10px;
-	vertical-align: middle;
+    width: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
+    vertical-align: middle;
 }
 
 .zone_avatar_caller
 {
-	display: inline-block;
-	vertical-align: middle;
-	height: 50px;
-	margin-right: -10px;
-	padding-left: 10px;
-	border-left: solid 1px #c3c3c3;
+    display: inline-block;
+    vertical-align: middle;
+    height: 50px;
+    margin-right: -10px;
+    padding-left: 10px;
+    border-left: solid 1px #c3c3c3;
 }
 
 .avatar_caller
 {
-	width: 50px;
-	border-radius: 50%;
-	background-color: #262626;
-	box-shadow: 0 0 3px #7c7c7c;
+    width: 50px;
+    border-radius: 50%;
+    background-color: #262626;
+    box-shadow: 0 0 3px #7c7c7c;
 }
 
 .zone_phone_caller
 {
-	display: block;
-	margin-top: 5px;
+    display: block;
+    margin-top: 5px;
 }
 
 .zone_reservation
 {
-	padding-top: 10px;
-	margin-bottom: 10px;
-	border-top: solid 1px #c3c3c3;
+    padding-top: 10px;
+    margin-bottom: 10px;
+    border-top: solid 1px #c3c3c3;
 }
 
 .reserved
 {
-	text-align: center;
-	font-family: inside_font_medium, Verdana, sans-serif;
-	color: white;
+    text-align: center;
+    font-family: inside_font_medium, Verdana, sans-serif;
+    color: white;
 }
 
 .reserved_details
 {
-	text-align: center;
-	font-family: inside_font_medium, Verdana, sans-serif;
-	color: #262626;
+    text-align: center;
+    font-family: inside_font_medium, Verdana, sans-serif;
+    color: #262626;
 }
 
 .bouton_reserver
 {
-	background-color: white;
-	text-align: center;
-	line-height: 32px;
-	border-radius: 2px;
-	font-family: inside_font_light, Verdana, sans-serif;
-	font-size: 100%;
-	color: #262626;
-	cursor: pointer;
-	border: 0;
-	box-shadow: 0 0 3px #7c7c7c;
+    background-color: white;
+    text-align: center;
+    line-height: 32px;
+    border-radius: 2px;
+    font-family: inside_font_light, Verdana, sans-serif;
+    font-size: 100%;
+    color: #262626;
+    cursor: pointer;
+    border: 0;
+    box-shadow: 0 0 3px #7c7c7c;
 }
 
 .bouton_reserver_details
 {
-	background-color: #d3d3d3;
-	text-align: center;
-	line-height: 32px;
-	border-radius: 2px;
-	font-family: inside_font_light, Verdana, sans-serif;
-	font-size: 100%;
-	color: #262626;
-	cursor: pointer;
-	border: 0;
-	box-shadow: 0 0 3px #7c7c7c;
+    background-color: #d3d3d3;
+    text-align: center;
+    line-height: 32px;
+    border-radius: 2px;
+    font-family: inside_font_light, Verdana, sans-serif;
+    font-size: 100%;
+    color: #262626;
+    cursor: pointer;
+    border: 0;
+    box-shadow: 0 0 3px #7c7c7c;
 }
 
 .bouton_reserver:hover, .bouton_reserver_details:hover
 {
-	color: white;
-	background-color: #c81932;
+    color: white;
+    background-color: #c81932;
 }
 
 /*** Affichage Mes choix ***/
 .icon_delete_choix
 {
-	float: right;
-	margin-left: -35px;
-	margin-top: 35px;
-	width: 30px;
-	height: 30px;
-	border: 0;
-	background-image: url("/inside/includes/icons/common/delete_grey.png");
-	background-size: 25px 25px;
-	background-repeat: no-repeat;
-	background-position: center;
-	background-color: transparent;
-	cursor: pointer;
+    float: right;
+    margin-left: -35px;
+    margin-top: 35px;
+    width: 30px;
+    height: 30px;
+    border: 0;
+    background-image: url("/inside/includes/icons/common/delete_grey.png");
+    background-size: 25px 25px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: transparent;
+    cursor: pointer;
 }
 
 .icone_update_choix
 {
-	float: right;
-	margin-right: 3px;
-	margin-left: -35px;
-	margin-top: 8px;
-	width: 25px;
-	height: 25px;
-	border: 0;
-	background-image: url("/inside/includes/icons/common/edit_grey.png");
-	background-size: 20px 20px;
-	background-repeat: no-repeat;
-	background-position: center;
-	background-color: transparent;
-	cursor: pointer;
+    float: right;
+    margin-right: 3px;
+    margin-left: -35px;
+    margin-top: 8px;
+    width: 25px;
+    height: 25px;
+    border: 0;
+    background-image: url("/inside/includes/icons/common/edit_grey.png");
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: transparent;
+    cursor: pointer;
 }
 
 .icon_validate_choix
 {
-	float: right;
-	margin-left: -35px;
-	margin-top: -5px;
-	width: 30px;
-	height: 30px;
-	border: 0;
-	background-image: url("/inside/includes/icons/common/validate_grey.png");
-	background-size: 25px 25px;
-	background-repeat: no-repeat;
-	background-position: center;
-	background-color: transparent;
-	cursor: pointer;
+    float: right;
+    margin-left: -35px;
+    margin-top: -5px;
+    width: 30px;
+    height: 30px;
+    border: 0;
+    background-image: url("/inside/includes/icons/common/validate_grey.png");
+    background-size: 25px 25px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: transparent;
+    cursor: pointer;
 }
 
 .icone_cancel_choix
 {
-	float: right;
-	margin-left: -35px;
-	margin-top: 25px;
-	width: 30px;
-	height: 30px;
-	border: 0;
-	background-image: url("/inside/includes/icons/common/cancel_grey.png");
-	background-size: 20px 20px;
-	background-repeat: no-repeat;
-	background-position: center;
-	background-color: transparent;
-	cursor: pointer;
+    float: right;
+    margin-left: -35px;
+    margin-top: 25px;
+    width: 30px;
+    height: 30px;
+    border: 0;
+    background-image: url("/inside/includes/icons/common/cancel_grey.png");
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: transparent;
+    cursor: pointer;
 }
 
 .lien_mon_choix
 {
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-	margin-top: 10px;
-	width: 100px;
-	height: 100px;
-	border-radius: 50%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
 }
 
 .image_mon_choix
 {
-	width: 100px;
-	filter: drop-shadow(0px 0px 1px #7c7c7c);
+    width: 100px;
+    filter: drop-shadow(0px 0px 1px #7c7c7c);
 }
 
 .nom_mon_choix
 {
-	padding-top: 10px;
-	margin-bottom: 10px;
-	text-align: center;
-	font-family: inside_font_medium, Verdana, sans-serif;
-	color: #262626;
-	word-wrap: break-word;
+    padding-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+    font-family: inside_font_medium, Verdana, sans-serif;
+    color: #262626;
+    word-wrap: break-word;
 }
 
 .lieu_mon_choix
 {
-	display: inline-block;
-	background-color: #2eb2f4;
-	margin: 0 5px 10px 5px;
-	padding: 5px;
-	border-radius: 2px;
-	font-family: inside_font_light, Verdana, sans-serif;
-	color: white;
-	max-width: calc(100% - 20px);
-	word-wrap: break-word;
+    display: inline-block;
+    background-color: #2eb2f4;
+    margin: 0 5px 10px 5px;
+    padding: 5px;
+    border-radius: 2px;
+    font-family: inside_font_light, Verdana, sans-serif;
+    color: white;
+    max-width: calc(100% - 20px);
+    word-wrap: break-word;
 }
 
 .zone_icones_mon_choix
 {
-	border-top: solid 1px #c3c3c3;
-	padding-top: 10px;
+    border-top: solid 1px #c3c3c3;
+    padding-top: 10px;
 }
 
 .zone_ouverture_mes_choix
 {
-	display: block;
-	margin-bottom: 10px;
+    display: block;
+    margin-bottom: 10px;
 }
 
 .jour_oui_fa
 {
-	display: inline-block;
-	border: 0;
-	width: 20px;
-	height: 20px;
-	background-color: #262626;
-	margin-left: 1.5px;
-	margin-right: 1.5px;
-	border-radius: 2px;
-	font-family: inside_font_light, Verdana, sans-serif;
-	font-size: 80%;
-	color: white;
-	line-height: 20px;
-	vertical-align: top;
-	text-align: center;
+    display: inline-block;
+    border: 0;
+    width: 20px;
+    height: 20px;
+    background-color: #262626;
+    margin-left: 1.5px;
+    margin-right: 1.5px;
+    border-radius: 2px;
+    font-family: inside_font_light, Verdana, sans-serif;
+    font-size: 80%;
+    color: white;
+    line-height: 20px;
+    vertical-align: top;
+    text-align: center;
 }
 
 .jour_non_fa
 {
-	display: inline-block;
-	border: 0;
-	width: 20px;
-	height: 20px;
-	background-color: #e3e3e3;
-	margin-left: 1.5px;
-	margin-right: 1.5px;
-	border-radius: 2px;
-	font-family: inside_font_light, Verdana, sans-serif;
-	font-size: 80%;
-	color: #262626;
-	line-height: 20px;
-	vertical-align: top;
-	text-align: center;
+    display: inline-block;
+    border: 0;
+    width: 20px;
+    height: 20px;
+    background-color: #e3e3e3;
+    margin-left: 1.5px;
+    margin-right: 1.5px;
+    border-radius: 2px;
+    font-family: inside_font_light, Verdana, sans-serif;
+    font-size: 80%;
+    color: #262626;
+    line-height: 20px;
+    vertical-align: top;
+    text-align: center;
 }
 
 .jour_non_fa_white
 {
-	display: inline-block;
-	border: 0;
-	width: 20px;
-	height: 20px;
-	background-color: white;
-	margin-left: 1.5px;
-	margin-right: 1.5px;
-	margin-bottom: 10px;
-	border-radius: 2px;
-	font-family: inside_font_light, Verdana, sans-serif;
-	font-size: 80%;
-	color: #262626;
-	line-height: 20px;
-	vertical-align: top;
-	text-align: center;
+    display: inline-block;
+    border: 0;
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    margin-left: 1.5px;
+    margin-right: 1.5px;
+    margin-bottom: 10px;
+    border-radius: 2px;
+    font-family: inside_font_light, Verdana, sans-serif;
+    font-size: 80%;
+    color: #262626;
+    line-height: 20px;
+    vertical-align: top;
+    text-align: center;
 }
 
 .horaire_mon_choix
 {
-	display: inline-block;
-	background-color: #70d55d;
-	margin-left: 5px;
-	margin-right: 5px;
-	margin-bottom: 10px;
-	padding: 5px;
-	border-radius: 2px;
-	font-family: inside_font_light, Verdana, sans-serif;
-	color: white;
+    display: inline-block;
+    background-color: #70d55d;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 10px;
+    padding: 5px;
+    border-radius: 2px;
+    font-family: inside_font_light, Verdana, sans-serif;
+    color: white;
 }
 
 .zone_transports_mes_choix
 {
-	display: block;
+    display: block;
 }
 
 .icone_mon_choix
 {
-	display: inline-block;
-	height: 25px;
-	vertical-align: middle;
-	margin-left: 5px;
-	margin-right: 5px;
-	margin-bottom: 10px;
+    display: inline-block;
+    height: 25px;
+    vertical-align: middle;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 10px;
 }
 
 .no_menu_mes_choix
 {
-	font-family: inside_font_light, Verdana, sans-serif;
-	color: #262626;
-	padding-top: 10px;
-	margin-bottom: 10px;
-	border-top: solid 1px #c3c3c3;
+    font-family: inside_font_light, Verdana, sans-serif;
+    color: #262626;
+    padding-top: 10px;
+    margin-bottom: 10px;
+    border-top: solid 1px #c3c3c3;
 }
 
 .zone_menus_mes_choix
 {
-	padding-top: 10px;
-	border-top: solid 1px #c3c3c3;
+    padding-top: 10px;
+    border-top: solid 1px #c3c3c3;
 }
 
 .zone_menu_mes_choix
 {
-	clear: both;
+    clear: both;
 }
 
 .titre_texte_mon_choix
 {
-	float: left;
-	width: 60px;
-	background-color: #ff1937;
-	margin-bottom: 10px;
-	border-radius: 2px;
-	font-family: inside_font_light, Verdana, sans-serif;
-	color: white;
-	text-align: center;
+    float: left;
+    width: 60px;
+    background-color: #ff1937;
+    margin-bottom: 10px;
+    border-radius: 2px;
+    font-family: inside_font_light, Verdana, sans-serif;
+    color: white;
+    text-align: center;
 }
 
 .texte_mon_choix
 {
-	font-family: inside_font_light, Verdana, sans-serif;
-	color: #262626;
-	word-wrap: break-word;
-	margin-left: 65px;
-	text-align: justify;
+    font-family: inside_font_light, Verdana, sans-serif;
+    color: #262626;
+    word-wrap: break-word;
+    margin-left: 65px;
+    text-align: justify;
 }
 
 /*** Modification Mes choix ***/
 .zone_icones_update_mon_choix
 {
-	border-top: solid 1px #c3c3c3;
-	padding-top: 10px;
-	margin-bottom: 5px;
+    border-top: solid 1px #c3c3c3;
+    padding-top: 10px;
+    margin-bottom: 5px;
 }
 
 .bouton_choix_update
 {
-	display: block;
-	width: 100%;
-	height: 32px;
-	background-color: #e3e3e3;
-	margin-bottom: 10px;
-	border-radius: 2px;
-	font-family: inside_font_light, Verdana, sans-serif;
-	color: #262626;
-	cursor: pointer;
-	text-align: center;
-	line-height: 32px;
-	-moz-user-select: none;
-	-webkit-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
+    display: block;
+    width: 100%;
+    height: 32px;
+    background-color: #e3e3e3;
+    margin-bottom: 10px;
+    border-radius: 2px;
+    font-family: inside_font_light, Verdana, sans-serif;
+    color: #262626;
+    cursor: pointer;
+    text-align: center;
+    line-height: 32px;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .bouton_choix_update:hover
 {
-	background-color: #70d55d;
-	color: white;
+    background-color: #70d55d;
+    color: white;
 }
 
 .bouton_choix_update:hover .fond_plus
 {
-	background-color: white;
-	color: #262626;
+    background-color: white;
+    color: #262626;
 }
 
 .listbox_horaires_update
 {
-	display: inline-block;
-	height: 32px;
-	width: 50px;
-	padding-left: 2.5px;
-	padding-right: 2.5px;
-	margin-right: 5px;
-	border-radius: 2px;
-	border: 0;
-	box-shadow: 0 0 3px #7c7c7c;
-	font-family: inside_font_regular, Verdana, sans-serif;
-	font-size: 100%;
-	color: #262626;
-	background-color: white;
+    display: inline-block;
+    height: 32px;
+    width: 50px;
+    padding-left: 2.5px;
+    padding-right: 2.5px;
+    margin-right: 5px;
+    border-radius: 2px;
+    border: 0;
+    box-shadow: 0 0 3px #7c7c7c;
+    font-family: inside_font_regular, Verdana, sans-serif;
+    font-size: 100%;
+    color: #262626;
+    background-color: white;
 }
 
 .bouton_annuler_update
 {
-	display: inline-block;
-	margin-bottom: 10px;
-	width: 70px;
-	background-color: #e3e3e3;
-	text-align: center;
-	line-height: 32px;
-	border-radius: 2px;
-	border: 0;
-	box-shadow: 0 0 3px #7c7c7c;
-	font-family: inside_font_light, Verdana, sans-serif;
-	font-size: 100%;
-	color: #262626;
-	cursor: pointer;
-	-moz-user-select: none;
-	-webkit-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
+    display: inline-block;
+    margin-bottom: 10px;
+    width: 70px;
+    background-color: #e3e3e3;
+    text-align: center;
+    line-height: 32px;
+    border-radius: 2px;
+    border: 0;
+    box-shadow: 0 0 3px #7c7c7c;
+    font-family: inside_font_light, Verdana, sans-serif;
+    font-size: 100%;
+    color: #262626;
+    cursor: pointer;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .bouton_annuler_update:hover
 {
-	color: white;
-	background-color: #ff1937;
+    color: white;
+    background-color: #ff1937;
 }
 
 .zone_update_menu
 {
-	border-top: solid 1px #c3c3c3;
-	padding-top: 5px;
-	padding-bottom: 10px;
+    border-top: solid 1px #c3c3c3;
+    padding-top: 5px;
+    padding-bottom: 10px;
 }
 
 .update_menu
 {
-	display: block;
-	width: calc(100% - 20px);
-	height: 30px;
-	margin-top: 5px;
-	padding-left: 10px;
-	padding-right: 10px;
-	background-color: white;
-	border-radius: 2px;
-	border: 0;
-	box-shadow: 0 0 3px #7c7c7c;
-	font-family: inside_font_regular, Verdana, sans-serif;
-	font-size: 100%;
-	color: #262626;
+    display: block;
+    width: calc(100% - 20px);
+    height: 30px;
+    margin-top: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: white;
+    border-radius: 2px;
+    border: 0;
+    box-shadow: 0 0 3px #7c7c7c;
+    font-family: inside_font_regular, Verdana, sans-serif;
+    font-size: 100%;
+    color: #262626;
 }
 
 /*** Affichage résumé semaine ***/
 .zone_proposition_resume
 {
-	width: 180px;
-	vertical-align: top;
-	margin-bottom: 20px;
-	background-color: #e3e3e3;
-	border-radius: 2px;
-	box-shadow: 0 0 3px #7c7c7c;
-	overflow: hidden;
-	padding-left: 10px;
-	padding-right: 10px;
-	text-align: center;
+    width: 180px;
+    vertical-align: top;
+    margin-bottom: 20px;
+    background-color: #e3e3e3;
+    border-radius: 2px;
+    box-shadow: 0 0 3px #7c7c7c;
+    overflow: hidden;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: center;
 }
 
 .caller_resume
 {
-	font-family: inside_font_light, Verdana, sans-serif;
-	color: white;
-	margin-bottom: 10px;
-	padding-top: 10px;
-	border-top: solid 1px #c3c3c3;
+    font-family: inside_font_light, Verdana, sans-serif;
+    color: white;
+    margin-bottom: 10px;
+    padding-top: 10px;
+    border-top: solid 1px #c3c3c3;
 }
 
 .jour_semaine
 {
-	font-family: inside_font_light, Verdana, sans-serif;
-	color: #a3a3a3;
-	margin-top: 10px;
+    font-family: inside_font_light, Verdana, sans-serif;
+    color: #a3a3a3;
+    margin-top: 10px;
 }
 
 .jour_semaine::first-letter
 {
-	text-transform: uppercase;
+    text-transform: uppercase;
 }
 
 .no_proposal
 {
-	padding-top: 50px;
-	padding-bottom: 50px;
-	margin-bottom: 10px;
-	text-align: center;
-	font-family: inside_font_medium, Verdana, sans-serif;
-	color: #262626;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    margin-bottom: 10px;
+    text-align: center;
+    font-family: inside_font_medium, Verdana, sans-serif;
+    color: #262626;
 }
 
 .icon_delete_resume
 {
-	float: right;
-	margin-left: -35px;
-	margin-top: -25px;
-	width: 30px;
-	height: 30px;
-	border: 0;
-	background-image: url("/inside/includes/icons/common/delete_grey.png");
-	background-size: 25px 25px;
-	background-repeat: no-repeat;
-	background-position: center;
-	background-color: transparent;
-	cursor: pointer;
+    float: right;
+    margin-left: -35px;
+    margin-top: -25px;
+    width: 30px;
+    height: 30px;
+    border: 0;
+    background-image: url("/inside/includes/icons/common/delete_grey.png");
+    background-size: 25px 25px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: transparent;
+    cursor: pointer;
 }
 
 .bouton_resume
 {
-	display: block;
-	width: calc(100% - 20px);
-	margin-bottom: 10px;
-	background-color: white;
-	padding: 5px 10px 5px 10px;
-	border-radius: 2px;
-	font-family: inside_font_light, Verdana, sans-serif;
-	color: #262626;
-	cursor: pointer;
-	text-align: center;
-	-moz-user-select: none;
-	-webkit-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
+    display: block;
+    width: calc(100% - 20px);
+    margin-bottom: 10px;
+    background-color: white;
+    padding: 5px 10px 5px 10px;
+    border-radius: 2px;
+    font-family: inside_font_light, Verdana, sans-serif;
+    color: #262626;
+    cursor: pointer;
+    text-align: center;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .bouton_resume:hover
 {
-	background-color: #70d55d;
-	color: white;
+    background-color: #70d55d;
+    color: white;
 }
 
 .bouton_resume:hover .fond_plus
 {
-	background-color: white;
-	color: #262626;
+    background-color: white;
+    color: #262626;
 }
 
 .zone_listbox_restaurant_resume
 {
-	display: block;
-	width: 100%;
+    display: block;
+    width: 100%;
 }
 
 .listbox_choix_resume
 {
-	display: block;
-	height: 32px;
-	width: 100%;
-	padding-left: 5px;
-	padding-right: 5px;
-	margin-left: auto;
-	margin-right: auto;
-	margin-bottom: 10px;
-	border-radius: 2px;
-	border: 0;
-	box-shadow: 0 0 3px #7c7c7c;
-	font-family: inside_font_regular, Verdana, sans-serif;
-	font-size: 100%;
-	color: #262626;
-	background-color: white;
+    display: block;
+    height: 32px;
+    width: 100%;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    border-radius: 2px;
+    border: 0;
+    box-shadow: 0 0 3px #7c7c7c;
+    font-family: inside_font_regular, Verdana, sans-serif;
+    font-size: 100%;
+    color: #262626;
+    background-color: white;
 }
 
 .bouton_annuler_resume
 {
-	display: block;
-	background-color: #e3e3e3;
-	padding: 5px 10px 5px 10px;
-	border-radius: 2px;
-	border: 0;
-	box-shadow: 0 0 3px #7c7c7c;
-	font-family: inside_font_light, Verdana, sans-serif;
-	font-size: 100%;
-	color: #262626;
-	cursor: pointer;
-	text-align: center;
-	-moz-user-select: none;
-	-webkit-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
+    display: block;
+    background-color: #e3e3e3;
+    padding: 5px 10px 5px 10px;
+    border-radius: 2px;
+    border: 0;
+    box-shadow: 0 0 3px #7c7c7c;
+    font-family: inside_font_light, Verdana, sans-serif;
+    font-size: 100%;
+    color: #262626;
+    cursor: pointer;
+    text-align: center;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .bouton_valider_resume
 {
-	display: block;
-	width: 100%;
-	background-color: #e3e3e3;
-	padding: 5px 10px 5px 10px;
-	margin-bottom: 10px;
-	border-radius: 2px;
-	border: 0;
-	box-shadow: 0 0 3px #7c7c7c;
-	font-family: inside_font_light, Verdana, sans-serif;
-	font-size: 100%;
-	color: #262626;
-	cursor: pointer;
-	text-align: center;
-	-moz-user-select: none;
-	-webkit-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
+    display: block;
+    width: 100%;
+    background-color: #e3e3e3;
+    padding: 5px 10px 5px 10px;
+    margin-bottom: 10px;
+    border-radius: 2px;
+    border: 0;
+    box-shadow: 0 0 3px #7c7c7c;
+    font-family: inside_font_light, Verdana, sans-serif;
+    font-size: 100%;
+    color: #262626;
+    cursor: pointer;
+    text-align: center;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .bouton_valider_resume:hover
 {
-	color: white;
-	background-color: #70d55d;
+    color: white;
+    background-color: #70d55d;
 }
 
 .bouton_annuler_resume:hover
 {
-	color: white;
-	background-color: #ff1937;
+    color: white;
+    background-color: #ff1937;
 }
 
 /*** Ajout restaurant ***/
 .fond_saisie_restaurant
 {
-	display: none;
-	background-color: rgb(0, 0, 0, 0.5);
-	position: fixed;
-	z-index: 10;
-	left: 0;
-	top: 0;
-	width: 100%;
-	height: 100%;
-	overflow: auto;
+    display: none;
+    background-color: rgb(0, 0, 0, 0.5);
+    position: fixed;
+    z-index: 10;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
 }
 
 .zone_saisie_restaurant
 {
-	width: 85%;
-	margin-top: 50px;
-	margin-left: auto;
-	margin-right: auto;
-	border-radius: 2px;
-	overflow: hidden;
+    width: 85%;
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 2px;
+    overflow: hidden;
 }
 
 .titre_saisie_restaurant
 {
-	display: inline-block;
-	line-height: 50px;
-	background-color: #ff1937;
-	width: calc(100% - 40px);
-	padding-left: 20px;
-	padding-right: 20px;
-	font-family: inside_font_light, Verdana, sans-serif;
-	font-size: 120%;
-	color: white;
-	border-bottom: solid 2px #c81932;
+    display: inline-block;
+    line-height: 50px;
+    background-color: #ff1937;
+    width: calc(100% - 40px);
+    padding-left: 20px;
+    padding-right: 20px;
+    font-family: inside_font_light, Verdana, sans-serif;
+    font-size: 120%;
+    color: white;
+    border-bottom: solid 2px #c81932;
 }
 
 .form_saisie_restaurant
 {
-	width: 100%;
-	margin-left: auto;
-	margin-right: auto;
-	text-align: center;
-	background-color: white;
-	border-top: solid 1px #d3d3d3;
-	color: #262626;
-	max-height: calc(100vh - 150px);
-	overflow-y: auto;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    background-color: white;
+    border-top: solid 1px #d3d3d3;
+    color: #262626;
+    max-height: calc(100vh - 150px);
+    overflow-y: auto;
 }
 
 .zone_saisie_left
 {
-	float: left;
-	width: 180px;
-	text-align: center;
-	padding: 10px;
+    float: left;
+    width: 180px;
+    text-align: center;
+    padding: 10px;
 }
 
 .zone_parcourir_restaurant_saisie
 {
-	display: inline-block;
-	height: 120px;
-	line-height: 120px;
-	width: 120px;
-	border-style: dashed;
-	border-radius: 50%;
-	border-color: #a3a3a3;
-	text-align: center;
-	overflow: hidden;
+    display: inline-block;
+    height: 120px;
+    line-height: 120px;
+    width: 120px;
+    border-style: dashed;
+    border-radius: 50%;
+    border-color: #a3a3a3;
+    text-align: center;
+    overflow: hidden;
 }
 
 .logo_saisie_image
 {
-	width: 40px;
-	vertical-align: middle;
+    width: 40px;
+    vertical-align: middle;
 }
 
 .bouton_parcourir_restaurant_saisie
 {
-	display: block;
-	opacity: 0;
-	height: 120px;
-	width: 120px;
-	margin-top: -115px;
-	cursor: pointer;
-	position: relative;
-	z-index: 1;
+    display: block;
+    opacity: 0;
+    height: 120px;
+    width: 120px;
+    margin-top: -115px;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
 }
 
 .mask_saisie_restaurant
 {
-	width: 120px;
-	height: 120px;
-	border-radius: 50%;
-	overflow: hidden;
-	margin-left: auto;
-	margin-right: auto;
-	margin-top: -127px;
-	margin-bottom: 14px;
-	line-height: 120px;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -127px;
+    margin-bottom: 14px;
+    line-height: 120px;
 }
 
 .image_saisie_restaurant
 {
-	margin-left: auto;
-	margin-right: auto;
-	max-width: 120px;
-	max-height: 120px;
-	vertical-align: middle;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 120px;
+    max-height: 120px;
+    vertical-align: middle;
 }
 
 .zone_saisie_prix
 {
-	margin-top: 10px;
+    margin-top: 10px;
 }
 
 .saisie_prix_min_restaurant
 {
-	display: inline-block;
-	width: calc(50% - 25px);
-	margin-right: 10px;
-	padding-left: 10px;
-	padding-right: 10px;
-	background-color: white;
-	border-radius: 2px;
-	border: 0;
-	box-shadow: 0 0 3px #7c7c7c;
-	font-family: inside_font_regular, Verdana, sans-serif;
-	font-size: 100%;
-	color: #262626;
-	line-height: 32px;
+    display: inline-block;
+    width: calc(50% - 25px);
+    margin-right: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: white;
+    border-radius: 2px;
+    border: 0;
+    box-shadow: 0 0 3px #7c7c7c;
+    font-family: inside_font_regular, Verdana, sans-serif;
+    font-size: 100%;
+    color: #262626;
+    line-height: 32px;
 }
 
 .saisie_prix_max_restaurant
 {
-	display: inline-block;
-	width: calc(50% - 25px);
-	padding-left: 10px;
-	padding-right: 10px;
-	background-color: white;
-	border-radius: 2px;
-	border: 0;
-	box-shadow: 0 0 3px #7c7c7c;
-	font-family: inside_font_regular, Verdana, sans-serif;
-	font-size: 100%;
-	color: #262626;
-	line-height: 32px;
+    display: inline-block;
+    width: calc(50% - 25px);
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: white;
+    border-radius: 2px;
+    border: 0;
+    box-shadow: 0 0 3px #7c7c7c;
+    font-family: inside_font_regular, Verdana, sans-serif;
+    font-size: 100%;
+    color: #262626;
+    line-height: 32px;
 }
 
 .zone_saisie_right
 {
-	display: inline-block;
-	width: calc(100% - 210px);
-	padding: 10px 10px 10px 0;
+    display: inline-block;
+    width: calc(100% - 210px);
+    padding: 10px 10px 10px 0;
 }
 
 .saisie_nom_restaurant
 {
-	display: inline-block;
-	width: calc(80% - 240px);
-	vertical-align: middle;
-	margin: 0 10px 10px 0;
-	padding-left: 10px;
-	padding-right: 10px;
-	border: 0;
-	background-color: white;
-	border-radius: 2px;
-	box-shadow: 0 0 3px #7c7c7c;
-	font-family: inside_font_medium, Verdana, sans-serif;
-	font-size: 100%;
-	color: #262626;
-	line-height: 32px;
+    display: inline-block;
+    width: calc(80% - 240px);
+    vertical-align: middle;
+    margin: 0 10px 10px 0;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: 0;
+    background-color: white;
+    border-radius: 2px;
+    box-shadow: 0 0 3px #7c7c7c;
+    font-family: inside_font_medium, Verdana, sans-serif;
+    font-size: 100%;
+    color: #262626;
+    line-height: 32px;
 }
 
 .saisie_nom_restaurant_other
 {
-	display: inline-block;
-	width: calc(60% - 270px);
-	vertical-align: middle;
-	margin: 0 10px 10px 0;
-	padding-left: 10px;
-	padding-right: 10px;
-	border: 0;
-	background-color: white;
-	border-radius: 2px;
-	box-shadow: 0 0 3px #7c7c7c;
-	font-family: inside_font_medium, Verdana, sans-serif;
-	font-size: 100%;
-	color: #262626;
-	line-height: 32px;
+    display: inline-block;
+    width: calc(60% - 270px);
+    vertical-align: middle;
+    margin: 0 10px 10px 0;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: 0;
+    background-color: white;
+    border-radius: 2px;
+    box-shadow: 0 0 3px #7c7c7c;
+    font-family: inside_font_medium, Verdana, sans-serif;
+    font-size: 100%;
+    color: #262626;
+    line-height: 32px;
 }
 
 .saisie_lieu
 {
-	display: inline-block;
-	width: 20%;
-	vertical-align: middle;
-	margin: 0 10px 10px 0;
-	padding-left: 10px;
-	padding-right: 10px;
-	height: 34px;
-	border-radius: 2px;
-	border: 0;
-	box-shadow: 0 0 3px #7c7c7c;
-	font-family: inside_font_regular, Verdana, sans-serif;
-	font-size: 100%;
-	color: #262626;
-	background-color: white;
+    display: inline-block;
+    width: 20%;
+    vertical-align: middle;
+    margin: 0 10px 10px 0;
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 34px;
+    border-radius: 2px;
+    border: 0;
+    box-shadow: 0 0 3px #7c7c7c;
+    font-family: inside_font_regular, Verdana, sans-serif;
+    font-size: 100%;
+    color: #262626;
+    background-color: white;
 }
 
 .saisie_lieu_autre_restaurant
 {
-	display: inline-block;
-	width: 20%;
-	vertical-align: middle;
-	margin: 0 10px 10px 0;
-	padding-left: 10px;
-	padding-right: 10px;
-	border: 0;
-	background-color: white;
-	border-radius: 2px;
-	box-shadow: 0 0 3px #7c7c7c;
-	font-family: inside_font_regular, Verdana, sans-serif;
-	font-size: 100%;
-	color: #262626;
-	line-height: 32px;
+    display: inline-block;
+    width: 20%;
+    vertical-align: middle;
+    margin: 0 10px 10px 0;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: 0;
+    background-color: white;
+    border-radius: 2px;
+    box-shadow: 0 0 3px #7c7c7c;
+    font-family: inside_font_regular, Verdana, sans-serif;
+    font-size: 100%;
+    color: #262626;
+    line-height: 32px;
 }
 
 .zone_bouton_saisie
 {
-	display: inline-block;
-	width: 200px;
-	vertical-align: middle;
-	margin-bottom: 10px;
+    display: inline-block;
+    width: 200px;
+    vertical-align: middle;
+    margin-bottom: 10px;
 }
 
 .saisie_bouton
 {
-	width: 100%;
-	height: 34px;
-	line-height: 34px;
-	border-radius: 2px;
-	border: 0;
-	font-family: inside_font_light, Verdana, sans-serif;
-	font-size: 100%;
-	color: #262626;
-	background-color: #e3e3e3;
-	cursor: pointer;
-	box-shadow: 0 0 3px #7c7c7c;
+    width: 100%;
+    height: 34px;
+    line-height: 34px;
+    border-radius: 2px;
+    border: 0;
+    font-family: inside_font_light, Verdana, sans-serif;
+    font-size: 100%;
+    color: #262626;
+    background-color: #e3e3e3;
+    cursor: pointer;
+    box-shadow: 0 0 3px #7c7c7c;
 }
 
 .saisie_bouton:hover
 {
-	background-color: #ff1937;
-	color: white;
+    background-color: #ff1937;
+    color: white;
 }
 
 #types_restaurants
 {
-	display: inline-block;
-	margin-bottom: -10px;
-	text-align: left;
-	width: 100%;
+    display: inline-block;
+    margin-bottom: -10px;
+    text-align: left;
+    width: 100%;
 }
 
 .bouton_type_autre, .bouton_update_type_autre
 {
-	display: inline-block;
-	vertical-align: top;
-	background-color: #e3e3e3;
-	height: 35px;
-	line-height: 35px;
-	padding-left: 10px;
-	padding-right: 10px;
-	margin-bottom: 10px;
-	border-radius: 2px;
-	font-family: inside_font_light, Verdana, sans-serif;
-	color: #262626;
-	cursor: pointer;
-	-moz-user-select: none;
-	-webkit-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
+    display: inline-block;
+    vertical-align: top;
+    background-color: #e3e3e3;
+    height: 35px;
+    line-height: 35px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 10px;
+    border-radius: 2px;
+    font-family: inside_font_light, Verdana, sans-serif;
+    color: #262626;
+    cursor: pointer;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .bouton_type_autre:hover, .bouton_update_type_autre:hover
 {
-	background-color: #70d55d;
-	color: white;
+    background-color: #70d55d;
+    color: white;
 }
 
 .bouton_type_autre:hover .fond_plus, .bouton_update_type_autre:hover .fond_plus
 {
-	background-color: white;
-	color: #262626;
+    background-color: white;
+    color: #262626;
 }
 
 .switch_types
 {
-	display: inline-block;
-	margin: 0 10px 10px 0;
-	height: 35px;
-	line-height: 35px;
-	border-radius: 2px;
-	font-family: inside_font_light, Verdana, sans-serif;
-	color: #262626;
-	padding-left: 5px;
-	cursor: pointer;
-	background-color: #e3e3e3;
+    display: inline-block;
+    margin: 0 10px 10px 0;
+    height: 35px;
+    line-height: 35px;
+    border-radius: 2px;
+    font-family: inside_font_light, Verdana, sans-serif;
+    color: #262626;
+    padding-left: 5px;
+    cursor: pointer;
+    background-color: #e3e3e3;
 }
 
 .switch_types input
 {
-	cursor: pointer;
+    cursor: pointer;
 }
 
 .switch_types:hover
 {
-	background-color: #70d55d;
-	color: white;
+    background-color: #70d55d;
+    color: white;
 }
 
 .bouton_checked
 {
-	background-color: #70d55d;
-	color: white;
+    background-color: #70d55d;
+    color: white;
 }
 
 .label_switch
 {
-	display: inline-block;
-	margin-left: -25px;
-	padding-left: 30px;
-	padding-right: 10px;
-	cursor: pointer;
+    display: inline-block;
+    margin-left: -25px;
+    padding-left: 30px;
+    padding-right: 10px;
+    cursor: pointer;
 }
 
 .type_other
 {
-	display: inline-block;
-	border: 0;
-	width: 80px;
-	height: 33px;
-	background-color: #e3e3e3;
-	padding-left: 10px;
-	padding-right: 10px;
-	margin-right: 10px;
-	margin-bottom: 10px;
-	vertical-align: top;
-	border-radius: 2px;
-	font-family: inside_font_light, Verdana, sans-serif;
-	font-size: 100%;
-	color: #262626;
+    display: inline-block;
+    border: 0;
+    width: 80px;
+    height: 33px;
+    background-color: #e3e3e3;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    vertical-align: top;
+    border-radius: 2px;
+    font-family: inside_font_light, Verdana, sans-serif;
+    font-size: 100%;
+    color: #262626;
 }
 
 .filled
 {
-	background-color: #70d55d;
-	color: white;
+    background-color: #70d55d;
+    color: white;
 }
 
 .checkbox_jour
 {
-	display: none;
+    display: none;
 }
 
 .label_jour_checked
 {
-	display: inline-block;
-	border: 0;
-	width: 32px;
-	height: 32px;
-	background-color: #ff1937;
-	margin-left: 2px;
-	margin-right: 2px;
-	border-radius: 2px;
-	font-family: inside_font_light, Verdana, sans-serif;
-	font-size: 100%;
-	color: white;
-	line-height: 32px;
-	text-align: center;
-	vertical-align: top;
-	cursor: pointer;
+    display: inline-block;
+    border: 0;
+    width: 32px;
+    height: 32px;
+    background-color: #ff1937;
+    margin-left: 2px;
+    margin-right: 2px;
+    border-radius: 2px;
+    font-family: inside_font_light, Verdana, sans-serif;
+    font-size: 100%;
+    color: white;
+    line-height: 32px;
+    text-align: center;
+    vertical-align: top;
+    cursor: pointer;
 }
 
 .label_jour
 {
-	display: inline-block;
-	border: 0;
-	width: 32px;
-	height: 32px;
-	background-color: #e3e3e3;
-	margin-left: 2px;
-	margin-right: 2px;
-	border-radius: 2px;
-	font-family: inside_font_light, Verdana, sans-serif;
-	font-size: 100%;
-	color: #262626;
-	line-height: 32px;
-	text-align: center;
-	vertical-align: top;
-	cursor: pointer;
+    display: inline-block;
+    border: 0;
+    width: 32px;
+    height: 32px;
+    background-color: #e3e3e3;
+    margin-left: 2px;
+    margin-right: 2px;
+    border-radius: 2px;
+    font-family: inside_font_light, Verdana, sans-serif;
+    font-size: 100%;
+    color: #262626;
+    line-height: 32px;
+    text-align: center;
+    vertical-align: top;
+    cursor: pointer;
 }
 
 .zone_saisie_under
 {
-	clear: both;
-	width: calc(100% - 20px);
-	padding: 0 10px 10px 10px;
+    clear: both;
+    width: calc(100% - 20px);
+    padding: 0 10px 10px 10px;
 }
 
 .saisie_telephone_restaurant
 {
-	display: inline-block;
-	vertical-align: middle;
-	width: 160px;
-	padding-left: 10px;
-	padding-right: 10px;
-	background-color: white;
-	border-radius: 2px;
-	border: 0;
-	box-shadow: 0 0 3px #7c7c7c;
-	font-family: inside_font_regular, Verdana, sans-serif;
-	font-size: 100%;
-	color: #262626;
-	line-height: 32px;
+    display: inline-block;
+    vertical-align: middle;
+    width: 160px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: white;
+    border-radius: 2px;
+    border: 0;
+    box-shadow: 0 0 3px #7c7c7c;
+    font-family: inside_font_regular, Verdana, sans-serif;
+    font-size: 100%;
+    color: #262626;
+    line-height: 32px;
 }
 
 .lien_rapide_saisie
 {
-	display: inline-block;
-	vertical-align: middle;
-	margin-left: 10px;
-	width: 34px;
-	height: 34px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 10px;
+    width: 34px;
+    height: 34px;
 }
 
 .image_lien_rapide_saisie
 {
-	width: 100%;
-	height: 100%;
+    width: 100%;
+    height: 100%;
 }
 
 .saisie_lien_restaurant
 {
-	display: inline-block;
-	vertical-align: middle;
-	width: calc((100% / 3) - 134px);
-	margin-left: 10px;
-	padding-left: 10px;
-	padding-right: 10px;
-	background-color: white;
-	border-radius: 2px;
-	border: 0;
-	box-shadow: 0 0 3px #7c7c7c;
-	font-family: inside_font_regular, Verdana, sans-serif;
-	font-size: 100%;
-	color: #262626;
-	line-height: 32px;
+    display: inline-block;
+    vertical-align: middle;
+    width: calc((100% / 3) - 134px);
+    margin-left: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: white;
+    border-radius: 2px;
+    border: 0;
+    box-shadow: 0 0 3px #7c7c7c;
+    font-family: inside_font_regular, Verdana, sans-serif;
+    font-size: 100%;
+    color: #262626;
+    line-height: 32px;
 }
 
 .textarea_saisie_description_restaurant
 {
-	min-height: 50px;
-	margin-top: 10px;
-	width: calc(100% - 20px);
-	padding: 5px 10px 5px 10px;
-	border: 0;
-	box-shadow: 0 0 3px #7c7c7c;
-	background-color: white;
-	border-radius: 2px;
-	font-family: inside_font_regular, Verdana, sans-serif;
-	font-size: 100%;
-	color: #262626;
-	resize: vertical;
+    min-height: 50px;
+    margin-top: 10px;
+    width: calc(100% - 20px);
+    padding: 5px 10px 5px 10px;
+    border: 0;
+    box-shadow: 0 0 3px #7c7c7c;
+    background-color: white;
+    border-radius: 2px;
+    font-family: inside_font_regular, Verdana, sans-serif;
+    font-size: 100%;
+    color: #262626;
+    resize: vertical;
 }
 
 /*** Fiches restaurants ***/
 .zone_liens_lieux
 {
-	text-align: center;
-	margin-top: 15px;
-	margin-bottom: 15px;
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
 
 .lien_lieu
 {
-	display: inline-block;
-	font-family: inside_font_regular, Verdana, sans-serif;
-	color: white;
-	background-color: #262626;
-	padding: 5px;
-	border-radius: 2px;
-	margin: 5px;
-	cursor: pointer;
+    display: inline-block;
+    font-family: inside_font_regular, Verdana, sans-serif;
+    color: white;
+    background-color: #262626;
+    padding: 5px;
+    border-radius: 2px;
+    margin: 5px;
+    cursor: pointer;
 }
 
 .image_lieu
 {
-	display: inline-block;
-	vertical-align: middle;
-	margin-right: 5px;
-	width: 20px;
-	height: 20px;
-	background-image: url("/inside/includes/icons/foodadvisor/location.png");
-	background-size: 20px 20px;
-	background-repeat: no-repeat;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 5px;
+    width: 20px;
+    height: 20px;
+    background-image: url("/inside/includes/icons/foodadvisor/location.png");
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
 }
 
 .nom_lieu
 {
-	display: inline-block;
-	vertical-align: middle;
-	font-family: inside_font_regular, Verdana, sans-serif;
-	color: white;
+    display: inline-block;
+    vertical-align: middle;
+    font-family: inside_font_regular, Verdana, sans-serif;
+    color: white;
 }
 
 .lien_lieu:hover
 {
-	background-color: #d3d3d3;
+    background-color: #d3d3d3;
 }
 
 .lien_lieu:hover .image_lieu
 {
-	background-image: url("/inside/includes/icons/foodadvisor/location_grey.png");
+    background-image: url("/inside/includes/icons/foodadvisor/location_grey.png");
 }
 
 .lien_lieu:hover .nom_lieu
 {
-	color: #262626;
+    color: #262626;
 }
 
 .zone_restaurants
 {
-	width: 100%;
-	margin-left: auto;
-	margin-right: auto;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .zone_fiches_restaurants
 {
-	width: 100%;
-	margin-left: auto;
-	margin-right: auto;
-	opacity: 0;
-	transition: opacity 0.2s;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    opacity: 0;
+    transition: opacity 0.2s;
 }
 
 .zone_fiches_restaurants.masonry
 {
-	opacity: 1;
+    opacity: 1;
 }
 
 .fiche_restaurant
 {
-	background-color: #e3e3e3;
-	display: block;
-	width: 500px;
-	border-radius: 2px;
-	color: #262626;
-	margin-bottom: 20px;
+    background-color: #e3e3e3;
+    display: block;
+    width: 500px;
+    border-radius: 2px;
+    color: #262626;
+    margin-bottom: 20px;
 }
 
 .fiche_restaurant_top
 {
-	position: relative;
-	z-index: 2;
+    position: relative;
+    z-index: 2;
 }
 
 .zone_fiche_left
 {
-	display: inline-block;
-	width: 100px;
-	height: 100px;
-	vertical-align: top;
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    vertical-align: top;
 }
 
 .image_restaurant
 {
-	margin-left: auto;
-	margin-right: auto;
-	width: 80px;
-	height: 80px;
-	padding: 10px;
-	filter: drop-shadow(0px 0px 1px #7c7c7c);
+    margin-left: auto;
+    margin-right: auto;
+    width: 80px;
+    height: 80px;
+    padding: 10px;
+    filter: drop-shadow(0px 0px 1px #7c7c7c);
 }
 
 .image_rounded
 {
-	border-radius: 50%;
+    border-radius: 50%;
 }
 
 .zone_fiche_middle
 {
-	display: inline-block;
-	width: 350px;
+    display: inline-block;
+    width: 350px;
 }
 
 .nom_restaurant
 {
-	padding: 10px 10px 5px 0;
-	font-family: inside_font_medium, Verdana, sans-serif;
-	color: #262626;
-	text-align: justify;
+    padding: 10px 10px 5px 0;
+    font-family: inside_font_medium, Verdana, sans-serif;
+    color: #262626;
+    text-align: justify;
 }
 
 .price
 {
-	display: inline-block;
-	margin-right: 20px;
-	margin-bottom: 10px;
-	font-family: inside_font_light, Verdana, sans-serif;
-	font-size: 80%;
-	color: #262626;
-	line-height: 15px;
+    display: inline-block;
+    margin-right: 20px;
+    margin-bottom: 10px;
+    font-family: inside_font_light, Verdana, sans-serif;
+    font-size: 80%;
+    color: #262626;
+    line-height: 15px;
 }
 
 .type_restaurant
 {
-	display: inline-block;
-	background-color: #70d55d;
-	margin-right: 10px;
-	margin-bottom: 10px;
-	padding: 5px;
-	border-radius: 2px;
-	font-family: inside_font_light, Verdana, sans-serif;
-	color: white;
+    display: inline-block;
+    background-color: #70d55d;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    padding: 5px;
+    border-radius: 2px;
+    font-family: inside_font_light, Verdana, sans-serif;
+    color: white;
 }
 
 .zone_icones_fiches
 {
-	display: block;
-	min-height: 32px;
-	margin-bottom: 10px;
+    display: block;
+    min-height: 32px;
+    margin-bottom: 10px;
 }
 
 .jour_oui
 {
-	display: inline-block;
-	border: 0;
-	width: 32px;
-	height: 32px;
-	background-color: #ff1937;
-	margin-right: 4px;
-	border-radius: 2px;
-	font-family: inside_font_light, Verdana, sans-serif;
-	font-size: 100%;
-	color: white;
-	line-height: 32px;
-	vertical-align: top;
-	text-align: center;
+    display: inline-block;
+    border: 0;
+    width: 32px;
+    height: 32px;
+    background-color: #ff1937;
+    margin-right: 4px;
+    border-radius: 2px;
+    font-family: inside_font_light, Verdana, sans-serif;
+    font-size: 100%;
+    color: white;
+    line-height: 32px;
+    vertical-align: top;
+    text-align: center;
 }
 
 .jour_non
 {
-	display: inline-block;
-	border: 0;
-	width: 32px;
-	height: 32px;
-	background-color: white;
-	margin-right: 4px;
-	border-radius: 2px;
-	font-family: inside_font_light, Verdana, sans-serif;
-	font-size: 100%;
-	color: #262626;
-	line-height: 32px;
-	vertical-align: top;
-	text-align: center;
+    display: inline-block;
+    border: 0;
+    width: 32px;
+    height: 32px;
+    background-color: white;
+    margin-right: 4px;
+    border-radius: 2px;
+    font-family: inside_font_light, Verdana, sans-serif;
+    font-size: 100%;
+    color: #262626;
+    line-height: 32px;
+    vertical-align: top;
+    text-align: center;
 }
 
 .icone_fiche
 {
-	display: inline-block;
-	vertical-align: middle;
-	width: 32px;
-	margin-left: 5px;
+    display: inline-block;
+    vertical-align: middle;
+    width: 32px;
+    margin-left: 5px;
 }
 
 .numero_restaurant
 {
-	margin-bottom: 10px;
+    margin-bottom: 10px;
 }
 
 .icone_fiche_phone
 {
-	display: inline-block;
-	vertical-align: middle;
-	width: 30px;
-	margin-right: 10px;
+    display: inline-block;
+    vertical-align: middle;
+    width: 30px;
+    margin-right: 10px;
 }
 
 .phone_number
 {
-	display: inline-block;
-	font-family: inside_font_regular, Verdana, sans-serif;
-	color: #262626;
+    display: inline-block;
+    font-family: inside_font_regular, Verdana, sans-serif;
+    color: #262626;
 }
 
 .zone_fiche_right
 {
-	display: inline-block;
-	vertical-align: top;
-	width: 50px;
+    display: inline-block;
+    vertical-align: top;
+    width: 50px;
 }
 
 .lien_modifier_restaurant
 {
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-	margin-top: 10px;
-	width: 35px;
-	height: 35px;
-	cursor: pointer;
-	border-radius: 50%;
-	background-color: #c3c3c3;
-	text-align: center;
-	box-shadow: 0 0 3px #7c7c7c;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    border-radius: 50%;
+    background-color: #c3c3c3;
+    text-align: center;
+    box-shadow: 0 0 3px #7c7c7c;
 }
 
 .icone_update_restaurant
 {
-	width: 25px;
-	margin-top: 5px;
+    width: 25px;
+    margin-top: 5px;
 }
 
 .icon_delete_restaurant
 {
-	margin-left: 8px;
-	margin-top: 10px;
-	width: 35px;
-	height: 35px;
-	border: 0;
-	border-radius: 50%;
-	background-image: url("/inside/includes/icons/common/delete.png");
-	background-size: 25px 25px;
-	background-repeat: no-repeat;
-	background-position: center;
-	background-color: #c3c3c3;
-	cursor: pointer;
-	box-shadow: 0 0 3px #7c7c7c;
+    margin-left: 8px;
+    margin-top: 10px;
+    width: 35px;
+    height: 35px;
+    border: 0;
+    border-radius: 50%;
+    background-image: url("/inside/includes/icons/common/delete.png");
+    background-size: 25px 25px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #c3c3c3;
+    cursor: pointer;
+    box-shadow: 0 0 3px #7c7c7c;
 }
 
 .icon_fast_restaurant
 {
-	margin-left: 8px;
-	margin-top: 10px;
-	margin-bottom: 10px;
-	width: 35px;
-	height: 35px;
-	border: 0;
-	border-radius: 50%;
-	background-image: url("/inside/includes/icons/common/food_advisor.png");
-	background-size: 25px 25px;
-	background-repeat: no-repeat;
-	background-position: center;
-	background-color: #c3c3c3;
-	cursor: pointer;
-	box-shadow: 0 0 3px #7c7c7c;
+    margin-left: 8px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 35px;
+    height: 35px;
+    border: 0;
+    border-radius: 50%;
+    background-image: url("/inside/includes/icons/common/food_advisor.png");
+    background-size: 25px 25px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #c3c3c3;
+    cursor: pointer;
+    box-shadow: 0 0 3px #7c7c7c;
 }
 
 .zone_fiche_bottom
 {
-	display: block;
+    display: block;
 }
 
 .description_restaurant
 {
-	clear: both;
-	background-color: #d3d3d3;
-	padding: 10px;
-	font-family: inside_font_regular, Verdana, sans-serif;
-	color: #262626;
-	text-align: justify;
+    clear: both;
+    background-color: #d3d3d3;
+    padding: 10px;
+    font-family: inside_font_regular, Verdana, sans-serif;
+    color: #262626;
+    text-align: justify;
 }
 
 .short_description
 {
-	margin-bottom: 10px;
+    margin-bottom: 10px;
 }
 
 .expand_description
 {
-	float: right;
-	width: 15px;
-	margin-top: -10px;
-	line-height: 10px;
-	text-align: center;
-	padding: 5px;
-	border-radius: 2px;
-	cursor: pointer;
+    float: right;
+    width: 15px;
+    margin-top: -10px;
+    line-height: 10px;
+    text-align: center;
+    padding: 5px;
+    border-radius: 2px;
+    cursor: pointer;
 }
 
 .expand_description:hover
 {
-	background-color: #e3e3e3;
+    background-color: #e3e3e3;
 }
 
 .zone_parcourir_restaurant_update
 {
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-	margin-top: 6px;
-	height: 80px;
-	line-height: 80px;
-	width: 80px;
-	border-style: dashed;
-	border-radius: 50%;
-	border-color: #a3a3a3;
-	text-align: center;
-	overflow: hidden;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 6px;
+    height: 80px;
+    line-height: 80px;
+    width: 80px;
+    border-style: dashed;
+    border-radius: 50%;
+    border-color: #a3a3a3;
+    text-align: center;
+    overflow: hidden;
 }
 
 .logo_saisie_image_2
 {
-	width: 30px;
-	vertical-align: middle;
+    width: 30px;
+    vertical-align: middle;
 }
 
 .bouton_parcourir_restaurant_update
 {
-	display: block;
-	opacity: 0;
-	height: 80px;
-	width: 80px;
-	margin-top: -80px;
-	cursor: pointer;
-	position: relative;
-	z-index: 1;
+    display: block;
+    opacity: 0;
+    height: 80px;
+    width: 80px;
+    margin-top: -80px;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
 }
 
 .mask_update_restaurant
 {
-	width: 80px;
-	height: 80px;
-	border-radius: 50%;
-	overflow: hidden;
-	margin-left: auto;
-	margin-right: auto;
-	text-align: center;
-	margin-top: -83px;
-	line-height: 80px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    margin-top: -83px;
+    line-height: 80px;
 }
 
 .update_image_restaurant
 {
-	margin-left: auto;
-	margin-right: auto;
-	max-width: 80px;
-	max-height: 80px;
-	margin-top: -5px;
-	vertical-align: middle;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 80px;
+    max-height: 80px;
+    margin-top: -5px;
+    vertical-align: middle;
 }
 
 .zone_update_prix
 {
-	display: block;
-	margin-bottom: 10px;
-	font-family: inside_font_light, Verdana, sans-serif;
-	color: #262626;
+    display: block;
+    margin-bottom: 10px;
+    font-family: inside_font_light, Verdana, sans-serif;
+    color: #262626;
 }
 
 .update_prix_min_restaurant
 {
-	display: inline-block;
-	vertical-align: middle;
-	width: 25%;
-	padding-left: 10px;
-	padding-right: 10px;
-	background-color: white;
-	border-radius: 2px;
-	border: 0;
-	font-family: inside_font_regular, Verdana, sans-serif;
-	font-size: 100%;
-	color: #262626;
-	line-height: 30px;
+    display: inline-block;
+    vertical-align: middle;
+    width: 25%;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: white;
+    border-radius: 2px;
+    border: 0;
+    font-family: inside_font_regular, Verdana, sans-serif;
+    font-size: 100%;
+    color: #262626;
+    line-height: 30px;
 }
 
 .update_prix_max_restaurant
 {
-	display: inline-block;
-	vertical-align: middle;
-	width: 25%;
-	margin-left: 10px;
-	padding-left: 10px;
-	padding-right: 10px;
-	background-color: white;
-	border-radius: 2px;
-	border: 0;
-	font-family: inside_font_regular, Verdana, sans-serif;
-	font-size: 100%;
-	color: #262626;
-	line-height: 30px;
+    display: inline-block;
+    vertical-align: middle;
+    width: 25%;
+    margin-left: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: white;
+    border-radius: 2px;
+    border: 0;
+    font-family: inside_font_regular, Verdana, sans-serif;
+    font-size: 100%;
+    color: #262626;
+    line-height: 30px;
 }
 
 .euro
 {
-	display: inline-block;
-	vertical-align: middle;
-	width: 20px;
-	height: 20px;
+    display: inline-block;
+    vertical-align: middle;
+    width: 20px;
+    height: 20px;
 }
 
 .zone_update_types
 {
-	background-color: white;
-	border-radius: 2px;
-	padding: 10px 10px 0 10px;
-	margin-left: 10px;
-	margin-right: 10px;
-	margin-bottom: 10px;
-	text-align: left;
-	min-height: 150px;
-	height: 150px;
-	overflow-y: auto;
-	resize: vertical;
+    background-color: white;
+    border-radius: 2px;
+    padding: 10px 10px 0 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    text-align: left;
+    min-height: 150px;
+    height: 150px;
+    overflow-y: auto;
+    resize: vertical;
 }
 
 .zone_bouton_validation
 {
-	float: right;
-	margin-right: 7px;
-	margin-top: 10px;
-	width: 35px;
-	height: 35px;
-	border-radius: 50%;
+    float: right;
+    margin-right: 7px;
+    margin-top: 10px;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
 }
 
 .zone_bouton_validation .zone_loading_form
 {
-	padding-top: 15px;
-	padding-bottom: 15px;
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
 
 .icone_valider_restaurant
 {
-	width: 35px;
-	height: 35px;
-	border: 0;
-	border-radius: 50%;
-	background-image: url("/inside/includes/icons/common/validate.png");
-	background-size: 25px 25px;
-	background-repeat: no-repeat;
-	background-position: center;
-	background-color: #c3c3c3;
-	cursor: pointer;
-	box-shadow: 0 0 3px #7c7c7c;
+    width: 35px;
+    height: 35px;
+    border: 0;
+    border-radius: 50%;
+    background-image: url("/inside/includes/icons/common/validate.png");
+    background-size: 25px 25px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #c3c3c3;
+    cursor: pointer;
+    box-shadow: 0 0 3px #7c7c7c;
 }
 
 .icone_annuler_restaurant
 {
-	float: right;
-	margin-right: -36px;
-	margin-top: 55px;
-	width: 35px;
-	height: 35px;
-	border: 0;
-	border-radius: 50%;
-	background-image: url("/inside/includes/icons/common/cancel.png");
-	background-size: 20px 20px;
-	background-repeat: no-repeat;
-	background-position: center;
-	background-color: #c3c3c3;
-	cursor: pointer;
-	box-shadow: 0 0 3px #7c7c7c;
+    float: right;
+    margin-right: -36px;
+    margin-top: 55px;
+    width: 35px;
+    height: 35px;
+    border: 0;
+    border-radius: 50%;
+    background-image: url("/inside/includes/icons/common/cancel.png");
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #c3c3c3;
+    cursor: pointer;
+    box-shadow: 0 0 3px #7c7c7c;
 }
 
 .update_nom_restaurant
 {
-	width: calc(100% - 20px);
-	padding-left: 10px;
-	padding-right: 10px;
-	margin-top: 10px;
-	margin-bottom: 10px;
-	border: 0;
-	background-color: white;
-	border-radius: 2px;
-	font-family: inside_font_medium, Verdana, sans-serif;
-	font-size: 100%;
-	color: #262626;
-	line-height: 30px;
+    width: calc(100% - 20px);
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 0;
+    background-color: white;
+    border-radius: 2px;
+    font-family: inside_font_medium, Verdana, sans-serif;
+    font-size: 100%;
+    color: #262626;
+    line-height: 30px;
 }
 
 .update_lieu_restaurant
 {
-	width: 100%;
-	margin-bottom: 10px;
-	padding-left: 5px;
-	padding-right: 5px;
-	border-radius: 2px;
-	border: 0;
-	font-family: inside_font_regular, Verdana, sans-serif;
-	font-size: 100%;
-	color: #262626;
-	height: 30px;
+    width: 100%;
+    margin-bottom: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-radius: 2px;
+    border: 0;
+    font-family: inside_font_regular, Verdana, sans-serif;
+    font-size: 100%;
+    color: #262626;
+    height: 30px;
 }
 
 .update_lieu_autre_restaurant
 {
-	width: calc(100% - 20px);
-	padding-left: 10px;
-	padding-right: 10px;
-	margin-bottom: 10px;
-	border: 0;
-	background-color: white;
-	border-radius: 2px;
-	font-family: inside_font_regular, Verdana, sans-serif;
-	font-size: 100%;
-	color: #262626;
-	line-height: 30px;
+    width: calc(100% - 20px);
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 10px;
+    border: 0;
+    background-color: white;
+    border-radius: 2px;
+    font-family: inside_font_regular, Verdana, sans-serif;
+    font-size: 100%;
+    color: #262626;
+    line-height: 30px;
 }
 
 .opened_restaurant_update
 {
-	display: block;
-	margin-bottom: 10px;
+    display: block;
+    margin-bottom: 10px;
 }
 
 .update_label_jour
 {
-	display: inline-block;
-	border: 0;
-	width: 32px;
-	height: 32px;
-	background-color: white;
-	margin-right: 4px;
-	border-radius: 2px;
-	font-family: inside_font_light, Verdana, sans-serif;
-	font-size: 100%;
-	color: #262626;
-	line-height: 32px;
-	text-align: center;
-	vertical-align: top;
-	cursor: pointer;
+    display: inline-block;
+    border: 0;
+    width: 32px;
+    height: 32px;
+    background-color: white;
+    margin-right: 4px;
+    border-radius: 2px;
+    font-family: inside_font_light, Verdana, sans-serif;
+    font-size: 100%;
+    color: #262626;
+    line-height: 32px;
+    text-align: center;
+    vertical-align: top;
+    cursor: pointer;
 }
 
 .update_label_jour_checked
 {
-	display: inline-block;
-	border: 0;
-	width: 32px;
-	height: 32px;
-	background-color: #ff1937;
-	margin-right: 4px;
-	border-radius: 2px;
-	font-family: inside_font_light, Verdana, sans-serif;
-	font-size: 100%;
-	color: white;
-	line-height: 32px;
-	text-align: center;
-	vertical-align: top;
-	cursor: pointer;
+    display: inline-block;
+    border: 0;
+    width: 32px;
+    height: 32px;
+    background-color: #ff1937;
+    margin-right: 4px;
+    border-radius: 2px;
+    font-family: inside_font_light, Verdana, sans-serif;
+    font-size: 100%;
+    color: white;
+    line-height: 32px;
+    text-align: center;
+    vertical-align: top;
+    cursor: pointer;
 }
 
 .update_icone_fiche
 {
-	float: left;
-	margin-left: 10px;
-	margin-right: 10px;
-	margin-top: 1px;
-	width: 30px;
+    float: left;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 1px;
+    width: 30px;
 }
 
 .update_lien_restaurant
 {
-	width: calc(100% - 80px);
-	padding-left: 10px;
-	padding-right: 10px;
-	margin-bottom: 10px;
-	border: 0;
-	background-color: white;
-	border-radius: 2px;
-	font-family: inside_font_regular, Verdana, sans-serif;
-	font-size: 100%;
-	color: #262626;
-	line-height: 30px;
+    width: calc(100% - 80px);
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 10px;
+    border: 0;
+    background-color: white;
+    border-radius: 2px;
+    font-family: inside_font_regular, Verdana, sans-serif;
+    font-size: 100%;
+    color: #262626;
+    line-height: 30px;
 }
 
 .textarea_update_description_restaurant
 {
-	min-height: 50px;
-	height: 150px;
-	width: calc(100% - 20px);
-	padding: 5px 10px 5px 10px;
-	border: 0;
-	background-color: white;
-	border-radius: 2px;
-	font-family: inside_font_regular, Verdana, sans-serif;
-	font-size: 100%;
-	color: #262626;
-	resize: vertical;
+    min-height: 50px;
+    height: 150px;
+    width: calc(100% - 20px);
+    padding: 5px 10px 5px 10px;
+    border: 0;
+    background-color: white;
+    border-radius: 2px;
+    font-family: inside_font_regular, Verdana, sans-serif;
+    font-size: 100%;
+    color: #262626;
+    resize: vertical;
 }

@@ -4,67 +4,67 @@
 
 .zone_recherche
 {
-	width: 100%;
-	margin-bottom: -0.5vh;
+    width: 100%;
+    margin-bottom: -0.5vh;
 }
 
 .count_search
 {
-	display: inline-block;
-	vertical-align: middle;
-	margin-left: 1.5vh;
-	margin-top: -0.5vh;
-	width: 4vh;
-	height: 4vh;
-	text-align: center;
-	line-height: 4vh;
-	background-color: #262626;
-	border-radius: 50%;
-	font-family: inside_font_thin, Verdana, sans-serif;
-	color: white;
-	font-size: 2vh;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 1.5vh;
+    margin-top: -0.5vh;
+    width: 4vh;
+    height: 4vh;
+    text-align: center;
+    line-height: 4vh;
+    background-color: #262626;
+    border-radius: 50%;
+    font-family: inside_font_thin, Verdana, sans-serif;
+    color: white;
+    font-size: 2vh;
 }
 
 .lien_resultat
 {
-	display: block;
-	width: 100%;
-	margin-left: auto;
-	margin-right: auto;
-	text-decoration: none;
-	margin-bottom: 1vh;
+    display: block;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    text-decoration: none;
+    margin-bottom: 1vh;
 }
 
 .zone_resultat
 {
-	border-radius: 0.5vh;
-	overflow: hidden;
-	box-shadow: 0 0 0.5vh #7c7c7c;
-	font-family: inside_font_light, Verdana, sans-serif;
-	background-color: #e3e3e3;
-	border-collapse: collapse;
-	width: 100%;
+    border-radius: 0.5vh;
+    overflow: hidden;
+    box-shadow: 0 0 0.5vh #7c7c7c;
+    font-family: inside_font_light, Verdana, sans-serif;
+    background-color: #e3e3e3;
+    border-collapse: collapse;
+    width: 100%;
 }
 
 .zone_resultat_titre
 {
-	background-color: #e3e3e3;
-	width: 70%;
-	line-height: 2.5vh;
-	text-align: justify;
-	vertical-align: middle;
-	padding: 1vh;
-	font-size: 2.5vh;
-	color: #262626;
+    background-color: #e3e3e3;
+    width: 70%;
+    line-height: 2.5vh;
+    text-align: justify;
+    vertical-align: middle;
+    padding: 1vh;
+    font-size: 2.5vh;
+    color: #262626;
 }
 
 .zone_resultat_info
 {
-	background-color: #ff1937;
-	width: 30%;
-	line-height: 2.5vh;
-	text-align: center;
-	vertical-align: middle;
-	font-size: 2vh;
-	color: white;
+    background-color: #ff1937;
+    width: 30%;
+    line-height: 2.5vh;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 2vh;
+    color: white;
 }

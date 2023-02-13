@@ -5,207 +5,207 @@
 /*** Onglets ***/
 .zone_changelog_left
 {
-	display: inline-block;
-	width: 200px;
-	vertical-align: top;
+    display: inline-block;
+    width: 200px;
+    vertical-align: top;
 }
 
 .history
 {
-	display: inline-block;
-	margin-bottom: 10px;
-	width: 100%;
-	height: 30px;
-	line-height: 30px;
-	text-align: center;
-	text-decoration: none;
-	font-family: inside_font_light, Verdana, sans-serif;
-	border-radius: 2px;
-	box-shadow: 0 0 3px #7c7c7c;
+    display: inline-block;
+    margin-bottom: 10px;
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    text-decoration: none;
+    font-family: inside_font_light, Verdana, sans-serif;
+    border-radius: 2px;
+    box-shadow: 0 0 3px #7c7c7c;
 }
 
 .view, .year
 {
-	display: inline-block;
-	margin-bottom: 10px;
-	width: calc(50% - 10px);
-	height: 30px;
-	line-height: 30px;
-	text-align: center;
-	text-decoration: none;
-	font-family: inside_font_light, Verdana, sans-serif;
-	border-radius: 2px;
-	box-shadow: 0 0 3px #7c7c7c;
+    display: inline-block;
+    margin-bottom: 10px;
+    width: calc(50% - 10px);
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    text-decoration: none;
+    font-family: inside_font_light, Verdana, sans-serif;
+    border-radius: 2px;
+    box-shadow: 0 0 3px #7c7c7c;
 }
 
 .active
 {
-	background-color: #ff1937;
-	color: white;
+    background-color: #ff1937;
+    color: white;
 }
 
 .inactive
 {
-	background-color: white;
-	color: #262626;
+    background-color: white;
+    color: #262626;
 }
 
 .inactive:hover
 {
-	color: white;
-	background-color: #262626;
-	text-decoration: none;
+    color: white;
+    background-color: #262626;
+    text-decoration: none;
 }
 
 /*** Histoire du site ***/
 .introduction_history
 {
-	display: block;
-	width: 100%;
-	margin-bottom: 10px;
-	font-family: inside_font_light, Verdana, sans-serif;
-	font-size: 120%;
-	color: #262626;
-	text-align: justify;
-	line-height: 30px;
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+    font-family: inside_font_light, Verdana, sans-serif;
+    font-size: 120%;
+    color: #262626;
+    text-align: justify;
+    line-height: 30px;
 }
 
 .introduction_history::first-letter
 {
-	font-family: inside_font_regular, Verdana, sans-serif;
-	font-size: 250%;
+    font-family: inside_font_regular, Verdana, sans-serif;
+    font-size: 250%;
 }
 
 .signature_history
 {
-	display: block;
-	width: 100%;
-	font-family: inside_font_light_italic, Verdana, sans-serif;
-	font-size: 80%;
-	color: #262626;
-	text-align: right;
+    display: block;
+    width: 100%;
+    font-family: inside_font_light_italic, Verdana, sans-serif;
+    font-size: 80%;
+    color: #262626;
+    text-align: right;
 }
 
 .event_history
 {
-	display: block;
-	margin-top: 10px;
+    display: block;
+    margin-top: 10px;
 }
 
 .date_history
 {
-	display: inline-block;
-	font-family: inside_font_thin, Verdana, sans-serif;
-	font-size: 400%;
-	color: #b3b3b3;
-	vertical-align: middle;
+    display: inline-block;
+    font-family: inside_font_thin, Verdana, sans-serif;
+    font-size: 400%;
+    color: #b3b3b3;
+    vertical-align: middle;
 }
 
 .trait_history
 {
-	display: inline-block;
-	height: 1px;
-	background-color: #b3b3b3;
-	margin-left: 15px;
-	vertical-align: middle;
+    display: inline-block;
+    height: 1px;
+    background-color: #b3b3b3;
+    margin-left: 15px;
+    vertical-align: middle;
 }
 
 .details_history
 {
-	display: block;
-	margin-bottom: 15px;
-	font-family: inside_font_light, Verdana, sans-serif;
-	font-size: 120%;
-	color: #262626;
-	text-align: justify;
-	line-height: 30px;
+    display: block;
+    margin-bottom: 15px;
+    font-family: inside_font_light, Verdana, sans-serif;
+    font-size: 120%;
+    color: #262626;
+    text-align: justify;
+    line-height: 30px;
 }
 
 .details_history::first-letter
 {
-	font-family: inside_font_regular, Verdana, sans-serif;
-	font-size: 250%;
+    font-family: inside_font_regular, Verdana, sans-serif;
+    font-size: 250%;
 }
 
 /*** Journaux ***/
 .zone_changelog_right
 {
-	display: none;
-	width: calc(100% - 220px);
-	margin-left: 20px;
-	vertical-align: top;
+    display: none;
+    width: calc(100% - 220px);
+    margin-left: 20px;
+    vertical-align: top;
 }
 
 .notes_changelog
 {
-	line-height: 30px;
-	font-family: inside_font_light, Verdana, sans-serif;
-	font-size: 130%;
-	color: #262626;
-	text-align: justify;
+    line-height: 30px;
+    font-family: inside_font_light, Verdana, sans-serif;
+    font-size: 130%;
+    color: #262626;
+    text-align: justify;
 }
 
 .notes_changelog::first-letter
 {
-	font-size: 250%;
-	font-family: inside_font_regular, Verdana, sans-serif;
+    font-size: 250%;
+    font-family: inside_font_regular, Verdana, sans-serif;
 }
 
 .zone_logs_semaine
 {
-	width: 100%;
-	margin-left: auto;
-	margin-right: auto;
-	margin-bottom: 15px;
-	opacity: 0;
-	transition: opacity 0.2s;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 15px;
+    opacity: 0;
+    transition: opacity 0.2s;
 }
 
 .zone_logs_semaine.masonry
 {
-	opacity: 1;
+    opacity: 1;
 }
 
 .zone_logs_categorie
 {
-	background-color: #e3e3e3;
-	width: 430px;
-	margin-top: 15px;
-	padding: 10px;
-	border-radius: 2px;
-	box-shadow: 0 0 3px #7c7c7c;
-	vertical-align: top;
+    background-color: #e3e3e3;
+    width: 430px;
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 2px;
+    box-shadow: 0 0 3px #7c7c7c;
+    vertical-align: top;
 }
 
 .titre_categorie
 {
-	display: block;
-	text-align: center;
-	width: 100%;
-	font-family: inside_font_thin, Verdana, sans-serif;
-	color: #262626;
-	font-size: 150%;
-	font-weight: bold;
+    display: block;
+    text-align: center;
+    width: 100%;
+    font-family: inside_font_thin, Verdana, sans-serif;
+    color: #262626;
+    font-size: 150%;
+    font-weight: bold;
 }
 
 .logo_titre_categorie
 {
-	height: 25px;
-	vertical-align: middle;
-	margin-top: -5px;
-	margin-right: 10px;
+    height: 25px;
+    vertical-align: middle;
+    margin-top: -5px;
+    margin-right: 10px;
 }
 
 .logs_categorie
 {
-	padding-left: 15px;
-	margin: 10px 0 0 0;
-	font-family: inside_font_light, Verdana, sans-serif;
-	color: #262626;
-	text-align: justify;
+    padding-left: 15px;
+    margin: 10px 0 0 0;
+    font-family: inside_font_light, Verdana, sans-serif;
+    color: #262626;
+    text-align: justify;
 }
 
 .log_categorie
 {
-	margin-top: 5px;
+    margin-top: 5px;
 }

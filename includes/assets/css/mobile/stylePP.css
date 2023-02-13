@@ -5,218 +5,218 @@
 /*** Liste des parcours ***/
 .PP-recherche
 {
-	display: inline-block;
-	width: calc(65% - 3.2vh);
-	margin-bottom: 1vh;
-	margin-right: 0.5vh;
-	border: 0;
-	background-color: white;
-	padding: 1.1vh 2vh 1.1vh 2vh;
-	border-radius: 0.5vh;
-	box-shadow: 0 0 0.5vh #7c7c7c;
-	font-family: inside_font_light, Verdana, sans-serif;
-	font-size: 2.5vh;
+    display: inline-block;
+    width: calc(65% - 3.2vh);
+    margin-bottom: 1vh;
+    margin-right: 0.5vh;
+    border: 0;
+    background-color: white;
+    padding: 1.1vh 2vh 1.1vh 2vh;
+    border-radius: 0.5vh;
+    box-shadow: 0 0 0.5vh #7c7c7c;
+    font-family: inside_font_light, Verdana, sans-serif;
+    font-size: 2.5vh;
 }
 
 .PP-tri
 {
-	display: inline-block;
-	width: calc(35% - 2vh);
-	margin-bottom: 1vh;
-	padding: 1vh;
-	font-family: inside_font_light, Verdana, sans-serif;
-	font-size: 2.5vh;
-	color: #262626;
-	border: 0;
-	background-color: #e3e3e3;
-	border-radius: 0.5vh;
-	box-shadow: 0 0 0.5vh #7c7c7c;
+    display: inline-block;
+    width: calc(35% - 2vh);
+    margin-bottom: 1vh;
+    padding: 1vh;
+    font-family: inside_font_light, Verdana, sans-serif;
+    font-size: 2.5vh;
+    color: #262626;
+    border: 0;
+    background-color: #e3e3e3;
+    border-radius: 0.5vh;
+    box-shadow: 0 0 0.5vh #7c7c7c;
 }
 
 .PP-table
 {
-	border-collapse: collapse;
-	width: 100%;
-	margin-left: auto;
-	margin-right: auto;
-	background-color: white;
-	border-radius: 0.5vh;
-	overflow: hidden;
+    border-collapse: collapse;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: white;
+    border-radius: 0.5vh;
+    overflow: hidden;
 }
 
 .PP-tr
 {
-	background-color: #f3f3f3;
-	border-top: solid 0.3vh white;
+    background-color: #f3f3f3;
+    border-top: solid 0.3vh white;
 }
 
 .PP-table-titre
 {
-	width: calc(100% / 3);
-	padding-top: 1vh;
-	padding-bottom: 1vh;
-	text-align: center;
-	background-color: #ffad01;
-	font-family: inside_font_regular, Verdana, sans-serif;
-	font-weight: bold;
-	color: #262626;
+    width: calc(100% / 3);
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+    text-align: center;
+    background-color: #ffad01;
+    font-family: inside_font_regular, Verdana, sans-serif;
+    font-weight: bold;
+    color: #262626;
 }
 
 .PP-table-ligne
 {
-	padding-top: 1vh;
-	padding-bottom: 1vh;
-	text-align: center;
-	font-family: inside_font_light, Verdana, sans-serif;
-	color: #262626;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+    text-align: center;
+    font-family: inside_font_light, Verdana, sans-serif;
+    color: #262626;
 }
 
 .PP-table-lien
 {
-	color: #262626;
+    color: #262626;
 }
 
 /*** Ajout de parcours ***/
 .PP-form-saisie
 {
-	text-align: center;
+    text-align: center;
 }
 
 .PP-titre-form
 {
-	font-family: inside_font_regular, Verdana, sans-serif;
-	font-size: 3vh;
-	color: #c81932;
-	padding-bottom: 1vh;
+    font-family: inside_font_regular, Verdana, sans-serif;
+    font-size: 3vh;
+    color: #c81932;
+    padding-bottom: 1vh;
 }
 
 .PP-zone-saisie-avancee-infos
 {
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-	background-color: #e3e3e3;
-	border-radius: 0.5vh;
-	padding: 1vh;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #e3e3e3;
+    border-radius: 0.5vh;
+    padding: 1vh;
 }
 
 .PP-zone-saisie-parcours
 {
-	display: block;
-	margin-bottom: 1vh;
+    display: block;
+    margin-bottom: 1vh;
 }
 
 .PP-zone-saisie-parcours:last-child
 {
-	margin-bottom: 0;
+    margin-bottom: 0;
 }
 
 .PP-label-parcours
 {
-	display: inline-block;
-	vertical-align: middle;
-	width: 15vh;
-	font-family: inside_font_light, Verdana, sans-serif;
-	font-size: 2.5vh;
-	color: #262626;
-	text-align: left;
+    display: inline-block;
+    vertical-align: middle;
+    width: 15vh;
+    font-family: inside_font_light, Verdana, sans-serif;
+    font-size: 2.5vh;
+    color: #262626;
+    text-align: left;
 }
 
 .PP-monoligne
 {
-	display: inline-block;
-	vertical-align: middle;
-	width: calc(100% - 17vh);
-	margin-left: auto;
-	margin-right: auto;
-	line-height: 6vh;
-	height: 6vh;
-	padding-left: 1vh;
-	padding-right: 1vh;
-	border: 0;
-	background-color: white;
-	border-radius: 0.5vh;
-	font-family: inside_font_light_italic, Verdana, sans-serif;
-	font-size: 3vh;
-	color: #262626;
+    display: inline-block;
+    vertical-align: middle;
+    width: calc(100% - 17vh);
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 6vh;
+    height: 6vh;
+    padding-left: 1vh;
+    padding-right: 1vh;
+    border: 0;
+    background-color: white;
+    border-radius: 0.5vh;
+    font-family: inside_font_light_italic, Verdana, sans-serif;
+    font-size: 3vh;
+    color: #262626;
 }
 
 .PP-listbox
 {
-	display: inline-block;
-	width: calc(100% - 15vh);
-	line-height: 6vh;
-	height: 6vh;
-	font-family: inside_font_light_italic, Verdana, sans-serif;
-	font-size: 3vh;
-	color: #262626;
-	background-color: white;
-	border: 0;
-	border-radius: 0.5vh;
-	padding-left: 0.5vh;
-	padding-right: 0.5vh;
+    display: inline-block;
+    width: calc(100% - 15vh);
+    line-height: 6vh;
+    height: 6vh;
+    font-family: inside_font_light_italic, Verdana, sans-serif;
+    font-size: 3vh;
+    color: #262626;
+    background-color: white;
+    border: 0;
+    border-radius: 0.5vh;
+    padding-left: 0.5vh;
+    padding-right: 0.5vh;
 }
 
 .PP-bouton-saisie
 {
-	width: 100%;
-	padding: 1vh;
-	margin-top: 2vh;
-	border: 0;
-	font-family: inside_font_light, Verdana, sans-serif;
-	color: #262626;
-	font-size: 3vh;
-	text-align: center;
-	border-radius: 0.5vh;
-	box-shadow: 0 0 0.5vh #7c7c7c;
-	text-decoration: none;
-	background-color: #e3e3e3; 
+    width: 100%;
+    padding: 1vh;
+    margin-top: 2vh;
+    border: 0;
+    font-family: inside_font_light, Verdana, sans-serif;
+    color: #262626;
+    font-size: 3vh;
+    text-align: center;
+    border-radius: 0.5vh;
+    box-shadow: 0 0 0.5vh #7c7c7c;
+    text-decoration: none;
+    background-color: #e3e3e3; 
 }
 
 .PP-bouton-saisie:active
 {
-	background-color: #ff1937;
-	color: white;
+    background-color: #ff1937;
+    color: white;
 }
 
 /*** Détails d'un parcours ***/
 .PP-parcours
 {
-	display: block;
-	width: 100%;
+    display: block;
+    width: 100%;
 }
 
 .PP-titre
 {
-	font-family: inside_font_regular, Verdana, sans-serif;
-	font-size: 5vh;
-	color: #c81932;
-	margin-bottom: 2vh;
+    font-family: inside_font_regular, Verdana, sans-serif;
+    font-size: 5vh;
+    color: #c81932;
+    margin-bottom: 2vh;
 }
 
 .PP-texte
 {
-	font-family: inside_font_light, Verdana, sans-serif;
-	font-size: 2.5vh;
-	color: #262626;
-	margin-bottom: 2vh;
+    font-family: inside_font_light, Verdana, sans-serif;
+    font-size: 2.5vh;
+    color: #262626;
+    margin-bottom: 2vh;
 }
 
 .PP-image
 {
-	display: block;
-	width: 100%;
-	margin-top: 2vh;
-	margin-left: auto;
-	margin-right: auto;
+    display: block;
+    width: 100%;
+    margin-top: 2vh;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .PP-pdf
 {
-	display: block;
-	width: 100%;
-	margin-top: 2vh;
-	height: 70vh;
-	margin-left: auto;
-	margin-right: auto;
+    display: block;
+    width: 100%;
+    margin-top: 2vh;
+    height: 70vh;
+    margin-left: auto;
+    margin-right: auto;
 }

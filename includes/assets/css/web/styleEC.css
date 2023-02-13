@@ -5,816 +5,816 @@
 /*** Filtres ***/
 .zone_filtres
 {
-	display: block;
-	margin-bottom: 10px;
+    display: block;
+    margin-bottom: 10px;
 }
 
 .zone_filtres option
 {
-	background-color: white;
+    background-color: white;
 }
 
 .listbox_filtre
 {
-	display: inline-block;
-	height: 30px;
-	margin: 0 10px 0 10px;
-	padding-left: 5px;
-	padding-right: 5px;
-	font-family: inside_font_light, Verdana, sans-serif;
-	font-size: 100%;
-	color: #262626;
-	border: 0;
-	border-radius: 2px;
-	background-color: #e3e3e3;
-	box-shadow: 0 0 3px #7c7c7c;
+    display: inline-block;
+    height: 30px;
+    margin: 0 10px 0 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+    font-family: inside_font_light, Verdana, sans-serif;
+    font-size: 100%;
+    color: #262626;
+    border: 0;
+    border-radius: 2px;
+    background-color: #e3e3e3;
+    box-shadow: 0 0 3px #7c7c7c;
 }
 
 /*** Saisie dépense ***/
 .fond_saisie_depense
 {
-	display: none;
-	background-color: rgb(0, 0, 0, 0.5);
-	position: fixed;
-	z-index: 10;
-	left: 0;
-	top: 0;
-	width: 100%;
-	height: 100%;
-	overflow: auto;
+    display: none;
+    background-color: rgb(0, 0, 0, 0.5);
+    position: fixed;
+    z-index: 10;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
 }
 
 .zone_saisie_depense
 {
-	width: 85%;
-	margin-top: 50px;
-	margin-left: auto;
-	margin-right: auto;
-	border-radius: 2px;
-	overflow: hidden;
+    width: 85%;
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 2px;
+    overflow: hidden;
 }
 
 .titre_saisie_depense
 {
-	display: inline-block;
-	line-height: 50px;
-	background-color: #ff1937;
-	width: calc(100% - 40px);
-	padding-left: 20px;
-	padding-right: 20px;
-	font-family: inside_font_light, Verdana, sans-serif;
-	font-size: 120%;
-	color: white;
-	border-bottom: solid 2px #c81932;
+    display: inline-block;
+    line-height: 50px;
+    background-color: #ff1937;
+    width: calc(100% - 40px);
+    padding-left: 20px;
+    padding-right: 20px;
+    font-family: inside_font_light, Verdana, sans-serif;
+    font-size: 120%;
+    color: white;
+    border-bottom: solid 2px #c81932;
 }
 
 .close_add
 {
-	float: right;
-	width: 30px;
-	height: 30px;
-	margin-top: -40px;
-	margin-right: 10px;
-	cursor: pointer;
-	text-align: center;
+    float: right;
+    width: 30px;
+    height: 30px;
+    margin-top: -40px;
+    margin-right: 10px;
+    cursor: pointer;
+    text-align: center;
 }
 
 .close_img
 {
-	width: 20px;
-	padding: 5px;
-	transform: rotate(0deg);
-	transition: transform 0.2s ease;
+    width: 20px;
+    padding: 5px;
+    transform: rotate(0deg);
+    transition: transform 0.2s ease;
 }
 
 .close_img:hover
 {
-	transform: rotate(90deg);
-	transition: transform 0.2s ease;
+    transform: rotate(90deg);
+    transition: transform 0.2s ease;
 }
 
 .form_saisie_depense
 {
-	width: 100%;
-	margin-left: auto;
-	margin-right: auto;
-	text-align: center;
-	background-color: white;
-	border-top: solid 1px #d3d3d3;
-	max-height: calc(100vh - 150px);
-	overflow-y: auto;
-	color: #262626;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    background-color: white;
+    border-top: solid 1px #d3d3d3;
+    max-height: calc(100vh - 150px);
+    overflow-y: auto;
+    color: #262626;
 }
 
 /*** Achat ***/
 .zone_saisie_left
 {
-	display: inline-block;
-	width: 280px;
-	text-align: center;
-	margin: 10px;
-	vertical-align: top;
+    display: inline-block;
+    width: 280px;
+    text-align: center;
+    margin: 10px;
+    vertical-align: top;
 }
 
 .saisie_buyer
 {
-	display: block;
-	width: 100%;
-	margin-bottom: 10px;
-	padding-left: 5px;
-	padding-right: 5px;
-	height: 34px;
-	border-radius: 2px;
-	border: 0;
-	box-shadow: 0 0 3px #7c7c7c;
-	font-family: inside_font_regular, Verdana, sans-serif;
-	font-size: 100%;
-	color: #262626;
-	background-color: white;
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+    height: 34px;
+    border-radius: 2px;
+    border: 0;
+    box-shadow: 0 0 3px #7c7c7c;
+    font-family: inside_font_regular, Verdana, sans-serif;
+    font-size: 100%;
+    color: #262626;
+    background-color: white;
 }
 
 .zone_saisie_prix, .zone_saisie_reduction
 {
-	display: block;
-	margin-bottom: 10px;
+    display: block;
+    margin-bottom: 10px;
 }
 
 .saisie_prix, .saisie_reduction
 {
-	display: inline-block;
-	vertical-align: middle;
-	width: calc(100% - 45px);
-	padding-left: 10px;
-	padding-right: 10px;
-	border: 0;
-	background-color: white;
-	border-radius: 2px;
-	box-shadow: 0 0 3px #7c7c7c;
-	font-family: inside_font_regular, Verdana, sans-serif;
-	font-size: 100%;
-	color: #262626;
-	line-height: 32px;
+    display: inline-block;
+    vertical-align: middle;
+    width: calc(100% - 45px);
+    padding-left: 10px;
+    padding-right: 10px;
+    border: 0;
+    background-color: white;
+    border-radius: 2px;
+    box-shadow: 0 0 3px #7c7c7c;
+    font-family: inside_font_regular, Verdana, sans-serif;
+    font-size: 100%;
+    color: #262626;
+    line-height: 32px;
 }
 
 .euro
 {
-	display: inline-block;
-	margin-left: 5px;
-	vertical-align: middle;
-	width: 20px;
-	height: 20px;
+    display: inline-block;
+    margin-left: 5px;
+    vertical-align: middle;
+    width: 20px;
+    height: 20px;
 }
 
 .saisie_date_depense
 {
-	display: inline-block;
-	width: calc(100% - 20px);
-	vertical-align: middle;
-	padding-left: 10px;
-	padding-right: 10px;
-	line-height: 32px;
-	border: 0;
-	border-radius: 2px;
-	box-shadow: 0 0 3px #7c7c7c;
-	font-family: inside_font_regular, Verdana, sans-serif;
-	font-size: 100%;
-	color: #262626;
-	background-color: white;
+    display: inline-block;
+    width: calc(100% - 20px);
+    vertical-align: middle;
+    padding-left: 10px;
+    padding-right: 10px;
+    line-height: 32px;
+    border: 0;
+    border-radius: 2px;
+    box-shadow: 0 0 3px #7c7c7c;
+    font-family: inside_font_regular, Verdana, sans-serif;
+    font-size: 100%;
+    color: #262626;
+    background-color: white;
 }
 
 .saisie_commentaire
 {
-	display: block;
-	margin-top: 10px;
-	height: 70px;
-	min-height: 70px;
-	width: calc(100% - 20px);
-	padding: 5px 10px 5px 10px;
-	border: 0;
-	box-shadow: 0 0 3px #7c7c7c;
-	background-color: white;
-	border-radius: 2px;
-	font-family: inside_font_regular, Verdana, sans-serif;
-	font-size: 100%;
-	color: #262626;
-	resize: vertical;
+    display: block;
+    margin-top: 10px;
+    height: 70px;
+    min-height: 70px;
+    width: calc(100% - 20px);
+    padding: 5px 10px 5px 10px;
+    border: 0;
+    box-shadow: 0 0 3px #7c7c7c;
+    background-color: white;
+    border-radius: 2px;
+    font-family: inside_font_regular, Verdana, sans-serif;
+    font-size: 100%;
+    color: #262626;
+    resize: vertical;
 }
 
 .zone_bouton_saisie, .zone_bouton_saisie_montants
 {
-	display: block;
-	width: 100%;
-	margin-top: 10px;
+    display: block;
+    width: 100%;
+    margin-top: 10px;
 }
 
 .form_saisie_depense .zone_loading_form
 {
-	padding-top: 13.5px;
-	padding-bottom: 13.5px;
+    padding-top: 13.5px;
+    padding-bottom: 13.5px;
 }
 
 .saisie_bouton
 {
-	width: 100%;
-	background-color: #e3e3e3;
-	padding-top: 5px;
-	padding-bottom: 5px;
-	border-radius: 2px;
-	font-family: inside_font_light, Verdana, sans-serif;
-	font-size: 100%;
-	color: #262626;
-	cursor: pointer;
-	text-align: center;
-	border: 0;
-	vertical-align: top;
-	box-shadow: 0 0 3px #7c7c7c;
+    width: 100%;
+    background-color: #e3e3e3;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 2px;
+    font-family: inside_font_light, Verdana, sans-serif;
+    font-size: 100%;
+    color: #262626;
+    cursor: pointer;
+    text-align: center;
+    border: 0;
+    vertical-align: top;
+    box-shadow: 0 0 3px #7c7c7c;
 }
 
 .saisie_bouton:hover
 {
-	color: white;
-	background-color: #ff1937;
+    color: white;
+    background-color: #ff1937;
 }
 
 .lien_explications
 {
-	display: block;
-	width: calc(100% - 20px);
-	padding: 5px 10px 5px 10px;
-	margin-left: auto;
-	margin-right: auto;
-	margin-top: 10px;
-	font-family: inside_font_light, Verdana, sans-serif;
-	font-size: 100%;
-	color: #262626;
-	text-align: center;
-	background-color: #e3e3e3;
-	border-radius: 2px;
-	box-shadow: 0 0 3px #7c7c7c;
-	cursor: pointer;
+    display: block;
+    width: calc(100% - 20px);
+    padding: 5px 10px 5px 10px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    font-family: inside_font_light, Verdana, sans-serif;
+    font-size: 100%;
+    color: #262626;
+    text-align: center;
+    background-color: #e3e3e3;
+    border-radius: 2px;
+    box-shadow: 0 0 3px #7c7c7c;
+    cursor: pointer;
 }
 
 .fond_plus
 {
-	display: inline-block;
-	margin-right: 8px;
-	width: 20px;
-	height: 20px;
-	background-color: #70d55d;
-	border-radius: 50%;
-	font-family: inside_font_light, Verdana, sans-serif;
-	color: white;
-	text-align: center;
-	line-height: 20px;
+    display: inline-block;
+    margin-right: 8px;
+    width: 20px;
+    height: 20px;
+    background-color: #70d55d;
+    border-radius: 50%;
+    font-family: inside_font_light, Verdana, sans-serif;
+    color: white;
+    text-align: center;
+    line-height: 20px;
 }
 
 .lien_explications:hover
 {
-	background-color: #70d55d;
-	color: white;
+    background-color: #70d55d;
+    color: white;
 }
 
 .lien_explications:hover .fond_plus
 {
-	background-color: white;
-	color: #262626;
+    background-color: white;
+    color: #262626;
 }
 
 /*** Parts utilisateurs ***/
 .zone_saisie_right
 {
-	display: inline-block;
-	width: calc(100% - 320px);
-	padding: 10px 10px 0 10px;
-	text-align: left;
-	vertical-align: top;
+    display: inline-block;
+    width: calc(100% - 320px);
+    padding: 10px 10px 0 10px;
+    text-align: left;
+    vertical-align: top;
 }
 
 .zone_saisie_utilisateurs
 {
-	margin-left: auto;
-	margin-right: auto;
-	width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
 }
 
 .zone_saisie_utilisateur
 {
-	display: inline-block;
-	padding: 5px;
-	border-radius: 2px;
-	vertical-align: top;
-	background-color: #e3e3e3;
-	box-shadow: 0 0 3px #7c7c7c;
-	text-align: center;
-	width: 190px;
-	margin-bottom: 10px;
+    display: inline-block;
+    padding: 5px;
+    border-radius: 2px;
+    vertical-align: top;
+    background-color: #e3e3e3;
+    box-shadow: 0 0 3px #7c7c7c;
+    text-align: center;
+    width: 190px;
+    margin-bottom: 10px;
 }
 
 .part_selected
 {
-	background-color: #ff1937;
-	color: white;
+    background-color: #ff1937;
+    color: white;
 }
 
 .pseudo_depense
 {
-	display: block;
-	width: 100%;
-	font-family: inside_font_regular, Verdana, sans-serif;
-	font-size: 70%;
-	line-height: 15px;
-	margin-bottom: 5px;
+    display: block;
+    width: 100%;
+    font-family: inside_font_regular, Verdana, sans-serif;
+    font-size: 70%;
+    line-height: 15px;
+    margin-bottom: 5px;
 }
 
 .avatar_depense
 {
-	display: inline-block;
-	width: 40px;
-	height: 40px;
-	border-radius: 50%;
-	background-color: #262626;
-	vertical-align: middle;
-	box-shadow: 0 0 3px #7c7c7c;
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #262626;
+    vertical-align: middle;
+    box-shadow: 0 0 3px #7c7c7c;
 }
 
 .zone_saisie_quantite
 {
-	display: inline-block;
-	vertical-align: middle;
-	width: calc(100% - 90px);
+    display: inline-block;
+    vertical-align: middle;
+    width: calc(100% - 90px);
 }
 
 .bouton_quantite
 {
-	display: inline-block;
-	width: 20px;
-	line-height: 20px;
-	vertical-align: middle;
-	border-radius: 2px;
-	font-family: inside_font_regular, Verdana, sans-serif;
-	color: white;
-	cursor: pointer;
-	background-color: #262626;
-	-moz-user-select: none;
-	-webkit-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
+    display: inline-block;
+    width: 20px;
+    line-height: 20px;
+    vertical-align: middle;
+    border-radius: 2px;
+    font-family: inside_font_regular, Verdana, sans-serif;
+    color: white;
+    cursor: pointer;
+    background-color: #262626;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .bouton_quantite:hover
 {
-	background-color: #c81932;
-	color: white;
+    background-color: #c81932;
+    color: white;
 }
 
 .quantite
 {
-	display: inline-block;
-	width: 20px;
-	margin-left: 10px;
-	margin-right: 10px;
-	line-height: 20px;
-	vertical-align: middle;
-	border-radius: 2px;
-	border: 0;
-	font-family: inside_font_medium, Verdana, sans-serif;
-	color: #262626;
-	text-align: center;
-	-moz-user-select: none;
-	-webkit-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
+    display: inline-block;
+    width: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+    line-height: 20px;
+    vertical-align: middle;
+    border-radius: 2px;
+    border: 0;
+    font-family: inside_font_medium, Verdana, sans-serif;
+    color: #262626;
+    text-align: center;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .quantite_des
 {
-	display: inline-block;
-	vertical-align: middle;
-	width: calc(100% - 80px);
-	height: 30px;
-	font-family: inside_font_light, Verdana, sans-serif;
-	font-size: 120%;
-	color: white;
-	text-align: center;
-	background-color: transparent;
-	border: 0;
+    display: inline-block;
+    vertical-align: middle;
+    width: calc(100% - 80px);
+    height: 30px;
+    font-family: inside_font_light, Verdana, sans-serif;
+    font-size: 120%;
+    color: white;
+    text-align: center;
+    background-color: transparent;
+    border: 0;
 }
 
 .zone_saisie_montant
 {
-	display: inline-block;
-	vertical-align: middle;
-	width: calc(100% - 90px);
+    display: inline-block;
+    vertical-align: middle;
+    width: calc(100% - 90px);
 }
 
 .montant
 {
-	display: inline-block;
-	vertical-align: middle;
-	width: calc(100% - 40px);
-	padding-left: 10px;
-	padding-right: 10px;
-	height: 30px;
-	border: 0;
-	border-radius: 2px;
-	font-family: inside_font_light, Verdana, sans-serif;
-	font-size: 100%;
-	color: #262626;
-	background-color: white;
+    display: inline-block;
+    vertical-align: middle;
+    width: calc(100% - 40px);
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 30px;
+    border: 0;
+    border-radius: 2px;
+    font-family: inside_font_light, Verdana, sans-serif;
+    font-size: 100%;
+    color: #262626;
+    background-color: white;
 }
 
 .montant_des
 {
-	display: inline-block;
-	vertical-align: middle;
-	width: calc(100% - 42px);
-	line-height: 32px;
-	font-family: inside_font_light, Verdana, sans-serif;
-	font-size: 120%;
-	color: white;
-	text-align: center;
-	border: 0;
-	background-color: transparent;
+    display: inline-block;
+    vertical-align: middle;
+    width: calc(100% - 42px);
+    line-height: 32px;
+    font-family: inside_font_light, Verdana, sans-serif;
+    font-size: 120%;
+    color: white;
+    text-align: center;
+    border: 0;
+    background-color: transparent;
 }
 
 .parts_saisie
 {
-	display: inline-block;
-	vertical-align: middle;
-	width: 30px;
-	height: 30px;
+    display: inline-block;
+    vertical-align: middle;
+    width: 30px;
+    height: 30px;
 }
 
 .euro_saisie
 {
-	display: inline-block;
-	vertical-align: middle;
-	width: 20px;
-	height: 20px;
-	padding: 5px;
+    display: inline-block;
+    vertical-align: middle;
+    width: 20px;
+    height: 20px;
+    padding: 5px;
 }
 
 .explications
 {
-	margin-left: auto;
-	margin-right: auto;
-	margin-bottom: 10px;
-	padding: 10px;
-	font-family: inside_font_regular, Verdana, sans-serif;
-	text-align: justify;
-	background-color: #e3e3e3;
-	border-radius: 2px;
-	box-shadow: 0 0 3px #7c7c7c;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    padding: 10px;
+    font-family: inside_font_regular, Verdana, sans-serif;
+    text-align: justify;
+    background-color: #e3e3e3;
+    border-radius: 2px;
+    box-shadow: 0 0 3px #7c7c7c;
 }
 
 .explications li:last-child
 {
-	margin-bottom: -15px;
+    margin-bottom: -15px;
 }
 
 /*** Bilan & Années***/
 .zone_expenses_left
 {
-	display: inline-block;
-	width: 400px;
-	vertical-align: top;
+    display: inline-block;
+    width: 400px;
+    vertical-align: top;
 }
 
 .zone_bilan_expenses
 {
-	display: block;
-	width: 100%;
+    display: block;
+    width: 100%;
 }
 
 .zone_bilan_user
 {
-	background-color: #e3e3e3;
-	display: block;
-	width: calc(100% - 20px);
-	padding: 5px 10px 5px 10px;
-	border-radius: 2px;
-	box-shadow: 0 0 3px #7c7c7c;
-	margin-bottom: 10px;
+    background-color: #e3e3e3;
+    display: block;
+    width: calc(100% - 20px);
+    padding: 5px 10px 5px 10px;
+    border-radius: 2px;
+    box-shadow: 0 0 3px #7c7c7c;
+    margin-bottom: 10px;
 }
 
 .bilan_rouge
 {
-	background-color: #ee4949;
+    background-color: #ee4949;
 }
 
 .bilan_orange
 {
-	background-color: #ff9147;
+    background-color: #ff9147;
 }
 
 .bilan_jaune
 {
-	background-color: #fffd4c;
+    background-color: #fffd4c;
 }
 
 .bilan_vert
 {
-	background-color: #b6fc78;
+    background-color: #b6fc78;
 }
 
 .bilan_vert_fonce
 {
-	background-color: #71d058;
+    background-color: #71d058;
 }
 
 .avatar
 {
-	display: inline-block;
-	width: 40px;
-	height: 40px;
-	background-color: #262626;
-	vertical-align: middle;
-	border-radius: 50%;
-	box-shadow: 0 0 3px #7c7c7c;
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background-color: #262626;
+    vertical-align: middle;
+    border-radius: 50%;
+    box-shadow: 0 0 3px #7c7c7c;
 }
 
 .pseudo_bilan
 {
-	display: inline-block;
-	padding-left: 10px;
-	padding-right: 10px;
-	width: calc(100% - 140px);
-	vertical-align: middle;
-	font-family: inside_font_regular, Verdana, sans-serif;
-	text-align: justify;
-	font-size: 80%;
-	color: #262626;
-	line-height: 15px;
-	word-break: break-word;
+    display: inline-block;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: calc(100% - 140px);
+    vertical-align: middle;
+    font-family: inside_font_regular, Verdana, sans-serif;
+    text-align: justify;
+    font-size: 80%;
+    color: #262626;
+    line-height: 15px;
+    word-break: break-word;
 }
 
 .total_bilan
 {
-	display: inline-block;
-	width: 80px;
-	text-align: center;
-	vertical-align: middle;
-	font-family: inside_font_medium, Verdana, sans-serif;
-	color: #262626;
-	line-height: 20px;
+    display: inline-block;
+    width: 80px;
+    text-align: center;
+    vertical-align: middle;
+    font-family: inside_font_medium, Verdana, sans-serif;
+    color: #262626;
+    line-height: 20px;
 }
 
 .zone_annees_expenses
 {
-	display: block;
-	width: 100%;
+    display: block;
+    width: 100%;
 }
 
 .year
 {
-	display: inline-block;
-	margin-bottom: 10px;
-	width: calc(50% - 10px);
-	height: 30px;
-	line-height: 30px;
-	text-align: center;
-	text-decoration: none;
-	font-family: inside_font_light, Verdana, sans-serif;
-	border-radius: 2px;
-	box-shadow: 0 0 3px #7c7c7c;
+    display: inline-block;
+    margin-bottom: 10px;
+    width: calc(50% - 10px);
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    text-decoration: none;
+    font-family: inside_font_light, Verdana, sans-serif;
+    border-radius: 2px;
+    box-shadow: 0 0 3px #7c7c7c;
 }
 
 .active
 {
-	background-color: #ff1937;
-	color: white;
+    background-color: #ff1937;
+    color: white;
 }
 
 .inactive
 {
-	background-color: white;
-	color: #262626;
+    background-color: white;
+    color: #262626;
 }
 
 .inactive:hover
 {
-	color: white;
-	background-color: #262626;
-	text-decoration: none;
+    color: white;
+    background-color: #262626;
+    text-decoration: none;
 }
 
 /*** Dépenses ***/
 .zone_expenses_right
 {
-	display: inline-block;
-	width: calc(100% - 420px);
-	margin-left: 20px;
-	vertical-align: top;
+    display: inline-block;
+    width: calc(100% - 420px);
+    margin-left: 20px;
+    vertical-align: top;
 }
 
 .zone_depense
 {
-	background-color: #e3e3e3;
-	display: block;
-	width: 100%;
-	border-radius: 2px;
-	margin-bottom: 10px;
+    background-color: #e3e3e3;
+    display: block;
+    width: 100%;
+    border-radius: 2px;
+    margin-bottom: 10px;
 }
 
 .zone_depense_top
 {
-	display: block;
-	padding: 5px 10px 5px 10px;
+    display: block;
+    padding: 5px 10px 5px 10px;
 }
 
 .zone_achat
 {
-	width: calc(50% + 150px);
-	display: inline-block;
-	vertical-align: middle;
+    width: calc(50% + 150px);
+    display: inline-block;
+    vertical-align: middle;
 }
 
 .pseudo_achat
 {
-	display: inline-block;
-	padding-left: 10px;
-	padding-right: 10px;
-	width: calc(100% - 360px);
-	vertical-align: middle;
-	font-family: inside_font_regular, Verdana, sans-serif;
-	text-align: justify;
-	font-size: 80%;
-	color: #262626;
-	line-height: 15px;
-	word-break: break-word;
+    display: inline-block;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: calc(100% - 360px);
+    vertical-align: middle;
+    font-family: inside_font_regular, Verdana, sans-serif;
+    text-align: justify;
+    font-size: 80%;
+    color: #262626;
+    line-height: 15px;
+    word-break: break-word;
 }
 
 .date_achat
 {
-	display: inline-block;
-	width: 110px;
-	margin-right: 10px;
-	text-align: center;
-	vertical-align: middle;
-	font-family: inside_font_regular, Verdana, sans-serif;
-	color: white;
-	line-height: 20px;
-	background-color: #2eb2f4;
-	border-radius: 2px;
-	padding-top: 5px;
-	padding-bottom: 5px;
+    display: inline-block;
+    width: 110px;
+    margin-right: 10px;
+    text-align: center;
+    vertical-align: middle;
+    font-family: inside_font_regular, Verdana, sans-serif;
+    color: white;
+    line-height: 20px;
+    background-color: #2eb2f4;
+    border-radius: 2px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
 .valeur_achat
 {
-	display: inline-block;
-	width: 80px;
-	margin-right: 10px;
-	text-align: center;
-	vertical-align: middle;
-	font-family: inside_font_medium, Verdana, sans-serif;
-	color: white;
-	line-height: 20px;
-	background-color: #70d55d;
-	border-radius: 2px;
-	padding-top: 5px;
-	padding-bottom: 5px;
+    display: inline-block;
+    width: 80px;
+    margin-right: 10px;
+    text-align: center;
+    vertical-align: middle;
+    font-family: inside_font_medium, Verdana, sans-serif;
+    color: white;
+    line-height: 20px;
+    background-color: #70d55d;
+    border-radius: 2px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
 .frais_achat
 {
-	display: inline-block;
-	width: 80px;
-	margin-right: 10px;
-	text-align: center;
-	vertical-align: middle;
-	font-family: inside_font_medium, Verdana, sans-serif;
-	color: white;
-	line-height: 20px;
-	background-color: #ff1937;
-	border-radius: 2px;
-	padding-top: 5px;
-	padding-bottom: 5px;
+    display: inline-block;
+    width: 80px;
+    margin-right: 10px;
+    text-align: center;
+    vertical-align: middle;
+    font-family: inside_font_medium, Verdana, sans-serif;
+    color: white;
+    line-height: 20px;
+    background-color: #ff1937;
+    border-radius: 2px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
 .zone_parts
 {
-	display: inline-block;
-	width: calc(50% - 150px);
-	text-align: right;
-	vertical-align: middle;
+    display: inline-block;
+    width: calc(50% - 150px);
+    text-align: right;
+    vertical-align: middle;
 }
 
 .zone_parts_utilisateur
 {
-	display: inline-block;
-	margin-left: 10px;
-	text-align: center;
+    display: inline-block;
+    margin-left: 10px;
+    text-align: center;
 }
 
 .parts_depense
 {
-	float: right;
-	width: 15px;
-	height: 15px;
-	background-color: #ff1937;
-	color: white;
-	border-radius: 50%;
-	border: solid 2px #e3e3e3;
-	font-family: inside_font_medium, Verdana, sans-serif;
-	font-size: 70%;
-	text-align: center;
-	line-height: 15px;
-	margin-top: 27px;
-	margin-left: -13px;
-	position: relative;
-	z-index: 1;
+    float: right;
+    width: 15px;
+    height: 15px;
+    background-color: #ff1937;
+    color: white;
+    border-radius: 50%;
+    border: solid 2px #e3e3e3;
+    font-family: inside_font_medium, Verdana, sans-serif;
+    font-size: 70%;
+    text-align: center;
+    line-height: 15px;
+    margin-top: 27px;
+    margin-left: -13px;
+    position: relative;
+    z-index: 1;
 }
 
 .montant_depense
 {
-	display: block;
-	height: 20px;
-	padding-left: 5px;
-	padding-right: 5px;
-	margin-top: 5px;
-	margin-bottom: 5px;
-	line-height: 20px;
-	background-color: #ff1937;
-	font-family: inside_font_light, Verdana, sans-serif;
-	font-size: 100%;
-	color: white;
-	border-radius: 2px;
-	text-align: center;
+    display: block;
+    height: 20px;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    line-height: 20px;
+    background-color: #ff1937;
+    font-family: inside_font_light, Verdana, sans-serif;
+    font-size: 100%;
+    color: white;
+    border-radius: 2px;
+    text-align: center;
 }
 
 .regularisation
 {
-	display: inline-block;
-	padding: 5px 10px 5px 10px;
-	text-align: center;
-	vertical-align: middle;
-	font-family: inside_font_regular, Verdana, sans-serif;
-	color: white;
-	line-height: 20px;
-	background-color: #ff1937;
-	border-radius: 2px;
+    display: inline-block;
+    padding: 5px 10px 5px 10px;
+    text-align: center;
+    vertical-align: middle;
+    font-family: inside_font_regular, Verdana, sans-serif;
+    color: white;
+    line-height: 20px;
+    background-color: #ff1937;
+    border-radius: 2px;
 }
 
 .zone_depense_bottom
 {
-	display: block;
-	background-color: #d3d3d3;
-	padding: 5px 10px 5px 10px;
+    display: block;
+    background-color: #d3d3d3;
+    padding: 5px 10px 5px 10px;
 }
 
 .commentaire_depense
 {
-	display: inline-block;
-	width: calc(100% - 80px);
-	font-family: inside_font_light, Verdana, sans-serif;
-	text-align: justify;
-	vertical-align: middle;
+    display: inline-block;
+    width: calc(100% - 80px);
+    font-family: inside_font_light, Verdana, sans-serif;
+    text-align: justify;
+    vertical-align: middle;
 }
 
 .zone_actions_depense
 {
-	display: inline-block;
-	width: 80px;
-	vertical-align: middle;
-	text-align: right;
+    display: inline-block;
+    width: 80px;
+    vertical-align: middle;
+    text-align: right;
 }
 
 .lien_depense
 {
-	display: inline-block;
-	margin-left: 10px;
-	width: 30px;
-	height: 30px;
-	vertical-align: middle;
-	cursor: pointer;
+    display: inline-block;
+    margin-left: 10px;
+    width: 30px;
+    height: 30px;
+    vertical-align: middle;
+    cursor: pointer;
 }
 
 .icone_depense
 {
-	width: 25px;
-	height: 25px;
-	margin-top: 2.5px;
-	vertical-align: middle;
+    width: 25px;
+    height: 25px;
+    margin-top: 2.5px;
+    vertical-align: middle;
 }
 
 .form_supprimer_depense
 {
-	display: inline-block;
-	margin-left: 10px;
-	vertical-align: middle;
+    display: inline-block;
+    margin-left: 10px;
+    vertical-align: middle;
 }
 
 .icone_supprimer_depense
 {
-	width: 30px;
-	height: 30px;
-	border: 0;
-	background-color: transparent;
-	background-image: url("/inside/includes/icons/common/delete_grey.png");
-	background-size: 25px 25px;
-	background-repeat: no-repeat;
-	background-position: center;
-	cursor: pointer;
-	vertical-align: middle;
+    width: 30px;
+    height: 30px;
+    border: 0;
+    background-color: transparent;
+    background-image: url("/inside/includes/icons/common/delete_grey.png");
+    background-size: 25px 25px;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+    vertical-align: middle;
 }

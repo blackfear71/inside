@@ -5,390 +5,390 @@
 /*** Zones ***/
 .zone_vues
 {
-	display: inline-block;
-	width: 120px;
-	vertical-align: top;
+    display: inline-block;
+    width: 120px;
+    vertical-align: top;
 }
 
 .zone_ideas_right
 {
-	display: inline-block;
-	width: calc(100% - 140px);
-	margin-left: 20px;
+    display: inline-block;
+    width: calc(100% - 140px);
+    margin-left: 20px;
 }
 
 .zone_ideas
 {
-	margin-left: auto;
-	margin-right: auto;
-	opacity: 0;
-	transition: opacity 0.2s
+    margin-left: auto;
+    margin-right: auto;
+    opacity: 0;
+    transition: opacity 0.2s
 }
 
 .zone_ideas.masonry
 {
-	opacity: 1;
+    opacity: 1;
 }
 
 /*** Onglets ***/
 .view
 {
-	display: block;
-	margin-bottom: 10px;
-	width: 100%;
-	height: 30px;
-	line-height: 30px;
-	text-align: center;
-	text-decoration: none;
-	font-family: inside_font_light, Verdana, sans-serif;
-	border-radius: 2px;
-	box-shadow: 0 0 3px #7c7c7c;
+    display: block;
+    margin-bottom: 10px;
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    text-decoration: none;
+    font-family: inside_font_light, Verdana, sans-serif;
+    border-radius: 2px;
+    box-shadow: 0 0 3px #7c7c7c;
 }
 
 .active
 {
-	background-color: #ff1937;
-	color: white;
+    background-color: #ff1937;
+    color: white;
 }
 
 .inactive
 {
-	background-color: white;
-	color: #262626;
+    background-color: white;
+    color: #262626;
 }
 
 .inactive:hover
 {
-	color: white;
-	background-color: #262626;
-	text-decoration: none;
+    color: white;
+    background-color: #262626;
+    text-decoration: none;
 }
 
 /*** Saisie idée ***/
 .fond_saisie_idea
 {
-	display: none;
-	background-color: rgb(0, 0, 0, 0.5);
-	position: fixed;
-	z-index: 10;
-	left: 0;
-	top: 0;
-	width: 100%;
-	height: 100%;
-	overflow: auto;
+    display: none;
+    background-color: rgb(0, 0, 0, 0.5);
+    position: fixed;
+    z-index: 10;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
 }
 
 .zone_saisie_idea
 {
-	width: 85%;
-	margin-top: 50px;
-	margin-left: auto;
-	margin-right: auto;
-	overflow: auto;
-	border-radius: 2px;
+    width: 85%;
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: auto;
+    border-radius: 2px;
 }
 
 .titre_saisie_idea
 {
-	display: inline-block;
-	line-height: 50px;
-	background-color: #ff1937;
-	width: calc(100% - 40px);
-	padding-left: 20px;
-	padding-right: 20px;
-	font-family: inside_font_light, Verdana, sans-serif;
-	font-size: 120%;
-	color: white;
-	border-bottom: solid 2px #c81932;
+    display: inline-block;
+    line-height: 50px;
+    background-color: #ff1937;
+    width: calc(100% - 40px);
+    padding-left: 20px;
+    padding-right: 20px;
+    font-family: inside_font_light, Verdana, sans-serif;
+    font-size: 120%;
+    color: white;
+    border-bottom: solid 2px #c81932;
 }
 
 .zone_close
 {
-	float: right;
-	width: 30px;
-	height: 30px;
-	margin-top: -40px;
-	margin-right: 10px;
-	cursor: pointer;
-	text-align: center;
+    float: right;
+    width: 30px;
+    height: 30px;
+    margin-top: -40px;
+    margin-right: 10px;
+    cursor: pointer;
+    text-align: center;
 }
 
 .close_img
 {
-	width: 20px;
-	padding: 5px;
-	transform: rotate(0deg);
-	transition: transform 0.2s ease;
+    width: 20px;
+    padding: 5px;
+    transform: rotate(0deg);
+    transition: transform 0.2s ease;
 }
 
 .close_img:hover
 {
-	transform: rotate(90deg);
-	transition: transform 0.2s ease;
+    transform: rotate(90deg);
+    transition: transform 0.2s ease;
 }
 
 .form_saisie_idea
 {
-	width: 100%;
-	margin-left: auto;
-	margin-right: auto;
-	text-align: center;
-	background-color: white;
-	border-top: solid 1px #d3d3d3;
-	max-height: calc(100vh - 150px);
-	overflow-y: auto;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    background-color: white;
+    border-top: solid 1px #d3d3d3;
+    max-height: calc(100vh - 150px);
+    overflow-y: auto;
 }
 
 .zone_explications
 {
-	display: inline-block;
-	vertical-align: top;
-	width: 400px;
-	margin-top: 10px;
-	margin-bottom: 10px;
-	background-color: #e3e3e3;
-	border-radius: 2px;
-	box-shadow: 0 0 3px #7c7c7c;
-	padding: 10px;
+    display: inline-block;
+    vertical-align: top;
+    width: 400px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: #e3e3e3;
+    border-radius: 2px;
+    box-shadow: 0 0 3px #7c7c7c;
+    padding: 10px;
 }
 
 .titre_saisie_idee
 {
-	font-family: inside_font_medium, Verdana, sans-serif;
-	color: #262626;
-	text-align: center;
+    font-family: inside_font_medium, Verdana, sans-serif;
+    color: #262626;
+    text-align: center;
 }
 
 .cycle_vie
 {
-	display: block;
-	width: 100%;
-	margin-top: 10px;
+    display: block;
+    width: 100%;
+    margin-top: 10px;
 }
 
 .zone_saisie
 {
-	display: inline-block;
-	width: calc(100% - 450px);
-	margin-top: 10px;
-	margin-left: 10px;
+    display: inline-block;
+    width: calc(100% - 450px);
+    margin-top: 10px;
+    margin-left: 10px;
 }
 
 .saisie_titre
 {
-	vertical-align: middle;
-	display: inline-block;
-	width: calc(100% - 230px);
-	margin-right: 10px;
-	padding-left: 10px;
-	padding-right: 10px;
-	line-height: 32px;
-	border: 0;
-	border-radius: 2px;
-	box-shadow: 0 0 3px #7c7c7c;
-	font-family: inside_font_light, Verdana, sans-serif;
-	font-size: 100%;
-	color: #262626;
-	background-color: white;
+    vertical-align: middle;
+    display: inline-block;
+    width: calc(100% - 230px);
+    margin-right: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    line-height: 32px;
+    border: 0;
+    border-radius: 2px;
+    box-shadow: 0 0 3px #7c7c7c;
+    font-family: inside_font_light, Verdana, sans-serif;
+    font-size: 100%;
+    color: #262626;
+    background-color: white;
 }
 
 .saisie_contenu
 {
-	width: calc(100% - 20px);
-	margin-top: 10px;
-	margin-bottom: 10px;
-	height: 210px;
-	min-height: 210px;
-	padding: 5px 10px 5px 10px;
-	font-family: inside_font_light, Verdana, sans-serif;
-	font-size: 100%;
-	color: #262626;
-	resize: vertical;
-	border-radius: 2px;
-	background-color: white;
-	border: 0;
-	box-shadow: 0 0 3px #7c7c7c;
+    width: calc(100% - 20px);
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 210px;
+    min-height: 210px;
+    padding: 5px 10px 5px 10px;
+    font-family: inside_font_light, Verdana, sans-serif;
+    font-size: 100%;
+    color: #262626;
+    resize: vertical;
+    border-radius: 2px;
+    background-color: white;
+    border: 0;
+    box-shadow: 0 0 3px #7c7c7c;
 }
 
 .zone_bouton_saisie
 {
-	display: inline-block;
-	width: 200px;
-	vertical-align: middle;
+    display: inline-block;
+    width: 200px;
+    vertical-align: middle;
 }
 
 .saisie_bouton
 {
-	height: 34px;
-	line-height: 34px;
-	border-radius: 2px;
-	border: 0;
-	font-family: inside_font_light, Verdana, sans-serif;
-	font-size: 100%;
-	color: #262626;
-	background-color: #e3e3e3;
-	cursor: pointer;
-	box-shadow: 0 0 3px #7c7c7c;
+    height: 34px;
+    line-height: 34px;
+    border-radius: 2px;
+    border: 0;
+    font-family: inside_font_light, Verdana, sans-serif;
+    font-size: 100%;
+    color: #262626;
+    background-color: #e3e3e3;
+    cursor: pointer;
+    box-shadow: 0 0 3px #7c7c7c;
 }
 
 .saisie_bouton:hover
 {
-	background-color: #ff1937;
-	color: white;
+    background-color: #ff1937;
+    color: white;
 }
 
 /*** Idées ***/
 .zone_idea
 {
-	display: inline-block;
-	border-radius: 2px;
-	margin-bottom: 20px;
-	width: 480px;
+    display: inline-block;
+    border-radius: 2px;
+    margin-bottom: 20px;
+    width: 480px;
 }
 
 .zone_idea_top
 {
-	background-color: #c3c3c3;
-	padding: 10px;
-	border-top-left-radius: 2px;
-	border-top-right-radius: 2px;
+    background-color: #c3c3c3;
+    padding: 10px;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
 }
 
 .zone_idea_titre
 {
-	font-family: inside_font_medium, Verdana, sans-serif;
-	color: #262626;
-	text-align: center;
+    font-family: inside_font_medium, Verdana, sans-serif;
+    color: #262626;
+    text-align: center;
 }
 
 .zone_idea_middle
 {
-	background-color: #d3d3d3;
-	padding: 10px;
-	text-align: center;
+    background-color: #d3d3d3;
+    padding: 10px;
+    text-align: center;
 }
 
 .avatar_idea
 {
-	display: inline-block;
-	width: 40px;
-	height: 40px;
-	border-radius: 50%;
-	box-shadow: 0 0 3px #7c7c7c;
-	background-color: #262626;
-	vertical-align: middle;
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    box-shadow: 0 0 3px #7c7c7c;
+    background-color: #262626;
+    vertical-align: middle;
 }
 
 .pseudo_idea
 {
-	display: inline-block;
-	margin-left: 10px;
-	vertical-align: middle;
-	font-family: inside_font_light, Verdana, sans-serif;
-	color: #262626;
-	max-width: 50%;
-	word-break: break-word;
-	text-align: justify;
+    display: inline-block;
+    margin-left: 10px;
+    vertical-align: middle;
+    font-family: inside_font_light, Verdana, sans-serif;
+    color: #262626;
+    max-width: 50%;
+    word-break: break-word;
+    text-align: justify;
 }
 
 .date_idea
 {
-	display: inline-block;
-	margin: 5px 0 5px 10px;
-	vertical-align: middle;
-	font-family: inside_font_light, Verdana, sans-serif;
-	color: white;
-	background-color: #2eb2f4;
-	padding: 3px 8px 3px 8px;
-	border-radius: 2px;
+    display: inline-block;
+    margin: 5px 0 5px 10px;
+    vertical-align: middle;
+    font-family: inside_font_light, Verdana, sans-serif;
+    color: white;
+    background-color: #2eb2f4;
+    padding: 3px 8px 3px 8px;
+    border-radius: 2px;
 }
 
 .icone_idea
 {
-	display: inline-block;
-	vertical-align: middle;
-	margin-top: -2px;
-	margin-right: 5px;
-	width: 20px;
-	height: 20px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: -2px;
+    margin-right: 5px;
+    width: 20px;
+    height: 20px;
 }
 
 .idea_status
 {
-	display: inline-block;
-	margin: 5px 0 5px 10px;
-	vertical-align: middle;
-	font-family: inside_font_light, Verdana, sans-serif;
-	color: white;
-	padding: 3px 8px 3px 8px;
-	border-radius: 2px;
+    display: inline-block;
+    margin: 5px 0 5px 10px;
+    vertical-align: middle;
+    font-family: inside_font_light, Verdana, sans-serif;
+    color: white;
+    padding: 3px 8px 3px 8px;
+    border-radius: 2px;
 }
 
 .idea_proposed
 {
-	background-color: #b3b3b3;
+    background-color: #b3b3b3;
 }
 
 .idea_in_charge
 {
-	background-color: #262626;
+    background-color: #262626;
 }
 
 .idea_in_progress
 {
-	background-color: #13a2e9;
+    background-color: #13a2e9;
 }
 
 .idea_ended
 {
-	background-color: #70d55d;
+    background-color: #70d55d;
 }
 
 .idea_rejected
 {
-	background-color: #ff1937;
+    background-color: #ff1937;
 }
 
 .zone_idea_dev
 {
-	padding: 10px;
-	text-align: center;
+    padding: 10px;
+    text-align: center;
 }
 
 .white
 {
-	color: white;
+    color: white;
 }
 
 .zone_idea_bottom
 {
-	background-color: #e3e3e3;
-	padding: 10px;
+    background-color: #e3e3e3;
+    padding: 10px;
 }
 
 .content_idea
 {
-	font-family: inside_font_light, Verdana, sans-serif;
-	color: #262626;
-	text-align: justify;
+    font-family: inside_font_light, Verdana, sans-serif;
+    color: #262626;
+    text-align: justify;
 }
 
 /*** Actions ***/
 .zone_idea_actions
 {
-	background-color: #c3c3c3;
-	text-align: center;
-	padding: 10px 10px 0 10px;
-	border-bottom-left-radius: 2px;
-	border-bottom-right-radius: 2px;
+    background-color: #c3c3c3;
+    text-align: center;
+    padding: 10px 10px 0 10px;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
 }
 
 .form_manage_idea
 {
-	display: inline-block;
+    display: inline-block;
 }
 
 .margin_button
 {
-	margin: 0 10px 10px 10px;
+    margin: 0 10px 10px 10px;
 }

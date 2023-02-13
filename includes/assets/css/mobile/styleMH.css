@@ -11,7 +11,7 @@
 
 .zone_films_accueil
 {
-	  width: 100%;
+      width: 100%;
 }
 
 .zone_film_accueil
@@ -226,7 +226,7 @@
     height: 4vh;
     width: 4vh;
     margin-right: 2vh;
-	  vertical-align: middle;
+      vertical-align: middle;
 }
 
 .icone_saisie_textarea
@@ -570,12 +570,12 @@
 
 .seen_interested
 {
-	  background-color: #2eb2f4;
+      background-color: #2eb2f4;
 }
 
 .participate_interested
 {
-	  background-color: #70d55d;
+      background-color: #70d55d;
 }
 
 .current_user_interested
@@ -996,7 +996,7 @@
 
 .destinataires
 {
-	  margin: 1vh 0 1vh 3vh;
+      margin: 1vh 0 1vh 3vh;
 }
 
 .avatar_dest

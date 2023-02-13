@@ -5,121 +5,121 @@
 /*** Zones ***/
 .zone_notifications_left
 {
-	display: inline-block;
-	width: 120px;
-	vertical-align: top;
+    display: inline-block;
+    width: 120px;
+    vertical-align: top;
 }
 
 .zone_notifications_right
 {
-	display: inline-block;
-	width: calc(100% - 140px);
-	margin-left: 20px;
-	vertical-align: top;
+    display: inline-block;
+    width: calc(100% - 140px);
+    margin-left: 20px;
+    vertical-align: top;
 }
 
 /*** Onglets ***/
 .view
 {
-	display: block;
-	margin-bottom: 10px;
-	width: 100%;
-	height: 30px;
-	line-height: 30px;
-	text-align: center;
-	text-decoration: none;
-	font-family: inside_font_light, Verdana, sans-serif;
-	border-radius: 2px;
-	box-shadow: 0 0 3px #7c7c7c;
+    display: block;
+    margin-bottom: 10px;
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    text-decoration: none;
+    font-family: inside_font_light, Verdana, sans-serif;
+    border-radius: 2px;
+    box-shadow: 0 0 3px #7c7c7c;
 }
 
 .active
 {
-	background-color: #ff1937;
-	color: white;
+    background-color: #ff1937;
+    color: white;
 }
 
 .inactive
 {
-	background-color: white;
-	color: #262626;
+    background-color: white;
+    color: #262626;
 }
 
 .inactive:hover
 {
-	color: white;
-	background-color: #262626;
-	text-decoration: none;
+    color: white;
+    background-color: #262626;
+    text-decoration: none;
 }
 
 /*** Notifications ***/
 .lien_notification
 {
-	display: block;
-	width: 100%;
-	margin-left: auto;
-	margin-right: auto;
-	text-decoration: none;
-	margin-bottom: 10px;
+    display: block;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    text-decoration: none;
+    margin-bottom: 10px;
 }
 
 .zone_notification
 {
-	border-radius: 2px;
-	overflow: hidden;
-	box-shadow: 0 0 3px #7c7c7c;
-	font-family: inside_font_light, Verdana, sans-serif;
-	background-color: #e3e3e3;
-	border-collapse: collapse;
-	width: 100%;
+    border-radius: 2px;
+    overflow: hidden;
+    box-shadow: 0 0 3px #7c7c7c;
+    font-family: inside_font_light, Verdana, sans-serif;
+    background-color: #e3e3e3;
+    border-collapse: collapse;
+    width: 100%;
 }
 
 .zone_notification_icone
 {
-	background-color: #ff1937;
-	text-align: center;
-	width: 100px;
+    background-color: #ff1937;
+    text-align: center;
+    width: 100px;
 }
 
 .icone_notification
 {
-	width: 40px;
-	vertical-align: middle;
+    width: 40px;
+    vertical-align: middle;
 }
 
 .zone_notification_contenu
 {
-	background-color: #e3e3e3;
-	line-height: 25px;
-	text-align: justify;
-	vertical-align: middle;
-	padding: 5px 20px 5px 20px;
-	color: #262626;
-	word-break: break-word;
+    background-color: #e3e3e3;
+    line-height: 25px;
+    text-align: justify;
+    vertical-align: middle;
+    padding: 5px 20px 5px 20px;
+    color: #262626;
+    word-break: break-word;
 }
 
 .zone_notification_contenu::first-letter
 {
-	text-transform: uppercase;
+    text-transform: uppercase;
 }
 
 .lien_notification:hover .zone_notification_contenu
 {
-	background-color: #d3d3d3;
+    background-color: #d3d3d3;
 }
 
 .zone_notification_date
 {
-	background-color: #c3c3c3;
-	line-height: 60px;
-	text-align: center;
-	width: 120px;
-	vertical-align: middle;
-	color: #7c7c7c;
+    background-color: #c3c3c3;
+    line-height: 60px;
+    text-align: center;
+    width: 120px;
+    vertical-align: middle;
+    color: #7c7c7c;
 }
 
 .smiley
 {
-	width: 30px;
-	vertical-align: middle;
+    width: 30px;
+    vertical-align: middle;
 }
