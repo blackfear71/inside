@@ -1,75 +1,75 @@
 <?php
-  // CONTROLE : Déjà bande à part
-  // RETOUR : Booléen
-  function controleAlreadySolo($isSolo)
-  {
-    // Initialisations
-    $control_ok = true;
-
-    // Contrôle
-    if ($isSolo == true)
+    // CONTROLE : Déjà bande à part
+    // RETOUR : Booléen
+    function controleAlreadySolo($isSolo)
     {
-      $_SESSION['alerts']['already_solo'] = true;
-      $control_ok                         = false;
+        // Initialisations
+        $control_ok = true;
+
+        // Contrôle
+        if ($isSolo == true)
+        {
+            $_SESSION['alerts']['already_solo'] = true;
+            $control_ok                         = false;
+        }
+
+        // Retour
+        return $control_ok;
     }
 
-    // Retour
-    return $control_ok;
-  }
-
-  // CONTROLE : Déjà voté
-  // RETOUR : Booléen
-  function controleAlreadyVoted($mesChoix)
-  {
-    // Initialisations
-    $control_ok = true;
-
-    // Contrôle
-    if (!empty($mesChoix))
+    // CONTROLE : Déjà voté
+    // RETOUR : Booléen
+    function controleAlreadyVoted($mesChoix)
     {
-      $_SESSION['alerts']['solo_choice'] = true;
-      $control_ok                        = false;
+        // Initialisations
+        $control_ok = true;
+
+        // Contrôle
+        if (!empty($mesChoix))
+        {
+            $_SESSION['alerts']['solo_choice'] = true;
+            $control_ok                        = false;
+        }
+
+        // Retour
+        return $control_ok;
     }
 
-    // Retour
-    return $control_ok;
-  }
-
-  // CONTROLE : Déjà réservé
-  // RETOUR : Booléen
-  function controleAlreadyReserved($reserved)
-  {
-    // Initialisations
-    $control_ok = true;
-
-    // Contrôle
-    if ($reserved == 'Y')
+    // CONTROLE : Déjà réservé
+    // RETOUR : Booléen
+    function controleAlreadyReserved($reserved)
     {
-      $_SESSION['alerts']['already_reserved'] = true;
-      $control_ok                             = false;
+        // Initialisations
+        $control_ok = true;
+
+        // Contrôle
+        if ($reserved == 'Y')
+        {
+            $_SESSION['alerts']['already_reserved'] = true;
+            $control_ok                             = false;
+        }
+
+        // Retour
+        return $control_ok;
     }
 
-    // Retour
-    return $control_ok;
-  }
-
-  // CONTROLE : Choix existant à date
-  // RETOUR : Booléen
-  function controleChoixExistantDate($date, $equipe)
-  {
-    // Initialisations
-    $control_ok = true;
-
-    // Contrôle
-    $exist = physiqueChoixExistantDate($date, $equipe);
-
-    if ($exist == true)
+    // CONTROLE : Choix existant à date
+    // RETOUR : Booléen
+    function controleChoixExistantDate($date, $equipe)
     {
-      $_SESSION['alerts']['already_resume'] = true;
-      $control_ok                           = false;
-    }
+        // Initialisations
+        $control_ok = true;
 
-    // Retour
-    return $control_ok;
-  }
+        // Contrôle
+        $exist = physiqueChoixExistantDate($date, $equipe);
+
+        if ($exist == true)
+        {
+            $_SESSION['alerts']['already_resume'] = true;
+            $control_ok                           = false;
+        }
+
+        // Retour
+        return $control_ok;
+    }
 ?>
