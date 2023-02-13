@@ -1,49 +1,49 @@
 <?php
-  // CONTROLE : Format de date
-  // RETOUR : Booléen
-  function controleFormatDate($date, $isMobile)
-  {
-    // Initialisations
-    $control_ok = true;
-    $alerteDate = false;
-
-    // Contrôle
-    if ($isMobile == true)
+    // CONTROLE : Format de date
+    // RETOUR : Booléen
+    function controleFormatDate($date, $isMobile)
     {
-      if (validateDateMobile($date) != true)
-        $alerteDate = true;
-    }
-    else
-    {
-      if (validateDate($date) != true)
-        $alerteDate = true;
-    }
+        // Initialisations
+        $control_ok = true;
+        $alerteDate = false;
 
-    if ($alerteDate == true)
-    {
-      $_SESSION['alerts']['wrong_date'] = true;
-      $control_ok                       = false;
-    }
+        // Contrôle
+        if ($isMobile == true)
+        {
+            if (validateDateMobile($date) != true)
+                $alerteDate = true;
+        }
+        else
+        {
+            if (validateDate($date) != true)
+                $alerteDate = true;
+        }
 
-    // Retour
-    return $control_ok;
-  }
+        if ($alerteDate == true)
+        {
+            $_SESSION['alerts']['wrong_date'] = true;
+            $control_ok                       = false;
+        }
 
-  // CONTROLE : Saisie non vide
-  // RETOUR : Booléen
-  function controleCollector($collector)
-  {
-    // Initialisations
-    $control_ok = true;
-
-    // Contrôle
-    if (empty($collector))
-    {
-      $_SESSION['alerts']['empty_collector'] = true;
-      $control_ok                            = false;
+        // Retour
+        return $control_ok;
     }
 
-    // Retour
-    return $control_ok;
-  }
+    // CONTROLE : Saisie non vide
+    // RETOUR : Booléen
+    function controleCollector($collector)
+    {
+        // Initialisations
+        $control_ok = true;
+
+        // Contrôle
+        if (empty($collector))
+        {
+            $_SESSION['alerts']['empty_collector'] = true;
+            $control_ok                            = false;
+        }
+
+        // Retour
+        return $control_ok;
+    }
 ?>

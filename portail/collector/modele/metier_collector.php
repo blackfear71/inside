@@ -1,616 +1,625 @@
 <?php
-  include_once('../../includes/classes/collectors.php');
+    include_once('../../includes/classes/collectors.php');
 
-  // METIER : Initialise les données de sauvegarde en session
-  // RETOUR : Aucun
-  function initializeSaveSession()
-  {
-    // On initialise les champs de saisie s'il n'y a pas d'erreur
-    if ((!isset($_SESSION['alerts']['wrong_date'])      OR $_SESSION['alerts']['wrong_date']      != true)
-    AND (!isset($_SESSION['alerts']['file_too_big'])    OR $_SESSION['alerts']['file_too_big']    != true)
-    AND (!isset($_SESSION['alerts']['temp_not_found'])  OR $_SESSION['alerts']['temp_not_found']  != true)
-    AND (!isset($_SESSION['alerts']['wrong_file_type']) OR $_SESSION['alerts']['wrong_file_type'] != true)
-    AND (!isset($_SESSION['alerts']['wrong_file'])      OR $_SESSION['alerts']['wrong_file']      != true)
-    AND (!isset($_SESSION['alerts']['empty_collector']) OR $_SESSION['alerts']['empty_collector'] != true))
+    // METIER : Initialise les données de sauvegarde en session
+    // RETOUR : Aucun
+    function initializeSaveSession()
     {
-      unset($_SESSION['save']);
-
-      $_SESSION['save']['speaker']        = '';
-      $_SESSION['save']['other_speaker']  = '';
-      $_SESSION['save']['date_collector'] = '';
-      $_SESSION['save']['type_collector'] = '';
-      $_SESSION['save']['collector']      = '';
-      $_SESSION['save']['context']        = '';
-    }
-  }
-
-  // METIER : Lecture liste des utilisateurs
-  // RETOUR : Tableau d'utilisateurs
-  function getUsers($equipe)
-  {
-    // Récupération de la liste des utilisateurs (sauf ceux en cours d'inscription)
-    $listeUsers = physiqueUsers($equipe);
-
-    // Retour
-    return $listeUsers;
-  }
-
-  // METIER : Calcule le pourcentage de votes nécessaire pour devenir top culte
-  // RETOUR : Minimum pour être top culte
-  function getMinGolden($listeUsers, $equipe)
-  {
-    // Initialisations
-    $nombreUsers = 0;
-
-    // Récupération du nombre d'utilisateurs inscrits de l'équipe
-    foreach ($listeUsers as $user)
-    {
-      if ($user['team'] == $equipe)
-        $nombreUsers++;
-    }
-
-    // Calcul du minimum pour être culte (vérification minimum > 1)
-    if ($nombreUsers == 1)
-      $minGolden = $nombreUsers;
-    else
-      $minGolden = floor(($nombreUsers * 75) / 100);
-
-    // Retour
-    return $minGolden;
-  }
-
-  // METIER : Génération de la liste des tris et filtres
-  // RETOUR : Tableau des tris et des filtres
-  function getOrdersAndFilters()
-  {
-    // Génération du tableau
-    $tableauTrisFiltres = array('tris'    => array(array('label' => 'Du plus récent au plus vieux',               'value' => 'dateDesc'),
-                                                   array('label' => 'Du plus vieux au plus récent',               'value' => 'dateAsc')),
-                                'filtres' => array(array('label' => 'Aucun filtre',                               'value' => 'none'),
-                                                   array('label' => 'Non votés',                                  'value' => 'noVote'),
-                                                   array('label' => 'Mes phrases cultes',                         'value' => 'meOnly'),
-                                                   array('label' => 'Mes phrases rapportées',                     'value' => 'byMe'),
-                                                   array('label' => 'Les phrases cultes des autres utilisateurs', 'value' => 'usersOnly'),
-                                                   array('label' => 'Les phrases cultes hors utilisateurs',       'value' => 'othersOnly'),
-                                                   array('label' => 'Seulement les phrases cultes',               'value' => 'textOnly'),
-                                                   array('label' => 'Seulement les images',                       'value' => 'picturesOnly'),
-                                                   array('label' => 'Les tops cultes',                            'value' => 'topCulte'))
-                               );
-
-    // Retour
-    return $tableauTrisFiltres;
-  }
-
-  // METIER : Lecture nombre de pages en fonction du filtre
-  // RETOUR : Nombre de pages
-  function getPages($filtre, $sessionUser, $minGolden)
-  {
-    // Initialisations
-    $nombreParPage = 18;
-
-    // Récupération des données
-    $identifiant = $sessionUser['identifiant'];
-    $equipe      = $sessionUser['equipe'];
-
-    // Lecture du nombre total de phrases cultes pour chaque filtre
-    $nombreCollectors = physiqueNombreCollector($filtre, $identifiant, $equipe, $minGolden);
-
-    // Calcul du nombre de pages
-    $nombrePages = ceil($nombreCollectors / $nombreParPage);
-
-    // Retour
-    return $nombrePages;
-  }
-
-  // METIER : Lecture des phrases cultes
-  // RETOUR : Liste phrases cultes
-  function getCollectors($listeUsers, $nombrePages, $minGolden, $page, $sessionUser, $tri, $filtre)
-  {
-    // Initialisations
-    $nombreParPage = 18;
-
-    // Récupération des données
-    $identifiant = $sessionUser['identifiant'];
-    $equipe      = $sessionUser['equipe'];
-
-    // Vérification dépassement dernière page
-    if ($page > $nombrePages)
-      $page = $nombrePages;
-
-    // Calcul première entrée
-    $premiereEntree = ($page - 1) * $nombreParPage;
-
-    // Lecture des enregistrements en fonction du filtre et du tri
-    $listeCollectors = physiqueCollectors($tri, $filtre, $nombreParPage, $premiereEntree, $identifiant, $equipe, $minGolden);
-
-    // Récupération des données complémentaires
-    foreach ($listeCollectors as $collector)
-    {
-      // Pseudo auteur
-      if (isset($listeUsers[$collector->getAuthor()]))
-        $collector->setPseudo_author($listeUsers[$collector->getAuthor()]['pseudo']);
-
-      // Pseudo speaker (dont "autre" si besoin)
-      if ($collector->getType_speaker() == 'other' AND !empty($collector->getSpeaker()))
-        $collector->setPseudo_speaker($collector->getSpeaker());
-      else
-      {
-        if (isset($listeUsers[$collector->getSpeaker()]))
+        // On initialise les champs de saisie s'il n'y a pas d'erreur
+        if ((!isset($_SESSION['alerts']['wrong_date'])      OR $_SESSION['alerts']['wrong_date']      != true)
+        AND (!isset($_SESSION['alerts']['file_too_big'])    OR $_SESSION['alerts']['file_too_big']    != true)
+        AND (!isset($_SESSION['alerts']['temp_not_found'])  OR $_SESSION['alerts']['temp_not_found']  != true)
+        AND (!isset($_SESSION['alerts']['wrong_file_type']) OR $_SESSION['alerts']['wrong_file_type'] != true)
+        AND (!isset($_SESSION['alerts']['wrong_file'])      OR $_SESSION['alerts']['wrong_file']      != true)
+        AND (!isset($_SESSION['alerts']['empty_collector']) OR $_SESSION['alerts']['empty_collector'] != true))
         {
-          $collector->setPseudo_speaker($listeUsers[$collector->getSpeaker()]['pseudo']);
-          $collector->setAvatar_speaker($listeUsers[$collector->getSpeaker()]['avatar']);
+            unset($_SESSION['save']);
+
+            $_SESSION['save']['speaker']        = '';
+            $_SESSION['save']['other_speaker']  = '';
+            $_SESSION['save']['date_collector'] = '';
+            $_SESSION['save']['type_collector'] = '';
+            $_SESSION['save']['collector']      = '';
+            $_SESSION['save']['context']        = '';
         }
-      }
-
-      // Vote de l'utilisateur connecté
-      $voteExistant = physiqueVoteUser($collector->getId(), $identifiant);
-      $collector->setVote_user($voteExistant['vote']);
-
-      // Votes tous utilisateurs
-      $collector->setVotes(physiqueVotesUsers($collector->getId(), $listeUsers));
     }
 
-    // Retour
-    return $listeCollectors;
-  }
-
-  // METIER : Conversion de la liste d'objets des phrases / images cultes en tableau simple pour JSON
-  // RETOUR : Tableau des phrases / images cultes
-  function convertForJsonListeCollectors($listeCollectors)
-  {
-    // Initialisations
-    $listeCollectorsAConvertir = array();
-
-    // Conversion de la liste d'objets en tableau pour envoyer au Javascript
-    foreach ($listeCollectors as $collectorAConvertir)
+    // METIER : Lecture liste des utilisateurs
+    // RETOUR : Tableau d'utilisateurs
+    function getUsers($equipe)
     {
-      $collector = array('id'             => $collectorAConvertir->getId(),
-                         'date_add'       => $collectorAConvertir->getDate_add(),
-                         'author'         => $collectorAConvertir->getAuthor(),
-                         'pseudo_author'  => $collectorAConvertir->getPseudo_author(),
-                         'speaker'        => $collectorAConvertir->getSpeaker(),
-                         'pseudo_speaker' => $collectorAConvertir->getPseudo_speaker(),
-                         'avatar_speaker' => $collectorAConvertir->getAvatar_speaker(),
-                         'type_speaker'   => $collectorAConvertir->getType_speaker(),
-                         'date_collector' => $collectorAConvertir->getDate_collector(),
-                         'type_collector' => $collectorAConvertir->getType_collector(),
-                         'team'           => $collectorAConvertir->getTeam(),
-                         'collector'      => $collectorAConvertir->getCollector(),
-                         'context'        => $collectorAConvertir->getContext(),
-                         'nb_votes'       => $collectorAConvertir->getNb_votes(),
-                         'vote_user'      => $collectorAConvertir->getVote_user(),
-                         'votes'          => array()
-                        );
+        // Récupération de la liste des utilisateurs (sauf ceux en cours d'inscription)
+        $listeUsers = physiqueUsers($equipe);
 
-      $listeVotesCollector = array();
+        // Retour
+        return $listeUsers;
+    }
 
-      foreach ($collectorAConvertir->getVotes() as $smiley => $votesBySmiley)
-      {
-        if (!isset($listeVotesCollector[$smiley]))
-          $listeVotesCollector[$smiley] = array();
+    // METIER : Calcule le pourcentage de votes nécessaire pour devenir top culte
+    // RETOUR : Minimum pour être top culte
+    function getMinGolden($listeUsers, $equipe)
+    {
+        // Initialisations
+        $nombreUsers = 0;
 
-        foreach ($votesBySmiley as $pseudo)
+        // Récupération du nombre d'utilisateurs inscrits de l'équipe
+        foreach ($listeUsers as $user)
         {
-          array_push($listeVotesCollector[$smiley], $pseudo);
+            if ($user['team'] == $equipe)
+                $nombreUsers++;
         }
-      }
 
-      $collector['votes']                                       = $listeVotesCollector;
-      $listeCollectorsAConvertir[$collectorAConvertir->getId()] = $collector;
-    }
-
-    // Retour
-    return $listeCollectorsAConvertir;
-  }
-
-  // METIER : Insertion phrases / images cultes
-  // RETOUR : Id collector
-  function insertCollector($post, $files, $sessionUser, $isMobile)
-  {
-    // Initialisations
-    $idCollector = NULL;
-    $control_ok  = true;
-
-    // Récupération des données
-    $identifiant = $sessionUser['identifiant'];
-    $equipe      = $sessionUser['equipe'];
-
-    if ($post['speaker'] == 'other')
-    {
-      $speaker     = $post['other_speaker'];
-      $typeSpeaker = $post['speaker'];
-    }
-    else
-    {
-      $speaker     = $post['speaker'];
-      $typeSpeaker = 'user';
-    }
-
-    if ($isMobile == true)
-      $dateCollector = formatDateForInsertMobile($post['date_collector']);
-    else
-      $dateCollector = formatDateForInsert($post['date_collector']);
-
-    $typeCollector     = $post['type_collector'];
-    $contexteCollector = deleteInvisible($post['context']);
-
-    // Sauvegarde en session en cas d'erreur
-    if ($typeSpeaker == 'other')
-    {
-      $_SESSION['save']['speaker']       = $post['speaker'];
-      $_SESSION['save']['other_speaker'] = $post['other_speaker'];
-    }
-    else
-    {
-      $_SESSION['save']['speaker']       = $post['speaker'];
-      $_SESSION['save']['other_speaker'] = '';
-    }
-
-    $_SESSION['save']['date_collector'] = $post['date_collector'];
-    $_SESSION['save']['type_collector'] = $post['type_collector'];
-    $_SESSION['save']['context']        = $post['context'];
-
-    if ($typeCollector == 'T')
-      $_SESSION['save']['collector'] = $post['collector'];
-
-    // Contrôle date de saisie
-    $control_ok = controleFormatDate($post['date_collector'], $isMobile);
-
-    // Formatage du texte ou insertion image
-    if ($control_ok == true)
-    {
-      if ($typeCollector == 'I')
-        $contenuCollector = uploadImage($files, rand());
-      else
-        $contenuCollector = deleteInvisible($post['collector']);
-    }
-
-    // Contrôle saisie non vide
-    if ($control_ok == true)
-      $control_ok = controleCollector($contenuCollector);
-
-    // Insertion de l'enregistrement en base
-    if ($control_ok == true)
-    {
-      $collector = array('date_add'       => date('Ymd'),
-                         'author'         => $identifiant,
-                         'speaker'        => $speaker,
-                         'type_speaker'   => $typeSpeaker,
-                         'date_collector' => $dateCollector,
-                         'type_collector' => $typeCollector,
-                         'team'           => $equipe,
-                         'collector'      => $contenuCollector,
-                         'context'        => $contexteCollector
-                        );
-
-      $idCollector = physiqueInsertionCollector($collector);
-
-      // Insertion notification
-      if ($post['type_collector'] == 'I')
-        insertNotification('culte_image', $equipe, $idCollector, $identifiant);
-      else
-        insertNotification('culte', $equipe, $idCollector, $identifiant);
-
-      // Génération succès
-      insertOrUpdateSuccesValue('listener', $identifiant, 1);
-
-      if ($typeSpeaker != 'other')
-        insertOrUpdateSuccesValue('speaker', $post['speaker'], 1);
-
-      // Ajout expérience
-      insertExperience($identifiant, 'add_collector');
-
-      // Message d'alerte
-      if ($post['type_collector'] == 'I')
-        $_SESSION['alerts']['image_collector_added'] = true;
-      else
-        $_SESSION['alerts']['collector_added'] = true;
-    }
-
-    // Retour
-    return $idCollector;
-  }
-
-  // METIER : Modification phrases / images cultes
-  // RETOUR : Id collector
-  function updateCollector($post, $files, $isMobile)
-  {
-    // Initialisations
-    $control_ok = true;
-
-    // Récupération des données
-    $idCollector       = $post['id_collector'];
-    $typeCollector     = $post['type_collector'];
-    $contexteCollector = deleteInvisible($post['context']);
-
-    if ($isMobile == true)
-      $dateCollector = formatDateForInsertMobile($post['date_collector']);
-    else
-      $dateCollector = formatDateForInsert($post['date_collector']);
-
-    // Contrôle date de saisie
-    $control_ok = controleFormatDate($post['date_collector'], $isMobile);
-
-    // Récupération des données complémentaires
-    if ($control_ok == true)
-    {
-      // Lecture des données de la phrase / image culte
-      $oldCollector = physiqueCollector($idCollector);
-
-      // Récupération du speaker
-      if ($post['speaker'] == 'other')
-      {
-        $speaker     = $post['other_speaker'];
-        $typeSpeaker = $post['speaker'];
-      }
-      else
-      {
-        // On récupère éventuellement l'identifiant existant si l'utilisateur est désinscrit
-        if (!isset($post['speaker']))
-          $speaker = $oldCollector->getSpeaker();
+        // Calcul du minimum pour être culte (vérification minimum > 1)
+        if ($nombreUsers == 1)
+            $minGolden = $nombreUsers;
         else
-          $speaker = $post['speaker'];
+            $minGolden = floor(($nombreUsers * 75) / 100);
 
-        $typeSpeaker = 'user';
-      }
+        // Retour
+        return $minGolden;
+    }
 
-      // Insertion nouvelle image et suppression ancienne ou récupération phrase culte
-      if ($typeCollector == 'I')
-      {
-        if (!empty($files['image']['name']))
+    // METIER : Génération de la liste des tris et filtres
+    // RETOUR : Tableau des tris et des filtres
+    function getOrdersAndFilters()
+    {
+        // Génération du tableau
+        $tableauTrisFiltres = array(
+            'tris'    => array(
+                array('label' => 'Du plus récent au plus vieux',               'value' => 'dateDesc'),
+                array('label' => 'Du plus vieux au plus récent',               'value' => 'dateAsc')
+            ),
+            'filtres' => array(
+                array('label' => 'Aucun filtre',                               'value' => 'none'),
+                array('label' => 'Non votés',                                  'value' => 'noVote'),
+                array('label' => 'Mes phrases cultes',                         'value' => 'meOnly'),
+                array('label' => 'Mes phrases rapportées',                     'value' => 'byMe'),
+                array('label' => 'Les phrases cultes des autres utilisateurs', 'value' => 'usersOnly'),
+                array('label' => 'Les phrases cultes hors utilisateurs',       'value' => 'othersOnly'),
+                array('label' => 'Seulement les phrases cultes',               'value' => 'textOnly'),
+                array('label' => 'Seulement les images',                       'value' => 'picturesOnly'),
+                array('label' => 'Les tops cultes',                            'value' => 'topCulte')
+            )
+        );
+
+        // Retour
+        return $tableauTrisFiltres;
+    }
+
+    // METIER : Lecture nombre de pages en fonction du filtre
+    // RETOUR : Nombre de pages
+    function getPages($filtre, $sessionUser, $minGolden)
+    {
+        // Initialisations
+        $nombreParPage = 18;
+
+        // Récupération des données
+        $identifiant = $sessionUser['identifiant'];
+        $equipe      = $sessionUser['equipe'];
+
+        // Lecture du nombre total de phrases cultes pour chaque filtre
+        $nombreCollectors = physiqueNombreCollector($filtre, $identifiant, $equipe, $minGolden);
+
+        // Calcul du nombre de pages
+        $nombrePages = ceil($nombreCollectors / $nombreParPage);
+
+        // Retour
+        return $nombrePages;
+    }
+
+    // METIER : Lecture des phrases cultes
+    // RETOUR : Liste phrases cultes
+    function getCollectors($listeUsers, $nombrePages, $minGolden, $page, $sessionUser, $tri, $filtre)
+    {
+        // Initialisations
+        $nombreParPage = 18;
+
+        // Récupération des données
+        $identifiant = $sessionUser['identifiant'];
+        $equipe      = $sessionUser['equipe'];
+
+        // Vérification dépassement dernière page
+        if ($page > $nombrePages)
+            $page = $nombrePages;
+
+        // Calcul première entrée
+        $premiereEntree = ($page - 1) * $nombreParPage;
+
+        // Lecture des enregistrements en fonction du filtre et du tri
+        $listeCollectors = physiqueCollectors($tri, $filtre, $nombreParPage, $premiereEntree, $identifiant, $equipe, $minGolden);
+
+        // Récupération des données complémentaires
+        foreach ($listeCollectors as $collector)
         {
-          // Insertion image
-          $contenuCollector = uploadImage($files, rand());
+            // Pseudo auteur
+            if (isset($listeUsers[$collector->getAuthor()]))
+                $collector->setPseudo_author($listeUsers[$collector->getAuthor()]['pseudo']);
 
-          // Contrôle saisie non vide
-          $control_ok = controleCollector($contenuCollector);
+            // Pseudo speaker (dont "autre" si besoin)
+            if ($collector->getType_speaker() == 'other' AND !empty($collector->getSpeaker()))
+                $collector->setPseudo_speaker($collector->getSpeaker());
+            else
+            {
+                if (isset($listeUsers[$collector->getSpeaker()]))
+                {
+                    $collector->setPseudo_speaker($listeUsers[$collector->getSpeaker()]['pseudo']);
+                    $collector->setAvatar_speaker($listeUsers[$collector->getSpeaker()]['avatar']);
+                }
+            }
 
-          // Suppression des anciennes images
-          if ($control_ok == true)
-          {
-            if (!empty($oldCollector->getCollector()))
-              unlink('../../includes/images/collector/' . $oldCollector->getCollector());
-          }
+            // Vote de l'utilisateur connecté
+            $voteExistant = physiqueVoteUser($collector->getId(), $identifiant);
+            $collector->setVote_user($voteExistant['vote']);
+
+            // Votes tous utilisateurs
+            $collector->setVotes(physiqueVotesUsers($collector->getId(), $listeUsers));
+        }
+
+        // Retour
+        return $listeCollectors;
+    }
+
+    // METIER : Conversion de la liste d'objets des phrases / images cultes en tableau simple pour JSON
+    // RETOUR : Tableau des phrases / images cultes
+    function convertForJsonListeCollectors($listeCollectors)
+    {
+        // Initialisations
+        $listeCollectorsAConvertir = array();
+
+        // Conversion de la liste d'objets en tableau pour envoyer au Javascript
+        foreach ($listeCollectors as $collectorAConvertir)
+        {
+            $collector = array(
+                'id'             => $collectorAConvertir->getId(),
+                'date_add'       => $collectorAConvertir->getDate_add(),
+                'author'         => $collectorAConvertir->getAuthor(),
+                'pseudo_author'  => $collectorAConvertir->getPseudo_author(),
+                'speaker'        => $collectorAConvertir->getSpeaker(),
+                'pseudo_speaker' => $collectorAConvertir->getPseudo_speaker(),
+                'avatar_speaker' => $collectorAConvertir->getAvatar_speaker(),
+                'type_speaker'   => $collectorAConvertir->getType_speaker(),
+                'date_collector' => $collectorAConvertir->getDate_collector(),
+                'type_collector' => $collectorAConvertir->getType_collector(),
+                'team'           => $collectorAConvertir->getTeam(),
+                'collector'      => $collectorAConvertir->getCollector(),
+                'context'        => $collectorAConvertir->getContext(),
+                'nb_votes'       => $collectorAConvertir->getNb_votes(),
+                'vote_user'      => $collectorAConvertir->getVote_user(),
+                'votes'          => array()
+            );
+
+            $listeVotesCollector = array();
+
+            foreach ($collectorAConvertir->getVotes() as $smiley => $votesBySmiley)
+            {
+                if (!isset($listeVotesCollector[$smiley]))
+                    $listeVotesCollector[$smiley] = array();
+
+                foreach ($votesBySmiley as $pseudo)
+                {
+                    array_push($listeVotesCollector[$smiley], $pseudo);
+                }
+            }
+
+            $collector['votes']                                       = $listeVotesCollector;
+            $listeCollectorsAConvertir[$collectorAConvertir->getId()] = $collector;
+        }
+
+        // Retour
+        return $listeCollectorsAConvertir;
+    }
+
+    // METIER : Insertion phrases / images cultes
+    // RETOUR : Id collector
+    function insertCollector($post, $files, $sessionUser, $isMobile)
+    {
+        // Initialisations
+        $idCollector = NULL;
+        $control_ok  = true;
+
+        // Récupération des données
+        $identifiant = $sessionUser['identifiant'];
+        $equipe      = $sessionUser['equipe'];
+
+        if ($post['speaker'] == 'other')
+        {
+            $speaker     = $post['other_speaker'];
+            $typeSpeaker = $post['speaker'];
         }
         else
-          $contenuCollector = $oldCollector->getCollector();
-      }
-      else
-        $contenuCollector = deleteInvisible($post['collector']);
-    }
-
-    // Modification de l'enregistrement en base
-    if ($control_ok == true)
-    {
-      $collector = array('speaker'        => $speaker,
-                         'type_speaker'   => $typeSpeaker,
-                         'date_collector' => $dateCollector,
-                         'collector'      => $contenuCollector,
-                         'context'        => $contexteCollector
-                        );
-
-      physiqueUpdateCollector($oldCollector->getId(), $collector);
-
-      // Génération succès
-      if ($speaker != $oldCollector->getSpeaker())
-      {
-        if ($oldCollector->getType_speaker() != 'other')
         {
-          insertOrUpdateSuccesValue('speaker', $oldCollector->getSpeaker(), -1);
-
-          $oldSelfSatified = physiqueVoteCollectorUser($idCollector, $oldCollector->getSpeaker());
-
-          if ($oldSelfSatified == true)
-            insertOrUpdateSuccesValue('self-satisfied', $oldCollector->getSpeaker(), -1);
+            $speaker     = $post['speaker'];
+            $typeSpeaker = 'user';
         }
 
-        if ($typeSpeaker != 'other')
+        if ($isMobile == true)
+            $dateCollector = formatDateForInsertMobile($post['date_collector']);
+        else
+            $dateCollector = formatDateForInsert($post['date_collector']);
+
+        $typeCollector     = $post['type_collector'];
+        $contexteCollector = deleteInvisible($post['context']);
+
+        // Sauvegarde en session en cas d'erreur
+        if ($typeSpeaker == 'other')
         {
-          insertOrUpdateSuccesValue('speaker', $speaker, 1);
-
-          $selfSatisfied = physiqueVoteCollectorUser($idCollector, $speaker);
-
-          if ($selfSatisfied == true)
-            insertOrUpdateSuccesValue('self-satisfied', $speaker, 1);
+            $_SESSION['save']['speaker']       = $post['speaker'];
+            $_SESSION['save']['other_speaker'] = $post['other_speaker'];
         }
-      }
+        else
+        {
+            $_SESSION['save']['speaker']       = $post['speaker'];
+            $_SESSION['save']['other_speaker'] = '';
+        }
 
-      // Message d'alerte
-      if ($post['type_collector'] == 'I')
-        $_SESSION['alerts']['image_collector_updated'] = true;
-      else
-        $_SESSION['alerts']['collector_updated'] = true;
+        $_SESSION['save']['date_collector'] = $post['date_collector'];
+        $_SESSION['save']['type_collector'] = $post['type_collector'];
+        $_SESSION['save']['context']        = $post['context'];
+
+        if ($typeCollector == 'T')
+            $_SESSION['save']['collector'] = $post['collector'];
+
+        // Contrôle date de saisie
+        $control_ok = controleFormatDate($post['date_collector'], $isMobile);
+
+        // Formatage du texte ou insertion image
+        if ($control_ok == true)
+        {
+            if ($typeCollector == 'I')
+                $contenuCollector = uploadImage($files, rand());
+            else
+                $contenuCollector = deleteInvisible($post['collector']);
+        }
+
+        // Contrôle saisie non vide
+        if ($control_ok == true)
+            $control_ok = controleCollector($contenuCollector);
+
+        // Insertion de l'enregistrement en base
+        if ($control_ok == true)
+        {
+            $collector = array(
+                'date_add'       => date('Ymd'),
+                'author'         => $identifiant,
+                'speaker'        => $speaker,
+                'type_speaker'   => $typeSpeaker,
+                'date_collector' => $dateCollector,
+                'type_collector' => $typeCollector,
+                'team'           => $equipe,
+                'collector'      => $contenuCollector,
+                'context'        => $contexteCollector
+            );
+
+            $idCollector = physiqueInsertionCollector($collector);
+
+            // Insertion notification
+            if ($post['type_collector'] == 'I')
+                insertNotification('culte_image', $equipe, $idCollector, $identifiant);
+            else
+                insertNotification('culte', $equipe, $idCollector, $identifiant);
+
+            // Génération succès
+            insertOrUpdateSuccesValue('listener', $identifiant, 1);
+
+            if ($typeSpeaker != 'other')
+                insertOrUpdateSuccesValue('speaker', $post['speaker'], 1);
+
+            // Ajout expérience
+            insertExperience($identifiant, 'add_collector');
+
+            // Message d'alerte
+            if ($post['type_collector'] == 'I')
+                $_SESSION['alerts']['image_collector_added'] = true;
+            else
+                $_SESSION['alerts']['collector_added'] = true;
+        }
+
+        // Retour
+        return $idCollector;
     }
 
-    // Retour
-    return $idCollector;
-  }
-
-  // METIER : Formatage et insertion image Collector
-  // RETOUR : Nom fichier avec extension
-  function uploadImage($files, $name)
-  {
-    // Initialisations
-    $newName    = '';
-    $control_ok = true;
-
-    // Dossier de destination
-    $dossier = '../../includes/images/collector';
-
-    // Contrôles fichier
-    $fileDatas = controlsUploadFile($files['image'], $name, 'all');
-
-    // Récupération contrôles
-    $control_ok = controleFichier($fileDatas);
-
-    // Upload fichier
-    if ($control_ok == true)
-      $control_ok = uploadFile($fileDatas, $dossier);
-
-    // Rotation de l'image
-    if ($control_ok == true)
+    // METIER : Modification phrases / images cultes
+    // RETOUR : Id collector
+    function updateCollector($post, $files, $isMobile)
     {
-      $newName   = $fileDatas['new_name'];
-      $typeImage = $fileDatas['type_file'];
+        // Initialisations
+        $control_ok = true;
 
-      if ($typeImage == 'jpg' OR $typeImage == 'jpeg')
-        rotateImage($dossier . '/' . $newName, $typeImage);
+        // Récupération des données
+        $idCollector       = $post['id_collector'];
+        $typeCollector     = $post['type_collector'];
+        $contexteCollector = deleteInvisible($post['context']);
+
+        if ($isMobile == true)
+            $dateCollector = formatDateForInsertMobile($post['date_collector']);
+        else
+            $dateCollector = formatDateForInsert($post['date_collector']);
+
+        // Contrôle date de saisie
+        $control_ok = controleFormatDate($post['date_collector'], $isMobile);
+
+        // Récupération des données complémentaires
+        if ($control_ok == true)
+        {
+            // Lecture des données de la phrase / image culte
+            $oldCollector = physiqueCollector($idCollector);
+
+            // Récupération du speaker
+            if ($post['speaker'] == 'other')
+            {
+                $speaker     = $post['other_speaker'];
+                $typeSpeaker = $post['speaker'];
+            }
+            else
+            {
+                // On récupère éventuellement l'identifiant existant si l'utilisateur est désinscrit
+                if (!isset($post['speaker']))
+                    $speaker = $oldCollector->getSpeaker();
+                else
+                    $speaker = $post['speaker'];
+
+                $typeSpeaker = 'user';
+            }
+
+            // Insertion nouvelle image et suppression ancienne ou récupération phrase culte
+            if ($typeCollector == 'I')
+            {
+                if (!empty($files['image']['name']))
+                {
+                    // Insertion image
+                    $contenuCollector = uploadImage($files, rand());
+
+                    // Contrôle saisie non vide
+                    $control_ok = controleCollector($contenuCollector);
+
+                    // Suppression des anciennes images
+                    if ($control_ok == true)
+                    {
+                        if (!empty($oldCollector->getCollector()))
+                            unlink('../../includes/images/collector/' . $oldCollector->getCollector());
+                    }
+                }
+                else
+                    $contenuCollector = $oldCollector->getCollector();
+            }
+            else
+                $contenuCollector = deleteInvisible($post['collector']);
+        }
+
+        // Modification de l'enregistrement en base
+        if ($control_ok == true)
+        {
+            $collector = array(
+                'speaker'        => $speaker,
+                'type_speaker'   => $typeSpeaker,
+                'date_collector' => $dateCollector,
+                'collector'      => $contenuCollector,
+                'context'        => $contexteCollector
+            );
+
+            physiqueUpdateCollector($oldCollector->getId(), $collector);
+
+            // Génération succès
+            if ($speaker != $oldCollector->getSpeaker())
+            {
+                if ($oldCollector->getType_speaker() != 'other')
+                {
+                    insertOrUpdateSuccesValue('speaker', $oldCollector->getSpeaker(), -1);
+
+                    $oldSelfSatified = physiqueVoteCollectorUser($idCollector, $oldCollector->getSpeaker());
+
+                    if ($oldSelfSatified == true)
+                        insertOrUpdateSuccesValue('self-satisfied', $oldCollector->getSpeaker(), -1);
+                }
+
+                if ($typeSpeaker != 'other')
+                {
+                    insertOrUpdateSuccesValue('speaker', $speaker, 1);
+
+                    $selfSatisfied = physiqueVoteCollectorUser($idCollector, $speaker);
+
+                    if ($selfSatisfied == true)
+                        insertOrUpdateSuccesValue('self-satisfied', $speaker, 1);
+                }
+            }
+
+            // Message d'alerte
+            if ($post['type_collector'] == 'I')
+                $_SESSION['alerts']['image_collector_updated'] = true;
+            else
+                $_SESSION['alerts']['collector_updated'] = true;
+        }
+
+        // Retour
+        return $idCollector;
     }
 
-    // Retour
-    return $newName;
-  }
-
-  // METIER : Récupère le numéro de page lors de l'ajout ou de la modification
-  // RETOUR : Numéro de page
-  function numeroPageCollector($idCollector, $equipe)
-  {
-    // Initialisations
-    $nombreParPage = 18;
-
-    // Recherche de la position de la phrase culte dans la table
-    $positionCollector = physiquePositionCollector($idCollector, $equipe);
-
-    // Calcul du numéro de page
-    $numeroPage = ceil($positionCollector / $nombreParPage);
-
-    // Retour
-    return $numeroPage;
-  }
-
-  // METIER : Suppression phrases / images cultes
-  // RETOUR : Aucun
-  function deleteCollector($post)
-  {
-    // Récupération des données
-    $idCollector = $post['id_collector'];
-    $equipe      = $post['team_collector'];
-
-    // Lecture des données de la phrase / image culte
-    $collector = physiqueCollector($idCollector);
-
-    // Lecture des votes associés
-    $listeUsersVotes = physiqueVotesCollector($idCollector);
-
-    // Suppression image
-    if (!empty($collector->getCollector()) AND $collector->getType_collector() == 'I')
-      unlink('../../includes/images/collector/' . $collector->getCollector());
-
-    // Suppression des votes associés
-    physiqueDeleteVotes($idCollector);
-
-    // Suppression de l'enregistrement en base
-    physiqueDeleteCollector($idCollector);
-
-    // Suppression des notifications
-    if ($collector->getType_collector() == 'I')
-      deleteNotification('culte_image', $equipe, $idCollector);
-    else
-      deleteNotification('culte', $equipe, $idCollector);
-
-    // Génération succès
-    insertOrUpdateSuccesValue('listener', $collector->getAuthor(), -1);
-
-    if ($collector->getType_speaker() != 'other')
-      insertOrUpdateSuccesValue('speaker', $collector->getSpeaker(), -1);
-
-    foreach ($listeUsersVotes as $user)
+    // METIER : Formatage et insertion image Collector
+    // RETOUR : Nom fichier avec extension
+    function uploadImage($files, $name)
     {
-      insertOrUpdateSuccesValue('funny', $user, -1);
+        // Initialisations
+        $newName    = '';
+        $control_ok = true;
 
-      if ($collector->getSpeaker() == $user)
-        insertOrUpdateSuccesValue('self-satisfied', $user, -1);
+        // Dossier de destination
+        $dossier = '../../includes/images/collector';
+
+        // Contrôles fichier
+        $fileDatas = controlsUploadFile($files['image'], $name, 'all');
+
+        // Récupération contrôles
+        $control_ok = controleFichier($fileDatas);
+
+        // Upload fichier
+        if ($control_ok == true)
+            $control_ok = uploadFile($fileDatas, $dossier);
+
+        // Rotation de l'image
+        if ($control_ok == true)
+        {
+            $newName   = $fileDatas['new_name'];
+            $typeImage = $fileDatas['type_file'];
+
+            if ($typeImage == 'jpg' OR $typeImage == 'jpeg')
+                rotateImage($dossier . '/' . $newName, $typeImage);
+        }
+
+        // Retour
+        return $newName;
     }
 
-    // Message d'alerte
-    if ($collector->getType_collector() == 'I')
-      $_SESSION['alerts']['image_collector_deleted'] = true;
-    else
-      $_SESSION['alerts']['collector_deleted'] = true;
-  }
-
-  // METIER : Insertion ou mise à jour vote
-  // RETOUR : Id collector
-  function voteCollector($post, $sessionUser)
-  {
-    // Récupération des données
-    $identifiant = $sessionUser['identifiant'];
-    $equipe      = $sessionUser['equipe'];
-    $idCollector = $post['id_collector'];
-
-    if (isset($post['smiley_1']))
-      $vote = 1;
-    elseif (isset($post['smiley_2']))
-      $vote = 2;
-    elseif (isset($post['smiley_3']))
-      $vote = 3;
-    elseif (isset($post['smiley_4']))
-      $vote = 4;
-    elseif (isset($post['smiley_5']))
-      $vote = 5;
-    elseif (isset($post['smiley_6']))
-      $vote = 6;
-    elseif (isset($post['smiley_7']))
-      $vote = 7;
-    elseif (isset($post['smiley_8']))
-      $vote = 8;
-    else
-      $vote = 0;
-
-    // Lecture vote existant
-    $voteExistant = physiqueVoteUser($idCollector, $identifiant);
-
-    // Traitement du vote
-    if ($voteExistant['vote'] > 0)
+    // METIER : Récupère le numéro de page lors de l'ajout ou de la modification
+    // RETOUR : Numéro de page
+    function numeroPageCollector($idCollector, $equipe)
     {
-      // Suppression (vote = 0) ou mise à jour (vote != 0)
-      if ($vote == 0)
-        physiqueDeleteVote($voteExistant['id_vote']);
-      else
-        physiqueUpdateVote($voteExistant['id_vote'], $vote);
+        // Initialisations
+        $nombreParPage = 18;
+
+        // Recherche de la position de la phrase culte dans la table
+        $positionCollector = physiquePositionCollector($idCollector, $equipe);
+
+        // Calcul du numéro de page
+        $numeroPage = ceil($positionCollector / $nombreParPage);
+
+        // Retour
+        return $numeroPage;
     }
-    else
+
+    // METIER : Suppression phrases / images cultes
+    // RETOUR : Aucun
+    function deleteCollector($post)
     {
-      // Insertion (vote != 0)
-      if ($vote > 0)
-      {
-        $voteCollector = array('id_collector' => $idCollector,
-                               'team'         => $equipe,
-                               'identifiant'  => $identifiant,
-                               'vote'         => $vote
-                              );
+        // Récupération des données
+        $idCollector = $post['id_collector'];
+        $equipe      = $post['team_collector'];
 
-        physiqueInsertionVote($voteCollector);
-      }
+        // Lecture des données de la phrase / image culte
+        $collector = physiqueCollector($idCollector);
+
+        // Lecture des votes associés
+        $listeUsersVotes = physiqueVotesCollector($idCollector);
+
+        // Suppression image
+        if (!empty($collector->getCollector()) AND $collector->getType_collector() == 'I')
+            unlink('../../includes/images/collector/' . $collector->getCollector());
+
+        // Suppression des votes associés
+        physiqueDeleteVotes($idCollector);
+
+        // Suppression de l'enregistrement en base
+        physiqueDeleteCollector($idCollector);
+
+        // Suppression des notifications
+        if ($collector->getType_collector() == 'I')
+            deleteNotification('culte_image', $equipe, $idCollector);
+        else
+            deleteNotification('culte', $equipe, $idCollector);
+
+        // Génération succès
+        insertOrUpdateSuccesValue('listener', $collector->getAuthor(), -1);
+
+        if ($collector->getType_speaker() != 'other')
+            insertOrUpdateSuccesValue('speaker', $collector->getSpeaker(), -1);
+
+        foreach ($listeUsersVotes as $user)
+        {
+            insertOrUpdateSuccesValue('funny', $user, -1);
+
+            if ($collector->getSpeaker() == $user)
+                insertOrUpdateSuccesValue('self-satisfied', $user, -1);
+        }
+
+        // Message d'alerte
+        if ($collector->getType_collector() == 'I')
+            $_SESSION['alerts']['image_collector_deleted'] = true;
+        else
+            $_SESSION['alerts']['collector_deleted'] = true;
     }
 
-    // Génération succès (quand on vote, une seule prise en compte, et quand on retire son vote)
-    $selfSatisfied = physiqueCollectorUser($idCollector, $identifiant);
-
-    if ($voteExistant['vote'] > 0)
+    // METIER : Insertion ou mise à jour vote
+    // RETOUR : Id collector
+    function voteCollector($post, $sessionUser)
     {
-      // Suppression (vote = 0)
-      if ($vote == 0)
-      {
-        insertOrUpdateSuccesValue('funny', $identifiant, -1);
+        // Récupération des données
+        $identifiant = $sessionUser['identifiant'];
+        $equipe      = $sessionUser['equipe'];
+        $idCollector = $post['id_collector'];
 
-        if ($selfSatisfied == true)
-          insertOrUpdateSuccesValue('self-satisfied', $identifiant, -1);
-      }
+        if (isset($post['smiley_1']))
+            $vote = 1;
+        elseif (isset($post['smiley_2']))
+            $vote = 2;
+        elseif (isset($post['smiley_3']))
+            $vote = 3;
+        elseif (isset($post['smiley_4']))
+            $vote = 4;
+        elseif (isset($post['smiley_5']))
+            $vote = 5;
+        elseif (isset($post['smiley_6']))
+            $vote = 6;
+        elseif (isset($post['smiley_7']))
+            $vote = 7;
+        elseif (isset($post['smiley_8']))
+            $vote = 8;
+        else
+            $vote = 0;
+
+        // Lecture vote existant
+        $voteExistant = physiqueVoteUser($idCollector, $identifiant);
+
+        // Traitement du vote
+        if ($voteExistant['vote'] > 0)
+        {
+            // Suppression (vote = 0) ou mise à jour (vote != 0)
+            if ($vote == 0)
+                physiqueDeleteVote($voteExistant['id_vote']);
+            else
+                physiqueUpdateVote($voteExistant['id_vote'], $vote);
+        }
+        else
+        {
+            // Insertion (vote != 0)
+            if ($vote > 0)
+            {
+                $voteCollector = array(
+                    'id_collector' => $idCollector,
+                    'team'         => $equipe,
+                    'identifiant'  => $identifiant,
+                    'vote'         => $vote
+                );
+
+                physiqueInsertionVote($voteCollector);
+            }
+        }
+
+        // Génération succès (quand on vote, une seule prise en compte, et quand on retire son vote)
+        $selfSatisfied = physiqueCollectorUser($idCollector, $identifiant);
+
+        if ($voteExistant['vote'] > 0)
+        {
+            // Suppression (vote = 0)
+            if ($vote == 0)
+            {
+                insertOrUpdateSuccesValue('funny', $identifiant, -1);
+
+                if ($selfSatisfied == true)
+                    insertOrUpdateSuccesValue('self-satisfied', $identifiant, -1);
+            }
+        }
+        else
+        {
+            // Insertion (vote != 0)
+            if ($vote > 0)
+            {
+                insertOrUpdateSuccesValue('funny', $identifiant, 1);
+
+                if ($selfSatisfied == true)
+                    insertOrUpdateSuccesValue('self-satisfied', $identifiant, 1);
+            }
+        }
+
+        // Retour
+        return $idCollector;
     }
-    else
-    {
-      // Insertion (vote != 0)
-      if ($vote > 0)
-      {
-        insertOrUpdateSuccesValue('funny', $identifiant, 1);
-
-        if ($selfSatisfied == true)
-          insertOrUpdateSuccesValue('self-satisfied', $identifiant, 1);
-      }
-    }
-
-    // Retour
-    return $idCollector;
-  }
 ?>
