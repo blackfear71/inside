@@ -569,6 +569,7 @@
 
                 fputs($file, $balises);
                 fclose($file);
+                chmod($folder . '/content_chat_' . $teamReference . '.xml', 0757);
             }
         }
         else

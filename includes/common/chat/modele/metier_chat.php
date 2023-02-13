@@ -10,7 +10,7 @@
         return $listeUsersChat;
     }
 
-    // METIER : Inseère un message dans le fichier XML
+    // METIER : Insère un message dans le fichier XML
     // RETOUR : Aucun
     function submitChat($post)
     {
@@ -36,6 +36,7 @@
 
             fputs($file, $balises);
             fclose($file);
+            chmod($folder . '/content_chat_' . $equipe . '.xml', 0757);
         }
 
         // Ajout du message au fichier XML
