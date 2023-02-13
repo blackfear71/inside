@@ -1,227 +1,227 @@
 <?php
-  include_once('../../includes/functions/appel_bdd.php');
+    include_once('../../includes/functions/appel_bdd.php');
 
-  /****************************************************************************/
-  /********************************** SELECT **********************************/
-  /****************************************************************************/
-  // PHYSIQUE : Lecture nombre de lignes existantes pour une année
-  // RETOUR : Booléen
-  function physiqueAnneeExistante($annee, $equipe)
-  {
-    // Initialisations
-    $anneeExistante = false;
-
-    // Requête
-    global $bdd;
-
-    $req = $bdd->query('SELECT COUNT(*) AS nombreLignes
-                        FROM calendars
-                        WHERE year = "' . $annee . '" AND to_delete != "Y" AND team = "' . $equipe . '"');
-
-    $data = $req->fetch();
-
-    if ($data['nombreLignes'] > 0)
-      $anneeExistante = true;
-
-    $req->closeCursor();
-
-    // Retour
-    return $anneeExistante;
-  }
-
-  // PHYSIQUE : Lecture des années existantes
-  // RETOUR : Liste des années
-  function physiqueOnglets($equipe)
-  {
-    // Initialisations
-    $onglets = array();
-
-    // Requête
-    global $bdd;
-
-    $req = $bdd->query('SELECT DISTINCT year
-                        FROM calendars
-                        WHERE to_delete != "Y" AND team = "' . $equipe . '"
-                        ORDER BY year DESC');
-
-    while ($data = $req->fetch())
+    /****************************************************************************/
+    /********************************** SELECT **********************************/
+    /****************************************************************************/
+    // PHYSIQUE : Lecture nombre de lignes existantes pour une année
+    // RETOUR : Booléen
+    function physiqueAnneeExistante($annee, $equipe)
     {
-      // On ajoute la ligne au tableau
-      array_push($onglets, $data['year']);
+        // Initialisations
+        $anneeExistante = false;
+
+        // Requête
+        global $bdd;
+
+        $req = $bdd->query('SELECT COUNT(*) AS nombreLignes
+                            FROM calendars
+                            WHERE year = "' . $annee . '" AND to_delete != "Y" AND team = "' . $equipe . '"');
+
+        $data = $req->fetch();
+
+        if ($data['nombreLignes'] > 0)
+            $anneeExistante = true;
+
+        $req->closeCursor();
+
+        // Retour
+        return $anneeExistante;
     }
 
-    $req->closeCursor();
-
-    // Retour
-    return $onglets;
-  }
-
-  // PHYSIQUE : Lecture des calendriers
-  // RETOUR : Liste des calendriers
-  function physiqueCalendriers($annee, $equipe)
-  {
-    // Initialisations
-    $listeCalendriers = array();
-
-    // Requête
-    global $bdd;
-
-    $req = $bdd->query('SELECT *
-                        FROM calendars
-                        WHERE year = ' . $annee . ' AND to_delete != "Y" AND team = "' . $equipe . '"
-                        ORDER BY month DESC, id DESC');
-
-    while ($data = $req->fetch())
+    // PHYSIQUE : Lecture des années existantes
+    // RETOUR : Liste des années
+    function physiqueOnglets($equipe)
     {
-      // Instanciation d'un objet Calendrier à partir des données remontées de la bdd
-      $calendrier = Calendrier::withData($data);
+        // Initialisations
+        $onglets = array();
 
-      // Titre du calendrier
-      $calendrier->setTitle(formatMonthForDisplayStrong($calendrier->getMonth()));
+        // Requête
+        global $bdd;
 
-      // On ajoute la ligne au tableau
-      array_push($listeCalendriers, $calendrier);
+        $req = $bdd->query('SELECT DISTINCT year
+                            FROM calendars
+                            WHERE to_delete != "Y" AND team = "' . $equipe . '"
+                            ORDER BY year DESC');
+
+        while ($data = $req->fetch())
+        {
+            // On ajoute la ligne au tableau
+            array_push($onglets, $data['year']);
+        }
+
+        $req->closeCursor();
+
+        // Retour
+        return $onglets;
     }
 
-    $req->closeCursor();
-
-    // Retour
-    return $listeCalendriers;
-  }
-
-  // PHYSIQUE : Lecture des annexes
-  // RETOUR : Liste des annexes
-  function physiqueAnnexes($equipe)
-  {
-    // Initialisations
-    $listeAnnexes = array();
-
-    // Requête
-    global $bdd;
-
-    $req = $bdd->query('SELECT *
-                        FROM calendars_annexes
-                        WHERE to_delete != "Y" AND team = "' . $equipe . '"
-                        ORDER BY id DESC');
-
-    while ($data = $req->fetch())
+    // PHYSIQUE : Lecture des calendriers
+    // RETOUR : Liste des calendriers
+    function physiqueCalendriers($annee, $equipe)
     {
-      // Instanciation d'un objet Annexe à partir des données remontées de la bdd
-      $annexe = Annexe::withData($data);
+        // Initialisations
+        $listeCalendriers = array();
 
-      // On ajoute la ligne au tableau
-      array_push($listeAnnexes, $annexe);
+        // Requête
+        global $bdd;
+
+        $req = $bdd->query('SELECT *
+                            FROM calendars
+                            WHERE year = ' . $annee . ' AND to_delete != "Y" AND team = "' . $equipe . '"
+                            ORDER BY month DESC, id DESC');
+
+        while ($data = $req->fetch())
+        {
+            // Instanciation d'un objet Calendrier à partir des données remontées de la bdd
+            $calendrier = Calendrier::withData($data);
+
+            // Titre du calendrier
+            $calendrier->setTitle(formatMonthForDisplayStrong($calendrier->getMonth()));
+
+            // On ajoute la ligne au tableau
+            array_push($listeCalendriers, $calendrier);
+        }
+
+        $req->closeCursor();
+
+        // Retour
+        return $listeCalendriers;
     }
 
-    $req->closeCursor();
+    // PHYSIQUE : Lecture des annexes
+    // RETOUR : Liste des annexes
+    function physiqueAnnexes($equipe)
+    {
+        // Initialisations
+        $listeAnnexes = array();
 
-    // Retour
-    return $listeAnnexes;
-  }
+        // Requête
+        global $bdd;
 
-  // PHYSIQUE : Lecture préférences utilisateur
-  // RETOUR : Objet Preferences
-  function physiquePreferences($identifiant)
-  {
-    // Requête
-    global $bdd;
+        $req = $bdd->query('SELECT *
+                            FROM calendars_annexes
+                            WHERE to_delete != "Y" AND team = "' . $equipe . '"
+                            ORDER BY id DESC');
 
-    $req = $bdd->query('SELECT *
-                        FROM preferences
-                        WHERE identifiant = "' . $identifiant . '"');
+        while ($data = $req->fetch())
+        {
+            // Instanciation d'un objet Annexe à partir des données remontées de la bdd
+            $annexe = Annexe::withData($data);
 
-    $data = $req->fetch();
+            // On ajoute la ligne au tableau
+            array_push($listeAnnexes, $annexe);
+        }
 
-    // Instanciation d'un objet Preferences à partir des données remontées de la bdd
-    $preference = Preferences::withData($data);
+        $req->closeCursor();
 
-    $req->closeCursor();
+        // Retour
+        return $listeAnnexes;
+    }
 
-    // Retour
-    return $preference;
-  }
+    // PHYSIQUE : Lecture préférences utilisateur
+    // RETOUR : Objet Preferences
+    function physiquePreferences($identifiant)
+    {
+        // Requête
+        global $bdd;
 
-  /****************************************************************************/
-  /********************************** INSERT **********************************/
-  /****************************************************************************/
-  // PHYSIQUE : Insertion nouveau calendrier
-  // RETOUR : Id calendrier
-  function physiqueInsertionCalendrier($calendar)
-  {
-    // Initialisations
-    $newId = NULL;
+        $req = $bdd->query('SELECT *
+                            FROM preferences
+                            WHERE identifiant = "' . $identifiant . '"');
 
-    // Requête
-    global $bdd;
+        $data = $req->fetch();
 
-    $req = $bdd->prepare('INSERT INTO calendars(to_delete,
-                                                team,
-                                                month,
-                                                year,
-                                                calendar)
-                                        VALUES(:to_delete,
-                                               :team,
-                                               :month,
-                                               :year,
-                                               :calendar)');
+        // Instanciation d'un objet Preferences à partir des données remontées de la bdd
+        $preference = Preferences::withData($data);
 
-    $req->execute($calendar);
+        $req->closeCursor();
 
-    $req->closeCursor();
+        // Retour
+        return $preference;
+    }
 
-    $newId = $bdd->lastInsertId();
+    /****************************************************************************/
+    /********************************** INSERT **********************************/
+    /****************************************************************************/
+    // PHYSIQUE : Insertion nouveau calendrier
+    // RETOUR : Id calendrier
+    function physiqueInsertionCalendrier($calendar)
+    {
+        // Initialisations
+        $newId = NULL;
 
-    // Retour
-    return $newId;
-  }
+        // Requête
+        global $bdd;
 
-  // PHYSIQUE : Insertion nouvelle annexe
-  // RETOUR : Id annexe
-  function physiqueInsertionAnnexe($annexe)
-  {
-    // Initialisations
-    $newId = NULL;
+        $req = $bdd->prepare('INSERT INTO calendars(to_delete,
+                                                    team,
+                                                    month,
+                                                    year,
+                                                    calendar)
+                                            VALUES(:to_delete,
+                                                   :team,
+                                                   :month,
+                                                   :year,
+                                                   :calendar)');
 
-    // Requête
-    global $bdd;
+        $req->execute($calendar);
 
-    $req = $bdd->prepare('INSERT INTO calendars_annexes(to_delete,
-                                                        team,
-                                                        annexe,
-                                                        title)
-                                                VALUES(:to_delete,
-                                                       :team,
-                                                       :annexe,
-                                                       :title)');
+        $req->closeCursor();
 
-    $req->execute($annexe);
+        $newId = $bdd->lastInsertId();
 
-    $req->closeCursor();
+        // Retour
+        return $newId;
+    }
 
-    $newId = $bdd->lastInsertId();
+    // PHYSIQUE : Insertion nouvelle annexe
+    // RETOUR : Id annexe
+    function physiqueInsertionAnnexe($annexe)
+    {
+        // Initialisations
+        $newId = NULL;
 
-    // Retour
-    return $newId;
-  }
+        // Requête
+        global $bdd;
 
-  /****************************************************************************/
-  /********************************** UPDATE **********************************/
-  /****************************************************************************/
-  // PHYSIQUE : Mise à jour du statut du calendrier ou de l'annexe
-  // RETOUR : Aucun
-  function physiqueUpdateStatusCalendars($table, $idCalendars, $toDelete)
-  {
-    // Requête
-    global $bdd;
+        $req = $bdd->prepare('INSERT INTO calendars_annexes(to_delete,
+                                                            team,
+                                                            annexe,
+                                                            title)
+                                                    VALUES(:to_delete,
+                                                           :team,
+                                                           :annexe,
+                                                           :title)');
 
-    $req = $bdd->prepare('UPDATE ' . $table . '
-                          SET to_delete = :to_delete
-                          WHERE id = ' . $idCalendars);
+        $req->execute($annexe);
 
-    $req->execute(array(
-      'to_delete' => $toDelete
-    ));
+        $req->closeCursor();
 
-    $req->closeCursor();
-  }
+        $newId = $bdd->lastInsertId();
+
+        // Retour
+        return $newId;
+    }
+
+    /****************************************************************************/
+    /********************************** UPDATE **********************************/
+    /****************************************************************************/
+    // PHYSIQUE : Mise à jour du statut du calendrier ou de l'annexe
+    // RETOUR : Aucun
+    function physiqueUpdateStatusCalendars($table, $idCalendars, $toDelete)
+    {
+        // Requête
+        global $bdd;
+
+        $req = $bdd->prepare('UPDATE ' . $table . '
+                              SET to_delete = :to_delete
+                              WHERE id = ' . $idCalendars);
+
+        $req->execute(array(
+            'to_delete' => $toDelete
+        ));
+
+        $req->closeCursor();
+    }
 ?>
