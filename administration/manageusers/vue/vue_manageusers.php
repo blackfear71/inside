@@ -45,9 +45,9 @@
                     /***********************************/
                     /* Mot de passe (réinitialisation) */
                     /***********************************/
-					if (isset($_SESSION['save']['user_ask_id'])   AND !empty($_SESSION['save']['user_ask_id'])
-					AND isset($_SESSION['save']['user_ask_name']) AND !empty($_SESSION['save']['user_ask_name'])
-					AND isset($_SESSION['save']['new_password'])  AND !empty($_SESSION['save']['new_password']))
+                    if (isset($_SESSION['save']['user_ask_id'])   AND !empty($_SESSION['save']['user_ask_id'])
+                    AND isset($_SESSION['save']['user_ask_name']) AND !empty($_SESSION['save']['user_ask_name'])
+                    AND isset($_SESSION['save']['new_password'])  AND !empty($_SESSION['save']['new_password']))
                     {
                         echo '<div class="zone_reinitialisation_mdp">';
                             echo '<div class="message_reinitialisation_mdp">Le mot de passe a été réinitialisé pour l\'utilisateur <b>' . $_SESSION['save']['user_ask_id'] . ' / ' . $_SESSION['save']['user_ask_name'] . '</b> : </div>';

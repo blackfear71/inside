@@ -32,16 +32,16 @@
         $path = $_SERVER['PHP_SELF'];
 
         // Movie House
-		if ($path == '/inside/portail/moviehouse/moviehouse.php'
-		OR  $path == '/inside/portail/moviehouse/details.php'
-		OR  $path == '/inside/portail/moviehouse/mailing.php')
+        if ($path == '/inside/portail/moviehouse/moviehouse.php'
+        OR  $path == '/inside/portail/moviehouse/details.php'
+        OR  $path == '/inside/portail/moviehouse/mailing.php')
         {
             $onglet1 = '<a href="/inside/portail/moviehouse/moviehouse.php?view=' . $viewMovieHouse . '&year=' . date('Y') . '&action=goConsulter" title="Movie House" class="onglet_actif"><img src="/inside/includes/icons/common/movie_house.png" alt="movie_house" title="Movie House" class="logo_onglet" /></a>';
         }
 
         // Les enfants ! À table !
-		if ($path == '/inside/portail/foodadvisor/foodadvisor.php'
-		OR  $path == '/inside/portail/foodadvisor/restaurants.php')
+        if ($path == '/inside/portail/foodadvisor/foodadvisor.php'
+        OR  $path == '/inside/portail/foodadvisor/restaurants.php')
         {
             $onglet2 = '<a href="/inside/portail/foodadvisor/foodadvisor.php?action=goConsulter" title="Les enfants ! À table !" class="onglet_actif"><img src="/inside/includes/icons/common/food_advisor.png" alt="food_advisor" title="Les enfants ! À table !" class="logo_onglet" /></a>';
         }
@@ -65,8 +65,8 @@
         }
 
         // Calendars
-		if ($path == '/inside/portail/calendars/calendars.php'
-		OR  $path == '/inside/portail/calendars/calendars_generator.php')
+        if ($path == '/inside/portail/calendars/calendars.php'
+        OR  $path == '/inside/portail/calendars/calendars_generator.php')
         {
             $onglet6 = '<a href="/inside/portail/calendars/calendars.php?year=' . date('Y') . '&action=goConsulter" title="Calendars" class="onglet_actif"><img src="/inside/includes/icons/common/calendars.png" alt="calendars" title="Calendars" class="logo_onglet" /></a>';
         }
@@ -78,8 +78,8 @@
         }
 
         // Missions : Insider
-		if ($path == '/inside/portail/missions/missions.php'
-		OR  $path == '/inside/portail/missions/details.php')
+        if ($path == '/inside/portail/missions/missions.php'
+        OR  $path == '/inside/portail/missions/details.php')
         {
             $onglet8 = '<a href="/inside/portail/missions/missions.php?action=goConsulter" title="Missions : Insider" class="onglet_actif"><img src="/inside/includes/icons/common/missions.png" alt="missions" title="Missions : Insider" class="logo_onglet" /></a>';
         }

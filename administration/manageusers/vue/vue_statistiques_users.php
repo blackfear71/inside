@@ -1,8 +1,8 @@
 <?php
-	// Titre
-	echo '<div class="titre_section"><img src="../../includes/icons/admin/stats_grey.png" alt="stats_grey" class="logo_titre_section" /><div class="texte_titre_section">Statistiques des utilisateurs</div></div>';
+    // Titre
+    echo '<div class="titre_section"><img src="../../includes/icons/admin/stats_grey.png" alt="stats_grey" class="logo_titre_section" /><div class="texte_titre_section">Statistiques des utilisateurs</div></div>';
 
-	// Statistiques globales
+    // Statistiques globales
     echo '<div class="zone_statistiques_categories">';
         // Movie House
         echo '<a id="statistiques_films" class="zone_statistiques_categorie afficherDetailsStatistiques">';
