@@ -103,7 +103,7 @@
                     {
                         echo '<div class="zone_titre_succes zone_titre_full">';
                             // Titre succès
-                            echo '<div class="titre_succes titre_full">' . formatString($success->getTitle(), 30) . '</div>';
+                            echo '<div class="titre_succes titre_full">' . formatString($success->getTitle(), 35) . '</div>';
                         echo '</div>';
                     }
                 }
@@ -113,14 +113,14 @@
                     {
                         echo '<div class="zone_titre_succes">';
                             // Titre succès
-                            echo '<div class="titre_succes titre_full">' . formatString($success->getTitle(), 20) . '</div>';
+                            echo '<div class="titre_succes titre_full">' . formatString($success->getTitle(), 25) . '</div>';
                         echo '</div>';
                     }
                     else
                     {
                         echo '<div class="zone_titre_succes zone_titre_full">';
                             // Titre succès
-                            echo '<div class="titre_succes titre_full">' . formatString($success->getTitle(), 30) . '</div>';
+                            echo '<div class="titre_succes titre_full">' . formatString($success->getTitle(), 35) . '</div>';
                         echo '</div>';
                     }
                 }
