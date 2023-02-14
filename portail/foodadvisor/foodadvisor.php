@@ -198,13 +198,14 @@
                 }
             }
 
-            foreach ($listeRestaurants as $restaurantsParLieux)
+            // Les restaurants de cette liste sont échappés par la boucle précédente à cause de la propriété static de la méthode secureData
+            /*foreach ($listeRestaurants as $restaurantsParLieux)
             {
                 foreach ($restaurantsParLieux as $restaurant)
                 {
                     Restaurant::secureData($restaurant);
                 }
-            }
+            }*/
 
             foreach ($listeLieux as &$lieu)
             {
