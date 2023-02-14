@@ -67,11 +67,11 @@
 .titre_onglet
 {
     display: inline-block;
-    width: calc(50% - 5vh);
+    width: calc(50% - 6vh);
     height: 6vh;
     line-height: 6vh;
-    padding-left: 1vh;
-    padding-right: 1vh;
+    padding-left: 1.5vh;
+    padding-right: 1.5vh;
 }
 
 .lien_fermer_chat

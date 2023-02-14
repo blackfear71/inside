@@ -379,6 +379,8 @@ function initView(cookieShowChat, cookieWindowChat)
     console.log('cookieWindowChat : ' + cookieWindowChat);*/
 
     var html = '';
+    var hideChatRotateCss;
+    var hideChatPaddingCss;
     var ongletChatCss;
     var ongletUsersCss;
     var cursorCss;
