@@ -221,7 +221,7 @@
 
         $req = $bdd->query('SELECT *
                             FROM teams
-                            ORDER BY team ASC');
+                            ORDER BY reference ASC');
 
         while ($data = $req->fetch())
         {

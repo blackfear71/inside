@@ -23,8 +23,8 @@
     function getUsers()
     {
         // Initialisations
-        $listeUsersParEquipe              = array();
-        $listeUsersParEquipe['new_users'] = array();
+        $listeUsersParEquipe = array();
+        $inscriptionsEnCours = array('new_users' => array());
 
         // Récupération liste des utilisateurs
         $listeUsers = physiqueUsers();
@@ -34,24 +34,26 @@
         {
             // Ajout de l'utilisateur à son équipe
             if (!empty($user->getTeam()))
+            {
                 $team = $user->getTeam();
+
+                // Ajout de l'utilisateur à son équipe
+                if (!isset($listeUsersParEquipe[$team]))
+                    $listeUsersParEquipe[$team] = array();
+
+                array_push($listeUsersParEquipe[$team], $user);
+            }
             else
-                $team = 'new_users';
-
-            // Ajout de l'utilisateur à son équipe
-            if (!isset($listeUsersParEquipe[$team]))
-                $listeUsersParEquipe[$team] = array();
-
-            array_push($listeUsersParEquipe[$team], $user);
+                array_push($inscriptionsEnCours['new_users'], $user);
         }
-
-        // Suppression du tableau des nouveaux utilisateurs si vide
-        if (empty($listeUsersParEquipe['new_users']))
-            unset($listeUsersParEquipe['new_users']);
 
         // Tri
         ksort($listeUsersParEquipe);
 
+        // S'il y a des utilisateurs en cours d'inscription, on les remet au début du tableau
+        if (!empty($inscriptionsEnCours))
+            $listeUsersParEquipe = $inscriptionsEnCours + $listeUsersParEquipe;
+        
         // Retour
         return $listeUsersParEquipe;
     }

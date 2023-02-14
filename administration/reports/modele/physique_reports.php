@@ -46,7 +46,7 @@
         $req = $bdd->query('SELECT *
                             FROM teams
                             WHERE activation = "Y"
-                            ORDER BY team ASC');
+                            ORDER BY reference ASC');
 
         while ($data = $req->fetch())
         {
