@@ -166,7 +166,7 @@
                                         if (strlen($restaurant->getDescription()) > $longueurMax)
                                         {
                                             echo '<div id="long_description_' . $restaurant->getId() . '" style="display: none;">' . nl2br($restaurant->getDescription()) . '</div>';
-                                            echo '<div class="short_description" id="short_description_' . $restaurant->getId() . '">' . substr(nl2br($restaurant->getDescription()), 0, $longueurMax) . '...</div>';
+                                            echo '<div class="short_description" id="short_description_' . $restaurant->getId() . '">' . nl2br(formatString($restaurant->getDescription(), $longueurMax)) . '</div>';
                                             echo '<a id="description_' . $restaurant->getId() . '" class="descriptionRestaurant"><img src="../../includes/icons/foodadvisor/expand.png" alt="expand" class="expand_description" /></a>';
                                         }
                                         else

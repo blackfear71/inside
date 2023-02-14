@@ -1157,7 +1157,7 @@
     {
         // Formatage si dépassement du nombre de caractères voulu
         if (strlen($chaine) > $limite)
-            $chaine = substr($chaine, 0, $limite) . '...';
+            $chaine = mb_substr($chaine, 0, $limite) . '...';
 
         // Retour
         return $chaine;

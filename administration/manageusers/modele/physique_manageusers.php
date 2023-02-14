@@ -1059,7 +1059,7 @@
     function physiqueUpdateSpeakerCollector($identifiant, $pseudo)
     {
         // Initialisations
-        $speaker     = substr($pseudo, 0, 100);
+        $speaker     = mb_substr($pseudo, 0, 100);
         $typeSpeaker = 'other';
 
         // Requête
