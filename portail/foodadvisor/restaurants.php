@@ -101,20 +101,26 @@
 
             unset($type);
 
-            foreach ($listeRestaurants as $restaurantsParLieux)
+            foreach ($listeRestaurants as &$restaurantsParLieux)
             {
-                foreach ($restaurantsParLieux as $restaurant)
+                foreach ($restaurantsParLieux as &$restaurant)
                 {
-                    Restaurant::secureData($restaurant);
+                    $restaurant = Restaurant::secureData($restaurant);
                 }
+
+                unset($restaurant);
             }
+
+            unset($listeRestaurants);
 
             if ($choixRapide == true)
             {
-                foreach ($mesChoix as $monChoix)
+                foreach ($mesChoix as &$monChoix)
                 {
-                    Choix::secureData($monChoix);
+                    $monChoix = Choix::secureData($monChoix);
                 }
+
+                unset($monChoix);
             }
 
             // Conversion JSON

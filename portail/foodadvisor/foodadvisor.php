@@ -190,22 +190,29 @@
 
             unset($lieu);
 
-            foreach ($listeRestaurantsResume as $restaurantsParLieuxResume)
+            foreach ($listeRestaurantsResume as &$restaurantsParLieuxResume)
             {
-                foreach ($restaurantsParLieuxResume as $restaurant)
+                foreach ($restaurantsParLieuxResume as &$restaurant)
                 {
-                    Restaurant::secureData($restaurant);
+                    $restaurant = Restaurant::secureData($restaurant);
                 }
+
+                unset($restaurant);
             }
 
-            // Les restaurants de cette liste sont échappés par la boucle précédente à cause de la propriété static de la méthode secureData
-            /*foreach ($listeRestaurants as $restaurantsParLieux)
+            unset($restaurantsParLieuxResume);
+
+            foreach ($listeRestaurants as &$restaurantsParLieux)
             {
-                foreach ($restaurantsParLieux as $restaurant)
+                foreach ($restaurantsParLieux as &$restaurant)
                 {
-                    Restaurant::secureData($restaurant);
+                    $restaurant = Restaurant::secureData($restaurant);
                 }
-            }*/
+
+                unset($restaurant);
+            }
+
+            unset($restaurantsParLieux);
 
             foreach ($listeLieux as &$lieu)
             {
@@ -214,28 +221,32 @@
 
             unset($lieu);
 
-            foreach ($propositions as $proposition)
+            foreach ($propositions as &$proposition)
             {
-                Proposition::secureData($proposition);
+                $proposition = Proposition::secureData($proposition);
             }
+           
+            unset($proposition);
 
             foreach ($solos as $solo)
             {
                 Profile::secureData($solo);
             }
 
-            foreach ($mesChoix as $monChoix)
+            foreach ($mesChoix as &$monChoix)
             {
-                Choix::secureData($monChoix);
+                $monChoix = Choix::secureData($monChoix);
             }
 
-            foreach ($choixSemaine as $choixJour)
+            unset($monChoix);
+
+            foreach ($choixSemaine as &$choixJour)
             {
                 if (!empty($choixJour))
-                {
-                    Proposition::secureData($choixJour);
-                }
+                    $choixJour = Proposition::secureData($choixJour);
             }
+
+            unset($choixJour);
 
             if (!empty($sansPropositions))
             {

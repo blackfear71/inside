@@ -52,10 +52,12 @@
                     Movie::secureData($resultatsMH);
                 }
 
-                foreach ($resultats['food_advisor'] as $resultatsFA)
+                foreach ($resultats['food_advisor'] as &$resultatsFA)
                 {
-                    Restaurant::secureData($resultatsFA);
+                    $resultatsFA = Restaurant::secureData($resultatsFA);
                 }
+
+                unset($resultatsFA);
 
                 foreach ($resultats['petits_pedestres'] as $resultatsPP)
                 {

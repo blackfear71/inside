@@ -40,12 +40,12 @@
         public static function withData($data)
         {
             $restaurant = new self();
-            $restaurant->fill($data);
+            $restaurant->fillWithData($data);
 
             return $restaurant;
         }
 
-        protected function fill($data)
+        protected function fillWithData($data)
         {
             if (isset($data['id']))
                 $this->id           = $data['id'];
@@ -93,19 +93,28 @@
         // Sécurisation des données
         public static function secureData($data)
         {
-            //$data->setTeam(htmlspecialchars($data->getTeam()));
-            $data->setName(htmlspecialchars($data->getName()));
-            $data->setPicture(htmlspecialchars($data->getPicture()));
-            $data->setTypes(htmlspecialchars($data->getTypes()));
-            $data->setLocation(htmlspecialchars($data->getLocation()));
-            $data->setPhone(htmlspecialchars($data->getPhone()));
-            $data->setOpened(htmlspecialchars($data->getOpened()));
-            $data->setMin_price(htmlspecialchars($data->getMin_price()));
-            $data->setMax_price(htmlspecialchars($data->getMax_price()));
-            $data->setWebsite(htmlspecialchars($data->getWebsite()));
-            $data->setPlan(htmlspecialchars($data->getPlan()));
-            $data->setLafourchette(htmlspecialchars($data->getLafourchette()));
-            $data->setDescription(htmlspecialchars($data->getDescription()));
+            $restaurant = new self();
+            $restaurant->fillSecureData($data);
+
+            return $restaurant;
+        }
+
+        protected function fillSecureData($data)
+        {
+            $this->id           = $data->getId();
+            $this->team         = $data->getTeam();
+            $this->name         = htmlspecialchars($data->getName());
+            $this->picture      = htmlspecialchars($data->getPicture());
+            $this->types        = htmlspecialchars($data->getTypes());
+            $this->location     = htmlspecialchars($data->getLocation());
+            $this->phone        = htmlspecialchars($data->getPhone());
+            $this->opened       = htmlspecialchars($data->getOpened());
+            $this->min_price    = htmlspecialchars($data->getMin_price());
+            $this->max_price    = htmlspecialchars($data->getMax_price());
+            $this->website      = htmlspecialchars($data->getWebsite());
+            $this->plan         = htmlspecialchars($data->getPlan());
+            $this->lafourchette = htmlspecialchars($data->getLafourchette());
+            $this->description  = htmlspecialchars($data->getDescription());
         }
 
         // Getters et Setters pour l'objet Restaurant
@@ -325,12 +334,12 @@
         public static function withData($data)
         {
             $proposition = new self();
-            $proposition->fill($data);
+            $proposition->fillWithData($data);
 
             return $proposition;
         }
 
-        protected function fill($data)
+        protected function fillWithData($data)
         {
             if (isset($data['id']))
                 $this->id            = $data['id'];
@@ -354,32 +363,38 @@
         // Sécurisation des données
         public static function secureData($data)
         {
-            //$data->setTeam(htmlspecialchars($data->getTeam()));
-            $data->setName(htmlspecialchars($data->getName()));
-            $data->setPicture(htmlspecialchars($data->getPicture()));
-            $data->setLocation(htmlspecialchars($data->getLocation()));
-            $data->setNb_participants(htmlspecialchars($data->getNb_participants()));
-            $data->setClassement(htmlspecialchars($data->getClassement()));
-            $data->setDetermined(htmlspecialchars($data->getDetermined()));
-            $data->setDate(htmlspecialchars($data->getDate()));
-            $data->setCaller(htmlspecialchars($data->getCaller()));
-            $data->setPseudo(htmlspecialchars($data->getPseudo()));
-            $data->setAvatar(htmlspecialchars($data->getAvatar()));
-            $data->setReserved(htmlspecialchars($data->getReserved()));
-            $data->setTypes(htmlspecialchars($data->getTypes()));
-            $data->setPhone(htmlspecialchars($data->getPhone()));
-            $data->setWebsite(htmlspecialchars($data->getWebsite()));
-            $data->setPlan(htmlspecialchars($data->getPlan()));
-            $data->setLafourchette(htmlspecialchars($data->getLafourchette()));
-            $data->setOpened(htmlspecialchars($data->getOpened()));
-            $data->setMin_price(htmlspecialchars($data->getMin_price()));
-            $data->setMax_price(htmlspecialchars($data->getMax_price()));
-            $data->setDescription(htmlspecialchars($data->getDescription()));
+            $proposition = new self();
+            $proposition->fillSecureData($data);
 
-            foreach ($data->getDetails() as $detailsUser)
-            {
-                DetailsProposition::secureData($detailsUser);
-            }
+            return $proposition;
+        }
+
+        protected function fillSecureData($data)
+        {
+            $this->id              = $data->getId();
+            $this->id_restaurant   = $data->getId_restaurant();
+            $this->team            = $data->getTeam();
+            $this->name            = htmlspecialchars($data->getName());
+            $this->picture         = htmlspecialchars($data->getPicture());
+            $this->location        = htmlspecialchars($data->getLocation());
+            $this->nb_participants = htmlspecialchars($data->getNb_participants());
+            $this->classement      = htmlspecialchars($data->getClassement());
+            $this->determined      = htmlspecialchars($data->getDetermined());
+            $this->date            = htmlspecialchars($data->getDate());
+            $this->caller          = htmlspecialchars($data->getCaller());
+            $this->pseudo          = htmlspecialchars($data->getPseudo());
+            $this->avatar          = htmlspecialchars($data->getAvatar());
+            $this->reserved        = htmlspecialchars($data->getReserved());
+            $this->types           = htmlspecialchars($data->getTypes());
+            $this->phone           = htmlspecialchars($data->getPhone());
+            $this->website         = htmlspecialchars($data->getWebsite());
+            $this->plan            = htmlspecialchars($data->getPlan());
+            $this->lafourchette    = htmlspecialchars($data->getLafourchette());
+            $this->opened          = htmlspecialchars($data->getOpened());
+            $this->min_price       = htmlspecialchars($data->getMin_price());
+            $this->max_price       = htmlspecialchars($data->getMax_price());
+            $this->description     = htmlspecialchars($data->getDescription());
+            $this->details         = DetailsProposition::secureData($data->getDetails());
         }
 
         // Getters et Setters pour l'objet Proposition
@@ -671,12 +686,29 @@
         // Sécurisation des données
         public static function secureData($data)
         {
-            $data->setIdentifiant(htmlspecialchars($data->getIdentifiant()));
-            $data->setPseudo(htmlspecialchars($data->getPseudo()));
-            $data->setAvatar(htmlspecialchars($data->getAvatar()));
-            $data->setTransports(htmlspecialchars($data->getTransports()));
-            $data->setHoraire(htmlspecialchars($data->getHoraire()));
-            $data->setMenu(htmlspecialchars($data->getMenu()));
+            $details = array();
+
+            foreach ($data as &$detailsUser)
+            {
+                $detailsProposition = new self();
+                $detailsProposition->fillSecureData($detailsUser);
+
+                array_push($details, $detailsProposition);
+            }
+
+            unset($detailsUser);
+
+            return $details;
+        }
+
+        protected function fillSecureData($data)
+        {
+            $this->identifiant = htmlspecialchars($data->getIdentifiant());
+            $this->pseudo      = htmlspecialchars($data->getPseudo());
+            $this->avatar      = htmlspecialchars($data->getAvatar());
+            $this->transports  = htmlspecialchars($data->getTransports());
+            $this->horaire     = htmlspecialchars($data->getHoraire());
+            $this->menu        = htmlspecialchars($data->getMenu());
         }
 
         // Getters et Setters pour l'objet Proposition
@@ -784,12 +816,12 @@
         public static function withData($data)
         {
             $choix = new self();
-            $choix->fill($data);
+            $choix->fillWithData($data);
 
             return $choix;
         }
 
-        protected function fill($data)
+        protected function fillWithData($data)
         {
             if (isset($data['id']))
                 $this->id            = $data['id'];
@@ -819,16 +851,26 @@
         // Sécurisation des données
         public static function secureData($data)
         {
-            //$data->setTeam(htmlspecialchars($data->getTeam()));
-            $data->setIdentifiant(htmlspecialchars($data->getIdentifiant()));
-            $data->setDate(htmlspecialchars($data->getDate()));
-            $data->setTime(htmlspecialchars($data->getTime()));
-            $data->setTransports(htmlspecialchars($data->getTransports()));
-            $data->setMenu(htmlspecialchars($data->getMenu()));
-            $data->setName(htmlspecialchars($data->getName()));
-            $data->setPicture(htmlspecialchars($data->getPicture()));
-            $data->setLocation(htmlspecialchars($data->getLocation()));
-            $data->setOpened(htmlspecialchars($data->getOpened()));
+            $choix = new self();
+            $choix->fillSecureData($data);
+
+            return $choix;
+        }
+
+        protected function fillSecureData($data)
+        {
+            $this->id            = $data->getId();
+            $this->id_restaurant = $data->getId_restaurant();
+            $this->team          = $data->getTeam();
+            $this->identifiant   = htmlspecialchars($data->getIdentifiant());
+            $this->date          = htmlspecialchars($data->getDate());
+            $this->time          = htmlspecialchars($data->getTime());
+            $this->transports    = htmlspecialchars($data->getTransports());
+            $this->menu          = htmlspecialchars($data->getMenu());
+            $this->name          = htmlspecialchars($data->getName());
+            $this->picture       = htmlspecialchars($data->getPicture());
+            $this->location      = htmlspecialchars($data->getLocation());
+            $this->opened        = htmlspecialchars($data->getOpened());            
         }
 
         // Getters et Setters pour l'objet Choix
