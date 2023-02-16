@@ -124,10 +124,12 @@
                 }
             }
 
-            foreach ($listeEquipesParticipants as $equipe)
+            foreach ($listeEquipesParticipants as &$equipe)
             {
-                Team::secureData($equipe);
+                $equipe = Team::secureData($equipe);
             }
+
+            unset($equipe);            
             break;
 
         case 'goAjouter':

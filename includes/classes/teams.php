@@ -22,12 +22,12 @@
         public static function withData($data)
         {
             $team = new self();
-            $team->fill($data);
+            $team->fillWithData($data);
 
             return $team;
         }
 
-        protected function fill($data)
+        protected function fillWithData($data)
         {
             if (isset($data['id']))
                 $this->id         = $data['id'];
@@ -45,10 +45,19 @@
         // Sécurisation des données
         public static function secureData($data)
         {
-            //$data->setReference(htmlspecialchars($data->getReference()));
-            $data->setTeam(htmlspecialchars($data->getTeam()));
-            $data->setActivation(htmlspecialchars($data->getActivation()));
-            $data->setNombre_users(htmlspecialchars($data->getNombre_users()));
+            $team = new self();
+            $team->fillSecureData($data);
+
+            return $team;
+        }
+
+        protected function fillSecureData($data)
+        {
+            $this->id           = $data->getId();
+            $this->reference    = $data->getReference();
+            $this->team         = htmlspecialchars($data->getTeam());
+            $this->activation   = htmlspecialchars($data->getActivation());
+            $this->nombre_users = htmlspecialchars($data->getNombre_users());            
         }
 
         // Getters et Setters pour l'objet Team

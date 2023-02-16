@@ -111,7 +111,7 @@
                 unset($restaurant);
             }
 
-            unset($listeRestaurants);
+            unset($restaurantsParLieux);
 
             if ($choixRapide == true)
             {

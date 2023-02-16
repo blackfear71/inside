@@ -95,10 +95,12 @@
     switch ($_GET['action'])
     {
         case 'goConsulter':
-            foreach ($listeEquipes as $equipe)
+            foreach ($listeEquipes as &$equipe)
             {
-                Team::secureData($equipe);
+                $equipe = Team::secureData($equipe);
             }
+
+            unset($equipe);
 
             foreach ($listeAutorisationsParEquipe as $equipeAutorisations)
             {

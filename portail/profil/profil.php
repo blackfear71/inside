@@ -191,10 +191,12 @@
                     Profile::secureData($profil);
                     Preferences::secureData($preferences);
 
-                    foreach ($listeEquipes as $equipe)
+                    foreach ($listeEquipes as &$equipe)
                     {
-                        Team::secureData($equipe);
+                        $equipe = Team::secureData($equipe);
                     }
+
+                    unset($equipe);                    
                     break;
 
                 case 'themes':
@@ -228,7 +230,7 @@
                 case 'profile':
                 default:
                     Profile::secureData($profil);
-                    Team::secureData($equipe);
+                    $equipe = Team::secureData($equipe);
                     StatistiquesProfil::secureData($statistiques);
                     Progression::secureData($progression);
                     break;
