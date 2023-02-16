@@ -3623,6 +3623,7 @@
     color: #262626;
     text-align: center;
     background-color: #d3d3d3;
+    word-break: break-word;
 }
 
 .td_table_admin_important
@@ -3631,6 +3632,7 @@
     color: #262626;
     text-align: justify;
     background-color: #e3e3e3;
+    word-break: break-word;
 }
 
 .td_table_admin_important_centre
@@ -3639,6 +3641,7 @@
     color: #262626;
     text-align: center;
     background-color: #e3e3e3;
+    word-break: break-word;
 }
 
 .td_table_admin_normal
@@ -3647,6 +3650,7 @@
     color: #262626;
     text-align: justify;
     background-color: #e3e3e3;
+    word-break: break-word;
 }
 
 .td_table_admin_centre
@@ -3655,6 +3659,7 @@
     color: #262626;
     text-align: center;
     background-color: #e3e3e3;
+    word-break: break-word;
 }
 
 .td_table_admin_fusion
@@ -3664,6 +3669,7 @@
     background-color: #2eb2f4;
     color: white;
     text-align: center;
+    word-break: break-word;
 }
 
 .td_table_admin_actions
