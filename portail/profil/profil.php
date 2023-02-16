@@ -212,18 +212,22 @@
 
                     if (!empty($themesUsers))
                     {
-                        foreach ($themesUsers as $themeUsers)
+                        foreach ($themesUsers as &$themeUsers)
                         {
-                            Theme::secureData($themeUsers);
+                            $themeUsers = Theme::secureData($themeUsers);
                         }
+
+                        unset($themeUsers);
                     }
 
                     if (!empty($themesMissions))
                     {
-                        foreach ($themesMissions as $themeMission)
+                        foreach ($themesMissions as &$themeMission)
                         {
-                            Theme::secureData($themeMission);
+                            $themeMission = Theme::secureData($themeMission);
                         }
+                        
+                        unset($themeMission);
                     }
                     break;
 

@@ -60,15 +60,19 @@
     switch ($_GET['action'])
     {
         case 'goConsulter':
-            foreach ($themesUsers as $themeUsers)
+            foreach ($themesUsers as &$themeUsers)
             {
-                Theme::secureData($themeUsers);
+                $themeUsers = Theme::secureData($themeUsers);
             }
 
-            foreach ($themesMissions as $themeMission)
+            unset($themeUsers);
+
+            foreach ($themesMissions as &$themeMission)
             {
-                Theme::secureData($themeMission);
+                $themeMission = Theme::secureData($themeMission);
             }
+
+            unset($themeMission);
             break;
 
         case 'doAjouter':

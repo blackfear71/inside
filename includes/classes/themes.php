@@ -28,12 +28,12 @@
         public static function withData($data)
         {
             $theme = new self();
-            $theme->fill($data);
+            $theme->fillWithData($data);
 
             return $theme;
         }
 
-        protected function fill($data)
+        protected function fillWithData($data)
         {
             if (isset($data['id']))
                 $this->id        = $data['id'];
@@ -63,13 +63,22 @@
         // Sécurisation des données
         public static function secureData($data)
         {
-            $data->setReference(htmlspecialchars($data->getReference()));
-            $data->setName(htmlspecialchars($data->getName()));
-            $data->setType(htmlspecialchars($data->getType()));
-            $data->setLevel(htmlspecialchars($data->getLevel()));
-            $data->setLogo(htmlspecialchars($data->getLogo()));
-            $data->setDate_deb(htmlspecialchars($data->getDate_deb()));
-            $data->setDate_fin(htmlspecialchars($data->getDate_fin()));
+            $theme = new self();
+            $theme->fillSecureData($data);
+
+            return $theme;
+        }
+
+        protected function fillSecureData($data)
+        {
+            $this->id        = $data->getId();
+            $this->reference = htmlspecialchars($data->getReference());
+            $this->name      = htmlspecialchars($data->getName());
+            $this->type      = htmlspecialchars($data->getType());
+            $this->level     = htmlspecialchars($data->getLevel());
+            $this->logo      = htmlspecialchars($data->getLogo());
+            $this->date_deb  = htmlspecialchars($data->getDate_deb());
+            $this->date_fin  = htmlspecialchars($data->getDate_fin());
         }
 
         // Getters et Setters pour l'objet Theme
