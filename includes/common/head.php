@@ -63,13 +63,13 @@
 ?>
 
 <!-- Scripts communs -->
-<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
 <script>
-    window.jQuery || document.write('<script src="/inside/includes/libraries/js/jquery-3.5.1.min.js"><\/script>')
+    window.jQuery || document.write('<script src="/inside/includes/libraries/js/jquery-3.6.3.min.js"><\/script>')
 </script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js" integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0=" crossorigin="anonymous"></script>
 <script>
-    window.jQuery || document.write('<script src="/inside/includes/libraries/js/jquery-ui-1.12.1.min.js"><\/script>')
+    window.jQuery || document.write('<script src="/inside/includes/libraries/js/jquery-ui-1.13.2.min.js"><\/script>')
 </script>
 <script src="/inside/includes/assets/js/<?php echo $_SESSION['index']['plateforme']; ?>/script.js?version=<?php echo $dateModificationJs; ?>"></script>
 
@@ -102,7 +102,7 @@
 <?php } ?>
 
 <?php if (isset($masonryHead) AND $masonryHead == true) { ?>
-    <script src="/inside/includes/libraries/js/masonry.pkgd.js"></script>
+    <script src="/inside/includes/libraries/js/masonry.pkgd.min.js"></script>
 <?php } ?>
 
 <?php if (isset($exifHead) AND $exifHead == true) { ?>
