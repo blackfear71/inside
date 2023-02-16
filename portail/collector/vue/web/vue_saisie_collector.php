@@ -42,9 +42,9 @@
 
                     // Saisie "Autre"
                     if (!empty($_SESSION['save']['other_speaker']))
-                        echo '<input type="text" name="other_speaker" value="' . $_SESSION['save']['other_speaker'] . '" placeholder="Nom" maxlength="100" id="other_name" class="saisie_other_collector" />';
+                        echo '<input type="text" name="other_speaker" value="' . $_SESSION['save']['other_speaker'] . '" placeholder="Nom" maxlength="255" id="other_name" class="saisie_other_collector" />';
                     else
-                        echo '<input type="text" name="other_speaker" value="' . $_SESSION['save']['other_speaker'] . '" placeholder="Nom" maxlength="100" id="other_name" class="saisie_other_collector" style="display: none;" />';
+                        echo '<input type="text" name="other_speaker" value="' . $_SESSION['save']['other_speaker'] . '" placeholder="Nom" maxlength="255" id="other_name" class="saisie_other_collector" style="display: none;" />';
 
                     // Date
                     echo '<input type="text" name="date_collector" value="' . $_SESSION['save']['date_collector'] . '" placeholder="Date" maxlength="10" autocomplete="off" id="datepicker_collector" class="saisie_date_collector" required />';

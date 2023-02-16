@@ -193,9 +193,9 @@
 
                             // Modification "Autre"
                             if ($collector->getType_speaker() == 'other')
-                                echo '<input type="text" name="other_speaker" value="' . $collector->getPseudo_speaker() . '" placeholder="Nom" maxlength="100" id="other_speaker_' . $collector->getId() . '" class="update_other_speaker" />';
+                                echo '<input type="text" name="other_speaker" value="' . $collector->getPseudo_speaker() . '" placeholder="Nom" maxlength="255" id="other_speaker_' . $collector->getId() . '" class="update_other_speaker" />';
                             else
-                                echo '<input type="text" name="other_speaker" placeholder="Nom" maxlength="100" id="other_speaker_' . $collector->getId() . '" class="update_other_speaker" style="display: none;" />';
+                                echo '<input type="text" name="other_speaker" placeholder="Nom" maxlength="255" id="other_speaker_' . $collector->getId() . '" class="update_other_speaker" style="display: none;" />';
 
                             // Modification date
                             echo '<div class="zone_update_date">';
