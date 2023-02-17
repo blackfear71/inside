@@ -24,12 +24,12 @@
         public static function withData($data)
         {
             $generatorParameters = new self();
-            $generatorParameters->fill($data);
+            $generatorParameters->fillWithData($data);
 
             return $generatorParameters;
         }
 
-        protected function fill($data)
+        protected function fillWithData($data)
         {
             if (isset($data['nom_section']))
                 $this->nom_section       = $data['nom_section'];
@@ -53,16 +53,20 @@
         // Sécurisation des données
         public static function secureData($data)
         {
-            $data->setNom_section(htmlspecialchars($data->getNom_section()));
-            $data->setNom_technique(htmlspecialchars($data->getNom_technique()));
-            $data->setNom_head(htmlspecialchars($data->getNom_head()));
-            $data->setStyle_specifique(htmlspecialchars($data->getStyle_specifique()));
-            $data->setScript_specifique(htmlspecialchars($data->getScript_specifique()));
+            $generatorParameters = new self();
+            $generatorParameters->fillSecureData($data);
 
-            foreach ($data->getOptions() as $generatorOption)
-            {
-                GeneratorOptions::secureData($generatorOption);
-            }
+            return $generatorParameters;
+        }
+
+        protected function fillSecureData($data)
+        {
+            $this->nom_section       = htmlspecialchars($data->getNom_section());
+            $this->nom_technique     = htmlspecialchars($data->getNom_technique());
+            $this->nom_head          = htmlspecialchars($data->getNom_head());
+            $this->style_specifique  = htmlspecialchars($data->getStyle_specifique());
+            $this->script_specifique = htmlspecialchars($data->getScript_specifique());
+            $this->options           = GeneratorOptions::secureData($data->getOptions());
         }
 
         // Getters et Setters pour l'objet GeneratorParameters
@@ -154,12 +158,12 @@
         public static function withData($data)
         {
             $generatorOptions = new self();
-            $generatorOptions->fill($data);
+            $generatorOptions->fillWithData($data);
 
             return $generatorOptions;
         }
 
-        protected function fill($data)
+        protected function fillWithData($data)
         {
             if (isset($data['option']))
                 $this->option    = $data['option'];
@@ -177,10 +181,27 @@
         // Sécurisation des données
         public static function secureData($data)
         {
-            $data->setOption(htmlspecialchars($data->getOption()));
-            $data->setChecked(htmlspecialchars($data->getChecked()));
-            $data->setTitre(htmlspecialchars($data->getTitre()));
-            $data->setCategorie(htmlspecialchars($data->getCategorie()));
+            $generatorOptions = array();
+
+            foreach ($data as &$generatorOption)
+            {
+                $option = new self();
+                $option->fillSecureData($generatorOption);
+
+                array_push($generatorOptions, $option);
+            }
+
+            unset($generatorOption);
+
+            return $generatorOptions;
+        }
+
+        protected function fillSecureData($data)
+        {
+            $this->option    = htmlspecialchars($data->getOption());
+            $this->checked   = htmlspecialchars($data->getChecked());
+            $this->titre     = htmlspecialchars($data->getTitre());
+            $this->categorie = htmlspecialchars($data->getCategorie());
         }
 
         // Getters et Setters pour l'objet GeneratorOptions

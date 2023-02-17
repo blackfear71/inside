@@ -59,7 +59,7 @@
     switch ($_GET['action'])
     {
         case 'goConsulter':
-            GeneratorParameters::secureData($generatorParameters);
+            $generatorParameters = GeneratorParameters::secureData($generatorParameters);
 
             if (isset($metier))
                 $metier['content'] = htmlspecialchars($metier['content']);
