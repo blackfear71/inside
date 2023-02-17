@@ -38,12 +38,12 @@
         public static function withData($data)
         {
             $weekCake = new self();
-            $weekCake->fill($data);
+            $weekCake->fillWithData($data);
 
             return $weekCake;
         }
 
-        protected function fill($data)
+        protected function fillWithData($data)
         {
             if (isset($data['id']))
                 $this->id          = $data['id'];
@@ -82,18 +82,27 @@
         // Sécurisation des données
         public static function secureData($data)
         {
-            $data->setIdentifiant(htmlspecialchars($data->getIdentifiant()));
-            $data->setPseudo(htmlspecialchars($data->getPseudo()));
-            $data->setAvatar(htmlspecialchars($data->getAvatar()));
-            //$data->setTeam(htmlspecialchars($data->getTeam()));
-            $data->setWeek(htmlspecialchars($data->getWeek()));
-            $data->setYear(htmlspecialchars($data->getYear()));
-            $data->setCooked(htmlspecialchars($data->getCooked()));
-            $data->setName(htmlspecialchars($data->getName()));
-            $data->setPicture(htmlspecialchars($data->getPicture()));
-            $data->setIngredients(htmlspecialchars($data->getIngredients()));
-            $data->setRecipe(htmlspecialchars($data->getRecipe()));
-            $data->setTips(htmlspecialchars($data->getTips()));
+            $weekCake = new self();
+            $weekCake->fillSecureData($data);
+
+            return $weekCake;
+        }
+
+        protected function fillSecureData($data)
+        {
+            $this->id          = $data->getId();
+            $this->identifiant = htmlspecialchars($data->getIdentifiant());
+            $this->pseudo      = htmlspecialchars($data->getPseudo());
+            $this->avatar      = htmlspecialchars($data->getAvatar());
+            $this->team        = $data->getTeam();
+            $this->week        = htmlspecialchars($data->getWeek());
+            $this->year        = htmlspecialchars($data->getYear());
+            $this->cooked      = htmlspecialchars($data->getCooked());
+            $this->name        = htmlspecialchars($data->getName());
+            $this->picture     = htmlspecialchars($data->getPicture());
+            $this->ingredients = htmlspecialchars($data->getIngredients());
+            $this->recipe      = htmlspecialchars($data->getRecipe());
+            $this->tips        = htmlspecialchars($data->getTips());
         }
 
         // Getters et Setters pour l'objet WeekCake

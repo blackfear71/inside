@@ -107,8 +107,8 @@
     switch ($_GET['action'])
     {
         case 'goConsulter':
-            WeekCake::secureData($currentWeek);
-            WeekCake::secureData($nextWeek);
+            $currentWeek = WeekCake::secureData($currentWeek);
+            $nextWeek    = WeekCake::secureData($nextWeek);
 
             foreach ($listeCookers as &$user)
             {
@@ -137,10 +137,12 @@
 
             unset($year);
 
-            foreach ($recettes as $recette)
+            foreach ($recettes as &$recette)
             {
-                WeekCake::secureData($recette);
+                $recette = WeekCake::secureData($recette);
             }
+
+            unset($recette);
 
             // Conversion JSON
             $currentWeekJson   = json_encode(convertForJsonWeek($currentWeek));
