@@ -95,7 +95,7 @@
         case 'goConsulter':
         case 'goModifier':
             if ($parcoursExistant == true)
-                Parcours::secureData($parcours);
+                $parcours = Parcours::secureData($parcours);
             break;
 
         case 'goAjouter':

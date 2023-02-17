@@ -59,10 +59,12 @@
 
                 unset($resultatsFA);
 
-                foreach ($resultats['petits_pedestres'] as $resultatsPP)
+                foreach ($resultats['petits_pedestres'] as &$resultatsPP)
                 {
-                    Parcours::secureData($resultatsPP);
+                    $resultatsPP = Parcours::secureData($resultatsPP);
                 }
+
+                unset($resultatsPP);
 
                 foreach ($resultats['missions'] as $resultatsMI)
                 {

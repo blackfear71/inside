@@ -26,12 +26,12 @@
         public static function withData($data)
         {
             $parcours = new self();
-            $parcours->fill($data);
+            $parcours->fillWithData($data);
 
             return $parcours;
         }
 
-        protected function fill($data)
+        protected function fillWithData($data)
         {
             if (isset($data['id']))
                 $this->id       = $data['id'];
@@ -58,12 +58,21 @@
         // Sécurisation des données
         public static function secureData($data)
         {
-            //$data->setTeam(htmlspecialchars($data->getTeam()));
-            $data->setNom(htmlspecialchars($data->getNom()));
-            $data->setDistance(htmlspecialchars($data->getDistance()));
-            $data->setLieu(htmlspecialchars($data->getLieu()));
-            $data->setUrl(htmlspecialchars($data->getUrl()));
-            $data->setType(htmlspecialchars($data->getType()));
+            $parcours = new self();
+            $parcours->fillSecureData($data);
+
+            return $parcours;
+        }
+
+        protected function fillSecureData($data)
+        {
+            $this->id       = $data->getId();
+            $this->team     = $data->getTeam();
+            $this->nom      = htmlspecialchars($data->getNom());
+            $this->distance = htmlspecialchars($data->getDistance());
+            $this->lieu     = htmlspecialchars($data->getLieu());
+            $this->url      = htmlspecialchars($data->getUrl());
+            $this->type     = htmlspecialchars($data->getType());
         }
 
         // Getters et Setters pour l'objet Parcours
