@@ -74,10 +74,12 @@
             {
                 Mission::secureData($detailsMission);
 
-                foreach ($participants as $participant)
+                foreach ($participants as &$participant)
                 {
-                    Profile::secureData($participant);
+                    $participant = Profile::secureData($participant);
                 }
+
+                unset($participant);                
 
                 $missionUser['daily']         = htmlspecialchars($missionUser['daily']);
                 $missionUser['event']         = htmlspecialchars($missionUser['event']);

@@ -98,7 +98,7 @@
                 Calendrier::secureData($calendrier);
             }
 
-            Preferences::secureData($preferences);
+            $preferences = Preferences::secureData($preferences);
             break;
 
         case 'goConsulterAnnexes':
@@ -114,7 +114,7 @@
                 Annexe::secureData($annexe);
             }
 
-            Preferences::secureData($preferences);
+            $preferences = Preferences::secureData($preferences);
             break;
 
         case 'doSupprimer':

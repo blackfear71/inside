@@ -44,12 +44,12 @@
         public static function withData($data)
         {
             $profile = new self();
-            $profile->fill($data);
+            $profile->fillWithData($data);
 
             return $profile;
         }
 
-        protected function fill($data)
+        protected function fillWithData($data)
         {
             if (isset($data['id']))
                 $this->id          = $data['id'];
@@ -91,21 +91,30 @@
         // Sécurisation des données
         public static function secureData($data)
         {
-            $data->setIdentifiant(htmlspecialchars($data->getIdentifiant()));
-            //$data->setTeam(htmlspecialchars($data->getTeam()));
-            //$data->setNew_team(htmlspecialchars($data->getNew_team()));
-            $data->setPing(htmlspecialchars($data->getPing()));
-            $data->setConnected(htmlspecialchars($data->getConnected()));
-            $data->setStatus(htmlspecialchars($data->getStatus()));
-            $data->setPseudo(htmlspecialchars($data->getPseudo()));
-            $data->setAvatar(htmlspecialchars($data->getAvatar()));
-            $data->setEmail(htmlspecialchars($data->getEmail()));
-            $data->setAnniversary(htmlspecialchars($data->getAnniversary()));
-            $data->setExperience(htmlspecialchars($data->getExperience()));
-            $data->setLevel(htmlspecialchars($data->getLevel()));
-            $data->setExpenses(htmlspecialchars($data->getExpenses()));
-            $data->setBeginner(htmlspecialchars($data->getBeginner()));
-            $data->setDevelopper(htmlspecialchars($data->getDevelopper()));
+            $profile = new self();
+            $profile->fillSecureData($data);
+
+            return $profile;
+        }
+
+        protected function fillSecureData($data)
+        {
+            $this->id          = $data->getId();
+            $this->identifiant = htmlspecialchars($data->getIdentifiant());
+            $this->team        = $data->getTeam();
+            $this->new_team    = $data->getNew_team();
+            $this->ping        = htmlspecialchars($data->getPing());
+            $this->connected   = htmlspecialchars($data->getConnected());
+            $this->status      = htmlspecialchars($data->getStatus());
+            $this->pseudo      = htmlspecialchars($data->getPseudo());
+            $this->avatar      = htmlspecialchars($data->getAvatar());
+            $this->email       = htmlspecialchars($data->getEmail());
+            $this->experience  = htmlspecialchars($data->getExperience());
+            $this->level       = htmlspecialchars($data->getLevel());
+            $this->anniversary = htmlspecialchars($data->getAnniversary());
+            $this->expenses    = htmlspecialchars($data->getExpenses());
+            $this->beginner    = htmlspecialchars($data->getBeginner());
+            $this->developper  = htmlspecialchars($data->getDevelopper());
         }
 
         // Getters et Setters pour l'objet Profile
@@ -309,12 +318,20 @@
         // Sécurisation des données
         public static function secureData($data)
         {
-            $data->setNiveau(htmlspecialchars($data->getNiveau()));
-            $data->setExperience_min(htmlspecialchars($data->getExperience_min()));
-            $data->setExperience_max(htmlspecialchars($data->getExperience_max()));
-            $data->setExperience_niveau(htmlspecialchars($data->getExperience_niveau()));
-            $data->setProgression(htmlspecialchars($data->getProgression()));
-            $data->setPourcentage(htmlspecialchars($data->getPourcentage()));
+            $progression = new self();
+            $progression->fillSecureData($data);
+
+            return $progression;
+        }
+
+        protected function fillSecureData($data)
+        {
+            $this->niveau            = htmlspecialchars($data->getNiveau());
+            $this->experience_min    = htmlspecialchars($data->getExperience_min());
+            $this->experience_max    = htmlspecialchars($data->getExperience_max());
+            $this->experience_niveau = htmlspecialchars($data->getExperience_niveau());
+            $this->progression       = htmlspecialchars($data->getProgression());
+            $this->pourcentage       = htmlspecialchars($data->getPourcentage());
         }
 
         // Getters et Setters pour l'objet Progression
@@ -418,12 +435,12 @@
         public static function withData($data)
         {
             $statistiques = new self();
-            $statistiques->fill($data);
+            $statistiques->fillWithData($data);
 
             return $statistiques;
         }
 
-        protected function fill($data)
+        protected function fillWithData($data)
         {
             if (isset($data['nb_films_ajoutes']))
                 $this->nb_films_ajoutes = $data['nb_films_ajoutes'];
@@ -459,16 +476,24 @@
         // Sécurisation des données
         public static function secureData($data)
         {
-            $data->setNb_films_ajoutes(htmlspecialchars($data->getNb_films_ajoutes()));
-            $data->setNb_comments(htmlspecialchars($data->getNb_comments()));
-            $data->setNb_reservations(htmlspecialchars($data->getNb_reservations()));
-            $data->setNb_gateaux(htmlspecialchars($data->getNb_gateaux()));
-            $data->setNb_recettes(htmlspecialchars($data->getNb_recettes()));
-            $data->setExpenses(htmlspecialchars($data->getExpenses()));
-            $data->setNb_collectors(htmlspecialchars($data->getNb_collectors()));
-            $data->setNb_ideas(htmlspecialchars($data->getNb_ideas()));
-            $data->setNb_bugs(htmlspecialchars($data->getNb_bugs()));
-            $data->setNb_evolutions(htmlspecialchars($data->getNb_evolutions()));
+            $statistiques = new self();
+            $statistiques->fillSecureData($data);
+
+            return $statistiques;
+        }
+
+        protected function fillSecureData($data)
+        {
+            $this->nb_films_ajoutes = htmlspecialchars($data->getNb_films_ajoutes());
+            $this->nb_comments      = htmlspecialchars($data->getNb_comments());
+            $this->nb_reservations  = htmlspecialchars($data->getNb_reservations());
+            $this->nb_gateaux       = htmlspecialchars($data->getNb_gateaux());
+            $this->nb_recettes      = htmlspecialchars($data->getNb_recettes());
+            $this->expenses         = htmlspecialchars($data->getExpenses());
+            $this->nb_collectors    = htmlspecialchars($data->getNb_collectors());
+            $this->nb_ideas         = htmlspecialchars($data->getNb_ideas());
+            $this->nb_bugs          = htmlspecialchars($data->getNb_bugs());
+            $this->nb_evolutions    = htmlspecialchars($data->getNb_evolutions());
         }
 
         // Getters et Setters pour l'objet StatistiquesProfil
@@ -616,12 +641,12 @@
         public static function withData($data)
         {
             $preferences = new self();
-            $preferences->fill($data);
+            $preferences->fillWithData($data);
 
             return $preferences;
         }
 
-        protected function fill($data)
+        protected function fillWithData($data)
         {
             if (isset($data['id']))
                 $this->id                     = $data['id'];
@@ -657,15 +682,24 @@
         // Sécurisation des données
         public static function secureData($data)
         {
-            $data->setRef_theme(htmlspecialchars($data->getRef_theme()));
-            $data->setFont(htmlspecialchars($data->getFont()));
-            $data->setInit_chat(htmlspecialchars($data->getInit_chat()));
-            $data->setCelsius(htmlspecialchars($data->getCelsius()));
-            $data->setView_movie_house(htmlspecialchars($data->getView_movie_house()));
-            $data->setCategories_movie_house(htmlspecialchars($data->getCategories_movie_house()));
-            $data->setView_the_box(htmlspecialchars($data->getView_the_box()));
-            $data->setView_notifications(htmlspecialchars($data->getView_notifications()));
-            $data->setManage_calendars(htmlspecialchars($data->getManage_calendars()));
+            $preferences = new self();
+            $preferences->fillSecureData($data);
+
+            return $preferences;
+        }
+
+        protected function fillSecureData($data)
+        {
+            $this->id                     = $data->getId();
+            $this->ref_theme              = htmlspecialchars($data->getRef_theme());
+            $this->font                   = htmlspecialchars($data->getFont());
+            $this->init_chat              = htmlspecialchars($data->getInit_chat());
+            $this->celsius                = htmlspecialchars($data->getCelsius());
+            $this->view_movie_house       = htmlspecialchars($data->getView_movie_house());
+            $this->categories_movie_house = htmlspecialchars($data->getCategories_movie_house());
+            $this->view_the_box           = htmlspecialchars($data->getView_the_box());
+            $this->view_notifications     = htmlspecialchars($data->getView_notifications());
+            $this->manage_calendars       = htmlspecialchars($data->getManage_calendars());
         }
 
         // Getters et Setters pour l'objet Preferences
@@ -819,20 +853,28 @@
         // Sécurisation des données
         public static function secureData($data)
         {
-            $data->setIdentifiant(htmlspecialchars($data->getIdentifiant()));
-            $data->setPseudo(htmlspecialchars($data->getPseudo()));
-            $data->setNb_films_ajoutes(htmlspecialchars($data->getNb_films_ajoutes()));
-            $data->setNb_films_comments(htmlspecialchars($data->getNb_films_comments()));
-            $data->setNb_collectors(htmlspecialchars($data->getNb_collectors()));
-            $data->setNb_reservations(htmlspecialchars($data->getNb_reservations()));
-            $data->setNb_gateaux_semaine(htmlspecialchars($data->getNb_gateaux_semaine()));
-            $data->setNb_recettes(htmlspecialchars($data->getNb_recettes()));
-            $data->setExpenses(htmlspecialchars($data->getExpenses()));
-            $data->setNb_bugs_soumis(htmlspecialchars($data->getNb_bugs_soumis()));
-            $data->setNb_bugs_resolus(htmlspecialchars($data->getNb_bugs_resolus()));
-            $data->setNb_idees_soumises(htmlspecialchars($data->getNb_idees_soumises()));
-            $data->setNb_idees_en_charge(htmlspecialchars($data->getNb_idees_en_charge()));
-            $data->setNb_idees_terminees(htmlspecialchars($data->getNb_idees_terminees()));
+            $statistiquesAdmin = new self();
+            $statistiquesAdmin->fillSecureData($data);
+
+            return $statistiquesAdmin;
+        }
+
+        protected function fillSecureData($data)
+        {
+            $this->identifiant        = htmlspecialchars($data->getIdentifiant());
+            $this->pseudo             = htmlspecialchars($data->getPseudo());
+            $this->nb_films_ajoutes   = htmlspecialchars($data->getNb_films_ajoutes());
+            $this->nb_films_comments  = htmlspecialchars($data->getNb_films_comments());
+            $this->nb_collectors      = htmlspecialchars($data->getNb_collectors());
+            $this->nb_reservations    = htmlspecialchars($data->getNb_reservations());
+            $this->nb_gateaux_semaine = htmlspecialchars($data->getNb_gateaux_semaine());
+            $this->nb_recettes        = htmlspecialchars($data->getNb_recettes());
+            $this->expenses           = htmlspecialchars($data->getExpenses());
+            $this->nb_bugs_soumis     = htmlspecialchars($data->getNb_bugs_soumis());
+            $this->nb_bugs_resolus    = htmlspecialchars($data->getNb_bugs_resolus());
+            $this->nb_idees_soumises  = htmlspecialchars($data->getNb_idees_soumises());
+            $this->nb_idees_en_charge = htmlspecialchars($data->getNb_idees_en_charge());
+            $this->nb_idees_terminees = htmlspecialchars($data->getNb_idees_terminees());            
         }
 
         // Getters et Setters pour l'objet StatistiquesAdmin
@@ -1028,19 +1070,27 @@
         // Sécurisation des données
         public static function secureData($data)
         {
-            $data->setNb_films_ajoutes_total(htmlspecialchars($data->getNb_films_ajoutes_total()));
-            $data->setNb_films_comments_total(htmlspecialchars($data->getNb_films_comments_total()));
-            $data->setNb_collectors_total(htmlspecialchars($data->getNb_collectors_total()));
-            $data->setNb_reservations_total(htmlspecialchars($data->getNb_reservations_total()));
-            $data->setNb_gateaux_semaine_total(htmlspecialchars($data->getNb_gateaux_semaine_total()));
-            $data->setNb_recettes_total(htmlspecialchars($data->getNb_recettes_total()));
-            $data->setExpenses_no_parts(htmlspecialchars($data->getExpenses_no_parts()));
-            $data->setExpenses_total(htmlspecialchars($data->getExpenses_total()));
-            $data->setNb_bugs_soumis_total(htmlspecialchars($data->getNb_bugs_soumis_total()));
-            $data->setNb_bugs_resolus_total(htmlspecialchars($data->getNb_bugs_resolus_total()));
-            $data->setNb_idees_soumises_total(htmlspecialchars($data->getNb_idees_soumises_total()));
-            $data->setNb_idees_en_charge_total(htmlspecialchars($data->getNb_idees_en_charge_total()));
-            $data->setNb_idees_terminees_total(htmlspecialchars($data->getNb_idees_terminees_total()));
+            $totalStatistiquesAdmin = new self();
+            $totalStatistiquesAdmin->fillSecureData($data);
+
+            return $totalStatistiquesAdmin;
+        }
+
+        protected function fillSecureData($data)
+        {
+            $this->nb_films_ajoutes_total   = htmlspecialchars($data->getNb_films_ajoutes_total());
+            $this->nb_films_comments_total  = htmlspecialchars($data->getNb_films_comments_total());
+            $this->nb_collectors_total      = htmlspecialchars($data->getNb_collectors_total());
+            $this->nb_reservations_total    = htmlspecialchars($data->getNb_reservations_total());
+            $this->nb_gateaux_semaine_total = htmlspecialchars($data->getNb_gateaux_semaine_total());
+            $this->nb_recettes_total        = htmlspecialchars($data->getNb_recettes_total());
+            $this->expenses_no_parts        = htmlspecialchars($data->getExpenses_no_parts());
+            $this->expenses_total           = htmlspecialchars($data->getExpenses_total());
+            $this->nb_bugs_soumis_total     = htmlspecialchars($data->getNb_bugs_soumis_total());
+            $this->nb_bugs_resolus_total    = htmlspecialchars($data->getNb_bugs_resolus_total());
+            $this->nb_idees_soumises_total  = htmlspecialchars($data->getNb_idees_soumises_total());
+            $this->nb_idees_en_charge_total = htmlspecialchars($data->getNb_idees_en_charge_total());
+            $this->nb_idees_terminees_total = htmlspecialchars($data->getNb_idees_terminees_total());
         }
 
         // Getters et Setters pour l'objet TotalStatistiquesAdmin

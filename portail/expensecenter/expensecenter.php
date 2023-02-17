@@ -114,10 +114,12 @@
     switch ($_GET['action'])
     {
         case 'goConsulter':
-            foreach ($listeUsers as $user)
+            foreach ($listeUsers as &$user)
             {
-                Profile::secureData($user);
+                $user = Profile::secureData($user);
             }
+
+            unset($user);            
 
             foreach ($filters as &$filter)
             {

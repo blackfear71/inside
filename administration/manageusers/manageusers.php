@@ -106,13 +106,17 @@
 
             unset($equipe);            
 
-            foreach ($listeUsersParEquipe as $usersParEquipe)
+            foreach ($listeUsersParEquipe as &$usersParEquipe)
             {
-                foreach ($usersParEquipe as $user)
+                foreach ($usersParEquipe as &$user)
                 {
-                    Profile::secureData($user);
+                    $user = Profile::secureData($user);
                 }
+
+                unset($user);
             }
+
+            unset($usersParEquipe);
 
             foreach ($listeUsersDes as &$userDes)
             {
@@ -121,17 +125,21 @@
 
             unset($userDes);
 
-            foreach ($tableauStatistiquesIns as $statistiquesIns)
+            foreach ($tableauStatistiquesIns as &$statistiquesIns)
             {
-                StatistiquesAdmin::secureData($statistiquesIns);
+                $statistiquesIns = StatistiquesAdmin::secureData($statistiquesIns);
             }
 
-            foreach ($tableauStatistiquesDes as $statistiquesDes)
+            unset($statistiquesIns);
+
+            foreach ($tableauStatistiquesDes as &$statistiquesDes)
             {
-                StatistiquesAdmin::secureData($statistiquesDes);
+                $statistiquesDes = StatistiquesAdmin::secureData($statistiquesDes);
             }
 
-            TotalStatistiquesAdmin::secureData($totalStatistiques);
+            unset($statistiquesDes);
+
+            $totalStatistiques = TotalStatistiquesAdmin::secureData($totalStatistiques);
 
             // Conversion JSON
             $tableauStatistiquesInsJson = json_encode(convertForJsonStatistiques($tableauStatistiquesIns));

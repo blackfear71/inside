@@ -44,7 +44,7 @@
     switch ($_GET['action'])
     {
         case 'goConsulter':
-            Preferences::secureData($preferences);
+            $preferences = Preferences::secureData($preferences);
 
             foreach ($news as $messageNews)
             {

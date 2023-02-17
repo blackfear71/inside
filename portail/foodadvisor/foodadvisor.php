@@ -228,10 +228,12 @@
            
             unset($proposition);
 
-            foreach ($solos as $solo)
+            foreach ($solos as &$solo)
             {
-                Profile::secureData($solo);
+                $solo = Profile::secureData($solo);
             }
+
+            unset($solo);            
 
             foreach ($mesChoix as &$monChoix)
             {
@@ -250,10 +252,12 @@
 
             if (!empty($sansPropositions))
             {
-                foreach ($sansPropositions as $userNoChoice)
+                foreach ($sansPropositions as &$userNoChoice)
                 {
-                    Profile::secureData($userNoChoice);
+                    $userNoChoice = Profile::secureData($userNoChoice);
                 }
+
+                unset($userNoChoice);
             }
 
             // Conversion JSON

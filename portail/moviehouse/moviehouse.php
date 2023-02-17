@@ -152,7 +152,7 @@
 
             unset($year);
 
-            Preferences::secureData($preferences);
+            $preferences = Preferences::secureData($preferences);
 
             switch ($_GET['view'])
             {

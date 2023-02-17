@@ -59,7 +59,7 @@
     switch ($_GET['action'])
     {
         case 'goConsulter':
-            Profile::secureData($profil);
+            $profil = Profile::secureData($profil);
             break;
 
         case 'doModifierAvatar':

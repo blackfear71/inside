@@ -173,10 +173,12 @@
             {
                 case 'success':
                 case 'ranking':
-                    foreach ($listeUsers as $user)
+                    foreach ($listeUsers as &$user)
                     {
-                        Profile::secureData($user);
+                        $user = Profile::secureData($user);
                     }
+
+                    unset($user);
 
                     foreach ($listeSuccess as &$success)
                     {
@@ -190,8 +192,8 @@
                     break;
 
                 case 'settings':
-                    Profile::secureData($profil);
-                    Preferences::secureData($preferences);
+                    $profil      = Profile::secureData($profil);
+                    $preferences = Preferences::secureData($preferences);
 
                     foreach ($listeEquipes as &$equipe)
                     {
@@ -202,8 +204,8 @@
                     break;
 
                 case 'themes':
-                    Profile::secureData($profil);
-                    Preferences::secureData($preferences);
+                    $profil      = Profile::secureData($profil);
+                    $preferences = Preferences::secureData($preferences);
 
                     foreach ($policesCaracteres as &$police)
                     {
@@ -235,10 +237,10 @@
 
                 case 'profile':
                 default:
-                    Profile::secureData($profil);
-                    $equipe = Team::secureData($equipe);
-                    StatistiquesProfil::secureData($statistiques);
-                    Progression::secureData($progression);
+                    $profil       = Profile::secureData($profil);
+                    $equipe       = Team::secureData($equipe);
+                    $statistiques = StatistiquesProfil::secureData($statistiques);
+                    $progression  = Progression::secureData($progression);
                     break;
             }
             break;

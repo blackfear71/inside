@@ -67,13 +67,17 @@
 
             unset($equipe);            
 
-            foreach ($listeUsersParEquipe as $usersParEquipe)
+            foreach ($listeUsersParEquipe as &$usersParEquipe)
             {
-                foreach ($usersParEquipe as $user)
+                foreach ($usersParEquipe as &$user)
                 {
-                    Profile::secureData($user);
+                    $user = Profile::secureData($user);
                 }
+
+                unset($user);
             }
+
+            unset($usersParEquipe);
             break;
 
         case 'doModifier':
