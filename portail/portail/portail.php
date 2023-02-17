@@ -46,10 +46,12 @@
         case 'goConsulter':
             $preferences = Preferences::secureData($preferences);
 
-            foreach ($news as $messageNews)
+            foreach ($news as &$messageNews)
             {
-                News::secureData($messageNews);
+                $messageNews = News::secureData($messageNews);
             }
+
+            unset($messageNews);
 
             foreach ($portail as &$lienPortail)
             {

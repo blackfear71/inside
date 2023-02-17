@@ -22,12 +22,12 @@
         public static function withData($data)
         {
             $news = new self();
-            $news->fill($data);
+            $news->fillWithData($data);
 
             return $news;
         }
 
-        protected function fill($data)
+        protected function fillWithData($data)
         {
             if (isset($data['title']))
                 $this->title   = $data['title'];
@@ -48,11 +48,19 @@
         // Sécurisation des données
         public static function secureData($data)
         {
-            $data->setTitle(htmlspecialchars($data->getTitle()));
-            //$data->setContent(htmlspecialchars($data->getContent()));
-            //$data->setDetails(htmlspecialchars($data->getDetails()));
-            $data->setLogo(htmlspecialchars($data->getLogo()));
-            $data->setLink(htmlspecialchars($data->getLink()));
+            $news = new self();
+            $news->fillSecureData($data);
+
+            return $news;
+        }
+
+        protected function fillSecureData($data)
+        {
+            $this->title   = htmlspecialchars($data->getTitle());
+            $this->content = $data->getContent();
+            $this->details = $data->getDetails();
+            $this->logo    = htmlspecialchars($data->getLogo());
+            $this->link    = htmlspecialchars($data->getLink());
         }
 
         // Getters et Setters pour l'objet News
