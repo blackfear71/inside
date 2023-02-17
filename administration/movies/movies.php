@@ -53,7 +53,7 @@
                 $equipe = Team::secureData($equipe);
             }
 
-            unset($equipe);            
+            unset($equipe);
 
             foreach ($listeSuppression as &$film)
             {

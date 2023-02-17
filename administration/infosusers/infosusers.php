@@ -65,7 +65,7 @@
                 $equipe = Team::secureData($equipe);
             }
 
-            unset($equipe);            
+            unset($equipe);
 
             foreach ($listeUsersParEquipe as &$usersParEquipe)
             {

@@ -84,7 +84,7 @@
                 $equipe = Team::secureData($equipe);
             }
 
-            unset($equipe);            
+            unset($equipe);
 
             foreach ($listeBugs as $bug)
             {

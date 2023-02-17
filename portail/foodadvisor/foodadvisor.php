@@ -233,7 +233,7 @@
                 $solo = Profile::secureData($solo);
             }
 
-            unset($solo);            
+            unset($solo);
 
             foreach ($mesChoix as &$monChoix)
             {

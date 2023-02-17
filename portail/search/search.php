@@ -68,10 +68,12 @@
 
                 unset($resultatsPP);
 
-                foreach ($resultats['missions'] as $resultatsMI)
+                foreach ($resultats['missions'] as &$resultatsMI)
                 {
-                    Mission::secureData($resultatsMI);
+                    $resultatsMI = Mission::secureData($resultatsMI);
                 }
+
+                unset($resultatsMI);
             }
             break;
 

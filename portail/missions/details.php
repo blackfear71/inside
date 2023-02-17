@@ -72,14 +72,14 @@
         case 'goConsulter':
             if ($missionExistante == true)
             {
-                Mission::secureData($detailsMission);
+                $detailsMission = Mission::secureData($detailsMission);
 
                 foreach ($participants as &$participant)
                 {
                     $participant = Profile::secureData($participant);
                 }
 
-                unset($participant);                
+                unset($participant); 
 
                 $missionUser['daily']         = htmlspecialchars($missionUser['daily']);
                 $missionUser['event']         = htmlspecialchars($missionUser['event']);
@@ -95,10 +95,12 @@
                     
                     unset($succes);
 
-                    foreach ($ranking as $rankUser)
+                    foreach ($ranking as &$rankUser)
                     {
-                        ParticipantMission::secureData($rankUser);
+                        $rankUser = ParticipantMission::secureData($rankUser);
                     }
+
+                    unset($rankUser);
                 }
             }
             break;

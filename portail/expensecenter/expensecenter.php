@@ -119,7 +119,7 @@
                 $user = Profile::secureData($user);
             }
 
-            unset($user);            
+            unset($user);
 
             foreach ($filters as &$filter)
             {

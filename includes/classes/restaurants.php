@@ -870,7 +870,7 @@
             $this->name          = htmlspecialchars($data->getName());
             $this->picture       = htmlspecialchars($data->getPicture());
             $this->location      = htmlspecialchars($data->getLocation());
-            $this->opened        = htmlspecialchars($data->getOpened());            
+            $this->opened        = htmlspecialchars($data->getOpened());
         }
 
         // Getters et Setters pour l'objet Choix

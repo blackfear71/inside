@@ -102,14 +102,16 @@
     switch ($_GET['action'])
     {
         case 'goConsulter':
-            foreach ($listeMissions as $mission)
+            foreach ($listeMissions as &$mission)
             {
-                Mission::secureData($mission);
+                $mission = Mission::secureData($mission);
             }
+
+            unset($mission);
             break;
 
         case 'goModifier':
-            Mission::secureData($detailsMission);
+            $detailsMission = Mission::secureData($detailsMission);
 
             foreach ($succesMission as &$succes)
             {
@@ -118,24 +120,28 @@
 
             unset($succes);
 
-            foreach ($listeParticipantsParEquipes as $participantsParEquipes)
+            foreach ($listeParticipantsParEquipes as &$participantsParEquipes)
             {
-                foreach ($participantsParEquipes as $participant)
+                foreach ($participantsParEquipes as &$participant)
                 {
-                    ParticipantMission::secureData($participant);
+                    $participant = ParticipantMission::secureData($participant);
                 }
+
+                unset($participant);
             }
+
+            unset($participantsParEquipes);
 
             foreach ($listeEquipesParticipants as &$equipe)
             {
                 $equipe = Team::secureData($equipe);
             }
 
-            unset($equipe);            
+            unset($equipe);
             break;
 
         case 'goAjouter':
-            Mission::secureData($detailsMission);
+            $detailsMission = Mission::secureData($detailsMission);
             break;
 
         case 'doAjouter':

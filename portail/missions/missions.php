@@ -42,10 +42,12 @@
     switch ($_GET['action'])
     {
         case 'goConsulter':
-            foreach ($listeMissions as $mission)
+            foreach ($listeMissions as &$mission)
             {
-                Mission::secureData($mission);
+                $mission = Mission::secureData($mission);
             }
+
+            unset($mission);
             break;
 
         case 'doMission':

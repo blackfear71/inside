@@ -57,7 +57,7 @@
             $this->reference    = $data->getReference();
             $this->team         = htmlspecialchars($data->getTeam());
             $this->activation   = htmlspecialchars($data->getActivation());
-            $this->nombre_users = htmlspecialchars($data->getNombre_users());            
+            $this->nombre_users = htmlspecialchars($data->getNombre_users());
         }
 
         // Getters et Setters pour l'objet Team

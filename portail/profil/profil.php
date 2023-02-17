@@ -200,7 +200,7 @@
                         $equipe = Team::secureData($equipe);
                     }
 
-                    unset($equipe);                    
+                    unset($equipe);
                     break;
 
                 case 'themes':

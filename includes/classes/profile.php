@@ -874,7 +874,7 @@
             $this->nb_bugs_resolus    = htmlspecialchars($data->getNb_bugs_resolus());
             $this->nb_idees_soumises  = htmlspecialchars($data->getNb_idees_soumises());
             $this->nb_idees_en_charge = htmlspecialchars($data->getNb_idees_en_charge());
-            $this->nb_idees_terminees = htmlspecialchars($data->getNb_idees_terminees());            
+            $this->nb_idees_terminees = htmlspecialchars($data->getNb_idees_terminees());
         }
 
         // Getters et Setters pour l'objet StatistiquesAdmin

@@ -34,12 +34,12 @@
         public static function withData($data)
         {
             $mission = new self();
-            $mission->fill($data);
+            $mission->fillWithData($data);
 
             return $mission;
         }
 
-        protected function fill($data)
+        protected function fillWithData($data)
         {
             if (isset($data['id']))
                 $this->id           = $data['id'];
@@ -75,16 +75,25 @@
         // Sécurisation des données
         public static function secureData($data)
         {
-            $data->setMission(htmlspecialchars($data->getMission()));
-            $data->setReference(htmlspecialchars($data->getReference()));
-            $data->setDate_deb(htmlspecialchars($data->getDate_deb()));
-            $data->setDate_fin(htmlspecialchars($data->getDate_fin()));
-            $data->setHeure(htmlspecialchars($data->getHeure()));
-            $data->setObjectif(htmlspecialchars($data->getObjectif()));
-            $data->setDescription(htmlspecialchars($data->getDescription()));
-            $data->setExplications(htmlspecialchars($data->getExplications()));
-            $data->setConclusion(htmlspecialchars($data->getConclusion()));
-            $data->setStatut(htmlspecialchars($data->getStatut()));
+            $mission = new self();
+            $mission->fillSecureData($data);
+
+            return $mission;
+        }
+
+        protected function fillSecureData($data)
+        {
+            $this->id           = $data->getId();
+            $this->mission      = htmlspecialchars($data->getMission());
+            $this->reference    = htmlspecialchars($data->getReference());
+            $this->date_deb     = htmlspecialchars($data->getDate_deb());
+            $this->date_fin     = htmlspecialchars($data->getDate_fin());
+            $this->heure        = htmlspecialchars($data->getHeure());
+            $this->objectif     = htmlspecialchars($data->getObjectif());
+            $this->description  = htmlspecialchars($data->getDescription());
+            $this->explications = htmlspecialchars($data->getExplications());
+            $this->conclusion   = htmlspecialchars($data->getConclusion());
+            $this->statut       = htmlspecialchars($data->getStatut());
         }
 
         // Getters et Setters pour l'objet Mission
@@ -233,12 +242,20 @@
         // Sécurisation des données
         public static function secureData($data)
         {
-            $data->setIdentifiant(htmlspecialchars($data->getIdentifiant()));
-            //$data->setTeam(htmlspecialchars($data->getTeam()));
-            $data->setPseudo(htmlspecialchars($data->getPseudo()));
-            $data->setAvatar(htmlspecialchars($data->getAvatar()));
-            $data->setTotal(htmlspecialchars($data->getTotal()));
-            $data->setRank(htmlspecialchars($data->getRank()));
+            $participantMission = new self();
+            $participantMission->fillSecureData($data);
+
+            return $participantMission;
+        }
+
+        protected function fillSecureData($data)
+        {
+            $this->identifiant = htmlspecialchars($data->getIdentifiant());
+            $this->team        = $data->getTeam();
+            $this->pseudo      = htmlspecialchars($data->getPseudo());
+            $this->avatar      = htmlspecialchars($data->getAvatar());
+            $this->total       = htmlspecialchars($data->getTotal());
+            $this->rank        = htmlspecialchars($data->getRank());
         }
 
         // Getters et Setters pour l'objet ParticipantMission

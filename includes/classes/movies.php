@@ -186,7 +186,7 @@
             $this->stars_user      = htmlspecialchars($data->getStars_user());
             $this->participation   = htmlspecialchars($data->getParticipation());
             $this->nb_users        = htmlspecialchars($data->getNb_users());
-            $this->average         = htmlspecialchars($data->getAverage());            
+            $this->average         = htmlspecialchars($data->getAverage());
         }
 
         // Getters et Setters pour l'objet Movie
@@ -547,7 +547,7 @@
             $this->avatar        = htmlspecialchars($data->getAvatar());
             $this->email         = htmlspecialchars($data->getEmail());
             $this->stars         = htmlspecialchars($data->getStars());
-            $this->participation = htmlspecialchars($data->getParticipation());            
+            $this->participation = htmlspecialchars($data->getParticipation());
         }
 
         // Getters et Setters pour l'objet Stars
@@ -713,7 +713,7 @@
             $this->avatar  = htmlspecialchars($data->getAvatar());
             $this->date    = htmlspecialchars($data->getDate());
             $this->time    = htmlspecialchars($data->getTime());
-            $this->comment = htmlspecialchars($data->getComment());            
+            $this->comment = htmlspecialchars($data->getComment());
         }
 
         // Getters et Setters pour l'objet Comments
