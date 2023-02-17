@@ -144,10 +144,12 @@
 
             if ($nombrePages > 0)
             {
-                foreach ($listeCollectors as $collector)
+                foreach ($listeCollectors as &$collector)
                 {
-                    Collector::secureData($collector);
+                    $collector = Collector::secureData($collector);
                 }
+
+                unset($collector);
 
                 // Conversion JSON
                 $listeCollectorsJson = json_encode(convertForJsonListeCollectors($listeCollectors));

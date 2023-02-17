@@ -44,12 +44,12 @@
         public static function withData($data)
         {
             $collector = new self();
-            $collector->fill($data);
+            $collector->fillWithData($data);
 
             return $collector;
         }
 
-        protected function fill($data)
+        protected function fillWithData($data)
         {
             if (isset($data['id']))
                 $this->id             = $data['id'];
@@ -85,20 +85,29 @@
         // Sécurisation des données
         public static function secureData($data)
         {
-            $data->setDate_add(htmlspecialchars($data->getDate_add()));
-            $data->setAuthor(htmlspecialchars($data->getAuthor()));
-            $data->setPseudo_author(htmlspecialchars($data->getPseudo_author()));
-            $data->setSpeaker(htmlspecialchars($data->getSpeaker()));
-            $data->setPseudo_speaker(htmlspecialchars($data->getPseudo_speaker()));
-            $data->setAvatar_speaker(htmlspecialchars($data->getAvatar_speaker()));
-            $data->setType_speaker(htmlspecialchars($data->getType_speaker()));
-            $data->setDate_collector(htmlspecialchars($data->getDate_collector()));
-            $data->setType_collector(htmlspecialchars($data->getType_collector()));
-            //$data->setTeam(htmlspecialchars($data->getTeam()));
-            $data->setCollector(htmlspecialchars($data->getCollector()));
-            $data->setContext(htmlspecialchars($data->getContext()));
-            $data->setNb_votes(htmlspecialchars($data->getNb_votes()));
-            $data->setVote_user(htmlspecialchars($data->getVote_user()));
+            $collector = new self();
+            $collector->fillSecureData($data);
+
+            return $collector;
+        }
+
+        protected function fillSecureData($data)
+        {
+            $this->id             = $data->getId();
+            $this->date_add       = htmlspecialchars($data->getDate_add());
+            $this->author         = htmlspecialchars($data->getAuthor());
+            $this->pseudo_author  = htmlspecialchars($data->getPseudo_author());
+            $this->speaker        = htmlspecialchars($data->getSpeaker());
+            $this->pseudo_speaker = htmlspecialchars($data->getPseudo_speaker());
+            $this->avatar_speaker = htmlspecialchars($data->getAvatar_speaker());
+            $this->type_speaker   = htmlspecialchars($data->getType_speaker());
+            $this->date_collector = htmlspecialchars($data->getDate_collector());
+            $this->type_collector = htmlspecialchars($data->getType_collector());
+            $this->team           = $data->getTeam();
+            $this->collector      = htmlspecialchars($data->getCollector());
+            $this->context        = htmlspecialchars($data->getContext());
+            $this->nb_votes       = htmlspecialchars($data->getNb_votes());
+            $this->vote_user      = htmlspecialchars($data->getVote_user());
 
             $listeVotes = $data->getVotes();
 
@@ -114,7 +123,7 @@
 
             unset($votesParSmiley);
 
-            $data->setVotes($listeVotes);
+            $this->votes          = $listeVotes;
         }
 
         // Getters et Setters pour l'objet Collector
