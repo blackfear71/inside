@@ -34,12 +34,12 @@
         public static function withData($data)
         {
             $notification = new self();
-            $notification->fill($data);
+            $notification->fillWithData($data);
 
             return $notification;
         }
 
-        protected function fill($data)
+        protected function fillWithData($data)
         {
             if (isset($data['id']))
                 $this->id        = $data['id'];
@@ -69,16 +69,25 @@
         // Sécurisation des données
         public static function secureData($data)
         {
-            $data->setAuthor(htmlspecialchars($data->getAuthor()));
-            //$data->setTeam(htmlspecialchars($data->getTeam()));
-            $data->setDate(htmlspecialchars($data->getDate()));
-            $data->setTime(htmlspecialchars($data->getTime()));
-            $data->setCategory(htmlspecialchars($data->getCategory()));
-            $data->setContent(htmlspecialchars($data->getContent()));
-            $data->setTo_delete(htmlspecialchars($data->getTo_delete()));
-            $data->setIcon(htmlspecialchars($data->getIcon()));
-            //$data->setSentence(htmlspecialchars($data->getSentence()));
-            $data->setLink(htmlspecialchars($data->getLink()));
+            $notification = new self();
+            $notification->fillSecureData($data);
+
+            return $notification;
+        }
+
+        protected function fillSecureData($data)
+        {
+            $this->id        = $data->getId();
+            $this->author    = htmlspecialchars($data->getAuthor());
+            $this->team      = $data->getTeam();
+            $this->date      = htmlspecialchars($data->getDate());
+            $this->time      = htmlspecialchars($data->getTime());
+            $this->category  = htmlspecialchars($data->getCategory());
+            $this->content   = htmlspecialchars($data->getContent());
+            $this->to_delete = htmlspecialchars($data->getTo_delete());
+            $this->icon      = htmlspecialchars($data->getIcon());
+            $this->sentence  = $data->getSentence();
+            $this->link      = htmlspecialchars($data->getLink());
         }
 
         // Getters et Setters pour l'objet Notification

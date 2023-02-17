@@ -106,10 +106,12 @@
 
                 unset($user);
 
-                foreach ($notifications as $notification)
+                foreach ($notifications as &$notification)
                 {
-                    Notification::secureData($notification);
+                    $notification = Notification::secureData($notification);
                 }
+
+                unset($notification);
             }
             break;
 
