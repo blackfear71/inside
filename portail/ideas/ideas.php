@@ -80,10 +80,12 @@
         case 'goConsulter':
             if ($nombrePages > 0)
             {
-                foreach ($listeIdees as $idee)
+                foreach ($listeIdees as &$idee)
                 {
-                    Idea::secureData($idee);
+                    $idee = Idea::secureData($idee);
                 }
+
+                unset($idee);
             }
             break;
 

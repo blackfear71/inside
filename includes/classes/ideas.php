@@ -36,12 +36,12 @@
         public static function withData($data)
         {
             $ideas = new self();
-            $ideas->fill($data);
+            $ideas->fillWithData($data);
 
             return $ideas;
         }
 
-        protected function fill($data)
+        protected function fillWithData($data)
         {
             if (isset($data['id']))
                 $this->id                = $data['id'];
@@ -83,17 +83,26 @@
         // Sécurisation des données
         public static function secureData($data)
         {
-            //$data->setTeam(htmlspecialchars($data->getTeam()));
-            $data->setSubject(htmlspecialchars($data->getSubject()));
-            $data->setDate(htmlspecialchars($data->getDate()));
-            $data->setAuthor(htmlspecialchars($data->getAuthor()));
-            $data->setPseudo_author(htmlspecialchars($data->getPseudo_author()));
-            $data->setAvatar_author(htmlspecialchars($data->getAvatar_author()));
-            $data->setContent(htmlspecialchars($data->getContent()));
-            $data->setStatus(htmlspecialchars($data->getStatus()));
-            $data->setDevelopper(htmlspecialchars($data->getDevelopper()));
-            $data->setPseudo_developper(htmlspecialchars($data->getPseudo_developper()));
-            $data->setAvatar_developper(htmlspecialchars($data->getAvatar_developper()));
+            $ideas = new self();
+            $ideas->fillSecureData($data);
+
+            return $ideas;
+        }
+
+        protected function fillSecureData($data)
+        {
+            $this->id                = $data->getId();
+            $this->team              = $data->getTeam();
+            $this->subject           = htmlspecialchars($data->getSubject());
+            $this->date              = htmlspecialchars($data->getDate());
+            $this->author            = htmlspecialchars($data->getAuthor());
+            $this->pseudo_author     = htmlspecialchars($data->getPseudo_author());
+            $this->avatar_author     = htmlspecialchars($data->getAvatar_author());
+            $this->content           = htmlspecialchars($data->getContent());
+            $this->status            = htmlspecialchars($data->getStatus());
+            $this->developper        = htmlspecialchars($data->getDevelopper());
+            $this->pseudo_developper = htmlspecialchars($data->getPseudo_developper());
+            $this->avatar_developper = htmlspecialchars($data->getAvatar_developper());
         }
 
         // Getters et Setters pour l'objet Ideas
