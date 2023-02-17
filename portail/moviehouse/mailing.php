@@ -69,7 +69,7 @@
     {
         case 'goConsulter':
         case 'sendMail':
-            Movie::secureData($detailsFilm);
+            $detailsFilm = Movie::secureData($detailsFilm);
 
             foreach ($listeUsers as &$user)
             {
@@ -80,10 +80,12 @@
 
             unset($user);
 
-            foreach ($listeEtoiles as $etoiles)
+            foreach ($listeEtoiles as &$etoiles)
             {
-                Stars::secureData($etoiles);
+                $etoiles = Stars::secureData($etoiles);
             }
+
+            unset($etoiles);
             break;
 
         default:

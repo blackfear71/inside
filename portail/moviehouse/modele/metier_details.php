@@ -460,12 +460,14 @@
     function sendMail($details, $participants)
     {
         // Traitement de sécurité
-        Movie::secureData($details);
+        $details = Movie::secureData($details);
 
-        foreach ($participants as $participant)
+        foreach ($participants as &$participant)
         {
-            Stars::secureData($participant);
+            $participant = Stars::secureData($participant);
         }
+
+        unset($participant);
 
         // Récupération du contenu du mail
         $message = getModeleMailFilm($details, $participants);

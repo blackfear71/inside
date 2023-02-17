@@ -127,7 +127,7 @@
             var listeRestaurants = <?php if (isset($listeRestaurantsJson) AND !empty($listeRestaurantsJson)) echo $listeRestaurantsJson; else echo '{}'; ?>;
 
             // Récupération des détails des propositions pour le script
-            var detailsPropositions = <?php if (isset($detailsPropositions) AND !empty($detailsPropositions)) echo $detailsPropositions; else echo '{}'; ?>;
+            var detailsPropositions = <?php if (isset($detailsPropositionsJson) AND !empty($detailsPropositionsJson)) echo $detailsPropositionsJson; else echo '{}'; ?>;
 
             // Récupération utilisateur connecté
             var userSession = <?php echo json_encode($_SESSION['user']['identifiant']); ?>;

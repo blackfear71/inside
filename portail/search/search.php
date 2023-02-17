@@ -47,10 +47,12 @@
         case 'goSearch':
             if (!empty($resultats))
             {
-                foreach ($resultats['movie_house'] as $resultatsMH)
+                foreach ($resultats['movie_house'] as &$resultatsMH)
                 {
-                    Movie::secureData($resultatsMH);
+                    $resultatsMH = Movie::secureData($resultatsMH);
                 }
+
+                unset($resultatsMH);
 
                 foreach ($resultats['food_advisor'] as &$resultatsFA)
                 {

@@ -265,7 +265,7 @@
             $listeRestaurantsResumeJson = json_encode(convertForJsonListeRestaurantsParLieu($listeRestaurantsResume));
             $listeLieuxJson             = json_encode($listeLieux);
             $listeRestaurantsJson       = json_encode(convertForJsonListeRestaurantsParLieu($listeRestaurants));
-            $detailsPropositions        = json_encode(convertForJsonListePropositions($propositions));
+            $detailsPropositionsJson    = json_encode(convertForJsonListePropositions($propositions));
             break;
 
         case 'doDeterminer':

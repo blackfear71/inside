@@ -117,7 +117,7 @@
         case 'goConsulter':
             if ($filmExistant == true)
             {
-                Movie::secureData($detailsFilm);
+                $detailsFilm = Movie::secureData($detailsFilm);
 
                 foreach ($listeNavigation as &$navigation)
                 {
@@ -139,15 +139,19 @@
 
                 unset($user);
 
-                foreach ($listeEtoiles as $etoiles)
+                foreach ($listeEtoiles as &$etoiles)
                 {
-                    Stars::secureData($etoiles);
+                    $etoiles = Stars::secureData($etoiles);
                 }
 
-                foreach ($listeCommentaires as $comment)
+                unset($etoiles);
+
+                foreach ($listeCommentaires as &$comment)
                 {
-                    Commentaire::secureData($comment);
+                    $comment = Commentaire::secureData($comment);
                 }
+
+                unset($comment);
 
                 // Conversion JSON
                 $detailsFilmJson = json_encode(convertForJsonDetailsFilm($detailsFilm));

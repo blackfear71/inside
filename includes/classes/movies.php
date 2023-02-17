@@ -64,12 +64,12 @@
         public static function withData($data)
         {
             $movie = new self();
-            $movie->fill($data);
+            $movie->fillWithData($data);
 
             return $movie;
         }
 
-        protected function fill($data)
+        protected function fillWithData($data)
         {
             if (isset($data['id']))
                 $this->id              = $data['id'];
@@ -153,31 +153,40 @@
         // Sécurisation des données
         public static function secureData($data)
         {
-            $data->setFilm(htmlspecialchars($data->getFilm()));
-            $data->setTo_delete(htmlspecialchars($data->getTo_delete()));
-            //$data->setTeam(htmlspecialchars($data->getTeam()));
-            $data->setDate_add(htmlspecialchars($data->getDate_add()));
-            $data->setIdentifiant_add(htmlspecialchars($data->getIdentifiant_add()));
-            $data->setPseudo_add(htmlspecialchars($data->getPseudo_add()));
-            $data->setIdentifiant_del(htmlspecialchars($data->getIdentifiant_del()));
-            $data->setPseudo_del(htmlspecialchars($data->getPseudo_del()));
-            $data->setSynopsis(htmlspecialchars($data->getSynopsis()));
-            $data->setDate_theater(htmlspecialchars($data->getDate_theater()));
-            $data->setDate_release(htmlspecialchars($data->getDate_release()));
-            $data->setLink(htmlspecialchars($data->getLink()));
-            $data->setPoster(htmlspecialchars($data->getPoster()));
-            $data->setTrailer(htmlspecialchars($data->getTrailer()));
-            $data->setId_url(htmlspecialchars($data->getId_url()));
-            $data->setDoodle(htmlspecialchars($data->getDoodle()));
-            $data->setDate_doodle(htmlspecialchars($data->getDate_doodle()));
-            $data->setTime_doodle(htmlspecialchars($data->getTime_doodle()));
-            $data->setRestaurant(htmlspecialchars($data->getRestaurant()));
-            $data->setPlace(htmlspecialchars($data->getPlace()));
-            $data->setNb_comments(htmlspecialchars($data->getNb_comments()));
-            $data->setStars_user(htmlspecialchars($data->getStars_user()));
-            $data->setParticipation(htmlspecialchars($data->getParticipation()));
-            $data->setNb_users(htmlspecialchars($data->getNb_users()));
-            $data->setAverage(htmlspecialchars($data->getAverage()));
+            $movie = new self();
+            $movie->fillSecureData($data);
+
+            return $movie;
+        }
+
+        protected function fillSecureData($data)
+        {
+            $this->id              = $data->getId();
+            $this->film            = htmlspecialchars($data->getFilm());
+            $this->to_delete       = htmlspecialchars($data->getTo_delete());
+            $this->team            = $data->getTeam();
+            $this->date_add        = htmlspecialchars($data->getDate_add());
+            $this->identifiant_add = htmlspecialchars($data->getIdentifiant_add());
+            $this->pseudo_add      = htmlspecialchars($data->getPseudo_add());
+            $this->identifiant_del = htmlspecialchars($data->getIdentifiant_del());
+            $this->pseudo_del      = htmlspecialchars($data->getPseudo_del());
+            $this->synopsis        = htmlspecialchars($data->getSynopsis());
+            $this->date_theater    = htmlspecialchars($data->getDate_theater());
+            $this->date_release    = htmlspecialchars($data->getDate_release());
+            $this->link            = htmlspecialchars($data->getLink());
+            $this->poster          = htmlspecialchars($data->getPoster());
+            $this->trailer         = htmlspecialchars($data->getTrailer());
+            $this->id_url          = htmlspecialchars($data->getId_url());
+            $this->doodle          = htmlspecialchars($data->getDoodle());
+            $this->date_doodle     = htmlspecialchars($data->getDate_doodle());
+            $this->time_doodle     = htmlspecialchars($data->getTime_doodle());
+            $this->restaurant      = htmlspecialchars($data->getRestaurant());
+            $this->place           = htmlspecialchars($data->getPlace());
+            $this->nb_comments     = htmlspecialchars($data->getNb_comments());
+            $this->stars_user      = htmlspecialchars($data->getStars_user());
+            $this->participation   = htmlspecialchars($data->getParticipation());
+            $this->nb_users        = htmlspecialchars($data->getNb_users());
+            $this->average         = htmlspecialchars($data->getAverage());            
         }
 
         // Getters et Setters pour l'objet Movie
@@ -497,12 +506,12 @@
         public static function withData($data)
         {
             $stars = new self();
-            $stars->fill($data);
+            $stars->fillWithData($data);
 
             return $stars;
         }
 
-        protected function fill($data)
+        protected function fillWithData($data)
         {
             if (isset($data['id']))
                 $this->id             = $data['id'];
@@ -523,12 +532,22 @@
         // Sécurisation des données
         public static function secureData($data)
         {
-            $data->setIdentifiant(htmlspecialchars($data->getIdentifiant()));
-            $data->setPseudo(htmlspecialchars($data->getPseudo()));
-            $data->setAvatar(htmlspecialchars($data->getAvatar()));
-            $data->setEmail(htmlspecialchars($data->getEmail()));
-            $data->setStars(htmlspecialchars($data->getStars()));
-            $data->setParticipation(htmlspecialchars($data->getParticipation()));
+            $stars = new self();
+            $stars->fillSecureData($data);
+
+            return $stars;
+        }
+
+        protected function fillSecureData($data)
+        {
+            $this->id            = $data->getId();
+            $this->id_film       = $data->getId_film();
+            $this->identifiant   = htmlspecialchars($data->getIdentifiant());
+            $this->pseudo        = htmlspecialchars($data->getPseudo());
+            $this->avatar        = htmlspecialchars($data->getAvatar());
+            $this->email         = htmlspecialchars($data->getEmail());
+            $this->stars         = htmlspecialchars($data->getStars());
+            $this->participation = htmlspecialchars($data->getParticipation());            
         }
 
         // Getters et Setters pour l'objet Stars
@@ -650,12 +669,12 @@
         public static function withData($data)
         {
             $comments = new self();
-            $comments->fill($data);
+            $comments->fillWithData($data);
 
             return $comments;
         }
 
-        protected function fill($data)
+        protected function fillWithData($data)
         {
             if (isset($data['id']))
                 $this->id      = $data['id'];
@@ -679,12 +698,22 @@
         // Sécurisation des données
         public static function secureData($data)
         {
-            $data->setAuthor(htmlspecialchars($data->getAuthor()));
-            $data->setPseudo(htmlspecialchars($data->getPseudo()));
-            $data->setAvatar(htmlspecialchars($data->getAvatar()));
-            $data->setDate(htmlspecialchars($data->getDate()));
-            $data->setTime(htmlspecialchars($data->getTime()));
-            $data->setComment(htmlspecialchars($data->getComment()));
+            $comments = new self();
+            $comments->fillSecureData($data);
+
+            return $comments;
+        }
+
+        protected function fillSecureData($data)
+        {
+            $this->id      = $data->getId();
+            $this->id_film = $data->getId_film();
+            $this->author  = htmlspecialchars($data->getAuthor());
+            $this->pseudo  = htmlspecialchars($data->getPseudo());
+            $this->avatar  = htmlspecialchars($data->getAvatar());
+            $this->date    = htmlspecialchars($data->getDate());
+            $this->time    = htmlspecialchars($data->getTime());
+            $this->comment = htmlspecialchars($data->getComment());            
         }
 
         // Getters et Setters pour l'objet Comments

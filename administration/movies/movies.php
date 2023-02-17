@@ -55,10 +55,12 @@
 
             unset($equipe);            
 
-            foreach ($listeSuppression as $film)
+            foreach ($listeSuppression as &$film)
             {
-                Movie::secureData($film);
+                $film = Movie::secureData($film);
             }
+
+            unset($film);
             break;
 
         case 'doDeleteFilm':

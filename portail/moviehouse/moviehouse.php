@@ -157,10 +157,12 @@
             switch ($_GET['view'])
             {
                 case 'cards':
-                    foreach ($listeFilms as $film)
+                    foreach ($listeFilms as &$film)
                     {
-                        Movie::secureData($film);
+                        $film = Movie::secureData($film);
                     }
+
+                    unset($film);
 
                     if (isset($listeUsers) AND !empty($listeUsers))
                     {
@@ -176,45 +178,57 @@
 
                     if (isset($listeEtoiles) AND !empty($listeEtoiles))
                     {
-                        foreach ($listeEtoiles as $etoilesFilm)
+                        foreach ($listeEtoiles as &$etoilesFilm)
                         {
-                            foreach ($etoilesFilm as $ligneEtoilesFilm)
+                            foreach ($etoilesFilm as &$ligneEtoilesFilm)
                             {
-                                Stars::secureData($ligneEtoilesFilm);
+                                $ligneEtoilesFilm = Stars::secureData($ligneEtoilesFilm);
                             }
+
+                            unset($ligneEtoilesFilm);
                         }
+
+                        unset($etoilesFilm);
                     }
                     break;
 
                 case 'home':
                 default:
-                    foreach ($listeRecents as $recent)
+                    foreach ($listeRecents as &$recent)
                     {
-                        Movie::secureData($recent);
+                        $recent = Movie::secureData($recent);
                     }
+
+                    unset($recent);
 
                     if ($filmsSemaine == 'Y' AND $afficherSemaine == true)
                     {
-                        foreach ($listeSemaine as $filmSemaine)
+                        foreach ($listeSemaine as &$filmSemaine)
                         {
-                            Movie::secureData($filmSemaine);
+                            $filmSemaine = Movie::secureData($filmSemaine);
                         }
+
+                        unset($filmSemaine);
                     }
 
                     if ($filmsWaited == 'Y')
                     {
-                        foreach ($listeAttendus as $attendu)
+                        foreach ($listeAttendus as &$attendu)
                         {
-                            Movie::secureData($attendu);
+                            $attendu = Movie::secureData($attendu);
                         }
+
+                        unset($attendu);
                     }
 
                     if ($filmsWayOut == 'Y')
                     {
-                        foreach ($listeSorties as $sortie)
+                        foreach ($listeSorties as &$sortie)
                         {
-                            Movie::secureData($sortie);
+                            $sortie = Movie::secureData($sortie);
                         }
+
+                        unset($sortie);
                     }
                     break;
             }
