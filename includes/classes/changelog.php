@@ -22,12 +22,12 @@
         public static function withData($data)
         {
             $changeLog = new self();
-            $changeLog->fill($data);
+            $changeLog->fillWithData($data);
 
             return $changeLog;
         }
 
-        protected function fill($data)
+        protected function fillWithData($data)
         {
             if (isset($data['id']))
                 $this->id    = $data['id'];
@@ -48,9 +48,18 @@
         // Sécurisation des données
         public static function secureData($data)
         {
-            $data->setWeek(htmlspecialchars($data->getWeek()));
-            $data->setYear(htmlspecialchars($data->getYear()));
-            $data->setNotes(htmlspecialchars($data->getNotes()));
+            $changeLog = new self();
+            $changeLog->fillSecureData($data);
+
+            return $changeLog;
+        }
+
+        protected function fillSecureData($data)
+        {
+            $this->id    = $data->getId();
+            $this->week  = htmlspecialchars($data->getWeek());
+            $this->year  = htmlspecialchars($data->getYear());
+            $this->notes = htmlspecialchars($data->getNotes());
 
             $listeLogs = $data->getLogs();
 
@@ -66,7 +75,7 @@
 
             unset($logsCategorie);
 
-            $data->setLogs($listeLogs);
+            $this->logs = $listeLogs;
         }
 
         // Getters et Setters pour l'objet ChangeLog
@@ -143,9 +152,17 @@
         // Sécurisation des données
         public static function secureData($data)
         {
-            $data->setAction(htmlspecialchars($data->getAction()));
-            $data->setYear(htmlspecialchars($data->getYear()));
-            $data->setWeek(htmlspecialchars($data->getWeek()));
+            $changeLogParameters = new self();
+            $changeLogParameters->fillSecureData($data);
+
+            return $changeLogParameters;
+        }
+
+        protected function fillSecureData($data)
+        {
+            $this->action = htmlspecialchars($data->getAction());
+            $this->year   = htmlspecialchars($data->getYear());
+            $this->week   = htmlspecialchars($data->getWeek());
         }
 
         // Getters et Setters pour l'objet ChangeLogParameters

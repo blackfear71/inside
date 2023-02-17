@@ -73,10 +73,12 @@
 
             unset($categorie);
 
-            foreach ($listeLogs as $log)
+            foreach ($listeLogs as &$log)
             {
-                ChangeLog::secureData($log);
+                $log = ChangeLog::secureData($log);
             }
+
+            unset($log);
             break;
 
         case 'goConsulterHistoire':

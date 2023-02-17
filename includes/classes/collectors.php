@@ -123,7 +123,7 @@
 
             unset($votesParSmiley);
 
-            $this->votes          = $listeVotes;
+            $this->votes = $listeVotes;
         }
 
         // Getters et Setters pour l'objet Collector

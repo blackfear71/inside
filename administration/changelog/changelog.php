@@ -88,10 +88,10 @@
 
             unset($categorie);
 
-            ChangeLogParameters::secureData($changeLogParameters);
+            $changeLogParameters = ChangeLogParameters::secureData($changeLogParameters);
 
             if (isset($changeLog))
-                ChangeLog::secureData($changeLog);
+                $changeLog = ChangeLog::secureData($changeLog);
 
             // Conversion JSON
             $categoriesChangeLogJson = json_encode($categoriesChangeLog);
