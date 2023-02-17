@@ -36,12 +36,12 @@
         public static function withData($data)
         {
             $expenses = new self();
-            $expenses->fill($data);
+            $expenses->fillWithData($data);
 
             return $expenses;
         }
 
-        protected function fill($data)
+        protected function fillWithData($data)
         {
             if (isset($data['id']))
                 $this->id      = $data['id'];
@@ -68,21 +68,26 @@
         // Sécurisation des données
         public static function secureData($data)
         {
-            //$data->setTeam(htmlspecialchars($data->getTeam()));
-            $data->setDate(htmlspecialchars($data->getDate()));
-            $data->setPrice(htmlspecialchars($data->getPrice()));
-            $data->setBuyer(htmlspecialchars($data->getBuyer()));
-            $data->setPseudo(htmlspecialchars($data->getPseudo()));
-            $data->setAvatar(htmlspecialchars($data->getAvatar()));
-            $data->setComment(htmlspecialchars($data->getComment()));
-            $data->setFrais(htmlspecialchars($data->getFrais()));
-            $data->setType(htmlspecialchars($data->getType()));
-            $data->setNb_users(htmlspecialchars($data->getNb_users()));
+            $expenses = new self();
+            $expenses->fillSecureData($data);
 
-            foreach ($data->getParts() as $parts)
-            {
-                Parts::secureData($parts);
-            }
+            return $expenses;
+        }
+
+        protected function fillSecureData($data)
+        {
+            $this->id       = $data->getId();
+            $this->team     = $data->getTeam();
+            $this->date     = htmlspecialchars($data->getDate());
+            $this->price    = htmlspecialchars($data->getPrice());
+            $this->buyer    = htmlspecialchars($data->getBuyer());
+            $this->pseudo   = htmlspecialchars($data->getPseudo());
+            $this->avatar   = htmlspecialchars($data->getAvatar());
+            $this->comment  = htmlspecialchars($data->getComment());
+            $this->frais    = htmlspecialchars($data->getFrais());
+            $this->type     = htmlspecialchars($data->getType());
+            $this->nb_users = htmlspecialchars($data->getNb_users());
+            $this->parts    = Parts::secureData($data->getParts());
         }
 
         // Getters et Setters pour l'objet Expenses
@@ -248,12 +253,12 @@
         public static function withData($data)
         {
             $expenses = new self();
-            $expenses->fill($data);
+            $expenses->fillWithData($data);
 
             return $expenses;
         }
 
-        protected function fill($data)
+        protected function fillWithData($data)
         {
             if (isset($data['id']))
                 $this->id          = $data['id'];
@@ -274,11 +279,31 @@
         // Sécurisation des données
         public static function secureData($data)
         {
-            $data->setIdentifiant(htmlspecialchars($data->getIdentifiant()));
-            $data->setPseudo(htmlspecialchars($data->getPseudo()));
-            $data->setAvatar(htmlspecialchars($data->getAvatar()));
-            //$data->setTeam(htmlspecialchars($data->getTeam()));
-            $data->setParts(htmlspecialchars($data->getParts()));
+            $parts = array();
+
+            foreach ($data as &$part)
+            {
+                $partUser = new self();
+                $partUser->fillSecureData($part);
+
+                array_push($parts, $partUser);
+            }
+
+            unset($part);
+
+            return $parts;
+        }
+
+        protected function fillSecureData($data)
+        {
+            $this->id             = $data->getId();
+            $this->id_expense     = $data->getId_expense();
+            $this->identifiant    = htmlspecialchars($data->getIdentifiant());
+            $this->pseudo         = htmlspecialchars($data->getPseudo());
+            $this->avatar         = htmlspecialchars($data->getAvatar());
+            $this->team           = $data->getTeam();
+            $this->parts          = htmlspecialchars($data->getParts());
+            $this->inscrit        = $data->getInscrit();
         }
 
         // Getters et Setters pour l'objet Parts

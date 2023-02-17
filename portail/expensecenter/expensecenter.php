@@ -136,10 +136,12 @@
 
             unset($year);
 
-            foreach ($listeDepenses as $depense)
+            foreach ($listeDepenses as &$depense)
             {
-                Expenses::secureData($depense);
+                $depense = Expenses::secureData($depense);
             }
+
+            unset($depense);
 
             // Conversion JSON
             $equipeJson        = json_encode($_SESSION['user']['equipe']);
