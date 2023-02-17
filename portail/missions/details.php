@@ -86,10 +86,12 @@
 
                 if (date('Ymd') > $detailsMission->getDate_fin())
                 {
-                    foreach ($succesMission as $succes)
+                    foreach ($succesMission as &$succes)
                     {
-                        Success::secureData($succes);
+                        $succes = Success::secureData($succes);
                     }
+                    
+                    unset($succes);
 
                     foreach ($ranking as $rankUser)
                     {

@@ -484,8 +484,8 @@
         {
             $tableauUsers[$user->getIdentifiant()] = array(
                 'identifiant' => $user->getIdentifiant(),
-                'pseudo' => htmlspecialchars($user->getPseudo()),
-                'avatar' => htmlspecialchars($user->getAvatar())
+                'pseudo'      => $user->getPseudo(),
+                'avatar'      => $user->getAvatar()
             );
         }
 

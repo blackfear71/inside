@@ -94,10 +94,12 @@
     {
         case 'goConsulter':
         case 'goModifier':
-            foreach ($listeSuccess as $success)
+            foreach ($listeSuccess as &$success)
             {
-                Success::secureData($success);
+                $success = Success::secureData($success);
             }
+
+            unset($success);
 
             foreach ($listeMissions as $mission)
             {

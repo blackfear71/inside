@@ -178,10 +178,12 @@
                         Profile::secureData($user);
                     }
 
-                    foreach ($listeSuccess as $success)
+                    foreach ($listeSuccess as &$success)
                     {
-                        Success::secureData($success);
+                        $success = Success::secureData($success);
                     }
+
+                    unset($success);
 
                     // Conversion JSON
                     $listeSuccessJson = json_encode(convertForJsonListeSucces($listeSuccess));

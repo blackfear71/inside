@@ -38,12 +38,12 @@
         public static function withData($data)
         {
             $success = new self();
-            $success->fill($data);
+            $success->fillWithData($data);
 
             return $success;
         }
 
-        protected function fill($data)
+        protected function fillWithData($data)
         {
             if (isset($data['id']))
                 $this->id            = $data['id'];
@@ -82,22 +82,27 @@
         // Sécurisation des données
         public static function secureData($data)
         {
-            $data->setReference(htmlspecialchars($data->getReference()));
-            $data->setLevel(htmlspecialchars($data->getLevel()));
-            $data->setOrder_success(htmlspecialchars($data->getOrder_success()));
-            $data->setDefined(htmlspecialchars($data->getDefined()));
-            $data->setUnicity(htmlspecialchars($data->getUnicity()));
-            $data->setMission(htmlspecialchars($data->getMission()));
-            $data->setTitle(htmlspecialchars($data->getTitle()));
-            $data->setDescription(htmlspecialchars($data->getDescription()));
-            $data->setLimit_success(htmlspecialchars($data->getLimit_success()));
-            $data->setExplanation(htmlspecialchars($data->getExplanation()));
-            $data->setValue_user(htmlspecialchars($data->getValue_user()));
+            $success = new self();
+            $success->fillSecureData($data);
 
-            foreach ($data->getClassement() as $rank)
-            {
-                Classement::secureData($rank);
-            }
+            return $success;
+        }
+
+        protected function fillSecureData($data)
+        {
+            $this->id            = $data->getId();
+            $this->reference     = htmlspecialchars($data->getReference());
+            $this->level         = htmlspecialchars($data->getLevel());
+            $this->order_success = htmlspecialchars($data->getOrder_success());
+            $this->defined       = htmlspecialchars($data->getDefined());
+            $this->unicity       = htmlspecialchars($data->getUnicity());
+            $this->mission       = htmlspecialchars($data->getMission());
+            $this->title         = htmlspecialchars($data->getTitle());
+            $this->description   = htmlspecialchars($data->getDescription());
+            $this->limit_success = htmlspecialchars($data->getLimit_success());
+            $this->explanation   = htmlspecialchars($data->getExplanation());
+            $this->value_user    = htmlspecialchars($data->getValue_user());
+            $this->classement    = Classement::secureData($data->getClassement());
         }
 
         // Getters et Setters pour l'objet Success
@@ -266,11 +271,28 @@
         // Sécurisation des données
         public static function secureData($data)
         {
-            $data->setIdentifiant(htmlspecialchars($data->getIdentifiant()));
-            $data->setPseudo(htmlspecialchars($data->getPseudo()));
-            $data->setAvatar(htmlspecialchars($data->getAvatar()));
-            $data->setValue(htmlspecialchars($data->getValue()));
-            $data->setRank(htmlspecialchars($data->getRank()));
+            $classement = array();
+
+            foreach ($data as &$rang)
+            {
+                $classementUser = new self();
+                $classementUser->fillSecureData($rang);
+
+                array_push($classement, $classementUser);
+            }
+
+            unset($rang);
+
+            return $classement;
+        }
+
+        protected function fillSecureData($data)
+        {
+            $this->identifiant = htmlspecialchars($data->getIdentifiant());
+            $this->pseudo      = htmlspecialchars($data->getPseudo());
+            $this->avatar      = htmlspecialchars($data->getAvatar());
+            $this->value       = htmlspecialchars($data->getValue());
+            $this->rank        = htmlspecialchars($data->getRank());
         }
 
         // Getters et Setters pour l'objet Classement

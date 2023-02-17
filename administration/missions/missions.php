@@ -111,10 +111,12 @@
         case 'goModifier':
             Mission::secureData($detailsMission);
 
-            foreach ($succesMission as $succes)
+            foreach ($succesMission as &$succes)
             {
-                Success::secureData($succes);
+                $succes = Success::secureData($succes);
             }
+
+            unset($succes);
 
             foreach ($listeParticipantsParEquipes as $participantsParEquipes)
             {
