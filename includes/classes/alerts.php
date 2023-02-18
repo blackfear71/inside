@@ -22,12 +22,12 @@
         public static function withData($data)
         {
             $alerte = new self();
-            $alerte->fill($data);
+            $alerte->fillWithData($data);
 
             return $alerte;
         }
 
-        protected function fill($data)
+        protected function fillWithData($data)
         {
             if (isset($data['id']))
                 $this->id       = $data['id'];
@@ -48,10 +48,19 @@
         // Sécurisation des données
         public static function secureData($data)
         {
-            $data->setCategory(htmlspecialchars($data->getCategory()));
-            $data->setType(htmlspecialchars($data->getType()));
-            $data->setAlert(htmlspecialchars($data->getAlert()));
-            $data->setMessage(htmlspecialchars($data->getMessage()));
+            $alerte = new self();
+            $alerte->fillSecureData($data);
+
+            return $alerte;
+        }
+
+        protected function fillSecureData($data)
+        {
+            $this->id       = $data->getId();
+            $this->category = htmlspecialchars($data->getCategory());
+            $this->type     = htmlspecialchars($data->getType());
+            $this->alert    = htmlspecialchars($data->getAlert());
+            $this->message  = htmlspecialchars($data->getMessage());
         }
 
         // Getters et Setters pour l'objet Alerte

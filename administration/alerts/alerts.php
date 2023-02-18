@@ -56,10 +56,12 @@
     switch ($_GET['action'])
     {
         case 'goConsulter':
-            foreach ($listeAlertes as $alerte)
+            foreach ($listeAlertes as &$alerte)
             {
-                Alerte::secureData($alerte);
+                $alerte = Alerte::secureData($alerte);
             }
+
+            unset($alerte);
             break;
 
         case 'doAjouter':
