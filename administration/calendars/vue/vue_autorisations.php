@@ -23,14 +23,14 @@
                                     {
                                         echo '<div id="bouton_autorisation_' . $autorisation->getIdentifiant() . '" class="switch_saisie_admin switch_checked">';
                                             echo '<input id="autorisation_' . $autorisation->getIdentifiant() . '" type="checkbox" name="autorization[' . $autorisation->getIdentifiant() . ']" checked />';
-                                            echo '<label for="autorisation_' . $autorisation->getIdentifiant() . '" class="label_switch">' . formatString($autorisation->getPseudo(), 70) . '</label>';
+                                            echo '<label for="autorisation_' . $autorisation->getIdentifiant() . '" class="label_switch">' . formatString($autorisation->getPseudo(), 50) . '</label>';
                                         echo '</div>';
                                     }
                                     else
                                     {
                                         echo '<div id="bouton_autorisation_' . $autorisation->getIdentifiant() . '" class="switch_saisie_admin">';
                                             echo '<input id="autorisation_' . $autorisation->getIdentifiant() . '" type="checkbox" name="autorization[' . $autorisation->getIdentifiant() . ']" />';
-                                            echo '<label for="autorisation_' . $autorisation->getIdentifiant() . '" class="label_switch">' . formatString($autorisation->getPseudo(), 70) . '</label>';
+                                            echo '<label for="autorisation_' . $autorisation->getIdentifiant() . '" class="label_switch">' . formatString($autorisation->getPseudo(), 50) . '</label>';
                                         echo '</div>';
                                     }
                                 }

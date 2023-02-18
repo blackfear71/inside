@@ -8,8 +8,6 @@
         private $year;
         private $title;
         private $calendar;
-        private $width;
-        private $height;
 
         // Constructeur par défaut (objet vide)
         public function __construct()
@@ -21,8 +19,6 @@
             $this->year      = '';
             $this->title     = '';
             $this->calendar  = '';
-            $this->width     = '';
-            $this->height    = '';
         }
 
         // Constructeur de l'objet Calendrier en fonction des données
@@ -30,12 +26,12 @@
         public static function withData($data)
         {
             $calendar = new self();
-            $calendar->fill($data);
+            $calendar->fillWithData($data);
 
             return $calendar;
         }
 
-        protected function fill($data)
+        protected function fillWithData($data)
         {
             if (isset($data['id']))
                 $this->id        = $data['id'];
@@ -59,12 +55,21 @@
         // Sécurisation des données
         public static function secureData($data)
         {
-            $data->setTo_delete(htmlspecialchars($data->getTo_delete()));
-            //$data->setTeam(htmlspecialchars($data->getTeam()));
-            $data->setMonth(htmlspecialchars($data->getMonth()));
-            $data->setYear(htmlspecialchars($data->getYear()));
-            $data->setCalendar(htmlspecialchars($data->getCalendar()));
-            $data->setTitle(htmlspecialchars($data->getTitle()));
+            $calendar = new self();
+            $calendar->fillSecureData($data);
+
+            return $calendar;
+        }
+
+        protected function fillSecureData($data)
+        {
+            $this->id        = $data->getId();
+            $this->to_delete = htmlspecialchars($data->getTo_delete());
+            $this->team      = $data->getTeam();
+            $this->month     = htmlspecialchars($data->getMonth());
+            $this->year      = htmlspecialchars($data->getYear());
+            $this->title     = htmlspecialchars($data->getTitle());
+            $this->calendar  = htmlspecialchars($data->getCalendar());
         }
 
         // Getters et Setters pour l'objet Calendrier
@@ -168,13 +173,13 @@
         // -> il faut passer une variable $data contenant le résultat de la requête fetch
         public static function withData($data)
         {
-            $calendar = new self();
-            $calendar->fill($data);
+            $annexe = new self();
+            $annexe->fillWithData($data);
 
-            return $calendar;
+            return $annexe;
         }
 
-        protected function fill($data)
+        protected function fillWithData($data)
         {
             if (isset($data['id']))
                 $this->id        = $data['id'];
@@ -195,10 +200,19 @@
         // Sécurisation des données
         public static function secureData($data)
         {
-            $data->setTo_delete(htmlspecialchars($data->getTo_delete()));
-            //$data->setTeam(htmlspecialchars($data->getTeam()));
-            $data->setAnnexe(htmlspecialchars($data->getAnnexe()));
-            $data->setTitle(htmlspecialchars($data->getTitle()));
+            $annexe = new self();
+            $annexe->fillSecureData($data);
+
+            return $annexe;
+        }
+
+        protected function fillSecureData($data)
+        {
+            $this->id        = $data->getId();
+            $this->to_delete = htmlspecialchars($data->getTo_delete());
+            $this->team      = $data->getTeam();
+            $this->annexe    = htmlspecialchars($data->getAnnexe());
+            $this->title     = htmlspecialchars($data->getTitle());
         }
 
         // Getters et Setters pour l'objet Annexe
@@ -262,7 +276,7 @@
     {
         private $identifiant;
         private $pseudo;
-        private $equipe;
+        private $team;
         private $manage_calendars;
 
         // Constructeur par défaut (objet vide)
@@ -270,7 +284,7 @@
         {
             $this->identifiant      = '';
             $this->pseudo           = '';
-            $this->equipe           = '';
+            $this->team             = '';
             $this->manage_calendars = '';
         }
 
@@ -279,12 +293,12 @@
         public static function withData($data)
         {
             $autorisation = new self();
-            $autorisation->fill($data);
+            $autorisation->fillWithData($data);
 
             return $autorisation;
         }
 
-        protected function fill($data)
+        protected function fillWithData($data)
         {
             if (isset($data['identifiant']))
                 $this->identifiant      = $data['identifiant'];
@@ -296,10 +310,18 @@
         // Sécurisation des données
         public static function secureData($data)
         {
-            $data->setIdentifiant(htmlspecialchars($data->getIdentifiant()));
-            $data->setPseudo(htmlspecialchars($data->getPseudo()));
-            //$data->setEquipe(htmlspecialchars($data->getEquipe()));
-            $data->setManage_calendars(htmlspecialchars($data->getManage_calendars()));
+            $autorisationCalendriers = new self();
+            $autorisationCalendriers->fillSecureData($data);
+
+            return $autorisationCalendriers;
+        }
+
+        protected function fillSecureData($data)
+        {
+            $this->identifiant      = htmlspecialchars($data->getIdentifiant());
+            $this->pseudo           = htmlspecialchars($data->getPseudo());
+            $this->team             = $data->getTeam();
+            $this->manage_calendars = htmlspecialchars($data->getManage_calendars());
         }
 
         // Getters et Setters pour l'objet AutorisationCalendriers
@@ -326,14 +348,14 @@
         }
 
         // Equipe
-        public function setEquipe($equipe)
+        public function setTeam($team)
         {
-            $this->equipe = $equipe;
+            $this->team = $team;
         }
 
-        public function getEquipe()
+        public function getTeam()
         {
-            return $this->equipe;
+            return $this->team;
         }
 
         // Autorisation gestion calendriers
@@ -365,9 +387,17 @@
         // Sécurisation des données
         public static function secureData($data)
         {
-            $data->setMonth(htmlspecialchars($data->getMonth()));
-            $data->setYear(htmlspecialchars($data->getYear()));
-            $data->setPicture(htmlspecialchars($data->getPicture()));
+            $calendarParameters = new self();
+            $calendarParameters->fillSecureData($data);
+
+            return $calendarParameters;
+        }
+
+        protected function fillSecureData($data)
+        {
+            $this->month   = htmlspecialchars($data->getMonth());
+            $this->year    = htmlspecialchars($data->getYear());
+            $this->picture = htmlspecialchars($data->getPicture());
         }
 
         // Getters et Setters pour l'objet CalendarParameters
@@ -420,8 +450,16 @@
         // Sécurisation des données
         public static function secureData($data)
         {
-            $data->setName(htmlspecialchars($data->getName()));
-            $data->setPicture(htmlspecialchars($data->getPicture()));
+            $annexeParameters = new self();
+            $annexeParameters->fillSecureData($data);
+
+            return $annexeParameters;
+        }
+
+        protected function fillSecureData($data)
+        {
+            $this->name    = htmlspecialchars($data->getName());
+            $this->picture = htmlspecialchars($data->getPicture());
         }
 
         // Getters et Setters pour l'objet AnnexeParameters

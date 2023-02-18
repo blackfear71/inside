@@ -102,13 +102,17 @@
 
             unset($equipe);
 
-            foreach ($listeAutorisationsParEquipe as $equipeAutorisations)
+            foreach ($listeAutorisationsParEquipe as &$equipeAutorisations)
             {
-                foreach ($equipeAutorisations as $autorisation)
+                foreach ($equipeAutorisations as &$autorisation)
                 {
-                    AutorisationCalendriers::secureData($autorisation);
+                    $autorisation = AutorisationCalendriers::secureData($autorisation);
                 }
+
+                unset($autorisation);
             }
+
+            unset($equipeAutorisations);
 
             foreach ($periodesVacances as &$periodeVacances)
             {
@@ -124,15 +128,19 @@
 
             unset($saisieVacances);
 
-            foreach ($listeSuppression as $calendar)
+            foreach ($listeSuppression as &$calendar)
             {
-                Calendrier::secureData($calendar);
+                $calendar = Calendrier::secureData($calendar);
             }
 
-            foreach ($listeSuppressionAnnexes as $annexe)
+            unset($calendar);
+
+            foreach ($listeSuppressionAnnexes as &$annexe)
             {
-                Annexe::secureData($annexe);
+                $annexe = Annexe::secureData($annexe);
             }
+
+            unset($annexe);
             break;
 
         case 'doUpdateAutorisations':

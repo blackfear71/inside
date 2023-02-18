@@ -31,13 +31,13 @@
       $user = physiqueDonneesUser($autorisation->getIdentifiant());
 
       $autorisation->setPseudo($user['pseudo']);
-      $autorisation->setEquipe($user['team']);
+      $autorisation->setTeam($user['team']);
 
       // Ajout de l'utilisateur à son équipe
-      if (!isset($listeAutorisationsParEquipe[$autorisation->getEquipe()]))
-        $listeAutorisationsParEquipe[$autorisation->getEquipe()] = array();
+      if (!isset($listeAutorisationsParEquipe[$autorisation->getTeam()]))
+        $listeAutorisationsParEquipe[$autorisation->getTeam()] = array();
 
-      array_push($listeAutorisationsParEquipe[$autorisation->getEquipe()], $autorisation);
+      array_push($listeAutorisationsParEquipe[$autorisation->getTeam()], $autorisation);
     }
 
     // Retour

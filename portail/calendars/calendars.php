@@ -93,11 +93,13 @@
 
             unset($mois);
 
-            foreach ($calendriers as $calendrier)
+            foreach ($calendriers as &$calendrier)
             {
-                Calendrier::secureData($calendrier);
+                $calendrier = Calendrier::secureData($calendrier);
             }
 
+            unset($calendrier);
+            
             $preferences = Preferences::secureData($preferences);
             break;
 
@@ -109,10 +111,12 @@
 
             unset($year);
 
-            foreach ($annexes as $annexe)
+            foreach ($annexes as &$annexe)
             {
-                Annexe::secureData($annexe);
+                $annexe = Annexe::secureData($annexe);
             }
+
+            unset($annexe);
 
             $preferences = Preferences::secureData($preferences);
             break;

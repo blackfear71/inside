@@ -111,7 +111,7 @@
     switch ($_GET['action'])
     {
         case 'goConsulter':
-            CalendarParameters::secureData($calendarParameters);
+            $calendarParameters = CalendarParameters::secureData($calendarParameters);
 
             if (isset($vacances) AND !empty($vacances))
             {
@@ -123,7 +123,7 @@
                 unset($jourVacances);
             }
 
-            AnnexeParameters::secureData($annexeParameters);
+            $annexeParameters = AnnexeParameters::secureData($annexeParameters);
             break;
 
         case 'doAjouter':
