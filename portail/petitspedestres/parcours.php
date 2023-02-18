@@ -83,10 +83,12 @@
     {
         case 'goConsulterListe':
             // On n'applique pas d'échappement car AngularJS le fait automatiquement dans {{ }}
-            /*foreach ($listeParcours as $parcours)
+            /*foreach ($listeParcours as &$parcours)
             {
-                Parcours::secureData($parcours);
-            }*/
+                $parcours = Parcours::secureData($parcours);
+            }
+            
+            unset($parcours);*/
 
             // Conversion JSON
             $listeParcoursJson = json_encode(convertForJsonListeParcours($listeParcours));
