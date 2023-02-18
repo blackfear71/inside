@@ -34,12 +34,12 @@
         public static function withData($data)
         {
             $bugs = new self();
-            $bugs->fill($data);
+            $bugs->fillWithData($data);
 
             return $bugs;
         }
 
-        protected function fill($data)
+        protected function fillWithData($data)
         {
             if (isset($data['id']))
                 $this->id       = $data['id'];
@@ -72,17 +72,26 @@
         // Sécurisation des données
         public static function secureData($data)
         {
-            $data->setSubject(htmlspecialchars($data->getSubject()));
-            $data->setDate(htmlspecialchars($data->getDate()));
-            $data->setAuthor(htmlspecialchars($data->getAuthor()));
-            $data->setPseudo(htmlspecialchars($data->getPseudo()));
-            $data->setAvatar(htmlspecialchars($data->getAvatar()));
-            //$data->setTeam(htmlspecialchars($data->getTeam()));
-            $data->setContent(htmlspecialchars($data->getContent()));
-            $data->setPicture(htmlspecialchars($data->getPicture()));
-            $data->getType(htmlspecialchars($data->getType()));
-            $data->getResolved(htmlspecialchars($data->getResolved()));
+            $bugs = new self();
+            $bugs->fillSecureData($data);
+
+            return $bugs;
         }
+
+        protected function fillSecureData($data)
+        {
+            $this->id       = $data->getId();
+            $this->subject  = htmlspecialchars($data->getSubject());
+            $this->date     = htmlspecialchars($data->getDate());
+            $this->author   = htmlspecialchars($data->getAuthor());
+            $this->pseudo   = htmlspecialchars($data->getPseudo());
+            $this->avatar   = htmlspecialchars($data->getAvatar());
+            $this->team     = $data->getTeam();
+            $this->content  = htmlspecialchars($data->getContent());
+            $this->picture  = htmlspecialchars($data->getPicture());
+            $this->type     = htmlspecialchars($data->getType());
+            $this->resolved = htmlspecialchars($data->getResolved());
+        }        
 
         // Getters et Setters pour l'objet BugEvolution
         // id

@@ -71,15 +71,19 @@
 
             unset($user);
 
-            foreach ($listeBugs as $bug)
+            foreach ($listeBugs as &$bug)
             {
-                BugEvolution::secureData($bug);
+                $bug = BugEvolution::secureData($bug);
             }
 
-            foreach ($listeEvolutions as $evolution)
+            unset($bug);
+
+            foreach ($listeEvolutions as &$evolution)
             {
-                BugEvolution::secureData($evolution);
+                $evolution = BugEvolution::secureData($evolution);
             }
+
+            unset($evolution);
             break;
 
         case 'doSignaler':
