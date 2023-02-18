@@ -78,6 +78,15 @@
 /*** Extraits ***/
 @font-face
 {
+    font-family: 'Montserrat';
+    src: url('/inside/includes/fonts/Montserrat/Montserrat-Regular.woff') format('woff'),
+         url('/inside/includes/fonts/Montserrat/Montserrat-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face
+{
     font-family: 'ProductSans';
     src: url('/inside/includes/fonts/ProductSans/ProductSans-Regular.woff') format('woff'),
          url('/inside/includes/fonts/ProductSans/ProductSans-Regular.ttf') format('truetype');
