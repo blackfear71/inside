@@ -39,7 +39,7 @@
 
                         foreach ($listeLieux as $lieu)
                         {
-                            if ($lieu == $_SESSION['save']['location'])
+                            if ($lieu == htmlspecialchars($_SESSION['save']['location']))
                                 echo '<option value="' . $lieu . '" selected>' . $lieu . '</option>';
                             else
                                 echo '<option value="' . $lieu . '">' . $lieu . '</option>';

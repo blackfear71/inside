@@ -28,6 +28,9 @@
         // Contrôle
         if (!empty($prix))
         {
+            // Remplacement des caractères spéciaux
+            $prix = str_replace(',', '.', htmlspecialchars($prix));
+
             if (!is_numeric($prix) OR $prix <= 0)
             {
                 $_SESSION['alerts']['wrong_price_' . $type] = true;

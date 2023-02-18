@@ -91,6 +91,8 @@
         $identifiant            = $sessionUser['identifiant'];
         $equipe                 = $sessionUser['equipe'];
         $nomRestaurant          = $post['name_restaurant'];
+        $prixMin                = $post['prix_min_restaurant'];
+        $prixMax                = $post['prix_max_restaurant'];
         $websiteRestaurant      = $post['website_restaurant'];
         $planRestaurant         = $post['plan_restaurant'];
         $lafourchetteRestaurant = $post['lafourchette_restaurant'];
@@ -101,10 +103,6 @@
         $search              = array(' ', '.');
         $replace             = array('', '');
         $telephoneRestaurant = str_replace($search, $replace, $post['phone_restaurant']);
-
-        // Formatage des prix
-        $prixMin = formatAmountForInsert($post['prix_min_restaurant']);
-        $prixMax = formatAmountForInsert($post['prix_max_restaurant']);
 
         // Remplacement des caractères pour le lieu saisi
         if ($post['location'] == 'other_location'  AND !empty($post['saisie_other_location']))
@@ -148,16 +146,16 @@
         if (isset($post['types_restaurants']))
             $_SESSION['save']['types_restaurants']     = $typesRestaurant;
 
-        // Contrôle prix min et max renseigné
-        $control_ok = controlePrixRenseignes($prixMin, $prixMax);
-
         // Contrôle prix min numérique et positif
-        if ($control_ok == true)
-            $control_ok = controlePrixNumerique($prixMin, 'min');
+        $control_ok = controlePrixNumerique($prixMin, 'min');
 
         // Contrôle prix max numérique et positif
         if ($control_ok == true)
             $control_ok = controlePrixNumerique($prixMax, 'max');
+            
+        // Contrôle prix min et max renseigné
+        if ($control_ok == true)
+            $control_ok = controlePrixRenseignes($prixMin, $prixMax);
 
         // Contrôle prix min <= prix max
         if ($control_ok == true)
@@ -252,8 +250,8 @@
                 'location'     => $lieuRestaurant,
                 'phone'        => $telephoneRestaurant,
                 'opened'       => $ouvertures,
-                'min_price'    => $prixMin,
-                'max_price'    => $prixMax,
+                'min_price'    => formatAmountForInsert($prixMin),
+                'max_price'    => formatAmountForInsert($prixMax),
                 'website'      => $websiteRestaurant,
                 'plan'         => $planRestaurant,
                 'lafourchette' => $lafourchetteRestaurant,
@@ -286,6 +284,8 @@
         // Récupération des données
         $idRestaurant           = $post['id_restaurant'];
         $nomRestaurant          = $post['update_name_restaurant_' . $idRestaurant];
+        $prixMin                = $post['update_prix_min_restaurant_' . $idRestaurant];
+        $prixMax                = $post['update_prix_max_restaurant_' . $idRestaurant];
         $websiteRestaurant      = $post['update_website_restaurant_' . $idRestaurant];
         $planRestaurant         = $post['update_plan_restaurant_' . $idRestaurant];
         $lafourchetteRestaurant = $post['update_lafourchette_restaurant_' . $idRestaurant];
@@ -296,10 +296,6 @@
         $search              = array(' ', '.');
         $replace             = array('', '');
         $telephoneRestaurant = str_replace($search, $replace, $post['update_phone_restaurant_' . $idRestaurant]);
-
-        // Formatage des prix
-        $prixMin = formatAmountForInsert($post['update_prix_min_restaurant_' . $idRestaurant]);
-        $prixMax = formatAmountForInsert($post['update_prix_max_restaurant_' . $idRestaurant]);
 
         // Remplacement des caractères pour le lieu saisi
         if ($post['update_location_' . $idRestaurant] == 'other_location' AND !empty($post['update_other_location_' . $idRestaurant]))
@@ -325,16 +321,16 @@
             }
         }
 
-        // Contrôle prix min et max renseigné
-        $control_ok = controlePrixRenseignes($prixMin, $prixMax);
-
         // Contrôle prix min numérique et positif
-        if ($control_ok == true)
-            $control_ok = controlePrixNumerique($prixMin, 'min');
+        $control_ok = controlePrixNumerique($prixMin, 'min');
 
         // Contrôle prix max numérique et positif
         if ($control_ok == true)
             $control_ok = controlePrixNumerique($prixMax, 'max');
+            
+        // Contrôle prix min et max renseigné
+        if ($control_ok == true)
+            $control_ok = controlePrixRenseignes($prixMin, $prixMax);
 
         // Contrôle prix min <= prix max
         if ($control_ok == true)
@@ -438,8 +434,8 @@
                 'location'     => $lieuRestaurant,
                 'phone'        => $telephoneRestaurant,
                 'opened'       => $ouvertures,
-                'min_price'    => $prixMin,
-                'max_price'    => $prixMax,
+                'min_price'    => formatAmountForInsert($prixMin),
+                'max_price'    => formatAmountForInsert($prixMax),
                 'website'      => $websiteRestaurant,
                 'plan'         => $planRestaurant,
                 'lafourchette' => $lafourchetteRestaurant,
