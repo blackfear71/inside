@@ -487,14 +487,14 @@
                 $message->setLogo('missions');
 
                 // Association message mission à sa session (pour les missions en cours)
-                foreach ($_SESSION['missions'] as $key_session => $ligneCurrentMission)
+                foreach ($_SESSION['missions'] as $keySession => $ligneCurrentMission)
                 {
                     foreach ($ligneCurrentMission as $ligneMission)
                     {
                         if ($mission->getId() == $ligneMission['id_mission'])
                         {
                             $idCurrentMission  = $ligneMission['id_mission'];
-                            $keyCurrentMission = $key_session;
+                            $keyCurrentMission = $keySession;
                         }
                         break;
                     }
@@ -654,5 +654,42 @@
 
         // Retour
         return $phrase;
+    }
+    
+    // METIER : Calcul le nombre de news de certaines catégories
+    // RETOUR : Tableau de nombre de news
+    function getNombreNews($tableauNews)
+    {
+        // Initialisations
+        $nombreNews = array(
+            'anniversary' => 0,
+            'movie_house' => 0,
+            'missions'    => 0
+        );
+
+        // Calcul du nombre de news concernées
+        foreach ($tableauNews as $news)
+        {
+            switch ($news->getLogo())
+            {
+                case 'anniversary':
+                    $nombreNews['anniversary']++;
+                    break;
+
+                case 'movie_house':
+                    $nombreNews['movie_house']++;
+                    break;
+                    
+                case 'missions':
+                    $nombreNews['missions']++;
+                    break;
+                                
+                default:
+                    break;
+            }
+        }
+
+        // Retour
+        return $nombreNews;
     }
 ?>

@@ -30,6 +30,9 @@
             // Récupération des news
             $news = getNews($_SESSION['user']);
 
+            // Récupération du nombre de news multiples
+            $nombreNews = getNombreNews($news);
+
             // Récupération du portail
             $portail = getPortail($preferences);
             break;

@@ -89,6 +89,9 @@
                                 {
                                     echo '<a id="bouton_' . $messageNews->getLogo() . '" class="zone_logo_news">';
                                         echo '<img src="../../includes/icons/common/' . $messageNews->getLogo() . '.png" alt="' . $messageNews->getLogo() . '" class="logo_news" />';
+
+                                        if (isset($nombreNews[$messageNews->getLogo()]) AND $nombreNews[$messageNews->getLogo()] > 1)
+                                            echo '<div class="nombre_news">' . $nombreNews[$messageNews->getLogo()] . '</div>';
                                     echo '</a>';
 
                                     $categorieNewsPrecedente = $messageNews->getLogo();
