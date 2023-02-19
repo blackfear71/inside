@@ -23,7 +23,7 @@
                     echo '<div class="empty_recherche_live">Aucun résultat n\'a été trouvé...</div>';
 
                     // Restaurants par lieu
-                    foreach ($listeRestaurants as $lieuRestaurants => $restaurantsParLieux)
+                    foreach ($listeRestaurantsResume as $lieuRestaurants => $restaurantsParLieux)
                     {
                         // Lieu
                         echo '<div class="zone_recherche_conteneur">';
