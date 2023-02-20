@@ -23,45 +23,50 @@
                     echo '<div class="empty_recherche_live">Aucun résultat n\'a été trouvé...</div>';
 
                     // Restaurants par lieu
-                    foreach ($listeRestaurantsResume as $lieuRestaurants => $restaurantsParLieux)
+                    if (!empty($listeRestaurants))
                     {
-                        // Lieu
-                        echo '<div class="zone_recherche_conteneur">';
-                            echo '<div id="titre_resume_' . formatId($lieuRestaurants) . '" class="titre_section">';
-                                echo '<img src="../../includes/icons/foodadvisor/location_grey.png" alt="location_grey" class="logo_titre_section" />';
-                                echo '<div class="texte_titre_section_fleche">' . $lieuRestaurants . '</div>';
-                                echo '<img src="../../includes/icons/common/open_grey.png" alt="open_grey" class="fleche_titre_section" />';
-                            echo '</div>';
+                        foreach ($listeRestaurantsResume as $lieuRestaurants => $restaurantsParLieux)
+                        {
+                            // Lieu
+                            echo '<div class="zone_recherche_conteneur">';
+                                echo '<div id="titre_resume_' . formatId($lieuRestaurants) . '" class="titre_section">';
+                                    echo '<img src="../../includes/icons/foodadvisor/location_grey.png" alt="location_grey" class="logo_titre_section" />';
+                                    echo '<div class="texte_titre_section_fleche">' . $lieuRestaurants . '</div>';
+                                    echo '<img src="../../includes/icons/common/open_grey.png" alt="open_grey" class="fleche_titre_section" />';
+                                echo '</div>';
 
-                            // Restaurants
-                            echo '<div id="afficher_resume_' . formatId($lieuRestaurants) . '" class="zone_recherche_contenu">';
-                                echo '<input type="hidden" name="num_jour" value="" />';
+                                // Restaurants
+                                echo '<div id="afficher_resume_' . formatId($lieuRestaurants) . '" class="zone_recherche_contenu">';
+                                    echo '<input type="hidden" name="num_jour" value="" />';
 
-                                foreach ($restaurantsParLieux as $restaurant)
-                                {
-                                    echo '<label for="resume_restaurant_' . $restaurant->getId() . '" id="label_resume_' . $restaurant->getId() . '" class="zone_recherche_item">';
-                                        echo '<div class="zone_proposition proposition_normal">';
-                                            echo '<div class="image_normal">';
-                                                // Image
-                                                if (!empty($restaurant->getPicture()))
-                                                    echo '<img src="../../includes/images/foodadvisor/' . $restaurant->getPicture() . '" alt="' . $restaurant->getPicture() . '" title="' . $restaurant->getName() . '" class="image_proposition image_rounded" />';
-                                                else
-                                                    echo '<img src="../../includes/icons/foodadvisor/restaurants.png" alt="restaurants" title="' . $restaurant->getName() . '" class="image_proposition" />';
+                                    foreach ($restaurantsParLieux as $restaurant)
+                                    {
+                                        echo '<label for="resume_restaurant_' . $restaurant->getId() . '" id="label_resume_' . $restaurant->getId() . '" class="zone_recherche_item">';
+                                            echo '<div class="zone_proposition proposition_normal">';
+                                                echo '<div class="image_normal">';
+                                                    // Image
+                                                    if (!empty($restaurant->getPicture()))
+                                                        echo '<img src="../../includes/images/foodadvisor/' . $restaurant->getPicture() . '" alt="' . $restaurant->getPicture() . '" title="' . $restaurant->getName() . '" class="image_proposition image_rounded" />';
+                                                    else
+                                                        echo '<img src="../../includes/icons/foodadvisor/restaurants.png" alt="restaurants" title="' . $restaurant->getName() . '" class="image_proposition" />';
+                                                echo '</div>';
+
+                                                // Nom restaurant
+                                                echo '<div class="nom_proposition">' . formatString($restaurant->getName(), 20) . '</div>';
+
+                                                // Radio bouton
+                                                echo '<div class="zone_checkbox_proposition">';
+                                                    echo '<input type="radio" id="resume_restaurant_' . $restaurant->getId() . '" name="" value="' . $restaurant->getId() . '" class="checkbox_proposition" required />';
+                                                echo '</div>';
                                             echo '</div>';
-
-                                            // Nom restaurant
-                                            echo '<div class="nom_proposition">' . formatString($restaurant->getName(), 20) . '</div>';
-
-                                            // Radio bouton
-                                            echo '<div class="zone_checkbox_proposition">';
-                                                echo '<input type="radio" id="resume_restaurant_' . $restaurant->getId() . '" name="" value="' . $restaurant->getId() . '" class="checkbox_proposition" required />';
-                                            echo '</div>';
-                                        echo '</div>';
-                                    echo '</label>';
-                                }
+                                        echo '</label>';
+                                    }
+                                echo '</div>';
                             echo '</div>';
-                        echo '</div>';
+                        }
                     }
+                    else
+                        echo '<div class="empty_propositions">Il n\'y a aucun restaurant disponible...</div>';
                 echo '</div>';
             echo '</div>';
 

@@ -327,6 +327,13 @@
     text-align: center;
 }
 
+.empty_propositions
+{
+    display: block;
+    line-height: 10vh;
+    text-align: center;
+}
+
 /*** Saisie propositions ***/
 .zone_checkbox_proposition
 {

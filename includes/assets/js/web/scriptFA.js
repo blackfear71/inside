@@ -693,6 +693,10 @@ function resetLiveSearch(idForm)
 
     // Affiche tous les restaurants par défaut
     $('#' + idForm).find('.zone_recherche_item').show();
+
+    // Affiche le message si vide s'il n'y a pas de restaurants
+    if ($('#' + idForm).find('.empty_propositions').length);
+        $('#' + idForm).find('.empty_propositions').show();
 }
 
 // Filtre la zone de recherche en fonction de la saisie
@@ -717,6 +721,10 @@ function liveSearch(idForm, input)
 
         // On cache le message vide
         $('#' + idForm).find('.empty_recherche_live').hide();
+
+        // Affiche le message si vide s'il n'y a pas de restaurants
+        if ($('#' + idForm).find('.empty_propositions').length);
+            $('#' + idForm).find('.empty_propositions').show();
     }
     // Sinon on filtre
     else
@@ -736,9 +744,21 @@ function liveSearch(idForm, input)
 
         // Affichage / masquage message vide
         if ($('.zone_recherche_conteneur').is(':visible'))
+        {
             $('#' + idForm).find('.empty_recherche_live').hide();
+
+            // Affiche le message si vide s'il n'y a pas de restaurants
+            if ($('#' + idForm).find('.empty_propositions').length);
+                $('#' + idForm).find('.empty_propositions').show();
+        }
         else
+        {
             $('#' + idForm).find('.empty_recherche_live').show();
+            
+            // Affiche le message si vide s'il n'y a pas de restaurants
+            if ($('#' + idForm).find('.empty_propositions').length);
+                $('#' + idForm).find('.empty_propositions').hide();
+        }
     }
 }
 
@@ -1438,10 +1458,15 @@ function afficherListboxLieuxResume(numeroJour)
         html += '<select id="' + idSelect + '" name="select_lieu_resume_' + numeroJour + '" class="listbox_choix_resume afficherRestaurantResume" required>';
             html += '<option value="" hidden>Choisissez...</option>';
 
-            $.each(listeLieuxResume, function (key, value)
+            if (listeLieuxResume.length > 0)
             {
-                html += '<option value="' + value + '">' + value + '</option>';
-            });
+                $.each(listeLieuxResume, function (key, value)
+                {
+                    html += '<option value="' + value + '">' + value + '</option>';
+                });
+            }
+            else
+                html += '<option value="" disabled>Aucun choix disponible</option>';
         html += '</select>';
 
         html += '<a id="' + idAnnuler + '" class="bouton_annuler_resume annulerLieuResume">Annuler</a>';

@@ -507,6 +507,17 @@
     text-align: center;
 }
 
+.empty_propositions
+{
+    display: block;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    font-family: inside_font_light, Verdana, sans-serif;
+    color: #262626;
+    font-size: 150%;
+    text-align: center;
+}
+
 /*** Détails proposition ***/
 .zone_details_proposition
 {
