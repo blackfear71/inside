@@ -23,7 +23,7 @@
                     echo '<div class="empty_recherche_live">Aucun résultat n\'a été trouvé...</div>';
 
                     // Restaurants par lieu
-                    if (!empty($listeRestaurants))
+                    if (!empty($listeRestaurantsResume))
                     {
                         foreach ($listeRestaurantsResume as $lieuRestaurants => $restaurantsParLieux)
                         {
