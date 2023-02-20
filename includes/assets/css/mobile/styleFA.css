@@ -392,6 +392,22 @@
     word-break: break-word;
 }
 
+.fond_plus_resume
+{
+    display: inline-block;
+    margin-left: 0.5vh;
+    margin-top: 0.5vh;
+    width: 5vh;
+    height: 5vh;
+    background-color: #70d55d;
+    border-radius: 50%;
+    font-family: inside_font_light, Verdana, sans-serif;
+    color: white;
+    font-size: 150%;
+    text-align: center;
+    line-height: 5vh;
+}
+
 .no_proposal
 {
     display: inline-block;

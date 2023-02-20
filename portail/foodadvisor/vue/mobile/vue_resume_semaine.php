@@ -58,7 +58,12 @@
                             echo '<div class="zone_resume_jour">' . formatDayForDisplayLight($jour) . '</div>';
 
                             // Choix absent
-                            echo '<div class="no_proposal">Pas de proposition pour ce jour...</div>';
+                            echo '<div class="nom_resume">Ajouter un choix</div>';
+
+                            // Symbole ajout
+                            echo '<div class="caller_normal">';
+                                echo '<span class="fond_plus_resume">+</span>';
+                            echo '</div>';
                         echo '</a>';
                     }
                     else
