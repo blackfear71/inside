@@ -73,7 +73,7 @@
             foreach ($listeLogs as $log)
             {
                 // Extraction des logs
-                $extractLogs = explode(';', $log->getLogs());
+                $extractLogs = array_filter(explode(';', $log->getLogs()));
 
                 // Tri des logs par catégories
                 $sortedLogs = array();
@@ -82,21 +82,16 @@
                 {
                     foreach ($extractLogs as $keyExtract => $extractedLog)
                     {
-                        if (!empty($extractedLog))
+                        list($entryExtracted, $categoryExtracted) = explode('@', $extractedLog);
+
+                        if ($categoryExtracted == $categorie)
                         {
-                            list($entryExtracted, $categoryExtracted) = explode('@', $extractedLog);
+                            if (!isset($sortedLogs[$categorie]))
+                                $sortedLogs[$categorie] = array();
 
-                            if ($categoryExtracted == $categorie)
-                            {
-                                if (!isset($sortedLogs[$categorie]))
-                                    $sortedLogs[$categorie] = array();
-
-                                array_push($sortedLogs[$categorie], $entryExtracted);
-                                unset($extractLogs[$keyExtract]);
-                            }
-                        }
-                        else
+                            array_push($sortedLogs[$categorie], $entryExtracted);
                             unset($extractLogs[$keyExtract]);
+                        }
                     }
                 }
 

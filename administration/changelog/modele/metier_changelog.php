@@ -102,7 +102,7 @@
         $changelog = physiqueChangelog($year, $week);
 
         // Extraction des logs
-        $extractLogs = explode(';', $changelog->getLogs());
+        $extractLogs = array_filter(explode(';', $changelog->getLogs()));
 
         // Tri par catégories
         $sortedLogs = array();
@@ -111,21 +111,16 @@
         {
             foreach ($extractLogs as $keyExtract => $extractedLog)
             {
-                if (!empty($extractedLog))
+                list($entryExtracted, $categoryExtracted) = explode('@', $extractedLog);
+
+                if ($categoryExtracted == $categorie)
                 {
-                    list($entryExtracted, $categoryExtracted) = explode('@', $extractedLog);
+                    if (!isset($sortedLogs[$categorie]))
+                        $sortedLogs[$categorie] = array();
 
-                    if ($categoryExtracted == $categorie)
-                    {
-                        if (!isset($sortedLogs[$categorie]))
-                            $sortedLogs[$categorie] = array();
-
-                        array_push($sortedLogs[$categorie], $entryExtracted);
-                        unset($extractLogs[$keyExtract]);
-                    }
-                }
-                else
+                    array_push($sortedLogs[$categorie], $entryExtracted);
                     unset($extractLogs[$keyExtract]);
+                }
             }
         }
 
