@@ -47,7 +47,7 @@
             ),
             array(
                 'categorie' => 'LES ENFANTS !<br />À TABLE !',
-                'lien'      => '../foodadvisor/foodadvisor.php?action=goConsulter',
+                'lien'      => '../foodadvisor/foodadvisor.php?date=' . date('Ymd') . '&action=goConsulter',
                 'title'     => 'Les enfants ! À table !',
                 'image'     => '../../includes/icons/common/food_advisor.png',
                 'alt'       => 'food_advisor',
@@ -208,7 +208,7 @@
             $news->setTitle('Où aller manger à midi ?');
             $news->setDetails('');
             $news->setLogo('food_advisor');
-            $news->setLink('/inside/portail/foodadvisor/foodadvisor.php?action=goConsulter');
+            $news->setLink('/inside/portail/foodadvisor/foodadvisor.php?date=' . date('Ymd') . '&action=goConsulter');
 
             // Récupération Id restaurant réservé
             $idRestaurant = physiqueRestaurantReserved($equipe);

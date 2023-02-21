@@ -1,4 +1,19 @@
 <?php
+    // CONTROLE : Date valide
+    // RETOUR : Booléen
+    function controleDateValide($date)
+    {
+        // Initialisations
+        $control_ok = true;
+
+        // Contrôle
+        if (validateDate($date) != true)
+            $control_ok = false;
+
+        // Retour
+        return $control_ok;
+    }
+
     // CONTROLE : Déjà bande à part
     // RETOUR : Booléen
     function controleAlreadySolo($isSolo)
@@ -67,6 +82,24 @@
         {
             $_SESSION['alerts']['already_resume'] = true;
             $control_ok                           = false;
+        }
+
+        // Retour
+        return $control_ok;
+    }
+
+    // CONTROLE : Date de détermination
+    // RETOUR : Booléen
+    function controleDateDetermination($date)
+    {
+        // Initialisations
+        $control_ok = true;
+
+        // Contrôle
+        if ($date != date('Ymd'))
+        {
+            $_SESSION['alerts']['determination_date'] = true;
+            $control_ok                               = false;
         }
 
         // Retour

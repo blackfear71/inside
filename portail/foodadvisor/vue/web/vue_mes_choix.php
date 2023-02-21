@@ -7,13 +7,22 @@
         echo '<img src="../../includes/icons/foodadvisor/menu_grey.png" alt="menu_grey" class="logo_titre_section" />';
 
         echo '<div class="texte_titre_section">';
-            echo 'Mes choix du jour';
+            if ($_GET['date'] == date('Ymd'))
+                echo 'Mes choix du jour';
+            else
+            {
+                if (substr($_GET['date'], 0, 4) == date('Y'))
+                    echo 'Mes choix du ' . formatDateForDisplayLight($_GET['date']);
+                else
+                    echo 'Mes choix du ' . formatDateForDisplay($_GET['date']);
+            }
 
             echo '<div class="zone_actions_propositions">';
                 // Supprimer tous les choix
                 if ($actions['supprimer_choix'] == true)
                 {
                     echo '<form method="post" id="delete_choices" action="foodadvisor.php?action=doSupprimerChoix" class="form_action_propositions">';
+                        echo '<input type="hidden" name="date" value="' . $_GET['date'] . '" />';
                         echo '<input type="submit" name="delete_choices" value="Supprimer tous mes choix" class="bouton_determination eventConfirm" />';
                         echo '<input type="hidden" value="Supprimer tous les choix saisis ?" class="eventMessage" />';
                     echo '</form>';
@@ -35,6 +44,7 @@
 
                         // Suppression
                         echo '<form method="post" action="foodadvisor.php?action=doSupprimerSolo">';
+                            echo '<input type="hidden" name="date" value="' . $_GET['date'] . '" />';
                             echo '<input type="submit" name="delete_solo" value="Ne plus faire bande à part" class="bouton_delete_solo" />';
                         echo '</form>';
                     echo '</div>';
@@ -42,7 +52,10 @@
                 else
                 {
                     echo '<div class="zone_proposition">';
-                        echo '<div class="titre_solo_choix">Vous avez choisi de faire bande à part aujourd\'hui.</div>';
+                        if ($_GET['date'] == date('Ymd'))
+                            echo '<div class="titre_solo_choix">Vous avez choisi de faire bande à part aujourd\'hui.</div>';
+                        else
+                            echo '<div class="titre_solo_choix">Vous avez choisi de faire bande à part ce jour.</div>';
                     echo '</div>';
                 }
             }
@@ -63,6 +76,7 @@
                             // Suppression
                             echo '<form id="delete_choice_' . $monChoix->getId() . '" method="post" action="foodadvisor.php?action=doSupprimer">';
                                 echo '<input type="hidden" name="id_choix" value="' . $monChoix->getId() . '" />';
+                                echo '<input type="hidden" name="date" value="' . $_GET['date'] . '" />';
                                 echo '<input type="submit" name="delete_choice" value="" title="Supprimer le choix" class="icon_delete_choix eventConfirm" />';
                                 echo '<input type="hidden" value="Supprimer ce choix ?" class="eventMessage" />';
                             echo '</form>';
@@ -83,19 +97,16 @@
                         echo '<div class="zone_icones_mon_choix">';
                             // Jours d'ouverture
                             echo '<div class="zone_ouverture_mes_choix">';
-                                $explodedOpened = explode(';', $monChoix->getOpened());
+                                $explodedOpened = array_filter(explode(';', $monChoix->getOpened()));
                                 $semaineShort   = array('Lu', 'Ma', 'Me', 'Je', 'Ve');
                                 $i              = 0;
 
                                 foreach ($explodedOpened as $opened)
                                 {
-                                    if (!empty($opened))
-                                    {
-                                        if ($opened == 'Y')
-                                            echo '<div class="jour_oui_fa">' . $semaineShort[$i] . '</div>';
-                                        else
-                                            echo '<div class="jour_non_fa">' . $semaineShort[$i] . '</div>';
-                                    }
+                                    if ($opened == 'Y')
+                                        echo '<div class="jour_oui_fa">' . $semaineShort[$i] . '</div>';
+                                    else
+                                        echo '<div class="jour_non_fa">' . $semaineShort[$i] . '</div>';
 
                                     $i++;
                                 }
@@ -111,7 +122,7 @@
                             // Moyens de transport
                             if (!empty($monChoix->getTransports()))
                             {
-                                $explodedTransports = explode(';', $monChoix->getTransports());
+                                $explodedTransports = array_filter(explode(';', $monChoix->getTransports()));
 
                                 echo '<div class="zone_transports_mes_choix">';
                                     foreach ($explodedTransports as $transport)
@@ -185,6 +196,7 @@
                         echo '<div class="zone_proposition" id="modifier_choix_' . $monChoix->getId() . '" style="display: none;">';
                             echo '<form method="post" action="foodadvisor.php?action=doModifier">';
                                 echo '<input type="hidden" name="id_choix" value="' . $monChoix->getId() . '" />';
+                                echo '<input type="hidden" name="date" value="' . $_GET['date'] . '" />';
 
                                 // Validation modification
                                 echo '<input type="submit" name="update_choix_' . $monChoix->getId() . '" value="" title="Valider" class="icon_validate_choix" />';
@@ -262,11 +274,11 @@
                                     }
 
                                     // Moyens de transport
-                                    $explodedTransports = explode(';', $monChoix->getTransports());
-                                    $feet = false;
-                                    $bike = false;
-                                    $tram = false;
-                                    $car  = false;
+                                    $explodedTransports = array_filter(explode(';', $monChoix->getTransports()));
+                                    $feet               = false;
+                                    $bike               = false;
+                                    $tram               = false;
+                                    $car                = false;
 
                                     foreach ($explodedTransports as $transport)
                                     {
@@ -375,5 +387,17 @@
         echo '</div>';
     }
     else
-        echo '<div class="empty">Pas de choix encore saisis pour aujourd\'hui...</div>';
+    {
+        if ($_GET['date'] == date('Ymd'))
+        {
+            if (date('H') >= 13)
+                echo '<div class="empty">Pas de choix saisis pour aujourd\'hui...</div>';
+            else
+                echo '<div class="empty">Pas de choix encore saisis pour aujourd\'hui...</div>';
+        }
+        elseif ($_GET['date'] < date('Ymd'))
+            echo '<div class="empty">Pas de choix saisis pour ce jour...</div>';
+        else
+            echo '<div class="empty">Pas de choix encore saisis pour ce jour...</div>';
+    }
 ?>

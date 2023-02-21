@@ -88,17 +88,20 @@
                     /* Propositions, choix et résumé de la semaine */
                     /***********************************************/
                     echo '<div class="zone_propositions_determination">';
-                    // Utilisateurs
-                    include('vue/web/vue_utilisateurs.php');
+                        // Jours de la semaine
+                        include('vue/web/vue_jours.php');
 
-                    // Propositions
-                    include('vue/web/vue_propositions.php');
+                        // Utilisateurs
+                        include('vue/web/vue_utilisateurs.php');
 
-                    // Mes choix
-                    include('vue/web/vue_mes_choix.php');
+                        // Propositions
+                        include('vue/web/vue_propositions.php');
 
-                    // Résumé de la semaine
-                    include('vue/web/vue_resume_semaine.php');
+                        // Mes choix
+                        include('vue/web/vue_mes_choix.php');
+
+                        // Résumé de la semaine
+                        include('vue/web/vue_resume_semaine.php');
                     echo '</div>';
                 ?>
             </article>

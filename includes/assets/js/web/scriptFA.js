@@ -218,22 +218,22 @@ $(function ()
     // Affiche la saisie lieu restaurant (résumé)
     $('.afficherResume').click(function ()
     {
-        var idBouton   = $(this).attr('id');
-        var numeroJour = $(this).attr('id').replace('choix_resume_', '');
+        var idBouton = $(this).attr('id');
+        var date     = $(this).attr('id').replace('choix_resume_', '');
 
         afficherMasquerIdNoDelay(idBouton);
-        afficherListboxLieuxResume(numeroJour);
+        afficherListboxLieuxResume(date);
     });
 
     // Masque la saisie lieu restaurant
     $(document).on('click', '.annulerLieuResume', function ()
     {
-        var idAnnuler  = $(this).attr('id');
-        var numeroJour = $(this).attr('id').replace('annuler_restaurant_resume_', '');
-        var idValider  = 'valider_restaurant_resume_' + numeroJour;
-        var idZone     = 'zone_listbox_resume_' + numeroJour;
+        var idAnnuler = $(this).attr('id');
+        var date      = $(this).attr('id').replace('annuler_restaurant_resume_', '');
+        var idValider = 'valider_restaurant_resume_' + date;
+        var idZone    = 'zone_listbox_resume_' + date;
 
-        cacherListboxRestaurantsResume(numeroJour, idZone, idValider, idAnnuler);
+        cacherListboxRestaurantsResume(date, idZone, idValider, idAnnuler);
     });
 
     // Affiche la saisie de restaurant
@@ -412,9 +412,9 @@ $(function ()
     // Affiche la saisie restaurant liée au lieu (résumé)
     $(document).on('change', '.afficherRestaurantResume', function ()
     {
-        var numeroJour = $(this).attr('id').replace('select_lieu_resume_', '');
+        var date = $(this).attr('id').replace('select_lieu_resume_', '');
 
-        afficherListboxRestaurantsResume(numeroJour, 'select_lieu_resume_' + numeroJour, 'zone_listbox_resume_' + numeroJour);
+        afficherListboxRestaurantsResume(date, 'select_lieu_resume_' + date, 'zone_listbox_resume_' + date);
     });
 
     // Change la couleur du type à la saisie restaurant
@@ -645,29 +645,40 @@ function tailleAutoZones()
 {
     // Taille des zones de résumé en fonction de la plus grande
     var buttonHeight;
-    var dayHeight     = $('.jour_semaine').height();
-    var textHeight    = $('.no_proposal').height();
-    var maxHeight     = Math.max($('#zone_resume_lundi').height(), $('#zone_resume_mardi').height(), $('#zone_resume_mercredi').height(), $('#zone_resume_jeudi').height(), $('#zone_resume_vendredi').height());
-    var calculPadding = (maxHeight - (dayHeight + textHeight + 20)) / 2;
     var calculPaddingNoProposal;
+    var dayHeight  = $('.jour_semaine_resume').height();
+    var textHeight = $('.no_proposal').height();
+
+    // Hauteur maximale et calcul du padding
+    var heights = [];
+
+    $('.zone_proposition_resume').each(function ()
+    {
+        heights.push($(this).height());
+    });
+
+    var maxHeight     = Math.max.apply(null, heights);
+    var calculPadding = (maxHeight - (dayHeight + textHeight + 20)) / 2;
 
     // Cas si ajout choix résumé présent
-    for (var i = 1; i <= 5; i++)
+    $('.zone_proposition_resume > .no_proposal').each(function ()
     {
-        if ($('#choix_resume_' + i).length)
+        var dateResume = this.id.replace('no_proposal_', '');
+
+        if ($('#choix_resume_' + dateResume).length)
         {
-            buttonHeight            = $('#choix_resume_' + i).height();
+            buttonHeight            = $('#choix_resume_' + dateResume).height();
             calculPaddingNoProposal = calculPadding - ((buttonHeight + 20) / 2);
 
-            $('#no_proposal_' + i).css('padding-top', calculPaddingNoProposal);
-            $('#no_proposal_' + i).css('padding-bottom', calculPaddingNoProposal);
+            $('#no_proposal_' + dateResume).css('padding-top', calculPaddingNoProposal);
+            $('#no_proposal_' + dateResume).css('padding-bottom', calculPaddingNoProposal);
         }
         else
         {
-            $('#no_proposal_' + i).css('padding-top', calculPadding);
-            $('#no_proposal_' + i).css('padding-bottom', calculPadding);
+            $('#no_proposal_' + dateResume).css('padding-top', calculPadding);
+            $('#no_proposal_' + dateResume).css('padding-bottom', calculPadding);
         }
-    }
+    });
 
     $('.zone_proposition_resume').css('min-height', maxHeight);
 }
@@ -1018,9 +1029,15 @@ function showDetails(zone, id)
     // Nom du restaurant
     $('#nom_details_proposition').html(details['name']);
 
-    // Jours d'ouverture
+    // Détermination du jour de la semaine
+    var jour  = $_GET('date').substr(6, 2);
+    var mois  = $_GET('date').substr(4, 2) - 1;
+    var annee = $_GET('date').substr(0, 4);
+
+    var dateJour = new Date(annee, mois, jour);
+
+    // Jours d'ouverture (en fonction de la date sélectionnée)
     var opened       = details['opened'].split(';');
-    var dateDuJour   = new Date();
     var availableDay = true;
 
     $.each(opened, function (key, value)
@@ -1032,7 +1049,7 @@ function showDetails(zone, id)
             else
                 $('#jour_details_proposition_' + key).addClass('jour_non_fa');
 
-            if (dateDuJour.getDay() == key + 1 && value == 'N')
+            if (dateJour.getDay() == key + 1 && value == 'N')
                 availableDay = false;
         }
     });
@@ -1443,19 +1460,19 @@ function showDetails(zone, id)
 }
 
 // Affiche la listbox des lieux (résumé)
-function afficherListboxLieuxResume(numeroJour)
+function afficherListboxLieuxResume(date)
 {
-    var idZone    = 'zone_listbox_resume_' + numeroJour;
-    var idSelect  = 'select_lieu_resume_' + numeroJour;
-    var idAnnuler = 'annuler_restaurant_resume_' + numeroJour;
-    var idReplace = 'no_proposal_' + numeroJour;
-    var idBouton  = 'choix_resume_' + numeroJour;
+    var idZone    = 'zone_listbox_resume_' + date;
+    var idSelect  = 'select_lieu_resume_' + date;
+    var idAnnuler = 'annuler_restaurant_resume_' + date;
+    var idReplace = 'no_proposal_' + date;
+    var idBouton  = 'choix_resume_' + date;
     var html      = '';
 
     var previousHeight = $('#' + idReplace).outerHeight() + $('#' + idBouton).height() + 20;
 
     html += '<div id="' + idZone + '" class="zone_listbox_restaurant_resume">';
-        html += '<select id="' + idSelect + '" name="select_lieu_resume_' + numeroJour + '" class="listbox_choix_resume afficherRestaurantResume" required>';
+        html += '<select id="' + idSelect + '" name="select_lieu_resume_' + date + '" class="listbox_choix_resume afficherRestaurantResume" required>';
             html += '<option value="" hidden>Choisissez...</option>';
 
             if (listeLieuxResume.length > 0)
@@ -1483,13 +1500,13 @@ function afficherListboxLieuxResume(numeroJour)
 }
 
 // Affiche la listbox des restaurants associés (résumé)
-function afficherListboxRestaurantsResume(numeroJour, idSelect, zone)
+function afficherListboxRestaurantsResume(date, idSelect, zone)
 {
     var lieu      = escapeHtml($('#' + idSelect).val());
-    var idSelect2 = 'select_restaurant_resume_' + numeroJour;
-    var idReplace = 'no_proposal_' + numeroJour;
-    var idValider = 'valider_restaurant_resume_' + numeroJour;
-    var idAnnuler = 'annuler_restaurant_resume_' + numeroJour;
+    var idSelect2 = 'select_restaurant_resume_' + date;
+    var idReplace = 'no_proposal_' + date;
+    var idValider = 'valider_restaurant_resume_' + date;
+    var idAnnuler = 'annuler_restaurant_resume_' + date;
     var html      = '';
 
     var previousHeight = $('#' + idReplace).outerHeight();
@@ -1501,7 +1518,7 @@ function afficherListboxRestaurantsResume(numeroJour, idSelect, zone)
         $('#' + idAnnuler).remove();
 
     html += '<form id="' + idValider + '" method="post" action="foodadvisor.php?action=doAjouterResume">';
-        html += '<select id="' + idSelect2 + '" name="select_restaurant_resume_' + numeroJour + '" class="listbox_choix_resume" required>';
+        html += '<select id="' + idSelect2 + '" name="' + idSelect2 + '" class="listbox_choix_resume" required>';
             html += '<option value="" hidden>Choisissez...</option>';
 
             $.each(listeRestaurantsResume[lieu], function (key, value)
@@ -1510,7 +1527,8 @@ function afficherListboxRestaurantsResume(numeroJour, idSelect, zone)
             });
         html += '</select>';
 
-        html += '<input type="hidden" name="num_jour" value="' + numeroJour + '" />';
+        html += '<input type="hidden" name="date_resume" value="' + date + '" />';
+        html += '<input type="hidden" name="date" value="' + $_GET('date') + '" />';
         html += '<input type="submit" name="submit_resume" value="Valider" class="bouton_valider_resume" />';
     html += '</form>';
 
@@ -1527,23 +1545,23 @@ function afficherListboxRestaurantsResume(numeroJour, idSelect, zone)
 }
 
 // Cache les lisbox des restaurants (résumé)
-function cacherListboxRestaurantsResume(numeroJour, zone, boutonValider, boutonAnnuler)
+function cacherListboxRestaurantsResume(date, zone, boutonValider, boutonAnnuler)
 {
-    var previousHeight = $('#no_proposal_' + numeroJour).outerHeight();
+    var previousHeight = $('#no_proposal_' + date).outerHeight();
 
     $('#' + zone).remove();
     $('#' + boutonValider).remove();
     $('#' + boutonAnnuler).remove();
-    $('#no_proposal_' + numeroJour).html('Pas de proposition pour ce jour');
+    $('#no_proposal_' + date).html('Pas de proposition pour ce jour');
 
-    $('#choix_resume_' + numeroJour).css('display', 'block');
+    $('#choix_resume_' + date).css('display', 'block');
 
     // Calcul marges en fonction des éléments
-    var textHeight = $('#no_proposal_' + numeroJour).height() + $('#choix_resume_' + numeroJour).height() + 20;
+    var textHeight = $('#no_proposal_' + date).height() + $('#choix_resume_' + date).height() + 20;
     var newPadding = (previousHeight - textHeight) / 2;
 
-    $('#no_proposal_' + numeroJour).css('padding-top', newPadding);
-    $('#no_proposal_' + numeroJour).css('padding-bottom', newPadding);
+    $('#no_proposal_' + date).css('padding-top', newPadding);
+    $('#no_proposal_' + date).css('padding-bottom', newPadding);
 }
 
 // Change la couleur des types de restaurants (saisie et modification restaurant)

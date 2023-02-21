@@ -42,12 +42,11 @@
         $stringTypes = physiqueTypesRestaurants($equipe);
 
         // Extraction sous forme de tableau
-        $explodedTypes = explode(';', $stringTypes);
+        $explodedTypes = array_filter(explode(';', $stringTypes));
 
         foreach ($explodedTypes as $exploded)
         {
-            if (!empty($exploded))
-                array_push($listeTypes, $exploded);
+            array_push($listeTypes, $exploded);
         }
 
         // Suppression des doublons
@@ -67,7 +66,7 @@
         // Initialisations
         $choixRapide = true;
 
-        // Détermination actions en fnction de la date et de l'heure
+        // Détermination actions en fonction de la date et de l'heure
         if (date('N') > 5 OR date('H') >= 13)
             $choixRapide = false;
 
@@ -492,7 +491,7 @@
             foreach ($restaurantsParLieux as $restaurant)
             {
                 // Formatage des types
-                $explodedTypes = explode(';', $restaurant->getTypes());
+                $explodedTypes = array_filter(explode(';', $restaurant->getTypes()));
 
                 foreach ($explodedTypes as $keyType => $type)
                 {

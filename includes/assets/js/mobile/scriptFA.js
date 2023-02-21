@@ -58,9 +58,9 @@ $(function () {
     // Ouvre la zone de saisie de résumé
     $('.afficherSaisieResume').click(function ()
     {
-        var numJour = $(this).attr('id').replace('jour_saisie_resume_', '');
+        var date = $(this).attr('id').replace('jour_saisie_resume_', '');
 
-        initialisationResume('zone_saisie_resume', numJour);
+        initialisationResume('zone_saisie_resume', date);
     });
 
     // Ferme la zone de saisie de résumé
@@ -435,8 +435,14 @@ function showDetailsProposition(idProposition)
 
     $('.nombre_participants_details').html(nombreParticipants);
 
-    // Jours d'ouverture
-    var dateDuJour   = new Date();
+    // Détermination du jour de la semaine
+    var jour  = $_GET('date').substr(6, 2);
+    var mois  = $_GET('date').substr(4, 2) - 1;
+    var annee = $_GET('date').substr(0, 4);
+
+    var dateJour = new Date(annee, mois, jour);
+
+    // Jours d'ouverture (en fonction de la date sélectionnée)
     var availableDay = true;
 
     $.each(opened, function (key, value)
@@ -454,7 +460,7 @@ function showDetailsProposition(idProposition)
                 $('#jour_details_' + key).removeClass('jour_oui_details');
             }
 
-            if (dateDuJour.getDay() == key + 1 && value == 'N')
+            if (dateJour.getDay() == key + 1 && value == 'N')
                 availableDay = false;
         }
     });
@@ -734,18 +740,26 @@ function showDetailsProposition(idProposition)
     });
 }
 
-function initialisationResume(idForm, numJour)
+// Initialise la saisie d'un résumé
+function initialisationResume(idForm, date)
 {
     // Initialisations
     var days = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi'];
 
+    // Détermination du jour de la semaine
+    var jour  = date.substr(6, 2);
+    var mois  = date.substr(4, 2) - 1;
+    var annee = date.substr(0, 4);
+
+    var jourSemaine = new Date(annee, mois, jour).getDay();
+
     // Modification du formulaire
-    $('#' + idForm).find('.zone_titre_saisie').html('Choix du ' + days[numJour - 1]);
-    $('#' + idForm).find('input[name=num_jour]').val(numJour);
+    $('#' + idForm).find('.zone_titre_saisie').html('Choix du ' + days[jourSemaine - 1]);
+    $('#' + idForm).find('input[name=date_resume]').val(date);
 
     $('#' + idForm).find('.zone_checkbox_proposition > input[type=radio]').each(function ()
     {
-        $(this).attr('name', 'select_restaurant_resume_' + numJour);
+        $(this).attr('name', 'select_restaurant_resume_' + date);
     });
 
     // Affichage de la zone de saisie
@@ -784,7 +798,7 @@ function showDetailsRestaurant(idRestaurant)
         $('.image_details').removeClass('image_rounded');
     }
 
-    // Jours d'ouverture
+    // Jours d'ouverture (la saisie rapide sur les restaurants n'est disponible qu'à la date du jour)
     var dateDuJour   = new Date();
     var availableDay = true;
 

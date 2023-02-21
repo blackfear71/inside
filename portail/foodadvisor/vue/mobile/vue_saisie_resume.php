@@ -37,8 +37,9 @@
 
                                 // Restaurants
                                 echo '<div id="afficher_resume_' . formatId($lieuRestaurants) . '" class="zone_recherche_contenu">';
-                                    echo '<input type="hidden" name="num_jour" value="" />';
-
+                                    echo '<input type="hidden" name="date_resume" value="" />';
+                                    echo '<input type="hidden" name="date" value="' . $_GET['date'] . '" />';
+                                    
                                     foreach ($restaurantsParLieux as $restaurant)
                                     {
                                         echo '<label for="resume_restaurant_' . $restaurant->getId() . '" id="label_resume_' . $restaurant->getId() . '" class="zone_recherche_item">';

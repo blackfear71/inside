@@ -110,6 +110,83 @@
     transition: transform 0.2s ease;
 }
 
+/*** Jours de la semaine ***/
+.zone_jours_semaine_propositions
+{
+    display: block;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.lien_semaine_precedente
+{
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 10px;
+    width: 32px;
+    height: 32px;
+    background-image: url("/inside/includes/icons/common/open_grey.png");
+    background-size: 25px 25px;
+    background-repeat: no-repeat;
+    background-position: center;
+    transform: rotate(90deg);
+}
+
+.lien_semaine_suivante
+{
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 10px;
+    width: 32px;
+    height: 32px;
+    background-image: url("/inside/includes/icons/common/open_grey.png");
+    background-size: 25px 25px;
+    background-repeat: no-repeat;
+    background-position: center;
+    transform: rotate(-90deg);
+}
+
+.jour_semaine_propositions
+{
+    flex-grow: 0;
+    display: inline-block;
+    vertical-align: middle;
+    width: calc((100% / 5) - 30px - (84px / 5));
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+    box-shadow: 0 0 3px #7c7c7c;
+    border-radius: 2px;
+    font-family: inside_font_regular, Verdana, sans-serif;
+    text-align: center;
+    line-height: 32px;
+}
+
+.jour_semaine_date
+{
+    background-color: #ff1937;
+    color: white;
+}
+
+.jour_semaine_selectionne
+{
+    background-color: #262626;
+    color: white;
+}
+
+.jour_semaine_autre
+{
+    background-color: #e3e3e3;
+    color: #262626;
+}
+
+.jour_semaine_propositions:hover
+{
+    background-color: #262626;
+    color: white;
+}
+
 /*** Saisie propositions ***/
 .zone_saisie_propositions
 {
@@ -1193,6 +1270,8 @@
 
 .bouton_reserver
 {
+    padding-left: 10px;
+    padding-right: 10px;
     background-color: white;
     text-align: center;
     line-height: 32px;
@@ -1207,6 +1286,8 @@
 
 .bouton_reserver_details
 {
+    padding-left: 10px;
+    padding-right: 10px;
     background-color: #d3d3d3;
     text-align: center;
     line-height: 32px;
@@ -1598,16 +1679,11 @@
     border-top: solid 1px #c3c3c3;
 }
 
-.jour_semaine
+.jour_semaine_resume
 {
     font-family: inside_font_light, Verdana, sans-serif;
     color: #a3a3a3;
     margin-top: 10px;
-}
-
-.jour_semaine::first-letter
-{
-    text-transform: uppercase;
 }
 
 .no_proposal
@@ -1624,7 +1700,7 @@
 {
     float: right;
     margin-left: -35px;
-    margin-top: -25px;
+    margin-top: 5px;
     width: 30px;
     height: 30px;
     border: 0;

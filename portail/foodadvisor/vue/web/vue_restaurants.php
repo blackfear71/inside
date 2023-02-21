@@ -57,7 +57,7 @@
                         echo '</a>';
 
                         // Les propositions
-                        echo '<a href="foodadvisor.php?action=goConsulter" title="Les propositions" class="lien_categorie">';
+                        echo '<a href="foodadvisor.php?date=' . date('Ymd') . '&action=goConsulter" title="Les propositions" class="lien_categorie">';
                             echo '<div class="zone_logo_lien"><img src="../../includes/icons/common/food_advisor.png" alt="food_advisor" class="image_lien" /></div>';
                             echo '<div class="zone_texte_lien">Les propositions</div>';
                         echo '</a>';

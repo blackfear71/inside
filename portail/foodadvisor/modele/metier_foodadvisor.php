@@ -1,25 +1,112 @@
-<?php
+<?php    
+    // METIER : Contrôle date valide
+    // RETOUR : Booléen
+    function controlDateValide($date)
+    {
+        // Initialisations
+        $erreurDate = false;
+
+        // Vérification date du jour
+        $control_ok = controleDateValide($date);
+
+        if ($control_ok == false)
+            $erreurDate = true;
+
+        // Retour
+        return $erreurDate;
+    }
+
+    // METIER : Récupération des jours de la semaine en fonction de la date
+    // RETOUR : Tableau des jours
+    function getJoursSemaine($date)
+    {
+        // Initialisations
+        $joursSemaine = array();
+
+        // Calcul des dates de la semaine
+        $nombreJoursLundi    = 1 - date('N', strtotime($date));
+        $nombreJoursVendredi = 5 - date('N', strtotime($date));
+        $lundi               = date('Ymd', strtotime($date . '+' . $nombreJoursLundi . ' days'));
+        $vendredi            = date('Ymd', strtotime($date . '+' . $nombreJoursVendredi . ' days'));
+
+        for ($i = $lundi; $i <= $vendredi; $i = date('Ymd', strtotime($i . ' + 1 days')))
+        {
+            // Formatage de la date
+            $dateWeb    = '';
+            $dateMobile = '';
+
+            switch (date('N', strtotime($i)))
+            {
+                case 1:
+                    $dateWeb    = 'Lundi';
+                    $dateMobile = 'Lu';
+                    break;
+
+                case 2:
+                    $dateWeb    = 'Mardi';
+                    $dateMobile = 'Ma';
+                    break;
+
+                case 3:
+                    $dateWeb    = 'Mercredi';
+                    $dateMobile = 'Me';
+                    break;
+
+                case 4:
+                    $dateWeb    = 'Jeudi';
+                    $dateMobile = 'Je';
+                    break;
+
+                case 5:
+                    $dateWeb    = 'Vendredi';
+                    $dateMobile = 'Ve';
+                    break;
+
+                default:
+                    break;
+            }
+
+            // Ajout du jour au tableau
+            if (!empty($dateWeb) AND !empty($dateMobile))
+            {
+                $jourCourant = array(
+                    'date'   => $i,
+                    'web'    => $dateWeb,
+                    'mobile' => $dateMobile
+                );
+    
+                array_push($joursSemaine, $jourCourant);
+            }
+        }
+
+        // Retour
+        return $joursSemaine;
+    }
+
     // METIER : Récupération et filtrage la liste des restaurants ouverts
     // RETOUR : Liste des restaurants filtrés
-    function getListeRestaurantsOuverts($listeRestaurantsResume, $equipe)
+    function getListeRestaurantsOuverts($listeRestaurantsResume, $date)
     {
         // Initialisations
         $listeRestaurants = array();
 
-        // Filtrage de la liste des restaurants ouverts pour chaque lieu
-        foreach ($listeRestaurantsResume as $lieu => $restaurantsParLieux)
+        // Filtrage de la liste des restaurants ouverts dans la semaine pour chaque lieu
+        if ($date >= date('Ymd') AND date('N', strtotime($date)) <= 5)
         {
-            foreach ($restaurantsParLieux as $restaurant)
+            foreach ($listeRestaurantsResume as $lieu => $restaurantsParLieux)
             {
-                // Vérification restaurant ouvert ce jour
-                $explodedOpened = array_filter(explode(';', $restaurant->getOpened()));
-
-                if (isset($explodedOpened[date('N') - 1]) AND $explodedOpened[date('N') - 1] == 'Y')
+                foreach ($restaurantsParLieux as $restaurant)
                 {
-                    if (!isset($listeRestaurants[$lieu]))
-                        $listeRestaurants[$lieu] = array();
+                    // Vérification restaurant ouvert ce jour
+                    $explodedOpened = array_filter(explode(';', $restaurant->getOpened()));
 
-                    array_push($listeRestaurants[$lieu], $restaurant);
+                    if (isset($explodedOpened[date('N', strtotime($date)) - 1]) AND $explodedOpened[date('N', strtotime($date)) - 1] == 'Y')
+                    {
+                        if (!isset($listeRestaurants[$lieu]))
+                            $listeRestaurants[$lieu] = array();
+    
+                        array_push($listeRestaurants[$lieu], $restaurant);
+                    }
                 }
             }
         }
@@ -131,7 +218,7 @@
 
     // METIER : Détermine la présence des différents boutons d'action
     // RETOUR : Tableau des actions
-    function getActions($propositions, $mesChoix, $isSolo, $isReserved, $identifiant)
+    function getActions($propositions, $mesChoix, $isSolo, $isReserved, $identifiant, $date)
     {
         // Initialisations
         $actions = array(
@@ -145,8 +232,10 @@
             'choix_rapide'     => true
         );
 
-        // Contrôles date et heure - toutes actions
-        if (date('N') > 5 OR date('H') >= 13)
+        // Contrôle date et heure - toutes actions
+        if (($date != date('Ymd') AND date('N', strtotime($date)) > 5)
+        OR  ($date == date('Ymd') AND date('N') > 5)
+        OR  ($date == date('Ymd') AND date('N') <= 5 AND date('H') >= 13))
         {
             $actions['saisir_choix']     = false;
             $actions['determiner']       = false;
@@ -158,52 +247,62 @@
             $actions['choix_rapide']     = false;
         }
 
-        // Contrôle propositions présentes - bouton détermination
+        // Contrôle saisie choix
+        if ($actions['saisir_choix'] == true)
+        {
+            if ($date < date('Ymd') OR $isSolo == true OR !empty($isReserved))
+                $actions['saisir_choix'] = false;
+        }
+
+        // Contrôle détermination (limitée à la date du jour)
         if ($actions['determiner'] == true)
         {
-            if (empty($propositions) OR empty($mesChoix))
+            if ($date != date('Ymd') OR empty($propositions) OR empty($mesChoix) OR !empty($isReserved))
                 $actions['determiner'] = false;
         }
 
-        // Contrôle choix présents - bouton suppression de tous les choix
-        if (empty($mesChoix))
-            $actions['supprimer_choix'] = false;
-
-        // Contrôle choix présents - bouton bande à part
+        // Contrôle bande à part
         if ($actions['solo'] == true)
         {
-            if (!empty($mesChoix))
+            if ($date < date('Ymd') OR !empty($mesChoix) OR $isSolo == true)
                 $actions['solo'] = false;
         }
 
-        // Contrôle vote solo présent
-        if ($actions['solo'] == true)
+        // Contrôle actions choix utilisateurs
+        if ($actions['choix'] == true)
         {
-            if ($isSolo == true)
-            {
-                $actions['saisir_choix']    = false;
-                $actions['solo']            = false;
-                $actions['supprimer_choix'] = false;
-                $actions['choix_rapide']    = false;
-            }
+            if ($date < date('Ymd'))
+                $actions['choix'] = false;
         }
 
-        // Contrôle réservation effectuée
+        // Contrôle réservation
         if ($actions['reserver'] == true)
         {
-            if (!empty($isReserved))
-            {
-                $actions['saisir_choix'] = false;
-                $actions['reserver']     = false;
-                $actions['determiner']   = false;
-            }
+            if ($date < date('Ymd') OR !empty($isReserved))
+                $actions['reserver'] = false;
         }
 
-        // Contrôle réserveur pour annulation - bouton annulation réservation
+        // Contrôle annulation réservation
         if ($actions['reserver'] == false)
         {
-            if ($isReserved == $identifiant AND date('N') <= 5 AND date('H') < 13)
+            if ((($date == date('Ymd') AND date('N') <= 5 AND date('H') < 13)
+            OR   ($date >  date('Ymd') AND date('N', strtotime($date)) <= 5))
+            AND $isReserved == $identifiant)
                 $actions['annuler_reserver'] = true;
+        }
+
+        // Contrôle suppression choix
+        if ($actions['supprimer_choix'] == true)
+        {
+            if ($date < date('Ymd') OR empty($mesChoix) OR $isSolo == true)
+                $actions['supprimer_choix'] = false;
+        }
+
+        // Contrôle choix rapide
+        if ($actions['choix_rapide'] == true)
+        {
+            if ($date < date('Ymd') OR $isSolo == true)
+                $actions['choix_rapide'] = false;
         }
 
         // Retour
@@ -212,16 +311,16 @@
 
     // METIER : Récupère les utilisateurs faisant bande à part
     // RETOUR : Liste des utilisateurs
-    function getSolos($equipe)
+    function getSolos($equipe, $date)
     {
         // Initialisations
         $solos = array();
 
-        // On ne récupère les utilisateurs qui font bande à part que si on est un jour de la semaine
-        if (date('N') <= 5)
+        // On ne récupère les utilisateurs qui font bande à part que si la date sélectionnée est un jour de la semaine
+        if (date('N', strtotime($date)) <= 5)
         {
             // Récupération de la liste des utilisateurs
-            $identifiantsSolos = physiqueIdentifiantsSolos($equipe);
+            $identifiantsSolos = physiqueIdentifiantsSolos($equipe, $date);
 
             // Récupération des données utilisateurs
             foreach ($identifiantsSolos as $identifiantSolo)
@@ -237,24 +336,18 @@
 
     // METIER : Récupère les utilisateurs qui n'ont pas fait de propositions
     // RETOUR : Liste des utilisateurs
-    function getNoPropositions($equipe)
+    function getNoPropositions($equipe, $date)
     {
         // Initialisations
         $noPropositions = array();
 
-        // Calcul des dates de la semaine
-        $nombreJoursLundi    = 1 - date('N');
-        $nombreJoursVendredi = 5 - date('N');
-        $lundi               = date('Ymd', strtotime('+' . $nombreJoursLundi . ' days'));
-        $vendredi            = date('Ymd', strtotime('+' . $nombreJoursVendredi . ' days'));
-
-        // Récupération de la liste des utilisateurs inscrits
-        $listeUsers = physiqueUsers($equipe, $lundi, $vendredi);
+        // Récupération de la liste des utilisateurs inscrits à la date
+        $listeUsers = physiqueUsers($equipe, $date);
 
         // Vérification nombre propositions de chaque utilisateur
         foreach ($listeUsers as $user)
         {
-            $nombrePropositions = physiqueNombrePropositions($equipe, $user->getIdentifiant());
+            $nombrePropositions = physiqueNombrePropositions($equipe, $user->getIdentifiant(), $date);
 
             if ($nombrePropositions == 0)
                 array_push($noPropositions, $user);
@@ -266,7 +359,7 @@
 
     // METIER : Insère un choix "bande à part"
     // RETOUR : Aucun
-    function setSolo($mesChoix, $isSolo, $sessionUser)
+    function setSolo($mesChoix, $isSolo, $sessionUser, $date)
     {
         // Initialisations
         $control_ok = true;
@@ -275,12 +368,20 @@
         $identifiant = $sessionUser['identifiant'];
         $equipe      = $sessionUser['equipe'];
 
-        // Contrôle date de saisie
-        $control_ok = controleDateSaisie('week_end_input');
+        // Contrôle date de saisie (format)
+        $control_ok = controleFormatDate($date);
 
-        // Contrôle heure de saisie
+        // Contrôle date de saisie (jour)
         if ($control_ok == true)
-            $control_ok = controleHeureSaisie('solo_time');
+            $control_ok = controleDateSaisie($date);
+
+        // Contrôle date de saisie (week-end)
+        if ($control_ok == true)
+            $control_ok = controleDateSaisieWeekEnd($date, 'week_end_input');
+
+        // Contrôle heure de saisie (du jour)
+        if ($control_ok == true)
+            $control_ok = controleHeureSaisie($date, 'solo_time');
 
         // Contrôle déjà solo
         if ($control_ok == true)
@@ -297,7 +398,7 @@
                 'id_restaurant' => 0,
                 'team'          => $equipe,
                 'identifiant'   => $identifiant,
-                'date'          => date('Ymd'),
+                'date'          => $date,
                 'time'          => '',
                 'transports'    => '',
                 'menu'          => ';;;'
@@ -309,7 +410,7 @@
 
     // METIER : Supprime un choix "bande à part"
     // RETOUR : Aucun
-    function deleteSolo($sessionUser)
+    function deleteSolo($sessionUser, $date)
     {
         // Initialisations
         $control_ok = true;
@@ -318,16 +419,24 @@
         $identifiant = $sessionUser['identifiant'];
         $equipe      = $sessionUser['equipe'];
 
-        // Contrôle date de saisie
-        $control_ok = controleDateSaisie('week_end_delete');
+        // Contrôle date de saisie (format)
+        $control_ok = controleFormatDate($date);
 
-        // Contrôle heure de saisie
+        // Contrôle date de saisie (jour)
         if ($control_ok == true)
-            $control_ok = controleHeureSaisie('delete_time_solo');
+            $control_ok = controleDateSaisie($date);
+
+        // Contrôle date de saisie (week-end)
+        if ($control_ok == true)
+            $control_ok = controleDateSaisieWeekEnd($date, 'week_end_delete');
+
+        // Contrôle heure de saisie (du jour)
+        if ($control_ok == true)
+            $control_ok = controleHeureSaisie($date, 'delete_time_solo');
 
         // Suppression de l'enregistrement en base
         if ($control_ok == true)
-            physiqueDeleteSolo($equipe, $identifiant);
+            physiqueDeleteSolo($equipe, $identifiant, $date);
     }
 
     // METIER : Insère ou met à jour une réservation
@@ -341,25 +450,34 @@
         $appelant     = $sessionUser['identifiant'];
         $equipe       = $sessionUser['equipe'];
         $idRestaurant = $post['id_restaurant'];
+        $date         = $post['date'];
 
-        // Contrôle date de saisie
-        $control_ok = controleDateSaisie('week_end_reservation');
+        // Contrôle date de saisie (format)
+        $control_ok = controleFormatDate($date);
 
-        // Contrôle heure de saisie
+        // Contrôle date de saisie (jour)
         if ($control_ok == true)
-            $control_ok = controleHeureSaisie('reservation_time');
+            $control_ok = controleDateSaisie($date);
+
+        // Contrôle date de saisie (week-end)
+        if ($control_ok == true)
+            $control_ok = controleDateSaisieWeekEnd($date, 'week_end_reservation');
+
+        // Contrôle heure de saisie (du jour)
+        if ($control_ok == true)
+            $control_ok = controleHeureSaisie($date, 'reservation_time');
 
         // Récupération de la détermination
         if ($control_ok == true)
         {
             // Contrôle si détermination déjà existante
-            $determinationExistante = physiqueDeterminationExistante($equipe);
+            $determinationExistante = physiqueDeterminationExistante($equipe, $date);
 
             // Si la détermination existe déjà
             if ($determinationExistante == true)
             {
                 // Récupération des données de la détermination
-                $determination = physiqueDetermination($equipe);
+                $determination = physiqueDetermination($equipe, $date);
 
                 // Contrôle si déjà réservé
                 $control_ok = controleAlreadyReserved($determination->getReserved());
@@ -391,7 +509,7 @@
                 $nouvelleDetermination = array(
                     'id_restaurant' => $idRestaurant,
                     'team'          => $equipe,
-                    'date'          => date('Ymd'),
+                    'date'          => $date,
                     'caller'        => $appelant,
                     'reserved'      => 'Y'
                 );
@@ -415,17 +533,34 @@
         $identifiant  = $sessionUser['identifiant'];
         $equipe       = $sessionUser['equipe'];
         $idRestaurant = $post['id_restaurant'];
+        $date         = $post['date'];
 
-        // Contrôle date de saisie
-        $control_ok = controleDateSaisie('week_end_reservation');
+        // Contrôle date de saisie (format)
+        $control_ok = controleFormatDate($date);
 
-        // Contrôle heure de saisie
+        // Contrôle date de saisie (jour)
         if ($control_ok == true)
-            $control_ok = controleHeureSaisie('delete_time_reservation');
+            $control_ok = controleDateSaisie($date);
+            
+        // Contrôle date de saisie (format)
+        if ($control_ok == true)
+            $control_ok = controleFormatDate($date);
+
+        // Contrôle date de saisie (jour)
+        if ($control_ok == true)
+            $control_ok = controleDateSaisie($date);
+
+        // Contrôle date de saisie (week-end)
+        if ($control_ok == true)
+            $control_ok = controleDateSaisieWeekEnd($date, 'week_end_reservation');
+
+        // Contrôle heure de saisie (du jour)
+        if ($control_ok == true)
+            $control_ok = controleHeureSaisie($date, 'delete_time_reservation');
 
         // Annulation réservation
         if ($control_ok == true)
-            physiqueAnnulationReservation($idRestaurant, $equipe, $identifiant);
+            physiqueAnnulationReservation($idRestaurant, $equipe, $identifiant, $date);
     }
 
     // METIER : Supprime les choix de tous les utilisateurs d'un restaurant et relance la détermination
@@ -439,81 +574,90 @@
         $identifiant  = $sessionUser['identifiant'];
         $equipe       = $sessionUser['equipe'];
         $idRestaurant = $post['id_restaurant'];
+        $date         = $post['date'];
 
-        // Contrôle date de saisie
-        $control_ok = controleDateSaisie('week_end_delete');
+        // Contrôle date de saisie (week-end)
+        $control_ok = controleDateSaisieWeekEnd($date, 'week_end_delete');
 
-        // Contrôle heure de saisie
+        // Contrôle heure de saisie (du jour)
         if ($control_ok == true)
-            $control_ok = controleHeureSaisie('delete_time');
+            $control_ok = controleHeureSaisie($date, 'delete_time');
 
         // Suppression de tous les choix utilisateurs pour ce restaurant et relance de la détermination
         if ($control_ok == true)
         {
             // Suppression de tous les choix utilisateurs pour ce restaurant
-            physiqueDeleteComplete($idRestaurant, $equipe);
+            physiqueDeleteComplete($idRestaurant, $equipe, $date);
 
             // Relance de la détermination si besoin
-            relanceDetermination($sessionUser);
+            relanceDetermination($sessionUser, $date);
         }
     }
 
     // METIER : Récupère les choix de la semaine
     // RETOUR : Liste des choix de la semaine
-    function getWeekChoices($equipe)
+    function getWeekChoices($equipe, $joursSemaine)
     {
         // Initialisations
         $listeChoixSemaine = array();
-        $semaine           = array(
-            1 => 'lundi',
-            2 => 'mardi',
-            3 => 'mercredi',
-            4 => 'jeudi',
-            5 => 'vendredi'
-        );
 
-        // Calcul des dates de la semaine
-        $nombreJoursLundi    = 1 - date('N');
-        $nombreJoursVendredi = 5 - date('N');
-        $lundi               = date('Ymd', strtotime('+' . $nombreJoursLundi . ' days'));
-        $vendredi            = date('Ymd', strtotime('+' . $nombreJoursVendredi . ' days'));
-
-        for ($i = $lundi; $i <= $vendredi; $i = date('Ymd', strtotime($i . ' + 1 days')))
+        // Récupération du résumé de la semaine à la date demandée
+        foreach ($joursSemaine as $jourSemaine)
         {
             // Lecture des données du choix
-            $choixSemaine = physiqueDonneesResume($equipe, $i);
+            $choixSemaine = array(
+                'date'  => $jourSemaine['date'],
+                'jour'  => $jourSemaine['web'],
+                'choix' => physiqueDonneesResume($equipe, $jourSemaine['date'])
+            );
 
-            if (!empty($choixSemaine))
+            if (!empty($choixSemaine['choix']))
             {
                 // Lecture des données du restaurant
-                $restaurant = physiqueDonneesRestaurant($choixSemaine->getId_restaurant());
+                $restaurant = physiqueDonneesRestaurant($choixSemaine['choix']->getId_restaurant());
 
                 // Nombre de participants
-                $nombreParticipants = physiqueNombreParticipants($choixSemaine->getId_restaurant(), $i);
+                $nombreParticipants = physiqueNombreParticipants($choixSemaine['choix']->getId_restaurant(), $jourSemaine['date']);
 
                 // Récupération pseudo et avatar
-                $user = physiqueUser($choixSemaine->getCaller());
+                $user = physiqueUser($choixSemaine['choix']->getCaller());
 
                 // Concaténation des données
-                $choixSemaine->setName($restaurant->getName());
-                $choixSemaine->setPicture($restaurant->getPicture());
-                $choixSemaine->setLocation($restaurant->getLocation());
-                $choixSemaine->setNb_participants($nombreParticipants);
+                $choixSemaine['choix']->setName($restaurant->getName());
+                $choixSemaine['choix']->setPicture($restaurant->getPicture());
+                $choixSemaine['choix']->setLocation($restaurant->getLocation());
+                $choixSemaine['choix']->setNb_participants($nombreParticipants);
 
                 if (!empty($user))
                 {
-                    $choixSemaine->setPseudo($user->getPseudo());
-                    $choixSemaine->setAvatar($user->getAvatar());
+                    $choixSemaine['choix']->setPseudo($user->getPseudo());
+                    $choixSemaine['choix']->setAvatar($user->getAvatar());
                 }
             }
 
             // On ajoute la ligne au tableau
-            $jour                               = date('N', strtotime($i));
-            $listeChoixSemaine[$semaine[$jour]] = $choixSemaine;
+            array_push($listeChoixSemaine, $choixSemaine);
         }
 
         // Retour
         return $listeChoixSemaine;
+    }
+
+    // METIER : Contrôle date du jour sélectionné pour la détermination
+    // RETOUR : Aucun
+    function controlDateDetermination($date)
+    {
+        // Initialisations
+        $erreurDetermination = false;
+
+        // Vérification date du jour sélectionné
+        $control_ok = controleDateDetermination($date);
+
+        if ($control_ok == false)
+            $erreurDetermination = true;
+
+        // Retour
+        return $erreurDetermination;
     }
 
     // METIER : Insère un ou plusieurs choix utilisateur
@@ -527,13 +671,22 @@
         $identifiant      = $sessionUser['identifiant'];
         $equipe           = $sessionUser['equipe'];
         $listeRestaurants = array_keys($post['restaurants']);
+        $date             = $post['date'];
 
-        // Contrôle date de saisie
-        $control_ok = controleDateSaisie('week_end_input');
+        // Contrôle date de saisie (format)
+        $control_ok = controleFormatDate($date);
 
-        // Contrôle heure de saisie
+        // Contrôle date de saisie (jour)
         if ($control_ok == true)
-            $control_ok = controleHeureSaisie('input_time');
+            $control_ok = controleDateSaisie($date);
+
+        // Contrôle date de saisie (week-end)
+        if ($control_ok == true)
+            $control_ok = controleDateSaisieWeekEnd($date, 'week_end_input');
+
+        // Contrôle heure de saisie (du jour)
+        if ($control_ok == true)
+            $control_ok = controleHeureSaisie($date, 'input_time');
 
         // Contrôle bande à part
         if ($control_ok == true)
@@ -548,7 +701,7 @@
                 foreach ($listeRestaurants as $keyId => $idRestaurant)
                 {
                     // Contrôle choix existant
-                    $choixNonExistant = controleChoixExistant($idRestaurant, $identifiant, $equipe, 'wrong_choice_already');
+                    $choixNonExistant = controleChoixExistant($idRestaurant, $identifiant, $equipe, $date, 'wrong_choice_already');
 
                     // On supprime la ligne du tableau si déjà saisi
                     if ($choixNonExistant == false)
@@ -568,7 +721,7 @@
                     $restaurant = physiqueDonneesRestaurant($idRestaurant);
 
                     // Contrôle restaurant ouvert
-                    $restaurantOuvert = controleRestaurantOuvert($restaurant->getOpened());
+                    $restaurantOuvert = controleRestaurantOuvert($restaurant->getOpened(), $date);
 
                     // On supprime la ligne du tableau si le restaurant n'est pas ouvert
                     if ($restaurantOuvert == false)
@@ -584,12 +737,7 @@
             {
                 foreach ($listeRestaurants as $idRestaurant)
                 {
-                    // Date de saisie
-                    $date = date('Ymd');
-
                     // Heure choisie
-                    $time = '';
-
                     if (isset($post['select_heures'][$idRestaurant])  AND !empty($post['select_heures'][$idRestaurant])
                     AND isset($post['select_minutes'][$idRestaurant]) AND !empty($post['select_minutes'][$idRestaurant]))
                         $time = $post['select_heures'][$idRestaurant] . $post['select_minutes'][$idRestaurant];
@@ -637,7 +785,7 @@
                     physiqueInsertionChoix($choix);
 
                     // Relance de la détermination si besoin
-                    relanceDetermination($sessionUser);
+                    relanceDetermination($sessionUser, $date);
                 }
             }
         }
@@ -652,13 +800,22 @@
 
         // Récupération des données
         $idChoix = $post['id_choix'];
+        $date    = $post['date'];
 
-        // Contrôle date de saisie
-        $control_ok = controleDateSaisie('week_end_input');
+        // Contrôle date de saisie (format)
+        $control_ok = controleFormatDate($date);
 
-        // Contrôle heure de saisie
+        // Contrôle date de saisie (jour)
         if ($control_ok == true)
-            $control_ok = controleHeureSaisie('input_time');
+            $control_ok = controleDateSaisie($date);
+            
+        // Contrôle date de saisie (week-end)
+        if ($control_ok == true)
+            $control_ok = controleDateSaisieWeekEnd($date, 'week_end_input');
+
+        // Contrôle heure de saisie (du jour)
+        if ($control_ok == true)
+            $control_ok = controleHeureSaisie($date, 'input_time');
 
         // Récupération des données et modification de l'enregistrements en base
         if ($control_ok == true)
@@ -704,7 +861,7 @@
                 'menu'       => $menu
             );
 
-            physiqueUpdateChoix($idChoix, $choix, $identifiant);
+            physiqueUpdateChoix($idChoix, $choix, $identifiant, $date);
         }
     }
 
@@ -718,13 +875,22 @@
         // Récupération des données
         $equipe  = $sessionUser['equipe'];
         $idChoix = $post['id_choix'];
+        $date    = $post['date'];
 
-        // Contrôle date de saisie
-        $control_ok = controleDateSaisie('week_end_delete');
+        // Contrôle date de saisie (format)
+        $control_ok = controleFormatDate($date);
 
-        // Contrôle heure de saisie
+        // Contrôle date de saisie (jour)
         if ($control_ok == true)
-            $control_ok = controleHeureSaisie('delete_time');
+            $control_ok = controleDateSaisie($date);
+            
+        // Contrôle date de saisie (week-end)
+        if ($control_ok == true)
+            $control_ok = controleDateSaisieWeekEnd($date, 'week_end_delete');
+
+        // Contrôle heure de saisie (du jour)
+        if ($control_ok == true)
+            $control_ok = controleHeureSaisie($date, 'delete_time');
 
         // Vérification appelant à la suppression du choix
         if ($control_ok == true)
@@ -733,28 +899,28 @@
             $choix = physiqueChoix($idChoix);
 
             // Récupération des données de la détermination si correspondantes
-            $determinationExistante = physiqueDeterminationExistanteUser($choix->getIdentifiant(), $equipe);
+            $determinationExistante = physiqueDeterminationExistanteUser($choix->getIdentifiant(), $equipe, $date);
 
             if ($determinationExistante == true)
             {
                 // Génération succès (pour l'appelant si supprimé)
                 insertOrUpdateSuccesValue('star-chief', $choix->getIdentifiant(), -1);
 
-                // Suppression détermination si existante (restaurant = choix, date = jour, caller = utilisateur)
-                physiqueDeleteDeterminationRestaurantUser($choix->getId_restaurant(), $equipe, $choix->getIdentifiant());
+                // Suppression détermination si existante (restaurant = choix, équipe = équipe utilisateur, caller = utilisateur, date = jour sélectionné)
+                physiqueDeleteDeterminationRestaurantUser($choix->getId_restaurant(), $equipe, $choix->getIdentifiant(), $date);
             }
 
             // Suppression de l'enregistrement en base
             physiqueDeleteChoix($idChoix);
 
             // Relance de la détermination si besoin
-            relanceDetermination($sessionUser);
+            relanceDetermination($sessionUser, $date);
         }
     }
 
     // METIER : Supprime tous les choix utilisateur
     // RETOUR : Aucun
-    function deleteAllChoices($sessionUser)
+    function deleteAllChoices($sessionUser, $date)
     {
         // Initialisations
         $control_ok = true;
@@ -763,36 +929,44 @@
         $identifiant = $sessionUser['identifiant'];
         $equipe      = $sessionUser['equipe'];
 
-        // Contrôle date de saisie
-        $control_ok = controleDateSaisie('week_end_delete');
+        // Contrôle date de saisie (format)
+        $control_ok = controleFormatDate($date);
 
-        // Contrôle heure de saisie
+        // Contrôle date de saisie (jour)
         if ($control_ok == true)
-            $control_ok = controleHeureSaisie('delete_time');
+            $control_ok = controleDateSaisie($date);
+
+        // Contrôle date de saisie (week-end)
+        if ($control_ok == true)
+            $control_ok = controleDateSaisieWeekEnd($date, 'week_end_delete');
+
+        // Contrôle heure de saisie (du jour)
+        if ($control_ok == true)
+            $control_ok = controleHeureSaisie($date, 'delete_time');
 
         // Vérification appelant à la suppression du choix
         if ($control_ok == true)
         {
             // Récupération des données de la détermination si correspondantes
-            $determinationExistante = physiqueDeterminationExistanteUser($identifiant, $equipe);
+            $determinationExistante = physiqueDeterminationExistanteUser($identifiant, $equipe, $date);
 
             if ($determinationExistante == true)
             {
                 // Récupération des données de la détermination
-                $determination = physiqueDetermination($equipe);
+                $determination = physiqueDetermination($equipe, $date);
 
                 // Génération succès (pour l'appelant si supprimé)
                 insertOrUpdateSuccesValue('star-chief', $determination->getCaller(), -1);
 
-                // Suppression détermination si existante (restaurant = choix, date = jour, caller = utilisateur)
-                physiqueDeleteDeterminationUser($determination->getId_restaurant(), $equipe, $determination->getCaller());
+                // Suppression détermination si existante (restaurant = choix, équipe = équipe utilisateur, caller = utilisateur, date = jour sélectionné)
+                physiqueDeleteDeterminationUser($determination->getId_restaurant(), $equipe, $determination->getCaller(), $date);
             }
 
             // Suppression des enregistrements en base
-            physiqueDeleteTousChoix($equipe, $identifiant);
+            physiqueDeleteTousChoix($equipe, $identifiant, $date);
 
             // Relance de la détermination si besoin
-            relanceDetermination($sessionUser);
+            relanceDetermination($sessionUser, $date);
         }
     }
 
@@ -804,16 +978,15 @@
         $control_ok = true;
 
         // Récupération des données
-        $jourSaisie   = $post['num_jour'];
-        $idRestaurant = $post['select_restaurant_resume_' . $jourSaisie];
+        $date         = $post['date_resume'];
+        $idRestaurant = $post['select_restaurant_resume_' . $date];
 
-        // Calcul date à insérer
-        $jourCourant = date('N');
-        $ecartJours  = $jourCourant - $jourSaisie;
-        $dateSaisie  = date('Ymd', strtotime('now - ' . $ecartJours . ' Days'));
-
+        // Contrôle date de saisie (format)
+        $control_ok = controleFormatDate($date);
+            
         // Contrôle choix déjà existant
-        $control_ok = controleChoixExistantDate($dateSaisie, $equipe);
+        if ($control_ok == true)
+            $control_ok = controleChoixExistantDate($date, $equipe);
 
         // Insertion de l'enregistrement en base
         if ($control_ok == true)
@@ -821,7 +994,7 @@
             $resume = array(
                 'id_restaurant' => $idRestaurant,
                 'team'          => $equipe,
-                'date'          => $dateSaisie,
+                'date'          => $date,
                 'caller'        => '',
                 'reserved'      => 'N'
             );
@@ -834,11 +1007,18 @@
     // RETOUR : Aucun
     function deleteResume($post, $equipe)
     {
-        // Récupération des données
-        $idResume   = $post['id_resume'];
-        $dateResume = $post['date_resume'];
+        // Initialisations
+        $control_ok = true;
 
+        // Récupération des données
+        $idResume = $post['id_resume'];
+        $date     = $post['date_resume'];
+
+        // Contrôle date de saisie (format)
+        $control_ok = controleFormatDate($date);
+    
         // Suppression de l'enregistrement en base
-        physiqueDeleteResume($idResume, $equipe, $dateResume);
+        if ($control_ok == true)
+            physiqueDeleteResume($idResume, $equipe, $date);
     }
 ?>

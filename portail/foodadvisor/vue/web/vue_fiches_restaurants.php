@@ -53,34 +53,30 @@
 
                                     // Types
                                     echo '<div class="zone_types_fiche">';
-                                        $explodedTypes = explode(';', $restaurant->getTypes());
+                                        $explodedTypes = array_filter(explode(';', $restaurant->getTypes()));
 
                                         foreach ($explodedTypes as $exploded)
                                         {
-                                            if (!empty($exploded))
-                                                echo '<span class="type_restaurant">' . $exploded . '</span>';
+                                            echo '<span class="type_restaurant">' . $exploded . '</span>';
                                         }
                                     echo '</div>';
 
                                     // Jours d'ouverture, site web et plan
                                     echo '<div class="zone_icones_fiches">';
                                         // Jours d'ouverture
-                                        $explodedOpened = explode(';', $restaurant->getOpened());
+                                        $explodedOpened = array_filter(explode(';', $restaurant->getOpened()));
                                         $semaineShort   = array(0 => 'Lu', 1 => 'Ma', 2 => 'Me', 3 => 'Je', 4 => 'Ve');
                                         $availableDay   = true;
 
                                         foreach ($explodedOpened as $keyOpened => $opened)
                                         {
-                                            if (!empty($opened))
-                                            {
-                                                if ($opened == 'Y')
-                                                    echo '<div class="jour_oui">' . $semaineShort[$keyOpened] . '</div>';
-                                                else
-                                                    echo '<div class="jour_non">' . $semaineShort[$keyOpened] . '</div>';
+                                            if ($opened == 'Y')
+                                                echo '<div class="jour_oui">' . $semaineShort[$keyOpened] . '</div>';
+                                            else
+                                                echo '<div class="jour_non">' . $semaineShort[$keyOpened] . '</div>';
 
-                                                if (date('N') == $keyOpened + 1 AND $opened == 'N')
-                                                    $availableDay = false;
-                                            }
+                                            if (date('N') == $keyOpened + 1 AND $opened == 'N')
+                                                $availableDay = false;
                                         }
 
                                         // Site web
@@ -151,6 +147,7 @@
                                         {
                                             echo '<form method="post" action="restaurants.php?action=doChoixRapide" class="lien_choix_rapide_restaurant">';
                                                 echo '<input type="hidden" name="id_restaurant" value="' . $restaurant->getId() . '" />';
+                                                echo '<input type="hidden" name="date" value="' . date('Ymd') . '" />';
                                                 echo '<input type="submit" name="fast_restaurant" value="" title="Proposer ce restaurant" class="icon_fast_restaurant" />';
                                             echo '</form>';
                                         }
@@ -224,7 +221,7 @@
 
                                     // Jours d'ouverture
                                     echo '<div class="opened_restaurant_update">';
-                                        $explodedOpened = explode(';', $restaurant->getOpened());
+                                        $explodedOpened = array_filter(explode(';', $restaurant->getOpened()));
                                         $semaine        = array(
                                             'Lu' => 'lundi',
                                             'Ma' => 'mardi',
@@ -281,7 +278,7 @@
                                     // Types
                                     echo '<div id="update_types_restaurants_' . $restaurant->getId() . '" class="zone_update_types">';
                                         // Types existants
-                                        $explodedTypes = explode(';', $restaurant->getTypes());
+                                        $explodedTypes = array_filter(explode(';', $restaurant->getTypes()));
                                         $k             = 0;
 
                                         foreach ($listeTypes as $type)
@@ -291,7 +288,7 @@
 
                                             foreach ($explodedTypes as $exploded)
                                             {
-                                                if (!empty($exploded) AND $exploded == $type)
+                                                if ($exploded == $type)
                                                 {
                                                     $matching = true;
                                                     break;

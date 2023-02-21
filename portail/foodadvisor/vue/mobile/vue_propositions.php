@@ -2,7 +2,19 @@
     // Titre
     echo '<div id="titre_propositions_users" class="titre_section">';
         echo '<img src="../../includes/icons/foodadvisor/propositions_grey.png" alt="propositions_grey" class="logo_titre_section" />';
-        echo '<div class="texte_titre_section_fleche">Les propositions du jour</div>';
+
+        echo '<div class="texte_titre_section_fleche">';
+            if ($_GET['date'] == date('Ymd'))
+                echo 'Les propositions du jour';
+            else
+            {
+                if (substr($_GET['date'], 0, 4) == date('Y'))
+                    echo 'Les propositions du ' . formatDateForDisplayLight($_GET['date']);
+                else
+                    echo 'Les propositions du ' . formatDateForDisplay($_GET['date']);
+            }
+        echo '</div>';
+
         echo '<img src="../../includes/icons/common/open_grey.png" alt="open_grey" class="fleche_titre_section" />';
     echo '</div>';
 
@@ -63,14 +75,26 @@
         }
         else
         {
-            if (date('N') > 5)
-                echo '<div class="empty">Il est impossible de voter pour aujourd\'hui...</div>';
+            if (date('N', strtotime($_GET['date'])) > 5)
+            {
+                if ($_GET['date'] == date('Ymd'))
+                    echo '<div class="empty">Il est impossible de voter pour aujourd\'hui...</div>';
+                else
+                    echo '<div class="empty">Il est impossible de voter pour ce jour...</div>';
+            }
             else
             {
-                if (date('H') >= 13)
-                    echo '<div class="empty">Il n\'est plus possible de voter pour aujourd\'hui...</div>';
+                if ($_GET['date'] == date('Ymd'))
+                {
+                    if (date('H') >= 13)
+                        echo '<div class="empty">Il n\'est plus possible de voter pour aujourd\'hui...</div>';
+                    else
+                        echo '<div class="empty">Il n\'y a pas encore de propositions pour aujourd\'hui...</div>';
+                }
+                elseif ($_GET['date'] < date('Ymd'))
+                    echo '<div class="empty">Il n\'y a pas de propositions pour ce jour...</div>';
                 else
-                    echo '<div class="empty">Il n\'y a pas encore de propositions pour aujourd\'hui...</div>';
+                    echo '<div class="empty">Il n\'y a pas encore de propositions pour ce jour...</div>';
             }
         }
     echo '</div>';

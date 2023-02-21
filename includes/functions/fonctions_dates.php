@@ -1,5 +1,5 @@
 <?php
-    // DATE : Contrôle date valide (format JJ/MM/AAAA)
+    // DATE : Contrôle date valide (format JJ/MM/AAAA ou AAAAMMJJ)
     // RETOUR : Booléen
     function validateDate($date)
     {
@@ -7,17 +7,36 @@
         $dateValide = false;
 
         // Vérification de la date
-        if (strlen($date) == 10)
+        switch (strlen($date))
         {
-            $jour  = substr($date, 0, 2);
-            $mois  = substr($date, 3, 2);
-            $annee = substr($date, 6, 4);
+            // Format JJ/MM/AAAA
+            case 10:
+                $jour  = substr($date, 0, 2);
+                $mois  = substr($date, 3, 2);
+                $annee = substr($date, 6, 4);
 
-            if (is_numeric($jour) AND is_numeric($mois) AND is_numeric($annee))
-            {
-                if (checkdate($mois, $jour, $annee) == true)
-                    $dateValide = true;
-            }
+                if (is_numeric($jour) AND is_numeric($mois) AND is_numeric($annee))
+                {
+                    if (checkdate($mois, $jour, $annee) == true)
+                        $dateValide = true;
+                }
+                break;
+
+            // Format AAAAMMJJ
+            case 8:
+                $jour  = substr($date, 6, 2);
+                $mois  = substr($date, 4, 2);
+                $annee = substr($date, 0, 4);
+
+                if (is_numeric($jour) AND is_numeric($mois) AND is_numeric($annee))
+                {
+                    if (checkdate($mois, $jour, $annee) == true)
+                        $dateValide = true;
+                }
+                break;
+
+            default:
+                break;
         }
 
         // Retour
@@ -56,6 +75,20 @@
         // Formatage de la date
         if (strlen($date) == 8)
             $dateFormat = substr($date, 6, 2) . '/' . substr($date, 4, 2) . '/' . substr($date, 0, 4);
+        else
+            $dateFormat = $date;
+
+        // Retour
+        return $dateFormat;
+    }
+
+    // DATE : Formate une date pour affichage court (AAAAMMJJ -> JJ/MM)
+    // RETOUR : Date formatée
+    function formatDateForDisplayLight($date)
+    {
+        // Formatage de la date
+        if (strlen($date) == 8)
+            $dateFormat = substr($date, 6, 2) . '/' . substr($date, 4, 2);
         else
             $dateFormat = $date;
 

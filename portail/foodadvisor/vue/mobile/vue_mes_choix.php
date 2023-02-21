@@ -5,7 +5,19 @@
             // Titre
             echo '<div id="titre_propositions_mes_choix" class="titre_section">';
                 echo '<img src="../../includes/icons/foodadvisor/menu_grey.png" alt="menu_grey" class="logo_titre_section" />';
-                echo '<div class="texte_titre_section_fleche">Mes choix</div>';
+                
+                echo '<div class="texte_titre_section_fleche">';
+                    if ($_GET['date'] == date('Ymd'))
+                        echo 'Mes choix du jour';
+                    else
+                    {
+                        if (substr($_GET['date'], 0, 4) == date('Y'))
+                            echo 'Mes choix du ' . formatDateForDisplayLight($_GET['date']);
+                        else
+                            echo 'Mes choix du ' . formatDateForDisplay($_GET['date']);
+                    }
+                echo '</div>';
+
                 echo '<img src="../../includes/icons/common/open_grey.png" alt="open_grey" class="fleche_titre_section" />';
             echo '</div>';
 
@@ -15,6 +27,7 @@
                 if ($actions['supprimer_choix'] == true)
                 {
                     echo '<form method="post" id="delete_choices" action="foodadvisor.php?action=doSupprimerChoix">';
+                        echo '<input type="hidden" name="date" value="' . $_GET['date'] . '" />';
                         echo '<input type="submit" name="delete_choices" value="Supprimer tous mes choix" class="lien_red_normal eventConfirm" />';
                         echo '<input type="hidden" value="Supprimer tous les choix saisis ?" class="eventMessage" />';
                     echo '</form>';
@@ -40,6 +53,7 @@
                         {
                             echo '<form id="delete_choice_' . $monChoix->getId() . '" method="post" action="foodadvisor.php?action=doSupprimer" class="form_delete_choix">';
                                 echo '<input type="hidden" name="id_choix" value="' . $monChoix->getId() . '" />';
+                                echo '<input type="hidden" name="date" value="' . $_GET['date'] . '" />';
                                 echo '<input type="submit" name="delete_choice" value="" title="Supprimer le choix" class="bouton_delete_choix eventConfirm" />';
                                 echo '<input type="hidden" value="Supprimer ce choix ?" class="eventMessage" />';
                             echo '</form>';

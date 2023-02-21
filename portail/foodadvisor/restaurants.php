@@ -44,14 +44,14 @@
             $listeRestaurants = getListeRestaurants($listeLieux, $_SESSION['user']['equipe']);
 
             // Détermination si bande à part
-            $isSolo = getSolo($_SESSION['user']);
+            $isSolo = getSolo($_SESSION['user'], date('Ymd'));
 
             // Récupération des tops d'actions rapides
             $choixRapide = getFastActions($isSolo);
 
             // Lecture des choix utilisateurs
             if ($choixRapide == true)
-                $mesChoix = getMyChoices($_SESSION['user']);
+                $mesChoix = getMyChoices($_SESSION['user'], date('Ymd'));
             break;
 
         case 'doAjouter':
@@ -71,7 +71,7 @@
 
         case 'doChoixRapide':
             // Détermination si bande à part
-            $isSolo = getSolo($_SESSION['user']);
+            $isSolo = getSolo($_SESSION['user'], date('Ymd'));
 
             // Insertion d'un choix rapide
             $idRestaurant = insertFastChoice($_POST, $isSolo, $_SESSION['user']);

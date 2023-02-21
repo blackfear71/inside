@@ -1,26 +1,35 @@
 <?php
-    /****************************/
-    /*** Propositions du jour ***/
-    /****************************/
+    /****************************************/
+    /*** Propositions du jour sélectionné ***/
+    /****************************************/
     echo '<div class="zone_propositions_right">';
         // Titre
         echo '<div class="titre_section">';
             echo '<img src="../../includes/icons/foodadvisor/propositions_grey.png" alt="propositions_grey" class="logo_titre_section" />';
 
             echo '<div class="texte_titre_section">';
-                echo 'Les propositions du jour';
+                if ($_GET['date'] == date('Ymd'))
+                    echo 'Les propositions du jour';
+                else
+                {
+                    if (substr($_GET['date'], 0, 4) == date('Y'))
+                        echo 'Les propositions du ' . formatDateForDisplayLight($_GET['date']);
+                    else
+                        echo 'Les propositions du ' . formatDateForDisplay($_GET['date']);
+                }
 
                 echo '<div class="zone_actions_propositions">';
                     // Lancer la détermination
                     if ($actions['determiner'] == true)
                     {
                         echo '<form method="post" action="foodadvisor.php?action=doDeterminer" class="form_action_propositions">';
-                        echo '<input type="submit" name="determiner" value="Lancer la détermination" class="bouton_determination" />';
+                            echo '<input type="hidden" name="date" value="' . $_GET['date'] . '" />';
+                            echo '<input type="submit" name="determiner" value="Lancer la détermination" class="bouton_determination" />';
                         echo '</form>';
                     }
 
                     // Rafraichir
-                    echo '<a href="foodadvisor.php?action=goConsulter" title="Rafraichir la page"><img src="../../includes/icons/foodadvisor/refresh.png" alt="refresh" class="image_refresh" /></a>';
+                    echo '<a href="foodadvisor.php?date=' . $_GET['date'] . '&action=goConsulter" title="Rafraichir la page"><img src="../../includes/icons/foodadvisor/refresh.png" alt="refresh" class="image_refresh" /></a>';
                 echo '</div>';
             echo '</div>';
         echo '</div>';
@@ -80,23 +89,20 @@
                         echo '<div class="zone_icones_mon_choix">';
                             // Jours d'ouverture
                             echo '<div class="zone_ouverture_mes_choix">';
-                                $explodedOpened = explode(';', $proposition->getOpened());
+                                $explodedOpened = array_filter(explode(';', $proposition->getOpened()));
                                 $semaineShort   = array('Lu', 'Ma', 'Me', 'Je', 'Ve');
                                 $i              = 0;
 
                                 foreach ($explodedOpened as $opened)
                                 {
-                                    if (!empty($opened))
+                                    if ($opened == 'Y')
+                                        echo '<div class="jour_oui_fa">' . $semaineShort[$i] . '</div>';
+                                    else
                                     {
-                                        if ($opened == 'Y')
-                                            echo '<div class="jour_oui_fa">' . $semaineShort[$i] . '</div>';
+                                        if ($proposition->getClassement() == 1)
+                                            echo '<div class="jour_non_fa_white">' . $semaineShort[$i] . '</div>';
                                         else
-                                        {
-                                            if ($proposition->getClassement() == 1)
-                                                echo '<div class="jour_non_fa_white">' . $semaineShort[$i] . '</div>';
-                                            else
-                                                echo '<div class="jour_non_fa">' . $semaineShort[$i] . '</div>';
-                                        }
+                                            echo '<div class="jour_non_fa">' . $semaineShort[$i] . '</div>';
                                     }
 
                                     $i++;
@@ -161,6 +167,7 @@
                                     // Bouton réservation
                                     echo '<form method="post" action="foodadvisor.php?action=doReserver">';
                                         echo '<input type="hidden" name="id_restaurant" value="' . $proposition->getId_restaurant() . '" />';
+                                        echo '<input type="hidden" name="date" value="' . $_GET['date'] . '" />';
                                         echo '<input type="submit" name="reserve" value="J\'ai réservé !" class="bouton_reserver" />';
                                     echo '</form>';
 
@@ -169,6 +176,7 @@
                                     {
                                         echo '<form id="choice_complete" method="post" action="foodadvisor.php?action=doComplet" class="margin_top_10">';
                                             echo '<input type="hidden" name="id_restaurant" value="' . $proposition->getId_restaurant() . '" />';
+                                            echo '<input type="hidden" name="date" value="' . $_GET['date'] . '" />';
                                             echo '<input type="submit" name="complete" value="Complet..." class="bouton_reserver eventConfirm" />';
                                             echo '<input type="hidden" value="Signaler ce choix comme complet ? Les votes des autres utilisateurs seront supprimés et la détermination relancée." class="eventMessage" />';
                                         echo '</form>';
@@ -188,6 +196,7 @@
                                 {
                                     echo '<form method="post" action="foodadvisor.php?action=doAnnulerReserver" class="margin_top_10">';
                                         echo '<input type="hidden" name="id_restaurant" value="' . $proposition->getId_restaurant() . '" />';
+                                        echo '<input type="hidden" name="date" value="' . $_GET['date'] . '" />';
                                         echo '<input type="submit" name="unreserve" value="Annuler la réservation" class="bouton_reserver" />';
                                     echo '</form>';
                                 }
@@ -199,14 +208,26 @@
         }
         else
         {
-            if (date('N') > 5)
-                echo '<div class="empty">Il est impossible de voter pour aujourd\'hui...</div>';
+            if (date('N', strtotime($_GET['date'])) > 5)
+            {
+                if ($_GET['date'] == date('Ymd'))
+                    echo '<div class="empty">Il est impossible de voter pour aujourd\'hui...</div>';
+                else
+                    echo '<div class="empty">Il est impossible de voter pour ce jour...</div>';
+            }
             else
             {
-                if (date('H') >= 13)
-                    echo '<div class="empty">Il n\'est plus possible de voter pour aujourd\'hui...</div>';
+                if ($_GET['date'] == date('Ymd'))
+                {
+                    if (date('H') >= 13)
+                        echo '<div class="empty">Il n\'est plus possible de voter pour aujourd\'hui...</div>';
+                    else
+                        echo '<div class="empty">Il n\'y a pas encore de propositions pour aujourd\'hui...</div>';
+                }
+                elseif ($_GET['date'] < date('Ymd'))
+                    echo '<div class="empty">Il n\'y a pas de propositions pour ce jour...</div>';
                 else
-                    echo '<div class="empty">Pas encore de propositions pour aujourd\'hui...</div>';
+                    echo '<div class="empty">Il n\'y a pas encore de propositions pour ce jour...</div>';
             }
         }
     echo '</div>';

@@ -18,6 +18,9 @@
                 echo '<img src="../../includes/icons/common/cancel.png" alt="cancel" title="Effacer" id="reset_recherche_live_propositions" class="logo_recherche_live size_logo_recherche_live" />';
             echo '</div>';
 
+            // Date de la saisie
+            echo '<input type="hidden" name="date" value="' . $_GET['date'] . '" />';
+            
             // Saisie
             echo '<div class="zone_contenu_saisie_live">';
                 echo '<div class="contenu_saisie">';

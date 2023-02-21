@@ -82,12 +82,14 @@
                         // Bouton réservation
                         echo '<form id="reserver_details_proposition" method="post" action="">';
                             echo '<input type="hidden" name="id_restaurant" value="" />';
+                            echo '<input type="hidden" name="date" value="' . $_GET['date'] . '" />';
                             echo '<input type="submit" name="reserve" value="J\'ai réservé !" class="bouton_reserver_details" />';
                         echo '</form>';
 
                         // Bouton complet
                         echo '<form id="choice_complete_details_proposition" method="post" action="" class="margin_top_10">';
                             echo '<input type="hidden" name="id_restaurant" value="" />';
+                            echo '<input type="hidden" name="date" value="' . $_GET['date'] . '" />';
                             echo '<input type="submit" name="complete" value="Complet..." class="bouton_reserver_details eventConfirm" />';
                             echo '<input type="hidden" value="Signaler ce choix comme complet ? Les votes des autres utilisateurs seront supprimés et la détermination relancée." class="eventMessage" />';
                         echo '</form>';
@@ -101,6 +103,7 @@
                     {
                         echo '<form id="annuler_details_proposition" method="post" action="" class="margin_top_10">';
                             echo '<input type="hidden" name="id_restaurant" value="" />';
+                            echo '<input type="hidden" name="date" value="' . $_GET['date'] . '" />';
                             echo '<input type="submit" name="unreserve" value="Annuler la réservation" class="bouton_reserver_details" />';
                         echo '</form>';
                     }
@@ -123,6 +126,7 @@
                         {
                             echo '<form id="choix_rapide_details_proposition" method="post" action="">';
                                 echo '<input type="hidden" name="id_restaurant" value="" />';
+                                echo '<input type="hidden" name="date" value="' . $_GET['date'] . '" />';
                                 echo '<input type="submit" name="fast_restaurant" value="" title="Proposer ce restaurant" class="icon_fast_proposition" />';
                             echo '</form>';
                         }

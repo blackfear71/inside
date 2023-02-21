@@ -2,6 +2,87 @@
 /*** Food Advisor ***/
 /********************/
 
+/*** Jours de la semaine ***/
+.zone_jours_semaine_propositions
+{
+    display: block;
+    margin-bottom: 2vh;
+    text-align: center;
+}
+
+.lien_semaine_precedente
+{
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 1vh;
+    width: 4vh;
+    height: 4vh;
+    background-image: url("/inside/includes/icons/common/open_grey.png");
+    background-size: 3vh 3vh;
+    background-repeat: no-repeat;
+    background-position: center;
+    transform: rotate(90deg);
+}
+
+.lien_semaine_suivante
+{
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 1vh;
+    width: 4vh;
+    height: 4vh;
+    background-image: url("/inside/includes/icons/common/open_grey.png");
+    background-size: 3vh 3vh;
+    background-repeat: no-repeat;
+    background-position: center;
+    transform: rotate(-90deg);
+}
+
+.jour_semaine_propositions
+{
+    flex-grow: 0;
+    display: inline-block;
+    vertical-align: middle;
+    width: calc((100% / 5) - 3vh - (10vh / 5));
+    margin-left: 1vh;
+    margin-right: 1vh;
+    padding: 0.5vh 0.5vh 1vh 0.5vh;
+    box-shadow: 0 0 0.5vh #7c7c7c;
+    border-radius: 0.5vh;
+    font-family: inside_font_regular, Verdana, sans-serif;
+    text-align: center;
+}
+
+.jour_semaine_date
+{
+    background-color: #ff1937;
+    color: white;
+}
+
+.jour_semaine_selectionne
+{
+    background-color: #262626;
+    color: white;
+}
+
+.jour_semaine_autre
+{
+    background-color: #e3e3e3;
+    color: #262626;
+}
+
+.jour_semaine_propositions:active
+{
+    background-color: #262626;
+    color: white;
+}
+
+.numero_jour_semaine
+{
+    line-height: 1vh;
+    font-size: 1.5vh;
+}
+
 /*** Bande à part & sans vote ***/
 .zone_propositions_solo_sans_vote
 {

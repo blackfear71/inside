@@ -9,26 +9,22 @@
 
         // Affichage du résulé de la semaine
         echo '<div id="afficher_propositions_resume" class="zone_propositions_resume_semaine">';
-            $numeroJour = 0;
-
             // Choix
-            foreach ($choixSemaine as $jour => $choixJour)
+            foreach ($choixSemaine as $choixJour)
             {
-                $numeroJour++;
-
-                if (!empty($choixJour))
+                if (!empty($choixJour['choix']))
                 {
                     echo '<div class="zone_proposition proposition_normal">';
                         // Jour
-                        echo '<div class="zone_resume_jour">' . formatDayForDisplayLight($jour) . '</div>';
+                        echo '<div class="zone_resume_jour">' . formatDayForDisplayLight($choixJour['jour']) . '</div>';
 
                         // Restaurant
-                        echo '<div class="nom_resume">' . formatString($choixJour->getName(), 20) . '</div>';
+                        echo '<div class="nom_resume">' . formatString($choixJour['choix']->getName(), 20) . '</div>';
 
                         // Réserveur
-                        if (!empty($choixJour->getCaller()))
+                        if (!empty($choixJour['choix']->getCaller()))
                         {
-                            $avatarFormatted = formatAvatar($choixJour->getAvatar(), $choixJour->getPseudo(), 2, 'avatar');
+                            $avatarFormatted = formatAvatar($choixJour['choix']->getAvatar(), $choixJour['choix']->getPseudo(), 2, 'avatar');
 
                             echo '<div class="caller_normal">';
                                 echo '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="caller_proposition" />';
@@ -37,11 +33,12 @@
                         else
                         {
                             // Suppression si disponible
-                            if ($numeroJour < date('N') OR ($numeroJour == date('N') AND date('H') >= 13))
+                            if (empty($choixJour['choix']->getCaller()) AND ($choixJour['date'] < date('Ymd') OR ($choixJour['date'] == date('Ymd') AND date('H') >= 13)))
                             {
-                                echo '<form id="delete_resume_' . $numeroJour . '" method="post" action="foodadvisor.php?action=doSupprimerResume" class="form_delete_choix">';
-                                    echo '<input type="hidden" name="id_resume" value="' . $choixJour->getId_restaurant() . '" />';
-                                    echo '<input type="hidden" name="date_resume" value="' . $choixJour->getDate() . '" />';
+                                echo '<form id="delete_resume_' . $choixJour['date'] . '" method="post" action="foodadvisor.php?action=doSupprimerResume" class="form_delete_choix">';
+                                    echo '<input type="hidden" name="id_resume" value="' . $choixJour['choix']->getId_restaurant() . '" />';
+                                    echo '<input type="hidden" name="date_resume" value="' . $choixJour['choix']->getDate() . '" />';
+                                    echo '<input type="hidden" name="date" value="' . $_GET['date'] . '" />';
                                     echo '<input type="submit" name="delete_resume" value="" title="Supprimer le choix" class="bouton_delete_choix eventConfirm" />';
                                     echo '<input type="hidden" value="Supprimer ce choix ?" class="eventMessage" />';
                                 echo '</form>';
@@ -51,11 +48,11 @@
                 }
                 else
                 {
-                    if ($numeroJour < date('N') OR ($numeroJour == date('N') AND date('H') >= 13))
+                    if ($choixJour['date'] < date('Ymd') OR ($choixJour['date'] == date('Ymd') AND date('H') >= 13))
                     {
-                        echo '<a id="jour_saisie_resume_' . $numeroJour . '" class="zone_proposition proposition_normal afficherSaisieResume">';
+                        echo '<a id="jour_saisie_resume_' . $choixJour['date'] . '" class="zone_proposition proposition_normal afficherSaisieResume">';
                             // Jour
-                            echo '<div class="zone_resume_jour">' . formatDayForDisplayLight($jour) . '</div>';
+                            echo '<div class="zone_resume_jour">' . formatDayForDisplayLight($choixJour['jour']) . '</div>';
 
                             // Choix absent
                             echo '<div class="nom_resume">Ajouter un choix</div>';
@@ -70,7 +67,7 @@
                     {
                         echo '<div class="zone_proposition proposition_normal">';
                             // Jour
-                            echo '<div class="zone_resume_jour">' . formatDayForDisplayLight($jour) . '</div>';
+                            echo '<div class="zone_resume_jour">' . formatDayForDisplayLight($choixJour['jour']) . '</div>';
 
                             // Choix absent
                             echo '<div class="no_proposal">Pas de proposition pour ce jour...</div>';

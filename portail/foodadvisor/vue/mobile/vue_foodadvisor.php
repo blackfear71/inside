@@ -79,11 +79,16 @@
                     // Résumé
                     include('vue/mobile/vue_saisie_resume.php');
 
+                    /***********************/
+                    /* Jours de la semaine */
+                    /***********************/
+                    include('vue/mobile/vue_jours.php');
+
                     /********************/
                     /* Boutons d'action */
                     /********************/
                     // Actualiser
-                    echo '<a href="foodadvisor.php?action=goConsulter" title="Rafraichir la page" class="lien_green lien_demi margin_lien">';
+                    echo '<a href="foodadvisor.php?date=' . $_GET['date'] . '&action=goConsulter" title="Rafraichir la page" class="lien_green lien_demi margin_lien">';
                         echo '<img src="../../includes/icons/foodadvisor/refresh.png" alt="refresh" class="image_lien" />';
                         echo '<div class="titre_lien">ACTUALISER</div>';
                     echo '</a>';
@@ -103,6 +108,7 @@
                         echo '<form method="post" action="foodadvisor.php?action=doSolo" class="lien_red lien_demi margin_lien">';
                             echo '<img src="../../includes/icons/foodadvisor/solo_grey.png" alt="solo_grey" class="image_lien" />';
                             echo '<div class="titre_lien">BANDE À PART</div>';
+                            echo '<input type="hidden" name="date" value="' . $_GET['date'] . '" />';
                             echo '<input type="submit" name="solo" value="" class="lien_form" />';
                         echo '</form>';
                     }
@@ -113,12 +119,16 @@
                         echo '<form method="post" action="foodadvisor.php?action=doDeterminer" class="lien_red lien_demi margin_lien">';
                             echo '<img src="../../includes/icons/foodadvisor/users_grey.png" alt="users_grey" class="image_lien" />';
                             echo '<div class="titre_lien">DÉTERMINATION</div>';
+                            echo '<input type="hidden" name="date" value="' . $_GET['date'] . '" />';
                             echo '<input type="submit" name="determiner" value="" class="lien_form" />';
                         echo '</form>';
                     }
 
                     // Liste des restaurants
-                    echo '<a href="restaurants.php?action=goConsulter" title="Les restaurants" class="lien_green lien_demi">';
+                    if ($actions['saisir_choix'] == true AND $actions['solo'] == false AND $actions['determiner'] == false)
+                        echo '<a href="restaurants.php?action=goConsulter" title="Les restaurants" class="lien_green">';
+                    else
+                        echo '<a href="restaurants.php?action=goConsulter" title="Les restaurants" class="lien_green lien_demi">';
                         echo '<img src="../../includes/icons/foodadvisor/restaurants_grey.png" alt="restaurants_grey" class="image_lien" />';
                         echo '<div class="titre_lien">RESTAURANTS</div>';
                     echo '</a>';
@@ -138,9 +148,9 @@
                     /***********/
                     include('vue/mobile/vue_details_proposition.php');
 
-                    /************************/
-                    /* Propositions du jour */
-                    /************************/
+                    /************************************/
+                    /* Propositions du jour sélectionné */
+                    /************************************/
                     include('vue/mobile/vue_propositions.php');
 
                     /*************/

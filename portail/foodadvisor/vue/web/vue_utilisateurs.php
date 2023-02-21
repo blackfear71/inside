@@ -10,6 +10,7 @@
         if ($actions['solo'] == true)
         {
             echo '<form method="post" action="foodadvisor.php?action=doSolo">';
+                echo '<input type="hidden" name="date" value="' . $_GET['date'] . '" />';
                 echo '<input type="submit" name="solo" value="Faire bande à part" class="bouton_solo" />';
             echo '</form>';
         }
@@ -42,7 +43,8 @@
             if (!empty($sansPropositions))
             {
                 echo '<div class="zone_proposition_solo_no_votes">';
-                    if (date('N') <= 5 AND date('H') < 13)
+                    if (($_GET['date'] >  date('Ymd') AND date('N', strtotime($_GET['date'])) <= 5)
+                    OR  ($_GET['date'] == date('Ymd') AND date('N') <= 5 AND date('H') < 13))
                         echo '<div class="titre_solo">Ils n\'ont pas encore fait de choix</div>';
                     else
                         echo '<div class="titre_solo">Ils n\'ont pas fait de choix aujourd\'hui</div>';

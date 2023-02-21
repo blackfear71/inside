@@ -35,12 +35,12 @@
                                 echo '<div class="nom_restaurant">' . formatString($restaurant->getName(), 20) . '</div>';
 
                                 // Détermination jour disponible
-                                $explodedOpened = explode(';', $restaurant->getOpened());
+                                $explodedOpened = array_filter(explode(';', $restaurant->getOpened()));
                                 $availableDay   = true;
 
                                 foreach ($explodedOpened as $keyOpened => $opened)
                                 {
-                                    if (!empty($opened) AND $opened == 'N' AND date('N') == $keyOpened + 1)
+                                    if ($opened == 'N' AND date('N') == $keyOpened + 1)
                                         $availableDay = false;
                                 }
 
@@ -64,6 +64,7 @@
                                     {
                                         echo '<form method="post" action="restaurants.php?action=doChoixRapide" class="form_saisie_rapide">';
                                             echo '<input type="hidden" name="id_restaurant" value="' . $restaurant->getId() . '" />';
+                                            echo '<input type="hidden" name="date" value="' . date('Ymd') . '" />';
                                             echo '<input type="submit" name="fast_restaurant" value="" title="Proposer ce restaurant" class="bouton_saisie_rapide" />';
                                         echo '</form>';
                                     }

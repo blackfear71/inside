@@ -25,7 +25,7 @@
             'titre' => 'MOVIE HOUSE'
         ),
         array(
-            'lien'  => '/inside/portail/foodadvisor/foodadvisor.php?action=goConsulter',
+            'lien'  => '/inside/portail/foodadvisor/foodadvisor.php?date=' . date('Ymd') . '&action=goConsulter',
             'image' => 'food_advisor',
             'titre' => 'LES ENFANTS ! À TABLE !'
         ),

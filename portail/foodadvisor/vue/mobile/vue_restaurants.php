@@ -84,7 +84,7 @@
                     echo '</a>';
 
                     // Propositions
-                    echo '<a href="foodadvisor.php?action=goConsulter" title="Les propositions" class="lien_green lien_demi">';
+                    echo '<a href="foodadvisor.php?date=' . date('Ymd') . '&action=goConsulter" title="Les propositions" class="lien_green lien_demi">';
                         echo '<img src="../../includes/icons/foodadvisor/propositions_grey.png" alt="propositions_grey" class="image_lien" />';
                         echo '<div class="titre_lien">PROPOSITIONS</div>';
                     echo '</a>';

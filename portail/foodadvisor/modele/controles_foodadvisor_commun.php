@@ -1,13 +1,48 @@
 <?php
-    // CONTROLE : Date détermination
+    // CONTROLE : Format de date
     // RETOUR : Booléen
-    function controleDateSaisie($alerte)
+    function controleFormatDate($date)
+    {
+        // Initialisations
+        $control_ok = true;
+
+        if (validateDate($date) != true)
+        {
+            $_SESSION['alerts']['wrong_date'] = true;
+            $control_ok                       = false;
+        }
+
+        // Retour
+        return $control_ok;
+    }
+
+    // CONTROLE : Date saisie
+    // RETOUR : Booléen
+    function controleDateSaisie($date)
     {
         // Initialisations
         $control_ok = true;
 
         // Contrôle
-        if (date('N') > 5)
+        if ($date < date('Ymd'))
+        {
+            $_SESSION['alerts']['input_date'] = true;
+            $control_ok                       = false;
+        }
+
+        // Retour
+        return $control_ok;
+    }
+
+    // CONTROLE : Date saisie (week-end)
+    // RETOUR : Booléen
+    function controleDateSaisieWeekEnd($date, $alerte)
+    {
+        // Initialisations
+        $control_ok = true;
+
+        // Contrôle
+        if (date('N', strtotime($date)) > 5)
         {
             $_SESSION['alerts'][$alerte] = true;
             $control_ok                  = false;
@@ -19,13 +54,13 @@
 
     // CONTROLE : Heure saisie
     // RETOUR : Booléen
-    function controleHeureSaisie($alerte)
+    function controleHeureSaisie($date, $alerte)
     {
         // Initialisations
         $control_ok = true;
 
         // Contrôle
-        if (date('H') >= 13)
+        if ($date == date('Ymd') AND date('H') >= 13)
         {
             $_SESSION['alerts'][$alerte] = true;
             $control_ok                  = false;
@@ -55,13 +90,13 @@
 
     // CONTROLE : Choix existant
     // RETOUR : Booléen
-    function controleChoixExistant($idRestaurant, $identifiant, $equipe, $alerte)
+    function controleChoixExistant($idRestaurant, $identifiant, $equipe, $date, $alerte)
     {
         // Initialisations
         $control_ok = true;
 
         // Contrôle
-        $exist = physiqueChoixExistant($idRestaurant, $identifiant, $equipe);
+        $exist = physiqueChoixExistant($idRestaurant, $identifiant, $equipe, $date);
 
         if ($exist == true)
         {
@@ -75,25 +110,21 @@
 
     // CONTROLE : Choix déjà existant
     // RETOUR : Booléen
-    function controleRestaurantOuvert($opened)
+    function controleRestaurantOuvert($opened, $date)
     {
         // Initialisations
         $control_ok = true;
 
         // Contrôle
-        $explodedOpened = explode(';', $opened);
+        $explodedOpened = array_filter(explode(';', $opened));
 
         foreach ($explodedOpened as $keyOpened => $opened)
         {
-            if (!empty($opened))
+            if (date('N', strtotime($date)) == $keyOpened + 1 AND $opened == 'N')
             {
-                if (date('N') == $keyOpened + 1 AND $opened == 'N')
-                {
-                    $_SESSION['alerts']['not_open'] = true;
-                    $control_ok                     = false;
-
-                    break;
-                }
+                $_SESSION['alerts']['not_open'] = true;
+                $control_ok                     = false;
+                break;
             }
         }
 

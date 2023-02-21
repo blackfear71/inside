@@ -6,7 +6,7 @@
     /****************************************************************************/
     // PHYSIQUE : Lecture des utilisateurs inscrits
     // RETOUR : Liste des utilisateurs
-    function physiqueUsers($equipe, $dateDebut, $dateFin)
+    function physiqueUsers($equipe, $date)
     {
         // Initialisations
         $listeUsers = array();
@@ -18,11 +18,11 @@
                             FROM users
                             WHERE (identifiant != "admin" AND team = "' . $equipe . '" AND status != "D"  AND status != "I")
                             OR EXISTS (SELECT id, team, date, caller
-                                    FROM food_advisor_choices
-                                    WHERE food_advisor_choices.caller = users.identifiant AND food_advisor_choices.team = "' . $equipe . '" AND date >= "' . $dateDebut . '" AND date <= "' . $dateFin . '")
+                                       FROM food_advisor_choices
+                                       WHERE food_advisor_choices.caller = users.identifiant AND food_advisor_choices.team = "' . $equipe . '" AND date = "' . $date . '")
                             OR EXISTS (SELECT id, team, identifiant, date
-                                    FROM food_advisor_users
-                                    WHERE food_advisor_users.identifiant = users.identifiant AND food_advisor_users.team = "' . $equipe . '" AND date >= "' . $dateDebut . '" AND date <= "' . $dateFin . '")
+                                       FROM food_advisor_users
+                                       WHERE food_advisor_users.identifiant = users.identifiant AND food_advisor_users.team = "' . $equipe . '" AND date = "' . $date . '")
                             ORDER BY identifiant ASC');
 
         while ($data = $req->fetch())
@@ -42,7 +42,7 @@
 
     // PHYSIQUE : Lecture bande à part
     // RETOUR : Liste identifiants
-    function physiqueIdentifiantsSolos($equipe)
+    function physiqueIdentifiantsSolos($equipe, $date)
     {
         // Initialisations
         $identifiantsSolos = array();
@@ -52,7 +52,7 @@
 
         $req = $bdd->query('SELECT *
                             FROM food_advisor_users
-                            WHERE id_restaurant = 0 AND team = "' . $equipe . '" AND date = "' . date('Ymd') . '"
+                            WHERE id_restaurant = 0 AND team = "' . $equipe . '" AND date = "' . $date . '"
                             ORDER BY identifiant ASC');
 
         while ($data = $req->fetch())
@@ -69,7 +69,7 @@
 
     // PHYSIQUE : Lecture nombre de propositions d'un utilisateur
     // RETOUR : Nombre de propositions
-    function physiqueNombrePropositions($equipe, $identifiant)
+    function physiqueNombrePropositions($equipe, $identifiant, $date)
     {
         // Initialisations
         $nombrePropositions = 0;
@@ -79,7 +79,7 @@
 
         $req = $bdd->query('SELECT COUNT(*) AS nombreLignes
                             FROM food_advisor_users
-                            WHERE date = "' . date('Ymd') . '" AND team = "' . $equipe . '" AND identifiant = "' . $identifiant . '"');
+                            WHERE date = "' . $date . '" AND team = "' . $equipe . '" AND identifiant = "' . $identifiant . '"');
 
         $data = $req->fetch();
 
@@ -144,7 +144,7 @@
 
     // PHYSIQUE : Lecture détermination existante liée à l'utilisateur
     // RETOUR : Booléen
-    function physiqueDeterminationExistanteUser($identifiant, $equipe)
+    function physiqueDeterminationExistanteUser($identifiant, $equipe, $date)
     {
         // Initialisations
         $exist = false;
@@ -154,7 +154,7 @@
 
         $req = $bdd->query('SELECT COUNT(*) AS nombreLignes
                             FROM food_advisor_choices
-                            WHERE date = "' . date('Ymd') . '" AND team = "' . $equipe . '" AND caller = "' . $identifiant . '"');
+                            WHERE date = "' . $date . '" AND team = "' . $equipe . '" AND caller = "' . $identifiant . '"');
 
         $data = $req->fetch();
 
@@ -197,14 +197,14 @@
     /****************************************************************************/
     // PHYSIQUE : Annulation réservation
     // RETOUR : Aucun
-    function physiqueAnnulationReservation($idRestaurant, $equipe, $identifiant)
+    function physiqueAnnulationReservation($idRestaurant, $equipe, $identifiant, $date)
     {
         // Requête
         global $bdd;
 
         $req = $bdd->prepare('UPDATE food_advisor_choices
                               SET reserved      = :reserved
-                              WHERE id_restaurant = ' . $idRestaurant . ' AND date = "' . date('Ymd') . '" AND team = "' . $equipe . '" AND caller = "' . $identifiant . '"');
+                              WHERE id_restaurant = ' . $idRestaurant . ' AND date = "' . $date . '" AND team = "' . $equipe . '" AND caller = "' . $identifiant . '"');
 
         $req->execute(array(
             'reserved' => 'N'
@@ -215,7 +215,7 @@
 
     // PHYSIQUE : Mise à jour choix existant
     // RETOUR : Aucun
-    function physiqueUpdateChoix($idChoix, $choix, $identifiant)
+    function physiqueUpdateChoix($idChoix, $choix, $identifiant, $date)
     {
         // Requête
         global $bdd;
@@ -224,7 +224,7 @@
                               SET time       = :time,
                                   transports = :transports,
                                   menu       = :menu
-                              WHERE id = ' . $idChoix . ' AND identifiant = "' . $identifiant . '" AND date = "' . date('Ymd') . '"');
+                              WHERE id = ' . $idChoix . ' AND identifiant = "' . $identifiant . '" AND date = "' . $date . '"');
 
         $req->execute($choix);
 
@@ -236,35 +236,35 @@
     /****************************************************************************/
     // PHYSIQUE : Suppression choix bande à part
     // RETOUR : Aucun
-    function physiqueDeleteSolo($equipe, $identifiant)
+    function physiqueDeleteSolo($equipe, $identifiant, $date)
     {
         // Requête
         global $bdd;
 
         $req = $bdd->exec('DELETE FROM food_advisor_users
-                           WHERE id_restaurant = 0 AND date = "' . date('Ymd') . '" AND team = "' . $equipe . '" AND identifiant = "' . $identifiant . '"');
+                           WHERE id_restaurant = 0 AND date = "' . $date . '" AND team = "' . $equipe . '" AND identifiant = "' . $identifiant . '"');
     }
 
     // PHYSIQUE : Suppression choix d'un restaurant
     // RETOUR : Aucun
-    function physiqueDeleteComplete($idRestaurant, $equipe)
+    function physiqueDeleteComplete($idRestaurant, $equipe, $date)
     {
         // Requête
         global $bdd;
 
         $req = $bdd->exec('DELETE FROM food_advisor_users
-                           WHERE date = "' . date('Ymd') . '" AND id_restaurant = "' . $idRestaurant . '" AND team = "' . $equipe . '"');
+                           WHERE date = "' . $date . '" AND id_restaurant = "' . $idRestaurant . '" AND team = "' . $equipe . '"');
     }
 
     // PHYSIQUE : Suppression détermination du jour liée à l'utilisateur
     // RETOUR : Aucun
-    function physiqueDeleteDeterminationUser($idRestaurant, $equipe, $identifiant)
+    function physiqueDeleteDeterminationUser($idRestaurant, $equipe, $identifiant, $date)
     {
         // Requête
         global $bdd;
 
         $req = $bdd->exec('DELETE FROM food_advisor_choices
-                           WHERE id_restaurant = ' . $idRestaurant . ' AND date = "' . date('Ymd') . '" AND team = "' . $equipe . '" AND caller = "' . $identifiant . '"');
+                           WHERE id_restaurant = ' . $idRestaurant . ' AND date = "' . $date . '" AND team = "' . $equipe . '" AND caller = "' . $identifiant . '"');
     }
 
     // PHYSIQUE : Suppression choix d'un utilisateur
@@ -280,24 +280,24 @@
 
     // PHYSIQUE : Suppression détermination existante pour un utilisateur
     // RETOUR : Aucun
-    function physiqueDeleteDeterminationRestaurantUser($idRestaurant, $equipe, $identifiant)
+    function physiqueDeleteDeterminationRestaurantUser($idRestaurant, $equipe, $identifiant, $date)
     {
         // Requête
         global $bdd;
 
         $req = $bdd->exec('DELETE FROM food_advisor_choices
-                           WHERE date = "' . date('Ymd') . '" AND id_restaurant = ' . $idRestaurant . ' AND team = "' . $equipe . '" AND caller = "' . $identifiant . '"');
+                           WHERE date = "' . $date . '" AND id_restaurant = ' . $idRestaurant . ' AND team = "' . $equipe . '" AND caller = "' . $identifiant . '"');
     }
 
     // PHYSIQUE : Suppression de tous les choix d'un utilisateur
     // RETOUR : Aucun
-    function physiqueDeleteTousChoix($equipe, $identifiant)
+    function physiqueDeleteTousChoix($equipe, $identifiant, $date)
     {
         // Requête
         global $bdd;
 
         $req = $bdd->exec('DELETE FROM food_advisor_users
-                           WHERE date = "' . date('Ymd') . '" AND team = "' . $equipe . '" AND identifiant = "' . $identifiant . '"');
+                           WHERE date = "' . $date . '" AND team = "' . $equipe . '" AND identifiant = "' . $identifiant . '"');
     }
 
     // PHYSIQUE : Suppression résumé
