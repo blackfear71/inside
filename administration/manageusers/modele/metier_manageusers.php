@@ -51,7 +51,7 @@
         ksort($listeUsersParEquipe);
 
         // S'il y a des utilisateurs en cours d'inscription, on les remet au début du tableau
-        if (!empty($inscriptionsEnCours))
+        if (!empty($inscriptionsEnCours['new_users']))
             $listeUsersParEquipe = $inscriptionsEnCours + $listeUsersParEquipe;
         
         // Retour
