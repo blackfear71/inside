@@ -500,13 +500,13 @@
         global $bdd;
 
         $req = $bdd->prepare('INSERT INTO collector_users(id_collector,
-                                                        team,
-                                                        identifiant,
-                                                        vote)
-                                                VALUES(:id_collector,
-                                                       :team,
-                                                       :identifiant,
-                                                       :vote)');
+                                                          team,
+                                                          identifiant,
+                                                          vote)
+                                                  VALUES(:id_collector,
+                                                         :team,
+                                                         :identifiant,
+                                                         :vote)');
 
         $req->execute($vote);
 

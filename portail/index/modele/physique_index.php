@@ -380,25 +380,25 @@
         global $bdd;
 
         $req = $bdd->prepare('INSERT INTO preferences(identifiant,
-                                                    ref_theme,
-                                                    font,
-                                                    init_chat,
-                                                    celsius,
-                                                    view_movie_house,
-                                                    categories_movie_house,
-                                                    view_the_box,
-                                                    view_notifications,
-                                                    manage_calendars)
-                                            VALUES(:identifiant,
-                                                   :ref_theme,
-                                                   :font,
-                                                   :init_chat,
-                                                   :celsius,
-                                                   :view_movie_house,
-                                                   :categories_movie_house,
-                                                   :view_the_box,
-                                                   :view_notifications,
-                                                   :manage_calendars)');
+                                                      ref_theme,
+                                                      font,
+                                                      init_chat,
+                                                      celsius,
+                                                      view_movie_house,
+                                                      categories_movie_house,
+                                                      view_the_box,
+                                                      view_notifications,
+                                                      manage_calendars)
+                                              VALUES(:identifiant,
+                                                     :ref_theme,
+                                                     :font,
+                                                     :init_chat,
+                                                     :celsius,
+                                                     :view_movie_house,
+                                                     :categories_movie_house,
+                                                     :view_the_box,
+                                                     :view_notifications,
+                                                     :manage_calendars)');
 
         $req->execute($preferences);
 

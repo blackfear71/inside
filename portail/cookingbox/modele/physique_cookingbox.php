@@ -271,25 +271,25 @@
         global $bdd;
 
         $req = $bdd->prepare('INSERT INTO cooking_box(identifiant,
-                                                    team,
-                                                    week,
-                                                    year,
-                                                    cooked,
-                                                    name,
-                                                    picture,
-                                                    ingredients,
-                                                    recipe,
-                                                    tips)
-                                            VALUES(:identifiant,
-                                                   :team,
-                                                   :week,
-                                                   :year,
-                                                   :cooked,
-                                                   :name,
-                                                   :picture,
-                                                   :ingredients,
-                                                   :recipe,
-                                                   :tips)');
+                                                      team,
+                                                      week,
+                                                      year,
+                                                      cooked,
+                                                      name,
+                                                      picture,
+                                                      ingredients,
+                                                      recipe,
+                                                      tips)
+                                              VALUES(:identifiant,
+                                                     :team,
+                                                     :week,
+                                                     :year,
+                                                     :cooked,
+                                                     :name,
+                                                     :picture,
+                                                     :ingredients,
+                                                     :recipe,
+                                                     :tips)');
 
         $req->execute($cooking);
 

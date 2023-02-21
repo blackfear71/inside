@@ -144,12 +144,12 @@
                                                  date_deb,
                                                  date_fin)
                                          VALUES(:reference,
-                                                 :name,
-                                                 :type,
-                                                 :level,
-                                                 :logo,
-                                                 :date_deb,
-                                                 :date_fin)');
+                                                :name,
+                                                :type,
+                                                :level,
+                                                :logo,
+                                                :date_deb,
+                                                :date_fin)');
 
         $req->execute($theme);
 

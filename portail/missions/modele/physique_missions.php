@@ -256,15 +256,15 @@
         global $bdd;
 
         $req = $bdd->prepare('INSERT INTO missions_users(id_mission,
-                                                        team,
-                                                        identifiant,
-                                                        avancement,
-                                                        date_mission)
-                                                VALUES(:id_mission,
-                                                       :team,
-                                                       :identifiant,
-                                                       :avancement,
-                                                       :date_mission)');
+                                                         team,
+                                                         identifiant,
+                                                         avancement,
+                                                         date_mission)
+                                                 VALUES(:id_mission,
+                                                        :team,
+                                                        :identifiant,
+                                                        :avancement,
+                                                        :date_mission)');
 
         $req->execute($missionUser);
 

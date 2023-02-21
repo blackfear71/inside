@@ -261,17 +261,17 @@
         global $bdd;
 
         $req = $bdd->prepare('INSERT INTO expense_center(team,
-                                                        date,
-                                                        price,
-                                                        buyer,
-                                                        comment,
-                                                        type)
-                                                VALUES(:team,
-                                                       :date,
-                                                       :price,
-                                                       :buyer,
-                                                       :comment,
-                                                       :type)');
+                                                         date,
+                                                         price,
+                                                         buyer,
+                                                         comment,
+                                                         type)
+                                                 VALUES(:team,
+                                                        :date,
+                                                        :price,
+                                                        :buyer,
+                                                        :comment,
+                                                        :type)');
 
         $req->execute($depense);
 
@@ -291,13 +291,13 @@
         global $bdd;
 
         $req = $bdd->prepare('INSERT INTO expense_center_users(id_expense,
-                                                            team,
-                                                            identifiant,
-                                                            parts)
-                                                    VALUES(:id_expense,
-                                                           :team,
-                                                           :identifiant,
-                                                           :parts)');
+                                                               team,
+                                                               identifiant,
+                                                               parts)
+                                                       VALUES(:id_expense,
+                                                              :team,
+                                                              :identifiant,
+                                                              :parts)');
 
         $req->execute($part);
 

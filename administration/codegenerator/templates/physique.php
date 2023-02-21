@@ -42,8 +42,10 @@
         // Requête
         global $bdd;
 
-        $req = $bdd->prepare('INSERT INTO table(champ1, champ2)
-        VALUES(:champ1, :champ2)');
+        $req = $bdd->prepare('INSERT INTO table(champ1,
+                                                champ2)
+                                        VALUES(:champ1,
+                                               :champ2)');
 
         $req->execute(array(
             'champ1' => $champ1,

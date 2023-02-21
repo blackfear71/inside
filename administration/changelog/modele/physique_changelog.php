@@ -61,13 +61,13 @@
         global $bdd;
 
         $req = $bdd->prepare('INSERT INTO change_log(week,
-                                                    year,
-                                                    notes,
-                                                    logs)
-                                            VALUES(:week,
-                                                   :year,
-                                                   :notes,
-                                                   :logs)');
+                                                     year,
+                                                     notes,
+                                                     logs)
+                                             VALUES(:week,
+                                                    :year,
+                                                    :notes,
+                                                    :logs)');
 
         $req->execute($changelog);
 

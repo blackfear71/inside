@@ -274,15 +274,15 @@
         global $bdd;
 
         $req = $bdd->prepare('INSERT INTO movie_house_comments(id_film,
-                                                            author,
-                                                            date,
-                                                            time,
-                                                            comment)
-                                                    VALUES(:id_film,
-                                                           :author,
-                                                           :date,
-                                                           :time,
-                                                           :comment)');
+                                                               author,
+                                                               date,
+                                                               time,
+                                                               comment)
+                                                       VALUES(:id_film,
+                                                              :author,
+                                                              :date,
+                                                              :time,
+                                                              :comment)');
 
         $req->execute($commentaire);
 

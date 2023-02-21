@@ -602,8 +602,8 @@
                                                 team,
                                                 activation)
                                         VALUES(:reference,
-                                            :team,
-                                            :activation)');
+                                               :team,
+                                               :activation)');
 
         $req->execute($equipe);
 

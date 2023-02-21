@@ -90,21 +90,21 @@
         global $bdd;
 
         $req = $bdd->prepare('INSERT INTO bugs(date,
-                                            author,
-                                            team,
-                                            subject,
-                                            content,
-                                            picture,
-                                            type,
-                                            resolved)
-                                    VALUES(:date,
-                                           :author,
-                                           :team,
-                                           :subject,
-                                           :content,
-                                           :picture,
-                                           :type,
-                                           :resolved)');
+                                               author,
+                                               team,
+                                               subject,
+                                               content,
+                                               picture,
+                                               type,
+                                               resolved)
+                                       VALUES(:date,
+                                              :author,
+                                              :team,
+                                              :subject,
+                                              :content,
+                                              :picture,
+                                              :type,
+                                              :resolved)');
 
         $req->execute($bug);
 
