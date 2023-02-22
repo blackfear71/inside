@@ -154,7 +154,7 @@
                                         else
                                         {
                                             echo '<div class="zone_image_restaurant_vote">';
-                                                echo '<img src="../../includes/icons/common/food_advisor.png" alt="food_advisor" title="Déjà voté" class="image_restaurant_vote" />';
+                                                echo '<img src="../../includes/icons/common/validate.png" alt="validate" title="Déjà voté" class="image_restaurant_vote" />';
                                             echo '</div>';
                                         }
                                     }
