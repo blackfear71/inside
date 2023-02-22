@@ -58,7 +58,7 @@
                             echo '<div class="nom_resume">Ajouter un choix</div>';
 
                             // Symbole ajout
-                            echo '<div class="caller_normal">';
+                            echo '<div class="bouton_ajout_resume">';
                                 echo '<span class="fond_plus_resume">+</span>';
                             echo '</div>';
                         echo '</a>';

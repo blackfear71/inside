@@ -353,6 +353,11 @@
     border: 0;
 }
 
+.bouton_delete_choix:active
+{
+    background-color: #b3b3b3;
+}
+
 /*** Recherche live ***/
 .zone_recherche_live
 {
@@ -471,6 +476,21 @@
     padding-left: 1vh;
     padding-right: 1vh;
     word-break: break-word;
+}
+
+.bouton_ajout_resume
+{
+    display: inline-block;
+    vertical-align: middle;
+    width: 6vh;
+    height: 6vh;
+    padding: 1vh;
+    background-color: #d3d3d3;
+}
+
+.bouton_ajout_resume:active
+{
+    background-color: #b3b3b3;
 }
 
 .fond_plus_resume
