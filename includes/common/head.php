@@ -28,7 +28,7 @@
 
     // Meta-données
     echo '<meta charset="utf-8" />';
-    echo '<meta name="description" content="Bienvenue sur Inside, le portail interne au seul vrai CDS Finance" />';
+    echo '<meta name="description" content="Bienvenue sur Inside, portail de partage et d\'échange au cœur de l\'équipe (ex-portail interne au seul vrai CDS Finance)" />';
     echo '<meta name="keywords" content="Inside, portail, CDS Finance" />';
 
     if ($_SESSION['index']['plateforme'] == 'mobile')
