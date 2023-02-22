@@ -68,6 +68,12 @@
                                             echo '<input type="submit" name="fast_restaurant" value="" title="Proposer ce restaurant" class="bouton_saisie_rapide" />';
                                         echo '</form>';
                                     }
+                                    else
+                                    {
+                                        echo '<div class="zone_image_restaurant_vote">';
+                                            echo '<img src="../../includes/icons/common/food_advisor.png" alt="food_advisor" title="Déjà voté" class="image_restaurant_vote" />';
+                                        echo '</div>';
+                                    }
                                 }
                             echo '</div>';
                         echo '</div>';
