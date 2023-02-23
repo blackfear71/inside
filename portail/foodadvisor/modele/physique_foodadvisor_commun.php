@@ -129,7 +129,8 @@
 
         $req = $bdd->query('SELECT DISTINCT id_restaurant
                             FROM food_advisor_users
-                            WHERE id_restaurant != 0 AND date = "' . $date . '" AND team = "' . $equipe . '"');
+                            WHERE id_restaurant != 0 AND date = "' . $date . '" AND team = "' . $equipe . '"
+                            ORDER BY id_restaurant ASC');
 
         while ($data = $req->fetch())
         {
@@ -159,7 +160,7 @@
         $req = $bdd->query('SELECT *
                             FROM food_advisor_users
                             WHERE id_restaurant != 0 AND team = "' . $equipe . '" AND identifiant = "' . $identifiant . '" AND date = "' . $date . '"
-                            ORDER BY id ASC');
+                            ORDER BY id_restaurant ASC');
 
         while ($data = $req->fetch())
         {
