@@ -37,6 +37,13 @@
             <!-- Déblocage succès -->
             <?php include('../../includes/common/success.php'); ?>
 
+            <!-- Celsius -->
+            <?php
+                $celsius = 'calendars_generator';
+
+                include('../../includes/common/web/celsius.php');
+            ?>
+
             <article>
                 <?php
                     /*******************/

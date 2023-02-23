@@ -430,17 +430,6 @@ aside
     color: white;
 }
 
-.texte_contenu_celsius ul
-{
-    padding-left: 2.5vh;
-    margin: 0;
-}
-
-.texte_contenu_celsius ul li
-{
-    margin-top: 2vh;
-}
-
 .zone_boutons_celsius
 {
     width: 100%;

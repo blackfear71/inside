@@ -88,8 +88,8 @@
                     echo '<div class="texte_titre_preference">CELSIUS</div>';
                 echo '</div>';
 
-                // Affichage sur mobile
-                echo '<div class="sous_titre_preference">Affichage sur mobile</div>';
+                // Affichage
+                echo '<div class="sous_titre_preference">Affichage</div>';
 
                 echo '<div class="zone_preference">';
                     if ($preferences->getCelsius() == 'Y')

@@ -37,6 +37,13 @@
             <!-- Déblocage succès -->
             <?php include('../../includes/common/success.php'); ?>
 
+            <!-- Celsius -->
+            <?php
+                $celsius = 'moviehouse';
+
+                include('../../includes/common/web/celsius.php');
+            ?>
+
             <!-- Contenu -->
             <article>
                 <?php

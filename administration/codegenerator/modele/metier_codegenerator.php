@@ -203,7 +203,7 @@
         $listeVues['vue_web'] = $vueWeb;
 
         // Récupération vue mobile
-        if ($options['mobile']->getChecked() == 'Y')
+        if ($options['admin']->getChecked() != 'Y' AND $options['mobile']->getChecked() == 'Y')
         {
             $vueMobile = getVue($generatorParameters, true);
 
@@ -335,8 +335,26 @@
             $vue = str_replace('/*success*/', '', $vue);
 
         // Celsius
-        if ($isMobile == true)
-            $vue = str_replace('/*celsius*/', '\'' . $nomTechnique . '\'', $vue);
+        if ($options['admin']->getChecked() != 'Y')
+        {
+            if ($isMobile == true)
+            {
+                $vue = str_replace('/*celsius*/', '\'' . $nomTechnique . '\'', $vue);
+            }
+            else
+            {
+                $vue = str_replace('/*celsius*/', '
+            <!-- Celsius -->
+            <?php
+                $celsius = \'' . $nomTechnique . '\';
+                
+                include(\'../../includes/common/web/celsius.php\');
+            ?>
+    ', $vue);
+            }
+        }
+        else
+            $vue = str_replace('/*celsius*/', '', $vue);
 
         // Missions
         if ($options['admin']->getChecked() == 'Y')

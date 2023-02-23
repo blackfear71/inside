@@ -37,6 +37,13 @@
             <!-- Déblocage succès -->
             <?php include('../../includes/common/success.php'); ?>
 
+            <!-- Celsius -->
+            <?php
+                $celsius = 'collector';
+
+                include('../../includes/common/web/celsius.php');
+            ?>
+
             <article>
                 <?php
                     /********************/

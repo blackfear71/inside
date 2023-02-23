@@ -36,6 +36,13 @@
             <!-- Déblocage succès -->
             <?php include('../../includes/common/success.php'); ?>
 
+            <!-- Celsius -->
+            <?php
+                $celsius = 'portail';
+
+                include('../../includes/common/web/celsius.php');
+            ?>
+
             <article>
                 <?php
                     /********************/

@@ -24,12 +24,12 @@
             <?php
                 $title = /*title*/;
                 
-                include('../../includes/common/web/header.php');/*onglets*/                
+                include('../../includes/common/web/header.php');/*onglets*/
             ?>
         </header>
 
         <!-- Contenu -->
-        <section>/*alerts*//*success*/            
+        <section>/*alerts*//*success*//*celsius*/
             <article>
                 <?php/*missions*/
                     /*********/

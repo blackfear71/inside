@@ -141,6 +141,29 @@ $(window).on('load', function ()
 {
     // Suppression de la barre de chargement de la page
     $('.zone_loading_page').remove();
+
+    // Initialisation de la position Celsius
+    setTimeout(function ()
+    {
+        initPositionCelsius();
+    }, 100);
+});
+
+// Au scroll du document
+$(window).scroll(function ()
+{
+    // Positionnement de Celsius en fonction du scroll
+    initPositionCelsius();
+});
+
+// Au redimensionnement de la fenêtre
+$(window).resize(function ()
+{
+    // Positionnement de Celsius en fonction du redimensionnement de la fenêtre
+    setTimeout(function ()
+    {
+        initPositionCelsius();
+    }, 100);
 });
 
 /*****************/
@@ -301,6 +324,18 @@ function afficherExperienceHeader(id)
 
     // Création de la ligne
     context.stroke();
+}
+
+// Fonction initialisation position Celsius
+function initPositionCelsius()
+{
+    var totalHeight = $('body')[0].scrollHeight - $(window).height();
+    var difference  = $('footer').height() - (totalHeight - $(window).scrollTop()) + 20;
+
+    if (difference > 0)
+        $('.zone_celsius').css('bottom', difference + 'px');
+    else
+        $('.zone_celsius').css('bottom', '20px');
 }
 
 // Changement thème

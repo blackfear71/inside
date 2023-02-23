@@ -411,7 +411,7 @@ function initCookieWindowChat()
     }
 }
 
-// Fonction initialisation position chat (aussi présente dans scriptMH.js)
+// Fonction initialisation position chat
 function initPositionChat()
 {
     var totalHeight = $('body')[0].scrollHeight - window.innerHeight;

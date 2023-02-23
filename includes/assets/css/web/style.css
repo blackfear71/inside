@@ -565,6 +565,83 @@ header
     transform: rotate(-90deg);
 }
 
+/*** Celsius ***/
+.zone_celsius
+{
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 6;
+}
+
+.celsius
+{
+    display: block;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    transform: scale(1);
+    transform-origin: center center;
+    transition: transform 0.2s;
+    filter: drop-shadow(0px 0px 1px #5c5c5c);
+}
+
+.zone_celsius:hover .celsius
+{
+    transform: scale(1.1);
+    transition: transform 0.2s;
+}
+
+.zone_contenu_celsius
+{
+    display: none;
+    margin-bottom: 20px;
+    z-index: 6;
+    width: 500px;
+    max-height: 300px;
+    border-radius: 2px;
+    box-shadow: 0 0 3px #7c7c7c;
+    overflow: hidden;
+    background-color: white;
+}
+
+.zone_celsius:hover .zone_contenu_celsius
+{
+    display: block;
+}
+
+.titre_contenu_celsius
+{
+    display: block;
+    line-height: 40px;
+    background-color: #ff1937;
+    width: calc(100% - 40px);
+    padding-left: 20px;
+    padding-right: 20px;
+    font-family: inside_font_medium, Verdana, sans-serif;
+    font-size: 120%;
+    color: white;
+    border-bottom: solid 2px #c81932;
+}
+
+.zone_texte_celsius
+{
+    width: 100%;
+    overflow-y: auto;
+    background-color: #e3e3e3;
+    border-top: solid 1px #ff4961;
+}
+
+.texte_contenu_celsius
+{
+    padding: 10px 20px 10px 20px;
+    height: 100%;
+    font-family: inside_font_light, Verdana, sans-serif;
+    font-size: 100%;
+    text-align: justify;
+    color: #262626;
+}
+
 /*** Ombre ancres ***/
 .zone_shadow
 {

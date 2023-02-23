@@ -85,7 +85,7 @@
                         break;
                 }
 
-                include('../../includes/common/mobile/celsius.php');
+                include('../../includes/common/mobile/celsius_mobile.php');
             ?>
 
             <article>

@@ -62,8 +62,8 @@
                 break;
 
             case 'portail':
-                $contenuCelsius = 'Bonjour <strong>' . $_SESSION['user']['pseudo'] . '</strong> et bienvenue sur la version mobile du site.
-                                   Je suis <strong>Celsius</strong> et je vais te guider à travers les différentes sections du site. Ici tu peux accéder à la section pour voter pour le repas du midi et celle pour répartir les dépenses.
+                $contenuCelsius = 'Bonjour <strong>' . $_SESSION['user']['pseudo'] . '</strong> et bienvenue sur la version ' . $_SESSION['index']['plateforme'] . ' du site.
+                                   Je suis <strong>Celsius</strong> et je vais te guider à travers les différentes sections. Ici tu peux accéder à la section pour voter pour le repas du midi et celle pour répartir les dépenses.
                                    Viens aussi choisir ton prochain film ou bien te moquer des bétises que disent les autres. Tu peux aussi télécharger les derniers calendriers ou en créer au besoin (sous réserve d\'être autorisé). Et n\'oublie pas les menus sur les côtés pour naviguer à travers le site !';
                 break;
 
@@ -97,31 +97,25 @@
                 break;
         }
 
+        // Affichage
         if (!empty($contenuCelsius))
         {
-            // Icône
-            echo '<img src="/inside/includes/icons/common/celsius.png" alt="celsius" title="Celsius" class="celsius" />';
+            echo '<div class="zone_celsius">';
+                // Contenu
+                echo '<div class="zone_contenu_celsius">';
+                    // Titre
+                    echo '<div class="titre_contenu_celsius">';
+                        echo 'Celsius';
+                    echo '</div>';
 
-            // Contenu
-            echo '<div id="contenuCelsius" class="zone_contenu_celsius">';
-                // Titre
-                echo '<div class="titre_contenu_celsius">';
-                    echo 'Celsius';
+                    // Texte
+                    echo '<div class="zone_texte_celsius">';
+                        echo '<div class="texte_contenu_celsius">' . $contenuCelsius . '</div>';
+                    echo '</div>';
                 echo '</div>';
 
-                // Texte
-                echo '<div class="zone_texte_celsius">';
-                    echo '<div class="texte_contenu_celsius">' . $contenuCelsius . '</div>';
-                echo '</div>';
-
-                // Boutons
-                echo '<div class="zone_boutons_celsius">';
-                    // Réinitialisation position
-                    echo '<a id="resetCelsius" class="bouton_celsius_left">Réinitialiser</a>';
-
-                    // Fermeture
-                    echo '<a id="closeCelsius" class="bouton_celsius_right">Fermer</a>';
-                echo '</div>';
+                // Icône
+                echo '<img src="/inside/includes/icons/common/celsius.png" alt="celsius" title="Celsius" class="celsius" />';
             echo '</div>';
         }
     }

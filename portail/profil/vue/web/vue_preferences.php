@@ -11,8 +11,8 @@
                 echo '<div class="zone_contributions">';
                     echo '<div class="titre_contribution"><img src="../../includes/icons/profil/celsius_grey.png" alt="celsius_grey" class="logo_titre_contribution" />CELSIUS</div>';
 
-                    // Affichage sur mobile
-                    echo '<div class="sous_titre_contribution">Affichage sur mobile</div>';
+                    // Affichage
+                    echo '<div class="sous_titre_contribution">Affichage</div>';
 
                     echo '<div class="zone_contribution large">';
                         if ($preferences->getCelsius() == 'Y')

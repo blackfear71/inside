@@ -36,6 +36,32 @@
             <!-- Déblocage succès -->
             <?php include('../../includes/common/success.php'); ?>
 
+            <!-- Celsius -->
+            <?php
+                switch ($_GET['view'])
+                {
+                    case 'settings':
+                        $celsius = 'settings';
+                        break;
+
+                    case 'success':
+                    case 'ranking':
+                        $celsius = 'success';
+                        break;
+
+                    case 'themes':
+                        $celsius = 'themes';
+                        break;
+
+                    case 'profile':
+                    default:
+                        $celsius = 'profil';
+                        break;
+                }
+
+                include('../../includes/common/web/celsius.php');
+            ?>
+
             <article>
                 <?php
                     /********************/
