@@ -294,6 +294,149 @@
         );
     }
 
+    // METIER : Récupération du contenu Celsius
+    // RETOUR : Contenu Celsius
+    function getContenuCelsius($celsius)
+    {
+        // Sélection du contenu Celsius à afficher
+        switch ($celsius)
+        {
+            case 'bugs':
+                $contenuCelsius = 'Le site ne présente aucun bug. Si toutefois tu penses être tombé sur ce qui prétend en être un, tu peux le
+                                   signaler sur cette page. Ce que j\'appellerai désormais "évolution" sera traitée dans les plus brefs délais
+                                   par une équipe exceptionnelle, toujours à ton écoute pour te servir au mieux.';
+                break;
+
+            case 'calendars':
+                $contenuCelsius = 'Tu trouveras ici les derniers calendriers pour les afficher au mur. Si tu souhaites pouvoir les créer par
+                                   toi-même, tu peux contacter l\'administrateur pour qu\'il t\'autorise à le faire.';
+                break;
+
+            case 'calendars_generator':
+                $contenuCelsius = 'Si tu penses avoir besoin d\'un calendrier pour ton équipe, tu es au bon endroit ! Il te suffit de mettre ta
+                                   plus belle photo du moment et le tour est joué. Tu peux les compléter avec des étiquettes qui permettront de
+                                   savoir qui est le Scrum Master ou qui doit faire un gâteau cette semaine !';
+                break;
+
+            case 'changelog':
+                $contenuCelsius = 'Tu veux être au courant des toutes dernières nouveautés ? Tu veux tout savoir de l\'histoire de ton site préféré ?
+                                   Alors c\'est ici que ça se passe ! Passionné par la technique ou simple curieux, viens voir ce qui t\'attend et
+                                   peut-être qu\'un jour ce sera à toi de compléter ces journaux...';
+                break;
+
+            case 'collector':
+                $contenuCelsius = 'Si tu as l\'oreille qui traîne ou le regard perçant, peut-être que tu as vu un de tes compères faire une bêtise...
+                                   encore une fois ! Alors n\'attends plus, montres-nous tout ça dès maintenant et que tu sois le chasseur ou la
+                                   proie, on se retrouve toujours tous ici...';
+                break;
+
+            case 'cookingbox':
+                $contenuCelsius = 'S\'il y a bien un endroit qui peut tous nous réunir, c\'est ici. Toutes tes créations et celles de tes meilleurs
+                                   amis vont se retrouver à la vue de tous avant de terminer leur incroyable voyage dans ton estomac... en espérant
+                                   que le goût soit à la hauteur du visuel. Partages également tes meilleurs secrets de recettes avec les autres !';
+                break;
+
+            case 'expensecenter':
+                $contenuCelsius = 'Tu peux saisir ici une dépense en commun ou bien une dépense en montants pour répartir par exemple une commande
+                                   sur chacun en fonction de ce qu\'il a pris. Ça peut même tenir compte des frais de livraison et des réductions !
+                                   Trop bien !';
+                break;
+
+            case 'foodadvisor':
+                $contenuCelsius = 'Dans cette section, tu peux voter à partir de la liste des restaurants ou bien aller encore plus vite grâce à la
+                                   toute nouvelle barre de recherche instantanée ! Ajoute tes choix avant 13h et n\'oublie pas non plus de remplir
+                                   le résumé de la semaine ! Tu peux aussi voter à l\'avance pour les jours suivants et consulter tous tes choix des
+                                   semaines précédentes.';
+                break;
+
+            case 'ideas':
+                $contenuCelsius = 'Si tu as des idées et que tu veux en faire part aux autres, n\'hésite pas à en proposer de nouvelles. N\'importe
+                                   qui peut les prendre en charge afin de devenir un super développeur Inside ! Le cycle de vie te montre comment
+                                   seront traitées les idées en cas de prise en charge. Tu peux contacter l\'administrateur pour plus de précisions
+                                   sur la mise en place du projet chez toi.';
+                break;
+
+            case 'missions':
+                $contenuCelsius = 'Bonjour agent <strong>' . $_SESSION['user']['pseudo'] . '</strong>, ta mission si tu l\'acceptes, ou si tu le veux
+                                   bien, ou si tu as le temps, ou si c\'est possible, est de vaincre tes adversaires. Allez on se bouge et on trouve
+                                   tous les petits indices cachés partout avant les autres. L\'amitié a ses limites.';
+                break;
+
+            case 'moviehouse':
+                $contenuCelsius = 'Parce que la culture n\'a pas de prix, parce que ce lieu est l\'origine de ma maison, c\'est ici que se réunissent
+                                   tous les (plus grands) films à voir ou à revoir. Mets une préférence sur chacun et peut-être que tu parviendras à
+                                   organiser une sortie et partager un bon moment !';
+                break;
+
+            case 'notifications':
+                $contenuCelsius = 'L\'essentiel de ce qui s\'est passé ces derniers temps est là, si tu as raté quelque chose, il est peut-être le
+                                   moment de se rattraper ! Tu peux régler le filtre par défaut dans tes préférences si tu aimes voir plus ou moins
+                                   de choses.';
+                break;
+
+            case 'petitspedestres':
+                $contenuCelsius = 'Quelle idée d\'aller courir ? Pourquoi se faire du mal comme ça ? Pour être en bonne santé, se sentir en forme ?
+                                   Quel intérêt ? C\'est peut-être pas si mal en fait... un jour je serai grand et j\'irai loin ! Un pied devant
+                                   l\'autre on progresse sur ses meilleurs chemins.';
+                break;
+
+            case 'portail':
+                $contenuCelsius = 'Bonjour <strong>' . $_SESSION['user']['pseudo'] . '</strong> et bienvenue sur la version ' . $_SESSION['index']['plateforme'] . '
+                                   du site. Je suis <strong>Celsius</strong> et je vais te guider à travers les différentes sections. Ici tu peux
+                                   accéder à l\'ensemble des applications du site comme celle pour voter pour le repas du midi et celle pour
+                                   répartir les dépenses. Viens aussi choisir ton prochain film, te moquer des bêtises que disent les autres ou
+                                   bien échanger tes meilleures recettes. Tu peux aussi télécharger les derniers calendriers ou participer à des
+                                   mini-jeux. Si tu es plus à l\'aise sur ton téléphone, sache que la version mobile est également disponible avec
+                                   les mêmes fonctionnalités !';
+                break;
+
+            case 'profil':
+                $contenuCelsius = 'Ici sont exposées toutes tes contributions à l\'équipe de joyeux Insiders ! Tu peux voir l\'état de ton compte en
+                                   quelques infos essentielles et accéder aux autres paramètres qui te permettront de personnaliser ton expérience.';
+                break;
+
+            case 'restaurants':
+                $contenuCelsius = 'Tu peux ajouter tes restaurants favoris ici et en faire profiter à tout le monde. Il faut en rajouter un maximum
+                                   pour que le choix soit le plus grand possible ! Tu peux aussi voter directement sur cette liste en fonction des
+                                   jours d\'ouverture qui ont été saisis, c\'est pratique.';
+                break;
+
+            case 'search':
+                $contenuCelsius = 'Tu cherches quelque chose ? Tu es au bon endroit mon ami ! On a de tout ici : des bons films, des bons restos,
+                                   des bonnes balades à pied et des super missions ! Fais ton choix, mais fais-le bien car il n\'y aura pas de
+                                   retour en arrière. Ou pas, je ne sais pas encore.';
+                break;
+
+            case 'settings':
+                $contenuCelsius = 'Un petit réglage par-ci, un tour de vis par-là... Allez, on règle tout ça pour que ce soit comme tu veux et
+                                   transformer cet espace en ton espace personnel ! Tu peux changer de mot de passe, changer d\'équipe et paramétrer
+                                   quelques options selon tes goûts. Si tu souhaites te désinscrire, sache déjà que j\'en suis très attristé mais
+                                   que si le cas arrivait, aucune de tes données ne seraient conservées. Mais on sait tous que tu ne vas pas le faire
+                                   hein ?';
+                break;
+
+            case 'success':
+            case 'ranking':
+                $contenuCelsius = 'Tu veux faire le malin et crâner devant tes copains ? Ok, y\'a moyen... Mais fais attention ! On ne sait jamais
+                                   qui peut te dépasser à ce petit jeu-là, rien n\'est jamais vraiment défini à l\'avance. Regarde bien où en est
+                                   ton voisin. Et nargue-le pour voir.';
+                break;
+
+            case 'themes':
+                $contenuCelsius = 'On peut changer sa police de caractères, c\'est cool nan ? Et puis il y a les thèmes aussi qui sont toujours
+                                   sympas. Tu peux choisir entre plusieurs selon ton niveau et aussi ceux des missions passées. D\'autres
+                                   viendront s\'ajouter avec le temps !';
+                break;
+
+            default:
+                $contenuCelsius = '';
+                break;
+        }
+
+        // Retour
+        return $contenuCelsius;
+    }
+
     // METIER : Génération des missions
     // RETOUR : Aucun
     function generateMissions()
