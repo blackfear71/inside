@@ -105,7 +105,7 @@
                     /********************************/
                     /* Affichage des phrases cultes */
                     /********************************/
-                    include('vue/web/vue_table_collectors.php');
+                    include('vue/web/vue_liste_collectors.php');
 
                     /**************/
                     /* Pagination */
