@@ -256,9 +256,21 @@
 
 .zone_idea_titre
 {
+    display: inline-block;
+    width: calc(100% - 100px);
+    margin-left: 50px;
     font-family: inside_font_medium, Verdana, sans-serif;
     color: #262626;
     text-align: center;
+}
+
+.zone_idea_id
+{
+    display: inline-block;
+    width: 50px;
+    font-family: inside_font_light, Verdana, sans-serif;
+    color: #7c7c7c;
+    text-align: right;
 }
 
 .zone_idea_middle

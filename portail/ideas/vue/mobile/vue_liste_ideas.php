@@ -8,9 +8,11 @@
                     echo '<div id="zone_shadow_' . $idee->getId() . '" class="zone_shadow">';
                         // Titre
                         echo '<div class="zone_idea_haut" id="' . $idee->getId() . '">';
-                            echo '<div class="zone_idea_titre">';
-                                echo $idee->getSubject();
-                            echo '</div>';
+                            // Libellé
+                            echo '<div class="zone_idea_titre">' . $idee->getSubject() . '</div>';
+
+                            // Numéro
+                            echo '<div class="zone_idea_id">#' . $idee->getId() . '</div>';
                         echo '</div>';
 
                         // Infos

@@ -13,7 +13,11 @@
                     echo '<div id="zone_shadow_' . $bug->getId() . '" class="zone_shadow">';
                         // Titre
                         echo '<div class="zone_report_top" id="' . $bug->getId() . '">';
+                            // Libellé
                             echo '<div class="zone_report_titre">' . $bug->getSubject() . '</div>';
+
+                            // Numéro
+                            echo '<div class="zone_report_id">#' . $bug->getId() . '</div>';
                         echo '</div>';
 
                         // Infos
@@ -111,7 +115,11 @@
                     echo '<div id="zone_shadow_' . $evolution->getId() . '" class="zone_shadow">';
                         // Titre
                         echo '<div class="zone_report_top" id="' . $evolution->getId() . '">';
+                            // Libellé
                             echo '<div class="zone_report_titre">' . $evolution->getSubject() . '</div>';
+
+                            // Numéro
+                            echo '<div class="zone_report_id">#' . $evolution->getId() . '</div>';
                         echo '</div>';
 
                         // Infos
