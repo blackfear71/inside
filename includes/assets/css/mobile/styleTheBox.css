@@ -229,6 +229,7 @@
 .saisie_bouton
 {
     background-color: #e3e3e3;
+    margin: 0 0.5vh 1vh 0.5vh;
     padding: 1vh;
     border-radius: 0.5vh;
     font-family: inside_font_light, Verdana, sans-serif;
@@ -243,9 +244,4 @@
 {
     background-color: #ff1937;
     color: white;
-}
-
-.margin_button
-{
-    margin: 0 0.5vh 1vh 0.5vh;
 }

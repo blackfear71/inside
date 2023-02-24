@@ -135,7 +135,7 @@
                             // Equipe
                             echo '<div class="team_report">';
                                 echo '<img src="../../includes/icons/reports/team.png" alt="team" class="icone_report" />';
-                                echo $bug->getTeam();
+                                echo $evolution->getTeam();
                             echo '</div>';
 
                             // Date
