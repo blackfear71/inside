@@ -161,7 +161,7 @@
                                 // Titre
                                 echo '<div id="titre_recherche_cooking_box" class="titre_section">';
                                     echo '<img src="../../includes/icons/search/cooking_box.png" alt="cooking_box" class="logo_titre_section" />';
-                                    echo '<div class="texte_titre_section_fleche">Cooking Box<div class="count_search">' . $resultats['nb_food_advisor'] . '</div></div>';
+                                    echo '<div class="texte_titre_section_fleche">Cooking Box<div class="count_search">' . $resultats['nb_cooking_box'] . '</div></div>';
                                     echo '<img src="../../includes/icons/common/open_grey.png" alt="open_grey" class="fleche_titre_section" />';
                                 echo '</div>';
 
