@@ -64,6 +64,36 @@
         return $resultatRecherche;
     }
 
+    // PHYSIQUE : Lecture des recettes pour la recherche
+    // RETOUR : Liste des recettes
+    function physiqueRechercheRecettes($recherche, $equipe)
+    {
+        // Initialisations
+        $resultatRecherche = array();
+
+        // Requête
+        global $bdd;
+
+        $req = $bdd->query('SELECT *
+                            FROM cooking_box
+                            WHERE team = "' . $equipe . '" AND name LIKE "%' . $recherche . '%"
+                            ORDER BY year DESC, week DESC');
+
+        while ($data = $req->fetch())
+        {
+            // Instanciation d'un objet WeekCake à partir des données remontées de la bdd
+            $recette = WeekCake::withData($data);
+
+            // On ajoute la ligne au tableau
+            array_push($resultatRecherche, $recette);
+        }
+
+        $req->closeCursor();
+
+        // Retour
+        return $resultatRecherche;
+    }
+
     // PHYSIQUE : Lecture des parcours pour la recherche
     // RETOUR : Liste des parcours
     function physiqueRechercheParcours($recherche, $equipe)

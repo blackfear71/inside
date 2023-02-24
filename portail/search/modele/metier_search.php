@@ -2,6 +2,7 @@
     include_once('../../includes/functions/appel_bdd.php');
     include_once('../../includes/classes/movies.php');
     include_once('../../includes/classes/restaurants.php');
+    include_once('../../includes/classes/gateaux.php');
     include_once('../../includes/classes/parcours.php');
     include_once('../../includes/classes/missions.php');
 
@@ -34,6 +35,10 @@
             $resultatsFoodAdvisor       = physiqueRechercheRestaurants($recherche, $equipe);
             $nombreResultatsFoodAdvisor = count($resultatsFoodAdvisor);
 
+            // Recettes
+            $resultatsCookingBox       = physiqueRechercheRecettes($recherche, $equipe);
+            $nombreResultatsCookingBox = count($resultatsCookingBox);
+
             // Parcours
             $resultatsPetitsPedestres       = physiqueRechercheParcours($recherche, $equipe);
             $nombreResultatsPetitsPedestres = count($resultatsPetitsPedestres);
@@ -46,10 +51,12 @@
             $resultatsRecherche = array(
                 'movie_house'         => $resultatsMovieHouse,
                 'food_advisor'        => $resultatsFoodAdvisor,
+                'cooking_box'         => $resultatsCookingBox,
                 'petits_pedestres'    => $resultatsPetitsPedestres,
                 'missions'            => $resultatsMissions,
                 'nb_movie_house'      => $nombreResultatsMovieHouse,
                 'nb_food_advisor'     => $nombreResultatsFoodAdvisor,
+                'nb_cooking_box'      => $nombreResultatsCookingBox,
                 'nb_petits_pedestres' => $nombreResultatsPetitsPedestres,
                 'nb_missions'         => $nombreResultatsMissions
             );

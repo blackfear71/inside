@@ -89,7 +89,7 @@
                             echo '<div class="empty">Pas de résultats trouvés pour "' . $_SESSION['search']['text_search'] . '" !</div>';
                         }
 
-                        // Résultats par section
+                        // Résultats films
                         if (!empty($resultats['movie_house']))
                         {
                             // Titre
@@ -123,6 +123,7 @@
                             echo '</div>';
                         }
 
+                        // Résultats restaurants
                         if (!empty($resultats['food_advisor']))
                         {
                             // Titre
@@ -153,6 +154,38 @@
                             echo '</div>';
                         }
 
+                        // Résultats recettes
+                        if (!empty($resultats['cooking_box']))
+                        {
+                            // Titre
+                            echo '<div id="titre_recherche_cooking_box" class="titre_section">';
+                                echo '<img src="../../includes/icons/search/cooking_box.png" alt="cooking_box" class="logo_titre_section" />';
+                                echo '<div class="texte_titre_section_fleche">Cooking Box<div class="count_search">' . $resultats['nb_food_advisor'] . '</div></div>';
+                                echo '<img src="../../includes/icons/common/open_grey.png" alt="open_grey" class="fleche_titre_section" />';
+                            echo '</div>';
+
+                            // Résultats
+                            echo '<div id="afficher_recherche_cooking_box">';
+                                foreach ($resultats['cooking_box'] as $resultatsCB)
+                                {
+                                    echo '<a href="../cookingbox/cookingbox.php?year=' . $resultatsCB->getYear() . '&action=goConsulter&anchor=' . $resultatsCB->getId() . '" class="lien_resultat">';
+                                        echo '<table class="zone_resultat">';
+                                            echo '<tr>';
+                                                echo '<td class="zone_resultat_titre">';
+                                                    echo $resultatsCB->getName();
+                                                echo '</td>';
+
+                                                echo '<td class="zone_resultat_info">';
+                                                    echo 'Semaine ' . formatWeekForDisplay($resultatsCB->getWeek()) . ' (' . $resultatsCB->getYear() . ')';
+                                                echo '</td>';
+                                            echo '</tr>';
+                                        echo '</table>';
+                                    echo '</a>';
+                                }
+                            echo '</div>';
+                        }
+
+                        // Résultats parcours
                         if (!empty($resultats['petits_pedestres']))
                         {
                             // Titre
@@ -183,6 +216,7 @@
                             echo '</div>';
                         }
 
+                        // Résultats missions
                         if (!empty($resultats['missions']))
                         {
                             // Titre
