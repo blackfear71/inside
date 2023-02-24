@@ -118,7 +118,7 @@
                 echo '<div class="titre_details_top">';
                     echo '<img src="../../includes/icons/foodadvisor/users_grey.png" alt="users_grey" class="logo_titre_section" />';
 
-                    echo '<div class="texte_titre_section">';
+                    echo '<div class="texte_titre_section_croix">';
                         echo 'Les participants';
 
                         // Choix rapide
@@ -131,10 +131,10 @@
                             echo '</form>';
                         }
                     echo '</div>';
-                echo '</div>';
 
-                // Bouton fermeture
-                echo '<a id="fermerDetails" class="close_details"><img src="../../includes/icons/common/close_grey.png" alt="close_grey" title="Fermer" class="close_img" /></a>';
+                    // Bouton fermeture
+                    echo '<a id="fermerDetails" class="bouton_fermer"><img src="../../includes/icons/common/close_grey.png" alt="close_grey" title="Fermer" class="croix_bouton_fermer" /></a>';
+                echo '</div>';
 
                 // Participants, transports et horaires
                 echo '<div id="top_details_proposition"></div>';

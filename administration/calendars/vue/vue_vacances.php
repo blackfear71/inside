@@ -1,6 +1,6 @@
 <?php
     // Titre
-    echo '<div class="titre_section"><img src="../../includes/icons/admin/holidays_grey.png" alt="holidays_grey" class="logo_titre_section" /><div class="texte_titre_section">Créer une période de vacances pour le générateur de calendrier</div></div>';
+    echo '<div class="titre_section"><img src="../../includes/icons/admin/holidays_grey.png" alt="holidays_grey" class="logo_titre_section" /><div class="texte_titre_section">Créer une période de vacances pour le générateur de calendriers</div></div>';
 
     // Périodes disponibles
     echo '<div class="zone_periodes_vacances">';

@@ -537,12 +537,44 @@ header
     vertical-align: middle;
 }
 
+.texte_titre_section_croix
+{
+    display: inline-block;
+    width: calc(100% - 70px);
+    margin-left: 10px;
+    vertical-align: middle;
+}
+
 .texte_titre_section_fold
 {
     display: inline-block;
     width: calc(100% - 70px);
     margin-left: 10px;
     vertical-align: middle;
+}
+
+.bouton_fermer
+{
+    display: inline-block;
+    height: 20px;
+    margin-left: 10px;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.croix_bouton_fermer
+{
+    height: 20px;
+    width: 20px;
+    transform: rotate(0deg);
+    transition: transform 0.2s ease;
+    vertical-align: top;
+}
+
+.bouton_fermer:hover .croix_bouton_fermer
+{
+    transform: rotate(90deg);
+    transition: transform 0.2s ease;
 }
 
 .bouton_fold

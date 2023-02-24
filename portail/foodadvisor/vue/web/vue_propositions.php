@@ -29,7 +29,7 @@
                     }
 
                     // Rafraichir
-                    echo '<a href="foodadvisor.php?date=' . $_GET['date'] . '&action=goConsulter" title="Rafraichir la page"><img src="../../includes/icons/foodadvisor/refresh.png" alt="refresh" class="image_refresh" /></a>';
+                    echo '<a href="foodadvisor.php?date=' . $_GET['date'] . '&action=goConsulter" title="Rafraichir la page" class="bouton_refresh"><img src="../../includes/icons/foodadvisor/refresh.png" alt="refresh" class="image_bouton_refresh" /></a>';
                 echo '</div>';
             echo '</div>';
         echo '</div>';

@@ -76,7 +76,14 @@
                         if (!empty($resultats['movie_house']))
                         {
                             // Titre
-                            echo '<div class="titre_section"><img src="../../includes/icons/search/movie_house.png" alt="movie_house" class="logo_titre_section" /><div class="texte_titre_section">Movie House<div class="count_search">' . $resultats['nb_movie_house'] . '</div></div></div>';
+                            echo '<div class="titre_section">';
+                                echo '<img src="../../includes/icons/search/movie_house.png" alt="movie_house" class="logo_titre_section" />';
+                                
+                                echo '<div class="texte_titre_section_fold">Movie House</div>';
+                                
+                                // Compteur
+                                echo '<div class="count_search">' . $resultats['nb_movie_house'] . '</div>';
+                            echo '</div>';
 
                             // Résultats
                             foreach ($resultats['movie_house'] as $resultatsMH)
@@ -103,7 +110,14 @@
                         if (!empty($resultats['food_advisor']))
                         {
                             // Titre
-                            echo '<div class="titre_section"><img src="../../includes/icons/search/restaurants.png" alt="restaurants" class="logo_titre_section" /><div class="texte_titre_section">Restaurants<div class="count_search">' . $resultats['nb_food_advisor'] . '</div></div></div>';
+                            echo '<div class="titre_section">';
+                                echo '<img src="../../includes/icons/search/restaurants.png" alt="restaurants" class="logo_titre_section" />';
+                                
+                                echo '<div class="texte_titre_section_fold">Restaurants</div>';
+                                
+                                // Compteur
+                                echo '<div class="count_search">' . $resultats['nb_food_advisor'] . '</div>';
+                            echo '</div>';
 
                             // Résultats
                             foreach ($resultats['food_advisor'] as $resultatsFA)
@@ -127,7 +141,14 @@
                         if (!empty($resultats['petits_pedestres']))
                         {
                             // Titre
-                            echo '<div class="titre_section"><img src="../../includes/icons/search/petits_pedestres.png" alt="petits_pedestres" class="logo_titre_section" /><div class="texte_titre_section">Les Petits Pédestres<div class="count_search">' . $resultats['nb_petits_pedestres'] . '</div></div></div>';
+                            echo '<div class="titre_section">';
+                                echo '<img src="../../includes/icons/search/petits_pedestres.png" alt="petits_pedestres" class="logo_titre_section" />';
+                                
+                                echo '<div class="texte_titre_section_fold">Les Petits Pédestres</div>';
+                                
+                                // Compteur
+                                echo '<div class="count_search">' . $resultats['nb_petits_pedestres'] . '</div>';
+                            echo '</div>';
 
                             // Résultats
                             foreach ($resultats['petits_pedestres'] as $resultatsPP)
@@ -151,8 +172,15 @@
                         if (!empty($resultats['missions']))
                         {
                             // Titre
-                            echo '<div class="titre_section"><img src="../../includes/icons/search/missions.png" alt="missions" class="logo_titre_section" /><div class="texte_titre_section">Missions<div class="count_search">' . $resultats['nb_missions'] . '</div></div></div>';
-
+                            echo '<div class="titre_section">';
+                                echo '<img src="../../includes/icons/search/missions.png" alt="missions" class="logo_titre_section" />';
+                                
+                                echo '<div class="texte_titre_section_fold">Missions</div>';
+                                
+                                // Compteur
+                                echo '<div class="count_search">' . $resultats['nb_missions'] . '</div>';
+                            echo '</div>';
+                            
                             // Résultats
                             foreach ($resultats['missions'] as $resultatsMI)
                             {

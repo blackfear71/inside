@@ -479,11 +479,11 @@
 .zone_actions_films
 {
     float: right;
-    margin-top: -2px;
 }
 
 .bouton_fold_films
 {
+    vertical-align: top;
     border: 0;
     background-color: #d3d3d3;
     margin-left: 10px;

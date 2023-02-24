@@ -14,7 +14,6 @@
 .zone_actions_propositions
 {
     float: right;
-    margin-top: -5px;
 }
 
 .form_action_propositions
@@ -24,6 +23,8 @@
 
 .bouton_determination
 {
+    display: inline-block;
+    vertical-align: top;
     border: 0;
     background-color: #d3d3d3;
     margin-left: 10px;
@@ -41,17 +42,23 @@
     color: white;
 }
 
-.image_refresh
+.bouton_refresh
 {
-    vertical-align: middle;
-    width: 29px;
-    margin-top: 2px;
+    display: inline-block;
+    vertical-align: top;
+    height: 25px;
     margin-left: 10px;
+}
+
+.image_bouton_refresh
+{
+    width: 25px;
+    height: 25px;
     transform: rotate(0deg);
     transition: transform 0.2s ease;
 }
 
-.image_refresh:hover
+.bouton_refresh:hover .image_bouton_refresh
 {
     transform: rotate(135deg);
     transition: transform 0.2s ease;
@@ -738,16 +745,6 @@
     background-position: center;
     background-color: #c3c3c3;
     cursor: pointer;
-}
-
-.close_details
-{
-    float: right;
-    width: 30px;
-    height: 30px;
-    margin-top: -45px;
-    cursor: pointer;
-    text-align: center;
 }
 
 .titre_details_top

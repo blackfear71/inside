@@ -9,17 +9,18 @@
 
 .count_search
 {
-    float: right;
-    margin-top: -5px;
-    width: 30px;
-    height: 30px;
+    display: inline-block;
+    vertical-align: middle;
+    width: 25px;
+    height: 25px;
+    margin-left: 10px;
     text-align: center;
-    line-height: 30px;
+    line-height: 25px;
     background-color: #262626;
     border-radius: 50%;
     font-family: inside_font_thin, Verdana, sans-serif;
     color: white;
-    font-size: 80%;
+    font-size: 70%;
 }
 
 .lien_resultat

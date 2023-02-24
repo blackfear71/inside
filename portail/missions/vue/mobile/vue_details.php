@@ -80,23 +80,23 @@
                             {
                                 case 'V':
                                     echo '<div class="titre_section">';
-                                    echo '<img src="../../includes/icons/missions/missions_to_come.png" alt="missions_to_come" class="logo_titre_section" />';
-                                    echo '<div class="texte_titre_section">' . $detailsMission->getMission() . '</div>';
+                                        echo '<img src="../../includes/icons/missions/missions_to_come.png" alt="missions_to_come" class="logo_titre_section" />';
+                                        echo '<div class="texte_titre_section">' . $detailsMission->getMission() . '</div>';
                                     echo '</div>';
                                     break;
 
                                 case 'C':
                                     echo '<div class="titre_section">';
-                                    echo '<img src="../../includes/icons/missions/missions_in_progress.png" alt="missions_in_progress" class="logo_titre_section" />';
-                                    echo '<div class="texte_titre_section">' . $detailsMission->getMission() . '</div>';
+                                        echo '<img src="../../includes/icons/missions/missions_in_progress.png" alt="missions_in_progress" class="logo_titre_section" />';
+                                        echo '<div class="texte_titre_section">' . $detailsMission->getMission() . '</div>';
                                     echo '</div>';
                                     break;
 
                                 case 'A':
                                 default:
                                     echo '<div class="titre_section">';
-                                    echo '<img src="../../includes/icons/missions/missions_ended.png" alt="missions_ended" class="logo_titre_section" />';
-                                    echo '<div class="texte_titre_section">' . $detailsMission->getMission() . '</div>';
+                                        echo '<img src="../../includes/icons/missions/missions_ended.png" alt="missions_ended" class="logo_titre_section" />';
+                                        echo '<div class="texte_titre_section">' . $detailsMission->getMission() . '</div>';
                                     echo '</div>';
                                     break;
                             }

@@ -904,10 +904,11 @@ function showDetailsStatistiques(typeStatistique)
                 // Titre
                 html += '<div class="titre_section">';
                     html += '<img src="../../includes/icons/admin/' + logoDetails + '.png" alt="stats_grey" class="logo_titre_section" />';
-                    html += '<div class="texte_titre_section">' + titreDetails + '</div>';
+                    
+                    html += '<div class="texte_titre_section_croix">' + titreDetails + '</div>';
 
                     // Bouton fermeture
-                    html += '<a id="fermerDetails" class="fermer_details"><img src="../../includes/icons/common/close_grey.png" alt="close_grey" title="Fermer" class="image_fermer" /></a>';
+                    html += '<a id="fermerDetails" class="bouton_fermer"><img src="../../includes/icons/common/close_grey.png" alt="close_grey" title="Fermer" class="croix_bouton_fermer" /></a>';
                 html += '</div>';
 
                 // Tableau des statistiques

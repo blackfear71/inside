@@ -690,30 +690,6 @@
     overflow-y: auto;
 }
 
-.fermer_details
-{
-    float: right;
-    width: 30px;
-    height: 30px;
-    margin-top: -30px;
-    cursor: pointer;
-    text-align: center;
-}
-
-.image_fermer
-{
-    width: 20px;
-    padding: 5px;
-    transform: rotate(0deg);
-    transition: transform 0.2s ease;
-}
-
-.image_fermer:hover
-{
-    transform: rotate(90deg);
-    transition: transform 0.2s ease;
-}
-
 /*** Gestion calendriers ***/
 .zone_autorisations_equipes
 {
