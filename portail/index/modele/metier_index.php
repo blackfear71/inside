@@ -245,7 +245,7 @@
             // Récupération des identifiants dans les parts des dépenses
             $listeUsersParts = physiqueIdentifiantsPartsDepenses();
 
-            // Récupération des identifiants dans les bugs/évolutions
+            // Récupération des identifiants dans les bugs / évolutions
             $listeUsersBugs = physiqueIdentifiantsBugs();
 
             // Récupération des identifiants dans les idées #TheBox

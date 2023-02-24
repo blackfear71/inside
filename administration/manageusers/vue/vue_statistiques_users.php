@@ -119,15 +119,21 @@
             echo '<div class="titre_statistiques_categorie"><img src="../../includes/icons/admin/alerts_grey.png" alt="alerts_grey" class="logo_titre_statistiques_categorie" />BUGS & ÉVOLUTIONS</div>';
 
             // Nombre de demandes
-            echo '<div class="zone_statistique">';
+            echo '<div class="zone_statistique zone_statistique_petit">';
                 echo '<div class="valeur_statistique">' . $totalStatistiques->getNb_bugs_soumis_total() . '</div>';
                 echo '<div class="texte_statistique">demandes</div>';
             echo '</div>';
 
             // Nombre de demandes résolues
-            echo '<div class="zone_statistique border_left">';
+            echo '<div class="zone_statistique zone_statistique_petit border_left">';
                 echo '<div class="valeur_statistique">' . $totalStatistiques->getNb_bugs_resolus_total() . '</div>';
-                echo '<div class="texte_statistique">demandes résolues</div>';
+                echo '<div class="texte_statistique">résolues</div>';
+            echo '</div>';
+
+            // Nombre de demandes rejetées
+            echo '<div class="zone_statistique zone_statistique_petit border_left">';
+                echo '<div class="valeur_statistique">' . $totalStatistiques->getNb_bugs_rejetes_total() . '</div>';
+                echo '<div class="texte_statistique">rejetées</div>';
             echo '</div>';
         echo '</a>';
 

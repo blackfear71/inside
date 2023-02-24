@@ -280,7 +280,7 @@
         return $listeUsersParts;
     }
 
-    // PHYSIQUE : Lecture des identifiants des bugs/évolutions
+    // PHYSIQUE : Lecture des identifiants des bugs / évolutions
     // RETOUR : Liste des utilisateurs uniques
     function physiqueIdentifiantsBugs()
     {

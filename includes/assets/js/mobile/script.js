@@ -37,7 +37,7 @@ $(function ()
     updateNotifications();
     majNotifications = setInterval(updateNotifications, 60000);
 
-    // Mise à jour du compteur des bugs/évolutions toutes les 60 secondes
+    // Mise à jour du compteur des bugs / évolutions toutes les 60 secondes
     updateBugs();
     majBugs = setInterval(updateBugs, 60000);
 
@@ -1105,7 +1105,7 @@ function updateNotifications()
     }, 'json');
 }
 
-// Exécute le script php de mise à jour du compteur de bugs/évolutions
+// Exécute le script php de mise à jour du compteur de bugs / évolutions
 function updateBugs()
 {
     $.get('/inside/includes/functions/script_commun.php', { function: 'countBugs' }, function (data)

@@ -76,7 +76,7 @@ $(window).resize(function ()
 /*****************/
 /*** Fonctions ***/
 /*****************/
-// Adaptations des bugs/évolutions sur mobile
+// Adaptations des bugs / évolutions sur mobile
 function adaptBugs()
 {
     if ($(window).width() < 1080)

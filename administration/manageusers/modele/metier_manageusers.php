@@ -77,7 +77,7 @@
         // Récupération des identifiants dans les parts des dépenses
         $listeUsersParts = physiqueIdentifiantsPartsDepenses();
 
-        // Récupération des identifiants dans les bugs/évolutions
+        // Récupération des identifiants dans les bugs / évolutions
         $listeUsersBugs = physiqueIdentifiantsBugs();
 
         // Récupération des identifiants dans les idées #TheBox
@@ -164,11 +164,14 @@
                 // Bilan des dépenses
                 $bilanUser = physiqueBilanDepensesUser($user->getIdentifiant());
 
-                // Nombre de demandes (bugs/évolutions)
+                // Nombre de demandes (bugs / évolutions)
                 $nombreBugsSoumis = physiqueBugsSoumisUser($user->getIdentifiant());
 
-                // Nombre de demandes résolues (bugs/évolutions)
-                $nombreBugsResolus = physiqueBugsResolusUser($user->getIdentifiant());
+                // Nombre de demandes résolues (bugs / évolutions)
+                $nombreBugsResolus = physiqueBugsStatutUser($user->getIdentifiant(), 'Y');
+
+                // Nombre de demandes rejetés (bugs / évolutions)
+                $nombreBugsRejetes = physiqueBugsStatutUser($user->getIdentifiant(), 'R');
 
                 // Nombre d'idées publiées
                 $nombreTheBox = physiqueTheBoxUser($user->getIdentifiant());
@@ -193,6 +196,7 @@
                 $statistiquesUser->setExpenses($bilanUser);
                 $statistiquesUser->setNb_bugs_soumis($nombreBugsSoumis);
                 $statistiquesUser->setNb_bugs_resolus($nombreBugsResolus);
+                $statistiquesUser->setNb_bugs_rejetes($nombreBugsRejetes);
                 $statistiquesUser->setNb_idees_soumises($nombreTheBox);
                 $statistiquesUser->setNb_idees_en_charge($nombreTheBoxEnCharge);
                 $statistiquesUser->setNb_idees_terminees($nombreTheBoxTerminees);
@@ -298,11 +302,14 @@
                 }
             }
 
-            // Nombre de demandes (bugs/évolutions)
+            // Nombre de demandes (bugs / évolutions)
             $nombreBugsSoumis = physiqueBugsSoumisUser($userDes);
 
-            // Nombre de demandes résolues (bugs/évolutions)
-            $nombreBugsResolus = physiqueBugsResolusUser($userDes);
+            // Nombre de demandes résolues (bugs / évolutions)
+            $nombreBugsResolus = physiqueBugsStatutUser($userDes, 'Y');
+
+            // Nombre de demandes rejetés (bugs / évolutions)
+            $nombreBugsRejetes = physiqueBugsStatutUser($userDes, 'R');
 
             // Nombre d'idées publiées
             $nombreTheBox = physiqueTheBoxUser($userDes);
@@ -327,6 +334,7 @@
             $statistiquesUser->setExpenses($bilanUser);
             $statistiquesUser->setNb_bugs_soumis($nombreBugsSoumis);
             $statistiquesUser->setNb_bugs_resolus($nombreBugsResolus);
+            $statistiquesUser->setNb_bugs_rejetes($nombreBugsRejetes);
             $statistiquesUser->setNb_idees_soumises($nombreTheBox);
             $statistiquesUser->setNb_idees_en_charge($nombreTheBoxEnCharge);
             $statistiquesUser->setNb_idees_terminees($nombreTheBoxTerminees);
@@ -388,11 +396,14 @@
 
         $regularisations = -1 * $expensesNoParts;
 
-        // Nombre de demandes (bugs/évolutions)
+        // Nombre de demandes (bugs / évolutions)
         $nombreBugsSoumis = physiqueBugsSoumisTotal();
 
-        // Nombre de demandes résolues (bugs/évolutions)
-        $nombreBugsResolus = physiqueBugsResolusTotal();
+        // Nombre de demandes résolues (bugs / évolutions)
+        $nombreBugsResolus = physiqueBugsStatutTotal('Y');
+
+        // Nombre de demandes rejetées (bugs / évolutions)
+        $nombreBugsRejetes = physiqueBugsStatutTotal('R');
 
         // Nombre d'idées publiées
         $nombreTheBox = physiqueTheBoxTotal();
@@ -416,6 +427,7 @@
         $totalStatistiques->setExpenses_total($sommeBilans);
         $totalStatistiques->setNb_bugs_soumis_total($nombreBugsSoumis);
         $totalStatistiques->setNb_bugs_resolus_total($nombreBugsResolus);
+        $totalStatistiques->setNb_bugs_rejetes_total($nombreBugsRejetes);
         $totalStatistiques->setNb_idees_soumises_total($nombreTheBox);
         $totalStatistiques->setNb_idees_en_charge_total($nombreTheBoxEnCharge);
         $totalStatistiques->setNb_idees_terminees_total($nombreTheBoxTerminees);
@@ -446,6 +458,7 @@
                 'expenses'           => $statistiquesAConvertir->getExpenses(),
                 'nb_bugs_soumis'     => $statistiquesAConvertir->getNb_bugs_soumis(),
                 'nb_bugs_resolus'    => $statistiquesAConvertir->getNb_bugs_resolus(),
+                'nb_bugs_rejetes'    => $statistiquesAConvertir->getNb_bugs_rejetes(),
                 'nb_idees_soumises'  => $statistiquesAConvertir->getNb_idees_soumises(),
                 'nb_idees_en_charge' => $statistiquesAConvertir->getNb_idees_en_charge(),
                 'nb_idees_terminees' => $statistiquesAConvertir->getNb_idees_terminees()

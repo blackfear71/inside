@@ -1,11 +1,11 @@
 <?php
-    /*********************************
-    ****** Demandes d'évolution ******
-    **********************************
+    /***********************************
+    ******* Demandes d'évolution *******
+    ************************************
     Fonctionnalités :
-    - Consultation des bugs/évolutions
-    - Ajout de bugs/évolutions
-    *********************************/
+    - Consultation des bugs / évolutions
+    - Ajout de bugs / évolutions
+    ***********************************/
 
     // Fonctions communes
     include_once('../../includes/functions/metier_commun.php');

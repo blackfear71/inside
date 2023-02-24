@@ -159,7 +159,7 @@
         return $listeUsersParts;
     }
 
-    // PHYSIQUE : Lecture des identifiants des bugs/évolutions
+    // PHYSIQUE : Lecture des identifiants des bugs / évolutions
     // RETOUR : Liste des utilisateurs uniques
     function physiqueIdentifiantsBugs()
     {
@@ -675,26 +675,26 @@
 
     // PHYSIQUE : Lecture du nombre de bugs résolus d'un utilisateur
     // RETOUR : Nombre de bugs résolus de l'utilisateur
-    function physiqueBugsResolusUser($identifiant)
+    function physiqueBugsStatutUser($identifiant, $statut)
     {
         // Initialisations
-        $nombreBugsResolus = 0;
+        $nombreBugs = 0;
 
         // Requête
         global $bdd;
 
-        $req = $bdd->query('SELECT COUNT(*) AS nombreBugsResolus
+        $req = $bdd->query('SELECT COUNT(*) AS nombreBugs
                             FROM bugs
-                            WHERE author = "' . $identifiant . '" AND resolved = "Y"');
+                            WHERE author = "' . $identifiant . '" AND resolved = "' . $statut . '"');
 
         $data = $req->fetch();
 
-        $nombreBugsResolus = $data['nombreBugsResolus'];
+        $nombreBugs = $data['nombreBugs'];
 
         $req->closeCursor();
 
         // Retour
-        return $nombreBugsResolus;
+        return $nombreBugs;
     }
 
     // PHYSIQUE : Lecture du nombre d'idées #TheBox soumises d'un utilisateur
@@ -770,7 +770,7 @@
     }
 
     // PHYSIQUE : Lecture du nombre total de bugs soumis
-    // RETOUR : Nombre total de bugs/évolutions soumis
+    // RETOUR : Nombre total de bugs / évolutions soumis
     function physiqueBugsSoumisTotal()
     {
         // Initialisations
@@ -792,28 +792,28 @@
         return $nombreBugsSoumis;
     }
 
-    // PHYSIQUE : Lecture du nombre total de bugs résolus
-    // RETOUR : Nombre total de bugs/évolutions résolus
-    function physiqueBugsResolusTotal()
+    // PHYSIQUE : Lecture du nombre total de bugs résolus / rejetés
+    // RETOUR : Nombre total de bugs / évolutions résolus / rejetés
+    function physiqueBugsStatutTotal($statut)
     {
         // Initialisations
-        $nombreBugsResolus = 0;
+        $nombreBugs = 0;
 
         // Requête
         global $bdd;
 
-        $req = $bdd->query('SELECT COUNT(*) AS nombreBugsResolus
+        $req = $bdd->query('SELECT COUNT(*) AS nombreBugs
                             FROM bugs
-                            WHERE resolved = "Y"');
+                            WHERE resolved = "' . $statut . '"');
 
         $data = $req->fetch();
 
-        $nombreBugsResolus = $data['nombreBugsResolus'];
+        $nombreBugs = $data['nombreBugs'];
 
         $req->closeCursor();
 
         // Retour
-        return $nombreBugsResolus;
+        return $nombreBugs;
     }
 
     // PHYSIQUE : Lecture du nombre total d'idées #TheBox soumises

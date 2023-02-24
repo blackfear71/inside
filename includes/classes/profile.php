@@ -827,6 +827,7 @@
         private $expenses;
         private $nb_bugs_soumis;
         private $nb_bugs_resolus;
+        private $nb_bugs_rejetes;
         private $nb_idees_soumises;
         private $nb_idees_en_charge;
         private $nb_idees_terminees;
@@ -845,6 +846,7 @@
             $this->expenses           = 0;
             $this->nb_bugs_soumis     = 0;
             $this->nb_bugs_resolus    = 0;
+            $this->nb_bugs_rejetes    = 0;
             $this->nb_idees_soumises  = 0;
             $this->nb_idees_en_charge = 0;
             $this->nb_idees_terminees = 0;
@@ -872,6 +874,7 @@
             $this->expenses           = htmlspecialchars($data->getExpenses());
             $this->nb_bugs_soumis     = htmlspecialchars($data->getNb_bugs_soumis());
             $this->nb_bugs_resolus    = htmlspecialchars($data->getNb_bugs_resolus());
+            $this->nb_bugs_rejetes    = htmlspecialchars($data->getNb_bugs_rejetes());
             $this->nb_idees_soumises  = htmlspecialchars($data->getNb_idees_soumises());
             $this->nb_idees_en_charge = htmlspecialchars($data->getNb_idees_en_charge());
             $this->nb_idees_terminees = htmlspecialchars($data->getNb_idees_terminees());
@@ -999,6 +1002,17 @@
             return $this->nb_bugs_resolus;
         }
 
+        // Nombre de bugs rejetés
+        public function setNb_bugs_rejetes($nb_bugs_rejetes)
+        {
+            $this->nb_bugs_rejetes = $nb_bugs_rejetes;
+        }
+
+        public function getNb_bugs_rejetes()
+        {
+            return $this->nb_bugs_rejetes;
+        }
+
         // Nombre d'idées soumises
         public function setNb_idees_soumises($nb_idees_soumises)
         {
@@ -1045,6 +1059,7 @@
         private $expenses_total;
         private $nb_bugs_soumis_total;
         private $nb_bugs_resolus_total;
+        private $nb_bugs_rejetes_total;
         private $nb_idees_soumises_total;
         private $nb_idees_en_charge_total;
         private $nb_idees_terminees_total;
@@ -1062,6 +1077,7 @@
             $this->expenses_total           = 0;
             $this->nb_bugs_soumis_total     = 0;
             $this->nb_bugs_resolus_total    = 0;
+            $this->nb_bugs_rejetes_total    = 0;
             $this->nb_idees_soumises_total  = 0;
             $this->nb_idees_en_charge_total = 0;
             $this->nb_idees_terminees_total = 0;
@@ -1088,6 +1104,7 @@
             $this->expenses_total           = htmlspecialchars($data->getExpenses_total());
             $this->nb_bugs_soumis_total     = htmlspecialchars($data->getNb_bugs_soumis_total());
             $this->nb_bugs_resolus_total    = htmlspecialchars($data->getNb_bugs_resolus_total());
+            $this->nb_bugs_rejetes_total    = htmlspecialchars($data->getNb_bugs_rejetes_total());
             $this->nb_idees_soumises_total  = htmlspecialchars($data->getNb_idees_soumises_total());
             $this->nb_idees_en_charge_total = htmlspecialchars($data->getNb_idees_en_charge_total());
             $this->nb_idees_terminees_total = htmlspecialchars($data->getNb_idees_terminees_total());
@@ -1202,6 +1219,17 @@
         public function getNb_bugs_resolus_total()
         {
             return $this->nb_bugs_resolus_total;
+        }
+
+        // Nombre de bugs rejetés
+        public function setNb_bugs_rejetes_total($nb_bugs_rejetes_total)
+        {
+            $this->nb_bugs_rejetes_total = $nb_bugs_rejetes_total;
+        }
+
+        public function getNb_bugs_rejetes_total()
+        {
+            return $this->nb_bugs_rejetes_total;
         }
 
         // Nombre d'idées soumises

@@ -24,8 +24,8 @@
         return $listeEquipes;
     }
 
-    // METIER : Lecture liste des bugs/évolutions
-    // RETOUR : Liste des bugs/évolutions
+    // METIER : Lecture liste des bugs / évolutions
+    // RETOUR : Liste des bugs / évolutions
     function getBugs($view, $type, $listeUsers, $listeEquipe)
     {
         // Récupération des rapports en fonction de la vue et du type

@@ -30,8 +30,8 @@
         return $listeUsers;
     }
 
-    // METIER : Lecture liste des bugs/évolutions
-    // RETOUR : Tableau des bugs/évolutions
+    // METIER : Lecture liste des bugs / évolutions
+    // RETOUR : Tableau des bugs / évolutions
     function getBugs($view, $type, $equipe, $listeUsers)
     {
         // Récupération des rapports en fonction de la vue et du type

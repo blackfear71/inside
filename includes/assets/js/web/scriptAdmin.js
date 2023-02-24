@@ -874,17 +874,18 @@ function showDetailsStatistiques(typeStatistique)
             titreDetails = 'BUGS & ÉVOLUTIONS';
             logoDetails  = 'alerts_grey';
 
-            colonnesCategorie.push({ name: 'Nombre de demandes (bugs / évolutions)', data: 'nb_bugs_soumis' });
-            colonnesCategorie.push({ name: 'Nombre de demandes résolues (bugs / évolutions)', data: 'nb_bugs_resolus' });
+            colonnesCategorie.push({ name: 'Demandes', data: 'nb_bugs_soumis' });
+            colonnesCategorie.push({ name: 'Demandes résolues', data: 'nb_bugs_resolus' });
+            colonnesCategorie.push({ name: 'Demandes rejetées', data: 'nb_bugs_rejetes' });
             break;
 
         case 'idees':
             titreDetails = '#THEBOX';
             logoDetails  = 'ideas_grey';
 
-            colonnesCategorie.push({ name: 'Nombre d\'idées publiées', data: 'nb_idees_soumises' });
-            colonnesCategorie.push({ name: 'Nombre d\'idées en charge', data: 'nb_idees_en_charge' });
-            colonnesCategorie.push({ name: 'Nombre d\'idées terminées ou rejetées', data: 'nb_idees_terminees' });
+            colonnesCategorie.push({ name: 'Idées publiées', data: 'nb_idees_soumises' });
+            colonnesCategorie.push({ name: 'Idées en charge', data: 'nb_idees_en_charge' });
+            colonnesCategorie.push({ name: 'Idées terminées ou rejetées', data: 'nb_idees_terminees' });
             break;
 
         default:
