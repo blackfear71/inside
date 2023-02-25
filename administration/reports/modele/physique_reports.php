@@ -138,18 +138,17 @@
     /****************************************************************************/
     // PHYSIQUE : Mise à jour statut rapport
     // RETOUR : Aucun
-    function physiqueUpdateRapport($idRapport, $resolved)
+    function physiqueUpdateRapport($idRapport, $rapport)
     {
         // Requête
         global $bdd;
 
         $req = $bdd->prepare('UPDATE bugs
-                              SET resolved = :resolved
+                              SET resolution = :resolution,
+                                  resolved   = :resolved
                               WHERE id = ' . $idRapport);
 
-        $req->execute(array(
-            'resolved' => $resolved
-        ));
+        $req->execute($rapport);
 
         $req->closeCursor();
     }

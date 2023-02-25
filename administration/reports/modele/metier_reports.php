@@ -55,36 +55,41 @@
     function updateBug($post)
     {
         // Récupération des données
-        $idRapport = $post['id_report'];
-        $action    = $post;
-        $resolved  = 'N';
-
-        unset($action['id_report']);
+        $idRapport  = $post['id_report'];
 
         // Lecture des données du rapport
         $rapport = physiqueRapport($idRapport);
 
-        // Détermination du statut
-        switch (key($action))
+        // Détermination du statut en fonction de l'action
+        if (isset($post['resolve_bug']))
         {
-            case 'resolve_bug':
-                $resolved = 'Y';
-                break;
-
-            case 'unresolve_bug':
-                $resolved = 'N';
-                break;
-
-            case 'reject_bug':
-                $resolved = 'R';
-                break;
-
-            default:
-                break;
+            $resolution = $post['resolution'];
+            $resolved   = 'Y';
         }
+        elseif (isset($post['unresolve_bug']))
+        {
+            $resolution = $rapport->getResolution();
+            $resolved   = 'N';
+        }
+        elseif (isset($post['reject_bug']))
+        {
+            $resolution = $post['resolution'];
+            $resolved   = 'R';
+        }
+        else
+        {
+            $resolution = '';
+            $resolved   = 'N';
+        }
+        
+        // Modification de l'enregistrement en base
+        $bug = array(
+            'resolution' => $resolution,
+            'resolved'   => $resolved
+        );
 
         // Mise à jour du statut
-        physiqueUpdateRapport($idRapport, $resolved);
+        physiqueUpdateRapport($idRapport, $bug);
 
         // Génération succès (sauf si rejeté ou remis en cours après rejet)
         if ($resolved != 'R' AND $rapport->getResolved() != 'R')

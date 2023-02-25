@@ -257,6 +257,18 @@
     margin-right: 1vh;
 }
 
+.zone_solution_bug_evolution
+{
+    margin-top: 2vh;
+}
+
+.subtitle_bug_evolution
+{
+    font-family: inside_font_regular, Verdana, sans-serif;
+    color: #262626;
+    font-size: 110%;
+}
+
 .content_bug_evolution
 {
     font-family: inside_font_light, Verdana, sans-serif;
@@ -266,5 +278,5 @@
 
 .clear_bug_evolution
 {
-      clear: both;
+    clear: both;
 }

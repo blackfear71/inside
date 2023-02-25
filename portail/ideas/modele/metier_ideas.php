@@ -126,7 +126,7 @@
         // Modification de l'enregistrement en base
         $idee = array(
             'subject'    => $subject,
-            'content'    => $content,
+            'content'    => $content
         );
 
         physiqueUpdateIdee($idIdee, $idee);

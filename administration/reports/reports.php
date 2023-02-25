@@ -51,9 +51,11 @@
             break;
 
         case 'doChangerStatut':
-            // Mise à jour d'un bug ou d'une évolution
-            $resolved  = updateBug($_POST);
+            // Récupération de l'id
             $idRapport = $_POST['id_report'];
+
+            // Mise à jour d'un bug ou d'une évolution
+            $resolved = updateBug($_POST);
             break;
 
         case 'doSupprimer':

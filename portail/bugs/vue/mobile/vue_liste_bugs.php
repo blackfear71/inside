@@ -63,13 +63,30 @@
 
                         // Contenu
                         echo '<div class="zone_bug_evolution_bas">';
+                            // Sous-titre
+                            echo '<div class="subtitle_bug_evolution">Demande</div>';
+
+                            // Image
                             if (!empty($bug->getPicture()))
                                 echo '<a class="agrandirImage"><img src="../../includes/images/reports/' . $bug->getPicture() . '" alt="' . $bug->getPicture() . '" class="image_bug_evolution" /></a>';
 
+                            // Contenu
                             echo '<div class="content_bug_evolution">' . nl2br($bug->getContent()) . '</div>';
 
                             if (!empty($bug->getPicture()))
                                 echo '<div class="clear_bug_evolution"></div>';
+
+                            // Solution
+                            if (!empty($bug->getResolution()))
+                            {
+                                echo '<div class="zone_solution_bug_evolution">';
+                                    // Sous-titre
+                                    echo '<div class="subtitle_bug_evolution">Solution</div>';
+
+                                    // Contenu
+                                    echo '<div class="content_bug_evolution">' . nl2br($bug->getResolution()) . '</div>';
+                                echo '</div>';
+                            }
                         echo '</div>';
                     echo '</div>';
                 echo '</div>';
@@ -142,13 +159,30 @@
 
                         // Contenu
                         echo '<div class="zone_bug_evolution_bas">';
+                            // Sous-titre
+                            echo '<div class="subtitle_bug_evolution">Demande</div>';
+
+                            // Image
                             if (!empty($evolution->getPicture()))
                                 echo '<a class="agrandirImage"><img src="../../includes/images/reports/' . $evolution->getPicture() . '" alt="' . $evolution->getPicture() . '" class="image_bug_evolution" /></a>';
 
+                            // Contenu
                             echo '<div class="content_bug_evolution">' . nl2br($evolution->getContent()) . '</div>';
 
                             if (!empty($evolution->getPicture()))
                                 echo '<div class="clear_bug_evolution"></div>';
+
+                            // Solution
+                            if (!empty($evolution->getResolution()))
+                            {
+                                echo '<div class="zone_solution_bug_evolution">';
+                                    // Sous-titre
+                                    echo '<div class="subtitle_bug_evolution">Solution</div>';
+
+                                    // Contenu
+                                    echo '<div class="content_bug_evolution">' . nl2br($evolution->getResolution()) . '</div>';
+                                echo '</div>';
+                            }
                         echo '</div>';
                     echo '</div>';
                 echo '</div>';

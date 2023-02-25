@@ -113,14 +113,15 @@
         {
             // On insère dans la table
             $bug = array(
-                'date'     => $date,
-                'author'   => $author,
-                'team'     => $equipe,
-                'subject'  => $subject,
-                'content'  => $content,
-                'picture'  => $picture,
-                'type'     => $type,
-                'resolved' => $resolved
+                'date'       => $date,
+                'author'     => $author,
+                'team'       => $equipe,
+                'subject'    => $subject,
+                'content'    => $content,
+                'picture'    => $picture,
+                'resolution' => '',
+                'type'       => $type,
+                'resolved'   => $resolved
             );
 
             $idBug = physiqueInsertionBug($bug);

@@ -327,6 +327,7 @@
 .zone_report_titre
 {
     display: inline-block;
+    vertical-align: middle;
     width: calc(100% - 100px);
     margin-left: 50px;
     font-family: inside_font_medium, Verdana, sans-serif;
@@ -337,6 +338,7 @@
 .zone_report_id
 {
     display: inline-block;
+    vertical-align: middle;
     width: 50px;
     font-family: inside_font_light, Verdana, sans-serif;
     color: #7c7c7c;
@@ -463,6 +465,18 @@
     clear: both;
 }
 
+.zone_solution_report
+{
+    margin-top: 20px;
+}
+
+.subtitle_report
+{
+    font-family: inside_font_regular, Verdana, sans-serif;
+    color: #262626;
+    font-size: 110%;
+}
+
 .content_report
 {
     vertical-align: top;
@@ -471,17 +485,46 @@
     text-align: justify;
 }
 
+.resolution_report
+{
+    display: block;
+    resize: vertical;
+    width: calc(100% - 20px);
+    padding: 10px;
+    font-family: inside_font_light, Verdana, sans-serif;
+    font-size: 100%;
+    color: #262626;
+    border-radius: 2px;
+    border: 0;
+    min-height: 120px;
+}
+
 /*** Admin ***/
+.form_delete_rapport
+{
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: -30px;
+}
+
+.icone_supprimer_rapport
+{
+    width: 30px;
+    height: 30px;
+    border: 0;
+    background-image: url("/inside/includes/icons/common/delete.png");
+    background-size: 25px 25px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: transparent;
+    cursor: pointer;
+}
+
 .zone_report_actions
 {
     background-color: #d3d3d3;
     text-align: center;
     padding: 10px 10px 0 10px;
-}
-
-.form_manage_bug
-{
-    display: inline-block;
 }
 
 .saisie_bouton_rapport

@@ -13,6 +13,13 @@
                     echo '<div id="zone_shadow_' . $bug->getId() . '" class="zone_shadow">';
                         // Titre
                         echo '<div class="zone_report_top" id="' . $bug->getId() . '">';
+                            // Supprimer
+                            echo '<form id="delete_report_' . $bug->getId() . '" method="post" action="reports.php?view=' . $_GET['view'] . '&action=doSupprimer" class="form_delete_rapport">';
+                                echo '<input type="hidden" name="id_report" value="' . $bug->getId() . '" />';
+                                echo '<input type="submit" name="delete_bug" value="" title="Supprimer" class="icone_supprimer_rapport eventConfirm" />';
+                                echo '<input type="hidden" value="Supprimer le rapport <strong>#' . $bug->getId() . '</strong> ?" class="eventMessage" />';
+                            echo '</form>';
+
                             // Libellé
                             echo '<div class="zone_report_titre">' . $bug->getSubject() . '</div>';
 
@@ -62,19 +69,50 @@
 
                         // Contenu
                         echo '<div class="zone_report_bottom">';
+                            // Sous-titre
+                            echo '<div class="subtitle_report">Demande</div>';
+
+                            // Image
                             if (!empty($bug->getPicture()))
                                 echo '<a class="agrandirImage"><img src="../../includes/images/reports/' . $bug->getPicture() . '" alt="' . $bug->getPicture() . '" class="image_report" /></a>';
 
+                            // Contenu
                             echo '<div class="content_report">' . nl2br($bug->getContent()) . '</div>';
 
                             if (!empty($bug->getPicture()))
                                 echo '<div class="clear_report"></div>';
                         echo '</div>';
 
-                        // Actions
-                        echo '<div class="zone_report_actions">';
-                            // Résoudre, rejeter ou remettre en cours
-                            echo '<form method="post" action="reports.php?view=' . $_GET['view'] . '&action=doChangerStatut" class="form_manage_bug">';
+                        // Solution et actions
+                        echo '<form method="post" action="reports.php?view=' . $_GET['view'] . '&action=doChangerStatut">';
+                            // Solution
+                            if ($bug->getResolved() == 'N')
+                            {
+                                echo '<div class="zone_report_bottom">';
+                                    // Sous-titre
+                                    echo '<div class="subtitle_report">Solution</div>';
+
+                                    // Contenu
+                                    echo '<textarea name="resolution" class="resolution_report">' . $bug->getResolution() . '</textarea>';
+                                echo '</div>';
+                            }
+                            else
+                            {
+                                if (!empty($bug->getResolution()))
+                                {
+                                    echo '<div class="zone_report_bottom">';
+                                        // Sous-titre
+                                        echo '<div class="subtitle_report">Solution</div>';
+
+                                        // Contenu
+                                        echo '<div class="content_report">' . nl2br($bug->getResolution()) . '</div>';
+                                    echo '</div>';
+                                }
+                            }
+
+                            // Actions
+                            echo '<div class="zone_report_actions">';
+                                // Résoudre, rejeter ou remettre en cours
                                 echo '<input type="hidden" name="id_report" value="' . $bug->getId() . '" />';
 
                                 if ($bug->getResolved() == 'N')
@@ -84,15 +122,8 @@
                                 }
                                 else
                                     echo '<input type="submit" name="unresolve_bug" value="Remettre en cours" class="saisie_bouton_rapport" />';
-                            echo '</form>';
-
-                            // Supprimer
-                            echo '<form id="delete_report_' . $bug->getId() . '" method="post" action="reports.php?view=' . $_GET['view'] . '&action=doSupprimer" class="form_manage_bug">';
-                                echo '<input type="hidden" name="id_report" value="' . $bug->getId() . '" />';
-                                echo '<input type="submit" name="delete_bug" value="Supprimer" class="saisie_bouton_rapport eventConfirm" />';
-                                echo '<input type="hidden" value="Supprimer ce rapport ?" class="eventMessage" />';
-                            echo '</form>';
-                        echo '</div>';
+                            echo '</div>';
+                        echo '</form>';
                     echo '</div>';
                 echo '</div>';
             }
@@ -115,6 +146,13 @@
                     echo '<div id="zone_shadow_' . $evolution->getId() . '" class="zone_shadow">';
                         // Titre
                         echo '<div class="zone_report_top" id="' . $evolution->getId() . '">';
+                            // Supprimer
+                            echo '<form id="delete_report_' . $evolution->getId() . '" method="post" action="reports.php?view=' . $_GET['view'] . '&action=doSupprimer" class="form_delete_rapport">';
+                                echo '<input type="hidden" name="id_report" value="' . $evolution->getId() . '" />';
+                                echo '<input type="submit" name="delete_evolution" value="" title="Supprimer" class="icone_supprimer_rapport eventConfirm" />';
+                                echo '<input type="hidden" value="Supprimer le rapport <strong>#' . $evolution->getId() . '</strong> ?" class="eventMessage" />';
+                            echo '</form>';
+
                             // Libellé
                             echo '<div class="zone_report_titre">' . $evolution->getSubject() . '</div>';
 
@@ -164,19 +202,50 @@
 
                         // Contenu
                         echo '<div class="zone_report_bottom">';
+                            // Sous-titre
+                            echo '<div class="subtitle_report">Demande</div>';
+
+                            // Image
                             if (!empty($evolution->getPicture()))
                                 echo '<a class="agrandirImage"><img src="../../includes/images/reports/' . $evolution->getPicture() . '" alt="' . $evolution->getPicture() . '" class="image_report" /></a>';
 
+                            // Contenu
                             echo '<div class="content_report">' . nl2br($evolution->getContent()) . '</div>';
 
                             if (!empty($evolution->getPicture()))
                                 echo '<div class="clear_report"></div>';
                         echo '</div>';
 
-                        // Actions
-                        echo '<div class="zone_report_actions">';
-                            // Résoudre, rejeter ou remettre en cours
-                            echo '<form method="post" action="reports.php?view=' . $_GET['view'] . '&action=doChangerStatut" class="form_manage_bug">';
+                        // Solution et actions
+                        echo '<form method="post" action="reports.php?view=' . $_GET['view'] . '&action=doChangerStatut">';
+                            // Solution
+                            if ($evolution->getResolved() == 'N')
+                            {
+                                echo '<div class="zone_report_bottom">';
+                                    // Sous-titre
+                                    echo '<div class="subtitle_report">Solution</div>';
+
+                                    // Contenu
+                                    echo '<textarea name="resolution" class="resolution_report">' . $evolution->getResolution() . '</textarea>';
+                                echo '</div>';
+                            }
+                            else
+                            {
+                                if (!empty($evolution->getResolution()))
+                                {
+                                    echo '<div class="zone_report_bottom">';
+                                        // Sous-titre
+                                        echo '<div class="subtitle_report">Solution</div>';
+
+                                        // Contenu
+                                        echo '<div class="content_report">' . nl2br($evolution->getResolution()) . '</div>';
+                                    echo '</div>';
+                                }
+                            }
+
+                            // Actions
+                            echo '<div class="zone_report_actions">';
+                                // Résoudre, rejeter ou remettre en cours
                                 echo '<input type="hidden" name="id_report" value="' . $evolution->getId() . '" />';
 
                                 if ($evolution->getResolved() == 'N')
@@ -186,15 +255,8 @@
                                 }
                                 else
                                     echo '<input type="submit" name="unresolve_bug" value="Remettre en cours" class="saisie_bouton_rapport" />';
-                            echo '</form>';
-
-                            // Supprimer
-                            echo '<form id="delete_report_' . $evolution->getId() . '" method="post" action="reports.php?view=' . $_GET['view'] . '&action=doSupprimer" class="form_manage_bug">';
-                                echo '<input type="hidden" name="id_report" value="' . $evolution->getId() . '" />';
-                                echo '<input type="submit" name="delete_bug" value="Supprimer" class="saisie_bouton_rapport eventConfirm" />';
-                                echo '<input type="hidden" value="Supprimer ce rapport ?" class="eventMessage" />';
-                            echo '</form>';
-                        echo '</div>';
+                            echo '</div>';
+                        echo '</form>';
                     echo '</div>';
                 echo '</div>';
             }

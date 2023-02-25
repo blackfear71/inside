@@ -95,6 +95,7 @@
                                                subject,
                                                content,
                                                picture,
+                                               resolution,
                                                type,
                                                resolved)
                                        VALUES(:date,
@@ -103,6 +104,7 @@
                                               :subject,
                                               :content,
                                               :picture,
+                                              :resolution,
                                               :type,
                                               :resolved)');
 
