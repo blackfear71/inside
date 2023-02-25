@@ -27,10 +27,17 @@
             echo '<div class="zone_ideas">';
                 foreach ($listeIdees as $idee)
                 {
-                    echo '<div class="zone_idea">';
+                    /*********************************************/
+                    /* Visualisation normale (sans modification) */
+                    /*********************************************/
+                    echo '<div class="zone_idea" id="visualiser_idee_' . $idee->getId() . '">';
                         echo '<div id="zone_shadow_' . $idee->getId() . '" class="zone_shadow">';
                             // Titre
                             echo '<div class="zone_idea_top" id="' . $idee->getId() . '">';
+                                // Modification
+                                if ($idee->getAuthor() == $_SESSION['user']['identifiant'] AND $idee->getStatus() != 'D' AND $idee->getStatus() != 'R')
+                                    echo '<a id="modifier_' . $idee->getId() . '" title="Modifier" class="icone_modifier_idee modifierIdee"></a>';
+
                                 // Libellé
                                 echo '<div class="zone_idea_titre">' . $idee->getSubject() . '</div>';
 
@@ -138,7 +145,7 @@
                             OR  $idee->getStatus() == 'D'
                             OR  $idee->getStatus() == 'R')
                             {
-                                // Boutons de prise en charge (disponibles si personne n'a pris en charge OU si le développeur est sur la page OU si l'idée est terminée / rejetée)
+                                // Boutons de prise en charge (disponibles si personne n'a pris en charge OU si le développeur est affecté à l'idée OU si l'idée est terminée / rejetée)
                                 echo '<div class="zone_idea_actions">';
                                     echo '<form method="post" action="ideas.php?view=' . $_GET['view'] . '&action=doChangerStatut" class="form_manage_idea">';
                                         echo '<input type="hidden" name="id_idea" value="' . $idee->getId() . '" />';
@@ -187,6 +194,40 @@
                             }
                         echo '</div>';
                     echo '</div>';
+
+                    /***************************/
+                    /* Caché pour modification */
+                    /***************************/
+                    if ($idee->getAuthor() == $_SESSION['user']['identifiant'] AND $idee->getStatus() != 'D' AND $idee->getStatus() != 'R')
+                    {
+                        echo '<div class="zone_idea zone_idea_update" id="modifier_idee_' . $idee->getId() . '" style="display: none;">';
+                            echo '<form method="post" action="ideas.php?view=' . $_GET['view'] . '&action=doModifier" class="zone_shadow">';
+                                echo '<div class="zone_idea_top">';
+                                    echo '<input type="hidden" name="id_idea" value="' . $idee->getId() . '" />';
+
+                                    // Boutons d'action
+                                    echo '<div id="zone_bouton_validation_' . $idee->getId() . '" class="zone_bouton_validation">';
+                                        // Validation modification
+                                        echo '<input type="submit" name="update_idee" value="" title="Valider" id="bouton_validation_idee_' . $idee->getId() . '" class="icone_valider_idee" />';
+
+                                        // Annulation modification
+                                        echo '<a id="annuler_update_idee_' . $idee->getId() . '" title="Annuler" class="icone_annuler_idee annulerIdee"></a>';
+                                    echo '</div>';
+
+                                    // Titre de l'idée
+                                    echo '<input type="text" name="subject_idea" value="' . $idee->getSubject() . '" placeholder="Titre" maxlength="255" class="update_saisie_idee" required />';
+
+                                    // Numéro
+                                    echo '<div class="zone_idea_id">#' . $idee->getId() . '</div>';
+                                echo '</div>';
+
+                                // Contenu de l'idée
+                                echo '<div class="zone_idea_middle">';
+                                    echo '<textarea placeholder="Description de l\'idée" name="content_idea" class="update_saisie_contenu" required>' . $idee->getContent() . '</textarea>';
+                                echo '</div>';
+                            echo '</form>';
+                        echo '</div>';
+                    }                    
                 }
             echo '</div>';
         }

@@ -8,6 +8,10 @@
                     echo '<div id="zone_shadow_' . $idee->getId() . '" class="zone_shadow">';
                         // Titre
                         echo '<div class="zone_idea_haut" id="' . $idee->getId() . '">';
+                            // Modification
+                            if ($idee->getAuthor() == $_SESSION['user']['identifiant'] AND $idee->getStatus() != 'D' AND $idee->getStatus() != 'R')
+                                echo '<a id="modifier_idee_' . $idee->getId() . '" title="Modifier" class="icone_modifier_idee modifierIdee"></a>';
+                    
                             // Libellé
                             echo '<div class="zone_idea_titre">' . $idee->getSubject() . '</div>';
 

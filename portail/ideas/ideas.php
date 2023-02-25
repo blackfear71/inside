@@ -41,7 +41,7 @@
 
                         // Récupération des idées
                         if ($nombrePages > 0)
-                            $listeIdees = getIdeas($_GET['view'], $_GET['page'], $nombrePages, $_SESSION['user']);
+                            $listeIdees = getIdees($_GET['view'], $_GET['page'], $nombrePages, $_SESSION['user']);
                         break;
 
                     default:
@@ -54,7 +54,18 @@
 
         case 'doInserer':
             // Insertion d'une idée
-            $idIdee = insertIdea($_POST, $_SESSION['user']);
+            $idIdee = insertIdee($_POST, $_SESSION['user']);
+            break;
+
+        case 'doModifier':
+            // Récupération de la vue
+            $view = $_GET['view'];
+
+            // Modification d'une idée
+            $idIdee = updateIdee($_POST);
+
+            // Récupération du numéro de page pour la redirection
+            $numeroPage = getNumeroPageIdea($idIdee, $view, $_SESSION['user']);
             break;
 
         case 'doChangerStatut':
@@ -62,7 +73,7 @@
             $idIdee = $_POST['id_idea'];
 
             // Modification du statut d'une idée
-            $view = updateIdea($_POST, $_GET['view'], $_SESSION['user']['identifiant']);
+            $view = updateStatutIdee($_POST, $_GET['view'], $_SESSION['user']['identifiant']);
 
             // Récupération du numéro de page pour la redirection
             $numeroPage = getNumeroPageIdea($idIdee, $view, $_SESSION['user']);
@@ -86,10 +97,14 @@
                 }
 
                 unset($idee);
+
+                // Conversion JSON
+                $listeIdeesJson = json_encode(convertForJsonListeIdees($listeIdees));
             }
             break;
 
         case 'doInserer':
+        case 'doModifier':
         case 'doChangerStatut':
         default:
             break;
@@ -99,6 +114,7 @@
     switch ($_GET['action'])
     {
         case 'doChangerStatut':
+        case 'doModifier':
             header('location: ideas.php?view=' . $view . '&action=goConsulter&page=' . $numeroPage . '&anchor=' . $idIdee);
             break;
 

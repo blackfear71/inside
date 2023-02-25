@@ -359,10 +359,10 @@ function initialisationModification(idCollector)
         $('#zone_saisie_collector').find('.saisie_date_collector').val(dateCollector);
 
         // Contenu
-        $('#zone_saisie_collector').find('.saisie_collector').html(contenu);
+        $('#zone_saisie_collector').find('.saisie_collector').val(contenu);
 
         // Contexte
-        $('#zone_saisie_collector').find('.saisie_contexte').html(contexte);
+        $('#zone_saisie_collector').find('.saisie_contexte').val(contexte);
     }
 
     // Affiche la zone de saisie
@@ -436,14 +436,14 @@ function resetSaisie(typeCollector)
             $('#zone_saisie_image').find('.saisie_date_collector').val('');
 
             // Contenu
-            $('#zone_saisie_collector').find('.saisie_collector').html('');
+            $('#zone_saisie_collector').find('.saisie_collector').val('');
 
             $('#zone_saisie_image').find('#image_collector').attr('src', '');
             $('#zone_saisie_image').find('.bouton_parcourir_image').prop('required', true);
 
             // Contexte
-            $('#zone_saisie_collector').find('.saisie_contexte').html('');
-            $('#zone_saisie_image').find('.saisie_contexte').html('');
+            $('#zone_saisie_collector').find('.saisie_contexte').val('');
+            $('#zone_saisie_image').find('.saisie_contexte').val('');
         }
     }, 200);
 }

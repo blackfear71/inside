@@ -363,7 +363,7 @@
     border-top-right-radius: 2px;
 }
 
-.icone_update_collector
+.icone_modifier_collector
 {
     display: inline-block;
     vertical-align: middle;
@@ -384,7 +384,7 @@
     margin-left: 10px;
 }
 
-.icon_delete_collector
+.icone_supprimer_collector
 {
     width: 30px;
     height: 30px;
@@ -412,7 +412,7 @@
     padding-bottom: 12.5px;
 }
 
-.icon_validate_collector
+.icone_valider_collector
 {
     display: inline-block;
     vertical-align: middle;
@@ -427,7 +427,7 @@
     cursor: pointer;
 }
 
-.icone_cancel_collector
+.icone_annuler_collector
 {
     display: inline-block;
     vertical-align: middle;

@@ -25,7 +25,7 @@
 
     // METIER : Lecture liste des idées
     // RETOUR : Tableau d'idées
-    function getIdeas($view, $page, $nombrePages, $sessionUser)
+    function getIdees($view, $page, $nombrePages, $sessionUser)
     {
         // Initialisations
         $nombreParPage = 18;
@@ -74,7 +74,7 @@
 
     // METIER : Insertion d'une idée
     // RETOUR : Id enregistrement créé
-    function insertIdea($post, $sessionUser)
+    function insertIdee($post, $sessionUser)
     {
         // Récupération des données
         $author     = $sessionUser['identifiant'];
@@ -114,9 +114,33 @@
         return $idIdee;
     }
 
+    // METIER : Mise à jour d'une idée
+    // RETOUR : Id idée
+    function updateIdee($post)
+    {
+        // Récupération des données
+        $idIdee  = $post['id_idea'];
+        $subject = $post['subject_idea'];
+        $content = $post['content_idea'];
+
+        // Modification de l'enregistrement en base
+        $idee = array(
+            'subject'    => $subject,
+            'content'    => $content,
+        );
+
+        physiqueUpdateIdee($idIdee, $idee);
+
+        // Message d'alerte
+        $_SESSION['alerts']['idea_updated'] = true;
+
+        // Retour
+        return $idIdee;
+    }
+
     // METIER : Mise à jour du statut d'une idée
     // RETOUR : Vue à afficher
-    function updateIdea($post, $view, $identifiant)
+    function updateStatutIdee($post, $view, $identifiant)
     {
         // Récupération des données
         $idIdee = $post['id_idea'];
@@ -166,7 +190,7 @@
             'developper' => $developper
         );
 
-        physiqueUpdateIdee($idIdee, $idee);
+        physiqueUpdateStatutIdee($idIdee, $idee);
 
         // Génération succès
         switch ($status)
@@ -214,5 +238,37 @@
 
         // Retour
         return $numeroPage;
+    }
+
+    // METIER : Conversion de la liste d'objets des idées en tableau simple pour JSON
+    // RETOUR : Tableau des idées
+    function convertForJsonListeIdees($listeIdees)
+    {
+        // Initialisations
+        $listeIdeesAConvertir = array();
+
+        // Conversion de la liste d'objets en tableau pour envoyer au Javascript
+        foreach ($listeIdees as $ideeAConvertir)
+        {
+            $idee = array(
+                'id'                => $ideeAConvertir->getId(),
+                'team'              => $ideeAConvertir->getTeam(),
+                'subject'           => $ideeAConvertir->getSubject(),
+                'date'              => $ideeAConvertir->getDate(),
+                'author'            => $ideeAConvertir->getAuthor(),
+                'pseudo_author'     => $ideeAConvertir->getPseudo_author(),
+                'avatar_author'     => $ideeAConvertir->getAvatar_author(),
+                'content'           => $ideeAConvertir->getContent(),
+                'status'            => $ideeAConvertir->getStatus(),
+                'developper'        => $ideeAConvertir->getDevelopper(),
+                'pseudo_developper' => $ideeAConvertir->getPseudo_developper(),
+                'avatar_developper' => $ideeAConvertir->getAvatar_developper()
+            );
+
+            $listeIdeesAConvertir[$ideeAConvertir->getId()] = $idee;
+        }
+
+        // Retour
+        return $listeIdeesAConvertir;
     }
 ?>

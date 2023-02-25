@@ -276,6 +276,23 @@
         global $bdd;
 
         $req = $bdd->prepare('UPDATE ideas
+                              SET subject = :subject,
+                                  content = :content
+                              WHERE id = ' . $idIdee);
+
+        $req->execute($idee);
+
+        $req->closeCursor();
+    }
+
+    // PHYSIQUE : Mise à jour statut idée
+    // RETOUR : Aucun
+    function physiqueUpdateStatutIdee($idIdee, $idee)
+    {
+        // Requête
+        global $bdd;
+
+        $req = $bdd->prepare('UPDATE ideas
                               SET status     = :status,
                                   developper = :developper
                               WHERE id = ' . $idIdee);

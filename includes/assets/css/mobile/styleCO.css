@@ -428,7 +428,7 @@
     margin-left: 0.5vh;
 }
 
-.icon_delete_collector
+.icone_supprimer_collector
 {
     width: 6vh;
     height: 6vh;
@@ -440,7 +440,7 @@
     background-color: transparent;
 }
 
-.icone_update_collector
+.icone_modifier_collector
 {
     display: inline-block;
     vertical-align: middle;

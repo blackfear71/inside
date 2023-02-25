@@ -29,6 +29,58 @@ $(function ()
 
         hideSubmitButton(zoneButton, submitButton, formSaisie, tabBlock);
     });
+
+    // Affiche la zone de modification d'une idée
+    $('.modifierIdee').click(function ()
+    {
+        var idIdee = $(this).attr('id').replace('modifier_', '');
+
+        afficherMasquerIdNoDelay('modifier_idee_' + idIdee);
+        afficherMasquerIdNoDelay('visualiser_idee_' + idIdee);
+        initMasonry();
+    });
+
+    // Ferme la zone de modification d'une idée
+    $('.annulerIdee').click(function ()
+    {
+        var idIdee = $(this).attr('id').replace('annuler_update_idee_', '');
+
+        afficherMasquerIdNoDelay('modifier_idee_' + idIdee);
+        afficherMasquerIdNoDelay('visualiser_idee_' + idIdee);
+        initMasonry();
+    });
+
+    // Bloque le bouton de validation si besoin
+    $('.icone_valider_idee').click(function ()
+    {
+        var submitButton = $('#' + $(this).attr('id'));
+        var zoneButton   = $('#' + submitButton.parent().attr('id'));
+        var formSaisie   = submitButton.closest('form');
+        var tabBlock     = [];
+
+        // Blocage spécifique (liens actions)
+        tabBlock.push({ element: '.icone_modifier_idee', property: 'display', value: 'none' });
+        tabBlock.push({ element: '.icone_valider_idee', property: 'display', value: 'none' });
+        tabBlock.push({ element: '.icone_annuler_idee', property: 'display', value: 'none' });
+
+        // Blocage spécifique (toutes zones de saisie autres restaurants)
+        tabBlock.push({ element: '.zone_ideas input', property: 'readonly', value: true });
+        tabBlock.push({ element: '.zone_ideas input', property: 'pointer-events', value: 'none' });
+        tabBlock.push({ element: '.zone_ideas input', property: 'color', value: '#a3a3a3' });
+        tabBlock.push({ element: '.zone_ideas textarea', property: 'readonly', value: true });
+        tabBlock.push({ element: '.zone_ideas textarea', property: 'pointer-events', value: 'none' });
+        tabBlock.push({ element: '.zone_ideas textarea', property: 'color', value: '#a3a3a3' });
+
+        hideSubmitButton(zoneButton, submitButton, formSaisie, tabBlock);
+    });
+
+    /*** Actions au redimensionnement */
+    // Adaptation de la masonry
+    $('.update_saisie_contenu').mouseup(function ()
+    {
+        if (this.style.width != this.outerWidth || this.style.height != this.outerHeight)
+            initMasonry();
+    });
 });
 
 // Au redimensionnement de la fenêtre
@@ -78,6 +130,21 @@ $(window).on('load', function ()
 /*****************/
 /*** Fonctions ***/
 /*****************/
+// Initialisation manuelle de "Masonry"
+function initMasonry()
+{
+    // On lance Masonry
+    $('.zone_ideas').masonry(
+    {
+        // zone_ideas
+        itemSelector: '.zone_idea',
+        columnWidth: 480,
+        fitWidth: true,
+        gutter: 20,
+        horizontalOrder: true
+    });
+}
+
 // Ferme la saisie d'une idée
 function closeInput(id)
 {

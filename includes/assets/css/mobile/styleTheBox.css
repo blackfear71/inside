@@ -71,9 +71,24 @@
     border-top-right-radius: 0.5vh;
 }
 
+.icone_modifier_idee
+{
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: -6vh;
+    width: 6vh;
+    height: 6vh;
+    background-image: url("/inside/includes/icons/common/edit.png");
+    background-size: 4.5vh 4.5vh;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: transparent;
+}
+
 .zone_idea_titre
 {
     display: inline-block;
+    vertical-align: middle;
     width: calc(100% - 12vh);
     margin-left: 6vh;
     font-family: inside_font_medium, Verdana, sans-serif;
@@ -84,6 +99,7 @@
 .zone_idea_id
 {
     display: inline-block;
+    vertical-align: middle;
     width: 6vh;
     font-family: inside_font_light, Verdana, sans-serif;
     color: #7c7c7c;

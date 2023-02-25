@@ -479,6 +479,14 @@ $(function ()
         if (idForm != '')
             liveSearch(idForm, inputContent);
     });
+
+    /*** Actions au redimensionnement */
+    // Adaptation de la masonry
+    $('.zone_update_types, .textarea_update_description_restaurant').mouseup(function ()
+    {
+        if (this.style.width != this.outerWidth || this.style.height != this.outerHeight)
+            initMasonry();
+    });
 });
 
 // Au redimensionnement de la fenêtre

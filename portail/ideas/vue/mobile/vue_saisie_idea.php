@@ -1,6 +1,9 @@
 <?php
     echo '<div id="zone_saisie_idee" class="fond_saisie">';
         echo '<form method="post" action="ideas.php?view=' . $_GET['view'] . '&action=doInserer" class="form_saisie">';
+            // Id idée (modification)
+            echo '<input type="hidden" name="id_idea" id="id_saisie_idee" value="" />';
+
             // Titre
             echo '<div class="zone_titre_saisie">Proposer une idée</div>';
 

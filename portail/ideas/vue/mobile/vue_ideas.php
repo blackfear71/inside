@@ -133,5 +133,11 @@
         <footer>
             <?php include('../../includes/common/mobile/footer_mobile.php'); ?>
         </footer>
+
+        <!-- Données JSON -->
+        <script>
+            // Récupération de la liste des idées pour le script
+            var listeIdees = <?php if (isset($listeIdeesJson) AND !empty($listeIdeesJson)) echo $listeIdeesJson; else echo '{}'; ?>;
+        </script>
     </body>
 </html>

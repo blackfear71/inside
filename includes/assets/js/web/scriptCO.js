@@ -39,7 +39,7 @@ $(function ()
         if ($(event.target).attr('class') == 'fond_zoom')
             masquerSupprimerIdWithDelay('zoom_image');
 
-        // Ferme la saisie d'une phrase/image culte
+        // Ferme la saisie d'une phrase / image culte
         if ($(event.target).attr('class') == 'fond_saisie_collector')
         {
             closeInput('zone_add_collector');
@@ -47,7 +47,7 @@ $(function ()
         }
     });
 
-    // Affiche la zone de modification d'une phrase/image culte
+    // Affiche la zone de modification d'une phrase / image culte
     $('.modifierCollector').click(function ()
     {
         var idCollector = $(this).attr('id').replace('modifier_', '');
@@ -58,7 +58,7 @@ $(function ()
         initMasonry();
     });
 
-    // Ferme la zone de modification d'une phrase/image culte
+    // Ferme la zone de modification d'une phrase / image culte
     $('.annulerCollector').click(function ()
     {
         var idCollector = $(this).attr('id').replace('annuler_update_collector_', '');
@@ -68,7 +68,7 @@ $(function ()
         initMasonry();
     });
 
-    // Affiche la zone de modification d'un vote d'une phrase/image culte
+    // Affiche la zone de modification d'un vote d'une phrase / image culte
     $('.modifierVote').click(function (event)
     {
         var idCollector = $(this).attr('id').replace('link_form_vote_', '');
@@ -127,7 +127,7 @@ $(function ()
     });
 
     // Bloque le bouton de validation si besoin
-    $('.icon_validate_collector').click(function ()
+    $('.icone_valider_collector').click(function ()
     {
         var submitButton = $('#' + $(this).attr('id'));
         var zoneButton   = $('#' + submitButton.parent().attr('id'));
@@ -138,10 +138,10 @@ $(function ()
         tabBlock.push({ element: '.link_current_vote', property: 'pointer-events', value: 'none' });
 
         // Blocage spécifique (liens actions)
-        tabBlock.push({ element: '.icone_update_collector', property: 'display', value: 'none' });
-        tabBlock.push({ element: '.icon_delete_collector', property: 'display', value: 'none' });
-        tabBlock.push({ element: '.icon_validate_collector', property: 'display', value: 'none' });
-        tabBlock.push({ element: '.icone_cancel_collector', property: 'display', value: 'none' });
+        tabBlock.push({ element: '.icone_modifier_collector', property: 'display', value: 'none' });
+        tabBlock.push({ element: '.icone_supprimer_collector', property: 'display', value: 'none' });
+        tabBlock.push({ element: '.icone_valider_collector', property: 'display', value: 'none' });
+        tabBlock.push({ element: '.icone_annuler_collector', property: 'display', value: 'none' });
 
         // Blocage spécifique (toutes zones de saisie autres restaurants)
         tabBlock.push({ element: '.zone_collectors input', property: 'readonly', value: true });
@@ -210,6 +210,14 @@ $(function ()
 
         adaptBrowse(idImage);
         initMasonry();
+    });
+
+    /*** Actions au redimensionnement */
+    // Adaptation de la masonry
+    $('.update_text_collector, .update_context_collector').mouseup(function ()
+    {
+        if (this.style.width != this.outerWidth || this.style.height != this.outerHeight)
+            initMasonry();
     });
 
     /*** Calendriers ***/
@@ -302,7 +310,7 @@ function initMasonry()
     $('.text_collector').wrapInner();
 }
 
-// Ferme la saisie d'une phrase/image culte
+// Ferme la saisie d'une phrase / image culte
 function closeInput(id)
 {
     if ($('#' + id).css('display') != 'none')
