@@ -144,6 +144,7 @@
 .zone_bug_evolution_titre
 {
     display: inline-block;
+    vertical-align: middle;
     width: calc(100% - 12vh);
     margin-left: 6vh;
     font-family: inside_font_medium, Verdana, sans-serif;
@@ -154,6 +155,7 @@
 .zone_bug_evolution_id
 {
     display: inline-block;
+    vertical-align: middle;
     width: 6vh;
     font-family: inside_font_light, Verdana, sans-serif;
     color: #7c7c7c;
