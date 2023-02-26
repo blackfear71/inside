@@ -154,28 +154,28 @@
                                         {
                                             // Ouverte
                                             case 'O':
-                                                echo '<input type="submit" name="take" value="Prendre en charge" title="Prendre en charge" class="saisie_bouton" />';
+                                                echo '<input type="submit" name="take" value="Prendre en charge" title="Prendre en charge" class="bouton_action_idea" />';
                                                 break;
 
                                             // Prise en charge
                                             case 'C':
-                                                echo '<input type="submit" name="reset" value="Réinitialiser" title="Remettre à disposition" class="saisie_bouton" />';
+                                                echo '<input type="submit" name="reset" value="Réinitialiser" title="Remettre à disposition" class="bouton_action_idea" />';
 
                                                 if (!empty($idee->getPseudo_developper()))
                                                 {
-                                                    echo '<input type="submit" name="developp" value="Développer" title="Commencer les développements" class="saisie_bouton" />';
-                                                    echo '<input type="submit" name="reject" value="Rejeter" title="Annuler l\'idée" class="saisie_bouton" />';
+                                                    echo '<input type="submit" name="developp" value="Développer" title="Commencer les développements" class="bouton_action_idea" />';
+                                                    echo '<input type="submit" name="reject" value="Rejeter" title="Annuler l\'idée" class="bouton_action_idea" />';
                                                 }
                                                 break;
 
                                             // En progrès
                                             case 'P':
-                                                echo '<input type="submit" name="reset" value="Réinitialiser" title="Remettre à disposition" class="saisie_bouton" />';
+                                                echo '<input type="submit" name="reset" value="Réinitialiser" title="Remettre à disposition" class="bouton_action_idea" />';
 
                                                 if (!empty($idee->getPseudo_developper()))
                                                 {
-                                                    echo '<input type="submit" name="take" value="Remise à prise en charge" title="Remettre à prise en charge" class="saisie_bouton" />';
-                                                    echo '<input type="submit" name="end" value="Terminer" title="Finaliser l\'idée" class="saisie_bouton" />';
+                                                    echo '<input type="submit" name="take" value="Remise à prise en charge" title="Remettre à prise en charge" class="bouton_action_idea" />';
+                                                    echo '<input type="submit" name="end" value="Terminer" title="Finaliser l\'idée" class="bouton_action_idea" />';
                                                 }
                                                 break;
 
@@ -183,7 +183,7 @@
                                             case 'D':
                                             // Rejetée
                                             case 'R':
-                                                echo '<input type="submit" name="reset" value="Réinitialiser" title="Remettre à disposition" class="saisie_bouton" />';
+                                                echo '<input type="submit" name="reset" value="Réinitialiser" title="Remettre à disposition" class="bouton_action_idea" />';
                                                 break;
 
                                             default:
