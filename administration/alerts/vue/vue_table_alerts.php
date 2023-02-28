@@ -25,15 +25,15 @@
                     switch ($alerte->getType())
                     {
                         case 'info':
-                        echo '<img src="../../includes/icons/common/information.png" alt="information" title="Information" class="icone_table_admin" />';
-                        break;
+                            echo '<img src="../../includes/icons/common/information.png" alt="information" title="Information" class="icone_table_admin" />';
+                            break;
 
                         case 'erreur':
-                        echo '<img src="../../includes/icons/common/alert.png" alt="alert" title="Alerte" class="icone_table_admin" />';
-                        break;
+                            echo '<img src="../../includes/icons/common/alert.png" alt="alert" title="Alerte" class="icone_table_admin" />';
+                            break;
 
                         default:
-                        break;
+                            break;
                     }
                 echo '</td>';
 

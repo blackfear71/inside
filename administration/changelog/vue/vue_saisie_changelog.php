@@ -119,38 +119,38 @@
 
                     // Entrées
                     echo '<div class="zone_saisie_entrees_changelog">';
-                    for ($i = 1; $i <= 5; $i++)
-                    {
-                        echo '<div class="zone_saisie_entree_changelog">';
-                            // Saisie entrée
-                            echo '<input type="text" name="saisies_entrees[' . $i . ']" placeholder="Entrée n°' . $i . '" value="" class="saisie_entree_changelog" />';
+                        for ($i = 1; $i <= 5; $i++)
+                        {
+                            echo '<div class="zone_saisie_entree_changelog">';
+                                // Saisie entrée
+                                echo '<input type="text" name="saisies_entrees[' . $i . ']" placeholder="Entrée n°' . $i . '" value="" class="saisie_entree_changelog" />';
 
-                            // Choix catégorie
-                            echo '<select name="categories_entrees[' . $i . ']" class="categorie_entree_changelog">';
-                                echo '<option value="" hidden>Choisir une catégorie</option>';
+                                // Choix catégorie
+                                echo '<select name="categories_entrees[' . $i . ']" class="categorie_entree_changelog">';
+                                    echo '<option value="" hidden>Choisir une catégorie</option>';
 
-                                foreach ($categoriesChangeLog as $keyCategorie => $categorie)
-                                {
-                                    echo '<option value="' . $keyCategorie . '">' . $categorie . '</option>';
-                                }
-                            echo '</select>';
+                                    foreach ($categoriesChangeLog as $keyCategorie => $categorie)
+                                    {
+                                        echo '<option value="' . $keyCategorie . '">' . $categorie . '</option>';
+                                    }
+                                echo '</select>';
+                            echo '</div>';
+                        }
+                    echo '</div>';
+
+                    // Boutons
+                    echo '<div class="zone_boutons_changelog">';
+                        // Ajouter une entrée
+                        echo '<a id="ajouter_entree_changelog" class="bouton_ajouter_entree">';
+                            echo '<span class="fond_plus">+</span>';
+                            echo 'Ajouter une entrée au journal';
+                        echo '</a>';
+
+                        // Ajouter le journal
+                        echo '<div class="zone_bouton_valider_journal">';
+                            echo '<input type="submit" name="insert_changelog" value="Ajouter le journal" id="bouton_saisie_journal" class="bouton_validation_journal" />';
                         echo '</div>';
-                    }
                     echo '</div>';
-
-                // Boutons
-                echo '<div class="zone_boutons_changelog">';
-                    // Ajouter une entrée
-                    echo '<a id="ajouter_entree_changelog" class="bouton_ajouter_entree">';
-                        echo '<span class="fond_plus">+</span>';
-                        echo 'Ajouter une entrée au journal';
-                    echo '</a>';
-
-                    // Ajouter le journal
-                    echo '<div class="zone_bouton_valider_journal">';
-                        echo '<input type="submit" name="insert_changelog" value="Ajouter le journal" id="bouton_saisie_journal" class="bouton_validation_journal" />';
-                    echo '</div>';
-                echo '</div>';
                 echo '</form>';
                 break;
         }

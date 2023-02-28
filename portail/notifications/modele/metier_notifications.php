@@ -319,18 +319,18 @@
                     // Récupération de la vue
                     switch ($idee->getStatus())
                     {
-                            // Ouverte
+                        // Ouverte
                         case 'O':
-                            // Prise en charge
+                        // Prise en charge
                         case 'C':
-                            // En progrès
+                        // En progrès
                         case 'P':
                             $view = 'inprogress';
                             break;
 
-                            // Terminée
+                        // Terminée
                         case 'D':
-                            // Rejetée
+                        // Rejetée
                         case 'R':
                             $view = 'done';
                             break;

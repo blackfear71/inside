@@ -6,7 +6,7 @@
         // Récupération de l'erreur serveur en fonction du code
         switch ($code)
         {
-                /*** Erreurs client ***/
+            /*** Erreurs client ***/
             case 403:
                 $erreur = 'Accès interdit';
                 break;
@@ -19,7 +19,7 @@
                 $erreur = 'Délai d\'attente dépassé';
                 break;
 
-                /*** Erreurs serveur ***/
+            /*** Erreurs serveur ***/
             case 500:
                 $erreur = 'Erreur interne du serveur';
                 break;

@@ -329,19 +329,19 @@
         // Détermination du premier numéro de jour du mois dans la semaine et du numéro dans la semaine du premier jour à afficher
         switch ($numeroPremierJourDuMois)
         {
-                // Samedi
+            // Samedi
             case 6:
                 $donneesCalendrier['numero_premier_jour_semaine']    = 3;
                 $donneesCalendrier['numero_premier_jour_a_afficher'] = 1;
                 break;
 
-                // Dimanche
+            // Dimanche
             case 7:
                 $donneesCalendrier['numero_premier_jour_semaine']    = 2;
                 $donneesCalendrier['numero_premier_jour_a_afficher'] = 1;
                 break;
 
-                // Du lundi au vendredi
+            // Du lundi au vendredi
             default:
                 $donneesCalendrier['numero_premier_jour_semaine']    = 1;
                 $donneesCalendrier['numero_premier_jour_a_afficher'] = $numeroPremierJourDuMois;
@@ -353,19 +353,19 @@
 
         switch ($numeroDernierJourDuMois)
         {
-                // Samedi
+            // Samedi
             case 6:
                 $donneesCalendrier['numero_dernier_jour_a_afficher'] = $numeroDernierJourDuMois - 1;
                 $dernierJourAAfficher                                = $nombreJoursMois - 1;
                 break;
 
-                // Dimanche
+            // Dimanche
             case 7:
                 $donneesCalendrier['numero_dernier_jour_a_afficher'] = $numeroDernierJourDuMois - 2;
                 $dernierJourAAfficher                                = $nombreJoursMois - 2;
                 break;
 
-                // Du lundi au vendredi
+            // Du lundi au vendredi
             default:
                 $donneesCalendrier['numero_dernier_jour_a_afficher'] = $numeroDernierJourDuMois;
                 $dernierJourAAfficher                                = $nombreJoursMois;

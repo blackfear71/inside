@@ -22,7 +22,7 @@
     // RETOUR : Tableau de liens
     function getPortail($preferences)
     {
-        // Préférence MovieHouse
+        // Préférence Movie House
         switch ($preferences->getView_movie_house())
         {
             case 'C':
