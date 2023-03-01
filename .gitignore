@@ -1,12 +1,26 @@
 ###################################
 ### Dossiers et fichiers exclus ###
 ###################################
+# Logs CRON
 cron/logs/
+
+# Conversations chat
 includes/common/chat/conversations/
+
+# Données CSV
 includes/datas/
+
+# Images
 includes/images/*
+!includes/images/calendars/
+includes/images/calendars/*
+!includes/images/calendars/backgrounds/
 !includes/images/moviehouse/
 !includes/images/ideas/
+
+# Livraison
 server/
+
+# Test
 test/
 .idea/
