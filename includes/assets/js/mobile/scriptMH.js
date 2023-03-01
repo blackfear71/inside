@@ -171,7 +171,7 @@ function switchCheckedColor(zone, input)
     {
         $(this).removeClass('bouton_checked');
         $(this).children('input').prop('checked', false);
-    })
+    });
 
     $('#' + input).addClass('bouton_checked');
     $('#' + input).children('input').prop('checked', true);

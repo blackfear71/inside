@@ -33,9 +33,30 @@ $(function ()
         tabBlock.push({ element: '.listbox', property: 'readonly', value: true });
         tabBlock.push({ element: '.listbox', property: 'pointer-events', value: 'none' });
         tabBlock.push({ element: '.listbox', property: 'color', value: '#a3a3a3' });
+        tabBlock.push({ element: '.zone_bouton_option', property: 'readonly', value: true });
+        tabBlock.push({ element: '.zone_bouton_option', property: 'pointer-events', value: 'none' });
+        tabBlock.push({ element: '.zone_bouton_option', property: 'color', value: '#a3a3a3' });
         tabBlock.push({ element: '.saisie_bouton', property: 'display', value: 'none' });
-
+        
         hideSubmitButton(zoneButton, submitButton, formSaisie, tabBlock);
+    });
+
+    // Change la couleur de la checkbox options générateur de calendriers
+    $('#checkbox_jours_feries').click(function ()
+    {
+        var idBouton = $(this).closest('div').attr('id');
+        
+        switchCheckedColor(idBouton);
+    });
+
+    // Change la couleur des switch options générateur de calendriers (sauf les couleurs)
+    $('.zone_bouton_option').not('#checkbox_jours_feries').click(function ()
+    {
+        var idBouton = $(this).closest('div').attr('id');
+        var idParent = $(this).closest('div').parent().attr('id');
+
+        if (idBouton != undefined)
+            switchRadioColor('zone_bouton_option', idBouton, idParent);
     });
 
     /*** Actions au changement ***/
@@ -125,33 +146,55 @@ function adaptCalendars()
         $('.zone_calendars').css('width', '100%');
 
         // Générateur de calendriers
-        $('.zone_calendrier_generator_middle').css('width', 'calc(100% - 280px)');
-        $('.zone_calendrier_generator_middle').css('margin-right', '0');
+        $('.zone_calendrier_generator_left').css('display', 'block');
+        $('.zone_calendrier_generator_left').css('width', '100%');
+        $('.zone_calendrier_generator_left').css('margin-right', '0');
 
         if ($('.zone_calendrier_generator_middle').length)
         {
+            $('.zone_calendrier_generator_middle').css('display', 'block');
+            $('.zone_calendrier_generator_middle').css('width', '100%');
+            $('.zone_calendrier_generator_middle').css('margin-right', '0');
+            $('.zone_calendrier_generator_middle').css('margin-top', '20px');
+    
+            setTimeout(function ()
+            {
+                $('.zone_calendrier_generator_right').css('display', 'block');
+                $('.zone_calendrier_generator_right').css('width', '100%');
+                $('.zone_calendrier_generator_right').css('margin-top', '20px');
+            }, 200);
+        }
+        else
+        {
+            $('.zone_calendrier_generator_right').css('display', 'block');
             $('.zone_calendrier_generator_right').css('width', '100%');
             $('.zone_calendrier_generator_right').css('margin-top', '20px');
         }
-        else
-        {
-            $('.zone_calendrier_generator_right').css('width', 'calc(100% - 280px)');
-            $('.zone_calendrier_generator_right').css('margin-top', '0');
-        }
 
         // Générateur d'annexes
-        $('.zone_annexe_generator_middle').css('width', 'calc(100% - 280px)');
-        $('.zone_annexe_generator_middle').css('margin-right', '0');
+        $('.zone_annexe_generator_left').css('display', 'block');
+        $('.zone_annexe_generator_left').css('width', '100%');
+        $('.zone_annexe_generator_left').css('margin-right', '0');
 
         if ($('.zone_annexe_generator_middle').length)
         {
-            $('.zone_annexe_generator_right').css('width', '100%');
-            $('.zone_annexe_generator_right').css('margin-top', '20px');
+            $('.zone_annexe_generator_middle').css('display', 'block');
+            $('.zone_annexe_generator_middle').css('width', '100%');
+            $('.zone_annexe_generator_middle').css('margin-right', '0');
+            $('.zone_annexe_generator_middle').css('margin-top', '20px');
+    
+            setTimeout(function ()
+            {
+                $('.zone_annexe_generator_right').css('display', 'block');
+                $('.zone_annexe_generator_right').css('width', '100%');
+                $('.zone_annexe_generator_right').css('margin-top', '20px');
+            }, 200);
         }
         else
         {
-            $('.zone_annexe_generator_right').css('width', 'calc(100% - 280px)');
-            $('.zone_annexe_generator_right').css('margin-top', '0');
+            $('.zone_annexe_generator_right').css('display', 'block');
+            $('.zone_annexe_generator_right').css('width', '100%');
+            $('.zone_annexe_generator_right').css('margin-top', '20px');
         }
 
         // Ajout de calendriers et annexes
@@ -173,26 +216,56 @@ function adaptCalendars()
         $('.zone_calendars').css('width', 'calc(100% - 280px)');
 
         // Générateur de calendriers
-        $('.zone_calendrier_generator_middle').css('width', '289px');
-        $('.zone_calendrier_generator_middle').css('margin-right', '20px');
+        $('.zone_calendrier_generator_left').css('display', 'inline-block');
+        $('.zone_calendrier_generator_left').css('width', '440px');
+        $('.zone_calendrier_generator_left').css('margin-right', '20px');
 
         if ($('.zone_calendrier_generator_middle').length)
-            $('.zone_calendrier_generator_right').css('width', 'calc(100% - 589px)');
-        else
-            $('.zone_calendrier_generator_right').css('width', 'calc(100% - 280px)');
+        {
+            $('.zone_calendrier_generator_middle').css('display', 'inline-block');
+            $('.zone_calendrier_generator_middle').css('width', '289px');
+            $('.zone_calendrier_generator_middle').css('margin-right', '20px');
+            $('.zone_calendrier_generator_middle').css('margin-top', '0');
 
-        $('.zone_calendrier_generator_right').css('margin-top', '0');
+            setTimeout(function ()
+            {
+                $('.zone_calendrier_generator_right').css('display', 'inline-block');
+                $('.zone_calendrier_generator_right').css('width', 'calc(100% - 769px)');
+                $('.zone_calendrier_generator_right').css('margin-top', '0');
+            }, 200);
+        }
+        else
+        {
+            $('.zone_calendrier_generator_right').css('display', 'inline-block');
+            $('.zone_calendrier_generator_right').css('width', 'calc(100% - 480px)');
+            $('.zone_calendrier_generator_right').css('margin-top', '0');
+        }
 
         // Générateur d'annexes
-        $('.zone_annexe_generator_middle').css('width', '213px');
-        $('.zone_annexe_generator_middle').css('margin-right', '20px');
+        $('.zone_annexe_generator_left').css('display', 'inline-block');
+        $('.zone_annexe_generator_left').css('width', '260px');
+        $('.zone_annexe_generator_left').css('margin-right', '20px');
 
         if ($('.zone_annexe_generator_middle').length)
-            $('.zone_annexe_generator_right').css('width', 'calc(100% - 513px)');
-        else
-            $('.zone_annexe_generator_right').css('width', 'calc(100% - 280px)');
+        {
+            $('.zone_annexe_generator_middle').css('display', 'inline-block');
+            $('.zone_annexe_generator_middle').css('width', '212px');
+            $('.zone_annexe_generator_middle').css('margin-right', '20px');
+            $('.zone_annexe_generator_middle').css('margin-top', '0');
 
-        $('.zone_annexe_generator_right').css('margin-top', '0');
+            setTimeout(function ()
+            {
+                $('.zone_annexe_generator_right').css('display', 'inline-block');
+                $('.zone_annexe_generator_right').css('width', 'calc(100% - 512px)');
+                $('.zone_annexe_generator_right').css('margin-top', '0');
+            }, 200);
+        }
+        else
+        {
+            $('.zone_annexe_generator_right').css('display', 'inline-block');
+            $('.zone_annexe_generator_right').css('width', 'calc(100% - 280px)');
+            $('.zone_annexe_generator_right').css('margin-top', '0');
+        }
 
         // Ajout de calendriers et annexes
         $('.zone_calendars_left').css('display', 'inline-block');
@@ -202,6 +275,34 @@ function adaptCalendars()
         $('.zone_calendars_right').css('display', 'inline-block');
         $('.zone_calendars_right').css('width', 'calc(50% - 10px)');
     }
+}
+
+// Change la couleur des switch
+function switchCheckedColor(idBouton)
+{
+    if ($('#' + idBouton).children('input').prop('checked'))
+    {
+        $('#' + idBouton).removeClass('bouton_checked');
+        $('#' + idBouton).children('input').prop('checked', false);
+    }
+    else
+    {
+        $('#' + idBouton).addClass('bouton_checked');
+        $('#' + idBouton).children('input').prop('checked', true);
+    }
+}
+
+// Change la couleur des radio boutons
+function switchRadioColor(zone, idBouton, idParent)
+{
+    $('#' + idParent + ' .' + zone).each(function ()
+    {
+        $(this).removeClass('bouton_checked');
+        $(this).children('input').prop('checked', false);
+    });
+
+    $('#' + idBouton).addClass('bouton_checked');
+    $('#' + idBouton).children('input').prop('checked', true);
 }
 
 // Affiche le calendrier généré au format JPEG

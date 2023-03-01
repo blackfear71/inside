@@ -178,7 +178,7 @@
         /**************/
         /* Jour férié */
         /**************/
-        $jourFerie = isJourFerie(date('Ymd'));
+        $jourFerie = isJourFerie(date('Ymd'), 'Y');
 
         if (!empty($jourFerie))
         {
@@ -188,7 +188,12 @@
             $news->setContent('Nous célébrons <strong>' . $jourFerie['nom_news'] . '</strong> !');
 
             if (date('N') <= 5)
-                $news->setDetails('En espérant que vous ne soyez pas venus travailler...');
+            {
+                if ($jourFerie['alsace'] == 'Y')
+                    $news->setDetails('En espérant que vous ne soyez pas venus travailler...  (sauf si vous n\'êtes pas en Alsace, là vous y allez)');
+                else
+                    $news->setDetails('En espérant que vous ne soyez pas venus travailler...');
+            }
             else
                 $news->setDetails('');
 

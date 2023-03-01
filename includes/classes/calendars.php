@@ -375,13 +375,19 @@
         private $month;
         private $year;
         private $picture;
+        private $holidays;
+        private $vacations;
+        private $color;
 
         // Constructeur par défaut (objet vide)
         public function __construct()
         {
-            $this->month   = '';
-            $this->year    = '';
-            $this->picture = '';
+            $this->month     = '';
+            $this->year      = '';
+            $this->picture   = '';
+            $this->holidays  = 'Y';
+            $this->vacations = 'b';
+            $this->color     = 'R';
         }
 
         // Sécurisation des données
@@ -395,9 +401,12 @@
 
         protected function fillSecureData($data)
         {
-            $this->month   = htmlspecialchars($data->getMonth());
-            $this->year    = htmlspecialchars($data->getYear());
-            $this->picture = htmlspecialchars($data->getPicture());
+            $this->month     = htmlspecialchars($data->getMonth());
+            $this->year      = htmlspecialchars($data->getYear());
+            $this->picture   = htmlspecialchars($data->getPicture());
+            $this->holidays  = htmlspecialchars($data->getHolidays());
+            $this->vacations = htmlspecialchars($data->getVacations());
+            $this->color     = htmlspecialchars($data->getColor());
         }
 
         // Getters et Setters pour l'objet CalendarParameters
@@ -432,6 +441,39 @@
         public function getPicture()
         {
             return $this->picture;
+        }
+
+        // Jours fériés
+        public function setHolidays($holidays)
+        {
+            $this->holidays = $holidays;
+        }
+
+        public function getHolidays()
+        {
+            return $this->holidays;
+        }
+
+        // Vacances scolaires
+        public function setVacations($vacations)
+        {
+            $this->vacations = $vacations;
+        }
+
+        public function getVacations()
+        {
+            return $this->vacations;
+        }
+
+        // Couleur
+        public function setColor($color)
+        {
+            $this->color = $color;
+        }
+
+        public function getColor()
+        {
+            return $this->color;
         }
     }
 

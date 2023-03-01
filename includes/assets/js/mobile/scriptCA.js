@@ -36,6 +36,24 @@ $(function ()
         loadFile(event, 'image_annexes', false);
     });
 
+    // Change la couleur de la checkbox options générateur de calendriers
+    $('#checkbox_jours_feries').click(function ()
+    {
+        var idBouton = $(this).closest('div').attr('id');
+        
+        switchCheckedColor(idBouton);
+    });
+
+    // Change la couleur des switch options générateur de calendriers (sauf les couleurs)
+    $('.zone_bouton_option').not('#checkbox_jours_feries').click(function ()
+    {
+        var idBouton = $(this).closest('div').attr('id');
+        var idParent = $(this).closest('div').parent().attr('id');
+
+        if (idBouton != undefined)
+            switchRadioColor('zone_bouton_option', idBouton, idParent);
+    });
+
     // Bloque la saisie en cas de soumission (Génération de calendrier)
     $('#bouton_saisie_generator').click(function ()
     {
@@ -100,6 +118,34 @@ $(window).on('load', function ()
 /*****************/
 /*** Fonctions ***/
 /*****************/
+// Change la couleur des switch
+function switchCheckedColor(idBouton)
+{
+    if ($('#' + idBouton).children('input').prop('checked'))
+    {
+        $('#' + idBouton).removeClass('bouton_checked');
+        $('#' + idBouton).children('input').prop('checked', false);
+    }
+    else
+    {
+        $('#' + idBouton).addClass('bouton_checked');
+        $('#' + idBouton).children('input').prop('checked', true);
+    }
+}
+
+// Change la couleur des radio boutons
+function switchRadioColor(zone, idBouton, idParent)
+{
+    $('#' + idParent + ' .' + zone).each(function ()
+    {
+        $(this).removeClass('bouton_checked');
+        $(this).children('input').prop('checked', false);
+    });
+
+    $('#' + idBouton).addClass('bouton_checked');
+    $('#' + idBouton).children('input').prop('checked', true);
+}
+
 // Affiche le calendrier généré au format JPEG
 function afficherCalendrierJpeg()
 {

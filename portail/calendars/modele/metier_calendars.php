@@ -288,6 +288,9 @@
         $calendarParameters->setMonth($parametres['month']);
         $calendarParameters->setYear($parametres['year']);
         $calendarParameters->setPicture($parametres['picture']);
+        $calendarParameters->setHolidays($parametres['holidays']);
+        $calendarParameters->setVacations($parametres['vacations']);
+        $calendarParameters->setColor($parametres['color']);
 
         // Retour
         return $calendarParameters;
@@ -395,57 +398,62 @@
         $vacances = array();
 
         // Récupération des données
-        $year  = $calendarParameters->getYear();
-        $month = $calendarParameters->getMonth();
+        $year      = $calendarParameters->getYear();
+        $month     = $calendarParameters->getMonth();
+        $vacations = $calendarParameters->getVacations();
 
-        // Lecture du fichier des périodes de vacances
-        if ($month >= 10)
+        // On ne récupère les périodes de vacances scolaires que si demandées
+        if (!empty($vacations))
         {
-            $anneeInitiale = $year;
-            $anneeFinale   = $year + 1;
-        }
-        else
-        {
-            $anneeInitiale = $year - 1;
-            $anneeFinale   = $year;
-        }
-
-        $nomFichier = $anneeInitiale . '-' . $anneeFinale . '.csv';
-
-        // Vérification fichier existant
-        $dossierVacances = '../../includes/datas/calendars';
-
-        // Si le fichier existe, on récupère les données
-        if (file_exists($dossierVacances . '/' . $nomFichier))
-        {
-            // Lecture des dates de vacances
-            $file = fopen($dossierVacances . '/' . $nomFichier, 'r');
-            $i    = 0;
-
-            while (!feof($file))
+            // Lecture du fichier des périodes de vacances
+            if ($month >= 10)
             {
-                $line[] = fgetcsv($file, 1024);
-
-                // Récupération des dates
-                if (substr($line[$i][0], 0, 4) == $year AND substr($line[$i][0], 5, 2) == $month)
-                {
-                    $vacances[str_replace('-', '', $line[$i][0])] = array(
-                        'date'            => $line[$i][0],
-                        'vacances_zone_a' => $line[$i][1],
-                        'vacances_zone_b' => $line[$i][2],
-                        'vacances_zone_c' => $line[$i][3],
-                        'nom_vacances'    => $line[$i][4]
-                    );
-                }
-
-                // Arrêt de la boucle si dates dépassées
-                if (substr($line[$i][0], 0, 4) > $year OR (substr($line[$i][0], 0, 4) == $year AND substr($line[$i][0], 5, 2) > $month))
-                    break;
-
-                $i++;
+                $anneeInitiale = $year;
+                $anneeFinale   = $year + 1;
+            }
+            else
+            {
+                $anneeInitiale = $year - 1;
+                $anneeFinale   = $year;
             }
 
-            fclose($file);
+            $nomFichier = $anneeInitiale . '-' . $anneeFinale . '.csv';
+
+            // Vérification fichier existant
+            $dossierVacances = '../../includes/datas/calendars';
+
+            // Si le fichier existe, on récupère les données
+            if (file_exists($dossierVacances . '/' . $nomFichier))
+            {
+                // Lecture des dates de vacances
+                $file = fopen($dossierVacances . '/' . $nomFichier, 'r');
+                $i    = 0;
+
+                while (!feof($file))
+                {
+                    $line[] = fgetcsv($file, 1024);
+
+                    // Récupération des dates
+                    if (substr($line[$i][0], 0, 4) == $year AND substr($line[$i][0], 5, 2) == $month)
+                    {
+                        $vacances[str_replace('-', '', $line[$i][0])] = array(
+                            'date'            => $line[$i][0],
+                            'vacances_zone_a' => $line[$i][1],
+                            'vacances_zone_b' => $line[$i][2],
+                            'vacances_zone_c' => $line[$i][3],
+                            'nom_vacances'    => $line[$i][4]
+                        );
+                    }
+
+                    // Arrêt de la boucle si dates dépassées
+                    if (substr($line[$i][0], 0, 4) > $year OR (substr($line[$i][0], 0, 4) == $year AND substr($line[$i][0], 5, 2) > $month))
+                        break;
+
+                    $i++;
+                }
+
+                fclose($file);
+            }
         }
 
         // Retour
@@ -508,6 +516,17 @@
         $_SESSION['calendar']['month']   = $post['month_calendar'];
         $_SESSION['calendar']['year']    = $post['year_calendar'];
         $_SESSION['calendar']['picture'] = $nomImage;
+        $_SESSION['calendar']['color']   = $post['choix_couleur_calendrier'];
+        
+        if (isset($post['jours_feries_alsace']) AND !empty($post['jours_feries_alsace']))
+            $_SESSION['calendar']['holidays'] = 'Y';
+        else
+            $_SESSION['calendar']['holidays'] = 'N';
+
+        if (isset($post['choix_vacances_scolaires']) AND $post['choix_vacances_scolaires'] == 'none')
+            $_SESSION['calendar']['vacations'] = '';
+        else
+            $_SESSION['calendar']['vacations'] = $post['choix_vacances_scolaires'];
 
         // Retour
         return $nomImage;

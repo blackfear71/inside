@@ -3,20 +3,53 @@
     $entetesTableau = array('lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche');
     $jourAAjouter   = 0;
 
+    // Détermination des couleurs perrsonnalisées
+    switch ($calendarParameters->getColor())
+    {
+        // Go Green
+        case 'V':
+            $couleur1 = 'couleur_calendrier_vert_1';
+            $couleur2 = 'couleur_calendrier_vert_2';
+            $bordure  = 'bordure_calendrier_vert';
+            break;
+
+        // Sky Blue
+        case 'B':
+            $couleur1 = 'couleur_calendrier_bleu_1';
+            $couleur2 = 'couleur_calendrier_bleu_2';
+            $bordure  = 'bordure_calendrier_bleu';
+            break;
+
+        // Sunny Yellow
+        case 'J':
+            $couleur1 = 'couleur_calendrier_jaune_1';
+            $couleur2 = 'couleur_calendrier_jaune_2';
+            $bordure  = 'bordure_calendrier_jaune';
+            break;
+
+        // Inside Red
+        case 'R':
+        default:
+            $couleur1 = 'couleur_calendrier_rouge_1';
+            $couleur2 = 'couleur_calendrier_rouge_2';
+            $bordure  = 'bordure_calendrier_rouge';
+            break;
+    }
+
     echo '<div class="zone_calendrier_generator_hidden">';
         echo '<div class="zone_calendrier_generator">';
             // Entête du calendrier
-            echo '<div class="zone_entete_calendrier_generator">';
+            echo '<div class="zone_entete_calendrier_generator ' . $couleur1 . '">';
                 // Mois
                 $search  = array('é', 'û');
                 $replace = array('e', 'u');
                 $nomMois = mb_strtoupper(str_replace($search, $replace, $listeMois[$calendarParameters->getMonth()]));
 
-                echo '<div class="mois_calendrier_generator">' . $nomMois . '</div>';
+                echo '<div class="mois_calendrier_generator ' . $bordure . '">' . $nomMois . '</div>';
                 echo '<div class="rift_mois_calendrier_generator"></div>';
 
                 // Semaines et numéro du mois
-                echo '<div class="zone_semaines_calendrier_generator">';
+                echo '<div class="zone_semaines_calendrier_generator ' . $couleur2 . '">';
                     // Semaines
                     echo '<div class="semaines_calendrier_generator">Semaines ' . $donneesCalendrier['semaine_debut_mois'] . ' à ' . $donneesCalendrier['semaine_fin_mois'] . '</div>';
 
@@ -65,15 +98,20 @@
 
                                     // Détermination si jour férié
                                     if ($numeroJourAAfficher < 10)
-                                        $jourFerie = isJourFerie($calendarParameters->getYear() . $calendarParameters->getMonth() . '0' . $numeroJourAAfficher);
+                                        $jourFerie = isJourFerie($calendarParameters->getYear() . $calendarParameters->getMonth() . '0' . $numeroJourAAfficher, $calendarParameters->getHolidays());
                                     else
-                                        $jourFerie = isJourFerie($calendarParameters->getYear() . $calendarParameters->getMonth() . $numeroJourAAfficher);
+                                        $jourFerie = isJourFerie($calendarParameters->getYear() . $calendarParameters->getMonth() . $numeroJourAAfficher, $calendarParameters->getHolidays());
 
                                     // Détermination si vacances
-                                    if ($numeroJourAAfficher < 10)
-                                        $jourVacances = isVacances($calendarParameters->getYear() . $calendarParameters->getMonth() . '0' . $numeroJourAAfficher, $vacances, 'vacances_zone_b');
+                                    if (!empty($vacances))
+                                    {
+                                        if ($numeroJourAAfficher < 10)
+                                            $jourVacances = isVacances($calendarParameters->getYear() . $calendarParameters->getMonth() . '0' . $numeroJourAAfficher, $vacances, 'vacances_zone_' . $calendarParameters->getVacations());
+                                        else
+                                            $jourVacances = isVacances($calendarParameters->getYear() . $calendarParameters->getMonth() . $numeroJourAAfficher, $vacances, 'vacances_zone_' . $calendarParameters->getVacations());
+                                    }
                                     else
-                                        $jourVacances = isVacances($calendarParameters->getYear() . $calendarParameters->getMonth() . $numeroJourAAfficher, $vacances, 'vacances_zone_b');
+                                        $jourVacances = false;
 
                                     // Affichage du numéro de jour et du jour férié si besoin
                                     echo '<td class="jour_calendrier_generator">';
@@ -81,9 +119,9 @@
                                         if ($jourVacances == true)
                                         {
                                             if (!empty($calendarParameters->getPicture()))
-                                                echo '<div class="numero_jour_calendrier_generator numero_jour_calendrier_generator_red_light">' . $numeroJourAAfficher . '</div>';
+                                                echo '<div class="numero_jour_calendrier_generator numero_jour_calendrier_generator_color_light ' . $couleur2 . '">' . $numeroJourAAfficher . '</div>';
                                             else
-                                                echo '<div class="numero_jour_calendrier_generator numero_jour_calendrier_generator_red">' . $numeroJourAAfficher . '</div>';
+                                                echo '<div class="numero_jour_calendrier_generator numero_jour_calendrier_generator_color ' . $couleur2 . '">' . $numeroJourAAfficher . '</div>';
                                         }
                                         else
                                         {

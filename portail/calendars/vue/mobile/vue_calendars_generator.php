@@ -107,15 +107,6 @@
 
                         // Générateur de calendriers
                         echo '<div id="afficher_generateur_calendrier" style="display: none;">';
-                            // Alerte vacances scolaires
-                            if (isset($vacances) AND empty($vacances))
-                            {
-                                echo '<div class="avertissement_calendrier_generator">';
-                                    echo 'Attention, les dates de vacances ne sont pas disponibles pour le mois de ' . $listeMois[$calendarParameters->getMonth()] . ' ' . $calendarParameters->getYear() . '.
-                                          Les données ne sont pas à jour ou non accessibles et ne peuvent pas être affichées sur le calendrier généré. Pour toute information, veuillez contacter l\'administrateur.';
-                                echo '</div>';
-                            }
-
                             // Explications
                             echo '<div class="titre_explications_calendrier_generator">A propos du générateur de calendriers</div>';
 
@@ -132,6 +123,16 @@
                                 echo 'Le calendrier généré est formaté en fonction des données saisies, les jours fériés sont calculés automatiquement ainsi que les jours de vacances scolaires.
                                       En cas de problème, n\'hésitez pas à contacter l\'administrateur.';
 
+                                // Alerte vacances scolaires
+                                if (isset($vacances) AND empty($vacances) AND !empty($calendarParameters->getVacations()))
+                                {
+                                    echo '<div class="avertissement_calendrier_generator_1">';
+                                        echo 'Attention, les dates de vacances ne sont pas disponibles pour le mois de ' . $listeMois[$calendarParameters->getMonth()] . ' ' . $calendarParameters->getYear() . '.
+                                              Les données ne sont pas à jour ou non accessibles et ne peuvent pas être affichées sur le calendrier généré. Pour toute information, veuillez contacter l\'administrateur.';
+                                    echo '</div>';
+                                }
+
+                                // Avertissement sauvegarde
                                 echo '<div class="avertissement_calendrier_generator_2">';
                                     echo 'Ne pas oublier d\'utiliser le bouton "Sauvegarder le calendrier" après l\'avoir généré pour le rendre disponible sur le site.';
                                 echo '</div>';
@@ -186,6 +187,159 @@
                                                 echo '<option value="' . $i . '">' . $i . '</option>';
                                         }
                                     echo '</select>';
+
+                                    // Options du calendrier
+                                    echo '<div class="zone_options_calendrier">';
+                                        // Jours fériés
+                                        echo '<div id="zone_option_jours_feries" class="zone_option_calendrier">';
+                                            echo '<div class="titre_explications_calendrier_generator">Jours fériés</div>';
+
+                                            if ($calendarParameters->getHolidays() == 'Y')
+                                            {
+                                                echo '<div id="checkbox_jours_feries" class="zone_bouton_option bouton_checked">';
+                                                    echo '<input type="checkbox" id="checkbox_jours_feries_alsace" name="jours_feries_alsace" checked />';
+                                                    echo '<label for="checkbox_jours_feries_alsace" class="label_option">Alsace</label>';
+                                                echo '</div>';
+                                            }
+                                            else
+                                            {
+                                                echo '<div id="checkbox_jours_feries" class="zone_bouton_option">';
+                                                    echo '<input type="checkbox" id="checkbox_jours_feries_alsace" name="jours_feries_alsace" />';
+                                                    echo '<label for="checkbox_jours_feries_alsace" class="label_option">Alsace</label>';
+                                                echo '</div>';
+                                            }
+                                        echo '</div>';
+
+                                        // Vacances scolaires
+                                        echo '<div id="zone_option_vacances_scolaires" class="zone_option_calendrier">';
+                                            echo '<div class="titre_explications_calendrier_generator">Vacances scolaires</div>';
+
+                                            if (empty($calendarParameters->getVacations()))
+                                            {
+                                                echo '<div id="radio_zone_aucune" class="zone_bouton_option zone_bouton_option_demi_margin bouton_checked">';
+                                                    echo '<input id="zone_aucune" type="radio" name="choix_vacances_scolaires" value="none" required checked />';
+                                                    echo '<label for="zone_aucune" class="label_option">Masquer</label>';
+                                                echo '</div>';
+                                            }
+                                            else
+                                            {
+                                                echo '<div id="radio_zone_aucune" class="zone_bouton_option zone_bouton_option_demi_margin">';
+                                                    echo '<input id="zone_aucune" type="radio" name="choix_vacances_scolaires" value="none" required />';
+                                                    echo '<label for="zone_aucune" class="label_option">Masquer</label>';
+                                                echo '</div>';
+                                            }
+                                            
+                                            if (!empty($calendarParameters->getVacations()) AND $calendarParameters->getVacations() == 'a')
+                                            {
+                                                echo '<div id="radio_zone_a" class="zone_bouton_option zone_bouton_option_demi bouton_checked">';
+                                                    echo '<input id="zone_a" type="radio" name="choix_vacances_scolaires" value="a" required checked />';
+                                                    echo '<label for="zone_a" class="label_option">Zone A</label>';
+                                                echo '</div>';
+                                            }
+                                            else
+                                            {
+                                                echo '<div id="radio_zone_a" class="zone_bouton_option zone_bouton_option_demi">';
+                                                    echo '<input id="zone_a" type="radio" name="choix_vacances_scolaires" value="a" required />';
+                                                    echo '<label for="zone_a" class="label_option">Zone A</label>';
+                                                echo '</div>';
+                                            }
+
+                                            if (!empty($calendarParameters->getVacations()) AND $calendarParameters->getVacations() == 'b')
+                                            {
+                                                echo '<div id="radio_zone_b" class="zone_bouton_option zone_bouton_option_demi_margin bouton_checked">';
+                                                    echo '<input id="zone_b" type="radio" name="choix_vacances_scolaires" value="b" required checked />';
+                                                    echo '<label for="zone_b" class="label_option">Zone B</label>';
+                                                echo '</div>';
+                                            }
+                                            else
+                                            {
+                                                echo '<div id="radio_zone_b" class="zone_bouton_option zone_bouton_option_demi_margin">';
+                                                    echo '<input id="zone_b" type="radio" name="choix_vacances_scolaires" value="b" required />';
+                                                    echo '<label for="zone_b" class="label_option">Zone B</label>';
+                                                echo '</div>';
+                                            }
+
+                                            if (!empty($calendarParameters->getVacations()) AND $calendarParameters->getVacations() == 'c')
+                                            {
+                                                echo '<div id="radio_zone_c" class="zone_bouton_option zone_bouton_option_demi bouton_checked">';
+                                                    echo '<input id="zone_c" type="radio" name="choix_vacances_scolaires" value="c" required checked />';
+                                                    echo '<label for="zone_c" class="label_option">Zone C</label>';
+                                                echo '</div>';
+                                            }
+                                            else
+                                            {
+                                                echo '<div id="radio_zone_c" class="zone_bouton_option zone_bouton_option_demi">';
+                                                    echo '<input id="zone_c" type="radio" name="choix_vacances_scolaires" value="c" required />';
+                                                    echo '<label for="zone_c" class="label_option">Zone C</label>';
+                                                echo '</div>';
+                                            }
+                                        echo '</div>';
+
+                                        // Couleur
+                                        echo '<div id="zone_option_couleur" class="zone_option_calendrier">';
+                                            echo '<div class="titre_explications_calendrier_generator">Couleurs</div>';
+
+                                            if (!empty($calendarParameters->getColor()) AND $calendarParameters->getColor() == 'R')
+                                            {
+                                                echo '<div class="zone_bouton_option zone_bouton_option_demi_margin zone_bouton_option_rouge">';
+                                                    echo '<input id="radio_couleur_rouge" type="radio" name="choix_couleur_calendrier" value="R" required checked />';
+                                                    echo '<label for="radio_couleur_rouge" class="label_option">Inside Red</label>';
+                                                echo '</div>';
+                                            }
+                                            else
+                                            {
+                                                echo '<div class="zone_bouton_option zone_bouton_option_demi_margin zone_bouton_option_rouge">';
+                                                    echo '<input id="radio_couleur_rouge" type="radio" name="choix_couleur_calendrier" value="R" required />';
+                                                    echo '<label for="radio_couleur_rouge" class="label_option">Inside Red</label>';
+                                                echo '</div>';
+                                            }
+
+                                            if (!empty($calendarParameters->getColor()) AND $calendarParameters->getColor() == 'V')
+                                            {
+                                                echo '<div class="zone_bouton_option zone_bouton_option_demi zone_bouton_option_vert">';
+                                                    echo '<input id="radio_couleur_vert" type="radio" name="choix_couleur_calendrier" value="V" required checked />';
+                                                    echo '<label for="radio_couleur_vert" class="label_option">Go Green</label>';
+                                                echo '</div>';
+                                            }
+                                            else
+                                            {
+                                                echo '<div class="zone_bouton_option zone_bouton_option_demi zone_bouton_option_vert">';
+                                                    echo '<input id="radio_couleur_vert" type="radio" name="choix_couleur_calendrier" value="V" required />';
+                                                    echo '<label for="radio_couleur_vert" class="label_option">Go Green</label>';
+                                                echo '</div>';
+                                            }
+                                            
+                                            if (!empty($calendarParameters->getColor()) AND $calendarParameters->getColor() == 'B')
+                                            {
+                                                echo '<div class="zone_bouton_option zone_bouton_option_demi_margin zone_bouton_option_bleu">';
+                                                    echo '<input id="radio_couleur_bleu" type="radio" name="choix_couleur_calendrier" value="B" required checked />';
+                                                    echo '<label for="radio_couleur_bleu" class="label_option">Sky Blue</label>';
+                                                echo '</div>';
+                                            }
+                                            else
+                                            {
+                                                echo '<div class="zone_bouton_option zone_bouton_option_demi_margin zone_bouton_option_bleu">';
+                                                    echo '<input id="radio_couleur_bleu" type="radio" name="choix_couleur_calendrier" value="B" required />';
+                                                    echo '<label for="radio_couleur_bleu" class="label_option">Sky Blue</label>';
+                                                echo '</div>';
+                                            }
+                                            
+                                            if (!empty($calendarParameters->getColor()) AND $calendarParameters->getColor() == 'J')
+                                            {
+                                                echo '<div class="zone_bouton_option zone_bouton_option_demi zone_bouton_option_jaune">';
+                                                    echo '<input id="radio_couleur_jaune" type="radio" name="choix_couleur_calendrier" value="J" required checked />';
+                                                    echo '<label for="radio_couleur_jaune" class="label_option">Sunny Yellow</label>';
+                                                echo '</div>';
+                                            }
+                                            else
+                                            {
+                                                echo '<div class="zone_bouton_option zone_bouton_option_demi zone_bouton_option_jaune">';
+                                                    echo '<input id="radio_couleur_jaune" type="radio" name="choix_couleur_calendrier" value="J" required />';
+                                                    echo '<label for="radio_couleur_jaune" class="label_option">Sunny Yellow</label>';
+                                                echo '</div>';
+                                            }
+                                        echo '</div>';
+                                    echo '</div>';
 
                                     // Bouton validation
                                     echo '<div class="zone_bouton_saisie">';

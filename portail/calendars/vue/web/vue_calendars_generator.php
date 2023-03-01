@@ -64,6 +64,18 @@
                         $anneeDebut = date('Y') - 2;
                         $anneeFin   = date('Y') + 2;
 
+                        /*******************************************/
+                        /* Génération du calendrier au format HTML */
+                        /*******************************************/
+                        if (isset($calendarParameters) AND !empty($calendarParameters->getMonth()) AND !empty($calendarParameters->getYear()))
+                            include('vue/web/vue_calendar_generated.php');
+
+                        /*****************************************/
+                        /* Génération de l'annexe au format HTML */
+                        /*****************************************/
+                        if (isset($annexeParameters) AND !empty($annexeParameters->getName()))
+                            include('vue/web/vue_annexe_generated.php');
+
                         /*****************************/
                         /* Générateur de calendriers */
                         /*****************************/
@@ -73,9 +85,9 @@
 
                             // Saisie
                             echo '<div class="zone_calendrier_generator_left">';
-                                echo '<div class="zone_saisie_calendrier">';
-                                    // Saisie des informations
-                                    echo '<form method="post" action="calendars_generator.php?action=doGenerer" enctype="multipart/form-data">';
+                                // Saisie des informations
+                                echo '<form method="post" action="calendars_generator.php?action=doGenerer" enctype="multipart/form-data">';
+                                    echo '<div class="zone_saisie_calendrier">';
                                         // Image
                                         echo '<div class="zone_saisie_image">';
                                             echo '<input type="hidden" name="MAX_FILE_SIZE" value="15728640" />';
@@ -121,60 +133,199 @@
                                                     echo '<option value="' . $i . '">' . $i . '</option>';
                                             }
                                         echo '</select>';
+                                    echo '</div>';
 
-                                        // Bouton validation
-                                        echo '<div class="zone_bouton_saisie">';
-                                            echo '<input type="submit" name="send" value="Générer le calendrier" id="bouton_saisie_generator" class="saisie_bouton" />';
+                                    // Options du calendrier
+                                    echo '<div class="zone_options_calendrier">';
+                                        // Jours fériés
+                                        echo '<div id="zone_option_jours_feries" class="zone_option_calendrier">';
+                                            echo '<div class="titre_option_calendrier">Jours fériés</div>';
+
+                                            if ($calendarParameters->getHolidays() == 'Y')
+                                            {
+                                                echo '<div id="checkbox_jours_feries" class="zone_bouton_option bouton_checked">';
+                                                    echo '<input type="checkbox" id="checkbox_jours_feries_alsace" name="jours_feries_alsace" checked />';
+                                                    echo '<label for="checkbox_jours_feries_alsace" class="label_option">Alsace</label>';
+                                                echo '</div>';
+                                            }
+                                            else
+                                            {
+                                                echo '<div id="checkbox_jours_feries" class="zone_bouton_option">';
+                                                    echo '<input type="checkbox" id="checkbox_jours_feries_alsace" name="jours_feries_alsace" />';
+                                                    echo '<label for="checkbox_jours_feries_alsace" class="label_option">Alsace</label>';
+                                                echo '</div>';
+                                            }
                                         echo '</div>';
-                                    echo '</form>';
-                                echo '</div>';
+
+                                        // Vacances scolaires
+                                        echo '<div id="zone_option_vacances_scolaires" class="zone_option_calendrier">';
+                                            echo '<div class="titre_option_calendrier">Vacances scolaires</div>';
+
+                                            if (empty($calendarParameters->getVacations()))
+                                            {
+                                                echo '<div id="radio_zone_aucune" class="zone_bouton_option bouton_checked">';
+                                                    echo '<input id="zone_aucune" type="radio" name="choix_vacances_scolaires" value="none" required checked />';
+                                                    echo '<label for="zone_aucune" class="label_option">Masquer</label>';
+                                                echo '</div>';
+                                            }
+                                            else
+                                            {
+                                                echo '<div id="radio_zone_aucune" class="zone_bouton_option">';
+                                                    echo '<input id="zone_aucune" type="radio" name="choix_vacances_scolaires" value="none" required />';
+                                                    echo '<label for="zone_aucune" class="label_option">Masquer</label>';
+                                                echo '</div>';
+                                            }
+                                            
+                                            if (!empty($calendarParameters->getVacations()) AND $calendarParameters->getVacations() == 'a')
+                                            {
+                                                echo '<div id="radio_zone_a" class="zone_bouton_option bouton_checked">';
+                                                    echo '<input id="zone_a" type="radio" name="choix_vacances_scolaires" value="a" required checked />';
+                                                    echo '<label for="zone_a" class="label_option">Zone A</label>';
+                                                echo '</div>';
+                                            }
+                                            else
+                                            {
+                                                echo '<div id="radio_zone_a" class="zone_bouton_option">';
+                                                    echo '<input id="zone_a" type="radio" name="choix_vacances_scolaires" value="a" required />';
+                                                    echo '<label for="zone_a" class="label_option">Zone A</label>';
+                                                echo '</div>';
+                                            }
+
+                                            if (!empty($calendarParameters->getVacations()) AND $calendarParameters->getVacations() == 'b')
+                                            {
+                                                echo '<div id="radio_zone_b" class="zone_bouton_option bouton_checked">';
+                                                    echo '<input id="zone_b" type="radio" name="choix_vacances_scolaires" value="b" required checked />';
+                                                    echo '<label for="zone_b" class="label_option">Zone B</label>';
+                                                echo '</div>';
+                                            }
+                                            else
+                                            {
+                                                echo '<div id="radio_zone_b" class="zone_bouton_option">';
+                                                    echo '<input id="zone_b" type="radio" name="choix_vacances_scolaires" value="b" required />';
+                                                    echo '<label for="zone_b" class="label_option">Zone B</label>';
+                                                echo '</div>';
+                                            }
+
+                                            if (!empty($calendarParameters->getVacations()) AND $calendarParameters->getVacations() == 'c')
+                                            {
+                                                echo '<div id="radio_zone_c" class="zone_bouton_option bouton_checked">';
+                                                    echo '<input id="zone_c" type="radio" name="choix_vacances_scolaires" value="c" required checked />';
+                                                    echo '<label for="zone_c" class="label_option">Zone C</label>';
+                                                echo '</div>';
+                                            }
+                                            else
+                                            {
+                                                echo '<div id="radio_zone_c" class="zone_bouton_option">';
+                                                    echo '<input id="zone_c" type="radio" name="choix_vacances_scolaires" value="c" required />';
+                                                    echo '<label for="zone_c" class="label_option">Zone C</label>';
+                                                echo '</div>';
+                                            }
+                                        echo '</div>';
+
+                                        // Couleur
+                                        echo '<div id="zone_option_couleur" class="zone_option_calendrier">';
+                                            echo '<div class="titre_option_calendrier">Couleurs</div>';
+
+                                            if (!empty($calendarParameters->getColor()) AND $calendarParameters->getColor() == 'R')
+                                            {
+                                                echo '<div class="zone_bouton_option zone_bouton_option_rouge">';
+                                                    echo '<input id="radio_couleur_rouge" type="radio" name="choix_couleur_calendrier" value="R" required checked />';
+                                                    echo '<label for="radio_couleur_rouge" class="label_option">Inside Red</label>';
+                                                echo '</div>';
+                                            }
+                                            else
+                                            {
+                                                echo '<div class="zone_bouton_option zone_bouton_option_rouge">';
+                                                    echo '<input id="radio_couleur_rouge" type="radio" name="choix_couleur_calendrier" value="R" required />';
+                                                    echo '<label for="radio_couleur_rouge" class="label_option">Inside Red</label>';
+                                                echo '</div>';
+                                            }
+
+                                            if (!empty($calendarParameters->getColor()) AND $calendarParameters->getColor() == 'V')
+                                            {
+                                                echo '<div class="zone_bouton_option zone_bouton_option_vert">';
+                                                    echo '<input id="radio_couleur_vert" type="radio" name="choix_couleur_calendrier" value="V" required checked />';
+                                                    echo '<label for="radio_couleur_vert" class="label_option">Go Green</label>';
+                                                echo '</div>';
+                                            }
+                                            else
+                                            {
+                                                echo '<div class="zone_bouton_option zone_bouton_option_vert">';
+                                                    echo '<input id="radio_couleur_vert" type="radio" name="choix_couleur_calendrier" value="V" required />';
+                                                    echo '<label for="radio_couleur_vert" class="label_option">Go Green</label>';
+                                                echo '</div>';
+                                            }
+                                            
+                                            if (!empty($calendarParameters->getColor()) AND $calendarParameters->getColor() == 'B')
+                                            {
+                                                echo '<div class="zone_bouton_option zone_bouton_option_bleu">';
+                                                    echo '<input id="radio_couleur_bleu" type="radio" name="choix_couleur_calendrier" value="B" required checked />';
+                                                    echo '<label for="radio_couleur_bleu" class="label_option">Sky Blue</label>';
+                                                echo '</div>';
+                                            }
+                                            else
+                                            {
+                                                echo '<div class="zone_bouton_option zone_bouton_option_bleu">';
+                                                    echo '<input id="radio_couleur_bleu" type="radio" name="choix_couleur_calendrier" value="B" required />';
+                                                    echo '<label for="radio_couleur_bleu" class="label_option">Sky Blue</label>';
+                                                echo '</div>';
+                                            }
+                                            
+                                            if (!empty($calendarParameters->getColor()) AND $calendarParameters->getColor() == 'J')
+                                            {
+                                                echo '<div class="zone_bouton_option zone_bouton_option_jaune">';
+                                                    echo '<input id="radio_couleur_jaune" type="radio" name="choix_couleur_calendrier" value="J" required checked />';
+                                                    echo '<label for="radio_couleur_jaune" class="label_option">Sunny Yellow</label>';
+                                                echo '</div>';
+                                            }
+                                            else
+                                            {
+                                                echo '<div class="zone_bouton_option zone_bouton_option_jaune">';
+                                                    echo '<input id="radio_couleur_jaune" type="radio" name="choix_couleur_calendrier" value="J" required />';
+                                                    echo '<label for="radio_couleur_jaune" class="label_option">Sunny Yellow</label>';
+                                                echo '</div>';
+                                            }
+                                        echo '</div>';
+                                    echo '</div>';
+
+                                    // Bouton validation
+                                    echo '<div class="zone_bouton_saisie">';
+                                        echo '<input type="submit" name="send" value="Générer le calendrier" id="bouton_saisie_generator" class="saisie_bouton" />';
+                                    echo '</div>';
+                                echo '</form>';
                             echo '</div>';
 
                             // Affichage du calendrier généré sous forme d'image
                             if (isset($calendarParameters) AND !empty($calendarParameters->getMonth()) AND !empty($calendarParameters->getYear()))
                             {
                                 echo '<div class="zone_calendrier_generator_middle">';
-                                    echo '<div class="zone_saisie_calendrier">';
-                                        // Génération du calendrier au format HTML
-                                        include('vue/web/vue_calendar_generated.php');
+                                    // Affichage du calendrier au format JPEG (une fois généré)
+                                    echo '<img src="" title="Calendrier généré" id="generated_calendar" class="image_rendu_calendrier_generator" />';
 
-                                        // Affichage du calendrier au format JPEG (une fois généré)
-                                        echo '<img src="" title="Calendrier généré" id="generated_calendar" class="image_rendu_generator" />';
+                                    // Formulaire de sauvegarde de l'image générée
+                                    echo '<form method="post" action="calendars_generator.php?action=doSauvegarder" enctype="multipart/form-data" class="form_sauvegarde_calendrier">';
+                                        // Image générée
+                                        echo '<input type="hidden" name="calendar_generator" id="calendar_generator" value="" />';
 
-                                        // Formulaire de sauvegarde de l'image générée
-                                        echo '<form method="post" action="calendars_generator.php?action=doSauvegarder" enctype="multipart/form-data" class="form_sauvegarde_calendrier">';
-                                            // Image générée
-                                            echo '<input type="hidden" name="calendar_generator" id="calendar_generator" value="" />';
+                                        // Nom fichiers temporaires
+                                        echo '<input type="hidden" name="temp_name_generator" value="' . $calendarParameters->getPicture() . '" />';
 
-                                            // Nom fichiers temporaires
-                                            echo '<input type="hidden" name="temp_name_generator" value="' . $calendarParameters->getPicture() . '" />';
+                                        // Mois
+                                        echo '<input type="hidden" name="month_generator" value="' . $calendarParameters->getMonth() . '" />';
 
-                                            // Mois
-                                            echo '<input type="hidden" name="month_generator" value="' . $calendarParameters->getMonth() . '" />';
+                                        // Année
+                                        echo '<input type="hidden" name="year_generator" value="' . $calendarParameters->getYear() . '" />';
 
-                                            // Année
-                                            echo '<input type="hidden" name="year_generator" value="' . $calendarParameters->getYear() . '" />';
-
-                                            // Bouton sauvegarde
-                                            echo '<div class="zone_bouton_saisie">';
-                                                echo '<input type="submit" name="save" value="Sauvegarder le calendrier" id="bouton_saisie_generated" class="saisie_bouton" />';
-                                            echo '</div>';
-                                        echo '</form>';
-                                    echo '</div>';
+                                        // Bouton sauvegarde
+                                        echo '<div class="zone_bouton_saisie">';
+                                            echo '<input type="submit" name="save" value="Sauvegarder le calendrier" id="bouton_saisie_generated" class="saisie_bouton" />';
+                                        echo '</div>';
+                                    echo '</form>';
                                 echo '</div>';
                             }
 
                             // Explications
                             echo '<div class="zone_calendrier_generator_right">';
-                                // Alerte vacances scolaires
-                                if (isset($vacances) AND empty($vacances))
-                                {
-                                    echo '<div class="avertissement_calendrier_generator">';
-                                        echo 'Attention, les dates de vacances ne sont pas disponibles pour le mois de ' . $listeMois[$calendarParameters->getMonth()] . ' ' . $calendarParameters->getYear() . '.
-                                              Les données ne sont pas à jour ou non accessibles et ne peuvent pas être affichées sur le calendrier généré. Pour toute information, veuillez contacter l\'administrateur.';
-                                    echo '</div>';
-                                }
-
                                 echo '<div class="titre_explications_calendrier_generator">A propos du générateur de calendriers</div>';
 
                                 echo '<div class="explications_calendrier_generator">';
@@ -185,11 +336,24 @@
                                         echo '<li>L\'image de fond (non obligatoire)</li>';
                                         echo '<li>Le mois (obligatoire)</li>';
                                         echo '<li>L\'année (obligatoire)</li>';
+                                        echo '<li>L\'affichage des jours fériés supplémentaires pour l\'Alsace (obligatoire)</li>';
+                                        echo '<li>La zone pour l\'affichage des vacances scolaires (obligatoire)</li>';
+                                        echo '<li>La couleur du bandeau et des vacances scolaires (obligatoire)</li>';
                                     echo '</ul>';
 
                                     echo 'Le calendrier généré est formaté en fonction des données saisies, les jours fériés sont calculés automatiquement ainsi que les jours de vacances scolaires.
                                           En cas de problème, n\'hésitez pas à contacter l\'administrateur.';
 
+                                    // Alerte vacances scolaires
+                                    if (isset($vacances) AND empty($vacances) AND !empty($calendarParameters->getVacations()))
+                                    {
+                                        echo '<div class="avertissement_calendrier_generator_1">';
+                                            echo 'Attention, les dates de vacances ne sont pas disponibles pour le mois de ' . $listeMois[$calendarParameters->getMonth()] . ' ' . $calendarParameters->getYear() . '.
+                                                  Les données ne sont pas à jour ou non accessibles et ne peuvent pas être affichées sur le calendrier généré. Pour toute information, veuillez contacter l\'administrateur.';
+                                        echo '</div>';
+                                    }
+
+                                    // Avertissement sauvegarde
                                     echo '<div class="avertissement_calendrier_generator_2">';
                                         echo 'Ne pas oublier d\'utiliser le bouton "Sauvegarder le calendrier" après l\'avoir généré pour le rendre disponible sur le site.';
                                     echo '</div>';
@@ -206,9 +370,9 @@
 
                             // Saisie
                             echo '<div class="zone_annexe_generator_left">';
-                                echo '<div class="zone_saisie_calendrier">';
-                                    // Saisie des informations
-                                    echo '<form method="post" action="calendars_generator.php?action=doGenererAnnexe" enctype="multipart/form-data">';
+                                // Saisie des informations
+                                echo '<form method="post" action="calendars_generator.php?action=doGenererAnnexe" enctype="multipart/form-data">';
+                                    echo '<div class="zone_saisie_calendrier">';
                                         // Image
                                         echo '<div class="zone_saisie_image">';
                                             echo '<input type="hidden" name="MAX_FILE_SIZE" value="15728640" />';
@@ -235,43 +399,38 @@
 
                                         // Titre annexe
                                         echo '<input type="text" name="name_annexe" value="' . $annexeParameters->getName() . '" placeholder="Nom" maxlength="255" class="titre_annexe" required />';
+                                    echo '</div>';
 
-                                        // Bouton validation
-                                        echo '<div class="zone_bouton_saisie">';
-                                            echo '<input type="submit" name="send_annexe" value="Générer l\'annexe" id="bouton_saisie_annexe_generator" class="saisie_bouton" />';
-                                        echo '</div>';
-                                    echo '</form>';
-                                echo '</div>';
+                                    // Bouton validation
+                                    echo '<div class="zone_bouton_saisie">';
+                                        echo '<input type="submit" name="send_annexe" value="Générer l\'annexe" id="bouton_saisie_annexe_generator" class="saisie_bouton" />';
+                                    echo '</div>';
+                                echo '</form>';
                             echo '</div>';
 
                             // Affichage de l'annexe générée sous forme d'image
                             if (isset($annexeParameters) AND !empty($annexeParameters->getName()))
                             {
                                 echo '<div class="zone_annexe_generator_middle">';
-                                    echo '<div class="zone_saisie_calendrier">';
-                                        // Génération de l'annexe au format HTML
-                                        include('vue/web/vue_annexe_generated.php');
+                                    // Affichage de l'annexe au format JPEG (une fois généré)
+                                    echo '<img src="" title="Annexe générée" id="generated_annexe" class="image_rendu_annexe_generator" />';
 
-                                        // Affichage de l'annexe au format JPEG (une fois généré)
-                                        echo '<img src="" title="Annexe générée" id="generated_annexe" class="image_rendu_generator" />';
+                                    // Formulaire de sauvegarde de l'image générée
+                                    echo '<form method="post" action="calendars_generator.php?action=doSauvegarderAnnexe" enctype="multipart/form-data" class="form_sauvegarde_annexe">';
+                                        // Image générée
+                                        echo '<input type="hidden" name="annexe_generator" id="annexe_generator" value="" />';
 
-                                        // Formulaire de sauvegarde de l'image générée
-                                        echo '<form method="post" action="calendars_generator.php?action=doSauvegarderAnnexe" enctype="multipart/form-data" class="form_sauvegarde_annexe">';
-                                            // Image générée
-                                            echo '<input type="hidden" name="annexe_generator" id="annexe_generator" value="" />';
+                                        // Nom fichiers temporaires
+                                        echo '<input type="hidden" name="temp_name_annexe_generator" value="' . $annexeParameters->getPicture() . '" />';
 
-                                            // Nom fichiers temporaires
-                                            echo '<input type="hidden" name="temp_name_annexe_generator" value="' . $annexeParameters->getPicture() . '" />';
+                                        // Nom
+                                        echo '<input type="hidden" name="title_generator" value="' . $annexeParameters->getName() . '" />';
 
-                                            // Nom
-                                            echo '<input type="hidden" name="title_generator" value="' . $annexeParameters->getName() . '" />';
-
-                                            // Bouton sauvegarde
-                                            echo '<div class="zone_bouton_saisie">';
-                                                echo '<input type="submit" name="save" value="Sauvegarder l\'annexe" id="bouton_saisie_annexe_generated" class="saisie_bouton" />';
-                                            echo '</div>';
-                                        echo '</form>';
-                                    echo '</div>';
+                                        // Bouton sauvegarde
+                                        echo '<div class="zone_bouton_saisie">';
+                                            echo '<input type="submit" name="save" value="Sauvegarder l\'annexe" id="bouton_saisie_annexe_generated" class="saisie_bouton" />';
+                                        echo '</div>';
+                                    echo '</form>';
                                 echo '</div>';
                             }
 

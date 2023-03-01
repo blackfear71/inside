@@ -343,7 +343,7 @@
 
     // DATE : Détermine si un jour est férié (AAAAMMJJ)
     // RETOUR : Jour férié
-    function isJourFerie($date)
+    function isJourFerie($date, $isAlsace)
     {
         // Initialisations
         $jourFerie = '';
@@ -364,84 +364,107 @@
             $annee . '0101'    => array(
                 'reference' => 'nouvel_an',
                 'nom_jour'  => 'Jour de l\'an',
-                'nom_news'  => 'le Jour de l\'an'
+                'nom_news'  => 'le Jour de l\'an',
+                'alsace'    => 'N'
             ),
             $vendrediSaint     => array(
                 'reference' => 'vendredi_saint',
                 'nom_jour'  => 'Vendredi Saint',
-                'nom_news'  => 'le Vendredi Saint'
+                'nom_news'  => 'le Vendredi Saint',
+                'alsace'    => 'Y'
             ),
             $dimanchePaques    => array(
                 'reference' => 'dimanche_paques',
                 'nom_jour'  => 'Dimanche de Pâques',
-                'nom_news'  => 'le Dimanche de Pâques'
+                'nom_news'  => 'le Dimanche de Pâques',
+                'alsace'    => 'N'
             ),
             $lundiPaques       => array(
                 'reference' => 'lundi_paques',
                 'nom_jour'  => 'Lundi de Pâques',
-                'nom_news'  => 'le Lundi de Pâques'
+                'nom_news'  => 'le Lundi de Pâques',
+                'alsace'    => 'N'
             ),
             $annee . '0501'    => array(
                 'reference' => 'fete_travail',
                 'nom_jour'  => 'Fête du travail',
-                'nom_news'  => 'la Fête du travail'
+                'nom_news'  => 'la Fête du travail',
+                'alsace'    => 'N'
             ),
             $annee . '0508'    => array(
                 'reference' => 'victoire_1945',
                 'nom_jour'  => 'Victoire 1945',
-                'nom_news'  => 'la Victoire de 1945'
+                'nom_news'  => 'la Victoire de 1945',
+                'alsace'    => 'N'
             ),
             $ascension         => array(
                 'reference' => 'ascension',
                 'nom_jour'  => 'Ascension',
-                'nom_news'  => 'l\'Ascension'
+                'nom_news'  => 'l\'Ascension',
+                'alsace'    => 'N'
             ),
             $dimanchePentecote => array(
                 'reference' => 'dimanche_pentecote',
                 'nom_jour'  => 'Dimanche de Pentecôte',
-                'nom_news'  => 'le Dimanche de Pentecôte'
+                'nom_news'  => 'le Dimanche de Pentecôte',
+                'alsace'    => 'N'
             ),
             $lundiPentecote    => array(
                 'reference' => 'lundi_pentecote',
                 'nom_jour'  => 'Lundi de Pentecôte',
-                'nom_news'  => 'le Lundi de Pentecôte'
+                'nom_news'  => 'le Lundi de Pentecôte',
+                'alsace'    => 'N'
             ),
             $annee . '0714'    => array(
                 'reference' => 'fete_nationale',
                 'nom_jour'  => 'Fête Nationale',
-                'nom_news'  => 'la Fête Nationale'
+                'nom_news'  => 'la Fête Nationale',
+                'alsace'    => 'N'
             ),
             $annee . '0815'    => array(
                 'reference' => 'assomption',
                 'nom_jour'  => 'Assom-ption',
-                'nom_news'  => 'l\'Assomption'
+                'nom_news'  => 'l\'Assomption',
+                'alsace'    => 'N'
             ),
             $annee . '1101'    => array(
                 'reference' => 'toussaint',
                 'nom_jour'  => 'Toussaint',
-                'nom_news'  => 'la Toussaint'
+                'nom_news'  => 'la Toussaint',
+                'alsace'    => 'N'
             ),
             $annee . '1111'    => array(
                 'reference' => 'armistice_1918',
                 'nom_jour'  => 'Armistice 1918',
-                'nom_news'  => 'l\'Armistice de 1918'
+                'nom_news'  => 'l\'Armistice de 1918',
+                'alsace'    => 'N'
             ),
             $annee . '1225'    => array(
                 'reference' => 'noel',
                 'nom_jour'  => 'Noël',
-                'nom_news'  => 'Noël'
+                'nom_news'  => 'Noël',
+                'alsace'    => 'N'
             ),
             $annee . '1226'    => array(
                 'reference' => 'saint_etienne',
                 'nom_jour'  => 'Saint-Etienne',
-                'nom_news'  => 'la Saint-Etienne'
+                'nom_news'  => 'la Saint-Etienne',
+                'alsace'    => 'Y'
             )
         );
 
         // Détermination si date fériée
-        if (isset($joursFeries[$date]))
-            $jourFerie = $joursFeries[$date];
-
+        if ($isAlsace == 'Y')
+        {
+            if (isset($joursFeries[$date]))
+                $jourFerie = $joursFeries[$date];
+        }
+        else
+        {
+            if (isset($joursFeries[$date]) AND $joursFeries[$date]['alsace'] == 'N')
+                $jourFerie = $joursFeries[$date];
+        }
+        
         // Retour
         return $jourFerie;
     }
