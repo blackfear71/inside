@@ -166,18 +166,9 @@
 
                 // Signature
                 echo '<div class="zone_signature_calendrier_generator">';
-                    echo '<div class="triangle_1"></div>';
-                    echo '<div class="triangle_2"></div>';
-
-                    echo '<div class="triangle_1"></div>';
-                    echo '<div class="signature_calendrier_generator"></div>';
-                    echo '<div class="triangle_2"></div>';
-
-                    echo '<div class="triangle_1"></div>';
                     echo '<div class="signature_calendrier_generator">';
                         echo '<div class="texte_signature_calendrier_generator">INSIDE<br />DESIGN</div>';
                     echo '</div>';
-                    echo '<div class="triangle_2"></div>';
                 echo '</div>';
             echo '</div>';
         echo '</div>';

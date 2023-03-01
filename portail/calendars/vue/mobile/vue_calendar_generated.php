@@ -45,7 +45,7 @@
                 $replace = array('e', 'u');
                 $nomMois = mb_strtoupper(str_replace($search, $replace, $listeMois[$calendarParameters->getMonth()]));
 
-                echo '<div class="mois_calendrier_generator">' . $nomMois . '</div>';
+                echo '<div class="mois_calendrier_generator ' . $bordure . '">' . $nomMois . '</div>';
                 echo '<div class="rift_mois_calendrier_generator"></div>';
 
                 // Semaines et numéro du mois
@@ -166,18 +166,9 @@
 
                 // Signature
                 echo '<div class="zone_signature_calendrier_generator">';
-                    echo '<div class="triangle_1"></div>';
-                    echo '<div class="triangle_2"></div>';
-
-                    echo '<div class="triangle_1"></div>';
-                    echo '<div class="signature_calendrier_generator"></div>';
-                    echo '<div class="triangle_2"></div>';
-
-                    echo '<div class="triangle_1"></div>';
                     echo '<div class="signature_calendrier_generator">';
                         echo '<div class="texte_signature_calendrier_generator">INSIDE<br />DESIGN</div>';
                     echo '</div>';
-                    echo '<div class="triangle_2"></div>';
                 echo '</div>';
             echo '</div>';
         echo '</div>';
