@@ -40,6 +40,10 @@
             array_push($listeAutorisationsParEquipe[$autorisation->getTeam()], $autorisation);
         }
 
+        // Tri
+        if (!empty($listeAutorisationsParEquipe))
+            ksort($listeAutorisationsParEquipe);
+
         // Retour
         return $listeAutorisationsParEquipe;
     }
