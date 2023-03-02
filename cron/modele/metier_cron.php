@@ -367,10 +367,20 @@
                 // Ajout des données au log
                 $log['status'] = 'OK';
 
-                if ($nombrePurges == 1)
-                    $log['infos']  = $nombrePurges . ' fichier temporaire supprimé';
-                else
-                    $log['infos']  = $nombrePurges . ' fichiers temporaires supprimés';
+                switch ($nombrePurges)
+                {
+                    case 0:
+                        $log['infos'] = 'Aucun fichier temporaire supprimé';
+                        break;
+
+                    case 1:
+                        $log['infos'] = $nombrePurges . ' fichier temporaire supprimé';
+                        break;
+
+                    default:
+                        $log['infos'] = $nombrePurges . ' fichiers temporaires supprimés';
+                        break;
+                }
             }
             else
             {
