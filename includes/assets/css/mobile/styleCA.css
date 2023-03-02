@@ -259,7 +259,7 @@
     background: linear-gradient(-45deg, #ffad01 50%, #fffd4c 50% 100%);
 }
 
-.zone_bouton_option:hover:not(.zone_bouton_option_rouge):not(.zone_bouton_option_vert):not(.zone_bouton_option_bleu):not(.zone_bouton_option_jaune)
+.zone_bouton_option:active:not(.zone_bouton_option_rouge):not(.zone_bouton_option_vert):not(.zone_bouton_option_bleu):not(.zone_bouton_option_jaune)
 {
     background: #262626;
     color: white;
