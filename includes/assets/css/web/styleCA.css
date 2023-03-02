@@ -625,7 +625,6 @@
     font-size: 1500%;
     height: 210px;
     line-height: 160px;
-    color: white;
     padding-left: 50px;
     padding-right: 50px;
     opacity: 0.5;
@@ -801,18 +800,13 @@
     text-align: right;
     font-family: roboto_light, Verdana, sans-serif;
     font-size: 300%;
+    color: white;
     border-radius: 5px;
 }
 
-.numero_jour_calendrier_generator_color_light
+.numero_jour_calendrier_generator_color_opacity
 {
     opacity: 0.7;
-    color: white;
-}
-
-.numero_jour_calendrier_generator_color
-{
-    color: white;
 }
 
 .numero_jour_calendrier_generator_grey_light
@@ -911,6 +905,16 @@
     line-height: 40px;
     color: #262626;
     text-align: right;
+}
+
+.police_calendrier_blanc
+{
+    color: white;
+}
+
+.police_calendrier_gris
+{
+    color: #262626;
 }
 
 /*** Générateur d'annexes ***/
