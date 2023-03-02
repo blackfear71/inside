@@ -118,6 +118,9 @@
                                     echo '<li>L\'image de fond (non obligatoire)</li>';
                                     echo '<li>Le mois (obligatoire)</li>';
                                     echo '<li>L\'année (obligatoire)</li>';
+                                    echo '<li>L\'affichage des jours fériés supplémentaires pour l\'Alsace (obligatoire)</li>';
+                                    echo '<li>La zone pour l\'affichage des vacances scolaires (obligatoire)</li>';
+                                    echo '<li>La couleur du bandeau et des vacances scolaires (obligatoire)</li>';
                                 echo '</ul>';
 
                                 echo 'Le calendrier généré est formaté en fonction des données saisies, les jours fériés sont calculés automatiquement ainsi que les jours de vacances scolaires.
