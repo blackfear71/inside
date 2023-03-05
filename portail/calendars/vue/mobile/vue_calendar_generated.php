@@ -30,6 +30,22 @@
             $police   = 'police_calendrier_gris';
             break;
 
+        // Malabar Purple
+        case 'P':
+            $couleur1 = 'couleur_calendrier_violet_1';
+            $couleur2 = 'couleur_calendrier_violet_2';
+            $bordure  = 'bordure_calendrier_violet';
+            $police   = 'police_calendrier_blanc';
+            break;
+
+        // Ivory White
+        case 'W':
+            $couleur1 = 'couleur_calendrier_blanc_1';
+            $couleur2 = 'couleur_calendrier_blanc_2';
+            $bordure  = 'bordure_calendrier_blanc';
+            $police   = 'police_calendrier_gris';
+            break;
+
         // Inside Red
         case 'R':
         default:
@@ -39,7 +55,7 @@
             $police   = 'police_calendrier_blanc';
             break;
     }
-    
+
     echo '<div class="zone_calendrier_generator_hidden">';
         echo '<div class="zone_calendrier_generator">';
             // Entête du calendrier
@@ -55,7 +71,7 @@
                 // Semaines et numéro du mois
                 echo '<div class="zone_semaines_calendrier_generator ' . $couleur2 . '">';
                     // Semaines
-                    echo '<div class="semaines_calendrier_generator">Semaines ' . $donneesCalendrier['semaine_debut_mois'] . ' à ' . $donneesCalendrier['semaine_fin_mois'] . '</div>';
+                    echo '<div class="semaines_calendrier_generator ' . $police . '">Semaines ' . $donneesCalendrier['semaine_debut_mois'] . ' à ' . $donneesCalendrier['semaine_fin_mois'] . '</div>';
 
                     // Numéro du mois
                     echo '<div class="zone_numero_mois_calendrier_generator">';
@@ -123,9 +139,9 @@
                                         if ($jourVacances == true)
                                         {
                                             if (!empty($calendarParameters->getPicture()))
-                                                echo '<div class="numero_jour_calendrier_generator numero_jour_calendrier_generator_opacity ' . $police . ' ' . $couleur2 . '">' . $numeroJourAAfficher . '</div>';
+                                                echo '<div class="numero_jour_calendrier_generator numero_jour_calendrier_generator_color_opacity ' . $police . ' ' . $couleur2 . '">' . $numeroJourAAfficher . '</div>';
                                             else
-                                                echo '<div class="numero_jour_calendrier_generator ' . $couleur2 . '">' . $numeroJourAAfficher . '</div>';
+                                                echo '<div class="numero_jour_calendrier_generator ' . $police . ' ' . $couleur2 . '">' . $numeroJourAAfficher . '</div>';
                                         }
                                         else
                                         {

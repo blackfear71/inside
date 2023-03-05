@@ -30,6 +30,22 @@
             $police   = 'police_calendrier_gris';
             break;
 
+        // Malabar Purple
+        case 'P':
+            $couleur1 = 'couleur_calendrier_violet_1';
+            $couleur2 = 'couleur_calendrier_violet_2';
+            $bordure  = 'bordure_calendrier_violet';
+            $police   = 'police_calendrier_blanc';
+            break;
+
+        // Ivory White
+        case 'W':
+            $couleur1 = 'couleur_calendrier_blanc_1';
+            $couleur2 = 'couleur_calendrier_blanc_2';
+            $bordure  = 'bordure_calendrier_blanc';
+            $police   = 'police_calendrier_gris';
+            break;
+
         // Inside Red
         case 'R':
         default:
@@ -43,19 +59,19 @@
     echo '<div class="zone_calendrier_generator_hidden">';
         echo '<div class="zone_calendrier_generator">';
             // Entête du calendrier
-            echo '<div class="zone_entete_calendrier_generator ' . $police . ' ' . $couleur1 . '">';
+            echo '<div class="zone_entete_calendrier_generator ' . $couleur1 . '">';
                 // Mois
                 $search  = array('é', 'û');
                 $replace = array('e', 'u');
                 $nomMois = mb_strtoupper(str_replace($search, $replace, $listeMois[$calendarParameters->getMonth()]));
 
-                echo '<div class="mois_calendrier_generator ' . $bordure . '">' . $nomMois . '</div>';
+                echo '<div class="mois_calendrier_generator ' . $police . ' ' . $bordure . '">' . $nomMois . '</div>';
                 echo '<div class="rift_mois_calendrier_generator"></div>';
 
                 // Semaines et numéro du mois
                 echo '<div class="zone_semaines_calendrier_generator ' . $couleur2 . '">';
                     // Semaines
-                    echo '<div class="semaines_calendrier_generator">Semaines ' . $donneesCalendrier['semaine_debut_mois'] . ' à ' . $donneesCalendrier['semaine_fin_mois'] . '</div>';
+                    echo '<div class="semaines_calendrier_generator ' . $police . '">Semaines ' . $donneesCalendrier['semaine_debut_mois'] . ' à ' . $donneesCalendrier['semaine_fin_mois'] . '</div>';
 
                     // Numéro du mois
                     echo '<div class="zone_numero_mois_calendrier_generator">';
@@ -91,7 +107,7 @@
                         // Affichage d'une ligne
                         echo '<tr class="ligne_calendrier_generator">';
                             // Jours
-                            for ($j = 1; $j <= $donneesCalendrier['nombre_jours_par_ligne']; $j++) 
+                            for ($j = 1; $j <= $donneesCalendrier['nombre_jours_par_ligne']; $j++)
                             {
                                 if (($i == 1                                              AND $j >= $donneesCalendrier['numero_premier_jour_a_afficher'])
                                 OR  ($i == $donneesCalendrier['nombre_lignes_calendrier'] AND $j <= $donneesCalendrier['numero_dernier_jour_a_afficher'])
@@ -125,7 +141,7 @@
                                             if (!empty($calendarParameters->getPicture()))
                                                 echo '<div class="numero_jour_calendrier_generator numero_jour_calendrier_generator_color_opacity ' . $police . ' ' . $couleur2 . '">' . $numeroJourAAfficher . '</div>';
                                             else
-                                                echo '<div class="numero_jour_calendrier_generator ' . $couleur2 . '">' . $numeroJourAAfficher . '</div>';
+                                                echo '<div class="numero_jour_calendrier_generator ' . $police . ' ' . $couleur2 . '">' . $numeroJourAAfficher . '</div>';
                                         }
                                         else
                                         {

@@ -266,7 +266,18 @@
     background: linear-gradient(-45deg, #ffad01 50%, #fffd4c 50% 100%);
 }
 
-.zone_bouton_option:active:not(.zone_bouton_option_rouge):not(.zone_bouton_option_vert):not(.zone_bouton_option_bleu):not(.zone_bouton_option_jaune)
+.zone_bouton_option_violet
+{
+    background: linear-gradient(-45deg, #8d44b6 50%, #9858ba 50% 100%);
+    color: white;
+}
+
+.zone_bouton_option_blanc
+{
+    background: linear-gradient(-45deg, #cfcfb8 50%, #fefee2 50% 100%);
+}
+
+.zone_bouton_option:active:not(.zone_bouton_option_rouge):not(.zone_bouton_option_vert):not(.zone_bouton_option_bleu):not(.zone_bouton_option_jaune):not(.zone_bouton_option_violet):not(.zone_bouton_option_blanc)
 {
     background: #262626;
     color: white;
@@ -442,6 +453,26 @@
     background-color: #ffad01;
 }
 
+.couleur_calendrier_violet_1
+{
+    background-color: #9858ba;
+}
+
+.couleur_calendrier_violet_2
+{
+    background-color: #8d44b6;
+}
+
+.couleur_calendrier_blanc_1
+{
+    background-color: #fefee2;
+}
+
+.couleur_calendrier_blanc_2
+{
+    background-color: #cfcfb8;
+}
+
 .bordure_calendrier_rouge
 {
     border-bottom: solid 10px #c81932;
@@ -460,6 +491,16 @@
 .bordure_calendrier_jaune
 {
     border-bottom: solid 10px #ffad01;
+}
+
+.bordure_calendrier_violet
+{
+    border-bottom: solid 10px #8d44b6;
+}
+
+.bordure_calendrier_blanc
+{
+    border-bottom: solid 10px #cfcfb8;
 }
 
 .zone_entete_calendrier_generator
@@ -649,7 +690,7 @@
     margin: 10px;
     width: calc(100% - 65px);
     line-height: 50px;
-    padding: 10px 35px 10px 10px;
+    padding: 6px 35px 14px 10px;
     text-align: right;
     font-family: roboto_light, Verdana, sans-serif;
     font-size: 300%;
@@ -657,7 +698,7 @@
     border-radius: 5px;
 }
 
-.numero_jour_calendrier_generator_opacity
+.numero_jour_calendrier_generator_color_opacity
 {
     opacity: 0.7;
 }

@@ -285,6 +285,36 @@
                                                     echo '<label for="radio_couleur_jaune" class="label_option">Sunny Yellow</label>';
                                                 echo '</div>';
                                             }
+
+                                            if (!empty($calendarParameters->getColor()) AND $calendarParameters->getColor() == 'P')
+                                            {
+                                                echo '<div class="zone_bouton_option zone_bouton_option_violet">';
+                                                    echo '<input id="radio_couleur_violet" type="radio" name="choix_couleur_calendrier" value="P" required checked />';
+                                                    echo '<label for="radio_couleur_violet" class="label_option">Malabar Purple</label>';
+                                                echo '</div>';
+                                            }
+                                            else
+                                            {
+                                                echo '<div class="zone_bouton_option zone_bouton_option_violet">';
+                                                    echo '<input id="radio_couleur_violet" type="radio" name="choix_couleur_calendrier" value="P" required />';
+                                                    echo '<label for="radio_couleur_violet" class="label_option">Malabar Purple</label>';
+                                                echo '</div>';
+                                            }
+
+                                            if (!empty($calendarParameters->getColor()) AND $calendarParameters->getColor() == 'W')
+                                            {
+                                                echo '<div class="zone_bouton_option zone_bouton_option_blanc">';
+                                                    echo '<input id="radio_couleur_blanc" type="radio" name="choix_couleur_calendrier" value="W" required checked />';
+                                                    echo '<label for="radio_couleur_blanc" class="label_option">Ivory White</label>';
+                                                echo '</div>';
+                                            }
+                                            else
+                                            {
+                                                echo '<div class="zone_bouton_option zone_bouton_option_blanc">';
+                                                    echo '<input id="radio_couleur_blanc" type="radio" name="choix_couleur_calendrier" value="W" required />';
+                                                    echo '<label for="radio_couleur_blanc" class="label_option">Ivory White</label>';
+                                                echo '</div>';
+                                            }
                                         echo '</div>';
                                     echo '</div>';
 
