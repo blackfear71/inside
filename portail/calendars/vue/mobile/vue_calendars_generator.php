@@ -146,6 +146,8 @@
                                 // Saisie des informations
                                 echo '<form method="post" action="calendars_generator.php?action=doGenerer" enctype="multipart/form-data" id="form_saisie_generator">';
                                     // Image
+                                    echo '<div class="titre_explications_calendrier_generator margin_top_2vh">Image de fond</div>';
+
                                     echo '<div class="zone_saisie_image">';
                                         echo '<input type="hidden" name="MAX_FILE_SIZE" value="15728640" />';
 
@@ -164,6 +166,9 @@
                                                 echo '<img id="image_calendars_generated" alt="" class="image" />';
                                         echo '</div>';
                                     echo '</div>';
+
+                                    // Période
+                                    echo '<div class="titre_explications_calendrier_generator">Période</div>';
 
                                     // Listbox mois
                                     echo '<select name="month_calendar" class="listbox" required>';

@@ -89,6 +89,8 @@
                                 echo '<form method="post" action="calendars_generator.php?action=doGenerer" enctype="multipart/form-data">';
                                     echo '<div class="zone_saisie_calendrier">';
                                         // Image
+                                        echo '<div class="titre_option_calendrier">Image de fond</div>';
+
                                         echo '<div class="zone_saisie_image">';
                                             echo '<input type="hidden" name="MAX_FILE_SIZE" value="15728640" />';
 
@@ -107,6 +109,9 @@
                                                     echo '<img id="image_calendars_generated" alt="" class="image" />';
                                             echo '</div>';
                                         echo '</div>';
+
+                                        // Période
+                                        echo '<div class="titre_option_calendrier">Période</div>';
 
                                         // Listbox mois
                                         echo '<select name="month_calendar" class="listbox" required>';
