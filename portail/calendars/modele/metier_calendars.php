@@ -471,7 +471,7 @@
             if (($post['month_calendar'] != substr($post['picture_calendar_generated'], 0, 2))
             OR  ($post['year_calendar']  != substr($post['picture_calendar_generated'], 3, 4)))
             {
-                // Si l'image change, on supprime l'ancienne et on détermine un nouveau nom, sinon on renomme l'ancienne avec un nouveau nom
+                // Si l'image change, on supprime l'ancienne et on détermine un nouveau nom à partir de l'ancien nom, sinon on renomme l'ancienne avec un nouveau nom
                 if (isset($files['picture_calendar']) AND !empty($files['picture_calendar']['name']))
                 {
                     // Suppression des images temporaires
@@ -498,7 +498,23 @@
                 }
             }
             else
-                $nomImage = $post['picture_calendar_generated'];
+            {
+                // Si l'image change, on supprime l'ancienne et on détermine un nouveau nom à partir de l'ancien nom, sinon on récupère le nom de l'ancienne
+                if (isset($files['picture_calendar']) AND !empty($files['picture_calendar']['name']))
+                {
+                    // Suppression des images temporaires
+                    $dossierTemporaire = '../../includes/images/calendars/temp';
+
+                    unlink($dossierTemporaire . '/' . $post['picture_calendar_generated']);
+                    unlink($dossierTemporaire . '/trim_' . $post['picture_calendar_generated']);
+
+                    // Détermination du nouveau nom
+                    $type     = pathinfo($files['picture_calendar']['name'], PATHINFO_EXTENSION);
+                    $nomImage = pathinfo($post['picture_calendar_generated'], PATHINFO_FILENAME) . '.' . $type;
+                }
+                else
+                    $nomImage = $post['picture_calendar_generated'];
+            }
         }
         else
         {
