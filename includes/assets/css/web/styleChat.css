@@ -10,14 +10,15 @@
     right: 7.5%;
     box-shadow: 0 0 5px #5c5c5c;
     z-index: 3;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    overflow: hidden;
 }
 
 /*** Onglets ***/
 .zone_titre_chat
 {
     background-color: #ff1937;
-    border-top-left-radius: 2px;
-    border-top-right-radius: 2px;
     position: relative;
     z-index: 1;
     display: inline-block;

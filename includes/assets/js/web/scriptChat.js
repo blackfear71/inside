@@ -458,7 +458,6 @@ function initView(cookieShowChat, cookieWindowChat)
     $('#hide_chat').css('padding', hideChatPaddingCss);
     $('#onglet_chat').css('background-color', ongletChatCss);
     $('#onglet_users').css('background-color', ongletUsersCss);
-    $('#onglet_chat').css('border-top-left-radius', '2px');
     $('.titre_onglet').css('cursor', cursorCss);
     $('#fenetres_chat').html(html);
 }
