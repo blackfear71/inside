@@ -130,8 +130,8 @@
     display: inline-block;
     vertical-align: middle;
     margin-right: 10px;
-    width: 32px;
-    height: 32px;
+    width: 30px;
+    height: 30px;
     background-image: url("/inside/includes/icons/common/open_grey.png");
     background-size: 25px 25px;
     background-repeat: no-repeat;
@@ -144,8 +144,8 @@
     display: inline-block;
     vertical-align: middle;
     margin-left: 10px;
-    width: 32px;
-    height: 32px;
+    width: 30px;
+    height: 30px;
     background-image: url("/inside/includes/icons/common/open_grey.png");
     background-size: 25px 25px;
     background-repeat: no-repeat;
@@ -158,7 +158,7 @@
     flex-grow: 0;
     display: inline-block;
     vertical-align: middle;
-    width: calc((100% / 5) - 30px - (84px / 5));
+    width: calc((100% / 5) - 30px - (80px / 5));
     margin-left: 10px;
     margin-right: 10px;
     padding: 5px;
@@ -166,6 +166,7 @@
     border-radius: 2px;
     font-family: inside_font_regular, Verdana, sans-serif;
     text-align: center;
+    word-wrap: break-word;
 }
 
 .jour_semaine_date
