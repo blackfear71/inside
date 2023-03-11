@@ -107,7 +107,10 @@
                                 echo '<div class="PP-zone-saisie-parcours">';
                                     echo '<label class="PP-label-parcours">Type de lien : </label>';
                                     echo '<select name="type" class="PP-listbox">';
-                                        echo '<option value="" hidden selected>Choisir...</option>';
+                                        if (empty($parcours->getType()))
+                                            echo '<option value="" hidden selected>Choisir...</option>';
+                                        else
+                                            echo '<option value="" hidden>Choisir...</option>';
 
                                         if ($parcours->getType() == 'image')
                                             echo '<option value="image" selected>Image</option>';
