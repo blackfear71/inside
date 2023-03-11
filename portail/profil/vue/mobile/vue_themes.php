@@ -56,7 +56,7 @@
         echo '<div id="afficher_preferences_police">';
             // Choix de la police
             echo '<form method="post" action="profil.php?action=doModifierPolice" class="form_update_police">';
-                echo '<select id="select_police" name="police" class="select_update_police" required>';
+                echo '<select id="select_police" name="police" class="select_update_police">';
                     foreach ($policesCaracteres as $police)
                     {
                         if ($police == $_SESSION['user']['font'])
