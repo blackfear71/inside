@@ -127,7 +127,7 @@
                                     echo '<div class="titre_succes">Mission liée :</div>';
                                     echo '<select name="mission[' . $success->getId() . ']" class="select_modification_succes">';
                                         // Choix par défaut
-                                        if (!empty($success->getMission()))
+                                        if (empty($success->getMission()))
                                             echo '<option value="" selected>Aucune mission liée</option>';
                                         else
                                             echo '<option value="">Aucune mission liée</option>';
