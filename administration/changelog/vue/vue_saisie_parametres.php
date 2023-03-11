@@ -65,7 +65,7 @@
                 echo '<div class="zone_listbox_changelog">';
                     echo '<div class="titre_listbox_changelox">Année : </div>';
 
-                    echo '<select name="annee_changelog" class="listbox_periode" required>';
+                    echo '<select name="annee_changelog" class="listbox_periode">';
                         $anneeInitiale = intval(date('Y'));
                         $anneeFin      = 2017;
 
@@ -96,7 +96,7 @@
                 echo '<div class="zone_listbox_changelog">';
                     echo '<div class="titre_listbox_changelox">Semaine : </div>';
 
-                    echo '<select name="semaine_changelog" class="listbox_periode" required>';
+                    echo '<select name="semaine_changelog" class="listbox_periode">';
                     $semaineInitiale = intval(date('W'));
 
                     if (!empty($changeLogParameters->getWeek()))
