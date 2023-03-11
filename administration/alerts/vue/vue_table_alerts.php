@@ -57,7 +57,7 @@
                     echo '<form id="delete_alert_' . $alerte->getId() . '" method="post" action="alerts.php?action=doSupprimer" class="lien_action_table_admin">';
                         echo '<input type="hidden" name="id_alert" value="' . $alerte->getId() . '" />';
                         echo '<input type="submit" name="delete_alert" value="" title="Supprimer l\'alerte" class="icone_supprimer_table_admin eventConfirm" />';
-                        echo '<input type="hidden" value="Supprimer l\'alerte "' . $alerte->getAlert() . '" (' . $alerte->getCategory() . ') ?" class="eventMessage" />';
+                        echo '<input type="hidden" value="Supprimer l\'alerte &quot;' . $alerte->getAlert() . '&quot; (' . $alerte->getCategory() . ') ?" class="eventMessage" />';
                     echo '</form>';
                 echo '</td>';
             echo '</tr>';
