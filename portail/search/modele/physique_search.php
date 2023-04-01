@@ -106,8 +106,8 @@
 
         $req = $bdd->query('SELECT *
                             FROM petits_pedestres_parcours
-                            WHERE team = "' . $equipe . '" AND nom LIKE "%' . $recherche . '%"
-                            ORDER BY nom ASC');
+                            WHERE team = "' . $equipe . '" AND name LIKE "%' . $recherche . '%"
+                            ORDER BY name ASC');
 
         while ($data = $req->fetch())
         {

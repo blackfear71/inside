@@ -660,6 +660,26 @@
                             $value = physiqueCountSuccess('cooking_box', $listeConditions);
                             break;
 
+                        // Explorateur
+                        case 'explorer':
+                            $listeConditions = array(
+                                array(
+                                    'operator' => '',
+                                    'column'   => 'identifiant_add',
+                                    'test'     => '=',
+                                    'value'    => $user->getIdentifiant()
+                                ),
+                                array(
+                                    'operator' => 'AND',
+                                    'column'   => 'to_delete',
+                                    'test'     => '!=',
+                                    'value'    => 'Y'
+                                )
+                            );
+
+                            $value = physiqueCountSuccess('petits_pedestres_parcours', $listeConditions);
+                            break;
+
                         // Niveaux
                         case 'level_1':
                         case 'level_5':

@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="fr" ng-app="parcoursApp">
+<html lang="fr">
     <head>
         <!-- Head commun & spécifique-->
         <?php
             $titleHead       = 'Les Petits Pédestres';
             $styleHead       = 'stylePP.css';
             $scriptHead      = 'scriptPP.js';
-            $angularHead     = true;
+            $angularHead     = false;
             $chatHead        = true;
-            $datepickerHead  = false;
+            $datepickerHead  = true;
             $masonryHead     = false;
             $exifHead        = false;
             $html2canvasHead = false;
@@ -56,9 +56,9 @@
                     /* Boutons missions */
                     /********************/
                     $zoneInside = 'article';
-
+                    
                     include('../../includes/common/missions.php');
-
+    
                     /*********************/
                     /* Zone de recherche */
                     /*********************/
@@ -72,19 +72,18 @@
                     /*********/
                     /* Liens */
                     /*********/
-                    // Ajout parcours
-                    echo '<a href="parcours.php?action=goAjouter" title="Ajouter un parcours" class="lien_red">';
-                        echo '<img src="../../includes/icons/petitspedestres/parcours_grey.png" alt="parcours_grey" class="image_lien" />';
-                        echo '<div class="titre_lien">AJOUTER PARCOURS</div>';
-                    echo '</a>';
 
-                    /************/
-                    /* Parcours */
-                    /************/
-                    if (!empty($listeParcours))
-                        echo '<parcours-list></parcours-list>';
-                    else
-                        echo '<div class="empty">Aucun parcours disponible...</div>';
+                    /**********/
+                    /* Saisie */
+                    /**********/
+
+                    /********************/
+                    /* Boutons d'action */
+                    /********************/
+
+                    /***********/
+                    /* Contenu */
+                    /***********/
                 ?>
             </article>
 
@@ -96,9 +95,5 @@
         <footer>
             <?php include('../../includes/common/mobile/footer_mobile.php'); ?>
         </footer>
-
-        <script>
-            var listeParcoursJson = <?php echo $listeParcoursJson; ?>;
-        </script>
     </body>
 </html>

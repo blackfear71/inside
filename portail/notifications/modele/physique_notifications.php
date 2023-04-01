@@ -316,6 +316,28 @@
         return $recette;
     }
 
+    // PHYSIQUE : Lecture parcours
+    // RETOUR : Objet Parcours
+    function physiqueParcours($idParcours)
+    {
+        // Requête
+        global $bdd;
+
+        $req = $bdd->query('SELECT *
+                            FROM petits_pedestres_parcours
+                            WHERE id = ' . $idParcours);
+
+        $data = $req->fetch();
+
+        // Instanciation d'un objet Parcours à partir des données remontées de la bdd
+        $parcours = Parcours::withData($data);
+
+        $req->closeCursor();
+
+        // Retour
+        return $parcours;
+    }
+
     // PHYSIQUE : Lecture position phrase / image culte dans la table
     // RETOUR : Position
     function physiquePositionCollector($idCollector, $equipe)

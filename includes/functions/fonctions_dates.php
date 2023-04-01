@@ -166,6 +166,31 @@
         return $timeFormat;
     }
 
+    // DATE : Formate une durée pour affichage (secondes -> minutes / heures)
+    // RETOUR : Durée formatée
+    function formatSecondsForDisplay($time)
+    {
+        // Formatage de la durée
+        if ($time < 3600)
+        {
+            $minutes  = floor($time * 60 / 3600);
+            $secondes = floor((($time * 60 / 3600) - $minutes) * 60);
+
+            $timeFormat = $minutes . ' min ' . $secondes . ' sec';
+        }
+        else
+        {
+            $heures   = floor($time / 3600);
+            $minutes  = floor((($time / 3600) - $heures) * 60);
+            $secondes = floor((((($time / 3600) - $heures) * 60) - $minutes) * 3600 / 60);
+
+            $timeFormat = $heures . ' h ' . $minutes . ' min ' . $secondes . ' sec';
+        }
+
+        // Retour
+        return $timeFormat;
+    }
+
     // DATE : Formate une semaine pour affichage (suppression zéro initial)
     // RETOUR : Semaine formatée
     function formatWeekForDisplay($week)

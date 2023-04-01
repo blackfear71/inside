@@ -5,6 +5,7 @@
     include_once('../../includes/classes/ideas.php');
     include_once('../../includes/classes/movies.php');
     include_once('../../includes/classes/notifications.php');
+    include_once('../../includes/classes/parcours.php');
 
     // METIER : Récupération du détail des notifications
     // RETOUR : Tableau détails notifications
@@ -410,6 +411,15 @@
                     $lien   = '/inside/portail/cookingbox/cookingbox.php?year=' . $recette->getYear() . '&action=goConsulter&anchor=' . $recette->getId();
                     break;
 
+                case 'parcours':
+                    // Lecture des données du parcours
+                    $parcours = physiqueParcours($notification->getContent());
+
+                    // Formatage de la notification
+                    $icone  = 'petits_pedestres';
+                    $phrase = 'Un <strong>nouveau parcours</strong> vient d\'être ajouté, à vos baskets !';
+                    $lien   = '/inside/portail/petitspedestres/details.php?id_parcours=' . $parcours->getId() . '&action=goConsulter';
+                    break;
 
                 case 'changelog':
                     // Extraction des données du journal

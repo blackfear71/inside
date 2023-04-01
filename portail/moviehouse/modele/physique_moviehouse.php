@@ -220,14 +220,16 @@
             $req = $bdd->query('SELECT *
                                 FROM movie_house
                                 WHERE to_delete != "Y" AND team = "' . $equipe . '" AND date_doodle != "" AND date_doodle >= ' . date('Ymd') . ' AND SUBSTR(date_doodle, 1, 4) = ' . $annee . '
-                                ORDER BY date_doodle ASC, id DESC LIMIT ' . $limite);
+                                ORDER BY date_doodle ASC, id DESC
+                                LIMIT ' . $limite);
         }
         elseif ($annee > date('Y'))
         {
             $req = $bdd->query('SELECT *
                                 FROM movie_house
                                 WHERE to_delete != "Y" AND team = "' . $equipe . '" AND date_doodle != "" AND SUBSTR(date_doodle, 1, 4) = ' . $annee . '
-                                ORDER BY date_doodle ASC, id DESC LIMIT ' . $limite);
+                                ORDER BY date_doodle ASC, id DESC
+                                LIMIT ' . $limite);
         }
         elseif ($annee < date('Y'))
         {

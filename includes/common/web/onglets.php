@@ -24,7 +24,7 @@
         $onglet4 = '<a href="/inside/portail/expensecenter/expensecenter.php?year=' . date('Y') . '&filter=all&action=goConsulter" title="Expense Center" class="onglet_inactif"><img src="/inside/includes/icons/common/expense_center.png" alt="expense_center" title="Expense Center" class="logo_onglet" /></a>';
         $onglet5 = '<a href="/inside/portail/collector/collector.php?action=goConsulter&page=1&sort=dateDesc&filter=none" title="Collector Room" class="onglet_inactif"><img src="/inside/includes/icons/common/collector.png" alt="collector" title="Collector Room" class="logo_onglet" /></a>';
         $onglet6 = '<a href="/inside/portail/calendars/calendars.php?year=' . date('Y') . '&action=goConsulter" title="Calendars" class="onglet_inactif"><img src="/inside/includes/icons/common/calendars.png" alt="calendars" title="Calendars" class="logo_onglet" /></a>';
-        $onglet7 = '<a href="/inside/portail/petitspedestres/parcours.php?action=goConsulterListe" title="Les Petits Pédestres" class="onglet_inactif"><img src="/inside/includes/icons/common/petits_pedestres.png" alt="petits_pedestres" title="Les Petits Pédestres" class="logo_onglet" /></a>';
+        $onglet7 = '<a href="/inside/portail/petitspedestres/petitspedestres.php?action=goConsulter" title="Les Petits Pédestres" class="onglet_inactif"><img src="/inside/includes/icons/common/petits_pedestres.png" alt="petits_pedestres" title="Les Petits Pédestres" class="logo_onglet" /></a>';
         $onglet8 = '<a href="/inside/portail/missions/missions.php?action=goConsulter" title="Missions : Insider" class="onglet_inactif"><img src="/inside/includes/icons/common/missions.png" alt="missions" title="Missions : Insider" class="logo_onglet" /></a>';
         //$onglet9 = '<a href="/inside/portail/eventmanager/eventmanager.php?action=goConsulter" title="Event Manager" class="onglet_inactif"><img src="/inside/includes/icons/common/event_manager.png" alt="event_manager" title="Event Manager" class="logo_onglet" /></a>';
 
@@ -72,9 +72,9 @@
         }
 
         // Petits pédestres
-        if ($path == '/inside/portail/petitspedestres/parcours.php')
+        if ($path == '/inside/portail/petitspedestres/petitspedestres.php')
         {
-            $onglet7 = '<a href="/inside/portail/petitspedestres/parcours.php?action=goConsulterListe" class="onglet_actif" title="Les Petits Pédestres"><img src="/inside/includes/icons/common/petits_pedestres.png" alt="petits_pedestres" title="Les Petits Pédestres" class="logo_onglet" /></a>';
+            $onglet7 = '<a href="/inside/portail/petitspedestres/petitspedestres.php?action=goConsulter" class="onglet_actif" title="Les Petits Pédestres"><img src="/inside/includes/icons/common/petits_pedestres.png" alt="petits_pedestres" title="Les Petits Pédestres" class="logo_onglet" /></a>';
         }
 
         // Missions : Insider

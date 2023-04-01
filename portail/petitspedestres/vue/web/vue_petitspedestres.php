@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="fr" ng-app="parcoursApp">
+<html lang="fr">
     <head>
         <!-- Head commun & spécifique-->
         <?php
             $titleHead       = 'Les Petits Pédestres';
             $styleHead       = 'stylePP.css';
             $scriptHead      = 'scriptPP.js';
-            $angularHead     = true;
+            $angularHead     = false;
             $chatHead        = true;
-            $datepickerHead  = false;
+            $datepickerHead  = true;
             $masonryHead     = false;
             $exifHead        = false;
             $html2canvasHead = false;
@@ -23,7 +23,7 @@
         <header>
             <?php
                 $title = 'Les Petits Pédestres';
-
+                
                 include('../../includes/common/web/header.php');
                 include('../../includes/common/web/onglets.php');
             ?>
@@ -33,36 +33,41 @@
         <section>
             <!-- Messages d'alerte -->
             <?php include('../../includes/common/alerts.php'); ?>
-
+    
             <!-- Déblocage succès -->
             <?php include('../../includes/common/success.php'); ?>
-
+    
             <!-- Celsius -->
             <?php
                 $celsius = 'petitspedestres';
-
+                
                 include('../../includes/common/web/celsius.php');
             ?>
-            
+    
             <article>
                 <?php
                     /********************/
                     /* Boutons missions */
                     /********************/
                     $zoneInside = 'article';
-
+                    
                     include('../../includes/common/missions.php');
-
-                    /*********/
-                    /* Liens */
-                    /*********/
+    
+                    /*******************/
+                    /* Liens de saisie */
+                    /*******************/
                     echo '<div class="zone_liens_saisie">';
                         // Saisie parcours
-                        echo '<a href="parcours.php?action=goAjouter" title="Ajouter un parcours" class="lien_categorie">';
+                        echo '<a id="ajouterParcours" title="Ajouter un parcours" class="lien_categorie">';
                             echo '<div class="zone_logo_lien"><img src="../../includes/icons/petitspedestres/parcours.png" alt="parcours" class="image_lien" /></div>';
                             echo '<div class="zone_texte_lien">Ajouter un parcours</div>';
                         echo '</a>';
                     echo '</div>';
+
+                    /*******************/
+                    /* Saisie parcours */
+                    /*******************/
+                    include('vue/web/vue_saisie_parcours.php');
 
                     /*******************/
                     /* Chargement page */
@@ -71,18 +76,18 @@
                         echo '<div id="loading_page" class="loading_page"></div>';
                     echo '</div>';
 
-                    /************/
-                    /* Parcours */
-                    /************/
-                    if (!empty($listeParcours))
-                        echo '<parcours-list></parcours-list>';
-                    else
-                        echo '<div class="empty">Aucun parcours disponible...</div>';
-                ?>
+                    /***********/
+                    /* Contenu */
+                    /***********/
+                    // Tableau de bord
+                    include('vue/web/vue_tableau_de_bord.php');
 
-                <!-- Monsieur et madame Santé ont un fils, comment qu'y s'appelle ?
-                    Réponse : Parcours.
-                    C'est nul ? Oui, c'est nul. -->
+                    // Dernières courses
+                    include('vue/web/vue_dernieres_courses.php');
+
+                    // Parcours
+                    include('vue/web/vue_liste_parcours.php');
+                ?>
             </article>
 
             <!-- Chat -->
@@ -93,9 +98,5 @@
         <footer>
             <?php include('../../includes/common/web/footer.php'); ?>
         </footer>
-
-        <script>
-            var listeParcoursJson = <?php echo $listeParcoursJson; ?>;
-        </script>
     </body>
 </html>

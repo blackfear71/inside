@@ -50,7 +50,7 @@
             'titre' => 'CALENDARS'
         ),
         array(
-            'lien'  => '/inside/portail/petitspedestres/parcours.php?action=goConsulterListe',
+            'lien'  => '/inside/portail/petitspedestres/petitspedestres.php?action=goConsulter',
             'image' => 'petits_pedestres',
             'titre' => 'LES PETITS PÉDESTRES'
         ),

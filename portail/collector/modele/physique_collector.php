@@ -154,10 +154,11 @@
                                     FROM collector
                                     LEFT JOIN collector_users ON collector.id = collector_users.id_collector
                                     WHERE collector.team = "' . $equipe . '" AND NOT EXISTS (SELECT id, id_collector, identifiant
-                                                                                            FROM collector_users
-                                                                                            WHERE (collector.id = collector_users.id_collector AND collector_users.identifiant = "' . $identifiant . '"))
+                                                                                             FROM collector_users
+                                                                                             WHERE (collector.id = collector_users.id_collector AND collector_users.identifiant = "' . $identifiant . '"))
                                     GROUP BY collector.id
-                                    ORDER BY ' . $order . ' LIMIT ' . $premiereEntree . ', ' . $nombreParPage);
+                                    ORDER BY ' . $order . '
+                                    LIMIT ' . $premiereEntree . ', ' . $nombreParPage);
                 break;
 
             case 'meOnly':
@@ -166,7 +167,8 @@
                                     LEFT JOIN collector_users ON collector.id = collector_users.id_collector
                                     WHERE collector.team = "' . $equipe . '" AND collector.speaker = "' . $identifiant . '"
                                     GROUP BY collector.id
-                                    ORDER BY ' . $order . ' LIMIT ' . $premiereEntree . ', ' . $nombreParPage);
+                                    ORDER BY ' . $order . '
+                                    LIMIT ' . $premiereEntree . ', ' . $nombreParPage);
                 break;
 
             case 'byMe':
@@ -175,7 +177,8 @@
                                     LEFT JOIN collector_users ON collector.id = collector_users.id_collector
                                     WHERE collector.team = "' . $equipe . '" AND collector.author = "' . $identifiant . '"
                                     GROUP BY collector.id
-                                    ORDER BY ' . $order . ' LIMIT ' . $premiereEntree . ', ' . $nombreParPage);
+                                    ORDER BY ' . $order . '
+                                    LIMIT ' . $premiereEntree . ', ' . $nombreParPage);
                 break;
 
             case 'usersOnly':
@@ -184,7 +187,8 @@
                                     LEFT JOIN collector_users ON collector.id = collector_users.id_collector
                                     WHERE collector.team = "' . $equipe . '" AND collector.type_speaker = "user" AND collector.speaker != "' . $identifiant . '"
                                     GROUP BY collector.id
-                                    ORDER BY ' . $order . ' LIMIT ' . $premiereEntree . ', ' . $nombreParPage);
+                                    ORDER BY ' . $order . '
+                                    LIMIT ' . $premiereEntree . ', ' . $nombreParPage);
                 break;
 
             case 'othersOnly':
@@ -193,7 +197,8 @@
                                     LEFT JOIN collector_users ON collector.id = collector_users.id_collector
                                     WHERE collector.team = "' . $equipe . '" AND collector.type_speaker = "other"
                                     GROUP BY collector.id
-                                    ORDER BY ' . $order . ' LIMIT ' . $premiereEntree . ', ' . $nombreParPage);
+                                    ORDER BY ' . $order . '
+                                    LIMIT ' . $premiereEntree . ', ' . $nombreParPage);
                 break;
 
             case 'textOnly':
@@ -202,7 +207,8 @@
                                     LEFT JOIN collector_users ON collector.id = collector_users.id_collector
                                     WHERE collector.team = "' . $equipe . '" AND collector.type_collector = "T"
                                     GROUP BY collector.id
-                                    ORDER BY ' . $order . ' LIMIT ' . $premiereEntree . ', ' . $nombreParPage);
+                                    ORDER BY ' . $order . '
+                                    LIMIT ' . $premiereEntree . ', ' . $nombreParPage);
                 break;
 
             case 'picturesOnly':
@@ -211,7 +217,8 @@
                                     LEFT JOIN collector_users ON collector.id = collector_users.id_collector
                                     WHERE collector.team = "' . $equipe . '" AND collector.type_collector = "I"
                                     GROUP BY collector.id
-                                    ORDER BY ' . $order . ' LIMIT ' . $premiereEntree . ', ' . $nombreParPage);
+                                    ORDER BY ' . $order . '
+                                    LIMIT ' . $premiereEntree . ', ' . $nombreParPage);
                 break;
 
             case 'topCulte':
@@ -219,10 +226,11 @@
                                     FROM collector
                                     LEFT JOIN collector_users ON collector.id = collector_users.id_collector
                                     WHERE collector.team = "' . $equipe . '" AND (SELECT COUNT(collector_users.id)
-                                                                                FROM collector_users
-                                                                                WHERE collector_users.id_collector = collector.id) >= ' . $minGolden . '
+                                                                                  FROM collector_users
+                                                                                  WHERE collector_users.id_collector = collector.id) >= ' . $minGolden . '
                                     GROUP BY collector.id
-                                    ORDER BY ' . $order . ' LIMIT ' . $premiereEntree . ', ' . $nombreParPage);
+                                    ORDER BY ' . $order . '
+                                    LIMIT ' . $premiereEntree . ', ' . $nombreParPage);
                 break;
 
             case 'none':
@@ -232,7 +240,8 @@
                                     LEFT JOIN collector_users ON collector.id = collector_users.id_collector
                                     WHERE collector.team = "' . $equipe . '"
                                     GROUP BY collector.id
-                                    ORDER BY ' . $order . ' LIMIT ' . $premiereEntree . ', ' . $nombreParPage);
+                                    ORDER BY ' . $order . '
+                                    LIMIT ' . $premiereEntree . ', ' . $nombreParPage);
                 break;
         }
 

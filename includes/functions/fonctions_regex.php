@@ -162,15 +162,48 @@
         return $montantFormat;
     }
 
+    // REGEX : Formatage distance pour insertion
+    // RETOUR : Distance formatée
+    function formatDistanceForInsert($distance)
+    {
+        // Formatage
+        $distanceFormat = str_replace(',', '.', $distance);
+
+        // Retour
+        return $distanceFormat;
+    }
+
     // REGEX : Formatage distance pour affichage
     // RETOUR : Distance formatée
     function formatDistanceForDisplay($distance)
     {
         // Formatage
-        $distanceFormat = str_replace('.', ',', $distance) . ' km';
+        $distanceFormat = str_replace('.', ',', round($distance, 2)) . ' km';
 
         // Retour
         return $distanceFormat;
+    }
+
+    // REGEX : Formatage vitesse pour affichage
+    // RETOUR : Vitesse formatée
+    function formatSpeedForDisplay($speed)
+    {
+        // Formatage
+        $speedFormat = str_replace('.', ',', round($speed, 2)) . ' km/h';
+
+        // Retour
+        return $speedFormat;
+    }
+
+    // REGEX : Formatage cardio pour affichage
+    // RETOUR : Cardio formatée
+    function formatCardioForDisplay($cardio)
+    {
+        // Formatage
+        $cardioFormat = round($cardio) . ' bpm';
+
+        // Retour
+        return $cardioFormat;
     }
 
     // METIER : Suppression des caractères ASCII invisibles

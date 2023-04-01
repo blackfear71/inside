@@ -171,7 +171,7 @@
             AND $path != '/inside/portail/moviehouse/mailing.php'
             AND $path != '/inside/portail/moviehouse/moviehouse.php'
             AND $path != '/inside/portail/notifications/notifications.php'
-            AND $path != '/inside/portail/petitspedestres/parcours.php'
+            AND $path != '/inside/portail/petitspedestres/petitspedestres.php'
             AND $path != '/inside/portail/portail/portail.php'
             AND $path != '/inside/portail/search/search.php'
             AND $path != '/inside/portail/profil/profil.php')
@@ -545,7 +545,7 @@
             '/inside/portail/moviehouse/mailing.php',
             '/inside/portail/moviehouse/moviehouse.php',
             '/inside/portail/notifications/notifications.php',
-            '/inside/portail/petitspedestres/parcours.php',
+            '/inside/portail/petitspedestres/petitspedestres.php',
             '/inside/portail/portail/portail.php',
             '/inside/portail/profil/profil.php',
             '/inside/portail/search/search.php'
@@ -990,6 +990,7 @@
             case 'star-chief':
             case 'cooker':
             case 'recipe-master':
+            case 'explorer':
                 // Récupération de l'ancienne valeur du succès de l'utilisateur
                 $ancienneValeur = physiqueAncienneValeurSucces($reference, $identifiant);
 
@@ -1190,6 +1191,7 @@
             case 'add_film':
             case 'add_idea':
             case 'add_restaurant':
+            case 'add_parcours':
             case 'all_missions':
                 $experience = 10;
                 break;
@@ -1403,9 +1405,17 @@
                         }
                         break;
 
+                    case 'pdf':
+                        if (!strstr($typeFile, 'pdf'))
+                        {
+                            $_SESSION['alerts']['wrong_file_type'] = true;
+                            $control_ok                            = false;
+                        }
+                        break;
+
                     case 'all':
                     default:
-                        if (!strstr($typeFile, 'jpg') && !strstr($typeFile, 'jpeg') && !strstr($typeFile, 'bmp') && !strstr($typeFile, 'gif') && !strstr($typeFile, 'png'))
+                        if (!strstr($typeFile, 'jpg') && !strstr($typeFile, 'jpeg') && !strstr($typeFile, 'bmp') && !strstr($typeFile, 'gif') && !strstr($typeFile, 'png') && !strstr($typeFile, 'pdf'))
                         {
                             $_SESSION['alerts']['wrong_file_type'] = true;
                             $control_ok                            = false;
