@@ -26,7 +26,7 @@
                     break;
 
                 case 'picture':
-                    echo '<img src="../../includes/images/petitspedestres/document/' . $detailsParcours->getDocument() . '" alt="' . $detailsParcours->getDocument() . '" title="' . $detailsParcours->getName() . '" class="image_details_document" />';
+                    echo '<img src="../../includes/images/petitspedestres/documents/' . $detailsParcours->getDocument() . '" alt="' . $detailsParcours->getDocument() . '" title="' . $detailsParcours->getName() . '" class="image_details_document" />';
                     break;
 
                 default:
@@ -66,7 +66,7 @@
                     break;
 
                 case 'picture':
-                    $path = '../../includes/images/petitspedestres/document/' . $detailsParcours->getDocument();
+                    $path = '../../includes/images/petitspedestres/documents/' . $detailsParcours->getDocument();
                     break;
 
                 default:

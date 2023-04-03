@@ -1321,6 +1321,16 @@ function formatAmountForDisplay(amount, withCurrency)
     return amountFormatted;
 }
 
+// Formate une distance pour affichage
+function formatDistanceForDisplay(distance)
+{
+    // Formatage
+    var distanceFormatted = distance.replace('.', ',');
+
+    // Retour
+    return distanceFormatted;
+}
+
 // Génère le chemin vers l'avatar
 function formatAvatar(avatar, pseudo, niveau, alt)
 {

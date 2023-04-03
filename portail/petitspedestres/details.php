@@ -55,6 +55,16 @@
             }
             break;
 
+        case 'doModifier':
+            // Modification d'un parcours
+            $idParcours = updateParcours($_POST, $_FILES, $_SESSION['user']);
+            break;
+
+        case 'doSupprimer':
+            // Suppression d'un parcours
+            deleteParcours($_POST, $_SESSION['user']['identifiant']);
+            break;
+
         default:
             // Contrôle action renseignée URL
             header('location: details.php?id_parcours=' . $_GET['id_parcours'] . '&action=goConsulter');
@@ -89,17 +99,13 @@
 
                 unset($participantsParDate);
 
-
-
-                // TODO : il faudra certainement récupérer un JSON pour le JS pour modifier le parcours / les participations, comme pour les films
-
-
-
-
-
+                // Conversion JSON
+                $detailsParcoursJson = json_encode(convertForJsonDetailsParcours($detailsParcours));
             }
             break;
 
+        case 'doModifier':
+        case 'doSupprimer':
         default:
             break;
     }
@@ -107,6 +113,14 @@
     // Redirection affichage
     switch ($_GET['action'])
     {
+        case 'doModifier':
+            header('location: details.php?id_parcours=' . $idParcours . '&action=goConsulter');
+            break;
+
+        case 'doSupprimer':
+            header('location: petitspedestres.php?action=goConsulter');
+            break;
+
         case 'goConsulter':
         default:
             include_once('vue/' . $_SESSION['index']['plateforme'] . '/vue_details.php');

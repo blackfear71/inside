@@ -24,7 +24,7 @@
                     echo '</a>';
 
                     // Participation
-                    echo '<a id="participerParcours" title="Participer" class="lien_participer_parcours">';
+                    echo '<a id="ajouter_participation_' . $parcours->getId() . '" title="Participer" class="lien_participer_parcours ajouterParticipation">';
                         echo '<img src="../../includes/icons/petitspedestres/participate_grey.png" alt="participate_grey" class="icone_parcours" />';
                     echo '</a>';
                 echo '</div>';

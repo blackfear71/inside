@@ -72,6 +72,9 @@
             }
 
             unset($parcours);
+
+            // Conversion JSON
+            $listeParcoursJson = json_encode(convertForJsonListeParcours($listeParcours));
             break;
 
         case 'doAjouter':

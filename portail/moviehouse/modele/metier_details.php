@@ -139,7 +139,7 @@
             'hours_doodle'   => substr($detailsFilm->getTime_doodle(), 0, 2),
             'minutes_doodle' => substr($detailsFilm->getTime_doodle(), 2, 2),
             'restaurant'     => $detailsFilm->getRestaurant(),
-            'place'          => $detailsFilm->getPlace(),
+            'place'          => $detailsFilm->getPlace()
         );
 
         // Retour
@@ -392,7 +392,7 @@
             'author'  => $identifiant,
             'date'    => date('Ymd'),
             'time'    => date('His'),
-            'comment' => $comment,
+            'comment' => $comment
         );
 
         physiqueInsertionCommentaire($commentaire);

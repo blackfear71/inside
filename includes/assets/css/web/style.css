@@ -477,7 +477,8 @@ header
 
 .zone_logo_lien
 {
-    float: left;
+    display: inline-block;
+    vertical-align: middle;
     width: 50px;
     height: 50px;
     background-color: #ff1937;
@@ -500,6 +501,34 @@ header
     width: 35px;
     height: 35px;
     margin-top: 7.5px;
+}
+
+.zone_texte_formulaire
+{
+    display: inline-block;
+    vertical-align: middle;
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 50px;
+    font-family: inside_font_regular, Verdana, sans-serif;
+    color: #262626;
+    font-size: 100%;
+    border: 0;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.image_formulaire_suppression
+{
+    width: 50px;
+    height: 50px;
+    border: 0;
+    background-color: transparent;
+    background-image: url("/inside/includes/icons/common/delete.png");
+    background-size: 35px 35px;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
 }
 
 /*** Titres sections ***/

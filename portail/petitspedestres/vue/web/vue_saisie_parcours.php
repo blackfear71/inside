@@ -11,14 +11,12 @@
             echo '<a id="annulerParcours" class="close_add"><img src="../../includes/icons/common/close.png" alt="close" title="Fermer" class="close_img" /></a>';
 
             // Saisie parcours
-            if ($_SERVER['PHP_SELF'] == '/inside/portail/petitspedestres/petitspedestres.php')
-                echo '<form method="post" action="petitspedestres.php?action=doAjouter" enctype="multipart/form-data" class="form_saisie_parcours">';
-            else
-                echo '<form method="post" action="details.php?action=doModifier" enctype="multipart/form-data" class="form_saisie_parcours">';
+            echo '<form method="post" action="petitspedestres.php?action=doAjouter" enctype="multipart/form-data" class="form_saisie_parcours">';
+                // Id parcours (modification)
                 echo '<input type="hidden" name="id_parcours" value="" />';
 
                 // Photo
-                echo '<div class="zone_saisie_left">';
+                echo '<div class="zone_saisie_parcours_left">';
                     // Saisie image
                     echo '<input type="hidden" name="MAX_FILE_SIZE" value="15728640" />';
 
@@ -33,7 +31,7 @@
                 echo '</div>';
 
                 // Informations parcours
-                echo '<div class="zone_saisie_right">';
+                echo '<div class="zone_saisie_parcours_right">';
                     // Nom du parcours
                     echo '<div class="zone_saisie_ligne">';
                         echo '<img src="../../includes/icons/petitspedestres/parcours_grey.png" alt="parcours_grey" title="Nom du parcours" class="icone_saisie" />';
@@ -69,7 +67,7 @@
                 echo '<div class="zone_saisie_bottom">';
                     echo '<div class="zone_bouton_saisie">';
                         // Ajouter
-                        echo '<input type="submit" name="insert_parcours" value="Ajouter" id="bouton_saisie_parcours" class="saisie_bouton" />';
+                        echo '<input type="submit" name="insert_parcours" value="Ajouter le parcours" id="bouton_saisie_parcours" class="saisie_bouton" />';
                     echo '</div>';
                 echo '</div>';
             echo '</form>';

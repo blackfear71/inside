@@ -564,7 +564,7 @@
         $listePositionsHorizontales = array(
             'left',
             'right',
-            'middle',
+            'middle'
         );
 
         // Définition des positions verticales disponibles (zone article)
@@ -574,7 +574,7 @@
             'middle_left',
             'middle_right',
             'bottom_left',
-            'bottom_right',
+            'bottom_right'
         );
 
         // Calcul du nombre d'emplacements maximum possibles (nombre de pages x (3 emplacements du header + 3 emplacements du footer + 6 emplacements de l'article)

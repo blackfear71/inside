@@ -63,27 +63,29 @@
                             echo '<div class="zone_texte_lien">Modifier le parcours</div>';
                         echo '</a>';
 
-
-
-                        // TODO : à remplacer par un formulaire comme pour MH
-
-
-
                         // Suppression parcours
-                        echo '<a id="modifierParcours" title="Supprimer le parcours" class="lien_categorie">';
-                            echo '<div class="zone_logo_lien"><img src="../../includes/icons/common/delete.png" alt="delete" class="image_lien" /></div>';
-                            echo '<div class="zone_texte_lien">Supprimer le parcours</div>';
-                        echo '</a>';
+                        echo '<form id="delete_parcours" method="post" action="details.php?action=doSupprimer" class="lien_categorie">';
+                            echo '<input type="hidden" name="id_parcours" value="' . $detailsParcours->getId() . '" />';
+                            echo '<input type="hidden" name="team_parcours" value="' . $detailsParcours->getTeam() . '" />';
 
+                            echo '<div class="zone_logo_lien">';
+                                echo '<input type="submit" name="delete_parcours" value="" title="Supprimer le parcours" class="image_formulaire_suppression eventConfirm" />';
+                            echo '</div>';
 
-
-
+                            echo '<input type="submit" name="delete_parcours" value="Supprimer le parcours" title="Supprimer le parcours" class="zone_texte_formulaire eventConfirm" />';
+                            echo '<input type="hidden" value="Demander la suppression de ce parcours ?" class="eventMessage" />';
+                        echo '</form>';
                     echo '</div>';
 
                     /*******************/
                     /* Saisie parcours */
                     /*******************/
                     include('vue/web/vue_saisie_parcours.php');
+
+                    /************************/
+                    /* Saisie participation */
+                    /************************/
+                    include('vue/web/vue_saisie_participation.php');
 
                     /*******************/
                     /* Chargement page */
@@ -111,5 +113,11 @@
         <footer>
             <?php include('../../includes/common/web/footer.php'); ?>
         </footer>
+
+        <!-- Données JSON -->
+        <script>
+            // Récupération des détails du parcours pour le script
+            var detailsParcours = <?php if (isset($detailsParcoursJson) AND !empty($detailsParcoursJson)) echo $detailsParcoursJson; else echo '{}'; ?>;
+        </script>
     </body>
 </html>

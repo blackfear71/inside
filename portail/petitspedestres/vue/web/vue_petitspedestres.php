@@ -69,6 +69,11 @@
                     /*******************/
                     include('vue/web/vue_saisie_parcours.php');
 
+                    /************************/
+                    /* Saisie participation */
+                    /************************/
+                    include('vue/web/vue_saisie_participation.php');
+
                     /*******************/
                     /* Chargement page */
                     /*******************/
@@ -98,5 +103,11 @@
         <footer>
             <?php include('../../includes/common/web/footer.php'); ?>
         </footer>
+
+        <!-- Données JSON -->
+        <script>
+            // Récupération de la liste des parcours pour le script
+            var listeParcours = <?php if (isset($listeParcoursJson) AND !empty($listeParcoursJson)) echo $listeParcoursJson; else echo '{}'; ?>;
+        </script>
     </body>
 </html>

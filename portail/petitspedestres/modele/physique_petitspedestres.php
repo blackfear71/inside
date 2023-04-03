@@ -260,36 +260,62 @@
         return $newId;
     }
 
-
-
-
-
-
-
-
-
     /****************************************************************************/
     /********************************** UPDATE **********************************/
     /****************************************************************************/
-    // PHYSIQUE : Mise à jour
+    // PHYSIQUE : Mise à jour parcours
     // RETOUR : Aucun
-    function physiqueUpdate($champ1, $champ2, $id)
+    function physiqueUpdateParcours($idParcours, $parcours)
     {
         // Requête
         global $bdd;
 
-        $req = $bdd->prepare('UPDATE table
-                              SET champ1 = :champ1,
-                                  champ2 = :champ2
-                              WHERE id = ' . $id);
+        $req = $bdd->prepare('UPDATE petits_pedestres_parcours
+                              SET name     = :name,
+                                  distance = :distance,
+                                  location = :location,
+                                  picture  = :picture,
+                                  document = :document,
+                                  type     = :type
+                              WHERE id = ' . $idParcours);
+
+        $req->execute($parcours);
+
+        $req->closeCursor();
+    }
+
+    // PHYSIQUE : Mise à jour du statut du parcours
+    // RETOUR : Aucun
+    function physiqueUpdateStatusParcours($idParcours, $toDelete, $identifiant)
+    {
+        // Requête
+        global $bdd;
+
+        $req = $bdd->prepare('UPDATE petits_pedestres_parcours
+                              SET to_delete       = :to_delete,
+                                  identifiant_del = :identifiant_del
+                              WHERE id = ' . $idParcours);
 
         $req->execute(array(
-            'champ1' => $champ1,
-            'champ2' => $champ2
+            'to_delete'       => $toDelete,
+            'identifiant_del' => $identifiant
         ));
 
         $req->closeCursor();
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     /****************************************************************************/
     /********************************** DELETE **********************************/
@@ -306,6 +332,9 @@
     }
 
 
+
+
+    
 
 
     

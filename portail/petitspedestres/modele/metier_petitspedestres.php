@@ -103,7 +103,7 @@
             {
                 $imageParcours = array(
                     'new_name' => '',
-                    'type'     => '',
+                    'type'     => ''
                 );
             }
         }
@@ -136,34 +136,119 @@
             insertExperience($identifiant, 'add_parcours');
 
             // Message d'alerte
-            $_SESSION['alerts']['course_added'] = true;
+            $_SESSION['alerts']['parcours_added'] = true;
         }
 
         // Retour
         return $idParcours;
     }
 
+    // METIER : Modification d'un parcours
+    // RETOUR : Id parcours
+    function updateParcours($post, $files, $sessionUser)
+    {
+        // Initialisations
+        $control_ok = true;
 
+        // Récupération des données
+        $idParcours       = $post['id_parcours'];
+        $identifiant      = $sessionUser['identifiant'];
+        $equipe           = $sessionUser['equipe'];
+        $nomParcours      = $post['nom_parcours'];
+        $distanceParcours = formatDistanceForInsert($post['distance_parcours']);
+        $lieuParcours     = $post['lieu_parcours'];
 
+        // Lecture des données du parcours
+        $ancienParcours = physiqueParcours($idParcours);
 
+        // Contrôle distance numérique
+        $control_ok = controleDistanceNumerique($distanceParcours);
 
+        // Insertion nouveau document et suppression ancien
+        if ($control_ok == true)
+        {
+            if (!empty($files['document_parcours']['name']))
+            {
+                // Insertion document
+                $documentParcours = uploadParcours($files['document_parcours'], 'document_' . rand(), 'document');
 
+                // Contrôle saisie non vide
+                $control_ok = controleContenuParcours($post, $documentParcours['new_name']);
 
+                // Suppression ancien document
+                if ($control_ok == true)
+                {
+                    if (!empty($ancienParcours->getDocument()))
+                    {
+                        switch ($ancienParcours->getType())
+                        {
+                            case 'document':
+                                unlink('../../includes/datas/petitspedestres/' . $ancienParcours->getDocument());
+                                break;
 
+                            case 'picture':
+                                unlink('../../includes/images/petitspedestres/documents/' . $ancienParcours->getDocument());
+                                break;
 
+                            default:
+                                break;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                // On conserve l'ancien document
+                $documentParcours = array(
+                    'new_name' => $ancienParcours->getDocument(),
+                    'type'     => $ancienParcours->getType()
+                );
+            }
+        }
 
+        // Insertion image (si renseignée) et suppression ancienne
+        if ($control_ok == true)
+        {
+            if (!empty($files['image_parcours']['name']))
+            {
+                // Insertion image
+                $imageParcours = uploadParcours($files['image_parcours'], 'picture_' . rand(), 'picture');
 
+                // Suppression ancienne image
+                if (!empty($ancienParcours->getPicture()))
+                    unlink('../../includes/images/petitspedestres/pictures/' . $ancienParcours->getPicture());
+            }
+            else
+            {
+                // On conserve l'ancienne image
+                $imageParcours = array(
+                    'new_name' => $ancienParcours->getPicture(),
+                    'type'     => ''
+                );
+            }
+        }
 
+        // Modification de l'enregistrement en base
+        if ($control_ok == true)
+        {
+            $parcours = array(
+                'name'     => $nomParcours,
+                'distance' => $distanceParcours,
+                'location' => $lieuParcours,
+                'picture'  => $imageParcours['new_name'],
+                'document' => $documentParcours['new_name'],
+                'type'     => $documentParcours['type']
+            );
 
+            physiqueUpdateParcours($ancienParcours->getId(), $parcours);
 
+            // Message d'alerte
+            $_SESSION['alerts']['parcours_updated'] = true;
+        }
 
-
-
-
-
-
-
-
+        // Retour
+        return $idParcours;
+    }
 
     // METIER : Formatage et insertion fichier
     // RETOUR : Nom fichier avec extension
@@ -172,7 +257,7 @@
         // Initialisations
         $document   = array(
             'new_name' => '',
-            'type'     => '',
+            'type'     => ''
         );
         $control_ok = true;
 
@@ -192,7 +277,7 @@
                 }
                 else
                 {
-                    $dossier = '../../includes/images/petitspedestres/document';
+                    $dossier = '../../includes/images/petitspedestres/documents';
                     $type    = 'picture';
                 }
                 break;
@@ -223,6 +308,25 @@
 
         // Retour
         return $document;
+    }
+
+    // METIER : Demande de suppression d'un parcours
+    // RETOUR : Aucun
+    function deleteParcours($post, $identifiant)
+    {
+        // Récupération des données
+        $idParcours = $post['id_parcours'];
+        $equipe     = $post['team_parcours'];
+        $toDelete   = 'Y';
+
+        // Modification de l'enregistrement en base
+        physiqueUpdateStatusParcours($idParcours, $toDelete, $identifiant);
+
+        // Mise à jour du statut des notifications
+        updateNotification('parcours', $equipe, $idParcours, $toDelete);
+
+        // Message d'alerte
+        $_SESSION['alerts']['parcours_removed'] = true;
     }
 
     // METIER : Contrôle parcours existant
@@ -277,5 +381,40 @@
 
         // Retour
         return $listeParticipantsParDate;
+    }
+
+    // METIER : Conversion de la liste d'objets des parcours en tableau simple pour JSON
+    // RETOUR : Tableau des parcours
+    function convertForJsonListeParcours($listeParcours)
+    {
+        // Initialisations
+        $listeParcoursAConvertir = array();
+
+        foreach ($listeParcours as $parcoursAConvertir)
+        {
+            $listeParcoursAConvertir[$parcoursAConvertir->getId()] = $parcoursAConvertir->getName();
+        }
+
+        // Retour
+        return $listeParcoursAConvertir;
+    }
+
+    // METIER : Conversion des détails d'un parcours en tableau simple pour JSON
+    // RETOUR : Tableau des détails
+    function convertForJsonDetailsParcours($detailsParcours)
+    {
+        // Conversion de l'objet en tableau pour envoyer au Javascript
+        $detailsAConvertir = array(
+            'id'       => $detailsParcours->getId(),
+            'name'     => $detailsParcours->getName(),
+            'distance' => $detailsParcours->getDistance(),
+            'location' => $detailsParcours->getLocation(),
+            'picture'  => $detailsParcours->getPicture(),
+            'document' => $detailsParcours->getDocument(),
+            'type'     => $detailsParcours->getType()
+        );
+
+        // Retour
+        return $detailsAConvertir;
     }
 ?>
