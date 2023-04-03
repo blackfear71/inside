@@ -28,7 +28,7 @@
                     if ($course->getCompetition() == 'Y')
                         echo '<img src="../../includes/icons/petitspedestres/cup_grey.png" alt="cup_grey" title="Compétition" class="icone_derniere_course" />';
                     else
-                        echo '<img src="../../includes/icons/petitspedestres/cup_white.png" alt="cup_white" title="Compétition" class="icone_derniere_course" />';
+                        echo '<img src="../../includes/icons/petitspedestres/cup_white.png" alt="cup_white" title="Classique" class="icone_derniere_course" />';
                 echo '</a>';
             }
         }

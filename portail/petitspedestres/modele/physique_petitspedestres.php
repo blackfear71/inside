@@ -82,7 +82,7 @@
         $req = $bdd->query('SELECT *
                             FROM petits_pedestres_parcours
                             WHERE team = "' . $equipe . '" AND to_delete != "Y"
-                            ORDER BY name ASC, location ASC');
+                            ORDER BY location ASC, name ASC');
 
         while ($data = $req->fetch())
         {
@@ -122,6 +122,98 @@
 
         // Retour
         return $parcoursExistant;
+    }
+
+    // PHYSIQUE : Lecture d'un parcours
+    // RETOUR : Objet parcours
+    function physiqueParcours($idParcours)
+    {
+        // Requête
+        global $bdd;
+
+        $req = $bdd->query('SELECT petits_pedestres_parcours.*, COUNT(petits_pedestres_users.id) AS nombreRuns
+                            FROM petits_pedestres_parcours
+                            JOIN petits_pedestres_users ON petits_pedestres_parcours.id = petits_pedestres_users.id_parcours
+                            WHERE petits_pedestres_parcours.id = ' . $idParcours);
+
+        $data = $req->fetch();
+
+        // Instanciation d'un objet Parcours à partir des données remontées de la bdd
+        $parcours = Parcours::withData($data);
+
+        $parcours->setRuns($data['nombreRuns']);
+
+        $req->closeCursor();
+
+        // Retour
+        return $parcours;
+    }
+
+    // PHYSIQUE : Lecture des utilisateurs inscrits
+    // RETOUR : Liste des utilisateurs
+    function physiqueUsersDetailsParcours($idParcours, $equipe)
+    {
+        // Initialisations
+        $listeUsers = array();
+
+        // Requête
+        global $bdd;
+
+        $req = $bdd->query('SELECT id, identifiant, team, pseudo, avatar
+                            FROM users
+                            WHERE (identifiant != "admin" AND status != "I" AND team = "' . $equipe . '")
+                            OR EXISTS (SELECT id, id_parcours, identifiant
+                                       FROM petits_pedestres_users
+                                       WHERE petits_pedestres_users.identifiant = users.identifiant AND petits_pedestres_users.id_parcours = "' . $idParcours . '")
+                            ORDER BY identifiant ASC');
+
+        while ($data = $req->fetch())
+        {
+            // Création tableau de correspondance identifiant / pseudo / avatar
+            $listeUsers[$data['identifiant']] = array(
+                'pseudo' => $data['pseudo'],
+                'equipe' => $data['team'],
+                'avatar' => $data['avatar']
+            );
+        }
+
+        $req->closeCursor();
+
+        // Retour
+        return $listeUsers;
+    }
+
+    // PHYSIQUE : Lecture des participations d'un parcours
+    // RETOUR : Liste des participations
+    function physiqueParticipantsParcours($idParcours)
+    {
+        // Initialisations
+        $listeParticipants = array();
+
+        // Requête
+        global $bdd;
+
+        $req = $bdd->query('SELECT *
+                            FROM petits_pedestres_users
+                            WHERE id_parcours = ' . $idParcours . '
+                            ORDER BY date DESC, identifiant ASC');
+
+        while ($data = $req->fetch())
+        {
+            // Instanciation d'un objet ParticipationCourse à partir des données remontées de la bdd
+            $participation = ParticipationCourse::withData($data);
+
+            // On ajoute la ligne au tableau
+            if (!isset($listeParticipants[$data['date']]))
+                $listeParticipants[$data['date']] = array();
+
+            array_push($listeParticipants[$data['date']], $participation);
+        }
+
+        $req->closeCursor();
+
+        // Retour
+        return $listeParticipants;
     }
 
     /****************************************************************************/

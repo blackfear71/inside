@@ -187,8 +187,8 @@
                             FROM users
                             WHERE (identifiant != "admin" AND status != "I" AND team = "' . $equipe . '")
                             OR EXISTS (SELECT id, id_film, author
-                                    FROM movie_house_comments
-                                    WHERE movie_house_comments.author = users.identifiant AND movie_house_comments.id_film = "' . $idFilm . '")
+                                       FROM movie_house_comments
+                                       WHERE movie_house_comments.author = users.identifiant AND movie_house_comments.id_film = "' . $idFilm . '")
                             ORDER BY identifiant ASC');
 
         while ($data = $req->fetch())

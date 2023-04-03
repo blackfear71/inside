@@ -442,3 +442,270 @@
     background-color: #ff1937;
     color: white;
 }
+
+/*** Détails parcours ***/
+.zone_details_parcours
+{
+    display: block;
+    width: 100%;
+}
+
+.zone_image_details_parcours
+{
+    display: block;
+    width: 100%;
+    height: 150px;
+    overflow: hidden;
+    border-radius: 2px;
+    box-shadow: 0 0 3px #7c7c7c;
+}
+
+.image_details_parcours
+{
+    display: block;
+    width: 100%;
+    transform: translateY(calc(-1 * (50% - 75px)));
+}
+
+.zone_details_parcours_left
+{
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 20px;
+    width: calc(60% - 10px);
+}
+
+.image_details_document
+{
+    display: block;
+    width: 100%;
+    border-radius: 2px;
+    box-shadow: 0 0 3px #7c7c7c;
+}
+
+.document_details_document
+{
+    display: block;
+    width: 100%;
+    height: 500px;
+    border-radius: 2px;
+    box-shadow: 0 0 3px #7c7c7c;
+}
+
+.zone_details_parcours_right
+{
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 20px;
+    width: calc(40% - 10px);
+    margin-left: 20px;
+    margin-bottom: -20px;
+}
+
+.zone_donnee_details_parcours
+{
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.icone_donnee_details_parcours
+{
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 10px;
+    width: 30px;
+}
+
+.donnee_details_parcours
+{
+    display: inline-block;
+    vertical-align: middle;
+    width: calc(100% - 40px);
+    font-family: inside_font_light, Verdana, sans-serif;
+    color: #262626;
+    font-size: 100%;
+}
+
+.zone_participations_parcours
+{
+    display: block;
+    margin-bottom: -10px;
+}
+
+.zone_participants_parcours
+{
+    display: block;
+    width: calc(100% - 20px);
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 2px;
+    box-shadow: 0 0 3px #7c7c7c;
+    background-color: #e3e3e3;
+}
+
+.zone_participants_left
+{
+    display: inline-block;
+    vertical-align: middle;
+    width: 130px;
+    margin-right: 10px;
+}
+
+.date_participation
+{
+    display: inline-block;
+    vertical-align: middle;
+    width: 130px;
+    font-family: inside_font_light, Verdana, sans-serif;
+    color: white;
+    background-color: #2eb2f4;
+    line-height: 30px;
+    border-radius: 2px;
+    text-align: center;
+}
+
+.icone_date_participation
+{
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 5px;
+    width: 20px;
+    height: 20px;
+}
+
+.texte_date_participation
+{
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.zone_participants_right
+{
+    display: inline-block;
+    vertical-align: middle;
+    width: calc(100% - 140px);
+}
+
+.zone_participant
+{
+    display: block;
+}
+
+.zone_participant:not(:first-child)
+{
+    padding-top: 10px;
+}
+
+.avatar_participant
+{
+    display: inline-block;
+    vertical-align: middle;
+    width: 40px;
+    margin-right: 10px;
+    border-radius: 50%;
+    box-shadow: 0 0 3px #7c7c7c;
+    background-color: #262626;
+}
+
+.pseudo_participant
+{
+    display: inline-block;
+    vertical-align: middle;
+    width: calc(100% - 140px);
+    font-family: inside_font_medium, Verdana, sans-serif;
+    color: #262626;
+    word-break: break-word;
+    text-align: justify;
+}
+
+.pseudo_participant_full
+{
+    display: inline-block;
+    vertical-align: middle;
+    width: calc(100% - 50px);
+    font-family: inside_font_medium, Verdana, sans-serif;
+    color: #262626;
+    word-break: break-word;
+    text-align: justify;
+}
+
+.lien_actions_participation
+{
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.icone_modifier_participation
+{
+    display: inline-block;
+    margin-left: 15px;
+    width: 30px;
+    height: 30px;
+    border: 0;
+    border-radius: 2px;
+    background-color: #ff1937;
+    background-image: url("/inside/includes/icons/common/edit.png");
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+    overflow: hidden;
+    vertical-align: middle;
+    box-shadow: 0 0 3px #7c7c7c;
+}
+
+.icone_supprimer_participation
+{
+    display: inline-block;
+    margin-left: 15px;
+    width: 30px;
+    height: 30px;
+    border: 0;
+    border-radius: 2px;
+    background-color: #ff1937;
+    background-image: url("/inside/includes/icons/common/delete.png");
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+    overflow: hidden;
+    vertical-align: middle;
+    box-shadow: 0 0 3px #7c7c7c;
+}
+
+.zone_donnees_participant
+{
+    display: block;
+    margin-top: 10px;
+}
+
+.zone_donnees_participant:not(:last-child)
+{
+    border-bottom: solid 1px #c3c3c3;
+    padding-bottom: 10px;
+}
+
+.zone_donnee_participant
+{
+    display: inline-block;
+    width: calc(100% / 5);
+}
+
+.icone_donnee_participant
+{
+    display: inline-block;
+    vertical-align: middle;
+    width: 30px;
+    margin-right: 5px;
+}
+
+.donnee_participant
+{
+    display: inline-block;
+    vertical-align: middle;
+    font-family: inside_font_light, Verdana, sans-serif;
+    color: #262626;
+    font-size: 100%;
+    text-align: center;
+}

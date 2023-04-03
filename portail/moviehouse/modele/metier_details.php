@@ -90,8 +90,8 @@
         return $listeNavigation;
     }
 
-    // METIER : Récupération des étoiles utilisateurs d'un film
-    // RETOUR : Liste des étoiles utilisateurs
+    // METIER : Récupération de la liste des utilisateurs d'un film
+    // RETOUR : Liste des utilisateurs
     function getUsersDetailsFilm($idFilm, $equipe)
     {
         // Lecture des utilisateurs

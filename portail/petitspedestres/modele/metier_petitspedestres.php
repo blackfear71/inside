@@ -225,14 +225,57 @@
         return $document;
     }
 
+    // METIER : Contrôle parcours existant
+    // RETOUR : Booléen
+    function isParcoursDisponible($idParcours, $equipe)
+    {
+        // Contrôle parcours disponible
+        $parcoursDisponible = controleParcoursDisponible($idParcours, $equipe);
 
+        // Retour
+        return $parcoursDisponible;
+    }
 
+    // METIER : Récupération détails parcours
+    // RETOUR : Objet Parcours
+    function getDetailsParcours($idParcours, $identifiant)
+    {
+        // Récupération des détails d'un parcours
+        $parcours = physiqueParcours($idParcours);
 
+        // Retour
+        return $parcours;
+    }
 
+    // METIER : Récupération de la liste des utilisateurs d'un parcours
+    // RETOUR : Liste des utilisateurs
+    function getUsersDetailsParcours($idParcours, $equipe)
+    {
+        // Lecture des utilisateurs
+        $listeUsers = physiqueUsersDetailsParcours($idParcours, $equipe);
 
+        // Retour
+        return $listeUsers;
+    }
 
+    // METIER : Récupération des participations d'un parcours
+    // RETOUR : Liste des participations
+    function getParticipantsParcours($idParcours, $listeUsers)
+    {
+        // Récupération de la liste des participations
+        $listeParticipantsParDate = physiqueParticipantsParcours($idParcours);
 
+        // Récupération pseudo et avatar
+        foreach ($listeParticipantsParDate as $participantsParDate)
+        {
+            foreach ($participantsParDate as $participant)
+            {
+                $participant->setPseudo($listeUsers[$participant->getIdentifiant()]['pseudo']);
+                $participant->setAvatar($listeUsers[$participant->getIdentifiant()]['avatar']);
+            }
+        }
 
-
-
+        // Retour
+        return $listeParticipantsParDate;
+    }
 ?>

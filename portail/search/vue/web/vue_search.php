@@ -188,11 +188,11 @@
                                 // Résultats
                                 foreach ($resultats['petits_pedestres'] as $resultatsPP)
                                 {
-                                    echo '<a href="../petitspedestres/petitspedestres.php?id_parcours=' . $resultatsPP->getId() . '&action=goConsulter" class="lien_resultat">';
+                                    echo '<a href="../petitspedestres/details.php?id_parcours=' . $resultatsPP->getId() . '&action=goConsulter" class="lien_resultat">';
                                         echo '<table class="zone_resultat">';
                                             echo '<tr>';
                                                 echo '<td class="zone_resultat_titre">';
-                                                    echo $resultatsPP->getNom();
+                                                    echo $resultatsPP->getName();
                                                 echo '</td>';
 
                                                 echo '<td class="zone_resultat_info">';

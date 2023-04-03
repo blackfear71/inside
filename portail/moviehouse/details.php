@@ -3,9 +3,9 @@
     ****** Movie House ******
     *************************
     Fonctionnalités :
-    - Détails du films
-    - Modification du films
-    - Suppression du films
+    - Détails du film
+    - Modification du film
+    - Suppression du film
     - Gestion des préférences
     - Commentaires
     ************************/

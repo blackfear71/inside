@@ -72,7 +72,8 @@
         }
 
         // Petits pédestres
-        if ($path == '/inside/portail/petitspedestres/petitspedestres.php')
+        if ($path == '/inside/portail/petitspedestres/petitspedestres.php'
+        OR  $path == '/inside/portail/petitspedestres/details.php')
         {
             $onglet7 = '<a href="/inside/portail/petitspedestres/petitspedestres.php?action=goConsulter" class="onglet_actif" title="Les Petits Pédestres"><img src="/inside/includes/icons/common/petits_pedestres.png" alt="petits_pedestres" title="Les Petits Pédestres" class="logo_onglet" /></a>';
         }

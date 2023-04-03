@@ -171,6 +171,7 @@
             AND $path != '/inside/portail/moviehouse/mailing.php'
             AND $path != '/inside/portail/moviehouse/moviehouse.php'
             AND $path != '/inside/portail/notifications/notifications.php'
+            AND $path != '/inside/portail/petitspedestres/details.php'
             AND $path != '/inside/portail/petitspedestres/petitspedestres.php'
             AND $path != '/inside/portail/portail/portail.php'
             AND $path != '/inside/portail/search/search.php'
@@ -545,6 +546,7 @@
             '/inside/portail/moviehouse/mailing.php',
             '/inside/portail/moviehouse/moviehouse.php',
             '/inside/portail/notifications/notifications.php',
+            '/inside/portail/petitspedestres/details.php',
             '/inside/portail/petitspedestres/petitspedestres.php',
             '/inside/portail/portail/portail.php',
             '/inside/portail/profil/profil.php',

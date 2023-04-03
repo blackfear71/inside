@@ -93,6 +93,7 @@
         private $picture;
         private $document;
         private $type;
+        private $runs;
 
         // Constructeur par défaut (objet vide)
         public function __construct()
@@ -110,6 +111,7 @@
             $this->picture         = '';
             $this->document        = '';
             $this->type            = '';
+            $this->runs            = 0;
         }
 
         // Constructeur de l'objet Parcours en fonction de données
@@ -182,6 +184,7 @@
             $this->picture         = htmlspecialchars($data->getPicture());
             $this->document        = htmlspecialchars($data->getDocument());
             $this->type            = htmlspecialchars($data->getType());
+            $this->runs            = htmlspecialchars($data->getRuns());
         }
 
         // Getters et Setters pour l'objet Parcours
@@ -327,6 +330,17 @@
         {
             return $this->type;
         }
+
+        // Nombre de courses réalisées
+        public function setRuns($runs)
+        {
+            $this->runs = $runs;
+        }
+
+        public function getRuns()
+        {
+            return $this->runs;
+        }
     }
 
     class ParticipationCourse
@@ -335,6 +349,8 @@
         private $id_parcours;
         private $nom_parcours;
         private $identifiant;
+        private $pseudo;
+        private $avatar;
         private $date;
         private $distance;
         private $time;
@@ -349,6 +365,8 @@
             $this->id_parcours  = 0;
             $this->nom_parcours = '';
             $this->identifiant  = '';
+            $this->pseudo       = '';
+            $this->avatar       = '';
             $this->date         = '';
             $this->distance     = '';
             $this->time         = '';
@@ -412,6 +430,8 @@
             $this->id_parcours  = $data->getId_parcours();
             $this->nom_parcours = htmlspecialchars($data->getNom_parcours());
             $this->identifiant  = htmlspecialchars($data->getIdentifiant());
+            $this->pseudo       = htmlspecialchars($data->getPseudo());
+            $this->avatar       = htmlspecialchars($data->getAvatar());
             $this->date         = htmlspecialchars($data->getDate());
             $this->distance     = htmlspecialchars($data->getDistance());
             $this->time         = htmlspecialchars($data->getTime());
@@ -463,6 +483,28 @@
         public function getIdentifiant()
         {
             return $this->identifiant;
+        }
+
+        // Pseudo
+        public function setPseudo($pseudo)
+        {
+            $this->pseudo = $pseudo;
+        }
+
+        public function getPseudo()
+        {
+            return $this->pseudo;
+        }
+
+        // Avatar
+        public function setAvatar($avatar)
+        {
+            $this->avatar = $avatar;
+        }
+
+        public function getAvatar()
+        {
+            return $this->avatar;
         }
         
         // Date

@@ -3,7 +3,11 @@
     *** Les Petits Pédestres ***
     ****************************
     Fonctionnalités :
-    - A compléter
+    - Tableau de bord
+    - Dernières courses
+    - Liste des parcours
+    - Ajout de parcours
+    - Ajout participation
     ****************************/
     
     // Fonctions communes
@@ -79,7 +83,7 @@
     switch ($_GET['action'])
     {
         case 'doAjouter':
-            // header('location: details.php?id_parcours=' . $idParcours . '&action=goConsulter');
+            header('location: details.php?id_parcours=' . $idParcours . '&action=goConsulter');
             break;
 
         case 'goConsulter':
