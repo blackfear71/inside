@@ -607,6 +607,14 @@
     margin-bottom: 20px;
 }
 
+.zone_donnee_details_parcours_lien
+{
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
 .icone_donnee_details_parcours
 {
     display: inline-block;
@@ -637,8 +645,6 @@
     width: calc(100% - 20px);
     margin-bottom: 10px;
     padding: 10px;
-    border-radius: 2px;
-    box-shadow: 0 0 3px #7c7c7c;
     background-color: #e3e3e3;
 }
 

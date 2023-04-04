@@ -14,7 +14,7 @@ $(function ()
     // Affiche la zone de modification d'un parcours
     $('#modifierParcours').click(function ()
     {
-        initialisationModification('zone_saisie_parcours');
+        initialisationModificationParcours('zone_saisie_parcours');
     });
 
     // Affiche la zone de saisie de participation
@@ -22,7 +22,15 @@ $(function ()
     {
         var idParcours = $(this).attr('id').replace('ajouter_participation_', '');
 
-        initialisationParticipation('zone_saisie_participation', idParcours);
+        initialisationSaisieParticipation('zone_saisie_participation', idParcours);
+    });
+
+    // Affiche la zone de modification de participation
+    $('.modifierParticipation').click(function ()
+    {
+        var idParticipation = $(this).attr('id').replace('modifier_participation_', '');
+
+        initialisationModificationParticipation('zone_saisie_participation', idParticipation);
     });
 
     // Masque la zone de saisie de participation
@@ -85,6 +93,18 @@ $(function ()
     }
 });
 
+// Au chargement du document complet
+$(window).on('load', function ()
+{
+    // Déclenchement du scroll : on récupère l'id de l'ancre dans l'url (fonction JS)
+    var id     = $_GET('anchor');
+    var offset = 70;
+    var shadow = true;
+
+    // Scroll vers l'id
+    scrollToId(id, offset, shadow);
+});
+
 /*****************/
 /*** Fonctions ***/
 /*****************/
@@ -96,11 +116,11 @@ function closeInput(id)
 }
 
 // Initialisation modification d'un parcours
-function initialisationModification(zone)
+function initialisationModificationParcours(zone)
 {
     var titre  = 'Modifier un parcours';
     var bouton = 'Modifier le parcours';
-    var action = 'details.php?action=doModifier';
+    var action = 'details.php?action=doModifierParcours';
 
     // Modification des données
     $('#' + zone).find('.titre_saisie_parcours').html(titre);
@@ -108,7 +128,7 @@ function initialisationModification(zone)
     
     $('#' + zone).find('input[name=id_parcours]').val(detailsParcours['id']);
     $('#' + zone).find('input[name=nom_parcours]').val(detailsParcours['name']);
-    $('#' + zone).find('input[name=distance_parcours]').val(formatDistanceForDisplay(detailsParcours['distance']));
+    $('#' + zone).find('input[name=distance_parcours]').val(formatNumericForDisplay(detailsParcours['distance']));
     $('#' + zone).find('input[name=lieu_parcours]').val(detailsParcours['location']);
     $('#' + zone).find('input[name=document_parcours]').prop('required', false);
     $('#' + zone).find('#document_parcours').text(detailsParcours['document']);
@@ -122,17 +142,29 @@ function initialisationModification(zone)
 }
 
 // Initialisation saisie participation
-function initialisationParticipation(zone, idParcours)
+function initialisationSaisieParticipation(zone, idParcours)
 {
-    var titre  = 'Ajouter une participation au parcours "' + listeParcours[idParcours] + '"';
+    var titre;
     var bouton = 'Ajouter la participation';
-    var action = 'petitspedestres.php?action=doAjouterParticipation';
+    var action;
+
+    if (pageAppelante == 'petitspedestres')
+    {
+        titre  = 'Ajouter une participation au parcours "' + listeParcours[idParcours] + '"';
+        action = 'petitspedestres.php?action=doAjouterParticipation';
+    }
+    else
+    {
+        titre  = 'Ajouter une participation au parcours "' + detailsParcours['name'] + '"';
+        action = 'details.php?id_parcours=' + idParcours + '&action=doAjouterParticipation';
+    }
 
     // Modification des données
     $('#' + zone).find('.titre_saisie_participation').html(titre);
     $('#' + zone).find('.form_saisie_participation').attr('action', action);
 
     $('#' + zone).find('input[name=id_parcours]').val(idParcours);
+    $('#' + zone).find('input[name=id_participation]').val('');
     $('#' + zone).find('input[name=date_participation]').val('');
     $('#' + zone).find('input[name=competition_participation]').first().prop('checked', true);
     $('#' + zone).find('input[name=distance_participation]').val('');
@@ -141,6 +173,47 @@ function initialisationParticipation(zone, idParcours)
     $('#' + zone).find('input[name=minutes_participation]').val('');
     $('#' + zone).find('input[name=secondes_participation]').val('');
     $('#' + zone).find('input[name=cardio_participation]').val('');
+    $('#' + zone).find('#bouton_saisie_participation').val(bouton);
+
+    // Affichage zone de saisie
+    afficherMasquerIdWithDelay(zone);
+}
+
+// Initialisation modification participation
+function initialisationModificationParticipation(zone, idParticipation)
+{
+    var titre  = 'Modifier la participation au parcours "' + detailsParcours['name'] + '"';
+    var bouton = 'Modifier la participation';
+    var action = 'details.php?id_parcours=' + detailsParcours['id'] + '&action=doModifierParticipation';
+
+    // Récupération des données
+    var participation = listeParticipations[idParticipation];
+
+    // Modification des données
+    $('#' + zone).find('.titre_saisie_participation').html(titre);
+    $('#' + zone).find('.form_saisie_participation').attr('action', action);
+
+    $('#' + zone).find('input[name=id_parcours]').val(detailsParcours['id']);
+    $('#' + zone).find('input[name=id_participation]').val(idParticipation);
+    $('#' + zone).find('input[name=date_participation]').val(formatDateForDisplay(participation['date']));
+
+    if (participation['competition'] == 'Y')
+    {
+        $('#' + zone).find('#competition_non').prop('checked', false);
+        $('#' + zone).find('#competition_oui').prop('checked', true);
+    }
+    else
+    {
+        $('#' + zone).find('#competition_non').prop('checked', true);
+        $('#' + zone).find('#competition_oui').prop('checked', false);
+    }
+
+    $('#' + zone).find('input[name=distance_participation]').val(formatNumericForDisplay(participation['distance']));
+    $('#' + zone).find('input[name=vitesse_participation]').val(formatNumericForDisplay(participation['vitesse']));
+    $('#' + zone).find('input[name=heures_participation]').val(participation['heures']);
+    $('#' + zone).find('input[name=minutes_participation]').val(participation['minutes']);
+    $('#' + zone).find('input[name=secondes_participation]').val(participation['secondes']);
+    $('#' + zone).find('input[name=cardio_participation]').val(formatNumericForDisplay(participation['cardio']));
     $('#' + zone).find('#bouton_saisie_participation').val(bouton);
 
     // Affichage zone de saisie

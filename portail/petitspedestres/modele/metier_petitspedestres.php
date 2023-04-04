@@ -330,7 +330,7 @@
     }
 
     // METIER : Insertion d'une nouvelle participation
-    // RETOUR : Aucun
+    // RETOUR : Date participation
     function insertParticipation($post, $sessionUser, $isMobile)
     {
         // Initialisations
@@ -435,6 +435,133 @@
             // Message d'alerte
             $_SESSION['alerts']['participation_added'] = true;
         }
+
+        // Retour
+        if ($control_ok == true)
+            return $date;
+        else
+            return '';
+    }
+
+    // METIER : Modification d'une participation
+    // RETOUR : Date participation
+    function updateParticipation($post, $sessionUser, $isMobile)
+    {
+        // Initialisations
+        $control_ok = true;
+
+        // Récupération des données
+        $identifiant     = $sessionUser['identifiant'];
+        $equipe          = $sessionUser['equipe'];
+        $idParcours      = $post['id_parcours'];
+        $idParticipation = $post['id_participation'];
+        $date            = $post['date_participation'];
+        $distance        = formatNumericForInsert($post['distance_participation']);
+        $heures          = $post['heures_participation'];
+        $minutes         = $post['minutes_participation'];
+        $secondes        = $post['secondes_participation'];
+        $vitesse         = formatNumericForInsert($post['vitesse_participation']);
+        $cardio          = formatNumericForInsert($post['cardio_participation']);
+        $competition     = $post['competition_participation'];
+
+        // Lecture des données de la participation
+        $ancienneParticipation = physiqueParticipation($idParticipation);
+
+        // Contrôle format date
+        if ($control_ok == true)
+            $control_ok = controleFormatDate($date, $isMobile);
+
+        // Formatage de la date pour insertion
+        if ($control_ok == true)
+        {
+            if ($isMobile == true)
+                $date = formatDateForInsertMobile($date);
+            else
+                $date = formatDateForInsert($date);
+        }
+
+        // Contrôle saisie déjà existante (seulement si la date a aété modifiée)
+        if ($control_ok == true)
+        {
+            if ($date != $ancienneParticipation->getDate())
+                $control_ok = controleParticipationExistante($identifiant, $equipe, $idParcours, $date);
+        }
+
+        // Contrôle temps valide
+        if ($control_ok == true)
+        {
+            if (!empty($heures) OR !empty($minutes) OR !empty($secondes))
+            {
+                // Contrôle temps valide
+                $control_ok = controleTempsValide($heures, $minutes, $secondes);
+
+                // Formatage du temps pour insertion
+                if ($control_ok == true)
+                    $temps = $heures * 60 * 60 + $minutes * 60 + $secondes;
+            }
+            else
+                $temps = '';
+        }
+
+        // Contrôle distance numérique
+        if ($control_ok == true)
+        {
+            if (!empty($distance))
+                $control_ok = controleDonneeNumerique($distance, 'wrong_distance');
+        }
+
+        // Contrôle vitesse numérique
+        if ($control_ok == true)
+        {
+            if (!empty($vitesse))
+                $control_ok = controleDonneeNumerique($vitesse, 'wrong_speed');
+        }
+
+        // Contrôle cardio numérique
+        if ($control_ok == true)
+        {
+            if (!empty($cardio))
+                $control_ok = controleDonneeNumerique($cardio, 'wrong_cardio');
+        }
+
+        // Modification de l'enregistrement en base
+        if ($control_ok == true)
+        {
+            $participation = array(
+                'date'        => $date,
+                'distance'    => $distance,
+                'time'        => $temps,
+                'speed'       => $vitesse,
+                'cardio'      => $cardio,
+                'competition' => $competition
+            );
+
+            physiqueUpdateParticipation($idParticipation, $participation);
+
+            // Génération succès
+            if (!empty($ancienneParticipation->getDistance()))
+                insertOrUpdateSuccesValue('marathon', $identifiant, -1 * $ancienneParticipation->getDistance());
+
+            if (!empty($distance))
+                insertOrUpdateSuccesValue('marathon', $identifiant, $distance);
+
+            if ($ancienneParticipation->getCompetition() != $competition)
+            {
+                if ($competition == 'Y')
+                    insertOrUpdateSuccesValue('competitor', $identifiant, 1);
+                else
+                    insertOrUpdateSuccesValue('competitor', $identifiant, -1);
+            }
+
+            // Message d'alerte
+            $_SESSION['alerts']['participation_updated'] = true;
+        }
+
+        // Retour
+        if ($control_ok == true)
+            return $date;
+        else
+            return $ancienneParticipation->getDate();
     }
 
     // METIER : Contrôle parcours existant
@@ -498,6 +625,7 @@
         // Initialisations
         $listeParcoursAConvertir = array();
 
+        // Conversion des objets en tableau pour envoyer au Javascript
         foreach ($listeParcours as $parcoursAConvertir)
         {
             $listeParcoursAConvertir[$parcoursAConvertir->getId()] = $parcoursAConvertir->getName();
@@ -524,5 +652,39 @@
 
         // Retour
         return $detailsAConvertir;
+    }
+
+    // METIER : Conversion de la liste d'objets des participations en tableau simple pour JSON
+    // RETOUR : Tableau des participations
+    function convertForJsonListeParticipations($listeParticipationsParDate)
+    {
+        // Initialisations
+        $listeParticipationsAConvertir = array();
+
+        // Conversion des objets en tableau pour envoyer au Javascript
+        foreach ($listeParticipationsParDate as $participationsParDate)
+        {
+            foreach ($participationsParDate as $participation)
+            {
+                $duree = formatSecondsForInput($participation->getTime());
+
+                $listeParticipationsAConvertir[$participation->getId()] = array(
+                    'date'        => $participation->getDate(),
+                    'distance'    => $participation->getDistance(),
+                    'heures'      => $duree['heures'],
+                    'minutes'     => $duree['minutes'],
+                    'secondes'    => $duree['secondes'],
+                    'vitesse'     => $participation->getSpeed(),
+                    'cardio'      => $participation->getCardio(),
+                    'competition' => $participation->getCompetition()
+                );
+            }
+        }
+
+        // Tri
+        ksort($listeParticipationsAConvertir);
+
+        // Retour
+        return $listeParticipationsAConvertir;
     }
 ?>

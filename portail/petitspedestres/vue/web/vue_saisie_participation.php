@@ -11,9 +11,12 @@
             echo '<a id="annulerParticipation" class="close_add"><img src="../../includes/icons/common/close.png" alt="close" title="Fermer" class="close_img" /></a>';
         
             // Saisie participation
-            echo '<form method="post" action="petitspedestres.php?action=doAjouterParticipation" class="form_saisie_participation">';
-                // Id parcours
+            echo '<form method="post" action="" class="form_saisie_participation">';
+                // Id parcours (ajout et modification)
                 echo '<input type="hidden" name="id_parcours" value="" />';
+
+                // Id participation (modification)
+                echo '<input type="hidden" name="id_participation" value="" />';
 
                 // Participation
                 echo '<div class="zone_saisie_lignes_participation">';

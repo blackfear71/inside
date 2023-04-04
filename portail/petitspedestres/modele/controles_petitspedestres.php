@@ -73,8 +73,8 @@
         $control_ok = true;
         
         // Contrôle
-        if ((!empty($heures)   AND (!is_numeric($heures)   OR $heures != floor($heures)     OR $heures   < 0))
-        OR  (!empty($minutes)  AND (!is_numeric($minutes)  OR $minutes != floor($minutes)   OR $minutes  < 0 OR $minutes  > 59))
+        if ((!empty($heures)   AND (!is_numeric($heures)   OR $heures   != floor($heures)   OR $heures   < 0))
+        OR  (!empty($minutes)  AND (!is_numeric($minutes)  OR $minutes  != floor($minutes)  OR $minutes  < 0 OR $minutes  > 59))
         OR  (!empty($secondes) AND (!is_numeric($secondes) OR $secondes != floor($secondes) OR $secondes < 0 OR $secondes > 59)))
         {
             $_SESSION['alerts']['wrong_time'] = true;

@@ -42,7 +42,7 @@
             $listeParcours = getListeParcours($_SESSION['user']['equipe']);
             break;
 
-        case 'doAjouter':
+        case 'doAjouterParcours':
             // Insertion d'un parcours
             $idParcours = insertParcours($_POST, $_FILES, $_SESSION['user']);
             break;
@@ -82,7 +82,7 @@
             $listeParcoursJson = json_encode(convertForJsonListeParcours($listeParcours));
             break;
 
-        case 'doAjouter':
+        case 'doAjouterParcours':
         case 'doAjouterParticipation':
         default:
             break;
@@ -91,7 +91,7 @@
     // Redirection affichage
     switch ($_GET['action'])
     {
-        case 'doAjouter':
+        case 'doAjouterParcours':
             header('location: details.php?id_parcours=' . $idParcours . '&action=goConsulter');
             break;
 

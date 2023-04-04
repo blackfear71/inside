@@ -1321,14 +1321,14 @@ function formatAmountForDisplay(amount, withCurrency)
     return amountFormatted;
 }
 
-// Formate une distance pour affichage
-function formatDistanceForDisplay(distance)
+// Formate un numérique pour affichage
+function formatNumericForDisplay(numeric)
 {
     // Formatage
-    var distanceFormatted = distance.replace('.', ',');
+    var numericFormatted = numeric.replace('.', ',');
 
     // Retour
-    return distanceFormatted;
+    return numericFormatted;
 }
 
 // Génère le chemin vers l'avatar

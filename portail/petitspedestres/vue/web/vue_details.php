@@ -64,7 +64,7 @@
                         echo '</a>';
 
                         // Suppression parcours
-                        echo '<form id="delete_parcours" method="post" action="details.php?action=doSupprimer" class="lien_categorie">';
+                        echo '<form id="delete_parcours" method="post" action="details.php?action=doSupprimerParcours" class="lien_categorie">';
                             echo '<input type="hidden" name="id_parcours" value="' . $detailsParcours->getId() . '" />';
                             echo '<input type="hidden" name="team_parcours" value="' . $detailsParcours->getTeam() . '" />';
 
@@ -116,8 +116,14 @@
 
         <!-- Données JSON -->
         <script>
+            // Page appelante
+            var pageAppelante = 'details';
+            
             // Récupération des détails du parcours pour le script
             var detailsParcours = <?php if (isset($detailsParcoursJson) AND !empty($detailsParcoursJson)) echo $detailsParcoursJson; else echo '{}'; ?>;
+            
+            // Récupération de la liste des participations pour le script
+            var listeParticipations = <?php if (isset($listeParticipationsJson) AND !empty($listeParticipationsJson)) echo $listeParticipationsJson; else echo '{}'; ?>;
         </script>
     </body>
 </html>

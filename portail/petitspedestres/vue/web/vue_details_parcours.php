@@ -79,10 +79,10 @@
             echo '</a>';
 
             // Participation
-            echo '<div class="zone_donnee_details_parcours">';
-                echo '<img src="../../includes/icons/petitspedestres/participate_grey.png" alt="participate_grey" title="Participer" class="icone_donnee_details_parcours" />';
+            echo '<a id="ajouter_participation_' . $detailsParcours->getId() . '" title="Participer à cette course" class="zone_donnee_details_parcours_lien ajouterParticipation">';
+                echo '<img src="../../includes/icons/petitspedestres/participate_grey.png" alt="participate_grey" class="icone_donnee_details_parcours" />';
                 echo '<div class="donnee_details_parcours">Participer à cette course</div>';
-            echo '</div>';
+            echo '</a>';
         echo '</div>';
     echo '</div>';
 ?>

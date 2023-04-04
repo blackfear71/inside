@@ -50,20 +50,53 @@
                     $listeUsersDetails = getUsersDetailsParcours($_GET['id_parcours'], $_SESSION['user']['equipe']);
 
                     // Récupération des participations au parcours
-                    $listeParticipantsParDate = getParticipantsParcours($_GET['id_parcours'], $listeUsersDetails);
+                    $listeParticipationsParDate = getParticipantsParcours($_GET['id_parcours'], $listeUsersDetails);
                 }
             }
             break;
 
-        case 'doModifier':
+        case 'doModifierParcours':
             // Modification d'un parcours
             $idParcours = updateParcours($_POST, $_FILES, $_SESSION['user']);
             break;
 
-        case 'doSupprimer':
+        case 'doSupprimerParcours':
             // Suppression d'un parcours
             deleteParcours($_POST, $_SESSION['user']['identifiant']);
             break;
+
+        case 'doAjouterParticipation':
+            // Insertion d'une participation
+            $dateParticipation = insertParticipation($_POST, $_SESSION['user'], false);
+            break;
+
+        case 'doModifierParticipation':
+            // Modification d'une participation
+            $dateParticipation = updateParticipation($_POST, $_SESSION['user'], false);
+            break;
+
+
+
+
+
+
+
+        case 'doSupprimerParticipation':
+            // Suppression d'une participation
+
+
+
+
+            break;
+
+
+
+
+
+
+
+
+            
 
         default:
             // Contrôle action renseignée URL
@@ -87,25 +120,29 @@
 
                 unset($user);
 
-                foreach ($listeParticipantsParDate as &$participantsParDate)
+                foreach ($listeParticipationsParDate as &$participationsParDate)
                 {
-                    foreach ($participantsParDate as &$participant)
+                    foreach ($participationsParDate as &$participation)
                     {
-                        $participant = ParticipationCourse::secureData($participant);
+                        $participation = ParticipationCourse::secureData($participation);
                     }
 
-                    unset($participant);
+                    unset($participation);
                 }
 
-                unset($participantsParDate);
+                unset($participationsParDate);
 
                 // Conversion JSON
-                $detailsParcoursJson = json_encode(convertForJsonDetailsParcours($detailsParcours));
+                $detailsParcoursJson     = json_encode(convertForJsonDetailsParcours($detailsParcours));
+                $listeParticipationsJson = json_encode(convertForJsonListeParticipations($listeParticipationsParDate));
             }
             break;
 
-        case 'doModifier':
-        case 'doSupprimer':
+        case 'doModifierParcours':
+        case 'doSupprimerParcours':
+        case 'doAjouterParticipation':
+        case 'doModifierParticipation':
+        case 'doSupprimerParticipation':
         default:
             break;
     }
@@ -113,12 +150,21 @@
     // Redirection affichage
     switch ($_GET['action'])
     {
-        case 'doModifier':
+        case 'doModifierParcours':
+        case 'doSupprimerParticipation':
             header('location: details.php?id_parcours=' . $idParcours . '&action=goConsulter');
             break;
 
-        case 'doSupprimer':
+        case 'doSupprimerParcours':
             header('location: petitspedestres.php?action=goConsulter');
+            break;
+
+        case 'doAjouterParticipation':
+        case 'doModifierParticipation':
+            if (!empty($dateParticipation))
+                header('location: details.php?id_parcours=' . $_GET['id_parcours'] . '&action=goConsulter&anchor=' . $dateParticipation);
+            else
+                header('location: details.php?id_parcours=' . $_GET['id_parcours'] . '&action=goConsulter');
             break;
 
         case 'goConsulter':

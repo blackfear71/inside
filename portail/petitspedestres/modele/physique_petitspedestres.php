@@ -150,7 +150,7 @@
     }
 
     // PHYSIQUE : Lecture d'un parcours
-    // RETOUR : Objet parcours
+    // RETOUR : Objet Parcours
     function physiqueParcours($idParcours)
     {
         // Requête
@@ -239,6 +239,28 @@
 
         // Retour
         return $listeParticipants;
+    }
+
+    // PHYSIQUE : Lecture d'une participation
+    // RETOUR : Objet ParticipationCourse
+    function physiqueParticipation($idParticipation)
+    {
+        // Requête
+        global $bdd;
+
+        $req = $bdd->query('SELECT *
+                            FROM petits_pedestres_users
+                            WHERE id = ' . $idParticipation);
+
+        $data = $req->fetch();
+
+        // Instanciation d'un objet Parcours à partir des données remontées de la bdd
+        $participation = ParticipationCourse::withData($data);
+
+        $req->closeCursor();
+
+        // Retour
+        return $participation;
     }
 
     /****************************************************************************/
@@ -360,7 +382,26 @@
         $req->closeCursor();
     }
 
+    // PHYSIQUE : Mise à jour participation
+    // RETOUR : Aucun
+    function physiqueUpdateParticipation($idParticipation, $participation)
+    {
+        // Requête
+        global $bdd;
 
+        $req = $bdd->prepare('UPDATE petits_pedestres_users
+                              SET date        = :date,
+                                  distance    = :distance,
+                                  time        = :time,
+                                  speed       = :speed,
+                                  cardio      = :cardio,
+                                  competition = :competition
+                              WHERE id = ' . $idParticipation);
+
+        $req->execute($participation);
+
+        $req->closeCursor();
+    }
 
 
 

@@ -166,29 +166,60 @@
         return $timeFormat;
     }
 
-    // DATE : Formate une durée pour affichage (secondes -> minutes / heures)
+    // DATE : Formate une durée pour affichage (secondes -> secondes / minutes / heures)
     // RETOUR : Durée formatée
     function formatSecondsForDisplay($time)
     {
         // Formatage de la durée
         if ($time < 3600)
         {
-            $minutes  = floor($time * 60 / 3600);
-            $secondes = floor((($time * 60 / 3600) - $minutes) * 60);
+            $minutes  = round($time * 60 / 3600);
+            $secondes = round((($time * 60 / 3600) - $minutes) * 60);
 
             $timeFormat = $minutes . ' min ' . $secondes . ' sec';
         }
         else
         {
-            $heures   = floor($time / 3600);
-            $minutes  = floor((($time / 3600) - $heures) * 60);
-            $secondes = floor((((($time / 3600) - $heures) * 60) - $minutes) * 3600 / 60);
+            $heures   = round($time / 3600);
+            $minutes  = round((($time / 3600) - $heures) * 60);
+            $secondes = round((((($time / 3600) - $heures) * 60) - $minutes) * 3600 / 60);
 
             $timeFormat = $heures . ' h ' . $minutes . ' min ' . $secondes . ' sec';
         }
 
         // Retour
         return $timeFormat;
+    }
+
+    // DATE : Formate une durée pour saisie (secondes -> secondes / minutes / heures)
+    // RETOUR : Durée
+    function formatSecondsForInput($time)
+    {
+        if (!empty($time))
+        {
+            // Formatage de la durée
+            $heures   = round($time / 3600);
+            $minutes  = round((($time / 3600) - $heures) * 60);
+            $secondes = round((((($time / 3600) - $heures) * 60) - $minutes) * 3600 / 60);
+
+            // Construction du tableau
+            $duree = array(
+                'heures'   => !empty($heures)   ? $heures   : '',
+                'minutes'  => !empty($minutes)  ? $minutes  : '',
+                'secondes' => !empty($secondes) ? $secondes : ''
+            );
+        }
+        else
+        {
+            $duree = array(
+                'heures'   => '',
+                'minutes'  => '',
+                'secondes' => ''
+            );
+        }
+
+        // Retour
+        return $duree;
     }
 
     // DATE : Formate une semaine pour affichage (suppression zéro initial)

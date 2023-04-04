@@ -106,6 +106,9 @@
 
         <!-- Données JSON -->
         <script>
+            // Page appelante
+            var pageAppelante = 'petitspedestres';
+            
             // Récupération de la liste des parcours pour le script
             var listeParcours = <?php if (isset($listeParcoursJson) AND !empty($listeParcoursJson)) echo $listeParcoursJson; else echo '{}'; ?>;
         </script>

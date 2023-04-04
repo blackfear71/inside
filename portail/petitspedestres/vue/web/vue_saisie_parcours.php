@@ -11,7 +11,7 @@
             echo '<a id="annulerParcours" class="close_add"><img src="../../includes/icons/common/close.png" alt="close" title="Fermer" class="close_img" /></a>';
 
             // Saisie parcours
-            echo '<form method="post" action="petitspedestres.php?action=doAjouter" enctype="multipart/form-data" class="form_saisie_parcours">';
+            echo '<form method="post" action="petitspedestres.php?action=doAjouterParcours" enctype="multipart/form-data" class="form_saisie_parcours">';
                 // Id parcours (modification)
                 echo '<input type="hidden" name="id_parcours" value="" />';
 
