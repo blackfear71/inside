@@ -351,6 +351,7 @@
         private $identifiant;
         private $pseudo;
         private $avatar;
+        private $team;
         private $date;
         private $distance;
         private $time;
@@ -367,6 +368,7 @@
             $this->identifiant  = '';
             $this->pseudo       = '';
             $this->avatar       = '';
+            $this->team         = '';
             $this->date         = '';
             $this->distance     = '';
             $this->time         = '';
@@ -395,6 +397,9 @@
 
             if (isset($data['identifiant']))
                 $this->identifiant = $data['identifiant'];
+
+            if (isset($data['team']))
+                $this->team        = $data['team'];
 
             if (isset($data['date']))
                 $this->date        = $data['date'];
@@ -432,6 +437,7 @@
             $this->identifiant  = htmlspecialchars($data->getIdentifiant());
             $this->pseudo       = htmlspecialchars($data->getPseudo());
             $this->avatar       = htmlspecialchars($data->getAvatar());
+            $this->team         = $data->getTeam();
             $this->date         = htmlspecialchars($data->getDate());
             $this->distance     = htmlspecialchars($data->getDistance());
             $this->time         = htmlspecialchars($data->getTime());
@@ -505,6 +511,17 @@
         public function getAvatar()
         {
             return $this->avatar;
+        }
+        
+        // Equipe
+        public function setTeam($team)
+        {
+            $this->team = $team;
+        }
+
+        public function getTeam()
+        {
+            return $this->team;
         }
         
         // Date

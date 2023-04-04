@@ -19,10 +19,16 @@
                     echo '<div class="date_derniere_course">' . formatDateForDisplay($course->getDate()) . '</div>';
 
                     // Distance
-                    echo '<div class="distance_derniere_course">' . formatDistanceForDisplay($course->getDistance()) . '</div>';
+                    if (!empty($course->getDistance()))
+                        echo '<div class="distance_derniere_course">' . formatDistanceForDisplay($course->getDistance()) . '</div>';
+                    else
+                        echo '<div class="distance_derniere_course">N/A</div>';
 
                     // Temps
-                    echo '<div class="temps_derniere_course">' . formatSecondsForDIsplay($course->getTime()) . '</div>';
+                    if (!empty($course->getTime()))
+                        echo '<div class="temps_derniere_course">' . formatSecondsForDisplay($course->getTime()) . '</div>';
+                    else
+                        echo '<div class="temps_derniere_course">N/A</div>';
 
                     // Compétition
                     if ($course->getCompetition() == 'Y')

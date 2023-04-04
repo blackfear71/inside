@@ -66,25 +66,41 @@
                                     // Distance
                                     echo '<div class="zone_donnee_participant">';
                                         echo '<img src="../../includes/icons/petitspedestres/path_grey.png" alt="path_grey" title="Distance" class="icone_donnee_participant" />';
-                                        echo '<div class="donnee_participant">' . formatDistanceForDisplay($participant->getDistance()) . '</div>';   
+
+                                        if (!empty($participant->getDistance()))
+                                            echo '<div class="donnee_participant">' . formatDistanceForDisplay($participant->getDistance()) . '</div>';
+                                        else
+                                            echo '<div class="donnee_participant">N/A</div>';
                                     echo '</div>';
 
                                     // Temps
                                     echo '<div class="zone_donnee_participant">';
                                         echo '<img src="../../includes/icons/petitspedestres/time_grey.png" alt="time_grey" title="Temps" class="icone_donnee_participant" />';
-                                        echo '<div class="donnee_participant">' . formatSecondsForDisplay($participant->getTime()) . '</div>';   
+
+                                        if (!empty($participant->getTime()))
+                                            echo '<div class="donnee_participant">' . formatSecondsForDisplay($participant->getTime()) . '</div>';
+                                        else
+                                            echo '<div class="donnee_participant">N/A</div>';
                                     echo '</div>';
 
                                     // Vitesse
                                     echo '<div class="zone_donnee_participant">';
                                         echo '<img src="../../includes/icons/petitspedestres/speed_grey.png" alt="speed_grey" title="Vitesse" class="icone_donnee_participant" />';
-                                        echo '<div class="donnee_participant">' . formatSpeedForDisplay($participant->getSpeed()) . '</div>';   
+
+                                        if (!empty($participant->getSpeed()))
+                                            echo '<div class="donnee_participant">' . formatSpeedForDisplay($participant->getSpeed()) . '</div>';
+                                        else
+                                            echo '<div class="donnee_participant">N/A</div>';
                                     echo '</div>';
 
                                     // Cardio
                                     echo '<div class="zone_donnee_participant">';
                                         echo '<img src="../../includes/icons/petitspedestres/cardio_grey.png" alt="cardio_grey" title="Cardio" class="icone_donnee_participant" />';
-                                        echo '<div class="donnee_participant">' . formatCardioForDisplay($participant->getCardio()) . '</div>';   
+
+                                        if (!empty($participant->getCardio()))
+                                            echo '<div class="donnee_participant">' . formatCardioForDisplay($participant->getCardio()) . '</div>';
+                                        else
+                                            echo '<div class="donnee_participant">N/A</div>';
                                     echo '</div>';
 
                                     // Compétition
@@ -92,12 +108,12 @@
                                         if ($participant->getCompetition() == 'Y')
                                         {
                                             echo '<img src="../../includes/icons/petitspedestres/cup_grey.png" alt="cup_grey" title="Compétition" class="icone_donnee_participant" />';
-                                            echo '<div class="donnee_participant">Compétition</div>';   
+                                            echo '<div class="donnee_participant">Compétition</div>';
                                         }
                                         else
                                         {
                                             echo '<img src="../../includes/icons/petitspedestres/cup_white.png" alt="cup_white" title="Classique" class="icone_donnee_participant" />';
-                                            echo '<div class="donnee_participant">Classique</div>';   
+                                            echo '<div class="donnee_participant">Classique</div>';
                                         }
                                         
                                     echo '</div>';

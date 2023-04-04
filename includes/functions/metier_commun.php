@@ -993,6 +993,8 @@
             case 'cooker':
             case 'recipe-master':
             case 'explorer':
+            case 'runner':
+            case 'competitor':
                 // Récupération de l'ancienne valeur du succès de l'utilisateur
                 $ancienneValeur = physiqueAncienneValeurSucces($reference, $identifiant);
 
@@ -1037,6 +1039,7 @@
 
             // Incrémentation de la valeur précédente avec la valeur en entrée (cas incoming > 1)
             case 'eater':
+            case 'marathon':
                 // Récupération de l'ancienne valeur du succès de l'utilisateur
                 $ancienneValeur = physiqueAncienneValeurSucces($reference, $identifiant);
 
@@ -1201,6 +1204,7 @@
             case 'add_collector':
             case 'add_bug':
             case 'add_recipe':
+            case 'add_participation':
                 $experience = 15;
                 break;
 

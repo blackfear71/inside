@@ -357,20 +357,12 @@
 
                         // Cinéphile amateur
                         case 'publisher':
-                            $listeConditions = array(
-                                array(
+                            $listeConditions = array(array(
                                     'operator' => '',
                                     'column'   => 'identifiant_add',
                                     'test'     => '=',
                                     'value'    => $user->getIdentifiant()
-                                ),
-                                array(
-                                    'operator' => 'AND',
-                                    'column'   => 'to_delete',
-                                    'test'     => '!=',
-                                    'value'    => 'Y'
-                                )
-                            );
+                            ));
 
                             $value = physiqueCountSuccess('movie_house', $listeConditions);
                             break;
@@ -662,22 +654,51 @@
 
                         // Explorateur
                         case 'explorer':
+                            $listeConditions = array(array(
+                                    'operator' => '',
+                                    'column'   => 'identifiant_add',
+                                    'test'     => '=',
+                                    'value'    => $user->getIdentifiant()
+                            ));
+
+                            $value = physiqueCountSuccess('petits_pedestres_parcours', $listeConditions);
+                            break;
+
+                        // Bien dans mes baskets !
+                        case 'runner':
+                            $listeConditions = array(array(
+                                'operator' => '',
+                                'column'   => 'identifiant',
+                                'test'     => '=',
+                                'value'    => $user->getIdentifiant()
+                            ));
+
+                            $value = physiqueCountSuccess('petits_pedestres_users', $listeConditions);
+                            break;
+
+                        // Marathonien confirmé
+                        case 'marathon':
+                            $value = physiqueMarathonSuccess($user->getIdentifiant());
+                            break;
+
+                        // On n'est pas ici pour perdre
+                        case 'competitor':
                             $listeConditions = array(
                                 array(
                                     'operator' => '',
-                                    'column'   => 'identifiant_add',
+                                    'column'   => 'identifiant',
                                     'test'     => '=',
                                     'value'    => $user->getIdentifiant()
                                 ),
                                 array(
                                     'operator' => 'AND',
-                                    'column'   => 'to_delete',
-                                    'test'     => '!=',
+                                    'column'   => 'competition',
+                                    'test'     => '=',
                                     'value'    => 'Y'
                                 )
                             );
 
-                            $value = physiqueCountSuccess('petits_pedestres_parcours', $listeConditions);
+                            $value = physiqueCountSuccess('petits_pedestres_users', $listeConditions);
                             break;
 
                         // Niveaux

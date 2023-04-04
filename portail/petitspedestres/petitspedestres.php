@@ -47,6 +47,11 @@
             $idParcours = insertParcours($_POST, $_FILES, $_SESSION['user']);
             break;
 
+        case 'doAjouterParticipation':
+            // Insertion d'une participation
+            insertParticipation($_POST, $_SESSION['user'], false);
+            break;
+
         default:
             // Contrôle action renseignée URL
             header('location: petitspedestres.php?action=goConsulter');
@@ -78,6 +83,7 @@
             break;
 
         case 'doAjouter':
+        case 'doAjouterParticipation':
         default:
             break;
     }
@@ -87,6 +93,10 @@
     {
         case 'doAjouter':
             header('location: details.php?id_parcours=' . $idParcours . '&action=goConsulter');
+            break;
+
+        case 'doAjouterParticipation':
+            header('location: petitspedestres.php?action=goConsulter');
             break;
 
         case 'goConsulter':

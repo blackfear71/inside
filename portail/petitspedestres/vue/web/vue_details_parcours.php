@@ -39,13 +39,13 @@
             // Distance
             echo '<div class="zone_donnee_details_parcours">';
                 echo '<img src="../../includes/icons/petitspedestres/path_grey.png" alt="path_grey" title="Distance" class="icone_donnee_details_parcours" />';
-                echo '<div class="donnee_details_parcours">' . formatDistanceForDisplay($detailsParcours->getDistance()) . '</div>';   
+                echo '<div class="donnee_details_parcours">' . formatDistanceForDisplay($detailsParcours->getDistance()) . '</div>'; 
             echo '</div>';
             
             // Lieu
             echo '<div class="zone_donnee_details_parcours">';
                 echo '<img src="../../includes/icons/petitspedestres/location_grey.png" alt="location_grey" title="Lieu" class="icone_donnee_details_parcours" />';
-                echo '<div class="donnee_details_parcours">' . $detailsParcours->getLocation() . '</div>';   
+                echo '<div class="donnee_details_parcours">' . $detailsParcours->getLocation() . '</div>';
             echo '</div>';
             
             // Nombre de courses réalisées
@@ -53,9 +53,9 @@
                 echo '<img src="../../includes/icons/petitspedestres/runs_grey.png" alt="runs_grey" title="Nombre de courses réalisées" class="icone_donnee_details_parcours" />';
 
                 if ($detailsParcours->getRuns() == 1)
-                    echo '<div class="donnee_details_parcours">' . $detailsParcours->getRuns() . ' course réalisée</div>';   
+                    echo '<div class="donnee_details_parcours">' . $detailsParcours->getRuns() . ' course réalisée</div>';
                 else
-                    echo '<div class="donnee_details_parcours">' . $detailsParcours->getRuns() . ' courses réalisées</div>';   
+                    echo '<div class="donnee_details_parcours">' . $detailsParcours->getRuns() . ' courses réalisées</div>';
             echo '</div>';
             
             // Téléchargement
@@ -75,13 +75,13 @@
 
             echo '<a href="' . $path . '" class="zone_donnee_details_parcours" download>';
                 echo '<img src="../../includes/icons/petitspedestres/download_grey.png" alt="download_grey" title="Télécharger la fiche" class="icone_donnee_details_parcours" />';
-                echo '<div class="donnee_details_parcours">Télécharger la fiche du parcours</div>';   
+                echo '<div class="donnee_details_parcours">Télécharger la fiche du parcours</div>';
             echo '</a>';
 
             // Participation
             echo '<div class="zone_donnee_details_parcours">';
                 echo '<img src="../../includes/icons/petitspedestres/participate_grey.png" alt="participate_grey" title="Participer" class="icone_donnee_details_parcours" />';
-                echo '<div class="donnee_details_parcours">Participer à cette course</div>';   
+                echo '<div class="donnee_details_parcours">Participer à cette course</div>';
             echo '</div>';
         echo '</div>';
     echo '</div>';

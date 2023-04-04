@@ -164,13 +164,13 @@
 
     // REGEX : Formatage distance pour insertion
     // RETOUR : Distance formatée
-    function formatDistanceForInsert($distance)
+    function formatNumericForInsert($numeric)
     {
         // Formatage
-        $distanceFormat = str_replace(',', '.', $distance);
+        $numericFormat = str_replace(',', '.', $numeric);
 
         // Retour
-        return $distanceFormat;
+        return $numericFormat;
     }
 
     // REGEX : Formatage distance pour affichage

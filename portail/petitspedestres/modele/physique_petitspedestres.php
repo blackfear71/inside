@@ -99,6 +99,31 @@
         return $listeParcours;
     }
 
+    // PHYSIQUE : Lecture participation existante
+    // RETOUR : Booléen
+    function physiqueParticipationExistante($identifiant, $equipe, $idParcours, $date)
+    {
+        // Initialisations
+        $participationExistante = false;
+
+        // Requête
+        global $bdd;
+
+        $req = $bdd->query('SELECT COUNT(*) AS nombreLignes
+                            FROM petits_pedestres_users
+                            WHERE id_parcours = ' . $idParcours . ' AND date = "' . $date . '" AND identifiant = "' . $identifiant . '" AND team = "' . $equipe . '"');
+
+        $data = $req->fetch();
+
+        if ($data['nombreLignes'] > 0)
+            $participationExistante = true;
+
+        $req->closeCursor();
+
+        // Retour
+        return $participationExistante;
+    }
+
     // PHYSIQUE : Lecture parcours disponible
     // RETOUR : Booléen
     function physiqueParcoursDisponible($idParcours, $equipe)
@@ -220,7 +245,7 @@
     /********************************** INSERT **********************************/
     /****************************************************************************/
     // PHYSIQUE : Insertion nouveau parcours
-    // RETOUR : Aucun
+    // RETOUR : Id parcours
     function physiqueInsertionParcours($parcours)
     {
         // Initialisations
@@ -258,6 +283,37 @@
 
         // Retour
         return $newId;
+    }
+
+    // PHYSIQUE : Insertion nouvelle participation
+    // RETOUR : Aucun
+    function physiqueInsertionParticipation($participation)
+    {
+        // Requête
+        global $bdd;
+
+        $req = $bdd->prepare('INSERT INTO petits_pedestres_users(id_parcours,
+                                                                 identifiant,
+                                                                 team,
+                                                                 date,
+                                                                 distance,
+                                                                 time,
+                                                                 speed,
+                                                                 cardio,
+                                                                 competition)
+                                                         VALUES(:id_parcours,
+                                                                :identifiant,
+                                                                :team,
+                                                                :date,
+                                                                :distance,
+                                                                :time,
+                                                                :speed,
+                                                                :cardio,
+                                                                :competition)');
+
+        $req->execute($participation);
+
+        $req->closeCursor();
     }
 
     /****************************************************************************/

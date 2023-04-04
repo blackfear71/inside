@@ -403,6 +403,7 @@
         // Insertion notification
         if ($notificationCommentsExist != true)
             insertNotification('comments', $equipe, $idFilm, $identifiant);
+            
         // Génération succès
         insertOrUpdateSuccesValue('commentator', $identifiant, 1);
 

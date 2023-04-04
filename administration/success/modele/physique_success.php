@@ -397,6 +397,32 @@
         return $value;
     }
 
+    // PHYSIQUE : Récupération du succès "marathon"
+    // RETOUR : Valeur du succès
+    function physiqueMarathonSuccess($identifiant)
+    {
+        // Initialisations
+        $value = 0;
+
+        // Requête
+        global $bdd;
+
+        $req = $bdd->query('SELECT *
+                            FROM petits_pedestres_users
+                            WHERE identifiant = "' . $identifiant . '"');
+
+        while ($data = $req->fetch())
+        {
+            if (!empty($data['distance']))
+                $value += $data['distance'];
+        }
+
+        $req->closeCursor();
+
+        // Retour
+        return $value;
+    }
+
     // PHYSIQUE : Récupération du bilan d'un utilisateur
     // RETOUR : Bilan des dépenses
     function physiqueBilanUser($identifiant)

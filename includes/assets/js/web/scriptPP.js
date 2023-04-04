@@ -44,7 +44,7 @@ $(function ()
     });
 
     // Bloque le bouton de soumission si besoin
-    $('#bouton_saisie_parcours').click(function ()
+    $('#bouton_saisie_parcours, #bouton_saisie_participation').click(function ()
     {
         var zoneButton   = $('.zone_bouton_saisie');
         var submitButton = $(this);
@@ -66,6 +66,23 @@ $(function ()
     {
         loadDocument(event, 'document_parcours');
     });
+
+    /*** Calendriers ***/
+    if ($('#datepicker_parcours').length)
+    {
+        $('#datepicker_parcours').datepicker(
+        {
+            autoHide: true,
+            language: 'fr-FR',
+            format: 'dd/mm/yyyy',
+            weekStart: 1,
+            days: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+            daysShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
+            daysMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+            months: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+            monthsShort: ['Janv.', 'Févr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.']
+        });
+    }
 });
 
 /*****************/
@@ -107,49 +124,24 @@ function initialisationModification(zone)
 // Initialisation saisie participation
 function initialisationParticipation(zone, idParcours)
 {
-
-    
-    
-    
-    
-    console.log(idParcours);
-    console.log(listeParcours);
-    
-
-
-
-
-
     var titre  = 'Ajouter une participation au parcours "' + listeParcours[idParcours] + '"';
-    var bouton = 'Ajouter une participation';
+    var bouton = 'Ajouter la participation';
     var action = 'petitspedestres.php?action=doAjouterParticipation';
 
     // Modification des données
     $('#' + zone).find('.titre_saisie_participation').html(titre);
+    $('#' + zone).find('.form_saisie_participation').attr('action', action);
+
     $('#' + zone).find('input[name=id_parcours]').val(idParcours);
     $('#' + zone).find('input[name=date_participation]').val('');
-
-
-
-
-    // TODO : initialiser le radio bouton à N
-    $('#' + zone).find('input[name=competition_participation]').val('N');
-
-
-
-
+    $('#' + zone).find('input[name=competition_participation]').first().prop('checked', true);
     $('#' + zone).find('input[name=distance_participation]').val('');
     $('#' + zone).find('input[name=vitesse_participation]').val('');
-
-
-
-    // TODO : séparer le temps en 3 champs de saisie
-    $('#' + zone).find('input[name=temps_participation]').val('');
-
-
-
-
+    $('#' + zone).find('input[name=heures_participation]').val('');
+    $('#' + zone).find('input[name=minutes_participation]').val('');
+    $('#' + zone).find('input[name=secondes_participation]').val('');
     $('#' + zone).find('input[name=cardio_participation]').val('');
+    $('#' + zone).find('#bouton_saisie_participation').val(bouton);
 
     // Affichage zone de saisie
     afficherMasquerIdWithDelay(zone);

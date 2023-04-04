@@ -41,7 +41,7 @@
                     // Distance
                     echo '<div class="zone_saisie_ligne">';
                         echo '<img src="../../includes/icons/petitspedestres/path_grey.png" alt="path_grey" title="Distance" class="icone_saisie" />';
-                        echo '<input type="text" name="distance_parcours" value="' . $_SESSION['save']['distance_parcours_saisie'] . '" placeholder="Distance (km)" class="saisie_ligne" maxlength="5" required />';
+                        echo '<input type="text" name="distance_parcours" value="' . $_SESSION['save']['distance_parcours_saisie'] . '" placeholder="Distance (km)" class="saisie_ligne" maxlength="6" required />';
                     echo '</div>';
 
                     // Lieu

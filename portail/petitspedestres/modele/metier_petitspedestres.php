@@ -73,7 +73,7 @@
         $identifiantAdd   = $sessionUser['identifiant'];
         $identifiantDel   = '';
         $nomParcours      = $post['nom_parcours'];
-        $distanceParcours = formatDistanceForInsert($post['distance_parcours']);
+        $distanceParcours = formatNumericForInsert($post['distance_parcours']);
         $lieuParcours     = $post['lieu_parcours'];
 
         // Sauvegarde en session en cas d'erreur
@@ -82,7 +82,7 @@
         $_SESSION['save']['lieu_parcours_saisie']     = $post['lieu_parcours'];
 
         // Contrôle distance numérique
-        $control_ok = controleDistanceNumerique($distanceParcours);
+        $control_ok = controleDonneeNumerique($distanceParcours, 'wrong_distance');
 
         // Insertion document
         if ($control_ok == true)
@@ -155,14 +155,14 @@
         $identifiant      = $sessionUser['identifiant'];
         $equipe           = $sessionUser['equipe'];
         $nomParcours      = $post['nom_parcours'];
-        $distanceParcours = formatDistanceForInsert($post['distance_parcours']);
+        $distanceParcours = formatNumericForInsert($post['distance_parcours']);
         $lieuParcours     = $post['lieu_parcours'];
 
         // Lecture des données du parcours
         $ancienParcours = physiqueParcours($idParcours);
 
         // Contrôle distance numérique
-        $control_ok = controleDistanceNumerique($distanceParcours);
+        $control_ok = controleDonneeNumerique($distanceParcours, 'wrong_distance');
 
         // Insertion nouveau document et suppression ancien
         if ($control_ok == true)
@@ -327,6 +327,114 @@
 
         // Message d'alerte
         $_SESSION['alerts']['parcours_removed'] = true;
+    }
+
+    // METIER : Insertion d'une nouvelle participation
+    // RETOUR : Aucun
+    function insertParticipation($post, $sessionUser, $isMobile)
+    {
+        // Initialisations
+        $control_ok = true;
+
+        // Récupération des données
+        $identifiant = $sessionUser['identifiant'];
+        $equipe      = $sessionUser['equipe'];
+        $idParcours  = $post['id_parcours'];
+        $date        = $post['date_participation'];
+        $distance    = formatNumericForInsert($post['distance_participation']);
+        $heures      = $post['heures_participation'];
+        $minutes     = $post['minutes_participation'];
+        $secondes    = $post['secondes_participation'];
+        $vitesse     = formatNumericForInsert($post['vitesse_participation']);
+        $cardio      = formatNumericForInsert($post['cardio_participation']);
+        $competition = $post['competition_participation'];
+
+        // Contrôle format date
+        if ($control_ok == true)
+            $control_ok = controleFormatDate($date, $isMobile);
+
+        // Formatage de la date pour insertion
+        if ($control_ok == true)
+        {
+            if ($isMobile == true)
+                $date = formatDateForInsertMobile($date);
+            else
+                $date = formatDateForInsert($date);
+        }
+
+        // Contrôle saisie déjà existante
+        if ($control_ok == true)
+            $control_ok = controleParticipationExistante($identifiant, $equipe, $idParcours, $date);
+
+        // Contrôle temps valide
+        if ($control_ok == true)
+        {
+            if (!empty($heures) OR !empty($minutes) OR !empty($secondes))
+            {
+                // Contrôle temps valide
+                $control_ok = controleTempsValide($heures, $minutes, $secondes);
+
+                // Formatage du temps pour insertion
+                if ($control_ok == true)
+                    $temps = $heures * 60 * 60 + $minutes * 60 + $secondes;
+            }
+            else
+                $temps = '';
+        }
+
+        // Contrôle distance numérique
+        if ($control_ok == true)
+        {
+            if (!empty($distance))
+                $control_ok = controleDonneeNumerique($distance, 'wrong_distance');
+        }
+
+        // Contrôle vitesse numérique
+        if ($control_ok == true)
+        {
+            if (!empty($vitesse))
+                $control_ok = controleDonneeNumerique($vitesse, 'wrong_speed');
+        }
+
+        // Contrôle cardio numérique
+        if ($control_ok == true)
+        {
+            if (!empty($cardio))
+                $control_ok = controleDonneeNumerique($cardio, 'wrong_cardio');
+        }
+
+        // Insertion de l'enregistrement en base
+        if ($control_ok == true)
+        {
+            $participation = array(
+                'id_parcours' => $idParcours,
+                'identifiant' => $identifiant,
+                'team'        => $equipe,
+                'date'        => $date,
+                'distance'    => $distance,
+                'time'        => $temps,
+                'speed'       => $vitesse,
+                'cardio'      => $cardio,
+                'competition' => $competition
+            );
+
+            physiqueInsertionParticipation($participation);
+
+            // Génération succès
+            insertOrUpdateSuccesValue('runner', $identifiant, 1);
+
+            if (!empty($distance))
+                insertOrUpdateSuccesValue('marathon', $identifiant, $distance);
+
+            if ($competition == 'Y')
+                insertOrUpdateSuccesValue('competitor', $identifiant, 1);
+
+            // Ajout expérience
+            insertExperience($identifiant, 'add_participation');
+
+            // Message d'alerte
+            $_SESSION['alerts']['participation_added'] = true;
+        }
     }
 
     // METIER : Contrôle parcours existant
