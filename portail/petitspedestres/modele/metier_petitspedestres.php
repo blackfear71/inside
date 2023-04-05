@@ -25,9 +25,53 @@
     // RETOUR : Tableau de bord
     function getTableauDeBord($identifiant)
     {
+        // Initialisations
+        $tableauDeBord  = new TableauDeBord();
+        $nombreDistance = 0;
+        $nombreTemps    = 0;
+        $nombreVitesse  = 0;
+        $nombreCardio   = 0;
+        $sommeDistance  = 0;
+        $sommeTemps     = 0;
+        $sommeVitesse   = 0;
+        $sommeCardio    = 0;
+
         // Lecture des statistiques de l'utilisateur
-        $tableauDeBord = physiqueTableauDeBord($identifiant);
+        $listeParticipations = physiqueTableauDeBord($identifiant);
         
+        // Calcul des moyennes
+        foreach ($listeParticipations as $participation)
+        {
+            if (!empty($participation->getDistance()))
+            {
+                $nombreDistance++;
+                $sommeDistance += $participation->getDistance();
+            }
+
+            if (!empty($participation->getTime()))
+            {
+                $nombreTemps++;
+                $sommeTemps += $participation->getTime();
+            }
+
+            if (!empty($participation->getSpeed()))
+            {
+                $nombreVitesse++;
+                $sommeVitesse += $participation->getSpeed();
+            }
+
+            if (!empty($participation->getCardio()))
+            {
+                $nombreCardio++;
+                $sommeCardio += $participation->getCardio();
+            }
+        }
+
+        $tableauDeBord->setDistanceMoyenne($sommeDistance / $nombreDistance);
+        $tableauDeBord->setTempsMoyen($sommeTemps / $nombreTemps);
+        $tableauDeBord->setVitesseMoyenne($sommeVitesse / $nombreVitesse);
+        $tableauDeBord->setCardioMoyen($sommeCardio / $nombreCardio);
+
         // Retour
         return $tableauDeBord;
     }

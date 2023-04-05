@@ -4,35 +4,33 @@
     /****************************************************************************/
     /********************************** SELECT **********************************/
     /****************************************************************************/
-    // PHYSIQUE : Récupération tableau de bord
-    // RETOUR : Objet TableauDeBord
+    // PHYSIQUE : Récupération des participations d'un utilisateur
+    // RETOUR : Liste des participations
     function physiqueTableauDeBord($identifiant)
     {
         // Initialisations
-        $tableauDeBord = new TableauDeBord();
+        $listeParticipations = array();
 
         // Requête
         global $bdd;
 
-        $req = $bdd->query('SELECT COUNT(*) AS nombreLignes, SUM(distance) AS totalDistance, SUM(time) AS totalTemps, SUM(speed) AS totalVitesse, SUM(cardio) AS totalCardio
+        $req = $bdd->query('SELECT *
                             FROM petits_pedestres_users
                             WHERE identifiant = "' . $identifiant . '"');
 
-        $data = $req->fetch();
-
-        // Instanciation d'un objet TableauDeBord à partir des données remontées de la bdd
-        if ($data['nombreLignes'] > 0)
+        while ($data = $req->fetch())
         {
-            $tableauDeBord->setDistanceMoyenne($data['totalDistance'] / $data['nombreLignes']);
-            $tableauDeBord->setTempsMoyen($data['totalTemps'] / $data['nombreLignes']);
-            $tableauDeBord->setVitesseMoyenne($data['totalVitesse'] / $data['nombreLignes']);
-            $tableauDeBord->setCardioMoyen($data['totalCardio'] / $data['nombreLignes']);
+            // Instanciation d'un objet ParticipationCourse à partir des données remontées de la bdd
+            $participation = ParticipationCourse::withData($data);
+
+            // On ajoute la ligne au tableau
+            array_push($listeParticipations, $participation);
         }
 
         $req->closeCursor();
 
         // Retour
-        return $tableauDeBord;
+        return $listeParticipations;
     }
 
     // PHYSIQUE : Lecture dernières courses
