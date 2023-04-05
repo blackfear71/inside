@@ -403,36 +403,17 @@
         $req->closeCursor();
     }
 
-
-
-
-
-
-
-
-
-
-
-
     /****************************************************************************/
     /********************************** DELETE **********************************/
     /****************************************************************************/
-    // PHYSIQUE : Suppression
+    // PHYSIQUE : Suppression participation
     // RETOUR : Aucun
-    function physiqueDelete($id)
+    function physiqueDeleteParticipation($idParticipation)
     {
         // Requête
         global $bdd;
 
-        $req = $bdd->exec('DELETE FROM table
-                           WHERE id = ' . $id);
+        $req = $bdd->exec('DELETE FROM petits_pedestres_users
+                           WHERE id = ' . $idParticipation);
     }
-
-
-
-
-    
-
-
-    
 ?>

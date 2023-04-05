@@ -75,28 +75,10 @@
             $dateParticipation = updateParticipation($_POST, $_SESSION['user'], false);
             break;
 
-
-
-
-
-
-
         case 'doSupprimerParticipation':
             // Suppression d'une participation
-
-
-
-
+            $idParcours = deleteParticipation($_POST, $_SESSION['user']['identifiant']);
             break;
-
-
-
-
-
-
-
-
-            
 
         default:
             // Contrôle action renseignée URL

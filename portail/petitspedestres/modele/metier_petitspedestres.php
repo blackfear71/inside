@@ -564,6 +564,36 @@
             return $ancienneParticipation->getDate();
     }
 
+    // METIER : Suppression d'une participation
+    // RETOUR : Id parcours
+    function deleteParticipation($post, $identifiant)
+    {
+        // Récupération des données
+        $idParcours      = $post['id_parcours'];
+        $idParticipation = $post['id_participation'];
+
+        // Lecture des données de la participation
+        $participation = physiqueParticipation($idParticipation);
+
+        // Suppression de l'enregistrement en base
+        physiqueDeleteParticipation($idParticipation);
+
+        // Génération succès
+        insertOrUpdateSuccesValue('runner', $identifiant, -1);
+
+        if (!empty($participation->getDistance()))
+            insertOrUpdateSuccesValue('marathon', $identifiant, -1 * $participation->getDistance());
+
+        if ($participation->getCompetition() == 'Y')
+            insertOrUpdateSuccesValue('competitor', $identifiant, -1);
+
+        // Message d'alerte
+        $_SESSION['alerts']['participation_deleted'] = true;
+
+        // Retour
+        return $idParcours;
+    }
+
     // METIER : Contrôle parcours existant
     // RETOUR : Booléen
     function isParcoursDisponible($idParcours, $equipe)
