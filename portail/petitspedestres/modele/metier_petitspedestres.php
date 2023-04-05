@@ -346,7 +346,7 @@
         $minutes     = $post['minutes_participation'];
         $secondes    = $post['secondes_participation'];
         $vitesse     = formatNumericForInsert($post['vitesse_participation']);
-        $cardio      = formatNumericForInsert($post['cardio_participation']);
+        $cardio      = $post['cardio_participation'];
         $competition = $post['competition_participation'];
 
         // Contrôle format date
@@ -400,7 +400,7 @@
         if ($control_ok == true)
         {
             if (!empty($cardio))
-                $control_ok = controleDonneeNumerique($cardio, 'wrong_cardio');
+                $control_ok = controleDonneeEntiere($cardio, 'wrong_cardio');
         }
 
         // Insertion de l'enregistrement en base
@@ -461,7 +461,7 @@
         $minutes         = $post['minutes_participation'];
         $secondes        = $post['secondes_participation'];
         $vitesse         = formatNumericForInsert($post['vitesse_participation']);
-        $cardio          = formatNumericForInsert($post['cardio_participation']);
+        $cardio          = $post['cardio_participation'];
         $competition     = $post['competition_participation'];
 
         // Lecture des données de la participation
@@ -521,7 +521,7 @@
         if ($control_ok == true)
         {
             if (!empty($cardio))
-                $control_ok = controleDonneeNumerique($cardio, 'wrong_cardio');
+                $control_ok = controleDonneeEntiere($cardio, 'wrong_cardio');
         }
 
         // Modification de l'enregistrement en base

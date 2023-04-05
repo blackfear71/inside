@@ -17,6 +17,24 @@
         return $control_ok;
     }
 
+    // CONTROLE : Donnée entière et positive
+    // RETOUR : Booléen
+    function controleDonneeEntiere($donnee, $alerte)
+    {
+        // Initialisations
+        $control_ok = true;
+
+        // Contrôle
+        if (!is_numeric($donnee) OR $donnee != floor($donnee) OR $donnee <= 0)
+        {
+            $_SESSION['alerts'][$alerte] = true;
+            $control_ok                  = false;
+        }
+
+        // Retour
+        return $control_ok;
+    }
+
     // CONTROLE : Contenu renseigné
     // RETOUR : Booléen
     function controleContenuParcours($post, $document)
