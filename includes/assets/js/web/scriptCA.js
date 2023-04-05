@@ -92,9 +92,9 @@ $(window).resize(function ()
     adaptCalendars();
 });
 
-/***************/
-/*** Masonry ***/
-/***************/
+/************************/
+/*** Masonry & scroll ***/
+/************************/
 // Au chargement du document complet
 $(window).on('load', function ()
 {

@@ -26,9 +26,9 @@ $(window).resize(function ()
     initMasonry('0.4s');
 });
 
-/***************/
-/*** Masonry ***/
-/***************/
+/************************/
+/*** Masonry & scroll ***/
+/************************/
 // Au chargement du document complet
 $(window).on('load', function ()
 {

@@ -4,18 +4,6 @@
 // Au chargement du document
 $(function ()
 {
-    /*** Actions au chargement ***/
-    // Adaptation mobile
-    adaptExpenses();
-
-    // Déclenchement du scroll : on récupère l'id de l'ancre dans l'url (fonction JS)
-    var id     = $_GET('anchor');
-    var offset = 30;
-    var shadow = true;
-
-    // Scroll vers l'id
-    scrollToId(id, offset, shadow);
-
     /*** Actions au clic ***/
     // Ajouter une dépense
     $('#ajouterDepense').click(function ()
@@ -158,6 +146,21 @@ $(function ()
             monthsShort: ['Janv.', 'Févr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.']
         });
     }
+});
+
+// Au chargement du document complet
+$(window).on('load', function ()
+{
+    // Adaptation mobile
+    adaptExpenses();
+
+    // Déclenchement du scroll : on récupère l'id de l'ancre dans l'url (fonction JS)
+    var id     = $_GET('anchor');
+    var offset = 30;
+    var shadow = true;
+
+    // Scroll vers l'id
+    scrollToId(id, offset, shadow);
 });
 
 // Au redimensionnement de la fenêtre

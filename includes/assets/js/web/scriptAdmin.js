@@ -392,9 +392,9 @@ $(window).resize(function ()
     adaptGenerator();
 });
 
-/***************/
-/*** Masonry ***/
-/***************/
+/************************/
+/*** Masonry & scroll ***/
+/************************/
 // Au chargement du document complet (on lance Masonry et le scroll après avoir chargé les images)
 $(window).on('load', function ()
 {

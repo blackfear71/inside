@@ -149,9 +149,9 @@ $(window).resize(function ()
     tailleAutoRecette(0);
 });
 
-/***************/
-/*** Masonry ***/
-/***************/
+/************************/
+/*** Masonry & scroll ***/
+/************************/
 // Au chargement du document complet
 $(window).on('load', function ()
 {

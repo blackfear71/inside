@@ -96,6 +96,9 @@ $(function ()
 // Au chargement du document complet
 $(window).on('load', function ()
 {
+    // Adaptation mobile
+    adaptParcours();
+
     // Déclenchement du scroll : on récupère l'id de l'ancre dans l'url (fonction JS)
     var id     = $_GET('anchor');
     var offset = 70;
@@ -105,9 +108,71 @@ $(window).on('load', function ()
     scrollToId(id, offset, shadow);
 });
 
+// Au redimensionnement de la fenêtre
+$(window).resize(function ()
+{
+    // Adaptation mobile
+    adaptParcours();
+});
+
 /*****************/
 /*** Fonctions ***/
 /*****************/
+// Adaptations des parcours sur mobile
+function adaptParcours()
+{
+    if ($(window).width() < 1080)
+    {
+        // Liste des parcours
+        if ($('.zone_tableau_de_bord').length && $('.zone_dernieres_courses').length)
+        {
+            $('.zone_tableau_de_bord').css('display', 'block');
+            $('.zone_tableau_de_bord').css('width', '100%');
+    
+            $('.zone_dernieres_courses').css('display', 'block');
+            $('.zone_dernieres_courses').css('width', '100%');
+            $('.zone_dernieres_courses').css('margin-left', '0');
+        }
+
+        // Détails parcours
+        if ($('.zone_details_parcours_left').length && $('.zone_details_parcours_right').length)
+        {
+            $('.zone_details_parcours_left').css('display', 'block');
+            $('.zone_details_parcours_left').css('width', '100%');
+    
+            $('.zone_details_parcours_right').css('display', 'block');
+            $('.zone_details_parcours_right').css('width', '100%');
+            $('.zone_details_parcours_right').css('margin-left', '0');
+            $('.zone_details_parcours_right').css('margin-top', '20px');
+        }
+    }
+    else
+    {
+        // Liste des parcours
+        if ($('.zone_tableau_de_bord').length && $('.zone_dernieres_courses').length)
+        {
+            $('.zone_tableau_de_bord').css('display', 'inline-block');
+            $('.zone_tableau_de_bord').css('width', 'calc(40% - 10px)');
+    
+            $('.zone_dernieres_courses').css('display', 'inline-block');
+            $('.zone_dernieres_courses').css('width', 'calc(60% - 10px)');
+            $('.zone_dernieres_courses').css('margin-left', '20px');
+        }
+
+        // Détails parcours
+        if ($('.zone_details_parcours_left').length && $('.zone_details_parcours_right').length)
+        {
+            $('.zone_details_parcours_left').css('display', 'inline-block');
+            $('.zone_details_parcours_left').css('width', 'calc(60% - 10px)');
+    
+            $('.zone_details_parcours_right').css('display', 'inline-block');
+            $('.zone_details_parcours_right').css('width', 'calc(40% - 10px)');
+            $('.zone_details_parcours_right').css('margin-left', '20px');
+            $('.zone_details_parcours_right').css('margin-top', '0');
+        }
+    }
+}
+
 // Ferme la saisie d'un parcours
 function closeInput(id)
 {

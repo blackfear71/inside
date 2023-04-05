@@ -4,18 +4,6 @@
 // Au chargement du document
 $(function ()
 {
-    /*** Actions au chargement ***/
-    // Adaptation mobile
-    adaptBugs();
-
-    // Déclenchement du scroll : on récupère l'id de l'ancre dans l'url (fonction JS)
-    var id     = $_GET('anchor');
-    var offset = 70;
-    var shadow = true;
-
-    // Scroll vers l'id
-    scrollToId(id, offset, shadow);
-
     /*** Actions au clic ***/
     // Ajouter un rapport
     $('#ajouterRapport, #fermerRapport').click(function ()
@@ -64,6 +52,21 @@ $(function ()
     {
         loadFile(event, 'image_report', true);
     });
+});
+
+// Au chargement du document complet
+$(window).on('load', function ()
+{
+    // Adaptation mobile
+    adaptBugs();
+
+    // Déclenchement du scroll : on récupère l'id de l'ancre dans l'url (fonction JS)
+    var id     = $_GET('anchor');
+    var offset = 70;
+    var shadow = true;
+
+    // Scroll vers l'id
+    scrollToId(id, offset, shadow);
 });
 
 // Au redimensionnement de la fenêtre
