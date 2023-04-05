@@ -57,7 +57,6 @@
 {
     display: inline-block;
     vertical-align: top;
-    width: 100%;
     width: calc(60% - 10px);
     margin-left: 20px;
     margin-bottom: -10px;
@@ -170,7 +169,7 @@
     font-family: inside_font_light, Verdana, sans-serif;
     color: #262626;
     font-size: 100%;
-    text-align: center;
+    text-align: justify;
 }
 
 .lien_participer_parcours

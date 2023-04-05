@@ -69,21 +69,31 @@
                     /*********/
                     echo '<div class="titre_section_mobile">' . mb_strtoupper($titleHead) . '</div>';
 
-                    /*********/
-                    /* Liens */
-                    /*********/
-
                     /**********/
                     /* Saisie */
                     /**********/
+                    include('vue/mobile/vue_saisie_parcours.php');
 
                     /********************/
                     /* Boutons d'action */
                     /********************/
+                    // Saisie film
+                    echo '<a id="afficherSaisieParcours" title="Saisir un parcours" class="lien_red">';
+                        echo '<img src="../../includes/icons/petitspedestres/parcours_grey.png" alt="parcours_grey" class="image_lien" />';
+                        echo '<div class="titre_lien">AJOUTER UN PARCOURS</div>';
+                    echo '</a>';
 
                     /***********/
                     /* Contenu */
                     /***********/
+                    // Tableau de bord
+                    include('vue/mobile/vue_tableau_de_bord.php');
+
+                    // Dernières courses
+                    include('vue/mobile/vue_dernieres_courses.php');
+
+                    // Parcours
+                    include('vue/mobile/vue_liste_parcours.php');
                 ?>
             </article>
 
@@ -95,5 +105,14 @@
         <footer>
             <?php include('../../includes/common/mobile/footer_mobile.php'); ?>
         </footer>
+
+        <!-- Données JSON -->
+        <script>
+            // Page appelante
+            var pageAppelante = 'petitspedestres';
+            
+            // Récupération de la liste des parcours pour le script
+            var listeParcours = <?php if (isset($listeParcoursJson) AND !empty($listeParcoursJson)) echo $listeParcoursJson; else echo '{}'; ?>;
+        </script>
     </body>
 </html>

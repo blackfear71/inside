@@ -11,7 +11,7 @@
         {
             foreach ($dernieresCourses as $course)
             {
-                echo '<a href="details.php?id_parcours=' . $course->getId_parcours() . '&action=goConsulter" class="zone_derniere_course">';
+                echo '<a href="details.php?id_parcours=' . $course->getId_parcours() . '&action=goConsulter&anchor=' . $course->getDate() . '" class="zone_derniere_course">';
                     // Nom
                     echo '<div class="nom_derniere_course">' . $course->getNom_parcours() . '</div>';
 

@@ -173,15 +173,15 @@
         // Formatage de la durée
         if ($time < 3600)
         {
-            $minutes  = round($time * 60 / 3600);
+            $minutes  = floor($time * 60 / 3600);
             $secondes = round((($time * 60 / 3600) - $minutes) * 60);
 
             $timeFormat = $minutes . ' min ' . $secondes . ' sec';
         }
         else
         {
-            $heures   = round($time / 3600);
-            $minutes  = round((($time / 3600) - $heures) * 60);
+            $heures   = floor($time / 3600);
+            $minutes  = floor((($time / 3600) - $heures) * 60);
             $secondes = round((((($time / 3600) - $heures) * 60) - $minutes) * 3600 / 60);
 
             $timeFormat = $heures . ' h ' . $minutes . ' min ' . $secondes . ' sec';
