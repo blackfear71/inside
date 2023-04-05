@@ -128,6 +128,28 @@
         return $texteFormat;
     }
 
+    // REGEX : Formatage numérique pour affichage
+    // RETOUR : Numérique formaté
+    function formatNumericForDisplay($numeric)
+    {
+        // Formatage
+        $numericFormat = str_replace('.', ',', $numeric);
+
+        // Retour
+        return $numericFormat;
+    }
+
+    // REGEX : Formatage numérique pour insertion
+    // RETOUR : Numérique formaté
+    function formatNumericForInsert($numeric)
+    {
+        // Formatage
+        $numericFormat = str_replace(',', '.', $numeric);
+
+        // Retour
+        return $numericFormat;
+    }
+
     // REGEX : Formatage montant pour affichage
     // RETOUR : Montant formaté
     function formatAmountForDisplay($montant)
@@ -160,17 +182,6 @@
 
         // Retour
         return $montantFormat;
-    }
-
-    // REGEX : Formatage distance pour insertion
-    // RETOUR : Distance formatée
-    function formatNumericForInsert($numeric)
-    {
-        // Formatage
-        $numericFormat = str_replace(',', '.', $numeric);
-
-        // Retour
-        return $numericFormat;
     }
 
     // REGEX : Formatage distance pour affichage

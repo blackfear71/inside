@@ -18,7 +18,7 @@
                 // Suppression succès
                 echo '<form method="post" id="delete_success_' . $success->getId() . '" action="success.php?action=doSupprimer" class="form_suppression_succes">';
                     echo '<input type="hidden" name="id_success" value="' . $success->getId() . '" />';
-                    echo '<input type="submit" name="delete_success" value="" title="Supprimer le succès" class="bouton_delete eventConfirm" />';
+                    echo '<input type="submit" name="delete_success" value="" title="Supprimer le succès" class="bouton_suppression_succes eventConfirm" />';
                     echo '<input type="hidden" value="Supprimer le succès &quot;' . formatOnclick($success->getTitle()) . '&quot; ?" class="eventMessage" />';
                 echo '</form>';
 
@@ -40,7 +40,7 @@
                         if ($success->getUnicity() == 'Y')
                             echo '<div class="condition_succes">Unique</div>';
                         else
-                            echo '<div class="condition_succes">/ ' . $success->getLimit_success() . '</div>';
+                            echo '<div class="condition_succes">/ ' . formatNumericForDisplay($success->getLimit_success()) . '</div>';
                     echo '</div>';
 
                     // Logo succès
@@ -54,9 +54,9 @@
 
                     // Explications succès
                     if ($success->getDefined() == 'Y')
-                        echo '<div class="explications_succes">' . formatExplanation($success->getExplanation(), $success->getLimit_success(), '%limit%') . '</div>';
+                        echo '<div class="explications_succes">' . formatExplanation($success->getExplanation(), formatNumericForDisplay($success->getLimit_success()), '%limit%') . '</div>';
                     else
-                        echo '<div class="explications_succes_undefined">' . formatExplanation($success->getExplanation(), $success->getLimit_success(), '%limit%') . '</div>';
+                        echo '<div class="explications_succes_undefined">' . formatExplanation($success->getExplanation(), formatNumericForDisplay($success->getLimit_success()), '%limit%') . '</div>';
                 echo '</div>';
             echo '</div>';
 

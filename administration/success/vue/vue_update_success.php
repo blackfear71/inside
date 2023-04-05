@@ -121,7 +121,7 @@
 
                                     // Condition succès
                                     echo '<div class="titre_succes">Condition :</div>';
-                                    echo '<input type="text" value="' . $success->getLimit_success() . '" name="limit_success[' . $success->getId() . ']" maxlength="3" class="saisie_modification_succes" required />';
+                                    echo '<input type="text" value="' . formatNumericForDisplay($success->getLimit_success()) . '" name="limit_success[' . $success->getId() . ']" maxlength="10" class="saisie_modification_succes" required />';
 
                                     // Mission liée
                                     echo '<div class="titre_succes">Mission liée :</div>';

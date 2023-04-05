@@ -1241,7 +1241,7 @@
 .titre_explications
 {
     font-family: inside_font_medium, Verdana, sans-serif;
-    font-size: 110%;
+    font-size: 120%;
     text-align: justify;
     margin-top: 20px;
     margin-bottom: 10px;
@@ -1298,7 +1298,7 @@
     width: calc(100% - 195px);
     margin-left: 15px;
     font-family: inside_font_light, Verdana, sans-serif;
-    font-size: 120%;
+    font-size: 100%;
     color: #262626;
     text-align: justify;
     line-height: 30px;
@@ -1342,6 +1342,8 @@
     padding: 10px;
     border-radius: 2px;
     box-shadow: 0 0 3px #7c7c7c;
+    position: relative;
+    z-index: 1;
 }
 
 .succes_liste_undefined
@@ -1353,6 +1355,8 @@
     padding: 10px;
     border-radius: 2px;
     box-shadow: 0 0 3px #7c7c7c;
+    position: relative;
+    z-index: 1;
 }
 
 .ordonnancement_succes
@@ -1534,7 +1538,7 @@
     border-radius: 2px;
 }
 
-.bouton_delete
+.bouton_suppression_succes
 {
     border: 0;
     width: 20px;
@@ -1550,6 +1554,12 @@
     border-bottom-right-radius: 2px;
 }
 
+.bouton_suppression_succes:hover
+{
+    background-color: #ff1937;
+    background-image: url("/inside/includes/icons/common/delete.png");
+}
+
 .number_level
 {
     display: inline-block;
@@ -1561,12 +1571,6 @@
     text-align: center;
     margin-left: -25px;
     vertical-align: top;
-}
-
-.bouton_delete:hover
-{
-    background-color: #ff1937;
-    background-image: url("/inside/includes/icons/common/delete.png");
 }
 
 .avertissement_succes

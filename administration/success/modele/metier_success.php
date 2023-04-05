@@ -101,7 +101,7 @@
         $mission      = $post['mission'];
         $title        = $post['title'];
         $description  = $post['description'];
-        $limitSuccess = $post['limit_success'];
+        $limitSuccess = formatNumericForInsert($post['limit_success']);
         $explanation  = $post['explanation'];
 
         if (isset($post['unicity']))
@@ -110,15 +110,15 @@
             $unicity = 'N';
 
         // Sauvegarde en session en cas d'erreur
-        $_SESSION['save']['reference_success']   = $reference;
-        $_SESSION['save']['level']               = $level;
+        $_SESSION['save']['reference_success']   = $post['reference'];
+        $_SESSION['save']['level']               = $post['level'];
         $_SESSION['save']['unicity']             = $unicity;
-        $_SESSION['save']['mission']             = $mission;
-        $_SESSION['save']['order_success']       = $orderSuccess;
-        $_SESSION['save']['title_success']       = $title;
-        $_SESSION['save']['description_success'] = $description;
-        $_SESSION['save']['limit_success']       = $limitSuccess;
-        $_SESSION['save']['explanation_success'] = $explanation;
+        $_SESSION['save']['mission']             = $post['mission'];
+        $_SESSION['save']['order_success']       = $post['order_success'];
+        $_SESSION['save']['title_success']       = $post['title'];
+        $_SESSION['save']['description_success'] = $post['description'];
+        $_SESSION['save']['limit_success']       = $post['limit_success'];
+        $_SESSION['save']['explanation_success'] = $post['explanation'];
 
         // Contrôle référence unique
         $control_ok = controleReferenceUnique($reference);
@@ -225,7 +225,7 @@
                 'mission'       => $post['mission'][$id],
                 'title'         => $post['title'][$id],
                 'description'   => $post['description'][$id],
-                'limit_success' => $post['limit_success'][$id],
+                'limit_success' => formatNumericForInsert($post['limit_success'][$id]),
                 'explanation'   => $post['explanation'][$id],
             );
 

@@ -54,7 +54,7 @@
                         echo '<div class="description_succes_zoom">' . $ligneSuccesDebloque->getDescription() . '</div>';
 
                         // Explications du succès
-                        echo '<div class="explications_succes_zoom">' . formatExplanation($ligneSuccesDebloque->getExplanation(), $ligneSuccesDebloque->getLimit_success(), '%limit%') . '</div>';
+                        echo '<div class="explications_succes_zoom">' . formatExplanation($ligneSuccesDebloque->getExplanation(), formatNumericForDisplay($ligneSuccesDebloque->getLimit_success()), '%limit%') . '</div>';
                     echo '</div>';
                 }
 

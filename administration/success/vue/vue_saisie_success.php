@@ -33,7 +33,7 @@
             echo '<input type="text" name="order_success" placeholder="Ordonnancement" value="' . $_SESSION['save']['order_success'] . '" maxlength="3" class="saisie_succes_ordonnancement" required />';
 
             // Condition
-            echo '<input type="text" name="limit_success" placeholder="Condition" value="' . $_SESSION['save']['limit_success'] . '" maxlength="3" class="saisie_succes_condition" required />';
+            echo '<input type="text" name="limit_success" placeholder="Condition" value="' . $_SESSION['save']['limit_success'] . '" maxlength="10" class="saisie_succes_condition" required />';
 
             // Unicité
             if ($_SESSION['save']['unicity'] == 'Y')
@@ -101,12 +101,17 @@
     echo '</div>';
 
     echo '<div class="contenu_explications">';
+        echo 'Un succès <u>unique</u> n\'affichera pas de classement ni de barre de progression à l\'utilisateur.';
+    echo '</div>';
+
+    echo '<div class="contenu_explications">';
         echo 'Si c\'est un succès relatif à un <u>niveau</u>, mettre à jour également la fonction <strong>insertOrUpdateSuccesLevel()</strong> dans <strong>metier_commun.php</strong>.
         Une fois le code ajouté, vérifier que le succès est à "<strong>Unique</strong>".';
     echo '</div>';
 
     echo '<div class="contenu_explications">';
-        echo 'Si c\'est un succès relatif à une <u>mission</u>, mettre à jour également ce succès (dans le cas où cela n\'a pas déjà été fait à la création) en liant la référence de la mission dans la modification des succès.';
+        echo 'Si c\'est un succès relatif à une <u>mission</u>, mettre à jour également ce succès (dans le cas où cela n\'a pas déjà été fait à la création) en liant la
+        référence de la mission dans la modification des succès.';
     echo '</div>';
 
     echo '<div class="contenu_explications">';

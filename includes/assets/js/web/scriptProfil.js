@@ -476,7 +476,7 @@ function showSuccess(id)
                 html += '<div class="description_succes_zoom">' + success['description'] + '</div>';
 
                 // Explications du succès
-                html += '<div class="explications_succes_zoom">' + success['explanation'].replace('%limit%', success['limit_success']) + '</div>';
+                html += '<div class="explications_succes_zoom">' + success['explanation'].replace('%limit%', formatNumericForDisplay(success['limit_success'])) + '</div>';
             html += '</div>';
 
             // Bouton
