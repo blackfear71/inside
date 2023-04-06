@@ -77,14 +77,13 @@
                         echo '</form>';
                     echo '</div>';
 
-                    /*******************/
-                    /* Saisie parcours */
-                    /*******************/
+                    /***********/
+                    /* Saisies */
+                    /***********/
+                    // Parcours
                     include('vue/web/vue_saisie_parcours.php');
 
-                    /************************/
-                    /* Saisie participation */
-                    /************************/
+                    // Participation
                     include('vue/web/vue_saisie_participation.php');
 
                     /*******************/

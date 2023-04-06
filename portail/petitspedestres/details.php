@@ -44,7 +44,7 @@
                 if ($parcoursExistant == true)
                 {
                     // Récupération des détails du parcours
-                    $detailsParcours = getDetailsParcours($_GET['id_parcours'], $_SESSION['user']['identifiant']);
+                    $detailsParcours = getDetailsParcours($_GET['id_parcours'], $_SESSION['user']);
 
                     // Récupération de la liste des utilisateurs
                     $listeUsersDetails = getUsersDetailsParcours($_GET['id_parcours'], $_SESSION['user']['equipe']);

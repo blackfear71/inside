@@ -552,6 +552,36 @@
     box-shadow: 0 0 3px #7c7c7c;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*** Détails parcours ***/
 .zone_details_parcours
 {
@@ -562,119 +592,113 @@
 .zone_image_details_parcours
 {
     display: block;
-    margin-bottom: 20px;
+    margin-bottom: 1.5vh;
     width: 100%;
-    height: 150px;
+    height: 20vh;
     overflow: hidden;
-    border-radius: 2px;
-    box-shadow: 0 0 3px #7c7c7c;
+    border-radius: 0.5vh;
+    box-shadow: 0 0 0.5vh #7c7c7c;
 }
 
 .image_details_parcours
 {
     display: block;
     width: 100%;
-    transform: translateY(calc(-1 * (50% - 75px)));
+    transform: translateY(calc(-1 * (50% - 10vh)));
 }
 
-.zone_details_parcours_left
+.zone_informations_details_parcours
 {
-    display: inline-block;
-    vertical-align: top;
-    width: calc(60% - 10px);
+    display: block;
+    margin-bottom: 1.5vh;
+    background-color: #e3e3e3;
+    border-radius: 0.5vh;
+    padding: 2vh 2vh 0 2vh;
 }
 
 .image_details_document
 {
     display: block;
+    margin-bottom: 1.5vh;
     width: 100%;
-    border-radius: 2px;
-    box-shadow: 0 0 3px #7c7c7c;
+    border-radius: 0.5vh;
+    box-shadow: 0 0 0.5vh #7c7c7c;
 }
 
 .document_details_document
 {
     display: block;
-    width: 100%;
-    height: 500px;
-    border-radius: 2px;
-    box-shadow: 0 0 3px #7c7c7c;
-}
-
-.zone_details_parcours_right
-{
-    display: inline-block;
-    vertical-align: top;
-    width: calc(40% - 10px);
-    margin-left: 20px;
-    margin-bottom: -20px;
+    margin-bottom: 1.5vh;
+    padding: 1vh 1.5vh 1vh 1.5vh;
+    width: calc(100% - 3vh);
+    font-family: inside_font_regular, Verdana, sans-serif;
+    color: white;
+    font-size: 3vh;
+    text-align: justify;
+    background-color: #ff1937;
+    border-radius: 0.5vh;
+    box-shadow: 0 0 0.5vh #7c7c7c;
 }
 
 .zone_donnee_details_parcours
 {
     display: inline-block;
     width: 100%;
-    margin-bottom: 20px;
+    margin-bottom: 2vh;
 }
 
 .zone_donnee_details_parcours_lien
 {
     display: inline-block;
     width: 100%;
-    margin-bottom: 20px;
+    margin-bottom: 2vh;
 }
 
 .icone_donnee_details_parcours
 {
     display: inline-block;
     vertical-align: middle;
-    margin-right: 10px;
-    width: 30px;
+    margin-right: 1vh;
+    width: 5vh;
 }
 
 .donnee_details_parcours
 {
     display: inline-block;
     vertical-align: middle;
-    width: calc(100% - 40px);
+    width: calc(100% - 6vh);
     font-family: inside_font_light, Verdana, sans-serif;
     color: #262626;
-    font-size: 100%;
+    font-size: 3vh;
 }
 
+/*** Participations ***/
 .zone_participations_parcours
 {
     display: block;
-    margin-bottom: -10px;
+    margin-bottom: -1vh;
 }
 
-.zone_participants_parcours
+.zone_participation_parcours
 {
     display: block;
-    width: calc(100% - 20px);
-    margin-bottom: 10px;
-    padding: 10px;
+    width: 100%;
+    margin-bottom: 1.5vh;
     background-color: #e3e3e3;
 }
 
-.zone_participants_left
+.zone_date_participation
 {
-    display: inline-block;
-    vertical-align: middle;
-    width: 130px;
-    margin-right: 10px;
-}
-
-.date_participation
-{
-    display: inline-block;
-    vertical-align: middle;
-    width: 130px;
+    display: block;
+    width: 100%;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
     font-family: inside_font_light, Verdana, sans-serif;
     color: white;
+    font-size: 3vh;
     background-color: #2eb2f4;
-    line-height: 30px;
-    border-radius: 2px;
+    border-top-left-radius: 0.5vh;
+    border-top-right-radius: 0.5vh;
     text-align: center;
 }
 
@@ -682,9 +706,9 @@
 {
     display: inline-block;
     vertical-align: middle;
-    margin-right: 5px;
-    width: 20px;
-    height: 20px;
+    margin-right: 1vh;
+    width: 4vh;
+    height: 4vh;
 }
 
 .texte_date_participation
@@ -693,11 +717,11 @@
     vertical-align: middle;
 }
 
-.zone_participants_right
+.zone_participants_parcours
 {
-    display: inline-block;
-    vertical-align: middle;
-    width: calc(100% - 140px);
+    display: block;
+    width: calc(100% - 3vh);
+    padding: 1.5vh;
 }
 
 .zone_participant
@@ -707,26 +731,28 @@
 
 .zone_participant:not(:first-child)
 {
-    padding-top: 10px;
+    margin-top: 1.5vh;
 }
 
 .avatar_participant
 {
     display: inline-block;
     vertical-align: middle;
-    width: 40px;
-    margin-right: 10px;
-    border-radius: 50%;
-    box-shadow: 0 0 3px #7c7c7c;
+    width: 6vh;
+    height: 6vh;
     background-color: #262626;
+    margin-right: 1vh;
+    box-shadow: 0 0 0.5vh #7c7c7c;
+    border-radius: 50%;
 }
 
 .pseudo_participant
 {
     display: inline-block;
     vertical-align: middle;
-    width: calc(100% - 140px);
-    font-family: inside_font_medium, Verdana, sans-serif;
+    width: calc(100% - 20vh);
+    font-family: inside_font_light, Verdana, sans-serif;
+    font-size: 2.5vh;
     color: #262626;
     word-break: break-word;
     text-align: justify;
@@ -736,8 +762,9 @@
 {
     display: inline-block;
     vertical-align: middle;
-    width: calc(100% - 50px);
-    font-family: inside_font_medium, Verdana, sans-serif;
+    width: calc(100% - 7vh);
+    font-family: inside_font_light, Verdana, sans-serif;
+    font-size: 2.5vh;
     color: #262626;
     word-break: break-word;
     text-align: justify;
@@ -752,71 +779,68 @@
 .icone_modifier_participation
 {
     display: inline-block;
-    margin-left: 15px;
-    width: 30px;
-    height: 30px;
+    margin-left: 1vh;
+    width: 6vh;
+    height: 6vh;
     border: 0;
-    border-radius: 2px;
-    background-color: #ff1937;
-    background-image: url("/inside/includes/icons/common/edit.png");
-    background-size: 20px 20px;
+    background-color: transparent;
+    background-image: url("/inside/includes/icons/common/edit_grey.png");
+    background-size: 4vh 4vh;
     background-repeat: no-repeat;
     background-position: center;
     overflow: hidden;
     vertical-align: middle;
-    box-shadow: 0 0 3px #7c7c7c;
 }
 
 .icone_supprimer_participation
 {
     display: inline-block;
-    margin-left: 15px;
-    width: 30px;
-    height: 30px;
+    width: 6vh;
+    height: 6vh;
     border: 0;
-    border-radius: 2px;
-    background-color: #ff1937;
-    background-image: url("/inside/includes/icons/common/delete.png");
-    background-size: 20px 20px;
+    background-color: transparent;
+    background-image: url("/inside/includes/icons/common/delete_grey.png");
+    background-size: 4vh 4vh;
     background-repeat: no-repeat;
     background-position: center;
     overflow: hidden;
     vertical-align: middle;
-    box-shadow: 0 0 3px #7c7c7c;
 }
 
 .zone_donnees_participant
 {
     display: block;
-    margin-top: 10px;
+    margin-top: 1vh;
 }
 
 .zone_donnees_participant:not(:last-child)
 {
-    border-bottom: solid 1px #c3c3c3;
-    padding-bottom: 10px;
+    border-bottom: solid 0.1vh #c3c3c3;
+    padding-bottom: 1.5vh;
 }
 
 .zone_donnee_participant
 {
     display: inline-block;
+    vertical-align: top;
     width: calc(100% / 5);
 }
 
 .icone_donnee_participant
 {
-    display: inline-block;
-    vertical-align: middle;
-    width: 30px;
-    margin-right: 10px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 4vh;
 }
 
 .donnee_participant
 {
-    display: inline-block;
-    vertical-align: middle;
+    display: block;
+    margin-top: 0.5vh;
     font-family: inside_font_light, Verdana, sans-serif;
     color: #262626;
-    font-size: 120%;
+    font-size: 2vh;
     text-align: center;
+    word-wrap: break-word;
 }

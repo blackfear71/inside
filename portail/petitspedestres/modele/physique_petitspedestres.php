@@ -172,6 +172,27 @@
         return $parcours;
     }
 
+    // PHYSIQUE : Lecture du nombre de participations d'un utilisateur
+    // RETOUR : Objet Parcours
+    function physiqueParticipationsUser($idParcours, $identifiant, $equipe)
+    {
+        // Requête
+        global $bdd;
+
+        $req = $bdd->query('SELECT COUNT(*) AS nombreParticipations
+                            FROM petits_pedestres_users
+                            WHERE id_parcours = ' . $idParcours . ' AND identifiant = "' . $identifiant . '" AND team = "' . $equipe . '"');
+
+        $data = $req->fetch();
+
+        $nombreParticipations = $data['nombreParticipations'];
+
+        $req->closeCursor();
+
+        // Retour
+        return $nombreParticipations;
+    }
+
     // PHYSIQUE : Lecture des utilisateurs inscrits
     // RETOUR : Liste des utilisateurs
     function physiqueUsersDetailsParcours($idParcours, $equipe)

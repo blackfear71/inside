@@ -94,6 +94,7 @@
         private $document;
         private $type;
         private $runs;
+        private $my_runs;
 
         // Constructeur par défaut (objet vide)
         public function __construct()
@@ -112,6 +113,7 @@
             $this->document        = '';
             $this->type            = '';
             $this->runs            = 0;
+            $this->my_runs         = 0;
         }
 
         // Constructeur de l'objet Parcours en fonction de données
@@ -185,6 +187,7 @@
             $this->document        = htmlspecialchars($data->getDocument());
             $this->type            = htmlspecialchars($data->getType());
             $this->runs            = htmlspecialchars($data->getRuns());
+            $this->my_runs         = htmlspecialchars($data->getMyRuns());
         }
 
         // Getters et Setters pour l'objet Parcours
@@ -340,6 +343,17 @@
         public function getRuns()
         {
             return $this->runs;
+        }
+
+        // Nombre de courses réalisées par l'utilisateur
+        public function setMyRuns($my_runs)
+        {
+            $this->my_runs = $my_runs;
+        }
+
+        public function getMyRuns()
+        {
+            return $this->my_runs;
         }
     }
 

@@ -279,7 +279,7 @@
 
 .zone_bouton_option:active:not(.zone_bouton_option_rouge):not(.zone_bouton_option_vert):not(.zone_bouton_option_bleu):not(.zone_bouton_option_jaune):not(.zone_bouton_option_violet):not(.zone_bouton_option_blanc)
 {
-    background: #262626;
+    background-color: #262626;
     color: white;
 }
 

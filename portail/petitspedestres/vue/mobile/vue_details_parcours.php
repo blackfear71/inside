@@ -18,24 +18,22 @@
         }
 
         // Parcours
-        echo '<div class="zone_details_parcours_left">';
-            switch ($detailsParcours->getType())
-            {
-                case 'document':
-                    echo '<embed src="../../includes/datas/petitspedestres/' . $detailsParcours->getDocument() . '" type="application/pdf" class="document_details_document" />';
-                    break;
+        switch ($detailsParcours->getType())
+        {
+            case 'document':
+                echo '<div class="document_details_document">Le document PDF ne peut pas être affiché mais un bouton est disponible ci-dessous pour le télécharger</div>';
+                break;
 
-                case 'picture':
-                    echo '<img src="../../includes/images/petitspedestres/documents/' . $detailsParcours->getDocument() . '" alt="' . $detailsParcours->getDocument() . '" title="' . $detailsParcours->getName() . '" class="image_details_document" />';
-                    break;
+            case 'picture':
+                echo '<img src="../../includes/images/petitspedestres/documents/' . $detailsParcours->getDocument() . '" alt="' . $detailsParcours->getDocument() . '" title="' . $detailsParcours->getName() . '" class="image_details_document" />';
+                break;
 
-                default:
-                    break;
-            }
-        echo '</div>';
+            default:
+                break;
+        }
 
         // Informations
-        echo '<div class="zone_details_parcours_right">';
+        echo '<div class="zone_informations_details_parcours">';
             // Distance
             echo '<div class="zone_donnee_details_parcours">';
                 echo '<img src="../../includes/icons/petitspedestres/path_grey.png" alt="path_grey" title="Distance" class="icone_donnee_details_parcours" />';

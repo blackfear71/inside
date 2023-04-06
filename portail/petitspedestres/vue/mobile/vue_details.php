@@ -69,31 +69,42 @@
                     /*********/
                     echo '<div class="titre_section_mobile">' . mb_strtoupper($titleHead) . '</div>';
 
-                    /**********/
-                    /* Saisie */
-                    /**********/
+                    /***********/
+                    /* Saisies */
+                    /***********/
+                    // Parcours
                     include('vue/mobile/vue_saisie_parcours.php');
+
+                    // Participation
+                    include('vue/mobile/vue_saisie_participation.php');
 
                     /********************/
                     /* Boutons d'action */
                     /********************/
-                    // Saisie parcours
-                    echo '<a id="afficherSaisieParcours" title="Saisir un parcours" class="lien_green">';
-                        echo '<img src="../../includes/icons/petitspedestres/parcours_grey.png" alt="parcours_grey" class="image_lien" />';
-                        echo '<div class="titre_lien">AJOUTER UN PARCOURS</div>';
+                    // Modification parcours
+                    echo '<a id="afficherModificationParcours" title="Modifier le parcours" class="lien_green lien_demi margin_lien">';
+                        echo '<img src="../../includes/icons/common/edit_grey.png" alt="edit_grey" class="image_lien" />';
+                        echo '<div class="titre_lien">MODIFIER</div>';
                     echo '</a>';
+
+                    // Suppression parcours
+                    echo '<form id="delete_parcours" method="post" action="details.php?action=doSupprimerParcours" title="Supprimer le parcours" class="lien_green lien_demi">';
+                        echo '<img src="../../includes/icons/common/delete_grey.png" alt="delete_grey" class="image_lien" />';
+
+                        echo '<input type="hidden" name="id_parcours" value="' . $detailsParcours->getId() . '" />';
+                        echo '<input type="hidden" name="team_parcours" value="' . $detailsParcours->getTeam() . '" />';
+                        echo '<input type="submit" name="delete_parcours" value="SUPPRIMER" title="Supprimer le parcours" class="titre_lien_formulaire eventConfirm" />';
+                        echo '<input type="hidden" value="Demander la suppression de ce parcours ?" class="eventMessage" />';
+                    echo '</form>';
 
                     /***********/
                     /* Contenu */
                     /***********/
-                    // Tableau de bord
-                    include('vue/mobile/vue_tableau_de_bord.php');
-
-                    // Dernières courses
-                    include('vue/mobile/vue_dernieres_courses.php');
-
                     // Parcours
-                    include('vue/mobile/vue_liste_parcours.php');
+                    include('vue/mobile/vue_details_parcours.php');
+
+                    // Participations
+                    include('vue/mobile/vue_participations.php');
                 ?>
             </article>
 
@@ -109,10 +120,13 @@
         <!-- Données JSON -->
         <script>
             // Page appelante
-            var pageAppelante = 'petitspedestres';
+            var pageAppelante = 'details';
             
-            // Récupération de la liste des parcours pour le script
-            var listeParcours = <?php if (isset($listeParcoursJson) AND !empty($listeParcoursJson)) echo $listeParcoursJson; else echo '{}'; ?>;
+            // Récupération des détails du parcours pour le script
+            var detailsParcours = <?php if (isset($detailsParcoursJson) AND !empty($detailsParcoursJson)) echo $detailsParcoursJson; else echo '{}'; ?>;
+            
+            // Récupération de la liste des participations pour le script
+            var listeParticipations = <?php if (isset($listeParticipationsJson) AND !empty($listeParticipationsJson)) echo $listeParticipationsJson; else echo '{}'; ?>;
         </script>
     </body>
 </html>

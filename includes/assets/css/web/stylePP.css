@@ -632,6 +632,7 @@
     font-size: 100%;
 }
 
+/*** Participations ***/
 .zone_participations_parcours
 {
     display: block;
@@ -697,7 +698,7 @@
 
 .zone_participant:not(:first-child)
 {
-    padding-top: 10px;
+    margin-top: 10px;
 }
 
 .avatar_participant
@@ -792,6 +793,7 @@
 .zone_donnee_participant
 {
     display: inline-block;
+    vertical-align: top;
     width: calc(100% / 5);
 }
 

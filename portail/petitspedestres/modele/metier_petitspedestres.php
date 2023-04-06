@@ -651,10 +651,17 @@
 
     // METIER : Récupération détails parcours
     // RETOUR : Objet Parcours
-    function getDetailsParcours($idParcours, $identifiant)
+    function getDetailsParcours($idParcours, $sessionUser)
     {
+        // Récupération des données
+        $identifiant = $sessionUser['identifiant'];
+        $equipe      = $sessionUser['equipe'];
+
         // Récupération des détails d'un parcours
         $parcours = physiqueParcours($idParcours);
+
+        // Récupération du nombre de courses de l'utilisateur
+        $parcours->setMyRuns(physiqueParticipationsUser($idParcours, $identifiant, $equipe));
 
         // Retour
         return $parcours;

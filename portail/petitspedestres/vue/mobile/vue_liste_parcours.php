@@ -19,13 +19,13 @@
                     echo '<div class="zone_parcours">';
                         echo '<a href="details.php?id_parcours=' . $parcours->getId() . '&action=goConsulter" class="lien_parcours">';
                             // Nom
-                            echo '<div class="nom_parcours">' . $parcours->getName() . '</div>';
+                            echo '<div class="nom_parcours">' . formatString($parcours->getName(), 30) . '</div>';
 
                             // Distance
                             echo '<div class="distance_parcours">' . formatDistanceForDisplay($parcours->getDistance()) . '</div>';
 
                             // Localisation
-                            echo '<div class="lieu_parcours">' . $parcours->getLocation() . '</div>';
+                            echo '<div class="lieu_parcours">' . formatString($parcours->getLocation(), 30) . '</div>';
                         echo '</a>';
 
                         // Participation

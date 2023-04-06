@@ -651,6 +651,21 @@ aside
     text-align: center;
 }
 
+.titre_lien_formulaire
+{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 2vh;
+    line-height: 2vh;
+    font-family: inside_font_medium, Verdana, sans-serif;
+    color: #262626;
+    font-size: 2vh;
+    text-align: center;
+    border: 0;
+    background-color: transparent;
+}
+
 .lien_red_normal
 {
     display: inline-block;
