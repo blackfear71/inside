@@ -50,7 +50,13 @@
         // Phrases et images cultes ajoutées
         $nombreCollector = physiqueCollectorAjoutesUser($identifiant);
 
-        // Nombre d'idées publiées
+        // Parcours ajoutés
+        $nombreParcours = physiqueParcoursAjoutesUser($identifiant);
+
+        // Participations parcours
+        $nombreParticipations = physiqueParticipationsParcoursUser($identifiant);
+
+        // Idées publiées
         $nombreTheBox = physiqueTheBoxUser($identifiant);
 
         // Bugs soumis
@@ -61,16 +67,18 @@
 
         // Génération d'un objet StatistiquesProfil
         $statistiques = array(
-            'nb_films_ajoutes' => $nombreFilms,
-            'nb_comments'      => $nombreComments,
-            'nb_collectors'    => $nombreCollector,
-            'nb_reservations'  => $nombreReservations,
-            'nb_gateaux'       => $nombreGateauxSemaine,
-            'nb_recettes'      => $nombreRecettes,
-            'expenses'         => $bilanUser,
-            'nb_ideas'         => $nombreTheBox,
-            'nb_bugs'          => $nombreBugsSoumis,
-            'nb_evolutions'    => $nombreEvolutionsSoumises
+            'nb_films_ajoutes'  => $nombreFilms,
+            'nb_comments'       => $nombreComments,
+            'nb_collectors'     => $nombreCollector,
+            'nb_reservations'   => $nombreReservations,
+            'nb_gateaux'        => $nombreGateauxSemaine,
+            'nb_recettes'       => $nombreRecettes,
+            'expenses'          => $bilanUser,
+            'nb_ideas'          => $nombreTheBox,
+            'nb_bugs'           => $nombreBugsSoumis,
+            'nb_evolutions'     => $nombreEvolutionsSoumises,
+            'nb_parcours'       => $nombreParcours,
+            'nb_participations' => $nombreParticipations
         );
 
         $tableauStatistiques = StatistiquesProfil::withData($statistiques);

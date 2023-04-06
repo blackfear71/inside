@@ -8,7 +8,7 @@
     - Liste des parcours
     - Ajout de parcours
     - Ajout participation
-    ****************************/
+    ***************************/
     
     // Fonctions communes
     include_once('../../includes/functions/metier_commun.php');

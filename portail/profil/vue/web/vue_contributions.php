@@ -74,6 +74,23 @@
             echo '</div>';
         echo '</div>';
 
+        // Les Petits Pédestres
+        echo '<div class="zone_contributions">';
+            echo '<div class="titre_contribution"><img src="../../includes/icons/profil/parcours_grey.png" alt="parcours_grey" class="logo_titre_contribution" />LES PETITS PÉDESTRES</div>';
+
+            // Parcours ajoutés
+            echo '<div class="zone_contribution">';
+                echo '<div class="stat_contribution">' . $statistiques->getNb_parcours() . '</div>';
+                echo '<div class="texte_contribution">parcours ajoutés</div>';
+            echo '</div>';
+
+            // Participations
+            echo '<div class="zone_contribution border_left">';
+                echo '<div class="stat_contribution">' . $statistiques->getNb_participations() . '</div>';
+                echo '<div class="texte_contribution">participations</div>';
+            echo '</div>';
+        echo '</div>';
+        
         // #TheBox
         echo '<div class="zone_contributions">';
             echo '<div class="titre_contribution"><img src="../../includes/icons/profil/ideas_grey.png" alt="ideas_grey" class="logo_titre_contribution" />#THEBOX</div>';

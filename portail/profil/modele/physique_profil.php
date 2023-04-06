@@ -264,6 +264,54 @@
         return $nombreSoumis;
     }
 
+    // PHYSIQUE : Lecture du nombre de parcours ajoutés
+    // RETOUR : Nombre de parcours ajoutés
+    function physiqueParcoursAjoutesUser($identifiant)
+    {
+        // Initialisations
+        $nombreAjouts = 0;
+
+        // Requête
+        global $bdd;
+
+        $req = $bdd->query('SELECT COUNT(*) AS nombreAjouts
+                            FROM petits_pedestres_parcours
+                            WHERE identifiant_add = "' . $identifiant . '"');
+
+        $data = $req->fetch();
+
+        $nombreAjouts = $data['nombreAjouts'];
+
+        $req->closeCursor();
+
+        // Retour
+        return $nombreAjouts;
+    }
+
+    // PHYSIQUE : Lecture du nombre de participations d'un parcours pour un utilisateur
+    // RETOUR : Nombre de participations d'un parcours
+    function physiqueParticipationsParcoursUser($identifiant)
+    {
+        // Initialisations
+        $nombreParticipations = 0;
+
+        // Requête
+        global $bdd;
+
+        $req = $bdd->query('SELECT COUNT(*) AS nombreParticipations
+                            FROM petits_pedestres_users
+                            WHERE identifiant = "' . $identifiant . '"');
+
+        $data = $req->fetch();
+
+        $nombreParticipations = $data['nombreParticipations'];
+
+        $req->closeCursor();
+
+        // Retour
+        return $nombreParticipations;
+    }
+
     // PHYSIQUE : Lecture préférences
     // RETOUR : Objet Preferences
     function physiquePreferences($identifiant)

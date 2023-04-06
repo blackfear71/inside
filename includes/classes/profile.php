@@ -414,20 +414,24 @@
         private $nb_ideas;
         private $nb_bugs;
         private $nb_evolutions;
+        private $nb_parcours;
+        private $nb_participations;
 
         // Constructeur par défaut (objet vide)
         public function __construct()
         {
-            $this->nb_films_ajoutes = 0;
-            $this->nb_comments      = 0;
-            $this->nb_reservations  = 0;
-            $this->nb_gateaux       = 0;
-            $this->nb_recettes      = 0;
-            $this->expenses         = 0;
-            $this->nb_collectors    = 0;
-            $this->nb_ideas         = 0;
-            $this->nb_bugs          = 0;
-            $this->nb_evolutions    = 0;
+            $this->nb_films_ajoutes  = 0;
+            $this->nb_comments       = 0;
+            $this->nb_reservations   = 0;
+            $this->nb_gateaux        = 0;
+            $this->nb_recettes       = 0;
+            $this->expenses          = 0;
+            $this->nb_collectors     = 0;
+            $this->nb_ideas          = 0;
+            $this->nb_bugs           = 0;
+            $this->nb_evolutions     = 0;
+            $this->nb_parcours       = 0;
+            $this->nb_participations = 0;
         }
 
         // Constructeur de l'objet StatistiquesProfil en fonction des données
@@ -443,34 +447,40 @@
         protected function fillWithData($data)
         {
             if (isset($data['nb_films_ajoutes']))
-                $this->nb_films_ajoutes = $data['nb_films_ajoutes'];
+                $this->nb_films_ajoutes  = $data['nb_films_ajoutes'];
 
             if (isset($data['nb_comments']))
-                $this->nb_comments      = $data['nb_comments'];
+                $this->nb_comments       = $data['nb_comments'];
 
             if (isset($data['nb_reservations']))
-                $this->nb_reservations  = $data['nb_reservations'];
+                $this->nb_reservations   = $data['nb_reservations'];
 
             if (isset($data['nb_gateaux']))
-                $this->nb_gateaux       = $data['nb_gateaux'];
+                $this->nb_gateaux        = $data['nb_gateaux'];
 
             if (isset($data['nb_recettes']))
-                $this->nb_recettes      = $data['nb_recettes'];
+                $this->nb_recettes       = $data['nb_recettes'];
 
             if (isset($data['expenses']))
-                $this->expenses         = $data['expenses'];
+                $this->expenses          = $data['expenses'];
 
             if (isset($data['nb_collectors']))
-                $this->nb_collectors    = $data['nb_collectors'];
+                $this->nb_collectors     = $data['nb_collectors'];
 
             if (isset($data['nb_ideas']))
-                $this->nb_ideas         = $data['nb_ideas'];
+                $this->nb_ideas          = $data['nb_ideas'];
 
             if (isset($data['nb_bugs']))
-                $this->nb_bugs          = $data['nb_bugs'];
+                $this->nb_bugs           = $data['nb_bugs'];
 
             if (isset($data['nb_evolutions']))
-                $this->nb_evolutions    = $data['nb_evolutions'];
+                $this->nb_evolutions     = $data['nb_evolutions'];
+
+            if (isset($data['nb_parcours']))
+                $this->nb_parcours       = $data['nb_parcours'];
+
+            if (isset($data['nb_participations']))
+                $this->nb_participations = $data['nb_participations'];
         }
 
         // Sécurisation des données
@@ -484,16 +494,18 @@
 
         protected function fillSecureData($data)
         {
-            $this->nb_films_ajoutes = htmlspecialchars($data->getNb_films_ajoutes());
-            $this->nb_comments      = htmlspecialchars($data->getNb_comments());
-            $this->nb_reservations  = htmlspecialchars($data->getNb_reservations());
-            $this->nb_gateaux       = htmlspecialchars($data->getNb_gateaux());
-            $this->nb_recettes      = htmlspecialchars($data->getNb_recettes());
-            $this->expenses         = htmlspecialchars($data->getExpenses());
-            $this->nb_collectors    = htmlspecialchars($data->getNb_collectors());
-            $this->nb_ideas         = htmlspecialchars($data->getNb_ideas());
-            $this->nb_bugs          = htmlspecialchars($data->getNb_bugs());
-            $this->nb_evolutions    = htmlspecialchars($data->getNb_evolutions());
+            $this->nb_films_ajoutes  = htmlspecialchars($data->getNb_films_ajoutes());
+            $this->nb_comments       = htmlspecialchars($data->getNb_comments());
+            $this->nb_reservations   = htmlspecialchars($data->getNb_reservations());
+            $this->nb_gateaux        = htmlspecialchars($data->getNb_gateaux());
+            $this->nb_recettes       = htmlspecialchars($data->getNb_recettes());
+            $this->expenses          = htmlspecialchars($data->getExpenses());
+            $this->nb_collectors     = htmlspecialchars($data->getNb_collectors());
+            $this->nb_ideas          = htmlspecialchars($data->getNb_ideas());
+            $this->nb_bugs           = htmlspecialchars($data->getNb_bugs());
+            $this->nb_evolutions     = htmlspecialchars($data->getNb_evolutions());
+            $this->nb_parcours       = htmlspecialchars($data->getNb_parcours());
+            $this->nb_participations = htmlspecialchars($data->getNb_participations());
         }
 
         // Getters et Setters pour l'objet StatistiquesProfil
@@ -605,6 +617,28 @@
         public function getNb_evolutions()
         {
             return $this->nb_evolutions;
+        }
+
+        // Nombre de parcours ajoutés
+        public function setNb_parcours($nb_parcours)
+        {
+            $this->nb_parcours = $nb_parcours;
+        }
+
+        public function getNb_parcours()
+        {
+            return $this->nb_parcours;
+        }
+
+        // Nombre de participations aux parcours
+        public function setNb_participations($nb_participations)
+        {
+            $this->nb_participations = $nb_participations;
+        }
+
+        public function getNb_participations()
+        {
+            return $this->nb_participations;
         }
     }
 
