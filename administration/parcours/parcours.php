@@ -1,10 +1,10 @@
 <?php
-    /************************
-    *** Gestion des films ***
-    *************************
+    /***************************
+    *** Gestion des parcours ***
+    ****************************
     Fonctionnalités :
-    - Suppression des films
-    ************************/
+    - Suppression des parcours
+    ***************************/
 
     // Fonctions communes
     include_once('../../includes/functions/metier_commun.php');
@@ -14,8 +14,8 @@
     controlsAdmin();
 
     // Modèle de données
-    include_once('modele/metier_movies.php');
-    include_once('modele/physique_movies.php');
+    include_once('modele/metier_parcours.php');
+    include_once('modele/physique_parcours.php');
 
     // Appels métier
     switch ($_GET['action'])
@@ -24,23 +24,23 @@
             // Récupération de la liste des équipes
             $listeEquipes = getListeEquipes();
 
-            // Récupération de la liste des films à supprimer
-            $listeSuppression = getFilmsToDelete();
+            // Récupération de la liste des parcours à supprimer
+            $listeSuppression = getParcoursToDelete();
             break;
 
-        case 'doDeleteFilm':
-            // Suppression d'un film
-            deleteFilm($_POST);
+        case 'doDeleteParcours':
+            // Suppression d'un parcours
+            deleteParcours($_POST);
             break;
 
-        case 'doResetFilm':
-            // Annulation de la demande de suppression d'un film
-            resetFilm($_POST);
+        case 'doResetParcours':
+            // Annulation de la demande de suppression d'un parcours
+            resetParcours($_POST);
             break;
 
         default:
             // Contrôle action renseignée URL
-            header('location: movies.php?action=goConsulter');
+            header('location: parcours.php?action=goConsulter');
             break;
     }
 
@@ -55,16 +55,16 @@
 
             unset($equipe);
 
-            foreach ($listeSuppression as &$film)
+            foreach ($listeSuppression as &$parcours)
             {
-                $film = Movie::secureData($film);
+                $parcours = Parcours::secureData($parcours);
             }
 
-            unset($film);
+            unset($parcours);
             break;
 
-        case 'doDeleteFilm':
-        case 'doResetFilm':
+        case 'doDeleteParcours':
+        case 'doResetParcours':
         default:
             break;
     }
@@ -72,14 +72,14 @@
     // Redirection affichage
     switch ($_GET['action'])
     {
-        case 'doDeleteFilm':
-        case 'doResetFilm':
-            header('location: movies.php?action=goConsulter');
+        case 'doDeleteParcours':
+        case 'doResetParcours':
+            header('location: parcours.php?action=goConsulter');
             break;
 
         case 'goConsulter':
         default:
-            include_once('vue/vue_movies.php');
+            include_once('vue/vue_parcours.php');
             break;
     }
 ?>

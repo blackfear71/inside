@@ -1,7 +1,7 @@
 <?php
     // METIER : Génération du portail administration
     // RETOUR : Tableau des liens
-    function getPortail($alertEquipes, $alertUsers, $alertFilms, $alertVacances, $alertCalendars, $alertAnnexes, $alertCron, $nombreBugs, $nombreEvols)
+    function getPortail($alertEquipes, $alertUsers, $alertFilms, $alertVacances, $alertCalendars, $alertAnnexes, $alertParcours, $alertCron, $nombreBugs, $nombreEvols)
     {
         // Vérification des alertes
         if ($alertEquipes == true)
@@ -23,6 +23,11 @@
             $avertissementCalendars = true;
         else
             $avertissementCalendars = false;
+
+        if ($alertParcours == true)
+            $avertissementParcours = true;
+        else
+            $avertissementParcours = false;
 
         if ($nombreBugs != 0 OR $nombreEvols != 0)
             $avertissementBugs = true;
@@ -83,6 +88,14 @@
                 'image'     => '../../includes/icons/common/calendars.png',
                 'alt'       => 'calendars',
                 'alert'     => $avertissementCalendars
+            ),
+            array(
+                'categorie' => 'GESTION DES<br />PARCOURS',
+                'lien'      => '../parcours/parcours.php?action=goConsulter',
+                'title'     => 'Gestion des parcours',
+                'image'     => '../../includes/icons/common/petits_pedestres.png',
+                'alt'       => 'parcours',
+                'alert'     => $avertissementParcours
             ),
             array(
                 'categorie' => 'GESTION DES<br />MISSIONS',
@@ -208,6 +221,17 @@
     {
         // Appel physique
         $alert = physiqueAlerteAnnexes();
+
+        // Retour
+        return $alert;
+    }
+
+    // METIER : Contrôle alertes Parcours
+    // RETOUR : Booléen
+    function getAlerteParcours()
+    {
+        // Appel physique
+        $alert = physiqueAlerteParcours();
 
         // Retour
         return $alert;

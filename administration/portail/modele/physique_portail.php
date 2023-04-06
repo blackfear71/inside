@@ -132,6 +132,31 @@
         return $alert;
     }
 
+    // PHYSIQUE : Lecture alerte parcours
+    // RETOUR : Booléen
+    function physiqueAlerteParcours()
+    {
+        // Initialisations
+        $alert = false;
+
+        // Requête
+        global $bdd;
+
+        $req = $bdd->query('SELECT COUNT(*) AS nombreParcoursToDelete
+                            FROM petits_pedestres_parcours
+                            WHERE to_delete = "Y"');
+
+        $data = $req->fetch();
+
+        if ($data['nombreParcoursToDelete'] > 0)
+            $alert = true;
+
+        $req->closeCursor();
+
+        // Retour
+        return $alert;
+    }
+
     // PHYSIQUE : Lecture du nombre de bugs
     // RETOUR : Nombre de bugs
     function physiqueNombreBugs()
