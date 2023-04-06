@@ -72,7 +72,11 @@
                     /**********/
                     /* Saisie */
                     /**********/
+                    // Parcours
                     include('vue/mobile/vue_saisie_parcours.php');
+
+                    // Participation
+                    include('vue/mobile/vue_saisie_participation.php');
 
                     /********************/
                     /* Boutons d'action */

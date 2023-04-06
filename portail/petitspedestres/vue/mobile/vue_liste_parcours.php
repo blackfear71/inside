@@ -29,7 +29,7 @@
                         echo '</a>';
 
                         // Participation
-                        echo '<a id="ajouter_participation_' . $parcours->getId() . '" title="Participer" class="lien_participer_parcours ajouterParticipation">';
+                        echo '<a id="ajouter_participation_' . $parcours->getId() . '" title="Participer" class="lien_participer_parcours afficherSaisieParticipation">';
                             echo '<img src="../../includes/icons/petitspedestres/participate_grey.png" alt="participate_grey" class="icone_parcours" />';
                         echo '</a>';
                     echo '</div>';

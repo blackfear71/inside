@@ -182,137 +182,69 @@
     width: 5vh;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*** Commun saisies ***/
-.fond_saisie_parcours, .fond_saisie_participation
+.zone_saisie_lignes
 {
-    display: none;
-    background-color: rgb(0, 0, 0, 0.5);
-    position: fixed;
-    z-index: 10;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
+    display: block;
+    margin-bottom: 1.5vh;
 }
 
-.zone_saisie_parcours, .zone_saisie_participation
+.zone_saisie_ligne
 {
-    width: 85%;
-    margin-top: 50px;
-    margin-left: auto;
-    margin-right: auto;
-    border-radius: 2px;
-    overflow: hidden;
+    display: block;
+    margin-top: 2vh;
 }
 
-.titre_saisie_parcours, .titre_saisie_participation
+.icone_saisie
 {
     display: inline-block;
-    line-height: 50px;
-    background-color: #ff1937;
-    width: calc(100% - 40px);
-    padding-left: 20px;
-    padding-right: 20px;
+    height: 4vh;
+    width: 4vh;
+    margin-right: 2vh;
+    vertical-align: middle;
+}
+
+.saisie_ligne
+{
+    display: inline-block;
+    width: calc(100% - 9vh);
+    padding: 1.2vh 1.5vh 1.2vh 1.5vh;
+    border-radius: 0.5vh;
+    border: 0;
+    box-shadow: 0 0 0.5vh #7c7c7c;
     font-family: inside_font_light, Verdana, sans-serif;
-    font-size: 120%;
-    color: white;
-    border-bottom: solid 2px #c81932;
-}
-
-.close_add
-{
-    float: right;
-    width: 30px;
-    height: 30px;
-    margin-top: -40px;
-    margin-right: 10px;
-    text-align: center;
-}
-
-.close_img
-{
-    width: 20px;
-    padding: 5px;
-    transform: rotate(0deg);
-    transition: transform 0.2s ease;
-}
-
-.close_img:active
-{
-    transform: rotate(90deg);
-    transition: transform 0.2s ease;
-}
-
-.form_saisie_parcours, .form_saisie_participation
-{
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-    background-color: white;
-    border-top: solid 1px #d3d3d3;
-    max-height: calc(100vh - 150px);
-    overflow-y: auto;
-}
-
-.icone_saisie, .icone_saisie_participation
-{
-    display: inline-block;
-    height: 25px;
-    width: 25px;
-    margin-right: 10px;
+    font-size: 2.5vh;
+    color: #262626;
     vertical-align: middle;
 }
 
 /*** Saisie parcours ***/
-.zone_saisie_parcours_left
+.zone_image_saisie
 {
-    display: inline-block;
-    width: 146px;
-    min-height: 146px;
-    vertical-align: top;
+    display: block;
+    width: 100%;
+    height: 25vh;
+    line-height: 24vh;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
 }
 
 .zone_parcourir_image
 {
-    width: 120px;
-    height: 120px;
-    line-height: 120px;
-    margin-top: 10px;
-    margin-left: 10px;
+    width: 100%;
+    height: 100%;
     border-style: dashed;
-    border-width: 3px;
-    border-radius: 2px;
+    border-width: 0.5vh;
+    border-radius: 0.5vh;
     border-color: #a3a3a3;
     text-align: center;
     overflow: hidden;
+    box-sizing: border-box;
 }
 
 .logo_saisie_image
 {
-    width: 40px;
+    width: 6vh;
     vertical-align: middle;
 }
 
@@ -320,79 +252,51 @@
 {
     display: block;
     opacity: 0;
-    width: 120px;
-    height: 120px;
-    margin-top: -120px;
+    width: 100%;
+    height: 100%;
+    margin-top: -25vh;
     position: relative;
     z-index: 1;
 }
 
 .mask_image
 {
-    width: 120px;
-    height: 120px;
-    line-height: 120px;
+    width: calc(100% - 1vh);
+    height: calc(100% - 1vh);
+    line-height: 24vh;
     overflow: hidden;
     margin-left: auto;
     margin-right: auto;
-    margin-top: -123px;
+    margin-top: -24.5vh;
+    text-align: center;
 }
 
 .image
 {
-    margin-left: auto;
-    margin-right: auto;
     max-width: 100%;
     max-height: 100%;
     vertical-align: middle;
-}
-
-.zone_saisie_parcours_right
-{
-    display: inline-block;
-    width: calc(100% - 156px);
-    vertical-align: top;
-    margin-top: 10px;
-    margin-right: 10px;
-}
-
-.zone_saisie_ligne
-{
-    display: block;
-    margin-bottom: 10px;
-}
-
-.saisie_ligne
-{
-    display: inline-block;
-    width: calc(100% - 55px);
-    padding: 5px 10px 5px 10px;
-    background-color: white;
-    border-radius: 2px;
-    border: 0;
-    box-shadow: 0 0 3px #7c7c7c;
-    font-family: inside_font_light, Verdana, sans-serif;
-    font-size: 100%;
-    color: #262626;
-    line-height: 25px;
-    vertical-align: middle;
+    margin-top: -0.5vh;
 }
 
 .zone_parcourir_document
 {
     display: inline-block;
-    vertical-align: middle;
-    width: 200px;
-    height: 34px;
-    line-height: 34px;
-    margin-right: 10px;
-    border-radius: 2px;
-    border: 0;
-    font-family: inside_font_light, Verdana, sans-serif;
-    font-size: 100%;
+    width: calc(100% - 6vh);
+    line-height: 6vh;
+    border-radius: 0.5vh;
+    font-family: inside_font_regular, Verdana, sans-serif;
+    font-size: 2.5vh;
     color: #262626;
     background-color: #e3e3e3;
-    box-shadow: 0 0 3px #7c7c7c;
+    text-align: center;
+    box-shadow: 0 0 0.5vh #7c7c7c;
+}
+
+.zone_parcourir_document:active
+{
+    background-color: #ff1937;
+    color: white;
 }
 
 .bouton_parcourir_document
@@ -400,136 +304,79 @@
     float: left;
     opacity: 0;
     width: 100%;
-    height: 34px;
-    margin-top: -34px;
+    height: 6vh;
+    margin-top: -6vh;
 }
 
 .texte_parcourir_document
 {
     display: inline-block;
     vertical-align: middle;
-    width: calc(100% - 245px);
-    height: 34px;
-    line-height: 34px;
-    overflow: hidden;
+    width: 100%;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
     font-family: inside_font_light, Verdana, sans-serif;
-    font-size: 100%;
+    font-size: 2.5vh;
     color: #262626;
     text-align: left;
-}
-
-.zone_saisie_bottom
-{
-    display: block;
-    width: 100%;
-    margin-bottom: 10px;
-}
-
-.zone_bouton_saisie
-{
-    display: block;
-    width: 200px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.saisie_bouton
-{
-    display: inline-block;
-    vertical-align: middle;
-    width: 100%;
-    height: 34px;
-    line-height: 34px;
-    border-radius: 2px;
-    border: 0;
-    font-family: inside_font_light, Verdana, sans-serif;
-    font-size: 100%;
-    color: #262626;
-    background-color: #e3e3e3;
-    box-shadow: 0 0 3px #7c7c7c;
-}
-
-.zone_parcourir_document:active, .saisie_bouton:active
-{
-    background-color: #ff1937;
-    color: white;
+    word-wrap: break-word;
 }
 
 /*** Saisie participation ***/
-.zone_saisie_lignes_participation
-{
-    padding: 10px;
-}
-
-.zone_saisie_ligne_participation
-{
-    display: inline-block;
-    width: calc(50% - 10px);
-    margin-bottom: 10px;
-}
-
-.zone_saisie_ligne_participation:nth-child(2n)
-{
-    margin-left: 20px;
-}
-
 .saisie_ligne_participation
 {
     display: inline-block;
-    vertical-align: middle;
-    width: calc(100% - 105px);
-    padding: 5px 10px 5px 10px;
-    background-color: white;
-    border-radius: 2px;
+    width: calc(100% - 17vh);
+    padding: 1.2vh 1.5vh 1.2vh 1.5vh;
+    border-radius: 0.5vh;
     border: 0;
-    box-shadow: 0 0 3px #7c7c7c;
+    box-shadow: 0 0 0.5vh #7c7c7c;
     font-family: inside_font_light, Verdana, sans-serif;
-    font-size: 100%;
+    font-size: 2.5vh;
     color: #262626;
-    line-height: 25px;
+    vertical-align: middle;
 }
 
 .saisie_temps_participation
 {
     display: inline-block;
     vertical-align: middle;
-    width: calc((100% - 245px) / 3);
-    padding: 5px 10px 5px 10px;
+    width: calc((100% - 39vh) / 3);
+    padding: 1.2vh 1.5vh 1.2vh 1.5vh;
     background-color: white;
-    border-radius: 2px;
+    border-radius: 0.5vh;
     border: 0;
-    box-shadow: 0 0 3px #7c7c7c;
+    box-shadow: 0 0 0.5vh #7c7c7c;
     font-family: inside_font_light, Verdana, sans-serif;
-    font-size: 100%;
+    font-size: 2.5vh;
     color: #262626;
-    line-height: 25px;
 }
 
 .unite_saisie_participation
 {
     display: inline-block;
     vertical-align: middle;
-    height: 30px;
-    width: 40px;
-    padding-left: 10px;
+    padding-top: 1.2vh;
+    padding-bottom: 1.2vh;
+    margin-left: 1vh;
+    width: 7vh;
     font-family: inside_font_regular, Verdana, sans-serif;
-    font-size: 100%;
+    font-size: 2.5vh;
     color: #262626;
-    line-height: 30px;
     text-align: left;
 }
 
 .zone_radio_saisie_participation
 {
     display: inline-block;
-    width: calc(((100% - 35px) / 2) - 15px);
-    padding-left: 10px;
+    width: calc(((100% - 6vh) / 2) - 2vh);
+    padding-left: 1vh;
     text-align: left;
 }
 
 .zone_radio_saisie_participation:last-child
 {
-    margin-left: 10px;
+    margin-left: 2vh;
 }
 
 .radio_saisie_participation
@@ -541,46 +388,16 @@
 .label_saisie_participation
 {
     display: inline-block;
-    width: calc(100% - 32px);
-    padding: 8px 0 8px 40px;
-    margin-left: -30px;
+    width: calc(100% - 4vh);
+    padding: 1.2vh 0.4vh 1.2vh 4.5vh;
+    margin-left: -4.5vh;
     font-family: inside_font_light, Verdana, sans-serif;
-    font-size: 100%;
+    font-size: 2.5vh;
     color: #262626;
     background-color: #e3e3e3;
-    border-radius: 2px;
-    box-shadow: 0 0 3px #7c7c7c;
+    border-radius: 0.5vh;
+    box-shadow: 0 0 0.5vh #7c7c7c;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /*** Détails parcours ***/
 .zone_details_parcours

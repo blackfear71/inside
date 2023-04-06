@@ -70,9 +70,19 @@
             $dateParticipation = insertParticipation($_POST, $_SESSION['user'], false);
             break;
 
+        case 'doAjouterParticipationMobile':
+            // Insertion d'une participation
+            $dateParticipation = insertParticipation($_POST, $_SESSION['user'], true);
+            break;
+
         case 'doModifierParticipation':
             // Modification d'une participation
             $dateParticipation = updateParticipation($_POST, $_SESSION['user'], false);
+            break;
+
+        case 'doModifierParticipationMobile':
+            // Modification d'une participation
+            $dateParticipation = updateParticipation($_POST, $_SESSION['user'], true);
             break;
 
         case 'doSupprimerParticipation':
@@ -123,7 +133,9 @@
         case 'doModifierParcours':
         case 'doSupprimerParcours':
         case 'doAjouterParticipation':
+        case 'doAjouterParticipationMobile':
         case 'doModifierParticipation':
+        case 'doModifierParticipationMobile':
         case 'doSupprimerParticipation':
         default:
             break;
@@ -142,7 +154,9 @@
             break;
 
         case 'doAjouterParticipation':
+        case 'doAjouterParticipationMobile':
         case 'doModifierParticipation':
+        case 'doModifierParticipationMobile':
             if (!empty($dateParticipation))
                 header('location: details.php?id_parcours=' . $_GET['id_parcours'] . '&action=goConsulter&anchor=' . $dateParticipation);
             else

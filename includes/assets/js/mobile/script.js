@@ -490,6 +490,12 @@ function loadFile(event, id, rotation)
     }
 }
 
+// Insère un nom de document dans la zone correspondante
+function loadDocument(event, id)
+{
+    $('#' + id).text(event.target.files[0].name);
+}
+
 // Initialisation de la position Celsius
 function initPositionCelsius()
 {

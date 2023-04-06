@@ -43,7 +43,7 @@
 
                                                 // Modification
                                                 echo '<span class="lien_actions_participation">';
-                                                    echo '<a id="modifier_participation_' . $participation->getId() . '" title="Modifier la participation" class="icone_modifier_participation modifierParticipation"></a>';
+                                                    echo '<a id="modifier_participation_' . $participation->getId() . '" title="Modifier la participation" class="icone_modifier_participation afficherModificationParticipation"></a>';
                                                 echo '</span>';
 
                                                 // Suppression

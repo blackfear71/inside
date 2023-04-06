@@ -17,7 +17,7 @@ $(function ()
         afficherMasquerIdWithDelay('zone_saisie_annee');
     });
 
-    // Ouvre ou ferme la zone de saisie d'une dépense
+    // Ouvre ou ferme la zone de saisie d'un film
     $('#afficherSaisieFilm, #fermerSaisieFilm').click(function ()
     {
         afficherMasquerIdWithDelay('zone_saisie_film');

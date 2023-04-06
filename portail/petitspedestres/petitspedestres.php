@@ -52,6 +52,11 @@
             insertParticipation($_POST, $_SESSION['user'], false);
             break;
 
+        case 'doAjouterParticipationMobile':
+            // Insertion d'une participation
+            insertParticipation($_POST, $_SESSION['user'], true);
+            break;
+
         default:
             // Contrôle action renseignée URL
             header('location: petitspedestres.php?action=goConsulter');
@@ -84,6 +89,7 @@
 
         case 'doAjouterParcours':
         case 'doAjouterParticipation':
+        case 'doAjouterParticipationMobile':
         default:
             break;
     }
@@ -96,6 +102,7 @@
             break;
 
         case 'doAjouterParticipation':
+        case 'doAjouterParticipationMobile':
             header('location: petitspedestres.php?action=goConsulter');
             break;
 

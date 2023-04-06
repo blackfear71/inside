@@ -237,7 +237,7 @@
             // Boutons
             echo '<div class="zone_boutons_saisie">';
                 // Valider
-                echo '<input type="submit" name="submit_expense" value="Valider" id="validerSaisieFilm" class="bouton_saisie_gauche" />';
+                echo '<input type="submit" name="submit_film" value="Valider" id="validerSaisieFilm" class="bouton_saisie_gauche" />';
 
                 // Annuler
                 echo '<a id="fermerSaisieFilm" class="bouton_saisie_droite">Annuler</a>';
