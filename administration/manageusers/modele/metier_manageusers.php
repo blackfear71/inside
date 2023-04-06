@@ -616,7 +616,7 @@
             }
         }
 
-        // Mise à jour de la référence de l'équipe et du statut à "U"
+        // Mise à jour de la référence de l'équipe et du statut à "U" de l'utilisateur
         $user = array(
             'team'     => $teamReference,
             'new_team' => $newTeam,
@@ -656,7 +656,11 @@
     {
         // Récupération des données
         $identifiant = $post['id_user'];
-        $equipe      = $post['team_user'];
+
+        if ($post['team'] == 'other')
+            $equipe = trim($post['team_reference']);
+        else
+            $equipe = $post['team_user'];
 
         // Validation de l'équipe (création, modification ou suppression)
         acceptEquipe($post, false);
