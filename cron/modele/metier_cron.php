@@ -523,6 +523,9 @@
             // Récupération du nombre d'annexes à supprimer
             $nombreDemandesSuppressionsAnnexes = physiqueDemandesSuppressions('calendars_annexes');
 
+            // Récupération du nombre de parcours à supprimer
+            $nombreDemandesSuppressionsParcours = physiqueDemandesSuppressions('petits_pedestres_parcours');
+
             // Nombre de bugs en cours
             $nombreBugsEnCours = physiqueNombreBugsEvolutions('B');
 
@@ -531,15 +534,34 @@
 
             // Création d'un tableau des demandes
             $tableauDemandes = array(
-                'nombre_requetes_mot_de_passe'             => $nombreRequetesMotDePasse,
-                'nombre_requetes_changement_equipe'        => $nombreRequetesChangementEquipe,
-                'nombre_requetes_inscription'              => $nombreRequetesInscription,
-                'nombre_requetes_desinscription'           => $nombreRequetesDesinscription,
-                'nombre_demandes_suppressions_films'       => $nombreDemandesSuppressionsFilms,
-                'nombre_demandes_suppressions_calendriers' => $nombreDemandesSuppressionsCalendriers,
-                'nombre_demandes_suppressions_annexes'     => $nombreDemandesSuppressionsAnnexes,
-                'nombre_bugs_en_cours'                     => $nombreBugsEnCours,
-                'nombre_evolutions_en_cours'               => $nombreEvolutionsEnCours
+                'utilisateurs' => array(
+                    'titre'   => 'Gestion des utilisateurs',
+                    'icone'   => 'users_grey',
+                    'contenu' => array(
+                        array('Demandes de mot de passe', $nombreRequetesMotDePasse),
+                        array('Changements d\'équipe', $nombreRequetesChangementEquipe),
+                        array('Demandes d\'inscription', $nombreRequetesInscription),
+                        array('Demandes de désinscription', $nombreRequetesDesinscription)
+                    )
+                ),
+                'contenu' => array(
+                    'titre'   => 'Gestion du contenu',
+                    'icone'   => 'inside_grey',
+                    'contenu' => array(
+                        array('Suppressions de films', $nombreDemandesSuppressionsFilms),
+                        array('Suppressions de calendriers', $nombreDemandesSuppressionsCalendriers),
+                        array('Suppressions d\'annexes', $nombreDemandesSuppressionsAnnexes),
+                        array('Suppressions de parcours', $nombreDemandesSuppressionsParcours)
+                    )
+                ),
+                'maintenance'  => array(
+                    'titre'   => 'Maintenance du site',
+                    'icone'   => 'settings_grey',
+                    'contenu' => array(
+                        array('Bugs en cours', $nombreBugsEnCours),
+                        array('Evolutions en cours', $nombreEvolutionsEnCours)
+                    )
+                )
             );
 
             // Connexion au serveur de mails et initialisations

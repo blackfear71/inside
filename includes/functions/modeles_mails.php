@@ -74,40 +74,6 @@
                             background-color: #fbfbfb;
                         }
 
-                        .titre_section_mail
-                        {
-                            display: block;
-                            width: 100%;
-                            font-family: Calibri, Verdana, sans-serif;
-                            font-size: 150%;
-                            font-weight: bold;
-                            border-bottom: solid 1px #b3b3b3;
-                            line-height: 30px;
-                            margin-bottom: 20px;
-                            padding-top: 10px;
-                            padding-bottom: 10px;
-                            color: #262626;
-                            text-align: left;
-                            word-break: break-word;
-                        }
-
-                        .logo_titre_section_mail
-                        {
-                            display: inline-block;
-                            height: 25px;
-                            width: 25px;
-                            vertical-align: top;
-                            margin-top: 5px;
-                        }
-
-                        .texte_titre_section_mail
-                        {
-                            display: inline-block;
-                            width: calc(100% - 35px);
-                            margin-left: 10px;
-                            vertical-align: middle;
-                        }
-
                         .zone_contenu_mail
                         {
                             display: block;
@@ -371,18 +337,17 @@
                         .logo_titre_section_mail
                         {
                             display: inline-block;
+                            vertical-align: middle;
                             height: 25px;
                             width: 25px;
-                            vertical-align: top;
-                            margin-top: 5px;
                         }
 
                         .texte_titre_section_mail
                         {
                             display: inline-block;
+                            vertical-align: middle;
                             width: calc(100% - 35px);
                             margin-left: 10px;
-                            vertical-align: middle;
                         }
 
                         .zone_contenu_mail
@@ -480,137 +445,29 @@
                 // Contenu
                 $modele .= '<section>';
                     $modele .= '<article>';
-                        // Gestion des utilisateurs
-                        $modele .= '<div class="titre_section_mail"><img src="../includes/icons/admin/users_grey.png" alt="users_grey" class="logo_titre_section_mail" /><div class="texte_titre_section_mail">Gestion des utilisateurs</div></div>';
+                        foreach ($demandes as $demande)
+                        {
+                            // Titre
+                            $modele .= '<div class="titre_section_mail"><img src="../includes/icons/admin/' . $demande['icone'] . '.png" alt="' . $demande['icone'] . '" class="logo_titre_section_mail" /><div class="texte_titre_section_mail">' . $demande['titre'] . '</div></div>';
 
-                        $modele .= '<div class="zone_contenu_mail">';
-                            // Demandes de changemement de mot de passe
-                            $modele .= '<div class="zone_nombre_demandes_mail">';
-                                // Titre
-                                $modele .= '<div class="titre_demandes_mail">';
-                                    $modele .= 'Demandes de mot de passe';
-                                $modele .= '</div>';
+                            // Contenu
+                            $modele .= '<div class="zone_contenu_mail">';
+                                foreach ($demande['contenu'] as $contenu)
+                                {
+                                    $modele .= '<div class="zone_nombre_demandes_mail">';
+                                        // Titre
+                                        $modele .= '<div class="titre_demandes_mail">';
+                                            $modele .= $contenu[0];
+                                        $modele .= '</div>';
 
-                                // Valeur
-                                $modele .= '<div class="valeur_demandes_mail">';
-                                    $modele .= $demandes['nombre_requetes_mot_de_passe'];
-                                $modele .= '</div>';
+                                        // Valeur
+                                        $modele .= '<div class="valeur_demandes_mail">';
+                                            $modele .= $contenu[1];
+                                        $modele .= '</div>';
+                                    $modele .= '</div>';
+                                }
                             $modele .= '</div>';
-
-                            // Demandes de changemement d'équipe
-                            $modele .= '<div class="zone_nombre_demandes_mail">';
-                                // Titre
-                                $modele .= '<div class="titre_demandes_mail">';
-                                    $modele .= 'Changements d\'équipe';
-                                $modele .= '</div>';
-
-                                // Valeur
-                                $modele .= '<div class="valeur_demandes_mail">';
-                                    $modele .= $demandes['nombre_requetes_changement_equipe'];
-                                $modele .= '</div>';
-                            $modele .= '</div>';
-
-                            // Demandes d'inscription
-                            $modele .= '<div class="zone_nombre_demandes_mail">';
-                                // Titre
-                                $modele .= '<div class="titre_demandes_mail">';
-                                    $modele .= 'Demandes d\'inscription';
-                                $modele .= '</div>';
-
-                                // Valeur
-                                $modele .= '<div class="valeur_demandes_mail">';
-                                    $modele .= $demandes['nombre_requetes_inscription'];
-                                $modele .= '</div>';
-                            $modele .= '</div>';
-
-                            // Demandes de désinscription
-                            $modele .= '<div class="zone_nombre_demandes_mail">';
-                                // Titre
-                                $modele .= '<div class="titre_demandes_mail">';
-                                    $modele .= 'Demandes de désinscription';
-                                $modele .= '</div>';
-
-                                // Valeur
-                                $modele .= '<div class="valeur_demandes_mail">';
-                                    $modele .= $demandes['nombre_requetes_desinscription'];
-                                $modele .= '</div>';
-                            $modele .= '</div>';
-                        $modele .= '</div>';
-
-                        // Gestion du contenu
-                        $modele .= '<div class="titre_section_mail"><img src="../includes/icons/common/inside_grey.png" alt="inside_grey" class="logo_titre_section_mail" /><div class="texte_titre_section_mail">Gestion du contenu</div></div>';
-
-                        $modele .= '<div class="zone_contenu_mail">';
-                            // Suppressions de films
-                            $modele .= '<div class="zone_nombre_demandes_mail">';
-                                // Titre
-                                $modele .= '<div class="titre_demandes_mail">';
-                                    $modele .= 'Suppressions de films';
-                                $modele .= '</div>';
-
-                                // Valeur
-                                $modele .= '<div class="valeur_demandes_mail">';
-                                    $modele .= $demandes['nombre_demandes_suppressions_films'];
-                                $modele .= '</div>';
-                            $modele .= '</div>';
-
-                            // Suppressions de calendriers
-                            $modele .= '<div class="zone_nombre_demandes_mail">';
-                                // Titre
-                                $modele .= '<div class="titre_demandes_mail">';
-                                    $modele .= 'Suppressions de calendriers';
-                                $modele .= '</div>';
-
-                                // Valeur
-                                $modele .= '<div class="valeur_demandes_mail">';
-                                    $modele .= $demandes['nombre_demandes_suppressions_calendriers'];
-                                $modele .= '</div>';
-                            $modele .= '</div>';
-
-                            // Suppressions d'annexes
-                            $modele .= '<div class="zone_nombre_demandes_mail">';
-                                // Titre
-                                $modele .= '<div class="titre_demandes_mail">';
-                                    $modele .= 'Suppressions d\'annexes';
-                                $modele .= '</div>';
-
-                                // Valeur
-                                $modele .= '<div class="valeur_demandes_mail">';
-                                    $modele .= $demandes['nombre_demandes_suppressions_annexes'];
-                                $modele .= '</div>';
-                            $modele .= '</div>';
-                        $modele .= '</div>';
-
-                        // Maintenance du site
-                        $modele .= '<div class="titre_section_mail"><img src="../includes/icons/admin/settings_grey.png" alt="settings_grey" class="logo_titre_section_mail" /><div class="texte_titre_section_mail">Maintenance du site</div></div>';
-
-                        $modele .= '<div class="zone_contenu_mail">';
-                            // Bugs en cours
-                            $modele .= '<div class="zone_nombre_demandes_mail">';
-                                // Titre
-                                $modele .= '<div class="titre_demandes_mail">';
-                                    $modele .= 'Bugs en cours';
-                                $modele .= '</div>';
-
-                                // Valeur
-                                $modele .= '<div class="valeur_demandes_mail">';
-                                    $modele .= $demandes['nombre_bugs_en_cours'];
-                                $modele .= '</div>';
-                            $modele .= '</div>';
-
-                            // Evolutions en cours
-                            $modele .= '<div class="zone_nombre_demandes_mail">';
-                                // Titre
-                                $modele .= '<div class="titre_demandes_mail">';
-                                    $modele .= 'Evolutions en cours';
-                                $modele .= '</div>';
-
-                                // Valeur
-                                $modele .= '<div class="valeur_demandes_mail">';
-                                    $modele .= $demandes['nombre_evolutions_en_cours'];
-                                $modele .= '</div>';
-                            $modele .= '</div>';
-                        $modele .= '</div>';
+                        }
                     $modele .= '</article>';
                 $modele .= '</section>';
 
