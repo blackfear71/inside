@@ -355,7 +355,7 @@
 
         $req = $bdd->query('SELECT COUNT(expense_center.id) AS nombreAchats
                             FROM expense_center
-                            WHERE (expense_center.buyer = "' . $identifiant . '" AND expense_center.price > 0)
+                            WHERE (expense_center.buyer = "' . $identifiant . '" AND ((expense_center.type = "P" AND expense_center.price > 0) OR expense_center.type = "M"))
                             AND EXISTS (SELECT *
                                         FROM expense_center_users
                                         WHERE (expense_center.id = expense_center_users.id_expense))');
@@ -382,7 +382,7 @@
 
         $req = $bdd->query('SELECT COUNT(expense_center.id) AS nombreDepensesSansParts
                             FROM expense_center
-                            WHERE (expense_center.buyer = "' . $identifiant . '" AND expense_center.price > 0)
+                            WHERE (expense_center.buyer = "' . $identifiant . '" AND ((expense_center.type = "P" AND expense_center.price > 0) OR expense_center.type = "M"))
                             AND NOT EXISTS (SELECT *
                                             FROM expense_center_users
                                             WHERE (expense_center.id = expense_center_users.id_expense AND expense_center_users.identifiant = "' . $identifiant . '"))');
