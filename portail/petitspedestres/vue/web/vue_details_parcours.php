@@ -80,6 +80,7 @@
                     break;
 
                 default:
+                    $path = '';
                     break;
             }
 

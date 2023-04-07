@@ -78,6 +78,7 @@
                     break;
 
                 default:
+                    $path = '';
                     break;
             }
 

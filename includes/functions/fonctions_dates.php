@@ -205,8 +205,8 @@
             // Construction du tableau
             $duree = array(
                 'heures'   => !empty($heures)   ? $heures   : '',
-                'minutes'  => !empty($minutes)  ? $minutes  : '',
-                'secondes' => !empty($secondes) ? $secondes : ''
+                'minutes'  => !empty($minutes)  ? $minutes  : (!empty($heures) ? 0 : ''),
+                'secondes' => !empty($secondes) ? $secondes : ((!empty($heures) OR !empty($minutes)) ? 0 : '')
             );
         }
         else

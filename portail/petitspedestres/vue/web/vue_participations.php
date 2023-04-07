@@ -108,7 +108,7 @@
                                         echo '<div class="zone_donnee_participant">';
                                             if ($participation->getCompetition() == 'Y')
                                             {
-                                                echo '<img src="../../includes/icons/petitspedestres/cup_grey.png" alt="cup_grey" title="Compétition" class="icone_donnee_participant" />';
+                                                echo '<img src="../../includes/icons/petitspedestres/cup.png" alt="cup" title="Compétition" class="icone_donnee_participant" />';
                                                 echo '<div class="donnee_participant">Compétition</div>';
                                             }
                                             else

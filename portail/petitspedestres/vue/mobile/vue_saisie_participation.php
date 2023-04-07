@@ -63,9 +63,9 @@
                         echo '<div class="zone_saisie_ligne">';
                             echo '<img src="../../includes/icons/petitspedestres/time_grey.png" alt="time_grey" title="Temps" class="icone_saisie" />';
                             echo '<input type="text" name="heures_participation" value="" placeholder="Heures" class="saisie_temps_participation" maxlength="2" />';
-                            echo '<div class="unite_saisie_participation">h</div>';
+                            echo '<div class="unite_saisie_participation unite_saisie_heures">h</div>';
                             echo '<input type="text" name="minutes_participation" value="" placeholder="Minutes" class="saisie_temps_participation" maxlength="2" />';
-                            echo '<div class="unite_saisie_participation">min</div>';
+                            echo '<div class="unite_saisie_participation unite_saisie_minutes">min</div>';
                             echo '<input type="text" name="secondes_participation" value="" placeholder="Secondes" class="saisie_temps_participation" maxlength="2" />';
                             echo '<div class="unite_saisie_participation">s</div>';
                         echo '</div>';

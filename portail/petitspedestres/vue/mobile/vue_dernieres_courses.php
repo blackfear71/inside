@@ -18,14 +18,14 @@
                 {
                     echo '<a href="details.php?id_parcours=' . $course->getId_parcours() . '&action=goConsulter&anchor=' . $course->getDate() . '" class="zone_derniere_course">';
                         // Nom
-                        echo '<div class="nom_derniere_course">' . $course->getNom_parcours() . '</div>';
+                        echo '<div class="nom_derniere_course">' . formatString($course->getNom_parcours(), 30) . '</div>';
 
                         // Date
                         echo '<div class="date_derniere_course">' . formatDateForDisplay($course->getDate()) . '</div>';
 
                         // Compétition
                         if ($course->getCompetition() == 'Y')
-                            echo '<img src="../../includes/icons/petitspedestres/cup_grey.png" alt="cup_grey" title="Compétition" class="icone_derniere_course" />';
+                            echo '<img src="../../includes/icons/petitspedestres/cup.png" alt="cup" title="Compétition" class="icone_derniere_course" />';
                         else
                             echo '<img src="../../includes/icons/petitspedestres/cup_white.png" alt="cup_white" title="Classique" class="icone_derniere_course" />';
                     echo '</a>';
