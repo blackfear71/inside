@@ -84,7 +84,7 @@
 
         $req = $bdd->query('SELECT COUNT(*) AS nombreComments
                             FROM movie_house_comments
-                            WHERE author = "' . $identifiant . '"');
+                            WHERE identifiant = "' . $identifiant . '"');
 
         $data = $req->fetch();
 
@@ -252,7 +252,7 @@
 
         $req = $bdd->query('SELECT COUNT(*) AS nombreSoumis
                             FROM bugs
-                            WHERE author = "' . $identifiant . '" AND type = "' . $type . '"');
+                            WHERE identifiant = "' . $identifiant . '" AND type = "' . $type . '"');
 
         $data = $req->fetch();
 

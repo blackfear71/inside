@@ -72,8 +72,8 @@
                             FROM users
                             WHERE (identifiant != "admin" AND team = "' . $equipe . '" AND status != "I" AND status != "D")
                             OR EXISTS (SELECT id, identifiant, team
-                                    FROM cooking_box
-                                    WHERE cooking_box.identifiant = users.identifiant AND cooking_box.team = "' . $equipe . '")
+                                       FROM cooking_box
+                                       WHERE cooking_box.identifiant = users.identifiant AND cooking_box.team = "' . $equipe . '")
                             ORDER BY identifiant ASC');
 
         while ($data = $req->fetch())

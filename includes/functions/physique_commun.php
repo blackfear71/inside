@@ -533,14 +533,14 @@
         // Requête
         global $bdd;
 
-        $req = $bdd->prepare('INSERT INTO notifications(author,
+        $req = $bdd->prepare('INSERT INTO notifications(identifiant,
                                                         team,
                                                         date,
                                                         time,
                                                         category,
                                                         content,
                                                         to_delete)
-                                                VALUES(:author,
+                                                VALUES(:identifiant,
                                                        :team,
                                                        :date,
                                                        :time,

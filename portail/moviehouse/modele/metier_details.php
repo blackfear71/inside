@@ -368,8 +368,8 @@
         // Récupération pseudo et avatar
         foreach ($listeCommentaires as $commentaire)
         {
-            $commentaire->setPseudo($listeUsers[$commentaire->getAuthor()]['pseudo']);
-            $commentaire->setAvatar($listeUsers[$commentaire->getAuthor()]['avatar']);
+            $commentaire->setPseudo($listeUsers[$commentaire->getIdentifiant()]['pseudo']);
+            $commentaire->setAvatar($listeUsers[$commentaire->getIdentifiant()]['avatar']);
         }
 
         // Retour
@@ -388,11 +388,11 @@
 
         // Insertion de l'enregistrement en table
         $commentaire = array(
-            'id_film' => $idFilm,
-            'author'  => $identifiant,
-            'date'    => date('Ymd'),
-            'time'    => date('His'),
-            'comment' => $comment
+            'id_film'     => $idFilm,
+            'identifiant' => $identifiant,
+            'date'        => date('Ymd'),
+            'time'        => date('His'),
+            'comment'     => $comment
         );
 
         physiqueInsertionCommentaire($commentaire);

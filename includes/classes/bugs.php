@@ -4,7 +4,7 @@
         private $id;
         private $subject;
         private $date;
-        private $author;
+        private $identifiant;
         private $pseudo;
         private $avatar;
         private $team;
@@ -17,18 +17,18 @@
         // Constructeur par défaut (objet vide)
         public function __construct()
         {
-            $this->id         = 0;
-            $this->subject    = '';
-            $this->date       = '';
-            $this->author     = '';
-            $this->pseudo     = '';
-            $this->avatar     = '';
-            $this->team       = '';
-            $this->content    = '';
-            $this->picture    = '';
-            $this->resolution = '';
-            $this->type       = '';
-            $this->resolved   = '';
+            $this->id          = 0;
+            $this->subject     = '';
+            $this->date        = '';
+            $this->identifiant = '';
+            $this->pseudo      = '';
+            $this->avatar      = '';
+            $this->team        = '';
+            $this->content     = '';
+            $this->picture     = '';
+            $this->resolution  = '';
+            $this->type        = '';
+            $this->resolved    = '';
         }
 
         // Constructeur de l'objet BugEvolution en fonction des données
@@ -44,34 +44,34 @@
         protected function fillWithData($data)
         {
             if (isset($data['id']))
-                $this->id         = $data['id'];
+                $this->id          = $data['id'];
 
             if (isset($data['subject']))
-                $this->subject    = $data['subject'];
+                $this->subject     = $data['subject'];
 
             if (isset($data['date']))
-                $this->date       = $data['date'];
+                $this->date        = $data['date'];
 
-            if (isset($data['author']))
-                $this->author     = $data['author'];
+            if (isset($data['identifiant']))
+                $this->identifiant = $data['identifiant'];
 
             if (isset($data['team']))
-                $this->team       = $data['team'];
+                $this->team        = $data['team'];
 
             if (isset($data['content']))
-                $this->content    = $data['content'];
+                $this->content     = $data['content'];
 
             if (isset($data['picture']))
-                $this->picture    = $data['picture'];
+                $this->picture     = $data['picture'];
 
             if (isset($data['resolution']))
-                $this->resolution = $data['resolution'];
+                $this->resolution  = $data['resolution'];
 
             if (isset($data['type']))
-                $this->type       = $data['type'];
+                $this->type        = $data['type'];
 
             if (isset($data['resolved']))
-                $this->resolved   = $data['resolved'];
+                $this->resolved    = $data['resolved'];
         }
 
         // Sécurisation des données
@@ -85,18 +85,18 @@
 
         protected function fillSecureData($data)
         {
-            $this->id         = $data->getId();
-            $this->subject    = htmlspecialchars($data->getSubject());
-            $this->date       = htmlspecialchars($data->getDate());
-            $this->author     = htmlspecialchars($data->getAuthor());
-            $this->pseudo     = htmlspecialchars($data->getPseudo());
-            $this->avatar     = htmlspecialchars($data->getAvatar());
-            $this->team       = $data->getTeam();
-            $this->content    = htmlspecialchars($data->getContent());
-            $this->picture    = htmlspecialchars($data->getPicture());
-            $this->resolution = htmlspecialchars($data->getResolution());
-            $this->type       = htmlspecialchars($data->getType());
-            $this->resolved   = htmlspecialchars($data->getResolved());
+            $this->id          = $data->getId();
+            $this->subject     = htmlspecialchars($data->getSubject());
+            $this->date        = htmlspecialchars($data->getDate());
+            $this->identifiant = htmlspecialchars($data->getIdentifiant());
+            $this->pseudo      = htmlspecialchars($data->getPseudo());
+            $this->avatar      = htmlspecialchars($data->getAvatar());
+            $this->team        = $data->getTeam();
+            $this->content     = htmlspecialchars($data->getContent());
+            $this->picture     = htmlspecialchars($data->getPicture());
+            $this->resolution  = htmlspecialchars($data->getResolution());
+            $this->type        = htmlspecialchars($data->getType());
+            $this->resolved    = htmlspecialchars($data->getResolved());
         }        
 
         // Getters et Setters pour l'objet BugEvolution
@@ -133,15 +133,15 @@
             return $this->date;
         }
 
-        // Auteur
-        public function setAuthor($author)
+        // Identifiant
+        public function setIdentifiant($identifiant)
         {
-            $this->author = $author;
+            $this->identifiant = $identifiant;
         }
 
-        public function getAuthor()
+        public function getIdentifiant()
         {
-            return $this->author;
+            return $this->identifiant;
         }
 
         // Pseudo auteur

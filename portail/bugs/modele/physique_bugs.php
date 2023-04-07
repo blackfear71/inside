@@ -17,9 +17,9 @@
         $req = $bdd->query('SELECT id, identifiant, team, pseudo, avatar
                             FROM users
                             WHERE (identifiant != "admin" AND team = "' . $equipe . '" AND status != "I")
-                            OR EXISTS (SELECT id, author, team
-                                    FROM bugs
-                                    WHERE bugs.author = users.identifiant AND bugs.team = "' . $equipe . '")');
+                            OR EXISTS (SELECT id, identifiant, team
+                                       FROM bugs
+                                       WHERE bugs.identifiant = users.identifiant AND bugs.team = "' . $equipe . '")');
 
         while ($data = $req->fetch())
         {
@@ -90,7 +90,7 @@
         global $bdd;
 
         $req = $bdd->prepare('INSERT INTO bugs(date,
-                                               author,
+                                               identifiant,
                                                team,
                                                subject,
                                                content,
@@ -99,7 +99,7 @@
                                                type,
                                                resolved)
                                        VALUES(:date,
-                                              :author,
+                                              :identifiant,
                                               :team,
                                               :subject,
                                               :content,

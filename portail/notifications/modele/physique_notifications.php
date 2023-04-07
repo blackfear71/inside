@@ -44,7 +44,7 @@
             case 'me':
                 $req = $bdd->query('SELECT COUNT(*) AS nombreNotifications
                                     FROM notifications
-                                    WHERE to_delete = "N" AND (team = "' . $equipe . '" OR team = "") AND (author = "' . $identifiant . '" OR content = "' . $identifiant . '")');
+                                    WHERE to_delete = "N" AND (team = "' . $equipe . '" OR team = "") AND (identifiant = "' . $identifiant . '" OR content = "' . $identifiant . '")');
                 break;
 
             case 'week':
@@ -87,7 +87,7 @@
             case 'me':
                 $req = $bdd->query('SELECT *
                                     FROM notifications
-                                    WHERE to_delete = "N" AND (team = "' . $equipe . '" OR team = "") AND (author = "' . $identifiant . '" OR content = "' . $identifiant . '")
+                                    WHERE to_delete = "N" AND (team = "' . $equipe . '" OR team = "") AND (identifiant = "' . $identifiant . '" OR content = "' . $identifiant . '")
                                     ORDER BY date DESC, time DESC, id DESC
                                     LIMIT ' . $premiereEntree . ', ' . $nombreParPage);
                 break;
@@ -145,9 +145,9 @@
         $req = $bdd->query('SELECT id, identifiant, team, pseudo
                             FROM users
                             WHERE (identifiant != "admin" AND team = "' . $equipe . '" AND status != "I")
-                            OR EXISTS (SELECT id, author, team
-                                    FROM notifications
-                                    WHERE (notifications.author = users.identifiant OR notifications.content = users.identifiant) AND (notifications.team = "' . $equipe . '" OR notifications.team = ""))
+                            OR EXISTS (SELECT id, identifiant, team
+                                       FROM notifications
+                                       WHERE (notifications.identifiant = users.identifiant OR notifications.content = users.identifiant) AND (notifications.team = "' . $equipe . '" OR notifications.team = ""))
                             ORDER BY identifiant ASC');
 
         while ($data = $req->fetch())

@@ -825,17 +825,17 @@
 
     // METIER : Génération d'une notification
     // RETOUR : Aucun
-    function insertNotification($category, $equipe, $content, $author)
+    function insertNotification($category, $equipe, $content, $identifiant)
     {
         // Insertion de l'enregistrement en base
         $notification = array(
-            'author'    => $author,
-            'team'      => $equipe,
-            'date'      => date('Ymd'),
-            'time'      => date('His'),
-            'category'  => $category,
-            'content'   => $content,
-            'to_delete' => 'N'
+            'identifiant' => $identifiant,
+            'team'        => $equipe,
+            'date'        => date('Ymd'),
+            'time'        => date('His'),
+            'category'    => $category,
+            'content'     => $content,
+            'to_delete'   => 'N'
         );
 
         physiqueInsertionNotification($notification);

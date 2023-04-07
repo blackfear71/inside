@@ -18,11 +18,11 @@
                             FROM users
                             WHERE (identifiant != "admin" AND team = "' . $equipe . '" AND status != "I")
                             OR EXISTS (SELECT id, team, date, buyer
-                                    FROM expense_center
-                                    WHERE expense_center.buyer = users.identifiant AND expense_center.team = "' . $equipe . '" AND SUBSTR(date, 1, 4) = "' . $annee . '")
+                                       FROM expense_center
+                                       WHERE expense_center.buyer = users.identifiant AND expense_center.team = "' . $equipe . '" AND SUBSTR(date, 1, 4) = "' . $annee . '")
                             OR EXISTS (SELECT id, team, identifiant
-                                    FROM expense_center_users
-                                    WHERE expense_center_users.identifiant = users.identifiant AND expense_center_users.team = "' . $equipe . '")
+                                       FROM expense_center_users
+                                       WHERE expense_center_users.identifiant = users.identifiant AND expense_center_users.team = "' . $equipe . '")
                             ORDER BY identifiant ASC');
 
         while ($data = $req->fetch())

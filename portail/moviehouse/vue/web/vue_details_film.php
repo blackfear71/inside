@@ -375,7 +375,7 @@
                                             echo '</div>';
 
                                             // Actions sur commentaires seulement si l'auteur correspond à l'utilisateur connecté
-                                            if ($comment->getAuthor() == $_SESSION['user']['identifiant'])
+                                            if ($comment->getIdentifiant() == $_SESSION['user']['identifiant'])
                                             {
                                                 /***************************************************/
                                                 /* Ligne visualisation normale (sans modification) */

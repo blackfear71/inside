@@ -644,7 +644,7 @@
     {
         private $id;
         private $id_film;
-        private $author;
+        private $identifiant;
         private $pseudo;
         private $avatar;
         private $date;
@@ -654,14 +654,14 @@
         // Constructeur par défaut (objet vide)
         public function __construct()
         {
-            $this->id      = 0;
-            $this->id_film = 0;
-            $this->author  = '';
-            $this->pseudo  = '';
-            $this->avatar  = '';
-            $this->date    = '';
-            $this->time    = '';
-            $this->comment = '';
+            $this->id          = 0;
+            $this->id_film     = 0;
+            $this->identifiant = '';
+            $this->pseudo      = '';
+            $this->avatar      = '';
+            $this->date        = '';
+            $this->time        = '';
+            $this->comment     = '';
         }
 
         // Constructeur de l'objet Comments en fonction des données
@@ -677,22 +677,22 @@
         protected function fillWithData($data)
         {
             if (isset($data['id']))
-                $this->id      = $data['id'];
+                $this->id          = $data['id'];
 
             if (isset($data['id_film']))
-                $this->id_film = $data['id_film'];
+                $this->id_film     = $data['id_film'];
 
-            if (isset($data['author']))
-                $this->author  = $data['author'];
+            if (isset($data['identifiant']))
+                $this->identifiant = $data['identifiant'];
 
             if (isset($data['date']))
-                $this->date    = $data['date'];
+                $this->date        = $data['date'];
 
             if (isset($data['time']))
-                $this->time    = $data['time'];
+                $this->time        = $data['time'];
 
             if (isset($data['comment']))
-                $this->comment = $data['comment'];
+                $this->comment     = $data['comment'];
         }
 
         // Sécurisation des données
@@ -706,14 +706,14 @@
 
         protected function fillSecureData($data)
         {
-            $this->id      = $data->getId();
-            $this->id_film = $data->getId_film();
-            $this->author  = htmlspecialchars($data->getAuthor());
-            $this->pseudo  = htmlspecialchars($data->getPseudo());
-            $this->avatar  = htmlspecialchars($data->getAvatar());
-            $this->date    = htmlspecialchars($data->getDate());
-            $this->time    = htmlspecialchars($data->getTime());
-            $this->comment = htmlspecialchars($data->getComment());
+            $this->id          = $data->getId();
+            $this->id_film     = $data->getId_film();
+            $this->identifiant = htmlspecialchars($data->getIdentifiant());
+            $this->pseudo      = htmlspecialchars($data->getPseudo());
+            $this->avatar      = htmlspecialchars($data->getAvatar());
+            $this->date        = htmlspecialchars($data->getDate());
+            $this->time        = htmlspecialchars($data->getTime());
+            $this->comment     = htmlspecialchars($data->getComment());
         }
 
         // Getters et Setters pour l'objet Comments
@@ -740,14 +740,14 @@
         }
 
         // Auteur
-        public function setAuthor($author)
+        public function setIdentifiant($identifiant)
         {
-            $this->author = $author;
+            $this->identifiant = $identifiant;
         }
 
-        public function getAuthor()
+        public function getIdentifiant()
         {
-            return $this->author;
+            return $this->identifiant;
         }
 
         // Pseudo

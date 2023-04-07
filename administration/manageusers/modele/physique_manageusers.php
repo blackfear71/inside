@@ -69,13 +69,13 @@
         // Requête
         global $bdd;
 
-        $req = $bdd->query('SELECT DISTINCT author
+        $req = $bdd->query('SELECT DISTINCT identifiant
                             FROM movie_house_comments
-                            ORDER BY author ASC');
+                            ORDER BY identifiant ASC');
 
         while ($data = $req->fetch())
         {
-            array_push($listeUsersComments, $data['author']);
+            array_push($listeUsersComments, $data['identifiant']);
         }
 
         $req->closeCursor();
@@ -194,13 +194,13 @@
         // Requête
         global $bdd;
 
-        $req = $bdd->query('SELECT DISTINCT author
+        $req = $bdd->query('SELECT DISTINCT identifiant
                             FROM bugs
-                            ORDER BY author ASC');
+                            ORDER BY identifiant ASC');
 
         while ($data = $req->fetch())
         {
-            array_push($listeUsersBugs, $data['author']);
+            array_push($listeUsersBugs, $data['identifiant']);
         }
 
         $req->closeCursor();
@@ -299,7 +299,7 @@
 
         $req = $bdd->query('SELECT COUNT(*) AS nombreComments
                             FROM movie_house_comments
-                            WHERE author = "' . $identifiant . '"');
+                            WHERE identifiant = "' . $identifiant . '"');
 
         $data = $req->fetch();
 
@@ -727,8 +727,8 @@
                             FROM expense_center
                             LEFT JOIN expense_center_users ON expense_center.id = expense_center_users.id_expense
                             WHERE NOT EXISTS (SELECT id, id_expense
-                                            FROM expense_center_users
-                                            WHERE expense_center.id = expense_center_users.id_expense)
+                                              FROM expense_center_users
+                                              WHERE expense_center.id = expense_center_users.id_expense)
                             ORDER BY id ASC');
 
         while ($data = $req->fetch())
@@ -827,7 +827,7 @@
 
         $req = $bdd->query('SELECT COUNT(*) AS nombreBugsSoumis
                             FROM bugs
-                            WHERE author = "' . $identifiant . '"');
+                            WHERE identifiant = "' . $identifiant . '"');
 
         $data = $req->fetch();
 
@@ -851,7 +851,7 @@
 
         $req = $bdd->query('SELECT COUNT(*) AS nombreBugs
                             FROM bugs
-                            WHERE author = "' . $identifiant . '" AND resolved = "' . $statut . '"');
+                            WHERE identifiant = "' . $identifiant . '" AND resolved = "' . $statut . '"');
 
         $data = $req->fetch();
 

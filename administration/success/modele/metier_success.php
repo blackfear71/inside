@@ -391,7 +391,7 @@
                         case 'commentator':
                             $listeConditions = array(array(
                                 'operator' => '',
-                                'column'   => 'author',
+                                'column'   => 'identifiant',
                                 'test'     => '=',
                                 'value'    => $user->getIdentifiant()
                             ));
@@ -517,7 +517,7 @@
                         case 'debugger':
                             $listeConditions = array(array(
                                 'operator' => '',
-                                'column'   => 'author',
+                                'column'   => 'identifiant',
                                 'test'     => '=',
                                 'value'    => $user->getIdentifiant()
                             ));
@@ -530,7 +530,7 @@
                             $listeConditions = array(
                                 array(
                                     'operator' => '',
-                                    'column'   => 'author',
+                                    'column'   => 'identifiant',
                                     'test'     => '=',
                                     'value'    => $user->getIdentifiant()
                                 ),

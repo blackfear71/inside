@@ -2,7 +2,7 @@
     class Notification
     {
         private $id;
-        private $author;
+        private $identifiant;
         private $team;
         private $date;
         private $time;
@@ -16,17 +16,17 @@
         // Constructeur par défaut (objet vide)
         public function __construct()
         {
-            $this->id        = 0;
-            $this->author    = '';
-            $this->team      = '';
-            $this->date      = '';
-            $this->time      = '';
-            $this->category  = '';
-            $this->content   = '';
-            $this->to_delete = '';
-            $this->icon      = '';
-            $this->sentence  = '';
-            $this->link      = '';
+            $this->id          = 0;
+            $this->identifiant = '';
+            $this->team        = '';
+            $this->date        = '';
+            $this->time        = '';
+            $this->category    = '';
+            $this->content     = '';
+            $this->to_delete   = '';
+            $this->icon        = '';
+            $this->sentence    = '';
+            $this->link        = '';
         }
 
         // Constructeur de l'objet Notification en fonction des données
@@ -42,28 +42,28 @@
         protected function fillWithData($data)
         {
             if (isset($data['id']))
-                $this->id        = $data['id'];
+                $this->id          = $data['id'];
 
-            if (isset($data['author']))
-                $this->author    = $data['author'];
+            if (isset($data['identifiant']))
+                $this->identifiant = $data['identifiant'];
 
             if (isset($data['team']))
-                $this->team      = $data['team'];
+                $this->team        = $data['team'];
 
             if (isset($data['date']))
-                $this->date      = $data['date'];
+                $this->date        = $data['date'];
 
             if (isset($data['time']))
-                $this->time      = $data['time'];
+                $this->time        = $data['time'];
 
             if (isset($data['category']))
-                $this->category  = $data['category'];
+                $this->category    = $data['category'];
 
             if (isset($data['content']))
-                $this->content   = $data['content'];
+                $this->content     = $data['content'];
 
             if (isset($data['to_delete']))
-                $this->to_delete = $data['to_delete'];
+                $this->to_delete   = $data['to_delete'];
         }
 
         // Sécurisation des données
@@ -77,17 +77,17 @@
 
         protected function fillSecureData($data)
         {
-            $this->id        = $data->getId();
-            $this->author    = htmlspecialchars($data->getAuthor());
-            $this->team      = $data->getTeam();
-            $this->date      = htmlspecialchars($data->getDate());
-            $this->time      = htmlspecialchars($data->getTime());
-            $this->category  = htmlspecialchars($data->getCategory());
-            $this->content   = htmlspecialchars($data->getContent());
-            $this->to_delete = htmlspecialchars($data->getTo_delete());
-            $this->icon      = htmlspecialchars($data->getIcon());
-            $this->sentence  = $data->getSentence();
-            $this->link      = htmlspecialchars($data->getLink());
+            $this->id          = $data->getId();
+            $this->identifiant = htmlspecialchars($data->getIdentifiant());
+            $this->team        = $data->getTeam();
+            $this->date        = htmlspecialchars($data->getDate());
+            $this->time        = htmlspecialchars($data->getTime());
+            $this->category    = htmlspecialchars($data->getCategory());
+            $this->content     = htmlspecialchars($data->getContent());
+            $this->to_delete   = htmlspecialchars($data->getTo_delete());
+            $this->icon        = htmlspecialchars($data->getIcon());
+            $this->sentence    = $data->getSentence();
+            $this->link        = htmlspecialchars($data->getLink());
         }
 
         // Getters et Setters pour l'objet Notification
@@ -103,14 +103,14 @@
         }
 
         // Auteur
-        public function setAuthor($author)
+        public function setIdentifiant($identifiant)
         {
-            $this->author = $author;
+            $this->identifiant = $identifiant;
         }
 
-        public function getAuthor()
+        public function getIdentifiant()
         {
-            return $this->author;
+            return $this->identifiant;
         }
 
         // Equipe

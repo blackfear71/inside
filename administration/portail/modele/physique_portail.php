@@ -17,8 +17,8 @@
         $req = $bdd->query('SELECT COUNT(*) AS nombreEquipes
                             FROM teams
                             WHERE activation = "Y" AND NOT EXISTS (SELECT id, identifiant, team
-                                                                FROM users
-                                                                WHERE teams.reference = users.team)');
+                                                                   FROM users
+                                                                   WHERE teams.reference = users.team)');
 
         $data = $req->fetch();
 

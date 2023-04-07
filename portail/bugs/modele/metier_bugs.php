@@ -41,10 +41,10 @@
         foreach ($rapports as $rapport)
         {
             // Recherche des données de l'auteur
-            if (isset($listeUsers[$rapport->getAuthor()]))
+            if (isset($listeUsers[$rapport->getIdentifiant()]))
             {
-                $rapport->setPseudo($listeUsers[$rapport->getAuthor()]['pseudo']);
-                $rapport->setAvatar($listeUsers[$rapport->getAuthor()]['avatar']);
+                $rapport->setPseudo($listeUsers[$rapport->getIdentifiant()]['pseudo']);
+                $rapport->setAvatar($listeUsers[$rapport->getIdentifiant()]['avatar']);
             }
         }
 
@@ -61,14 +61,14 @@
         $control_ok = true;
 
         // Récupération des données
-        $date     = date('Ymd');
-        $author   = $sessionUser['identifiant'];
-        $equipe   = $sessionUser['equipe'];
-        $subject  = $post['subject_bug'];
-        $type     = $post['type_bug'];
-        $content  = $post['content_bug'];
-        $resolved = 'N';
-        $picture  = '';
+        $date        = date('Ymd');
+        $identifiant = $sessionUser['identifiant'];
+        $equipe      = $sessionUser['equipe'];
+        $subject     = $post['subject_bug'];
+        $type        = $post['type_bug'];
+        $content     = $post['content_bug'];
+        $resolved    = 'N';
+        $picture     = '';
 
         // Sauvegarde en session en cas d'erreur
         $_SESSION['save']['subject_bug'] = $post['subject_bug'];
@@ -113,24 +113,24 @@
         {
             // On insère dans la table
             $bug = array(
-                'date'       => $date,
-                'author'     => $author,
-                'team'       => $equipe,
-                'subject'    => $subject,
-                'content'    => $content,
-                'picture'    => $picture,
-                'resolution' => '',
-                'type'       => $type,
-                'resolved'   => $resolved
+                'date'        => $date,
+                'identifiant' => $identifiant,
+                'team'        => $equipe,
+                'subject'     => $subject,
+                'content'     => $content,
+                'picture'     => $picture,
+                'resolution'  => '',
+                'type'        => $type,
+                'resolved'    => $resolved
             );
 
             $idBug = physiqueInsertionBug($bug);
 
             // Génération succès
-            insertOrUpdateSuccesValue('debugger', $author, 1);
+            insertOrUpdateSuccesValue('debugger', $identifiant, 1);
 
             // Ajout expérience
-            insertExperience($author, 'add_bug');
+            insertExperience($identifiant, 'add_bug');
 
             // Message d'alerte
             $_SESSION['alerts']['bug_submitted'] = true;

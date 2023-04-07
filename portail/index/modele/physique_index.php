@@ -190,13 +190,13 @@
         // Requête
         global $bdd;
 
-        $req = $bdd->query('SELECT DISTINCT author
+        $req = $bdd->query('SELECT DISTINCT identifiant
                             FROM movie_house_comments
-                            ORDER BY author ASC');
+                            ORDER BY identifiant ASC');
 
         while ($data = $req->fetch())
         {
-            array_push($listeUsersComments, $data['author']);
+            array_push($listeUsersComments, $data['identifiant']);
         }
 
         $req->closeCursor();
@@ -290,13 +290,13 @@
         // Requête
         global $bdd;
 
-        $req = $bdd->query('SELECT DISTINCT author
+        $req = $bdd->query('SELECT DISTINCT identifiant
                             FROM bugs
-                            ORDER BY author ASC');
+                            ORDER BY identifiant ASC');
 
         while ($data = $req->fetch())
         {
-            array_push($listeUsersBugs, $data['author']);
+            array_push($listeUsersBugs, $data['identifiant']);
         }
 
         $req->closeCursor();

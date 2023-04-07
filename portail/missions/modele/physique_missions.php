@@ -168,8 +168,8 @@
         $req = $bdd->query('SELECT id, identifiant, team, pseudo, avatar
                             FROM users
                             WHERE EXISTS (SELECT id, id_mission, team, identifiant
-                                        FROM missions_users
-                                        WHERE missions_users.identifiant = users.identifiant AND missions_users.id_mission = "' . $idMission . '" AND missions_users.team = "' . $equipe . '")
+                                          FROM missions_users
+                                          WHERE missions_users.identifiant = users.identifiant AND missions_users.id_mission = "' . $idMission . '" AND missions_users.team = "' . $equipe . '")
                             ORDER BY identifiant ASC');
 
         while ($data = $req->fetch())

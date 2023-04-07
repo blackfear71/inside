@@ -18,11 +18,11 @@
                             FROM users
                             WHERE (identifiant != "admin" AND team = "' . $equipe . '" AND status != "I")
                             OR EXISTS (SELECT id, author, speaker, team
-                                    FROM collector
-                                    WHERE (collector.author = users.identifiant OR collector.speaker = users.identifiant) AND collector.team = "' . $equipe . '" AND collector.type_speaker != "other")
+                                       FROM collector
+                                       WHERE (collector.author = users.identifiant OR collector.speaker = users.identifiant) AND collector.team = "' . $equipe . '" AND collector.type_speaker != "other")
                             OR EXISTS (SELECT id, team, identifiant
-                                    FROM collector_users
-                                    WHERE collector_users.identifiant = users.identifiant AND collector_users.team = "' . $equipe . '")
+                                       FROM collector_users
+                                       WHERE collector_users.identifiant = users.identifiant AND collector_users.team = "' . $equipe . '")
                             ORDER BY identifiant ASC');
 
         while ($data = $req->fetch())
@@ -57,8 +57,8 @@
                 $req = $bdd->query('SELECT COUNT(*) AS nombreCollector
                                     FROM collector
                                     WHERE team = "' . $equipe . '" AND NOT EXISTS (SELECT id, id_collector, identifiant
-                                                                                FROM collector_users
-                                                                                WHERE (collector.id = collector_users.id_collector AND collector_users.identifiant = "' . $identifiant . '"))');
+                                                                                   FROM collector_users
+                                                                                   WHERE (collector.id = collector_users.id_collector AND collector_users.identifiant = "' . $identifiant . '"))');
                 break;
 
             case 'meOnly':

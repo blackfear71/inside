@@ -35,10 +35,10 @@
         foreach ($rapports as $rapport)
         {
             // Recherche des données de l'auteur
-            if (isset($listeUsers[$rapport->getAuthor()]))
+            if (isset($listeUsers[$rapport->getIdentifiant()]))
             {
-                $rapport->setPseudo($listeUsers[$rapport->getAuthor()]['pseudo']);
-                $rapport->setAvatar($listeUsers[$rapport->getAuthor()]['avatar']);
+                $rapport->setPseudo($listeUsers[$rapport->getIdentifiant()]['pseudo']);
+                $rapport->setAvatar($listeUsers[$rapport->getIdentifiant()]['avatar']);
             }
 
             // Recherche du libellé de l'équipe
@@ -95,9 +95,9 @@
         if ($resolved != 'R' AND $rapport->getResolved() != 'R')
         {
             if ($resolved == 'Y')
-                insertOrUpdateSuccesValue('compiler', $rapport->getAuthor(), 1);
+                insertOrUpdateSuccesValue('compiler', $rapport->getIdentifiant(), 1);
             else
-                insertOrUpdateSuccesValue('compiler', $rapport->getAuthor(), -1);
+                insertOrUpdateSuccesValue('compiler', $rapport->getIdentifiant(), -1);
         }
 
         // Retour
@@ -122,10 +122,10 @@
         physiqueDeleteRapport($idRapport);
 
         // Génération succès
-        insertOrUpdateSuccesValue('debugger', $rapport->getAuthor(), -1);
+        insertOrUpdateSuccesValue('debugger', $rapport->getIdentifiant(), -1);
 
         if ($rapport->getResolved() == 'Y')
-            insertOrUpdateSuccesValue('compiler', $rapport->getAuthor(), -1);
+            insertOrUpdateSuccesValue('compiler', $rapport->getIdentifiant(), -1);
 
         // Message d'alerte
         $_SESSION['alerts']['bug_deleted'] = true;
