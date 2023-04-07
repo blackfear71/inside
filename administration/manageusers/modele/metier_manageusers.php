@@ -68,14 +68,17 @@
         // Récupération des identifiants dans les commentaires des films
         $listeUsersComments = physiqueIdentifiantsCommentairesFilms();
 
-        // Récupération des identifiants dans les phrases cultes
-        $listeUsersCollector = physiqueIdentifiantsCollector();
-
         // Récupération des identifiants dans les dépenses
         $listeUsersExpenses = physiqueIdentifiantsDepenses();
 
         // Récupération des identifiants dans les parts des dépenses
         $listeUsersParts = physiqueIdentifiantsPartsDepenses();
+
+        // Récupération des identifiants dans les phrases cultes
+        $listeUsersCollector = physiqueIdentifiantsCollector();
+
+        // Récupération des identifiants dans les parcours
+        $listeUsersParcours = physiqueIdentifiantsParcours();
 
         // Récupération des identifiants dans les bugs / évolutions
         $listeUsersBugs = physiqueIdentifiantsBugs();
@@ -87,9 +90,10 @@
         $listeUsersDes = array_merge(
             $listeUsersFilms,
             $listeUsersComments,
-            $listeUsersCollector,
             $listeUsersExpenses,
             $listeUsersParts,
+            $listeUsersCollector,
+            $listeUsersParcours,
             $listeUsersBugs,
             $listeUsersTheBox
         );
@@ -149,9 +153,6 @@
                 // Commentaires films
                 $nombreComments = physiqueCommentairesFilmsUser($user->getIdentifiant());
 
-                // Phrases et images cultes ajoutées
-                $nombreCollector = physiqueCollectorAjoutesUser($user->getIdentifiant());
-
                 // Réservations de restaurants
                 $nombreReservations = physiqueReservationsUser($user->getIdentifiant());
 
@@ -163,6 +164,15 @@
 
                 // Bilan des dépenses
                 $bilanUser = physiqueBilanDepensesUser($user->getIdentifiant());
+
+                // Phrases et images cultes ajoutées
+                $nombreCollector = physiqueCollectorAjoutesUser($user->getIdentifiant());
+
+                // Parcours ajoutés
+                $nombreParcours = physiqueParcoursAjoutesUser($user->getIdentifiant());
+
+                // Participations parcours
+                $nombreParticipationsParcours = physiqueParticipationsParcoursUser($user->getIdentifiant());
 
                 // Nombre de demandes (bugs / évolutions)
                 $nombreBugsSoumis = physiqueBugsSoumisUser($user->getIdentifiant());
@@ -189,11 +199,13 @@
                 $statistiquesUser->setPseudo($user->getPseudo());
                 $statistiquesUser->setNb_films_ajoutes($nombreFilms);
                 $statistiquesUser->setNb_films_comments($nombreComments);
-                $statistiquesUser->setNb_collectors($nombreCollector);
                 $statistiquesUser->setNb_reservations($nombreReservations);
                 $statistiquesUser->setNb_gateaux_semaine($nombreGateauxSemaine);
                 $statistiquesUser->setNb_recettes($nombreRecettes);
                 $statistiquesUser->setExpenses($bilanUser);
+                $statistiquesUser->setNb_collectors($nombreCollector);
+                $statistiquesUser->setNb_parcours_ajoutes($nombreParcours);
+                $statistiquesUser->setNb_parcours_participations($nombreParticipationsParcours);
                 $statistiquesUser->setNb_bugs_soumis($nombreBugsSoumis);
                 $statistiquesUser->setNb_bugs_resolus($nombreBugsResolus);
                 $statistiquesUser->setNb_bugs_rejetes($nombreBugsRejetes);
@@ -237,9 +249,6 @@
 
             // Commentaires films
             $nombreComments = physiqueCommentairesFilmsUser($userDes);
-
-            // Phrases cultes ajoutées
-            $nombreCollector = physiqueCollectorAjoutesUser($userDes);
 
             // Réservations de restaurants
             $nombreReservations = physiqueReservationsUser($userDes);
@@ -302,6 +311,15 @@
                 }
             }
 
+            // Phrases cultes ajoutées
+            $nombreCollector = physiqueCollectorAjoutesUser($userDes);
+
+            // Parcours ajoutés
+            $nombreParcours = physiqueParcoursAjoutesUser($userDes);
+
+            // Participations parcours
+            $nombreParticipationsParcours = physiqueParticipationsParcoursUser($userDes);
+            
             // Nombre de demandes (bugs / évolutions)
             $nombreBugsSoumis = physiqueBugsSoumisUser($userDes);
 
@@ -327,11 +345,13 @@
             $statistiquesUser->setPseudo('');
             $statistiquesUser->setNb_films_ajoutes($nombreFilms);
             $statistiquesUser->setNb_films_comments($nombreComments);
-            $statistiquesUser->setNb_collectors($nombreCollector);
             $statistiquesUser->setNb_reservations($nombreReservations);
             $statistiquesUser->setNb_gateaux_semaine($nombreGateauxSemaine);
             $statistiquesUser->setNb_recettes($nombreRecettes);
             $statistiquesUser->setExpenses($bilanUser);
+            $statistiquesUser->setNb_collectors($nombreCollector);
+            $statistiquesUser->setNb_parcours_ajoutes($nombreParcours);
+            $statistiquesUser->setNb_parcours_participations($nombreParticipationsParcours);
             $statistiquesUser->setNb_bugs_soumis($nombreBugsSoumis);
             $statistiquesUser->setNb_bugs_resolus($nombreBugsResolus);
             $statistiquesUser->setNb_bugs_rejetes($nombreBugsRejetes);
@@ -359,9 +379,6 @@
 
         // Nombre de commentaires
         $nombreComments = physiqueCommentairesFilmsTotal();
-
-        // Nombre de phrase cultes
-        $nombreCollector = physiqueCollectorTotal();
 
         // Nombre de réservations de restaurants
         $nombreReservations = physiqueReservationsTotal();
@@ -396,6 +413,15 @@
 
         $regularisations = -1 * $expensesNoParts;
 
+        // Nombre de phrase cultes
+        $nombreCollector = physiqueCollectorTotal();
+        
+        // Parcours ajoutés
+        $nombreParcours = physiqueParcoursAjoutesTotal();
+
+        // Participations parcours
+        $nombreParticipationsParcours = physiqueParticipationsParcoursTotal();
+
         // Nombre de demandes (bugs / évolutions)
         $nombreBugsSoumis = physiqueBugsSoumisTotal();
 
@@ -419,12 +445,14 @@
 
         $totalStatistiques->setNb_films_ajoutes_total($nombreFilms);
         $totalStatistiques->setNb_films_comments_total($nombreComments);
-        $totalStatistiques->setNb_collectors_total($nombreCollector);
         $totalStatistiques->setNb_reservations_total($nombreReservations);
         $totalStatistiques->setNb_gateaux_semaine_total($nombreGateauxSemaine);
         $totalStatistiques->setNb_recettes_total($nombreRecettes);
         $totalStatistiques->setExpenses_no_parts($regularisations);
         $totalStatistiques->setExpenses_total($sommeBilans);
+        $totalStatistiques->setNb_collectors_total($nombreCollector);
+        $totalStatistiques->setNb_parcours_ajoutes_total($nombreParcours);
+        $totalStatistiques->setNb_parcours_participations_total($nombreParticipationsParcours);
         $totalStatistiques->setNb_bugs_soumis_total($nombreBugsSoumis);
         $totalStatistiques->setNb_bugs_resolus_total($nombreBugsResolus);
         $totalStatistiques->setNb_bugs_rejetes_total($nombreBugsRejetes);
@@ -447,21 +475,23 @@
         foreach ($tableauStatistiques as $statistiquesAConvertir)
         {
             $statistique = array(
-                'identifiant'        => $statistiquesAConvertir->getIdentifiant(),
-                'pseudo'             => $statistiquesAConvertir->getPseudo(),
-                'nb_films_ajoutes'   => $statistiquesAConvertir->getNb_films_ajoutes(),
-                'nb_films_comments'  => $statistiquesAConvertir->getNb_films_comments(),
-                'nb_collectors'      => $statistiquesAConvertir->getNb_collectors(),
-                'nb_reservations'    => $statistiquesAConvertir->getNb_reservations(),
-                'nb_gateaux_semaine' => $statistiquesAConvertir->getNb_gateaux_semaine(),
-                'nb_recettes'        => $statistiquesAConvertir->getNb_recettes(),
-                'expenses'           => $statistiquesAConvertir->getExpenses(),
-                'nb_bugs_soumis'     => $statistiquesAConvertir->getNb_bugs_soumis(),
-                'nb_bugs_resolus'    => $statistiquesAConvertir->getNb_bugs_resolus(),
-                'nb_bugs_rejetes'    => $statistiquesAConvertir->getNb_bugs_rejetes(),
-                'nb_idees_soumises'  => $statistiquesAConvertir->getNb_idees_soumises(),
-                'nb_idees_en_charge' => $statistiquesAConvertir->getNb_idees_en_charge(),
-                'nb_idees_terminees' => $statistiquesAConvertir->getNb_idees_terminees()
+                'identifiant'                => $statistiquesAConvertir->getIdentifiant(),
+                'pseudo'                     => $statistiquesAConvertir->getPseudo(),
+                'nb_films_ajoutes'           => $statistiquesAConvertir->getNb_films_ajoutes(),
+                'nb_films_comments'          => $statistiquesAConvertir->getNb_films_comments(),
+                'nb_reservations'            => $statistiquesAConvertir->getNb_reservations(),
+                'nb_gateaux_semaine'         => $statistiquesAConvertir->getNb_gateaux_semaine(),
+                'nb_recettes'                => $statistiquesAConvertir->getNb_recettes(),
+                'expenses'                   => $statistiquesAConvertir->getExpenses(),
+                'nb_collectors'              => $statistiquesAConvertir->getNb_collectors(),
+                'nb_parcours_ajoutes'        => $statistiquesAConvertir->getNb_parcours_ajoutes(),
+                'nb_parcours_participations' => $statistiquesAConvertir->getNb_parcours_participations(),
+                'nb_bugs_soumis'             => $statistiquesAConvertir->getNb_bugs_soumis(),
+                'nb_bugs_resolus'            => $statistiquesAConvertir->getNb_bugs_resolus(),
+                'nb_bugs_rejetes'            => $statistiquesAConvertir->getNb_bugs_rejetes(),
+                'nb_idees_soumises'          => $statistiquesAConvertir->getNb_idees_soumises(),
+                'nb_idees_en_charge'         => $statistiquesAConvertir->getNb_idees_en_charge(),
+                'nb_idees_terminees'         => $statistiquesAConvertir->getNb_idees_terminees()
             );
 
             array_push($listeStatistiquesAConvertir, $statistique);

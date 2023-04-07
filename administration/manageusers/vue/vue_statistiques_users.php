@@ -110,6 +110,27 @@
             echo '</div>';
         echo '</a>';
 
+        // Les Petits Pédestres
+        echo '<a id="statistiques_parcours" class="zone_statistiques_categorie afficherDetailsStatistiques">';
+            echo '<div class="zone_lien_plus">';
+                echo '<span class="lien_plus">+</span>';
+            echo '</div>';
+
+            echo '<div class="titre_statistiques_categorie"><img src="../../includes/icons/admin/parcours_grey.png" alt="parcours_grey" class="logo_titre_statistiques_categorie" />LES PETITS PÉDESTRES</div>';
+
+            // Parcours ajoutés
+            echo '<div class="zone_statistique">';
+                echo '<div class="valeur_statistique">' . $totalStatistiques->getNb_parcours_ajoutes_total() . '</div>';
+                echo '<div class="texte_statistique">parcours ajoutés</div>';
+            echo '</div>';
+
+            // Participations
+            echo '<div class="zone_statistique border_left">';
+                echo '<div class="valeur_statistique">' . $totalStatistiques->getNb_parcours_participations_total() . '</div>';
+                echo '<div class="texte_statistique">participations</div>';
+            echo '</div>';
+        echo '</a>';
+
         // Bugs / évolutions
         echo '<a id="statistiques_bugs" class="zone_statistiques_categorie afficherDetailsStatistiques">';
             echo '<div class="zone_lien_plus">';

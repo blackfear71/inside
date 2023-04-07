@@ -870,6 +870,14 @@ function showDetailsStatistiques(typeStatistique)
             colonnesCategorie.push({ name: 'Phrases cultes rapportées', data: 'nb_collectors' });
             break;
 
+        case 'parcours':
+            titreDetails = 'LES PETITS PÉDESTRES';
+            logoDetails  = 'parcours_grey';
+
+            colonnesCategorie.push({ name: 'Parcours ajoutés', data: 'nb_parcours_ajoutes' });
+            colonnesCategorie.push({ name: 'Participations', data: 'nb_parcours_participations' });
+            break;
+
         case 'bugs':
             titreDetails = 'BUGS & ÉVOLUTIONS';
             logoDetails  = 'alerts_grey';
@@ -1007,6 +1015,7 @@ function showDetailsStatistiques(typeStatistique)
                                     {
                                         case 'nb_reservations':
                                         case 'nb_idees_en_charge':
+                                        case 'nb_parcours_participations':
                                             html += '<td class="td_table_admin_centre">';
                                                 if (tableauStatistiquesDesJson[key][this.data] == 0)
                                                     html += 'N/A';

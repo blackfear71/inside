@@ -854,11 +854,13 @@
         private $pseudo;
         private $nb_films_ajoutes;
         private $nb_films_comments;
-        private $nb_collectors;
         private $nb_reservations;
         private $nb_gateaux_semaine;
         private $nb_recettes;
         private $expenses;
+        private $nb_collectors;
+        private $nb_parcours_ajoutes;
+        private $nb_parcours_participations;
         private $nb_bugs_soumis;
         private $nb_bugs_resolus;
         private $nb_bugs_rejetes;
@@ -869,21 +871,23 @@
         // Constructeur par défaut (objet vide)
         public function __construct()
         {
-            $this->identifiant        = '';
-            $this->pseudo             = '';
-            $this->nb_films_ajoutes   = 0;
-            $this->nb_films_comments  = 0;
-            $this->nb_collectors      = 0;
-            $this->nb_reservations    = 0;
-            $this->nb_gateaux_semaine = 0;
-            $this->nb_recettes        = 0;
-            $this->expenses           = 0;
-            $this->nb_bugs_soumis     = 0;
-            $this->nb_bugs_resolus    = 0;
-            $this->nb_bugs_rejetes    = 0;
-            $this->nb_idees_soumises  = 0;
-            $this->nb_idees_en_charge = 0;
-            $this->nb_idees_terminees = 0;
+            $this->identifiant                = '';
+            $this->pseudo                     = '';
+            $this->nb_films_ajoutes           = 0;
+            $this->nb_films_comments          = 0;
+            $this->nb_reservations            = 0;
+            $this->nb_gateaux_semaine         = 0;
+            $this->nb_recettes                = 0;
+            $this->expenses                   = 0;
+            $this->nb_collectors              = 0;
+            $this->nb_parcours_ajoutes        = 0;
+            $this->nb_parcours_participations = 0;
+            $this->nb_bugs_soumis             = 0;
+            $this->nb_bugs_resolus            = 0;
+            $this->nb_bugs_rejetes            = 0;
+            $this->nb_idees_soumises          = 0;
+            $this->nb_idees_en_charge         = 0;
+            $this->nb_idees_terminees         = 0;
         }
 
         // Sécurisation des données
@@ -897,21 +901,23 @@
 
         protected function fillSecureData($data)
         {
-            $this->identifiant        = htmlspecialchars($data->getIdentifiant());
-            $this->pseudo             = htmlspecialchars($data->getPseudo());
-            $this->nb_films_ajoutes   = htmlspecialchars($data->getNb_films_ajoutes());
-            $this->nb_films_comments  = htmlspecialchars($data->getNb_films_comments());
-            $this->nb_collectors      = htmlspecialchars($data->getNb_collectors());
-            $this->nb_reservations    = htmlspecialchars($data->getNb_reservations());
-            $this->nb_gateaux_semaine = htmlspecialchars($data->getNb_gateaux_semaine());
-            $this->nb_recettes        = htmlspecialchars($data->getNb_recettes());
-            $this->expenses           = htmlspecialchars($data->getExpenses());
-            $this->nb_bugs_soumis     = htmlspecialchars($data->getNb_bugs_soumis());
-            $this->nb_bugs_resolus    = htmlspecialchars($data->getNb_bugs_resolus());
-            $this->nb_bugs_rejetes    = htmlspecialchars($data->getNb_bugs_rejetes());
-            $this->nb_idees_soumises  = htmlspecialchars($data->getNb_idees_soumises());
-            $this->nb_idees_en_charge = htmlspecialchars($data->getNb_idees_en_charge());
-            $this->nb_idees_terminees = htmlspecialchars($data->getNb_idees_terminees());
+            $this->identifiant                = htmlspecialchars($data->getIdentifiant());
+            $this->pseudo                     = htmlspecialchars($data->getPseudo());
+            $this->nb_films_ajoutes           = htmlspecialchars($data->getNb_films_ajoutes());
+            $this->nb_films_comments          = htmlspecialchars($data->getNb_films_comments());
+            $this->nb_reservations            = htmlspecialchars($data->getNb_reservations());
+            $this->nb_gateaux_semaine         = htmlspecialchars($data->getNb_gateaux_semaine());
+            $this->nb_recettes                = htmlspecialchars($data->getNb_recettes());
+            $this->expenses                   = htmlspecialchars($data->getExpenses());
+            $this->nb_collectors              = htmlspecialchars($data->getNb_collectors());
+            $this->nb_parcours_ajoutes        = htmlspecialchars($data->getNb_parcours_ajoutes());
+            $this->nb_parcours_participations = htmlspecialchars($data->getNb_parcours_participations());
+            $this->nb_bugs_soumis             = htmlspecialchars($data->getNb_bugs_soumis());
+            $this->nb_bugs_resolus            = htmlspecialchars($data->getNb_bugs_resolus());
+            $this->nb_bugs_rejetes            = htmlspecialchars($data->getNb_bugs_rejetes());
+            $this->nb_idees_soumises          = htmlspecialchars($data->getNb_idees_soumises());
+            $this->nb_idees_en_charge         = htmlspecialchars($data->getNb_idees_en_charge());
+            $this->nb_idees_terminees         = htmlspecialchars($data->getNb_idees_terminees());
         }
 
         // Getters et Setters pour l'objet StatistiquesAdmin
@@ -959,17 +965,6 @@
             return $this->nb_films_comments;
         }
 
-        // Nombre de phrases cultes ajoutées
-        public function setNb_collectors($nb_collectors)
-        {
-            $this->nb_collectors = $nb_collectors;
-        }
-
-        public function getNb_collectors()
-        {
-            return $this->nb_collectors;
-        }
-
         // Nombre de réservations de restaurants
         public function setNb_reservations($nb_reservations)
         {
@@ -1014,6 +1009,39 @@
             return $this->expenses;
         }
 
+        // Nombre de phrases cultes ajoutées
+        public function setNb_collectors($nb_collectors)
+        {
+            $this->nb_collectors = $nb_collectors;
+        }
+
+        public function getNb_collectors()
+        {
+            return $this->nb_collectors;
+        }
+
+        // Nombre de parcours ajoutées
+        public function setNb_parcours_ajoutes($nb_parcours_ajoutes)
+        {
+            $this->nb_parcours_ajoutes = $nb_parcours_ajoutes;
+        }
+
+        public function getNb_parcours_ajoutes()
+        {
+            return $this->nb_parcours_ajoutes;
+        }
+
+        // Nombre de participations aux parcours
+        public function setNb_parcours_participations($nb_parcours_participations)
+        {
+            $this->nb_parcours_participations = $nb_parcours_participations;
+        }
+
+        public function getNb_parcours_participations()
+        {
+            return $this->nb_parcours_participations;
+        }
+        
         // Nombre de bugs soumis
         public function setNb_bugs_soumis($nb_bugs_soumis)
         {
@@ -1085,12 +1113,14 @@
     {
         private $nb_films_ajoutes_total;
         private $nb_films_comments_total;
-        private $nb_collectors_total;
         private $nb_reservations_total;
         private $nb_gateaux_semaine_total;
         private $nb_recettes_total;
         private $expenses_no_parts;
         private $expenses_total;
+        private $nb_collectors_total;
+        private $nb_parcours_ajoutes_total;
+        private $nb_parcours_participations_total;
         private $nb_bugs_soumis_total;
         private $nb_bugs_resolus_total;
         private $nb_bugs_rejetes_total;
@@ -1101,20 +1131,22 @@
         // Constructeur par défaut (objet vide)
         public function __construct()
         {
-            $this->nb_films_ajoutes_total   = 0;
-            $this->nb_films_comments_total  = 0;
-            $this->nb_collectors_total      = 0;
-            $this->nb_reservations_total    = 0;
-            $this->nb_gateaux_semaine_total = 0;
-            $this->nb_recettes_total        = 0;
-            $this->expenses_no_parts        = 0;
-            $this->expenses_total           = 0;
-            $this->nb_bugs_soumis_total     = 0;
-            $this->nb_bugs_resolus_total    = 0;
-            $this->nb_bugs_rejetes_total    = 0;
-            $this->nb_idees_soumises_total  = 0;
-            $this->nb_idees_en_charge_total = 0;
-            $this->nb_idees_terminees_total = 0;
+            $this->nb_films_ajoutes_total           = 0;
+            $this->nb_films_comments_total          = 0;
+            $this->nb_reservations_total            = 0;
+            $this->nb_gateaux_semaine_total         = 0;
+            $this->nb_recettes_total                = 0;
+            $this->expenses_no_parts                = 0;
+            $this->expenses_total                   = 0;
+            $this->nb_collectors_total              = 0;
+            $this->nb_parcours_ajoutes_total        = 0;
+            $this->nb_parcours_participations_total = 0;
+            $this->nb_bugs_soumis_total             = 0;
+            $this->nb_bugs_resolus_total            = 0;
+            $this->nb_bugs_rejetes_total            = 0;
+            $this->nb_idees_soumises_total          = 0;
+            $this->nb_idees_en_charge_total         = 0;
+            $this->nb_idees_terminees_total         = 0;
         }
 
         // Sécurisation des données
@@ -1128,20 +1160,22 @@
 
         protected function fillSecureData($data)
         {
-            $this->nb_films_ajoutes_total   = htmlspecialchars($data->getNb_films_ajoutes_total());
-            $this->nb_films_comments_total  = htmlspecialchars($data->getNb_films_comments_total());
-            $this->nb_collectors_total      = htmlspecialchars($data->getNb_collectors_total());
-            $this->nb_reservations_total    = htmlspecialchars($data->getNb_reservations_total());
-            $this->nb_gateaux_semaine_total = htmlspecialchars($data->getNb_gateaux_semaine_total());
-            $this->nb_recettes_total        = htmlspecialchars($data->getNb_recettes_total());
-            $this->expenses_no_parts        = htmlspecialchars($data->getExpenses_no_parts());
-            $this->expenses_total           = htmlspecialchars($data->getExpenses_total());
-            $this->nb_bugs_soumis_total     = htmlspecialchars($data->getNb_bugs_soumis_total());
-            $this->nb_bugs_resolus_total    = htmlspecialchars($data->getNb_bugs_resolus_total());
-            $this->nb_bugs_rejetes_total    = htmlspecialchars($data->getNb_bugs_rejetes_total());
-            $this->nb_idees_soumises_total  = htmlspecialchars($data->getNb_idees_soumises_total());
-            $this->nb_idees_en_charge_total = htmlspecialchars($data->getNb_idees_en_charge_total());
-            $this->nb_idees_terminees_total = htmlspecialchars($data->getNb_idees_terminees_total());
+            $this->nb_films_ajoutes_total           = htmlspecialchars($data->getNb_films_ajoutes_total());
+            $this->nb_films_comments_total          = htmlspecialchars($data->getNb_films_comments_total());
+            $this->nb_reservations_total            = htmlspecialchars($data->getNb_reservations_total());
+            $this->nb_gateaux_semaine_total         = htmlspecialchars($data->getNb_gateaux_semaine_total());
+            $this->nb_recettes_total                = htmlspecialchars($data->getNb_recettes_total());
+            $this->expenses_no_parts                = htmlspecialchars($data->getExpenses_no_parts());
+            $this->expenses_total                   = htmlspecialchars($data->getExpenses_total());
+            $this->nb_collectors_total              = htmlspecialchars($data->getNb_collectors_total());
+            $this->nb_parcours_ajoutes_total        = htmlspecialchars($data->getNb_parcours_ajoutes_total());
+            $this->nb_parcours_participations_total = htmlspecialchars($data->getNb_parcours_participations_total());
+            $this->nb_bugs_soumis_total             = htmlspecialchars($data->getNb_bugs_soumis_total());
+            $this->nb_bugs_resolus_total            = htmlspecialchars($data->getNb_bugs_resolus_total());
+            $this->nb_bugs_rejetes_total            = htmlspecialchars($data->getNb_bugs_rejetes_total());
+            $this->nb_idees_soumises_total          = htmlspecialchars($data->getNb_idees_soumises_total());
+            $this->nb_idees_en_charge_total         = htmlspecialchars($data->getNb_idees_en_charge_total());
+            $this->nb_idees_terminees_total         = htmlspecialchars($data->getNb_idees_terminees_total());
         }
 
         // Getters et Setters pour l'objet TotalStatistiquesAdmin
@@ -1165,17 +1199,6 @@
         public function getNb_films_comments_total()
         {
             return $this->nb_films_comments_total;
-        }
-
-        // Nombre de phrases cultes ajoutées
-        public function setNb_collectors_total($nb_collectors_total)
-        {
-            $this->nb_collectors_total = $nb_collectors_total;
-        }
-
-        public function getNb_collectors_total()
-        {
-            return $this->nb_collectors_total;
         }
 
         // Nombre de réservations de restaurants
@@ -1231,6 +1254,39 @@
         public function getExpenses_total()
         {
             return $this->expenses_total;
+        }
+
+        // Nombre de phrases cultes ajoutées
+        public function setNb_collectors_total($nb_collectors_total)
+        {
+            $this->nb_collectors_total = $nb_collectors_total;
+        }
+
+        public function getNb_collectors_total()
+        {
+            return $this->nb_collectors_total;
+        }
+
+        // Nombre de parcours ajoutées
+        public function setNb_parcours_ajoutes_total($nb_parcours_ajoutes_total)
+        {
+            $this->nb_parcours_ajoutes_total = $nb_parcours_ajoutes_total;
+        }
+
+        public function getNb_parcours_ajoutes_total()
+        {
+            return $this->nb_parcours_ajoutes_total;
+        }
+
+        // Nombre de participations aux parcours
+        public function setNb_parcours_participations_total($nb_parcours_participations_total)
+        {
+            $this->nb_parcours_participations_total = $nb_parcours_participations_total;
+        }
+
+        public function getNb_parcours_participations_total()
+        {
+            return $this->nb_parcours_participations_total;
         }
 
         // Nombre de bugs soumis

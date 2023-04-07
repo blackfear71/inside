@@ -159,6 +159,31 @@
         return $listeUsersParts;
     }
 
+    // PHYSIQUE : Lecture des identifiants des parcours
+    // RETOUR : Liste des utilisateurs uniques
+    function physiqueIdentifiantsParcours()
+    {
+        // Initialisations
+        $listeUsersParcours = array();
+
+        // Requête
+        global $bdd;
+
+        $req = $bdd->query('SELECT DISTINCT identifiant_add
+                            FROM petits_pedestres_parcours
+                            ORDER BY identifiant_add ASC');
+
+        while ($data = $req->fetch())
+        {
+            array_push($listeUsersParcours, $data['identifiant_add']);
+        }
+
+        $req->closeCursor();
+
+        // Retour
+        return $listeUsersParcours;
+    }
+    
     // PHYSIQUE : Lecture des identifiants des bugs / évolutions
     // RETOUR : Liste des utilisateurs uniques
     function physiqueIdentifiantsBugs()
@@ -286,54 +311,6 @@
         return $nombreComments;
     }
 
-    // PHYSIQUE : Lecture du bilan des dépenses d'un utilisateur
-    // RETOUR : Bilan des dépenses de l'utilisateur
-    function physiqueBilanDepensesUser($identifiant)
-    {
-        // Initialisations
-        $bilanUser = 0;
-
-        // Requête
-        global $bdd;
-
-        $req = $bdd->query('SELECT id, identifiant, expenses
-                            FROM users
-                            WHERE identifiant = "' . $identifiant . '"');
-
-        $data = $req->fetch();
-
-        $bilanUser = $data['expenses'];
-
-        $req->closeCursor();
-
-        // Retour
-        return $bilanUser;
-    }
-
-    // PHYSIQUE : Lecture du nombre de phrases cultes ajoutées
-    // RETOUR : Nombre de phrases cultes ajoutés
-    function physiqueCollectorAjoutesUser($identifiant)
-    {
-        // Initialisations
-        $nombreCollector = 0;
-
-        // Requête
-        global $bdd;
-
-        $req = $bdd->query('SELECT COUNT(*) AS nombreCollector
-                            FROM collector
-                            WHERE author = "' . $identifiant . '"');
-
-        $data = $req->fetch();
-
-        $nombreCollector = $data['nombreCollector'];
-
-        $req->closeCursor();
-
-        // Retour
-        return $nombreCollector;
-    }
-
     // PHYSIQUE : Lecture du nombre de réservations de restaurants
     // RETOUR : Nombre de réservations
     function physiqueReservationsUser($identifiant)
@@ -406,6 +383,30 @@
         return $nombreRecettes;
     }
 
+    // PHYSIQUE : Lecture du bilan des dépenses d'un utilisateur
+    // RETOUR : Bilan des dépenses de l'utilisateur
+    function physiqueBilanDepensesUser($identifiant)
+    {
+        // Initialisations
+        $bilanUser = 0;
+
+        // Requête
+        global $bdd;
+
+        $req = $bdd->query('SELECT id, identifiant, expenses
+                            FROM users
+                            WHERE identifiant = "' . $identifiant . '"');
+
+        $data = $req->fetch();
+
+        $bilanUser = $data['expenses'];
+
+        $req->closeCursor();
+
+        // Retour
+        return $bilanUser;
+    }
+
     // PHYSIQUE : Lecture de la liste des dépenses liées à un utilisateur désinscrit
     // RETOUR : Liste des dépenses
     function physiqueDepensesDesinscrit($identifiant)
@@ -421,39 +422,6 @@
                             LEFT JOIN expense_center_users ON expense_center.id = expense_center_users.id_expense
                             WHERE expense_center.buyer = "' . $identifiant . '" OR expense_center_users.identifiant = "' . $identifiant . '"
                             GROUP BY expense_center.id
-                            ORDER BY id ASC');
-
-        while ($data = $req->fetch())
-        {
-            // Instanciation d'un objet Expenses à partir des données remontées de la bdd
-            $expense = Expenses::withData($data);
-
-            // On ajoute la ligne au tableau
-            array_push($listeExpenses, $expense);
-        }
-
-        $req->closeCursor();
-
-        // Retour
-        return $listeExpenses;
-    }
-
-    // PHYSIQUE : Lecture de la liste des dépenses sans parts
-    // RETOUR : Liste des dépenses
-    function physiqueDepensesSansParts()
-    {
-        // Initialisations
-        $listeExpenses = array();
-
-        // Requête
-        global $bdd;
-
-        $req = $bdd->query('SELECT expense_center.*
-                            FROM expense_center
-                            LEFT JOIN expense_center_users ON expense_center.id = expense_center_users.id_expense
-                            WHERE NOT EXISTS (SELECT id, id_expense
-                                            FROM expense_center_users
-                                            WHERE expense_center.id = expense_center_users.id_expense)
                             ORDER BY id ASC');
 
         while ($data = $req->fetch())
@@ -508,6 +476,78 @@
         return $nombreParts;
     }
 
+    // PHYSIQUE : Lecture du nombre de phrases cultes ajoutées
+    // RETOUR : Nombre de phrases cultes ajoutés
+    function physiqueCollectorAjoutesUser($identifiant)
+    {
+        // Initialisations
+        $nombreCollector = 0;
+
+        // Requête
+        global $bdd;
+
+        $req = $bdd->query('SELECT COUNT(*) AS nombreCollector
+                            FROM collector
+                            WHERE author = "' . $identifiant . '"');
+
+        $data = $req->fetch();
+
+        $nombreCollector = $data['nombreCollector'];
+
+        $req->closeCursor();
+
+        // Retour
+        return $nombreCollector;
+    }
+
+    // PHYSIQUE : Lecture du nombre de parcours ajoutées
+    // RETOUR : Nombre de parcours ajoutés
+    function physiqueParcoursAjoutesUser($identifiant)
+    {
+        // Initialisations
+        $nombreParcours = 0;
+
+        // Requête
+        global $bdd;
+
+        $req = $bdd->query('SELECT COUNT(*) AS nombreParcours
+                            FROM petits_pedestres_parcours
+                            WHERE identifiant_add = "' . $identifiant . '"');
+
+        $data = $req->fetch();
+
+        $nombreParcours = $data['nombreParcours'];
+
+        $req->closeCursor();
+
+        // Retour
+        return $nombreParcours;
+    }
+
+    // PHYSIQUE : Lecture du nombre de participations d'un parcours
+    // RETOUR : Nombre de parcours ajoutés
+    function physiqueParticipationsParcoursUser($identifiant)
+    {
+        // Initialisations
+        $nombreParticipations = 0;
+
+        // Requête
+        global $bdd;
+
+        $req = $bdd->query('SELECT COUNT(*) AS nombreParticipations
+                            FROM petits_pedestres_users
+                            WHERE identifiant = "' . $identifiant . '"');
+
+        $data = $req->fetch();
+
+        $nombreParticipations = $data['nombreParticipations'];
+
+        $req->closeCursor();
+
+        // Retour
+        return $nombreParticipations;
+    }
+
     // PHYSIQUE : Lecture du nombre total de films ajoutés
     // RETOUR : Nombre total de films ajoutés
     function physiqueFilmsAjoutesTotal()
@@ -552,29 +592,6 @@
 
         // Retour
         return $nombreComments;
-    }
-
-    // PHYSIQUE : Lecture du nombre total de phrases cultes ajoutées
-    // RETOUR : Nombre total de phrases cultes ajoutées
-    function physiqueCollectorTotal()
-    {
-        // Initialisations
-        $nombreCollector = 0;
-
-        // Requête
-        global $bdd;
-
-        $req = $bdd->query('SELECT COUNT(*) AS nombreCollector
-                            FROM collector');
-
-        $data = $req->fetch();
-
-        $nombreCollector = $data['nombreCollector'];
-
-        $req->closeCursor();
-
-        // Retour
-        return $nombreCollector;
     }
 
     // PHYSIQUE : Lecture du nombre total de réservations de restaurants
@@ -649,6 +666,108 @@
         return $nombreRecettes;
     }
 
+    // PHYSIQUE : Lecture de la liste des dépenses sans parts
+    // RETOUR : Liste des dépenses
+    function physiqueDepensesSansParts()
+    {
+        // Initialisations
+        $listeExpenses = array();
+
+        // Requête
+        global $bdd;
+
+        $req = $bdd->query('SELECT expense_center.*
+                            FROM expense_center
+                            LEFT JOIN expense_center_users ON expense_center.id = expense_center_users.id_expense
+                            WHERE NOT EXISTS (SELECT id, id_expense
+                                            FROM expense_center_users
+                                            WHERE expense_center.id = expense_center_users.id_expense)
+                            ORDER BY id ASC');
+
+        while ($data = $req->fetch())
+        {
+            // Instanciation d'un objet Expenses à partir des données remontées de la bdd
+            $expense = Expenses::withData($data);
+
+            // On ajoute la ligne au tableau
+            array_push($listeExpenses, $expense);
+        }
+
+        $req->closeCursor();
+
+        // Retour
+        return $listeExpenses;
+    }
+
+    // PHYSIQUE : Lecture du nombre total de phrases cultes ajoutées
+    // RETOUR : Nombre total de phrases cultes ajoutées
+    function physiqueCollectorTotal()
+    {
+        // Initialisations
+        $nombreCollector = 0;
+
+        // Requête
+        global $bdd;
+
+        $req = $bdd->query('SELECT COUNT(*) AS nombreCollector
+                            FROM collector');
+
+        $data = $req->fetch();
+
+        $nombreCollector = $data['nombreCollector'];
+
+        $req->closeCursor();
+
+        // Retour
+        return $nombreCollector;
+    }
+
+    // PHYSIQUE : Lecture du nombre total de parcours ajoutées
+    // RETOUR : Nombre total de parcours ajoutées
+    function physiqueParcoursAjoutesTotal()
+    {
+        // Initialisations
+        $nombreParcours = 0;
+
+        // Requête
+        global $bdd;
+
+        $req = $bdd->query('SELECT COUNT(*) AS nombreParcours
+                            FROM petits_pedestres_parcours');
+
+        $data = $req->fetch();
+
+        $nombreParcours = $data['nombreParcours'];
+
+        $req->closeCursor();
+
+        // Retour
+        return $nombreParcours;
+    }
+
+    // PHYSIQUE : Lecture du nombre total de participations des parcours
+    // RETOUR : Nombre total de participations des parcours
+    function physiqueParticipationsParcoursTotal()
+    {
+        // Initialisations
+        $nombreParticipations = 0;
+
+        // Requête
+        global $bdd;
+
+        $req = $bdd->query('SELECT COUNT(*) AS nombreParticipations
+                            FROM petits_pedestres_users');
+
+        $data = $req->fetch();
+
+        $nombreParticipations = $data['nombreParticipations'];
+
+        $req->closeCursor();
+
+        // Retour
+        return $nombreParticipations;
+    }
+    
     // PHYSIQUE : Lecture du nombre de bugs soumis d'un utilisateur
     // RETOUR : Nombre de bugs soumis de l'utilisateur
     function physiqueBugsSoumisUser($identifiant)
