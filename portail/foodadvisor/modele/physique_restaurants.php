@@ -43,6 +43,7 @@
         global $bdd;
 
         $req = $bdd->prepare('INSERT INTO food_advisor_restaurants(team,
+                                                                   identifiant_add,
                                                                    name,
                                                                    picture,
                                                                    types,
@@ -56,6 +57,7 @@
                                                                    lafourchette,
                                                                    description)
                                                            VALUES(:team,
+                                                                  :identifiant_add,
                                                                   :name,
                                                                   :picture,
                                                                   :types,

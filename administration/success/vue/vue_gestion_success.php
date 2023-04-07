@@ -23,14 +23,12 @@
         echo '</form>';
 
         echo '<div class="explications_gestion_succes">';
-            echo 'Ce bouton permet d\'effacer tous les succès des utilisateurs dans la base de données sauf les suivants :';
+            echo 'Ce bouton permet d\'effacer tous les succès des utilisateurs dans la base de données sauf pour les exceptions suivantes :';
 
             echo '<ul class="margin_top_0 margin_bottom_0">';
-                echo '<li>J\'étais là. (beginning)</li>';
-                echo '<li>Je l\'ai fait ! (developper)</li>';
-                echo '<li>Véritable Jedi (padawan)</li>';
-                echo '<li>Economie de marché (greedy)</li>';
-                echo '<li>Radar à bouffe (restaurant-finder)</li>';
+                echo '<li>J\'étais là. (<strong>beginning</strong>) - défini manuellement par l\'administrateur</li>';
+                echo '<li>Je l\'ai fait ! (<strong>developper</strong>) - défini manuellement par l\'administrateur</li>';
+                echo '<li>Economie de marché (<strong>greedy</strong>) - pas d\'historique du plus haut bilan d\'un utilisateur</li>';
             echo '</ul>';
         echo '</div>';
     echo '</div>';

@@ -3,6 +3,7 @@
     {
         private $id;
         private $team;
+        private $identifiant_add;
         private $name;
         private $picture;
         private $types;
@@ -19,20 +20,21 @@
         // Constructeur par défaut (objet vide)
         public function __construct()
         {
-            $this->id           = 0;
-            $this->team         = '';
-            $this->name         = '';
-            $this->picture      = '';
-            $this->types        = '';
-            $this->location     = '';
-            $this->phone        = '';
-            $this->opened       = '';
-            $this->min_price    = '';
-            $this->max_price    = '';
-            $this->website      = '';
-            $this->plan         = '';
-            $this->lafourchette = '';
-            $this->description  = '';
+            $this->id              = 0;
+            $this->team            = '';
+            $this->identifiant_add = '';
+            $this->name            = '';
+            $this->picture         = '';
+            $this->types           = '';
+            $this->location        = '';
+            $this->phone           = '';
+            $this->opened          = '';
+            $this->min_price       = '';
+            $this->max_price       = '';
+            $this->website         = '';
+            $this->plan            = '';
+            $this->lafourchette    = '';
+            $this->description     = '';
         }
 
         // Constructeur de l'objet Restaurant en fonction des données
@@ -48,46 +50,49 @@
         protected function fillWithData($data)
         {
             if (isset($data['id']))
-                $this->id           = $data['id'];
+                $this->id              = $data['id'];
 
             if (isset($data['team']))
-                $this->team         = $data['team'];
+                $this->team            = $data['team'];
+
+            if (isset($data['identifiant_add']))
+                $this->identifiant_add = $data['identifiant_add'];
 
             if (isset($data['name']))
-                $this->name         = $data['name'];
+                $this->name            = $data['name'];
 
             if (isset($data['picture']))
-                $this->picture      = $data['picture'];
+                $this->picture         = $data['picture'];
 
             if (isset($data['types']))
-                $this->types        = $data['types'];
+                $this->types           = $data['types'];
 
             if (isset($data['location']))
-                $this->location     = $data['location'];
+                $this->location        = $data['location'];
 
             if (isset($data['phone']))
-                $this->phone        = $data['phone'];
+                $this->phone           = $data['phone'];
 
             if (isset($data['opened']))
-                $this->opened       = $data['opened'];
+                $this->opened          = $data['opened'];
 
             if (isset($data['min_price']))
-                $this->min_price    = $data['min_price'];
+                $this->min_price       = $data['min_price'];
 
             if (isset($data['max_price']))
-                $this->max_price    = $data['max_price'];
+                $this->max_price       = $data['max_price'];
 
             if (isset($data['website']))
-                $this->website      = $data['website'];
+                $this->website         = $data['website'];
 
             if (isset($data['plan']))
-                $this->plan         = $data['plan'];
+                $this->plan            = $data['plan'];
 
             if (isset($data['lafourchette']))
-                $this->lafourchette = $data['lafourchette'];
+                $this->lafourchette    = $data['lafourchette'];
 
             if (isset($data['description']))
-                $this->description  = $data['description'];
+                $this->description     = $data['description'];
         }
 
         // Sécurisation des données
@@ -101,20 +106,21 @@
 
         protected function fillSecureData($data)
         {
-            $this->id           = $data->getId();
-            $this->team         = $data->getTeam();
-            $this->name         = htmlspecialchars($data->getName());
-            $this->picture      = htmlspecialchars($data->getPicture());
-            $this->types        = htmlspecialchars($data->getTypes());
-            $this->location     = htmlspecialchars($data->getLocation());
-            $this->phone        = htmlspecialchars($data->getPhone());
-            $this->opened       = htmlspecialchars($data->getOpened());
-            $this->min_price    = htmlspecialchars($data->getMin_price());
-            $this->max_price    = htmlspecialchars($data->getMax_price());
-            $this->website      = htmlspecialchars($data->getWebsite());
-            $this->plan         = htmlspecialchars($data->getPlan());
-            $this->lafourchette = htmlspecialchars($data->getLafourchette());
-            $this->description  = htmlspecialchars($data->getDescription());
+            $this->id              = $data->getId();
+            $this->team            = $data->getTeam();
+            $this->identifiant_add = htmlspecialchars($data->getIdentifiant_add());
+            $this->name            = htmlspecialchars($data->getName());
+            $this->picture         = htmlspecialchars($data->getPicture());
+            $this->types           = htmlspecialchars($data->getTypes());
+            $this->location        = htmlspecialchars($data->getLocation());
+            $this->phone           = htmlspecialchars($data->getPhone());
+            $this->opened          = htmlspecialchars($data->getOpened());
+            $this->min_price       = htmlspecialchars($data->getMin_price());
+            $this->max_price       = htmlspecialchars($data->getMax_price());
+            $this->website         = htmlspecialchars($data->getWebsite());
+            $this->plan            = htmlspecialchars($data->getPlan());
+            $this->lafourchette    = htmlspecialchars($data->getLafourchette());
+            $this->description     = htmlspecialchars($data->getDescription());
         }
 
         // Getters et Setters pour l'objet Restaurant
@@ -138,6 +144,17 @@
         public function getTeam()
         {
             return $this->team;
+        }
+
+        // Identifiant ajout
+        public function setIdentifiant_add($identifiant_add)
+        {
+            $this->identifiant_add = $identifiant_add;
+        }
+
+        public function getIdentifiant_add()
+        {
+            return $this->identifiant_add;
         }
 
         // Nom du restaurant

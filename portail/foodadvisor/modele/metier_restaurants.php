@@ -242,19 +242,20 @@
         if ($control_ok == true)
         {
             $restaurant = array(
-                'team'         => $equipe,
-                'name'         => $nomRestaurant,
-                'picture'      => $newName,
-                'types'        => $typesFormatted,
-                'location'     => $lieuRestaurant,
-                'phone'        => $telephoneRestaurant,
-                'opened'       => $ouvertures,
-                'min_price'    => formatAmountForInsert($prixMin),
-                'max_price'    => formatAmountForInsert($prixMax),
-                'website'      => $websiteRestaurant,
-                'plan'         => $planRestaurant,
-                'lafourchette' => $lafourchetteRestaurant,
-                'description'  => $descriptionRestaurant
+                'team'            => $equipe,
+                'identifiant_add' => $identifiant,
+                'name'            => $nomRestaurant,
+                'picture'         => $newName,
+                'types'           => $typesFormatted,
+                'location'        => $lieuRestaurant,
+                'phone'           => $telephoneRestaurant,
+                'opened'          => $ouvertures,
+                'min_price'       => formatAmountForInsert($prixMin),
+                'max_price'       => formatAmountForInsert($prixMax),
+                'website'         => $websiteRestaurant,
+                'plan'            => $planRestaurant,
+                'lafourchette'    => $lafourchetteRestaurant,
+                'description'     => $descriptionRestaurant
             );
 
             $idRestaurant = physiqueInsertionRestaurant($restaurant);
@@ -458,7 +459,7 @@
         // Récupération des données
         $idRestaurant = $post['id_restaurant'];
 
-        // Récupération des données de la mission
+        // Récupération des données du restaurant
         $restaurant = physiqueDonneesRestaurant($idRestaurant);
 
         // Suppression des images
@@ -473,6 +474,9 @@
 
         // Suppression de l'enregistrement en base
         physiqueDeleteRestaurant($idRestaurant);
+
+        // Génération succès
+        insertOrUpdateSuccesValue('restaurant-finder', $restaurant->getIdentifiant_add(), -1);
 
         // Message alerte
         $_SESSION['alerts']['restaurant_deleted'] = true;

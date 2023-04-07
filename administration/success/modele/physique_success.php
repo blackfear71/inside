@@ -651,9 +651,7 @@
         $req = $bdd->exec('DELETE FROM success_users
                            WHERE reference != "beginning"
                              AND reference != "developper"
-                             AND reference != "padawan"
-                             AND reference != "greedy"
-                             AND reference != "restaurant-finder"');
+                             AND reference != "greedy"');
     }
 
     // PHYSIQUE : Suppression succès valeur nulle

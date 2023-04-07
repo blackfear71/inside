@@ -591,7 +591,14 @@
 
                         // Radar à bouffe
                         case 'restaurant-finder':
-                            $value = 0;
+                            $listeConditions = array(array(
+                                'operator' => '',
+                                'column'   => 'identifiant_add',
+                                'test'     => '=',
+                                'value'    => $user->getIdentifiant()
+                            ));
+
+                            $value = physiqueCountSuccess('food_advisor_restaurants', $listeConditions);
                             break;
 
                         // Chef étoilé
