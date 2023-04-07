@@ -704,18 +704,20 @@
         // Contrôle dépenses nulles
         $control_ok = controleDepensesNonNulles($user->getExpenses());
 
-        // Enregistrement du pseudo dans les phrases cultes (speaker avec passage à "other")
+        // Mise à jour des données non supprimées
         if ($control_ok == true)
+        {
+            // Enregistrement du pseudo dans les phrases cultes (speaker avec passage à "other")
             physiqueUpdateSpeakerCollector($user->getIdentifiant(), $user->getPseudo());
 
-        // Remise en cours des idées non terminées ou rejetées
-        if ($control_ok == true)
+            // Remise en cours des idées non terminées ou rejetées
             physiqueUpdateStatusTheBox($user->getIdentifiant());
+        }
 
         // Suppression des données
         if ($control_ok == true)
         {
-            // Suppression des avis movie_house_users
+            // Suppression des étoiles films
             physiqueDeleteStarsFilmsUser($user->getIdentifiant());
 
             // Suppression des votes collector
@@ -733,8 +735,11 @@
             // Suppression déterminations restaurants
             physiqueDeleteDeterminationsRestaurantsUser($user->getIdentifiant());
 
-            // Suppression semaines gâteau
+            // Suppression semaines gâteau (futures uniquement)
             physiqueDeleteSemainesGateauxUser($user->getIdentifiant());
+
+            // Suppression participations parcours
+            physiqueDeleteParticipationsParcoursUser($user->getIdentifiant());
 
             // Suppression des préférences
             physiqueDeletePreferences($user->getIdentifiant());

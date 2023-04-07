@@ -1200,6 +1200,17 @@
                            WHERE (year > ' . date('Y') . ' OR (year = ' . date('Y') . ' AND week > ' . date('W') . ')) AND identifiant = "' . $identifiant . '"');
     }
 
+    // PHYSIQUE : Suppression des participations aux parcours d'un utilisateur
+    // RETOUR : Aucun
+    function physiqueDeleteParticipationsParcoursUser($identifiant)
+    {
+        // Requête
+        global $bdd;
+
+        $req = $bdd->exec('DELETE FROM petits_pedestres_users
+                           WHERE identifiant = "' . $identifiant . '"');
+    }
+
     // PHYSIQUE : Suppression des préférences d'un utilisateur
     // RETOUR : Aucun
     function physiqueDeletePreferences($identifiant)

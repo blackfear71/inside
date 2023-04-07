@@ -67,10 +67,17 @@
             }
         }
 
-        $tableauDeBord->setDistanceMoyenne($sommeDistance / $nombreDistance);
-        $tableauDeBord->setTempsMoyen($sommeTemps / $nombreTemps);
-        $tableauDeBord->setVitesseMoyenne($sommeVitesse / $nombreVitesse);
-        $tableauDeBord->setCardioMoyen($sommeCardio / $nombreCardio);
+        if (!empty($nombreDistance))
+            $tableauDeBord->setDistanceMoyenne($sommeDistance / $nombreDistance);
+
+        if (!empty($nombreTemps))
+            $tableauDeBord->setTempsMoyen($sommeTemps / $nombreTemps);
+
+        if (!empty($nombreVitesse))
+            $tableauDeBord->setVitesseMoyenne($sommeVitesse / $nombreVitesse);
+
+        if (!empty($nombreCardio))
+            $tableauDeBord->setCardioMoyen($sommeCardio / $nombreCardio);
 
         // Retour
         return $tableauDeBord;
