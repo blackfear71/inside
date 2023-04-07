@@ -153,6 +153,9 @@
                 // Commentaires films
                 $nombreComments = physiqueCommentairesFilmsUser($user->getIdentifiant());
 
+                // Restaurants ajoutés
+                $nombreRestaurants = physiqueRestaurantsAjoutesUser($user->getIdentifiant());
+
                 // Réservations de restaurants
                 $nombreReservations = physiqueReservationsUser($user->getIdentifiant());
 
@@ -199,6 +202,7 @@
                 $statistiquesUser->setPseudo($user->getPseudo());
                 $statistiquesUser->setNb_films_ajoutes($nombreFilms);
                 $statistiquesUser->setNb_films_comments($nombreComments);
+                $statistiquesUser->setNb_restaurants_ajoutes($nombreRestaurants);
                 $statistiquesUser->setNb_reservations($nombreReservations);
                 $statistiquesUser->setNb_gateaux_semaine($nombreGateauxSemaine);
                 $statistiquesUser->setNb_recettes($nombreRecettes);
@@ -249,6 +253,9 @@
 
             // Commentaires films
             $nombreComments = physiqueCommentairesFilmsUser($userDes);
+
+            // Restaurants ajoutés
+            $nombreRestaurants = physiqueRestaurantsAjoutesUser($userDes);
 
             // Réservations de restaurants
             $nombreReservations = physiqueReservationsUser($userDes);
@@ -345,6 +352,7 @@
             $statistiquesUser->setPseudo('');
             $statistiquesUser->setNb_films_ajoutes($nombreFilms);
             $statistiquesUser->setNb_films_comments($nombreComments);
+            $statistiquesUser->setNb_restaurants_ajoutes($nombreRestaurants);
             $statistiquesUser->setNb_reservations($nombreReservations);
             $statistiquesUser->setNb_gateaux_semaine($nombreGateauxSemaine);
             $statistiquesUser->setNb_recettes($nombreRecettes);
@@ -379,6 +387,9 @@
 
         // Nombre de commentaires
         $nombreComments = physiqueCommentairesFilmsTotal();
+
+        // Nombre de restaurants ajoutés
+        $nombreRestaurants = physiqueRestaurantsAjoutesTotal();
 
         // Nombre de réservations de restaurants
         $nombreReservations = physiqueReservationsTotal();
@@ -445,6 +456,7 @@
 
         $totalStatistiques->setNb_films_ajoutes_total($nombreFilms);
         $totalStatistiques->setNb_films_comments_total($nombreComments);
+        $totalStatistiques->setNb_restaurants_ajoutes_total($nombreRestaurants);
         $totalStatistiques->setNb_reservations_total($nombreReservations);
         $totalStatistiques->setNb_gateaux_semaine_total($nombreGateauxSemaine);
         $totalStatistiques->setNb_recettes_total($nombreRecettes);
@@ -479,6 +491,7 @@
                 'pseudo'                     => $statistiquesAConvertir->getPseudo(),
                 'nb_films_ajoutes'           => $statistiquesAConvertir->getNb_films_ajoutes(),
                 'nb_films_comments'          => $statistiquesAConvertir->getNb_films_comments(),
+                'nb_restaurants_ajoutes'     => $statistiquesAConvertir->getNb_restaurants_ajoutes(),
                 'nb_reservations'            => $statistiquesAConvertir->getNb_reservations(),
                 'nb_gateaux_semaine'         => $statistiquesAConvertir->getNb_gateaux_semaine(),
                 'nb_recettes'                => $statistiquesAConvertir->getNb_recettes(),

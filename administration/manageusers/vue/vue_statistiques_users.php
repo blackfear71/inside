@@ -33,8 +33,14 @@
 
             echo '<div class="titre_statistiques_categorie"><img src="../../includes/icons/admin/food_advisor_grey.png" alt="food_advisor_grey" class="logo_titre_statistiques_categorie" />LES ENFANTS ! À TABLE !</div>';
 
+            // Restaurants ajoutés
+            echo '<div class="zone_statistique">';
+                echo '<div class="valeur_statistique">' . $totalStatistiques->getNb_restaurants_ajoutes_total() . '</div>';
+                echo '<div class="texte_statistique">restaurants ajoutés</div>';
+            echo '</div>';
+
             // Réservations
-            echo '<div class="zone_statistique zone_statistique_large">';
+            echo '<div class="zone_statistique border_left">';
                 echo '<div class="valeur_statistique">' . $totalStatistiques->getNb_reservations_total() . '</div>';
                 echo '<div class="texte_statistique">réservations</div>';
             echo '</div>';

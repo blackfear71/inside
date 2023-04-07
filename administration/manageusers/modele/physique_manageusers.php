@@ -311,6 +311,30 @@
         return $nombreComments;
     }
 
+    // PHYSIQUE : Lecture du nombre de restaurants ajoutés
+    // RETOUR : Nombre de restaurants ajoutés
+    function physiqueRestaurantsAjoutesUser($identifiant)
+    {
+        // Initialisations
+        $nombreAjouts = 0;
+
+        // Requête
+        global $bdd;
+
+        $req = $bdd->query('SELECT COUNT(*) AS nombreAjouts
+                            FROM food_advisor_restaurants
+                            WHERE identifiant_add = "' . $identifiant . '"');
+
+        $data = $req->fetch();
+
+        $nombreAjouts = $data['nombreAjouts'];
+
+        $req->closeCursor();
+
+        // Retour
+        return $nombreAjouts;
+    }
+
     // PHYSIQUE : Lecture du nombre de réservations de restaurants
     // RETOUR : Nombre de réservations
     function physiqueReservationsUser($identifiant)
@@ -592,6 +616,29 @@
 
         // Retour
         return $nombreComments;
+    }
+
+    // PHYSIQUE : Lecture du nombre total de restaurants ajoutés
+    // RETOUR : Nombre total de restaurants ajoutés
+    function physiqueRestaurantsAjoutesTotal()
+    {
+        // Initialisations
+        $nombreAjouts = 0;
+
+        // Requête
+        global $bdd;
+
+        $req = $bdd->query('SELECT COUNT(*) AS nombreAjouts
+                            FROM food_advisor_restaurants');
+
+        $data = $req->fetch();
+
+        $nombreAjouts = $data['nombreAjouts'];
+
+        $req->closeCursor();
+
+        // Retour
+        return $nombreAjouts;
     }
 
     // PHYSIQUE : Lecture du nombre total de réservations de restaurants

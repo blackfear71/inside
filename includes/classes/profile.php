@@ -854,6 +854,7 @@
         private $pseudo;
         private $nb_films_ajoutes;
         private $nb_films_comments;
+        private $nb_restaurants_ajoutes;
         private $nb_reservations;
         private $nb_gateaux_semaine;
         private $nb_recettes;
@@ -875,6 +876,7 @@
             $this->pseudo                     = '';
             $this->nb_films_ajoutes           = 0;
             $this->nb_films_comments          = 0;
+            $this->nb_restaurants_ajoutes     = 0;
             $this->nb_reservations            = 0;
             $this->nb_gateaux_semaine         = 0;
             $this->nb_recettes                = 0;
@@ -905,6 +907,7 @@
             $this->pseudo                     = htmlspecialchars($data->getPseudo());
             $this->nb_films_ajoutes           = htmlspecialchars($data->getNb_films_ajoutes());
             $this->nb_films_comments          = htmlspecialchars($data->getNb_films_comments());
+            $this->nb_restaurants_ajoutes     = htmlspecialchars($data->getNb_restaurants_ajoutes());
             $this->nb_reservations            = htmlspecialchars($data->getNb_reservations());
             $this->nb_gateaux_semaine         = htmlspecialchars($data->getNb_gateaux_semaine());
             $this->nb_recettes                = htmlspecialchars($data->getNb_recettes());
@@ -943,7 +946,7 @@
             return $this->pseudo;
         }
 
-        // Nombre de films ajoutés Movie House
+        // Nombre de films ajoutés
         public function setNb_films_ajoutes($nb_films_ajoutes)
         {
             $this->nb_films_ajoutes = $nb_films_ajoutes;
@@ -954,7 +957,7 @@
             return $this->nb_films_ajoutes;
         }
 
-        // Nombre de commentaires Movie House
+        // Nombre de commentaires des films
         public function setNb_films_comments($nb_films_comments)
         {
             $this->nb_films_comments = $nb_films_comments;
@@ -963,6 +966,17 @@
         public function getNb_films_comments()
         {
             return $this->nb_films_comments;
+        }
+
+        // Nombre de restaurants ajoutés
+        public function setNb_restaurants_ajoutes($nb_restaurants_ajoutes)
+        {
+            $this->nb_restaurants_ajoutes = $nb_restaurants_ajoutes;
+        }
+
+        public function getNb_restaurants_ajoutes()
+        {
+            return $this->nb_restaurants_ajoutes;
         }
 
         // Nombre de réservations de restaurants
@@ -1113,6 +1127,7 @@
     {
         private $nb_films_ajoutes_total;
         private $nb_films_comments_total;
+        private $nb_restaurants_ajoutes_total;
         private $nb_reservations_total;
         private $nb_gateaux_semaine_total;
         private $nb_recettes_total;
@@ -1133,6 +1148,7 @@
         {
             $this->nb_films_ajoutes_total           = 0;
             $this->nb_films_comments_total          = 0;
+            $this->nb_restaurants_ajoutes_total     = 0;
             $this->nb_reservations_total            = 0;
             $this->nb_gateaux_semaine_total         = 0;
             $this->nb_recettes_total                = 0;
@@ -1162,6 +1178,7 @@
         {
             $this->nb_films_ajoutes_total           = htmlspecialchars($data->getNb_films_ajoutes_total());
             $this->nb_films_comments_total          = htmlspecialchars($data->getNb_films_comments_total());
+            $this->nb_restaurants_ajoutes_total     = htmlspecialchars($data->getNb_restaurants_ajoutes_total());
             $this->nb_reservations_total            = htmlspecialchars($data->getNb_reservations_total());
             $this->nb_gateaux_semaine_total         = htmlspecialchars($data->getNb_gateaux_semaine_total());
             $this->nb_recettes_total                = htmlspecialchars($data->getNb_recettes_total());
@@ -1179,7 +1196,7 @@
         }
 
         // Getters et Setters pour l'objet TotalStatistiquesAdmin
-        // Nombre de films ajoutés Movie House
+        // Nombre de films ajoutés
         public function setNb_films_ajoutes_total($nb_films_ajoutes_total)
         {
             $this->nb_films_ajoutes_total = $nb_films_ajoutes_total;
@@ -1190,7 +1207,7 @@
             return $this->nb_films_ajoutes_total;
         }
 
-        // Nombre de commentaires Movie House
+        // Nombre de commentaires des films
         public function setNb_films_comments_total($nb_films_comments_total)
         {
             $this->nb_films_comments_total = $nb_films_comments_total;
@@ -1201,6 +1218,17 @@
             return $this->nb_films_comments_total;
         }
 
+        // Nombre de restaurants ajoutés
+        public function setNb_restaurants_ajoutes_total($nb_restaurants_ajoutes_total)
+        {
+            $this->nb_restaurants_ajoutes_total = $nb_restaurants_ajoutes_total;
+        }
+
+        public function getNb_restaurants_ajoutes_total()
+        {
+            return $this->nb_restaurants_ajoutes_total;
+        }
+        
         // Nombre de réservations de restaurants
         public function setNb_reservations_total($nb_reservations_total)
         {

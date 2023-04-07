@@ -845,6 +845,7 @@ function showDetailsStatistiques(typeStatistique)
             titreDetails = 'LES ENFANTS ! À TABLE !';
             logoDetails  = 'food_advisor_grey';
 
+            colonnesCategorie.push({ name: 'Restaurants ajoutés', data: 'nb_restaurants_ajoutes' });
             colonnesCategorie.push({ name: 'Réservations', data: 'nb_reservations' });
             break;
 
