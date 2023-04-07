@@ -6,7 +6,6 @@
             $titleHead       = 'Missions : Insider';
             $styleHead       = 'styleMI.css';
             $scriptHead      = '';
-            $angularHead     = false;
             $chatHead        = true;
             $datepickerHead  = false;
             $masonryHead     = false;

@@ -6,7 +6,6 @@
             $titleHead       = 'Journal des modifications';
             $styleHead       = 'styleCL.css';
             $scriptHead      = 'scriptCL.js';
-            $angularHead     = false;
             $chatHead        = true;
             $datepickerHead  = false;
             $masonryHead     = false;

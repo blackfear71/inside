@@ -6,7 +6,6 @@
             $titleHead       = 'Calendriers';
             $styleHead       = 'styleAdmin.css';
             $scriptHead      = 'scriptAdmin.js';
-            $angularHead     = false;
             $chatHead        = false;
             $datepickerHead  = false;
             $masonryHead     = true;

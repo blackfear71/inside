@@ -6,7 +6,6 @@
             $titleHead       = 'Calendars';
             $styleHead       = 'styleCA.css';
             $scriptHead      = 'scriptCA.js';
-            $angularHead     = false;
             $chatHead        = true;
             $datepickerHead  = false;
             $masonryHead     = false;

@@ -6,7 +6,6 @@
             $titleHead       = 'Notifications';
             $styleHead       = 'styleNO.css';
             $scriptHead      = 'scriptNO.js';
-            $angularHead     = false;
             $chatHead        = true;
             $datepickerHead  = false;
             $masonryHead     = false;

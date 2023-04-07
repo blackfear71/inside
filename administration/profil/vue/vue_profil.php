@@ -6,7 +6,6 @@
             $titleHead       = 'Administrateur';
             $styleHead       = 'styleProfil.css';
             $scriptHead      = 'scriptProfil.js';
-            $angularHead     = false;
             $chatHead        = false;
             $datepickerHead  = true;
             $masonryHead     = true;

@@ -6,7 +6,6 @@
             $titleHead       = 'Films';
             $styleHead       = 'styleAdmin.css';
             $scriptHead      = '';
-            $angularHead     = false;
             $chatHead        = false;
             $datepickerHead  = false;
             $masonryHead     = false;

@@ -6,7 +6,6 @@
             $titleHead       = 'Cooking Box';
             $styleHead       = 'styleCB.css';
             $scriptHead      = 'scriptCB.js';
-            $angularHead     = false;
             $chatHead        = true;
             $datepickerHead  = false;
             $masonryHead     = true;

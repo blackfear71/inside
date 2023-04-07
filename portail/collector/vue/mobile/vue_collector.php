@@ -6,7 +6,6 @@
             $titleHead       = 'Collector Room';
             $styleHead       = 'styleCO.css';
             $scriptHead      = 'scriptCO.js';
-            $angularHead     = false;
             $chatHead        = true;
             $datepickerHead  = false;
             $masonryHead     = false;

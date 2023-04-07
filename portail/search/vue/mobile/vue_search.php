@@ -6,7 +6,6 @@
             $titleHead       = 'Recherche';
             $styleHead       = 'styleSearch.css';
             $scriptHead      = '';
-            $angularHead     = false;
             $chatHead        = true;
             $datepickerHead  = false;
             $masonryHead     = false;

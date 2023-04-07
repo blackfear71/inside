@@ -6,7 +6,6 @@
             $titleHead       = 'Expense Center';
             $styleHead       = 'styleEC.css';
             $scriptHead      = 'scriptEC.js';
-            $angularHead     = false;
             $chatHead        = true;
             $datepickerHead  = false;
             $masonryHead     = false;

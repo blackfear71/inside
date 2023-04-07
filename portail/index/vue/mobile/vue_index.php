@@ -6,7 +6,6 @@
             $titleHead       = '';
             $styleHead       = 'styleIndex.css';
             $scriptHead      = 'scriptIndex.js';
-            $angularHead     = false;
             $chatHead        = false;
             $datepickerHead  = false;
             $masonryHead     = false;

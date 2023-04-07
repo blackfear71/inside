@@ -6,7 +6,6 @@
             $titleHead       = /*title_head*/;
             $styleHead       = /*style_specifique*/;
             $scriptHead      = /*script_specifique*/;
-            $angularHead     = /*angular_head*/;
             $chatHead        = /*chat_head*/;
             $datepickerHead  = /*datepicker_head*/;
             $masonryHead     = /*masonry_head*/;

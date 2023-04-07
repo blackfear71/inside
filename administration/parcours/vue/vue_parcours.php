@@ -6,7 +6,6 @@
             $titleHead       = 'Parcours';
             $styleHead       = 'styleAdmin.css';
             $scriptHead      = '';
-            $angularHead     = false;
             $chatHead        = false;
             $datepickerHead  = false;
             $masonryHead     = false;

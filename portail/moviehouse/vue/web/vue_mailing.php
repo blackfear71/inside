@@ -6,7 +6,6 @@
             $titleHead       = 'Movie House';
             $styleHead       = 'styleMH.css';
             $scriptHead      = '';
-            $angularHead     = false;
             $chatHead        = true;
             $datepickerHead  = false;
             $masonryHead     = false;

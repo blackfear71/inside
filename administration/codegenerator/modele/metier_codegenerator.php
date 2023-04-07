@@ -12,7 +12,6 @@
             array('option' => 'regex',       'checked' => 'N', 'titre' => 'Fonctions regex',            'categorie' => 'Contrôleur'),
             array('option' => 'images',      'checked' => 'N', 'titre' => 'Fonctions images',           'categorie' => 'Contrôleur'),
             array('option' => 'admin',       'checked' => 'N', 'titre' => 'Page admin',                 'categorie' => 'Contrôleur'),
-            array('option' => 'angular',     'checked' => 'N', 'titre' => 'Angular',                    'categorie' => 'Vue'),
             array('option' => 'chat',        'checked' => 'Y', 'titre' => 'Chat',                       'categorie' => 'Vue'),
             array('option' => 'datepicker',  'checked' => 'N', 'titre' => 'Datepicker',                 'categorie' => 'Vue'),
             array('option' => 'masonry',     'checked' => 'N', 'titre' => 'Masonry',                    'categorie' => 'Vue'),
@@ -267,11 +266,6 @@
         $vue = str_replace('/*script_specifique*/', "'" . $scriptSpecifique . "'", $vue);
 
         // Appels communs
-        if ($options['angular']->getChecked() == 'Y')
-            $vue = str_replace('/*angular_head*/', 'true', $vue);
-        else
-            $vue = str_replace('/*angular_head*/', 'false', $vue);
-
         if ($options['chat']->getChecked() == 'Y' AND $options['admin']->getChecked() != 'Y')
             $vue = str_replace('/*chat_head*/', 'true', $vue);
         else

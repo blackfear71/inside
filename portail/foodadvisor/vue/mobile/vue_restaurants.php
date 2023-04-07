@@ -6,7 +6,6 @@
             $titleHead       = 'Les enfants ! À table !';
             $styleHead       = 'styleFA.css';
             $scriptHead      = 'scriptFA.js';
-            $angularHead     = false;
             $chatHead        = true;
             $datepickerHead  = false;
             $masonryHead     = false;

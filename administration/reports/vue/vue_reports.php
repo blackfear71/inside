@@ -6,7 +6,6 @@
             $titleHead       = 'Bugs';
             $styleHead       = 'styleBugs.css';
             $scriptHead      = 'scriptBugs.js';
-            $angularHead     = false;
             $chatHead        = false;
             $datepickerHead  = false;
             $masonryHead     = false;

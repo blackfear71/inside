@@ -6,7 +6,6 @@
             $titleHead       = 'Missions';
             $styleHead       = 'styleAdmin.css';
             $scriptHead      = 'scriptAdmin.js';
-            $angularHead     = false;
             $chatHead        = false;
             $datepickerHead  = true;
             $masonryHead     = true;

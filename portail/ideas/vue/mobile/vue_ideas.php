@@ -6,7 +6,6 @@
             $titleHead       = '&#35;TheBox';
             $styleHead       = 'styleTheBox.css';
             $scriptHead      = 'scriptTheBox.js';
-            $angularHead     = false;
             $chatHead        = true;
             $datepickerHead  = false;
             $masonryHead     = false;

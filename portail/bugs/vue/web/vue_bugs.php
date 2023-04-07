@@ -6,7 +6,6 @@
             $titleHead       = 'Demandes d\'évolution';
             $styleHead       = 'styleBugs.css';
             $scriptHead      = 'scriptBugs.js';
-            $angularHead     = false;
             $chatHead        = true;
             $datepickerHead  = false;
             $masonryHead     = false;
