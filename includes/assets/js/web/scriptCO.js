@@ -143,7 +143,7 @@ $(function ()
         tabBlock.push({ element: '.icone_valider_collector', property: 'display', value: 'none' });
         tabBlock.push({ element: '.icone_annuler_collector', property: 'display', value: 'none' });
 
-        // Blocage spécifique (toutes zones de saisie autres restaurants)
+        // Blocage spécifique (toutes zones de saisie autres phrases cultes)
         tabBlock.push({ element: '.zone_collectors input', property: 'readonly', value: true });
         tabBlock.push({ element: '.zone_collectors input', property: 'pointer-events', value: 'none' });
         tabBlock.push({ element: '.zone_collectors input', property: 'color', value: '#a3a3a3' });

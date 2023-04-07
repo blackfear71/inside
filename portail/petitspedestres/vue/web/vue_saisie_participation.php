@@ -74,7 +74,7 @@
                     echo '</div>';
 
                     // Boutons d'action
-                    echo '<div class="zone_bouton_saisie">';
+                    echo '<div class="zone_bouton_saisie_participation">';
                         echo '<input type="submit" name="insert_participation" value="Ajouter la participation" id="bouton_saisie_participation" class="saisie_bouton" />';
                     echo '</div>';
                 echo '</div>';

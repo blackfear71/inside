@@ -34,25 +34,25 @@
                 echo '<div class="zone_saisie_parcours_right">';
                     // Nom du parcours
                     echo '<div class="zone_saisie_ligne">';
-                        echo '<img src="../../includes/icons/petitspedestres/parcours_grey.png" alt="parcours_grey" title="Nom du parcours" class="icone_saisie" />';
+                        echo '<img src="../../includes/icons/petitspedestres/parcours_grey.png" alt="parcours_grey" title="Nom du parcours" class="icone_saisie_parcours" />';
                         echo '<input type="text" name="nom_parcours" value="' . $_SESSION['save']['nom_parcours_saisie'] . '" placeholder="Nom du parcours" class="saisie_ligne" required />';
                     echo '</div>';
 
                     // Distance
                     echo '<div class="zone_saisie_ligne">';
-                        echo '<img src="../../includes/icons/petitspedestres/path_grey.png" alt="path_grey" title="Distance" class="icone_saisie" />';
+                        echo '<img src="../../includes/icons/petitspedestres/path_grey.png" alt="path_grey" title="Distance" class="icone_saisie_parcours" />';
                         echo '<input type="text" name="distance_parcours" value="' . $_SESSION['save']['distance_parcours_saisie'] . '" placeholder="Distance (km)" class="saisie_ligne" maxlength="6" required />';
                     echo '</div>';
 
                     // Lieu
                     echo '<div class="zone_saisie_ligne">';
-                        echo '<img src="../../includes/icons/petitspedestres/location_grey.png" alt="location_grey" title="Lieu" class="icone_saisie" />';
+                        echo '<img src="../../includes/icons/petitspedestres/location_grey.png" alt="location_grey" title="Lieu" class="icone_saisie_parcours" />';
                         echo '<input type="text" name="lieu_parcours" value="' . $_SESSION['save']['lieu_parcours_saisie'] . '" placeholder="Lieu" class="saisie_ligne" required />';
                     echo '</div>';
 
                     // Document
                     echo '<div class="zone_saisie_ligne">';
-                        echo '<img src="../../includes/icons/petitspedestres/document_grey.png" alt="document_grey" title="Document" class="icone_saisie" />';
+                        echo '<img src="../../includes/icons/petitspedestres/document_grey.png" alt="document_grey" title="Document" class="icone_saisie_parcours" />';
 
                         echo '<div class="zone_parcourir_document">';
                             echo 'Image ou PDF du parcours';
@@ -65,7 +65,7 @@
 
                 // Boutons d'action
                 echo '<div class="zone_saisie_bottom">';
-                    echo '<div class="zone_bouton_saisie">';
+                    echo '<div class="zone_bouton_saisie_parcours">';
                         // Ajouter
                         echo '<input type="submit" name="insert_parcours" value="Ajouter le parcours" id="bouton_saisie_parcours" class="saisie_bouton" />';
                     echo '</div>';

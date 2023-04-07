@@ -51,13 +51,40 @@ $(function ()
             closeInput('zone_saisie_participation');
     });
 
-    // Bloque le bouton de soumission si besoin
-    $('#bouton_saisie_parcours, #bouton_saisie_participation').click(function ()
+    // Bloque le bouton de soumission si besoin (parcours)
+    $('#bouton_saisie_parcours').click(function ()
     {
-        var zoneButton   = $('.zone_bouton_saisie');
+        var zoneButton   = $('.zone_bouton_saisie_parcours');
         var submitButton = $(this);
         var formSaisie   = submitButton.closest('form');
-        var tabBlock     = null;
+        var tabBlock     = [];
+
+        // Blocage spécifique (liens actions)
+        tabBlock.push({ element: '.icone_modifier_participation', property: 'display', value: 'none' });
+        tabBlock.push({ element: '.icone_supprimer_participation', property: 'display', value: 'none' });
+
+        hideSubmitButton(zoneButton, submitButton, formSaisie, tabBlock);
+    });
+
+    // Bloque le bouton de soumission si besoin (participation)
+    $('#bouton_saisie_participation').click(function ()
+    {
+        var zoneButton   = $('.zone_bouton_saisie_participation');
+        var submitButton = $(this);
+        var formSaisie   = submitButton.closest('form');
+        var tabBlock     = [];
+
+        // Blocage spécifique (liens actions)
+        tabBlock.push({ element: '.icone_modifier_participation', property: 'display', value: 'none' });
+        tabBlock.push({ element: '.icone_supprimer_participation', property: 'display', value: 'none' });
+
+        // Blocage spécifique (saisie parcours)
+        tabBlock.push({ element: '.zone_saisie_parcours input', property: 'readonly', value: true });
+        tabBlock.push({ element: '.zone_saisie_parcours input', property: 'pointer-events', value: 'none' });
+        tabBlock.push({ element: '.zone_saisie_parcours input', property: 'color', value: '#a3a3a3' });
+        tabBlock.push({ element: '.zone_saisie_parcours label', property: 'readonly', value: true });
+        tabBlock.push({ element: '.zone_saisie_parcours label', property: 'pointer-events', value: 'none' });
+        tabBlock.push({ element: '.zone_saisie_parcours label', property: 'color', value: '#a3a3a3' });
 
         hideSubmitButton(zoneButton, submitButton, formSaisie, tabBlock);
     });
