@@ -50,7 +50,7 @@
                     $listeUsersDetails = getUsersDetailsParcours($_GET['id_parcours'], $_SESSION['user']['equipe']);
 
                     // Récupération des participations au parcours
-                    $listeParticipationsParDate = getParticipantsParcours($_GET['id_parcours'], $listeUsersDetails);
+                    $listeParticipationsParDate = getParticipationsParcours($_GET['id_parcours'], $listeUsersDetails);
                 }
             }
             break;

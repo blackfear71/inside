@@ -680,15 +680,15 @@
 
     // METIER : Récupération des participations d'un parcours
     // RETOUR : Liste des participations
-    function getParticipantsParcours($idParcours, $listeUsers)
+    function getParticipationsParcours($idParcours, $listeUsers)
     {
         // Récupération de la liste des participations
-        $listeParticipantsParDate = physiqueParticipantsParcours($idParcours);
+        $listeParticipationsParDate = physiqueParticipationsParcours($idParcours);
 
         // Récupération pseudo et avatar
-        foreach ($listeParticipantsParDate as $participantsParDate)
+        foreach ($listeParticipationsParDate as $participationsParDate)
         {
-            foreach ($participantsParDate as $participant)
+            foreach ($participationsParDate as $participant)
             {
                 $participant->setPseudo($listeUsers[$participant->getIdentifiant()]['pseudo']);
                 $participant->setAvatar($listeUsers[$participant->getIdentifiant()]['avatar']);
@@ -696,7 +696,7 @@
         }
 
         // Retour
-        return $listeParticipantsParDate;
+        return $listeParticipationsParDate;
     }
 
     // METIER : Conversion de la liste d'objets des parcours en tableau simple pour JSON

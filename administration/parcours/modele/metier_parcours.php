@@ -41,49 +41,84 @@
     // RETOUR : Aucun
     function deleteParcours($post)
     {
+        // Initialisations
+        $cumulsParticipations = array();
 
-
-        // TODO : supprimer le parcours, les participations, les fichiers, les succès et les notifications
-
-
-
-
-
-
-        /*
         // Récupération des données
-        $idFilm = $post['id_film'];
-        $equipe = $post['team_film'];
+        $idParcours = $post['id_parcours'];
+        $equipe     = $post['team_parcours'];
 
-        // Récupération de l'identifiant de l'ajouteur
-        $identifiantAjout = physiqueIdentifiantAjoutFilm($idFilm);
+        // Lecture des données du parcours
+        $parcours = physiqueDonneesParcours($idParcours);
 
-        // Suppression des avis du film
-        physiqueDeleteAvisFilms($idFilm);
+        // Lecture de la liste des participations
+        $listeParticipations = physiqueParticipationsParcours($idParcours);
 
-        // Suppression des commentaires du film
-        physiqueDeleteCommentsFilms($idFilm);
+        // Calcul des cumuls pour la suppression des succès
+        if (!empty($listeParticipations))
+        {
+            foreach ($listeParticipations as $participation)
+            {
+                if (!isset($cumulsParticipations[$participation->getIdentifiant()]))
+                {
+                    $cumulsParticipations[$participation->getIdentifiant()] = array(
+                        'runner'     => 1,
+                        'marathon'   => $participation->getDistance(),
+                        'competitor' => $participation->getCompetition() == 'Y' ? 1 : 0
+                    );
+                }
+                else
+                {
+                    $cumulsParticipations[$participation->getIdentifiant()]['runner']     += 1;
+                    $cumulsParticipations[$participation->getIdentifiant()]['marathon']   += $participation->getDistance();
+                    $cumulsParticipations[$participation->getIdentifiant()]['competitor'] += $participation->getCompetition() == 'Y' ? 1 : 0;
+                }
+            }
+        }
 
-        // Suppression du film
-        physiqueDeleteFilms($idFilm);
+        // Suppression des images et documents
+        if (!empty($parcours->getPicture()))
+            unlink('../../includes/images/petitspedestres/pictures/' . $parcours->getPicture());
+
+        switch ($parcours->getType())
+        {
+            case 'document':
+                unlink('../../includes/datas/petitspedestres/' . $parcours->getDocument());
+                break;
+
+            case 'picture':
+                unlink('../../includes/images/petitspedestres/documents/' . $parcours->getDocument());
+                break;
+
+            default:
+                break;
+        }
+
+        // Suppression des participations du parcours
+        physiqueDeleteParticipationsParcours($idParcours);
+
+        // Suppression de l'enregistrement en base
+        physiqueDeleteParcours($idParcours);
 
         // Génération succès
-        insertOrUpdateSuccesValue('publisher', $identifiantAjout, -1);
+        insertOrUpdateSuccesValue('explorer', $parcours->getIdentifiant_add(), -1);
+        
+        if (!empty($cumulsParticipations))
+        {
+            foreach ($cumulsParticipations as $identifiant => $cumulParticipation)
+            {
+                insertOrUpdateSuccesValue('runner', $identifiant, -1 * $cumulParticipation['runner']);
+
+                if (!empty($cumulParticipation['marathon']))
+                    insertOrUpdateSuccesValue('marathon', $identifiant, -1 * $cumulParticipation['marathon']);
+        
+                if (!empty($cumulParticipation['competitor']))
+                    insertOrUpdateSuccesValue('competitor', $identifiant, -1 * $cumulParticipation['competitor']);
+            }
+        }
 
         // Suppression des notifications
-        deleteNotification('film', $equipe, $idFilm);
-        deleteNotification('doodle', $equipe, $idFilm);
-        deleteNotification('cinema', $equipe, $idFilm);
-        deleteNotification('comments', $equipe, $idFilm);*/
-
-
-
-
-        
-
-
-
-
+        deleteNotification('parcours', $equipe, $idParcours);
 
         // Message d'alerte
         $_SESSION['alerts']['parcours_deleted'] = true;

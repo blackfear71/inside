@@ -229,10 +229,10 @@
 
     // PHYSIQUE : Lecture des participations d'un parcours
     // RETOUR : Liste des participations
-    function physiqueParticipantsParcours($idParcours)
+    function physiqueParticipationsParcours($idParcours)
     {
         // Initialisations
-        $listeParticipants = array();
+        $listeParticipations = array();
 
         // Requête
         global $bdd;
@@ -248,16 +248,16 @@
             $participation = ParticipationCourse::withData($data);
 
             // On ajoute la ligne au tableau
-            if (!isset($listeParticipants[$data['date']]))
-                $listeParticipants[$data['date']] = array();
+            if (!isset($listeParticipations[$data['date']]))
+                $listeParticipations[$data['date']] = array();
 
-            array_push($listeParticipants[$data['date']], $participation);
+            array_push($listeParticipations[$data['date']], $participation);
         }
 
         $req->closeCursor();
 
         // Retour
-        return $listeParticipants;
+        return $listeParticipations;
     }
 
     // PHYSIQUE : Lecture d'une participation

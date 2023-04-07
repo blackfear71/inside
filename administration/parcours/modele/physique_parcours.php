@@ -109,25 +109,56 @@
         return $count;
     }
 
-    // PHYSIQUE : Lecture identifiant ajout film
-    // RETOUR : Identifiant
-    function physiqueIdentifiantAjoutFilm($idFilm)
+    // PHYSIQUE : Lecture données parcours
+    // RETOUR : Objet Parcours
+    function physiqueDonneesParcours($idParcours)
     {
         // Requête
         global $bdd;
 
         $req = $bdd->query('SELECT *
-                            FROM movie_house
-                            WHERE id = ' . $idFilm);
+                            FROM petits_pedestres_parcours
+                            WHERE id = ' . $idParcours);
 
         $data = $req->fetch();
 
-        $identifiant = $data['identifiant_add'];
+        // Instanciation d'un objet Parcours à partir des données remontées de la bdd
+        $parcours = Parcours::withData($data);
 
         $req->closeCursor();
 
         // Retour
-        return $identifiant;
+        return $parcours;
+    }
+
+    // PHYSIQUE : Lecture participations parcours
+    // RETOUR : Liste des participations
+    function physiqueParticipationsParcours($idParcours)
+    {
+        // Initialisations
+        $listeParticipations = array();
+
+        // Requête
+        global $bdd;
+
+        $req = $bdd->query('SELECT *
+                            FROM petits_pedestres_users
+                            WHERE id_parcours = ' . $idParcours . '
+                            ORDER BY identifiant ASC');
+
+        while ($data = $req->fetch())
+        {
+            // Instanciation d'un objet ParticipationCourse à partir des données remontées de la bdd
+            $participation = ParticipationCourse::withData($data);
+
+            // On ajoute la ligne au tableau
+            array_push($listeParticipations, $participation);
+        }
+                    
+        $req->closeCursor();
+
+        // Retour
+        return $listeParticipations;
     }
 
     /****************************************************************************/
@@ -156,36 +187,25 @@
     /****************************************************************************/
     /********************************** DELETE **********************************/
     /****************************************************************************/
-    // PHYSIQUE : Suppression avis film
+    // PHYSIQUE : Suppression participations parcours
     // RETOUR : Aucun
-    function physiqueDeleteAvisFilms($idFilm)
+    function physiqueDeleteParticipationsParcours($idParcours)
     {
         // Requête
         global $bdd;
 
-        $req = $bdd->exec('DELETE FROM movie_house_users
-                           WHERE id_film = ' . $idFilm);
+        $req = $bdd->exec('DELETE FROM petits_pedestres_users
+                           WHERE id_parcours = ' . $idParcours);
     }
 
-    // PHYSIQUE : Suppression commentaires film
+    // PHYSIQUE : Suppression parcours
     // RETOUR : Aucun
-    function physiqueDeleteCommentsFilms($idFilm)
+    function physiqueDeleteParcours($idParcours)
     {
         // Requête
         global $bdd;
 
-        $req = $bdd->exec('DELETE FROM movie_house_comments
-                           WHERE id_film = ' . $idFilm);
-    }
-
-    // PHYSIQUE : Suppression film
-    // RETOUR : Aucun
-    function physiqueDeleteFilms($idFilm)
-    {
-        // Requête
-        global $bdd;
-
-        $req = $bdd->exec('DELETE FROM movie_house
-                           WHERE id = ' . $idFilm);
+        $req = $bdd->exec('DELETE FROM petits_pedestres_parcours
+                           WHERE id = ' . $idParcours);
     }
 ?>

@@ -180,7 +180,7 @@
 
     // PHYSIQUE : Suppression film
     // RETOUR : Aucun
-    function physiqueDeleteFilms($idFilm)
+    function physiqueDeleteFilm($idFilm)
     {
         // Requête
         global $bdd;

@@ -55,7 +55,7 @@
         physiqueDeleteCommentsFilms($idFilm);
 
         // Suppression du film
-        physiqueDeleteFilms($idFilm);
+        physiqueDeleteFilm($idFilm);
 
         // Génération succès
         insertOrUpdateSuccesValue('publisher', $identifiantAjout, -1);

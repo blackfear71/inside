@@ -975,6 +975,7 @@
                 break;
 
             // Incrémentation de la valeur précédente avec la valeur en entrée (cas incoming <= 1)
+            // Pour afficher le déblocage on doit obtenir exactement la valeur limite
             case 'publisher':
             case 'viewer':
             case 'commentator':
@@ -1038,6 +1039,7 @@
                 break;
 
             // Incrémentation de la valeur précédente avec la valeur en entrée (cas incoming > 1)
+            // Pour afficher le déblocage on doit dépasser la valeur limite (si pas déjà fait)
             case 'eater':
             case 'marathon':
                 // Récupération de l'ancienne valeur du succès de l'utilisateur

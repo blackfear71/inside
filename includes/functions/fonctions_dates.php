@@ -198,8 +198,8 @@
         if (!empty($time))
         {
             // Formatage de la durée
-            $heures   = round($time / 3600);
-            $minutes  = round((($time / 3600) - $heures) * 60);
+            $heures   = floor($time / 3600);
+            $minutes  = floor((($time / 3600) - $heures) * 60);
             $secondes = round((((($time / 3600) - $heures) * 60) - $minutes) * 3600 / 60);
 
             // Construction du tableau
