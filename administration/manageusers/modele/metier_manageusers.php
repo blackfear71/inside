@@ -710,6 +710,9 @@
             // Enregistrement du pseudo dans les phrases cultes (speaker avec passage à "other")
             physiqueUpdateSpeakerCollector($user->getIdentifiant(), $user->getPseudo());
 
+            // Suppression de l'appelant sur les déterminations de restaurants
+            physiqueUpdateCallerDeterminationsRestaurantsUser($user->getIdentifiant());
+
             // Remise en cours des idées non terminées ou rejetées
             physiqueUpdateStatusTheBox($user->getIdentifiant());
         }
@@ -731,9 +734,6 @@
 
             // Suppression propositions restaurants
             physiqueDeleteVotesRestaurantsUser($user->getIdentifiant());
-
-            // Suppression déterminations restaurants
-            physiqueDeleteDeterminationsRestaurantsUser($user->getIdentifiant());
 
             // Suppression semaines gâteau (futures uniquement)
             physiqueDeleteSemainesGateauxUser($user->getIdentifiant());

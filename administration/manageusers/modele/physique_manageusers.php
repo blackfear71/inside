@@ -1078,6 +1078,27 @@
         $req->closeCursor();
     }
 
+    // PHYSIQUE : Mise à jour de l'appelant sur les déterminations de restaurants
+    // RETOUR : Aucun
+    function physiqueUpdateCallerDeterminationsRestaurantsUser($identifiant)
+    {
+        // Initialisations
+        $caller   = '';
+
+        // Requête
+        global $bdd;
+
+        $req = $bdd->prepare('UPDATE food_advisor_choices
+                              SET caller   = :caller
+                              WHERE caller = "' . $identifiant . '"');
+
+        $req->execute(array(
+            'caller'   => $caller
+        ));
+
+        $req->closeCursor();
+    }
+
     // PHYSIQUE : Mise à jour statut des idées #TheBox
     // RETOUR : Aucun
     function physiqueUpdateStatusTheBox($identifiant)
@@ -1176,17 +1197,6 @@
 
         $req = $bdd->exec('DELETE FROM food_advisor_users
                            WHERE identifiant = "' . $identifiant . '"');
-    }
-
-    // PHYSIQUE : Suppression des déterminations d'un utilisateur
-    // RETOUR : Aucun
-    function physiqueDeleteDeterminationsRestaurantsUser($identifiant)
-    {
-        // Requête
-        global $bdd;
-
-        $req = $bdd->exec('DELETE FROM food_advisor_choices
-                           WHERE caller = "' . $identifiant . '"');
     }
 
     // PHYSIQUE : Suppression des semaines de gâteau futures d'un utilisateur

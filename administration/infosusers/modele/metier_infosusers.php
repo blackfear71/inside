@@ -135,165 +135,160 @@
         $equipe = $post['team'];
 
         // Lecture des bugs / évolutions de l'équipe
-        $listeBugsEvolutions = physiqueTableEquipe('bugs', 'id, team, picture', 'BugEvolution', $equipe);
+        $listeBugsEvolutions = physiqueLectureTableEquipe('bugs', 'id, team, picture', 'BugEvolution', $equipe);
 
-        // Suppression des bugs / évolutions
+        // Suppression des images des bugs / évolutions
         if (!empty($listeBugsEvolutions))
         {
             foreach ($listeBugsEvolutions as $bugEvolution)
             {
-                // Suppression des images
                 if (!empty($bugEvolution->getPicture()))
                     unlink('../../includes/images/reports/' . $bugEvolution->getPicture());
-
-                // Suppression de l'enregistrement en base
-                physiqueDeleteTableEquipe('bugs', $bugEvolution->getId(), $equipe);
             }
         }
 
         // Lecture des calendriers de l'équipe
-        $listeCalendriers = physiqueTableEquipe('calendars', 'id, team, year, calendar', 'Calendrier', $equipe);
+        $listeCalendriers = physiqueLectureTableEquipe('calendars', 'id, team, year, calendar', 'Calendrier', $equipe);
 
-        // Suppression des calendriers
+        // Suppression des images des calendriers
         if (!empty($listeCalendriers))
         {
             foreach ($listeCalendriers as $calendrier)
             {
-                // Suppression des images
                 if (!empty($calendrier->getCalendar()))
                 {
                     unlink('../../includes/images/calendars/' . $calendrier->getYear() . '/' . $calendrier->getCalendar());
                     unlink('../../includes/images/calendars/' . $calendrier->getYear() . '/mini/' . $calendrier->getCalendar());
                 }
-
-                // Suppression de l'enregistrement en base
-                physiqueDeleteTableEquipe('calendars', $calendrier->getId(), $equipe);
             }
         }
 
         // Lecture des annexes de l'équipe
-        $listeAnnexes = physiqueTableEquipe('calendars_annexes', 'id, team, annexe', 'Annexe', $equipe);
+        $listeAnnexes = physiqueLectureTableEquipe('calendars_annexes', 'id, team, annexe', 'Annexe', $equipe);
 
-        // Suppression des annexes
+        // Suppression des images des annexes
         if (!empty($listeAnnexes))
         {
             foreach ($listeAnnexes as $annexe)
             {
-                // Suppression des images
                 if (!empty($annexe->getAnnexe()))
                     unlink('../../includes/images/calendars/annexes/' . $annexe->getAnnexe());
-
-                // Suppression de l'enregistrement en base
-                physiqueDeleteTableEquipe('calendars_annexes', $annexe->getId(), $equipe);
             }
         }
 
         // Lecture des phrases / images cultes de l'équipe
-        $listeCollectors = physiqueTableEquipe('collector', 'id, type_collector, team, collector', 'Collector', $equipe);
+        $listeCollectors = physiqueLectureTableEquipe('collector', 'id, type_collector, team, collector', 'Collector', $equipe);
 
-        // Suppression des phrases / images cultes
+        // Suppression des images des phrases cultes
         if (!empty($listeCollectors))
         {
             foreach ($listeCollectors as $collector)
             {
-                // Suppression des images
                 if ($collector->getType_collector() == 'I' AND !empty($collector->getCollector()))
                     unlink('../../includes/images/collector/' . $collector->getCollector());
-
-                // Suppression des votes
-                physiqueDeleteVotesCollector($collector->getId(), $equipe);
-
-                // Suppression de l'enregistrement en base
-                physiqueDeleteTableEquipe('collector', $collector->getId(), $equipe);
             }
         }
 
         // Lecture des recettes de l'équipe
-        $listeRecettes = physiqueTableEquipe('cooking_box', 'id, team, year, picture', 'WeekCake', $equipe);
+        $listeRecettes = physiqueLectureTableEquipe('cooking_box', 'id, team, year, picture', 'WeekCake', $equipe);
 
-        // Suppression des recettes
+        // Suppression des images des recettes
         if (!empty($listeRecettes))
         {
             foreach ($listeRecettes as $recette)
             {
-                // Suppression des images
                 if (!empty($recette->getPicture()))
                     unlink('../../includes/images/cookingbox/' . $recette->getYear() . '/' . $recette->getPicture());
-
-                // Suppression de l'enregistrement en base
-                physiqueDeleteTableEquipe('cooking_box', $recette->getId(), $equipe);
             }
         }
-
-        // Lecture des dépenses de l'équipe
-        $listeDepenses = physiqueTableEquipe('expense_center', 'id, team', 'Expenses', $equipe);
-
-        // Suppression des dépenses
-        if (!empty($listeDepenses))
-        {
-            foreach ($listeDepenses as $depense)
-            {
-                // Suppression des parts
-                physiqueDeletePartsDepenses($depense->getId(), $equipe);
-
-                // Suppression de l'enregistrement en base
-                physiqueDeleteTableEquipe('expense_center', $depense->getId(), $equipe);
-            }
-        }
-
-        // Suppression des choix de restaurants
-        physiqueDeleteTableEquipeLight('food_advisor_choices', $equipe);
-
-        // Suppression des votes de restaurants
-        physiqueDeleteTableEquipeLight('food_advisor_users', $equipe);
 
         // Lecture des restaurants de l'équipe
-        $listeRestaurants = physiqueTableEquipe('food_advisor_restaurants', 'id, team, picture', 'Restaurant', $equipe);
+        $listeRestaurants = physiqueLectureTableEquipe('food_advisor_restaurants', 'id, team, picture', 'Restaurant', $equipe);
 
-        // Suppression des restaurants
+        // Suppression des images des restaurants
         if (!empty($listeRestaurants))
         {
             foreach ($listeRestaurants as $restaurant)
             {
-                // Suppression des images
                 if (!empty($restaurant->getPicture()))
                     unlink('../../includes/images/foodadvisor/' . $restaurant->getPicture());
-
-                // Suppression de l'enregistrement en base
-                physiqueDeleteTableEquipe('food_advisor_restaurants', $restaurant->getId(), $equipe);
             }
         }
 
-        // Suppression des idées
-        physiqueDeleteTableEquipeLight('ideas', $equipe);
-
-        // Suppression des missions utilisateurs
-        physiqueDeleteTableEquipeLight('missions_users', $equipe);
-
         // Lecture des films de l'équipe
-        $listeFilms = physiqueTableEquipe('movie_house', 'id, team', 'Movie', $equipe);
+        $listeFilms = physiqueLectureTableEquipe('movie_house', 'id, team', 'Movie', $equipe);
 
-        // Suppression des films
+        // Suppression des commentaires et étoiles des films
         if (!empty($listeFilms))
         {
             foreach ($listeFilms as $film)
             {
                 // Suppression des commentaires
-                physiqueDeleteCommentairesFilm($film->getId());
+                physiqueDeleteElementTable('movie_house_comments', 'id_film', $film->getId());
 
                 // Suppression des votes
-                physiqueDeleteVotesFilm($film->getId());
-
-                // Suppression de l'enregistrement en base
-                physiqueDeleteTableEquipe('movie_house', $film->getId(), $equipe);
+                physiqueDeleteElementTable('movie_house_users', 'id_film', $film->getId());
             }
         }
 
-        // Suppression des notifications
-        physiqueDeleteTableEquipeLight('notifications', $equipe);
+        // Lecture des parcours de l'équipe
+        $listeParcours = physiqueLectureTableEquipe('petits_pedestres_parcours', 'id, team, picture, document, type', 'Parcours', $equipe);
 
-        // Suppression des parcours
-        physiqueDeleteTableEquipeLight('petits_pedestres_parcours', $equipe);
+        // Suppression des images et documents des parcours
+        if (!empty($listeParcours))
+        {
+            foreach ($listeParcours as $parcours)
+            {
+                // Suppression des images
+                if (!empty($parcours->getPicture()))
+                    unlink('../../includes/images/petitspedestres/pictures/' . $parcours->getPicture());
+
+                // Suppression des documents
+                if (!empty($parcours->getDocument()))
+                {
+                    switch ($parcours->getType())
+                    {
+                        case 'document':
+                            unlink('../../includes/datas/petitspedestres/' . $parcours->getDocument());
+                            break;
+
+                        case 'picture':
+                            unlink('../../includes/images/petitspedestres/documents/' . $parcours->getDocument());
+                            break;
+                            
+                        default:
+                            break;
+                    }
+                }
+            }
+        }
+
+        // Liste des tables à purger
+        $listeTables = array(
+            'bugs',
+            'calendars',
+            'calendars_annexes',
+            'collector',
+            'collector_users',
+            'cooking_box',
+            'expense_center',
+            'expense_center_users',
+            'food_advisor_choices',
+            'food_advisor_restaurants',
+            'food_advisor_users',
+            'ideas',
+            'missions_users',
+            'movie_house',
+            'notifications',
+            'petits_pedestres_parcours',
+            'petits_pedestres_users'
+        );
+
+        // Purge des tables
+        foreach ($listeTables as $table)
+        {
+            physiqueDeleteTableEquipe($table, $equipe);
+        }
 
         // Suppression du fichier de chat
         if (file_exists('../../includes/common/chat/conversations/content_chat_' . $equipe . '.xml'))

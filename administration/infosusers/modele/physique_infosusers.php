@@ -115,7 +115,7 @@
 
     // PHYSIQUE : Lecture d'une table pour une équipe
     // RETOUR : Liste des données de la table
-    function physiqueTableEquipe($table, $champs, $objet, $equipe)
+    function physiqueLectureTableEquipe($table, $champs, $objet, $equipe)
     {
         // Initialisations
         $listeElementsTable = array();
@@ -168,18 +168,7 @@
     /****************************************************************************/
     // PHYSIQUE : Suppression des données d'une table pour une équipe
     // RETOUR : Aucun
-    function physiqueDeleteTableEquipe($table, $idElement, $equipe)
-    {
-        // Requête
-        global $bdd;
-
-        $req = $bdd->exec('DELETE FROM ' . $table . '
-                           WHERE id = ' . $idElement . ' AND team = "' . $equipe . '"');
-    }
-
-    // PHYSIQUE : Suppression des données d'une table pour une équipe (simple)
-    // RETOUR : Aucun
-    function physiqueDeleteTableEquipeLight($table, $equipe)
+    function physiqueDeleteTableEquipe($table, $equipe)
     {
         // Requête
         global $bdd;
@@ -188,48 +177,15 @@
                            WHERE team = "' . $equipe . '"');
     }
 
-    // PHYSIQUE : Suppression des votes Collector
+    // PHYSIQUE : Suppression d'un élément d'une table
     // RETOUR : Aucun
-    function physiqueDeleteVotesCollector($idCollector, $equipe)
+    function physiqueDeleteElementTable($table, $colonne, $idElement)
     {
         // Requête
         global $bdd;
 
-        $req = $bdd->exec('DELETE FROM collector_users
-                           WHERE id_collector = ' . $idCollector . ' AND team = "' . $equipe . '"');
-    }
-
-    // PHYSIQUE : Suppression des parts des dépenses
-    // RETOUR : Aucun
-    function physiqueDeletePartsDepenses($idDepense, $equipe)
-    {
-        // Requête
-        global $bdd;
-
-        $req = $bdd->exec('DELETE FROM expense_center_users
-                           WHERE id_expense = ' . $idDepense . ' AND team = "' . $equipe . '"');
-    }
-
-    // PHYSIQUE : Suppression des commentaires film
-    // RETOUR : Aucun
-    function physiqueDeleteCommentairesFilm($idFilm)
-    {
-        // Requête
-        global $bdd;
-
-        $req = $bdd->exec('DELETE FROM movie_house_comments
-                           WHERE id_film = ' . $idFilm);
-    }
-
-    // PHYSIQUE : Suppression des votes film
-    // RETOUR : Aucun
-    function physiqueDeleteVotesFilm($idFilm)
-    {
-        // Requête
-        global $bdd;
-
-        $req = $bdd->exec('DELETE FROM movie_house_users
-                           WHERE id_film = ' . $idFilm);
+        $req = $bdd->exec('DELETE FROM ' . $table . '
+                           WHERE ' . $colonne . ' = ' . $idElement);
     }
 
     // PHYSIQUE : Suppression d'une équipe
