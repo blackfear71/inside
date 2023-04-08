@@ -109,9 +109,9 @@
         return $count;
     }
 
-    // PHYSIQUE : Lecture identifiant ajout film
-    // RETOUR : Identifiant
-    function physiqueIdentifiantAjoutFilm($idFilm)
+    // PHYSIQUE : Lecture données film
+    // RETOUR : Objet Movie
+    function physiqueDonneesFilm($idFilm)
     {
         // Requête
         global $bdd;
@@ -122,12 +122,71 @@
 
         $data = $req->fetch();
 
-        $identifiant = $data['identifiant_add'];
+        // Instanciation d'un objet Movie à partir des données remontées de la bdd
+        $film = Movie::withData($data);
 
         $req->closeCursor();
 
         // Retour
-        return $identifiant;
+        return $film;
+    }
+
+    // PHYSIQUE : Lecture commentaires film
+    // RETOUR : Liste des commentaires
+    function physiqueCommentairesFilms($idFilm)
+    {
+        // Initialisations
+        $listeCommentaires = array();
+        
+        // Requête
+        global $bdd;
+
+        $req = $bdd->query('SELECT *
+                            FROM movie_house_comments
+                            WHERE id_film = ' . $idFilm);
+
+        while ($data = $req->fetch())
+        {
+            // Instanciation d'un objet Commentaire à partir des données remontées de la bdd
+            $commentaire = Commentaire::withData($data);
+
+            // On ajoute la ligne au tableau
+            array_push($listeCommentaires, $commentaire);
+        }
+
+        $req->closeCursor();
+
+        // Retour
+        return $listeCommentaires;
+    }
+
+    // PHYSIQUE : Lecture étoiles film
+    // RETOUR : Liste des étoiles
+    function physiqueEtoilesFilms($idFilm)
+    {
+        // Initialisations
+        $listeEtoiles = array();
+        
+        // Requête
+        global $bdd;
+
+        $req = $bdd->query('SELECT *
+                            FROM movie_house_users
+                            WHERE id_film = ' . $idFilm);
+
+        while ($data = $req->fetch())
+        {
+            // Instanciation d'un objet Stars à partir des données remontées de la bdd
+            $etoile = Stars::withData($data);
+
+            // On ajoute la ligne au tableau
+            array_push($listeEtoiles, $etoile);
+        }
+
+        $req->closeCursor();
+
+        // Retour
+        return $listeEtoiles;
     }
 
     /****************************************************************************/

@@ -41,24 +41,103 @@
     // RETOUR : Aucun
     function deleteFilm($post)
     {
+        // Initialisations
+        $cumulsFilm = array();
+        
         // Récupération des données
         $idFilm = $post['id_film'];
         $equipe = $post['team_film'];
 
-        // Récupération de l'identifiant de l'ajouteur
-        $identifiantAjout = physiqueIdentifiantAjoutFilm($idFilm);
+        // Lecture des données du film
+        $film = physiqueDonneesFilm($idFilm);
 
-        // Suppression des avis du film
-        physiqueDeleteAvisFilms($idFilm);
+        // Lecture de la liste des commentaires
+        $listeCommentaires = physiqueCommentairesFilms($idFilm);
+
+        // Lecture de la liste des avis
+        $listeEtoiles = physiqueEtoilesFilms($idFilm);
+
+        // Calcul des cumuls pour la suppression des succès
+        if (!empty($listeCommentaires))
+        {
+            foreach ($listeCommentaires as $commentaire)
+            {
+                if (!isset($cumulsFilm[$commentaire->getIdentifiant()]))
+                {
+                    $cumulsFilm[$commentaire->getIdentifiant()] = array(
+                        'commentator' => 1,
+                        'viewer'      => 0,
+                        'padawan'     => 0
+                    );
+                }
+                else
+                    $cumulsFilm[$commentaire->getIdentifiant()]['commentator'] += 1;
+            }
+        }
+
+        if (!empty($listeEtoiles))
+        {
+            foreach ($listeEtoiles as $etoile)
+            {
+                if (!isset($cumulsFilm[$etoile->getIdentifiant()]))
+                {
+                    $cumulsFilm[$etoile->getIdentifiant()] = array(
+                        'commentator' => 0,
+                        'viewer'      => $etoile->getParticipation() == 'S' ? 1 : 0,
+                        'padawan'     => 0
+                    );
+                }
+                else
+                {
+                   if ($etoile->getParticipation() == 'S')
+                       $cumulsFilm[$etoile->getIdentifiant()]['viewer'] = 1;
+                }
+            }
+        }
+
+        if (stripos($film->getFilm(), 'Les derniers Jedi') !== false AND !empty($listeEtoiles))
+        {
+            foreach ($listeEtoiles as $etoile)
+            {
+                if ($etoile->getParticipation() == 'S')
+                {
+                    if (!isset($cumulsFilm[$etoile->getIdentifiant()]))
+                    {
+                        $cumulsFilm[$etoile->getIdentifiant()] = array(
+                            'commentator' => 0,
+                            'viewer'      => 0,
+                            'padawan'     => 0
+                        );
+                    }
+                    else
+                        $cumulsFilm[$etoile->getIdentifiant()]['padawan'] = 0;
+                }
+            }
+        }
 
         // Suppression des commentaires du film
         physiqueDeleteCommentsFilms($idFilm);
+
+        // Suppression des avis du film
+        physiqueDeleteAvisFilms($idFilm);
 
         // Suppression du film
         physiqueDeleteFilm($idFilm);
 
         // Génération succès
-        insertOrUpdateSuccesValue('publisher', $identifiantAjout, -1);
+        insertOrUpdateSuccesValue('publisher', $film->getIdentifiant_add(), -1);
+
+        if (!empty($cumulsFilm))
+        {
+            foreach ($cumulsFilm as $identifiant => $cumulFilm)
+            {
+                insertOrUpdateSuccesValue('commentator', $identifiant, -1 * $cumulFilm['commentator']);
+                insertOrUpdateSuccesValue('viewer', $identifiant, -1 * $cumulFilm['viewer']);
+        
+                if (stripos($film->getFilm(), 'Les derniers Jedi') !== false)
+                    insertOrUpdateSuccesValue('padawan', $identifiant, $cumulFilm['padawan']);
+            }
+        }
 
         // Suppression des notifications
         deleteNotification('film', $equipe, $idFilm);
