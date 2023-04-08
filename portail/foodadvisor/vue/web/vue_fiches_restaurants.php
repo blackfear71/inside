@@ -166,7 +166,7 @@
                                     $longueurMax = 300;
 
                                     echo '<div class="description_restaurant">';
-                                        if (strlen($restaurant->getDescription()) > $longueurMax)
+                                        if (mb_strlen($restaurant->getDescription()) > $longueurMax)
                                         {
                                             echo '<div id="long_description_' . $restaurant->getId() . '" style="display: none;">' . nl2br($restaurant->getDescription()) . '</div>';
                                             echo '<div class="short_description" id="short_description_' . $restaurant->getId() . '">' . nl2br(formatString($restaurant->getDescription(), $longueurMax)) . '</div>';

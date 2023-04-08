@@ -400,11 +400,11 @@
         );
 
         // Nom section
-        $lengthName = strlen($nomFonctionnel);
+        $lengthName = mb_strlen($nomFonctionnel);
 
         $controler = str_replace('/*******************', '/' . str_repeat('*', $lengthName + 7), $controler);
         $controler = str_replace('section_name', $nomFonctionnel, $controler);
-        $controler = str_replace('********************', str_repeat('*', $lengthName + 8), $controler);
+        $controler = str_replace('\*******************', str_repeat('*', $lengthName + 8), $controler);
         $controler = str_replace('*******************/', str_repeat('*', $lengthName + 7) . '/', $controler);
 
         // Titre fonctions communes

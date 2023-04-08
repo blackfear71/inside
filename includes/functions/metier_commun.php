@@ -1312,7 +1312,7 @@
     function formatString($chaine, $limite)
     {
         // Formatage si dépassement du nombre de caractères voulu
-        if (strlen($chaine) > $limite)
+        if (mb_strlen($chaine) > $limite)
             $chaine = mb_substr($chaine, 0, $limite) . '...';
 
         // Retour

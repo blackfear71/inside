@@ -304,7 +304,7 @@
                 $news->setDetails('Par ' . htmlspecialchars(formatUnknownUser($speaker, false, false)));
             }
 
-            if (strlen($collector->getCollector()) > 90)
+            if (mb_strlen($collector->getCollector()) > 90)
                 $news->setContent(nl2br(htmlspecialchars(formatString(unformatCollector($collector->getCollector()), 90))));
             else
                 $news->setContent(nl2br(htmlspecialchars(unformatCollector($collector->getCollector()))));
