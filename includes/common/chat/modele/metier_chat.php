@@ -20,7 +20,7 @@
         $message     = $post['message'];
 
         // On vérifie la présence du dossier, sinon on le créé de manière récursive
-        $folder = 'conversations';
+        $folder = '../../datas/conversations';
 
         if (!is_dir($folder))
             mkdir($folder, 0777, true);

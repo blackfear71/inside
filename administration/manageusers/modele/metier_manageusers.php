@@ -615,7 +615,7 @@
                 }
     
                 // Création d'un fichier XML pour le chat lors de la création d'une nouvelle équipe
-                $folder = '../../includes/common/chat/conversations';
+                $folder = '../../includes/datas/conversations';
     
                 if (!is_dir($folder))
                     mkdir($folder, 0777, true);

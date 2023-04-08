@@ -291,8 +291,8 @@
         }
 
         // Suppression du fichier de chat
-        if (file_exists('../../includes/common/chat/conversations/content_chat_' . $equipe . '.xml'))
-            unlink('../../includes/common/chat/conversations/content_chat_' . $equipe . '.xml');
+        if (file_exists('../../includes/datas/conversations/content_chat_' . $equipe . '.xml'))
+            unlink('../../includes/datas/conversations/content_chat_' . $equipe . '.xml');
 
         // Suppression de l'équipe
         physiqueDeleteEquipe($equipe);

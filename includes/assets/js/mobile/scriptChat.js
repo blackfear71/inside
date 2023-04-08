@@ -513,7 +513,7 @@ function initMessagesChat()
 function lectureInitialeConversation()
 {
     // Gestion de l'affichage (on utilise $.post plutôt que $.get car le GET met en cache le fichier XML)
-    $.post('/inside/includes/common/chat/conversations/content_chat_' + teamUser + '.xml', function (display)
+    $.post('/inside/includes/datas/conversations/content_chat_' + teamUser + '.xml', function (display)
     {
         // Initialisations
         var previousDate  = '';
@@ -608,7 +608,7 @@ function rafraichirConversation(scrollUpdate)
     var lastTime = $('#conversation_chat .time_chat').last().text();
 
     // Recherche de messages plus récents et affichage
-    $.post('/inside/includes/common/chat/conversations/content_chat_' + teamUser + '.xml', function (display)
+    $.post('/inside/includes/datas/conversations/content_chat_' + teamUser + '.xml', function (display)
     {
         // Initialisations
         var previousDate = '';
@@ -697,7 +697,7 @@ function afficherAnciensMessages()
     var scrollDown = isScrollbarDown();
 
     // Gestion de l'affichage (on utilise $.post plutôt que $.get car le GET met en cache le fichier XML)
-    $.post('/inside/includes/common/chat/conversations/content_chat_' + teamUser + '.xml', function (display)
+    $.post('/inside/includes/datas/conversations/content_chat_' + teamUser + '.xml', function (display)
     {
         // Initialisations
         var previousDate     = '';
