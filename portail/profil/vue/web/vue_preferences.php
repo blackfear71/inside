@@ -3,7 +3,7 @@
         // Titre
         echo '<div class="titre_section"><img src="../../includes/icons/profil/settings_grey.png" alt="settings_grey" class="logo_titre_section" /><div class="texte_titre_section">Préférences</div></div>';
 
-        echo '<form method="post" action="profil.php?action=doUpdatePreferences">';
+        echo '<form method="post" action="profil.php?action=doModifierPreferences">';
             echo '<div class="zone_profil_contributions">';
                 /***************/
                 /*** Celsius ***/

@@ -82,7 +82,7 @@
                         echo '</a>';
 
                         // Sauvegarde BDD
-                        echo '<form method="post" action="portail.php?action=doExtract" title="Sauvegarde BDD" class="lien_portail">';
+                        echo '<form method="post" action="portail.php?action=doExtraireBase" title="Sauvegarde BDD" class="lien_portail">';
                             // Logo
                             echo '<div class="zone_image_portail">';
                                 echo '<img src="../../includes/icons/admin/download.png" alt="download" class="image_lien_portail" />';

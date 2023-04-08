@@ -14,7 +14,7 @@ $(function ()
     // Affiche une image de bug/évolution en grand
     $('.agrandirImage').click(function ()
     {
-        showBug($(this));
+        afficherDetailsBug($(this));
     });
 
     // Ferme le zoom d'une image de bug/évolution
@@ -119,7 +119,7 @@ function adaptBugs()
 }
 
 // Affiche l'image d'un bug ou d'une évolution
-function showBug(element)
+function afficherDetailsBug(element)
 {
     var html   = '';
     var path   = element.children().attr('src');

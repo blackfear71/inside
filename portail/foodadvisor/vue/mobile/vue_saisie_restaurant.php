@@ -1,6 +1,6 @@
 <?php
     echo '<div id="zone_saisie_restaurant" class="fond_saisie">';
-        echo '<form method="post" action="restaurants.php?action=doAjouter" enctype="multipart/form-data" class="form_saisie">';
+        echo '<form method="post" action="restaurants.php?action=doAjouterRestaurant" enctype="multipart/form-data" class="form_saisie">';
             // Id restaurant (modification)
             echo '<input type="hidden" name="id_restaurant" id="id_saisie_restaurant" value="" />';
 

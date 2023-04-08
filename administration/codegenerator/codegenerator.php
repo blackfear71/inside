@@ -40,12 +40,12 @@
             }
             break;
 
-        case 'generateCode':
+        case 'doGenererCode':
             // Sauvegarde des paramètres saisis en session
             saveParameters($_POST);
             break;
 
-        case 'doDownload':
+        case 'doTelecharger':
             downloadCode($_POST);
             break;
 
@@ -83,8 +83,8 @@
                 $javascript['content'] = htmlspecialchars($javascript['content']);
             break;
 
-        case 'generateCode':
-        case 'doDownload':
+        case 'doGenererCode':
+        case 'doTelecharger':
         default:
             break;
     }
@@ -92,10 +92,10 @@
     // Redirection affichage
     switch ($_GET['action'])
     {
-        case 'doDownload':
+        case 'doTelecharger':
             break;
 
-        case 'generateCode':
+        case 'doGenererCode':
             header('location: codegenerator.php?action=goConsulter');
             break;
 

@@ -67,7 +67,7 @@
             }
             break;
 
-        case 'doAjouter':
+        case 'doAjouterCollector':
             // Insertion d'une phrase / image culte
             $idCollector = insertCollector($_POST, $_FILES, $_SESSION['user'], false);
 
@@ -76,7 +76,7 @@
                 $numeroPage = numeroPageCollector($idCollector, $_SESSION['user']['equipe']);
             break;
 
-        case 'doAjouterMobile':
+        case 'doAjouterCollectorMobile':
             // Insertion d'une phrase / image culte
             $idCollector = insertCollector($_POST, $_FILES, $_SESSION['user'], true);
 
@@ -85,12 +85,12 @@
                 $numeroPage = numeroPageCollector($idCollector, $_SESSION['user']['equipe']);
             break;
 
-        case 'doSupprimer':
+        case 'doSupprimerCollector':
             // Suppression d'une phrase / image culte
             deleteCollector($_POST);
             break;
 
-        case 'doModifier':
+        case 'doModifierCollector':
             // Modification d'une phrase / image culte
             $idCollector = updateCollector($_POST, $_FILES, false);
 
@@ -98,7 +98,7 @@
             $numeroPage = numeroPageCollector($idCollector, $_SESSION['user']['equipe']);
             break;
 
-        case 'doModifierMobile':
+        case 'doModifierCollectorMobile':
             // Modification d'une phrase / image culte
             $idCollector = updateCollector($_POST, $_FILES, true);
 
@@ -106,7 +106,7 @@
             $numeroPage = numeroPageCollector($idCollector, $_SESSION['user']['equipe']);
             break;
 
-        case 'doVoter':
+        case 'doVoterCollector':
             // Vote d'un utilisateur
             $idCollector = voteCollector($_POST, $_SESSION['user']);
             break;
@@ -160,12 +160,12 @@
             $listeUsersJson = json_encode($listeUsers);
             break;
 
-        case 'doAjouter':
-        case 'doAjouterMobile':
-        case 'doSupprimer':
-        case 'doModifier':
-        case 'doModifierMobile':
-        case 'doVoter':
+        case 'doAjouterCollector':
+        case 'doAjouterCollectorMobile':
+        case 'doSupprimerCollector':
+        case 'doModifierCollector':
+        case 'doModifierCollectorMobile':
+        case 'doVoterCollector':
         default:
             break;
     }
@@ -173,24 +173,24 @@
     // Redirection affichage
     switch ($_GET['action'])
     {
-        case 'doAjouter':
-        case 'doAjouterMobile':
+        case 'doAjouterCollector':
+        case 'doAjouterCollectorMobile':
             if (!empty($idCollector) AND !empty($numeroPage))
                 header('location: collector.php?action=goConsulter&page=' . $numeroPage . '&sort=dateDesc&filter=none&anchor=' . $idCollector);
             else
                 header('location: collector.php?action=goConsulter&page=' . $_GET['page'] . '&sort=dateDesc&filter=none');
             break;
 
-        case 'doModifier':
-        case 'doModifierMobile':
+        case 'doModifierCollector':
+        case 'doModifierCollectorMobile':
             header('location: collector.php?action=goConsulter&page=' . $numeroPage . '&sort=' . $_GET['sort'] . '&filter=' . $_GET['filter'] . '&anchor=' . $idCollector);
             break;
 
-        case 'doSupprimer':
+        case 'doSupprimerCollector':
             header('location: collector.php?action=goConsulter&page=' . $_GET['page'] . '&sort=dateDesc&filter=none');
             break;
 
-        case 'doVoter':
+        case 'doVoterCollector':
             header('location: collector.php?action=goConsulter&page=' . $_GET['page'] . '&sort=' . $_GET['sort'] . '&filter=' . $_GET['filter'] . '&anchor=' . $idCollector);
             break;
 

@@ -27,7 +27,7 @@
                             // Supprimer
                             if ($preferences->getManage_calendars() == 'Y')
                             {
-                                echo '<form id="delete_calendar_' . $calendrier->getId() . '" method="post" action="calendars.php?year=' . $_GET['year'] . '&action=doSupprimer" class="download_calendar">';
+                                echo '<form id="delete_calendar_' . $calendrier->getId() . '" method="post" action="calendars.php?year=' . $_GET['year'] . '&action=doSupprimerCalendrier" class="download_calendar">';
                                     echo '<input type="hidden" name="id_calendrier" value="' . $calendrier->getId() . '" />';
                                     echo '<input type="hidden" name="team_calendrier" value="' . $calendrier->getTeam() . '" />';
                                     echo '<input type="submit" name="delete_calendar" value="" title="Supprimer le calendrier" class="delete_calendar eventConfirm" />';

@@ -100,7 +100,7 @@ $(function ()
     // Affiche la zone de modification d'un film
     $('#modifierFilm, #doodleFilm').click(function ()
     {
-        initialisationModification('zone_saisie_film');
+        initialisationModificationFilm('zone_saisie_film');
     });
 
     // Affiche la zone de modification d'un commentaire
@@ -221,7 +221,7 @@ $(window).on('load', function ()
     var doodle = $_GET('doodle');
 
     if (doodle == 'true')
-        initialisationModification('zone_saisie_film');
+        initialisationModificationFilm('zone_saisie_film');
 });
 
 /*****************/
@@ -405,11 +405,11 @@ function insertSmileyCommentaires(smiley, id)
 }
 
 // Modification d'un film
-function initialisationModification(zone)
+function initialisationModificationFilm(zone)
 {
     var titre  = 'Modifier un film';
     var bouton = 'Modifier le film';
-    var action = 'details.php?action=doModifier';
+    var action = 'details.php?action=doModifierFilm';
 
     // Conversion des dates
     var dateTheater = formatDateForDisplay(detailsFilm['date_theater']);

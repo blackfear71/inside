@@ -100,7 +100,7 @@
                     echo '</a>';
 
                     // Supprimer
-                    echo '<form method="post" action="restaurants.php?action=doSupprimer" class="form_supprimer_restaurant">';
+                    echo '<form method="post" action="restaurants.php?action=doSupprimerRestaurant" class="form_supprimer_restaurant">';
                         echo '<input type="hidden" name="id_restaurant" value="" />';
                         echo '<input type="submit" name="delete_restaurant" value="" title="Supprimer" class="icone_supprimer_restaurant eventConfirm" />';
                         echo '<input type="hidden" value="Supprimer ce restaurant de la liste ?" class="eventMessage" />';

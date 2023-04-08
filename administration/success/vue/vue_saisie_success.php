@@ -3,7 +3,7 @@
     echo '<div class="titre_section"><img src="../../includes/icons/admin/send_grey.png" alt="send_grey" class="logo_titre_section" /><div class="texte_titre_section">Ajouter un succès</div></div>';
 
     // Saisie du succès
-    echo '<form method="post" action="success.php?action=doAjouter" class="form_saisie_admin" enctype="multipart/form-data">';
+    echo '<form method="post" action="success.php?action=doAjouterSucces" class="form_saisie_admin" enctype="multipart/form-data">';
         // Image
         echo '<div class="zone_saisie_image_succes">';
             echo '<input type="hidden" name="MAX_FILE_SIZE" value="15728640" />';

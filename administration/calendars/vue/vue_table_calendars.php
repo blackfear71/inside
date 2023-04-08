@@ -43,14 +43,14 @@
 
                       echo '<td class="td_table_admin_actions">';
                         // Valider
-                        echo '<form method="post" action="calendars.php?action=doDeleteCalendrier" class="lien_action_table_admin">';
+                        echo '<form method="post" action="calendars.php?action=doSupprimerCalendrier" class="lien_action_table_admin">';
                             echo '<input type="hidden" name="id_calendrier" value="' . $calendrier->getId() . '" />';
                             echo '<input type="hidden" name="team_calendrier" value="' . $calendrier->getTeam() . '" />';
                             echo '<input type="submit" name="accepter_suppression_calendrier" value="" title="Accepter" class="icone_valider_table_admin" />';
                         echo '</form>';
 
                         // Refuser
-                        echo '<form method="post" action="calendars.php?action=doResetCalendrier" class="lien_action_table_admin">';
+                        echo '<form method="post" action="calendars.php?action=doReinitialiserCalendrier" class="lien_action_table_admin">';
                             echo '<input type="hidden" name="id_calendrier" value="' . $calendrier->getId() . '" />';
                             echo '<input type="hidden" name="team_calendrier" value="' . $calendrier->getTeam() . '" />';
                             echo '<input type="submit" name="annuler_suppression_calendrier" value="" title="Refuser" class="icone_annuler_table_admin" />';

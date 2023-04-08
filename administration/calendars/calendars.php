@@ -49,7 +49,7 @@
             $listeSuppressionAnnexes = getAnnexesToDelete();
             break;
 
-        case 'doUpdateAutorisations':
+        case 'doModifierAutorisations':
             // Récupération de la liste des utilisateurs
             $listeUsers = getUsers();
 
@@ -57,30 +57,30 @@
             updateAutorisations($_POST, $listeUsers);
             break;
 
-        case 'doInsererVacances':
+        case 'doAjouterVacances':
             insertVacancesCSV($_POST);
             break;
 
-        case 'doDeleteVacances':
+        case 'doSupprimerVacances':
             deleteVacancesCSV($_POST);
             break;
 
-        case 'doDeleteCalendrier':
+        case 'doSupprimerCalendrier':
             // Suppression d'un calendrier
             deleteCalendrier($_POST);
             break;
 
-        case 'doDeleteAnnexe':
+        case 'doSupprimerAnnexe':
             // Suppression d'une annexe
             deleteAnnexe($_POST);
             break;
 
-        case 'doResetCalendrier':
+        case 'doReinitialiserCalendrier':
             // Annulation de la demande de suppression d'un calendrier
             resetCalendrier($_POST);
             break;
 
-        case 'doResetAnnexe':
+        case 'doReinitialiserAnnexe':
             // Annulation de la demande de suppression d'une annexe
             resetAnnexe($_POST);
             break;
@@ -143,13 +143,13 @@
             unset($annexe);
             break;
 
-        case 'doUpdateAutorisations':
-        case 'doInsererVacances':
-        case 'doDeleteVacances':
-        case 'doDeleteCalendrier':
-        case 'doDeleteAnnexe':
-        case 'doResetCalendrier':
-        case 'doResetAnnexe':
+        case 'doModifierAutorisations':
+        case 'doAjouterVacances':
+        case 'doSupprimerVacances':
+        case 'doSupprimerCalendrier':
+        case 'doSupprimerAnnexe':
+        case 'doReinitialiserCalendrier':
+        case 'doReinitialiserAnnexe':
         default:
             break;
     }
@@ -157,13 +157,13 @@
     // Redirection affichage
     switch ($_GET['action'])
     {
-        case 'doUpdateAutorisations':
-        case 'doInsererVacances':
-        case 'doDeleteVacances':
-        case 'doDeleteCalendrier':
-        case 'doDeleteAnnexe':
-        case 'doResetCalendrier':
-        case 'doResetAnnexe':
+        case 'doModifierAutorisations':
+        case 'doAjouterVacances':
+        case 'doSupprimerVacances':
+        case 'doSupprimerCalendrier':
+        case 'doSupprimerAnnexe':
+        case 'doReinitialiserCalendrier':
+        case 'doReinitialiserAnnexe':
             header('location: calendars.php?action=goConsulter');
             break;
 

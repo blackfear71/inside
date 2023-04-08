@@ -12,9 +12,9 @@
 
             // Saisie film
             if ($_SERVER['PHP_SELF'] == '/inside/portail/moviehouse/moviehouse.php')
-                echo '<form method="post" action="moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&action=doAjouter" class="form_saisie_film">';
+                echo '<form method="post" action="moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&action=doAjouterFilm" class="form_saisie_film">';
             else
-                echo '<form method="post" action="details.php?action=doModifier" class="form_saisie_film">';
+                echo '<form method="post" action="details.php?action=doModifierFilm" class="form_saisie_film">';
                 echo '<input type="hidden" name="id_film" value="" />';
 
                 // Informations film

@@ -13,7 +13,7 @@
     // Appels métier
     switch ($_GET['action'])
     {
-        case 'doSubmit':
+        case 'doAjouterMessage':
             // Insertion du message dans le fichier XML
             submitChat($_POST);
             break;
@@ -34,7 +34,7 @@
     // Traitements de sécurité avant la vue
     switch ($_GET['action'])
     {
-        case 'doSubmit':
+        case 'doAjouterMessage':
             break;
 
         default:
@@ -61,7 +61,7 @@
     // Redirection affichage
     switch ($_GET['action'])
     {
-        case 'doSubmit':
+        case 'doAjouterMessage':
             break;
 
         default:

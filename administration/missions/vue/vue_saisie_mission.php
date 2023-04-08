@@ -1,9 +1,9 @@
 <?php
     if ($_GET['action'] == 'goAjouter')
-        echo '<form method="post" action="missions.php?action=doAjouter" enctype="multipart/form-data" class="form_saisie_mission">';
+        echo '<form method="post" action="missions.php?action=doAjouterMission" enctype="multipart/form-data" class="form_saisie_mission">';
     else
     {
-        echo '<form method="post" action="missions.php?action=doModifier" enctype="multipart/form-data" class="form_saisie_mission_terminee">';
+        echo '<form method="post" action="missions.php?action=doModifierMission" enctype="multipart/form-data" class="form_saisie_mission_terminee">';
             echo '<input type="hidden" name="id_mission" value="' . $detailsMission->getId() . '" />';
     }
 

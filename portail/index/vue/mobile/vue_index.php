@@ -145,9 +145,9 @@
 
                             // Réinitialisation mot de passe
                             if ($erreursIndex['erreurInscription'] == false AND $erreursIndex['erreurPassword'] == true)
-                                echo '<form method="post" action="index.php?action=doDemanderMdp" id="formPassword" class="form_index">';
+                                echo '<form method="post" action="index.php?action=doDemanderMotDePasse" id="formPassword" class="form_index">';
                             else
-                                echo '<form method="post" action="index.php?action=doDemanderMdp" id="formPassword" class="form_index" style="display: none;">';
+                                echo '<form method="post" action="index.php?action=doDemanderMotDePasse" id="formPassword" class="form_index" style="display: none;">';
                                 // Données utilisateur
                                 echo '<input type="text" name="login" value="' . $_SESSION['save']['identifiant_saisi_mdp'] . '" placeholder="Identifiant" maxlength="3" class="monoligne_index" id="focus_identifiant_3" required />';
 

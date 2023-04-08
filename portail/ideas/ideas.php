@@ -52,12 +52,12 @@
             }
             break;
 
-        case 'doInserer':
+        case 'doAjouterIdee':
             // Insertion d'une idée
             $idIdee = insertIdee($_POST, $_SESSION['user']);
             break;
 
-        case 'doModifier':
+        case 'doModifierIdee':
             // Récupération de la vue
             $view = $_GET['view'];
 
@@ -68,7 +68,7 @@
             $numeroPage = getNumeroPageIdea($idIdee, $view, $_SESSION['user']);
             break;
 
-        case 'doChangerStatut':
+        case 'doModifierStatutIdee':
             // Récupération de l'id de l'idée
             $idIdee = $_POST['id_idea'];
 
@@ -103,9 +103,9 @@
             }
             break;
 
-        case 'doInserer':
-        case 'doModifier':
-        case 'doChangerStatut':
+        case 'doAjouterIdee':
+        case 'doModifierIdee':
+        case 'doModifierStatutIdee':
         default:
             break;
     }
@@ -113,12 +113,12 @@
     // Redirection affichage
     switch ($_GET['action'])
     {
-        case 'doChangerStatut':
-        case 'doModifier':
+        case 'doModifierIdee':
+        case 'doModifierStatutIdee':
             header('location: ideas.php?view=' . $view . '&action=goConsulter&page=' . $numeroPage . '&anchor=' . $idIdee);
             break;
 
-        case 'doInserer':
+        case 'doAjouterIdee':
             header('location: ideas.php?view=inprogress&action=goConsulter&page=1&anchor=' . $idIdee);
             break;
 

@@ -93,13 +93,13 @@
                             {
                                 case 'P':
                                     // Validation
-                                    echo '<form method="post" action="manageusers.php?action=doChangerMdp" class="lien_action_table_admin">';
+                                    echo '<form method="post" action="manageusers.php?action=doReinitialiserMotDePasse" class="lien_action_table_admin">';
                                         echo '<input type="hidden" name="id_user" value="' . $user->getIdentifiant() . '" />';
                                         echo '<input type="submit" name="reinitialiser" value="" title="Réinitialiser" class="icone_valider_table_admin" />';
                                     echo '</form>';
         
                                     // Annulation
-                                    echo '<form method="post" action="manageusers.php?action=doAnnulerMdp" class="lien_action_table_admin">';
+                                    echo '<form method="post" action="manageusers.php?action=doRefuserMotDePasse" class="lien_action_table_admin">';
                                         echo '<input type="hidden" name="id_user" value="' . $user->getIdentifiant() . '" />';
                                         echo '<input type="submit" name="annuler_reinitialisation" value="" title="Annuler" class="icone_annuler_table_admin" />';
                                     echo '</form>';

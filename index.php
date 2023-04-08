@@ -46,7 +46,7 @@
             subscribe($_POST);
             break;
 
-        case 'doDemanderMdp':
+        case 'doDemanderMotDePasse':
             // Demande de réinitialisation de mot de passe
             resetPassword($_POST);
             break;
@@ -71,7 +71,7 @@
 
         case 'doConnecter':
         case 'doDemanderInscription':
-        case 'doDemanderMdp':
+        case 'doDemanderMotDePasse':
         default:
             break;
     }
@@ -89,7 +89,7 @@
             break;
 
         case 'doDemanderInscription':
-        case 'doDemanderMdp':
+        case 'doDemanderMotDePasse':
             header('location: index.php?action=goConsulter');
             break;
 

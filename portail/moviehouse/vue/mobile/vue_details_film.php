@@ -92,7 +92,7 @@
                             echo '</a>';
 
                             // Supprimer
-                            echo '<form id="delete_film" method="post" action="details.php?action=doSupprimer" class="lien_details_film">';
+                            echo '<form id="delete_film" method="post" action="details.php?action=doSupprimerFilm" class="lien_details_film">';
                                 echo '<input type="hidden" name="id_film" value="' . $detailsFilm->getId() . '" />';
                                 echo '<input type="hidden" name="team_film" value="' . $detailsFilm->getTeam() . '" />';
                                 echo '<input type="submit" name="delete_film" value="" title="Demander la suppression" class="icone_details_film_delete eventConfirm" />';
@@ -451,7 +451,7 @@
                                 echo '<div class="empty">Pas encore de commentaires...</div>';
 
                             // Saisie commentaire
-                            echo '<form method="post" action="details.php?action=doCommenter" id="comments">';
+                            echo '<form method="post" action="details.php?action=doAjouterCommentaire" id="comments">';
                                 // Id film
                                 echo '<input type="hidden" name="id_film" value="' . $detailsFilm->getId() . '" />';
 

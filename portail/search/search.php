@@ -25,26 +25,26 @@
     // Appels métier
     switch ($_GET['action'])
     {
-        case 'doSearch':
+        case 'doRechercher':
             // Initialisation de la sauvegarde en session
             initializeSaveSearch();
             break;
 
-        case 'goSearch':
+        case 'goRechercher':
             // Récupération des résultats de recherche
             $resultats = getSearch($_SESSION['search']['text_search'], $_SESSION['user']['equipe']);
             break;
 
         default:
             // Contrôle action renseignée URL
-            header('location: search.php?action=goSearch');
+            header('location: search.php?action=goRechercher');
             break;
     }
 
     // Traitements de sécurité avant la vue
     switch ($_GET['action'])
     {
-        case 'goSearch':
+        case 'goRechercher':
             if (!empty($resultats))
             {
                 foreach ($resultats['movie_house'] as &$resultatsMH)
@@ -77,7 +77,7 @@
             }
             break;
 
-        case 'doSearch':
+        case 'doRechercher':
         default:
             break;
     }
@@ -85,11 +85,11 @@
     // Redirection affichage
     switch ($_GET['action'])
     {
-        case 'doSearch':
-            header('location: search.php?action=goSearch');
+        case 'doRechercher':
+            header('location: search.php?action=goRechercher');
             break;
 
-        case 'goSearch':
+        case 'goRechercher':
         default:
             include_once('vue/' . $_SESSION['index']['plateforme'] . '/vue_search.php');
             break;

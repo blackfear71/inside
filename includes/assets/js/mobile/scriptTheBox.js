@@ -16,7 +16,7 @@ $(function ()
     $('#afficherSaisieIdee').click(function ()
     {
         // Initialisation des titres de la saisie
-        initialisationSaisie('zone_saisie_idee');
+        initialisationSaisieIdee('zone_saisie_idee');
 
         // Affichage de la zone de saisie
         afficherMasquerIdWithDelay('zone_saisie_idee');
@@ -26,7 +26,7 @@ $(function ()
     $('#fermerSaisieIdee').click(function ()
     {
         // Réinitialisation de la saisie
-        resetSaisie();
+        reinitialisationSaisieIdee();
 
         // Fermeture de l'affichage
         afficherMasquerIdWithDelay('zone_saisie_idee');
@@ -37,7 +37,7 @@ $(function ()
     {
         var idIdee = $(this).attr('id').replace('modifier_idee_', '');
 
-        initialisationModification(idIdee);
+        initialisationModificationIdee(idIdee);
     });
 
     // Réinitialise la saisie à la fermeture au clic sur le fond
@@ -45,7 +45,7 @@ $(function ()
     {
         // Ferme la saisie d'une idée
         if ($(event.target).attr('class') == 'fond_saisie')
-            resetSaisie();
+            reinitialisationSaisieIdee();
     });
 
     // Bloque la saisie en cas de soumission
@@ -75,7 +75,7 @@ $(window).on('load', function ()
 /*** Fonctions ***/
 /*****************/
 // Initialisation des titres de la saisie d'une idée
-function initialisationSaisie(idZone)
+function initialisationSaisieIdee(idZone)
 {
     // Titre
     var titre = 'Proposer une idée';
@@ -86,13 +86,13 @@ function initialisationSaisie(idZone)
 }
 
 // Affiche la zone de mise à jour d'une idée
-function initialisationModification(idIdee)
+function initialisationModificationIdee(idIdee)
 {
     // Récupération des données
     var idee        = listeIdees[idIdee];
     var sujet       = idee['subject'];
     var description = idee['content'];
-    var action      = 'ideas.php?view=' + $_GET('view') + '&action=doModifier';
+    var action      = 'ideas.php?view=' + $_GET('view') + '&action=doModifierIdee';
     var titre       = 'Modifier une idée';
 
     // Modification des données
@@ -116,7 +116,7 @@ function initialisationModification(idIdee)
 }
 
 // Réinitialise la zone de saisie d'une idée si fermeture modification
-function resetSaisie()
+function reinitialisationSaisieIdee()
 {
     // Déclenchement après la fermeture
     setTimeout(function ()
@@ -125,15 +125,15 @@ function resetSaisie()
         var currentAction = $('#zone_saisie_idee').find('.form_saisie').attr('action').split('&action=');
         var call          = currentAction[currentAction.length - 1]
 
-        if (call == 'doModifier')
+        if (call == 'doModifierIdee')
         {
             // Action du formulaire
-            var action = 'ideas.php?view=' + $_GET('view') + '&action=doInserer';
+            var action = 'ideas.php?view=' + $_GET('view') + '&action=doAjouterIdee';
 
             $('#zone_saisie_idee').find('.form_saisie').attr('action', action);
 
             // Initialisation du titre de la saisie
-            initialisationSaisie('zone_saisie_idee');
+            initialisationSaisieIdee('zone_saisie_idee');
 
             // Identifiant idée
             $('#zone_saisie_idee').find('#id_saisie_idee').val('');

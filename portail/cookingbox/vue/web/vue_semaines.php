@@ -30,7 +30,7 @@
 
                             if ($currentWeek->getIdentifiant() == $_SESSION['user']['identifiant'])
                             {
-                                echo '<form method="post" action="cookingbox.php?year=' . $_GET['year'] . '&action=doValider">';
+                                echo '<form method="post" action="cookingbox.php?year=' . $_GET['year'] . '&action=doValiderSemaine">';
                                     echo '<input type="hidden" name="week_cake" value="' . $currentWeek->getWeek() . '" />';
                                     echo '<input type="hidden" name="year_cake" value="' . $currentWeek->getYear() . '" />';
                                     echo '<input type="submit" name="validate_cake" value="Je l\'ai fait" class="bouton_semaine_2" />';
@@ -44,7 +44,7 @@
 
                         if ($currentWeek->getIdentifiant() == $_SESSION['user']['identifiant'])
                         {
-                            echo '<form method="post" action="cookingbox.php?year=' . $_GET['year'] . '&action=doAnnuler">';
+                            echo '<form method="post" action="cookingbox.php?year=' . $_GET['year'] . '&action=doAnnulerSemaine">';
                                 echo '<input type="hidden" name="week_cake" value="' . $currentWeek->getWeek() . '" />';
                                 echo '<input type="hidden" name="year_cake" value="' . $currentWeek->getYear() . '" />';
                                 echo '<input type="submit" name="cancel_cake" value="Annuler" class="bouton_semaine_2" />';

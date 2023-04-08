@@ -54,17 +54,17 @@
                 $mesChoix = getMyChoices($_SESSION['user'], date('Ymd'));
             break;
 
-        case 'doAjouter':
+        case 'doAjouterRestaurant':
             // Insertion d'un nouveau restaurant
             $idRestaurant = insertRestaurant($_POST, $_FILES, $_SESSION['user']);
             break;
 
-        case 'doModifier':
+        case 'doModifierRestaurant':
             // Modification d'un restaurant
             $idRestaurant = updateRestaurant($_POST, $_FILES);
             break;
 
-        case 'doSupprimer':
+        case 'doSupprimerRestaurant':
             // Suppression d'un restaurant
             deleteRestaurant($_POST);
             break;
@@ -130,9 +130,9 @@
                 $mesChoixJson = json_encode(convertForJsonMesChoix($mesChoix));
             break;
 
-        case 'doAjouter':
-        case 'doModifier':
-        case 'doSupprimer':
+        case 'doAjouterRestaurant':
+        case 'doModifierRestaurant':
+        case 'doSupprimerRestaurant':
         case 'doChoixRapide':
         default:
             break;
@@ -141,19 +141,19 @@
     // Redirection affichage
     switch ($_GET['action'])
     {
-        case 'doAjouter':
+        case 'doAjouterRestaurant':
             if (!empty($idRestaurant))
                 header('location: restaurants.php?action=goConsulter&anchor=' . $idRestaurant);
             else
                 header('location: restaurants.php?action=goConsulter');
             break;
 
-        case 'doModifier':
+        case 'doModifierRestaurant':
         case 'doChoixRapide':
             header('location: restaurants.php?action=goConsulter&anchor=' . $idRestaurant);
             break;
 
-        case 'doSupprimer':
+        case 'doSupprimerRestaurant':
             header('location: restaurants.php?action=goConsulter');
             break;
 

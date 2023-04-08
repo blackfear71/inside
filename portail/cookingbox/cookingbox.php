@@ -61,17 +61,17 @@
             }
             break;
 
-        case 'doModifier':
+        case 'doModifierSemaine':
             // Modification d'une semaine (utilisateur choisi)
             updateCake($_POST, $_SESSION['user']['equipe']);
             break;
 
-        case 'doValider':
+        case 'doValiderSemaine':
             // Validation d'une semaine (par l'utilisateur choisi)
             validateCake('Y', $_POST, $_SESSION['user']);
             break;
 
-        case 'doAnnuler':
+        case 'doAnnulerSemaine':
             // Annulation de la validation d'une semaine (par l'utilisateur choisi)
             validateCake('N', $_POST, $_SESSION['user']);
             break;
@@ -152,9 +152,9 @@
             $recettesJson      = json_encode(convertForJsonListeRecettes($recettes));
             break;
 
-        case 'doModifier':
-        case 'doValider':
-        case 'doAnnuler':
+        case 'doModifierSemaine':
+        case 'doValiderSemaine':
+        case 'doAnnulerSemaine':
         case 'doAjouterRecette':
         case 'doModifierRecette':
         case 'doSupprimerRecette':
@@ -165,9 +165,9 @@
     // Redirection affichage
     switch ($_GET['action'])
     {
-        case 'doModifier':
-        case 'doValider':
-        case 'doAnnuler':
+        case 'doModifierSemaine':
+        case 'doValiderSemaine':
+        case 'doAnnulerSemaine':
         case 'doSupprimerRecette':
             header('location: cookingbox.php?year=' . $_GET['year'] . '&action=goConsulter');
             break;

@@ -19,7 +19,7 @@
                                 // Suppression
                                 if ($collector->getType_collector() == 'I')
                                 {
-                                    echo '<form id="delete_image_' . $collector->getId() . '" method="post" action="collector.php?action=doSupprimer&page=' . $_GET['page'] . '" class="form_delete_collector">';
+                                    echo '<form id="delete_image_' . $collector->getId() . '" method="post" action="collector.php?action=doSupprimerCollector&page=' . $_GET['page'] . '" class="form_delete_collector">';
                                         echo '<input type="hidden" name="id_collector" value="' . $collector->getId() . '" />';
                                         echo '<input type="hidden" name="team_collector" value="' . $collector->getTeam() . '" />';
                                         echo '<input type="submit" name="delete_collector" value="" title="Supprimer l\'image" class="icone_supprimer_collector eventConfirm" />';
@@ -28,7 +28,7 @@
                                 }
                                 else
                                 {
-                                    echo '<form id="delete_collector_' . $collector->getId() . '" method="post" action="collector.php?action=doSupprimer&page=' . $_GET['page'] . '" class="form_delete_collector">';
+                                    echo '<form id="delete_collector_' . $collector->getId() . '" method="post" action="collector.php?action=doSupprimerCollector&page=' . $_GET['page'] . '" class="form_delete_collector">';
                                         echo '<input type="hidden" name="id_collector" value="' . $collector->getId() . '" />';
                                         echo '<input type="hidden" name="team_collector" value="' . $collector->getTeam() . '" />';
                                         echo '<input type="submit" name="delete_collector" value="" title="Supprimer la phrase culte" class="icone_supprimer_collector eventConfirm" />';

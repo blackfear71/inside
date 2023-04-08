@@ -67,13 +67,13 @@
                     echo '</td>';
 
                     echo '<td class="td_table_admin_actions">';
-                        echo '<form method="post" action="movies.php?action=doDeleteFilm" class="lien_action_table_admin">';
+                        echo '<form method="post" action="movies.php?action=doSupprimerFilm" class="lien_action_table_admin">';
                             echo '<input type="hidden" name="id_film" value="' . $film->getId() . '" />';
                             echo '<input type="hidden" name="team_film" value="' . $film->getTeam() . '" />';
                             echo '<input type="submit" name="accepter_suppression_film" value="" title="Accepter" class="icone_valider_table_admin" />';
                         echo '</form>';
 
-                        echo '<form method="post" action="movies.php?action=doResetFilm" class="lien_action_table_admin">';
+                        echo '<form method="post" action="movies.php?action=doReinitialiserFilm" class="lien_action_table_admin">';
                             echo '<input type="hidden" name="id_film" value="' . $film->getId() . '" />';
                             echo '<input type="hidden" name="team_film" value="' . $film->getTeam() . '" />';
                             echo '<input type="submit" name="annuler_suppression_film" value="" title="Refuser" class="icone_annuler_table_admin" />';

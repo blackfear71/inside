@@ -45,12 +45,12 @@
             }
             break;
 
-        case 'doGenerer':
+        case 'doInitialiserChangelog':
             // Sauvegarde des paramètres saisis en session
             saveChangeLogParameters($_POST);
             break;
 
-        case 'doAjouter':
+        case 'doAjouterChangelog':
             // Récupère les catégories
             $categoriesChangeLog = getCategories();
 
@@ -58,7 +58,7 @@
             insertChangeLog($_POST, $categoriesChangeLog);
             break;
 
-        case 'doModifier':
+        case 'doModifierChangelog':
             // Récupère les catégories
             $categoriesChangeLog = getCategories();
 
@@ -66,7 +66,7 @@
             updateChangeLog($_POST, $categoriesChangeLog);
             break;
 
-        case 'doSupprimer':
+        case 'doSupprimerChangelog':
             // Suppression d'un journal
             deleteChangeLog($_POST);
             break;
@@ -97,10 +97,10 @@
             $categoriesChangeLogJson = json_encode($categoriesChangeLog);
             break;
 
-        case 'doGenerer':
-        case 'doAjouter':
-        case 'doModifier':
-        case 'doSupprimer':
+        case 'doInitialiserChangelog':
+        case 'doAjouterChangelog':
+        case 'doModifierChangelog':
+        case 'doSupprimerChangelog':
         default:
             break;
     }
@@ -108,10 +108,10 @@
     // Redirection affichage
     switch ($_GET['action']) 
     {
-        case 'doGenerer':
-        case 'doAjouter':
-        case 'doModifier':
-        case 'doSupprimer':
+        case 'doInitialiserChangelog':
+        case 'doAjouterChangelog':
+        case 'doModifierChangelog':
+        case 'doSupprimerChangelog':
             header('location: changelog.php?action=goConsulter');
             break;
 

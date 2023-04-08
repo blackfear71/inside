@@ -115,12 +115,12 @@
             }
             break;
 
-        case 'doAjouter':
+        case 'doAjouterFilm':
             // Insertion d'un film
             $idFilm = insertFilm($_POST, $_SESSION['user'], false);
             break;
 
-        case 'doAjouterMobile':
+        case 'doAjouterFilmMobile':
             // Insertion d'un film
             $idFilm = insertFilm($_POST, $_SESSION['user'], true);
             break;
@@ -234,8 +234,8 @@
             }
             break;
 
-        case 'doAjouter':
-        case 'doAjouterMobile':
+        case 'doAjouterFilm':
+        case 'doAjouterFilmMobile':
         case 'doVoterFilm':
         case 'doParticiperFilm':
         default:
@@ -245,8 +245,8 @@
     // Redirection affichage
     switch ($_GET['action'])
     {
-        case 'doAjouter':
-        case 'doAjouterMobile':
+        case 'doAjouterFilm':
+        case 'doAjouterFilmMobile':
             if ((isset($_SESSION['alerts']['wrong_date'])            AND $_SESSION['alerts']['wrong_date']            == true)
             OR  (isset($_SESSION['alerts']['wrong_date_doodle'])     AND $_SESSION['alerts']['wrong_date_doodle']     == true)
             OR  (isset($_SESSION['alerts']['restaurant_incomplete']) AND $_SESSION['alerts']['restaurant_incomplete'] == true))

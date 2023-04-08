@@ -3,7 +3,7 @@
     echo '<div class="titre_section"><img src="../../includes/icons/admin/send_grey.png" alt="send_grey" class="logo_titre_section" /><div class="texte_titre_section">Ajouter une alerte</div></div>';
 
     // Saisie de l'alerte
-    echo '<form method="post" action="alerts.php?action=doAjouter" class="form_saisie_admin">';
+    echo '<form method="post" action="alerts.php?action=doAjouterAlerte" class="form_saisie_admin">';
         // Type
         echo '<select name="type_alert" class="saisie_alerte_type" required>';
             echo '<option value="" hidden>Type d\'alerte</option>';

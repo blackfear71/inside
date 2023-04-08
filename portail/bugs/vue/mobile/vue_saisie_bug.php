@@ -1,6 +1,6 @@
 <?php
     echo '<div id="zone_saisie_rapport" class="fond_saisie">';
-        echo '<form method="post" action="bugs.php?action=doSignaler" enctype="multipart/form-data" class="form_saisie">';
+        echo '<form method="post" action="bugs.php?action=doAjouterRapport" enctype="multipart/form-data" class="form_saisie">';
             // Titre
             echo '<div class="zone_titre_saisie">Faire un rapport</div>';
 

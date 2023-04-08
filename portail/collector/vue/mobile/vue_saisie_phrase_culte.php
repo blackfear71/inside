@@ -1,6 +1,6 @@
 <?php
     echo '<div id="zone_saisie_collector" class="fond_saisie">';
-        echo '<form method="post" action="collector.php?action=doAjouterMobile&page=' . $_GET['page'] . '" class="form_saisie">';
+        echo '<form method="post" action="collector.php?action=doAjouterCollectorMobile&page=' . $_GET['page'] . '" class="form_saisie">';
             // Type de saisie
             echo '<input type="hidden" name="type_collector" value="T" />';
 

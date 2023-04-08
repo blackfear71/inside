@@ -33,7 +33,7 @@ $(function ()
         }
 
         if (idForm != '')
-            resetLiveSearch(idForm);
+            reinitialisationRechercheLive(idForm);
     });
 
     // Change la couleur d'une case à cocher à la sélection et affiche les options supplémentaires
@@ -196,7 +196,7 @@ $(function ()
     {
         var idDetails = $(this).attr('id').replace('afficher_details_', '');
 
-        showDetails('zone_details', idDetails);
+        afficherDetailsProposition('zone_details', idDetails);
 
         // Adaptation mobile
         adaptDetails();
@@ -699,7 +699,7 @@ function closeInputOrDetails(id)
 }
 
 // Réinitialise la zone de recherche saisie
-function resetLiveSearch(idForm)
+function reinitialisationRechercheLive(idForm)
 {
     // On vide la saisie
     $('#' + idForm).find('.input_recherche_live').val('');
@@ -1010,7 +1010,7 @@ function cacherSaisieMenu(zone, bouton, menu)
 }
 
 // Affiche les détails d'une proposition
-function showDetails(zone, id)
+function afficherDetailsProposition(zone, id)
 {
     // Modification des données
     var details = detailsPropositions[id];

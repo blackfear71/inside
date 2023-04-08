@@ -11,7 +11,7 @@
             echo '<a id="fermerPropositions" class="close_add"><img src="../../includes/icons/common/close.png" alt="close" title="Fermer" class="close_img" /></a>';
 
             // Saisie
-            echo '<form method="post" action="foodadvisor.php?action=doAjouter" class="form_saisie_propositions">';
+            echo '<form method="post" action="foodadvisor.php?action=doAjouterChoix" class="form_saisie_propositions">';
                 // Recherche
                 echo '<div class="zone_recherche_live">';
                     // Logo

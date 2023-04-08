@@ -44,12 +44,12 @@
             $totalStatistiques = getTotalStatistiques($tableauStatistiquesIns, $tableauStatistiquesDes);
             break;
 
-        case 'doChangerMdp':
+        case 'doReinitialiserMotDePasse':
             // Réinitialisation du mot de passe
             setNewPassword($_POST);
             break;
 
-        case 'doAnnulerMdp':
+        case 'doRefuserMotDePasse':
             // Annulation de la réinitialisation du mot de passe
             resetOldPassword($_POST);
             break;
@@ -146,8 +146,8 @@
             $tableauStatistiquesDesJson = json_encode(convertForJsonStatistiques($tableauStatistiquesDes));
             break;
 
-        case 'doChangerMdp':
-        case 'doAnnulerMdp':
+        case 'doReinitialiserMotDePasse':
+        case 'doRefuserMotDePasse':
         case 'doAccepterEquipe':
         case 'doRefuserEquipe':
         case 'doAccepterInscription':
@@ -162,8 +162,8 @@
     // Redirection affichage
     switch ($_GET['action'])
     {
-        case 'doChangerMdp':
-        case 'doAnnulerMdp':
+        case 'doReinitialiserMotDePasse':
+        case 'doRefuserMotDePasse':
         case 'doAccepterEquipe':
         case 'doRefuserEquipe':
         case 'doAccepterInscription':

@@ -37,7 +37,7 @@
             echo '<div class="alerte_periodes_vacances">La prochaine période de vacances scolaires ' . date('Y') . '-' . (date('Y') + 1) . ' n\'a pas encore été saisie.</div>';
 
         // Formulaire de saisie des vacances scolaires
-        echo '<form method="post" action="calendars.php?action=doInsererVacances">';
+        echo '<form method="post" action="calendars.php?action=doAjouterVacances">';
             // Tableau des vacances par zone
             echo '<table class="table_periodes_vacances">';
                 // Zones géographiques

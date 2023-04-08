@@ -1,6 +1,6 @@
 <?php
     echo '<div id="zone_saisie_propositions" class="fond_saisie">';
-        echo '<form method="post" action="foodadvisor.php?action=doAjouter" class="form_saisie">';
+        echo '<form method="post" action="foodadvisor.php?action=doAjouterChoix" class="form_saisie">';
             // Titre
             echo '<div class="zone_titre_saisie">';
                 echo 'Proposer où manger';

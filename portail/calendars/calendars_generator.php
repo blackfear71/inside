@@ -63,7 +63,7 @@
                 header('location: calendars.php?year=' . date('Y') . '&action=goConsulter');
             break;
 
-        case 'doGenerer':
+        case 'doGenererCalendrier':
             // Sauvegarde des paramètres saisis en session
             $nomImage = saveCalendarParameters($_POST, $_FILES);
 
@@ -81,7 +81,7 @@
                 insertImageAnnexe($_FILES, $nomImage);
             break;
 
-        case 'doSauvegarder':
+        case 'doSauvegarderCalendrier':
             // Sauvegarde de l'image générée
             $year = insertCalendrierGenere($_POST, $_SESSION['user']);
             break;
@@ -91,7 +91,7 @@
             insertAnnexeGeneree($_POST, $_SESSION['user']);
             break;
 
-        case 'doAjouter':
+        case 'doAjouterCalendrier':
             // Insertion d'un calendrier
             $year = insertCalendrier($_POST, $_FILES, $_SESSION['user']);
             break;
@@ -126,11 +126,11 @@
             $annexeParameters = AnnexeParameters::secureData($annexeParameters);
             break;
 
-        case 'doAjouter':
+        case 'doAjouterCalendrier':
         case 'doAjouterAnnexe':
-        case 'doGenerer':
+        case 'doGenererCalendrier':
         case 'doGenererAnnexe':
-        case 'doSauvegarder':
+        case 'doSauvegarderCalendrier':
         case 'doSauvegarderAnnexe':
         default:
             break;
@@ -139,8 +139,8 @@
     // Redirection affichage
     switch ($_GET['action'])
     {
-        case 'doAjouter':
-        case 'doSauvegarder':
+        case 'doAjouterCalendrier':
+        case 'doSauvegarderCalendrier':
             header('location: calendars.php?year=' . $year . '&action=goConsulter');
             break;
 
@@ -149,7 +149,7 @@
             header('location: calendars.php?action=goConsulterAnnexes');
             break;
 
-        case 'doGenerer':
+        case 'doGenererCalendrier':
             header('location: calendars_generator.php?action=goConsulter');
             break;
 

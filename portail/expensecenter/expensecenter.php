@@ -54,32 +54,32 @@
             }
             break;
 
-        case 'doInserer':
+        case 'doAjouterDepense':
             // Insertion d'une dépense
             $idExpense = insertExpense($_POST, $_SESSION['user'], false);
             break;
 
-        case 'doInsererMobile':
+        case 'doAjouterDepenseMobile':
             // Insertion d'une dépense
             $idExpense = insertExpense($_POST, $_SESSION['user'], true);
             break;
 
-        case 'doInsererMontants':
+        case 'doAjouterMontants':
             // Insertion d'une dépense en montants
             $idExpense = insertMontants($_POST, $_SESSION['user'], false);
             break;
 
-        case 'doInsererMontantsMobile':
+        case 'doAjouterMontantsMobile':
             // Insertion d'une dépense en montants
             $idExpense = insertMontants($_POST, $_SESSION['user'], true);
             break;
 
-        case 'doModifier':
+        case 'doModifierDepense':
             // Modification d'une dépense
             $idExpense = updateExpense($_POST, $_SESSION['user']['equipe'], false);
             break;
 
-        case 'doModifierMobile':
+        case 'doModifierDepenseMobile':
             // Modification d'une dépense
             $idExpense = updateExpense($_POST, $_SESSION['user']['equipe'], true);
             break;
@@ -94,7 +94,7 @@
             $idExpense = updateMontants($_POST, $_SESSION['user']['equipe'], true);
             break;
 
-        case 'doSupprimer':
+        case 'doSupprimerDepense':
             // Suppression d'une dépense
             deleteExpense($_POST);
             break;
@@ -149,15 +149,15 @@
             $listeDepensesJson = json_encode(convertForJsonListeDepenses($listeDepenses));
             break;
 
-        case 'doInserer':
-        case 'doInsererMobile':
-        case 'doInsererMontants':
-        case 'doInsererMontantsMobile':
-        case 'doModifier':
-        case 'doModifierMobile':
+        case 'doAjouterDepense':
+        case 'doAjouterDepenseMobile':
+        case 'doAjouterMontants':
+        case 'doAjouterMontantsMobile':
+        case 'doModifierDepense':
+        case 'doModifierDepenseMobile':
         case 'doModifierMontants':
         case 'doModifierMontantsMobile':
-        case 'doSupprimer':
+        case 'doSupprimerDepense':
         case 'doSupprimerMontants':
         default:
             break;
@@ -166,21 +166,21 @@
     // Redirection affichage
     switch ($_GET['action'])
     {
-        case 'doInserer':
-        case 'doInsererMobile':
-        case 'doInsererMontants':
-        case 'doInsererMontantsMobile':
+        case 'doAjouterDepense':
+        case 'doAjouterDepenseMobile':
+        case 'doAjouterMontants':
+        case 'doAjouterMontantsMobile':
             header('location: expensecenter.php?year=' . date('Y') . '&filter=all&action=goConsulter&anchor=' . $idExpense);
             break;
 
-        case 'doModifier':
-        case 'doModifierMobile':
+        case 'doModifierDepense':
+        case 'doModifierDepenseMobile':
         case 'doModifierMontants':
         case 'doModifierMontantsMobile':
             header('location: expensecenter.php?year=' . $_GET['year'] . '&filter=' . $_GET['filter'] . '&action=goConsulter&anchor=' . $idExpense);
             break;
 
-        case 'doSupprimer':
+        case 'doSupprimerDepense':
         case 'doSupprimerMontants':
             header('location: expensecenter.php?year=' . $_GET['year'] . '&filter=all&action=goConsulter');
             break;

@@ -36,7 +36,7 @@
         echo '</form>';
 
         // Mise à jour informations
-        echo '<form method="post" action="profil.php?action=doUpdateInfos" class="form_update_infos">';
+        echo '<form method="post" action="profil.php?action=doModifierInfos" class="form_update_infos">';
             // Pseudo
             echo '<img src="../../includes/icons/common/inside_red.png" alt="inside_red" class="logo_parametres" />';
             echo '<input type="text" name="pseudo" placeholder="Pseudo" value="' . $profil->getPseudo() . '" maxlength="255" class="monoligne_saisie" />';

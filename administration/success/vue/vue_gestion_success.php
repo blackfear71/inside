@@ -17,7 +17,7 @@
 
     // Purge
     echo '<div class="zone_gestion_succes margin_top_20">';
-        echo '<form id="purgeSuccess" method="post" action="success.php?action=doPurger" class="form_gestion_succes">';
+        echo '<form id="purgeSuccess" method="post" action="success.php?action=doPurgerSucces" class="form_gestion_succes">';
             echo '<input type="submit" name="purge_success" value="Purger les succès" class="bouton_gestion_succes eventConfirm" />';
             echo '<input type="hidden" value="Voulez-vous vraiment purger les succès ? Ceci est définitif." class="eventMessage" />';
         echo '</form>';
@@ -35,7 +35,7 @@
 
     // Initialisation
     echo '<div class="zone_gestion_succes margin_top_20">';
-        echo '<form id="initializeSuccess" method="post" action="success.php?action=doInitialiser" class="form_gestion_succes">';
+        echo '<form id="initializeSuccess" method="post" action="success.php?action=doInitialiserSucces" class="form_gestion_succes">';
             echo '<input type="submit" name="init_success" value="Initialiser les succès" class="bouton_gestion_succes eventConfirm" />';
             echo '<input type="hidden" value="Voulez-vous vraiment initialiser les succès ?" class="eventMessage" />';
         echo '</form>';

@@ -48,7 +48,7 @@
             }
             break;
 
-        case 'doSignaler':
+        case 'doAjouterRapport':
             // Insertion d'un bug / d'une évolution
             $idRapport = insertBug($_POST, $_FILES, $_SESSION['user']);
             break;
@@ -86,7 +86,7 @@
             unset($evolution);
             break;
 
-        case 'doSignaler':
+        case 'doAjouterRapport':
         default:
             break;
     }
@@ -94,7 +94,7 @@
     // Redirection affichage
     switch ($_GET['action'])
     {
-        case 'doSignaler':
+        case 'doAjouterRapport':
             header('location: bugs.php?view=unresolved&action=goConsulter&anchor=' . $idRapport);
             break;
 

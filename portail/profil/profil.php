@@ -108,38 +108,38 @@
             deleteAvatar($_SESSION['user']['identifiant']);
             break;
 
-        case 'doUpdateInfos':
+        case 'doModifierInfos':
             // Modification des informations de l'utilisateur
             updateInfos($_SESSION['user']['identifiant'], $_POST, false);
             break;
 
-        case 'doUpdateInfosMobile':
+        case 'doModifierInfosMobile':
             // Modification des informations de l'utilisateur
             updateInfos($_SESSION['user']['identifiant'], $_POST, true);
             break;
 
-        case 'doUpdatePreferences':
+        case 'doModifierPreferences':
             // Modification des préférences de l'utilisateur
             updatePreferences($_SESSION['user']['identifiant'], $_POST);
             break;
 
-        case 'doUpdatePassword':
+        case 'doModifierMotDePasse':
             // Modification du mot de passe de l'utilisateur
             updatePassword($_SESSION['user']['identifiant'], $_POST);
             break;
 
-        case 'doUpdateEquipe':
+        case 'doModifierEquipe':
             // Modification de l'équipe
             updateEquipe($_SESSION['user'], $_POST);
             break;
 
-        case 'askDesinscription':
+        case 'doDemanderDesinscription':
             // Demande de désinscription
             updateStatus($_SESSION['user']['identifiant'], 'D');
             break;
 
-        case 'cancelDesinscription':
-        case 'cancelResetPassword':
+        case 'doAnnulerDesinscription':
+        case 'doAnnulerMotDePasse':
             // Annulation changement statut
             updateStatus($_SESSION['user']['identifiant'], 'U');
             break;
@@ -247,14 +247,14 @@
 
         case 'doModifierAvatar':
         case 'doSupprimerAvatar':
-        case 'doUpdateInfos':
-        case 'doUpdateInfosMobile':
-        case 'doUpdatePreferences':
-        case 'doUpdatePassword':
-        case 'doUpdateEquipe':
-        case 'askDesinscription':
-        case 'cancelDesinscription':
-        case 'cancelResetPassword':
+        case 'doModifierInfos':
+        case 'doModifierInfosMobile':
+        case 'doModifierPreferences':
+        case 'doModifierMotDePasse':
+        case 'doModifierEquipe':
+        case 'doDemanderDesinscription':
+        case 'doAnnulerDesinscription':
+        case 'doAnnulerMotDePasse':
         case 'doModifierPolice':
         case 'doSupprimerTheme':
         case 'doModifierTheme':
@@ -267,14 +267,14 @@
     {
         case 'doModifierAvatar':
         case 'doSupprimerAvatar':
-        case 'doUpdateInfos':
-        case 'doUpdateInfosMobile':
-        case 'doUpdatePreferences':
-        case 'doUpdatePassword':
-        case 'doUpdateEquipe':
-        case 'askDesinscription':
-        case 'cancelDesinscription':
-        case 'cancelResetPassword':
+        case 'doModifierInfos':
+        case 'doModifierInfosMobile':
+        case 'doModifierPreferences':
+        case 'doModifierMotDePasse':
+        case 'doModifierEquipe':
+        case 'doDemanderDesinscription':
+        case 'doAnnulerDesinscription':
+        case 'doAnnulerMotDePasse':
             header('location: profil.php?view=settings&action=goConsulter');
             break;
 

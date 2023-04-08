@@ -3,7 +3,7 @@
     echo '<div class="titre_section"><img src="../../includes/icons/admin/datas_grey.png" alt="datas_grey" class="logo_titre_section" /><div class="texte_titre_section">Données de la page à générer</div></div>';
 
     // Paramétrage des données
-    echo '<form method="post" action="codegenerator.php?action=generateCode" class="form_saisie_admin">';
+    echo '<form method="post" action="codegenerator.php?action=doGenererCode" class="form_saisie_admin">';
         // Titre
         echo '<div class="categorie_generator">Données générales</div>';
 

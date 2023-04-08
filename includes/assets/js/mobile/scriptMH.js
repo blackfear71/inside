@@ -26,7 +26,7 @@ $(function ()
     // Affiche la zone de modification d'un film
     $('#modifierFilm, #doodleFilm').click(function ()
     {
-        initialisationModification('zone_saisie_film');
+        initialisationModificationFilm('zone_saisie_film');
     });
 
     // Change la couleur des switch restaurant film
@@ -102,7 +102,7 @@ $(window).on('load', function ()
     var doodle = $_GET('doodle');
 
     if (doodle == 'true')
-        initialisationModification('zone_saisie_film');
+        initialisationModificationFilm('zone_saisie_film');
 });
 
 /*****************/
@@ -178,10 +178,10 @@ function switchCheckedColor(zone, input)
 }
 
 // Modification d'un film
-function initialisationModification(zone)
+function initialisationModificationFilm(zone)
 {
     var titre  = 'Modifier un film';
-    var action = 'details.php?action=doModifierMobile';
+    var action = 'details.php?action=doModifierFilmMobile';
 
     // Conversion des dates
     var dateTheater = formatDateForDisplayMobile(detailsFilm['date_theater']);

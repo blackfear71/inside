@@ -159,7 +159,7 @@
             completeChoice($_POST, $_SESSION['user']);
             break;
 
-        case 'doAjouter':
+        case 'doAjouterChoix':
             // Détermination si bande à part
             $isSolo = getSolo($_SESSION['user'], $_POST['date']);
 
@@ -167,17 +167,17 @@
             insertChoices($_POST, $isSolo, $_SESSION['user']);
             break;
 
-        case 'doModifier':
+        case 'doModifierChoix':
             // Modification d'un choix
             updateChoice($_POST, $_SESSION['user']['identifiant']);
             break;
 
-        case 'doSupprimer':
+        case 'doSupprimerChoix':
             // Suppression d'un choix
             deleteChoice($_POST, $_SESSION['user']);
             break;
 
-        case 'doSupprimerChoix':
+        case 'doSupprimerTousChoix':
             // Suppression de tous les choix
             deleteAllChoices($_SESSION['user'], $_POST['date']);
             break;
@@ -313,10 +313,10 @@
         case 'doReserver':
         case 'doAnnulerReserver':
         case 'doComplet':
-        case 'doAjouter':
-        case 'doModifier':
-        case 'doSupprimer':
+        case 'doAjouterChoix':
+        case 'doModifierChoix':
         case 'doSupprimerChoix':
+        case 'doSupprimerTousChoix':
         case 'doChoixRapide':
         case 'doAjouterResume':
         case 'doSupprimerResume':
@@ -333,10 +333,10 @@
         case 'doReserver':
         case 'doAnnulerReserver':
         case 'doComplet':
-        case 'doAjouter':
-        case 'doModifier':
-        case 'doSupprimer':
+        case 'doAjouterChoix':
+        case 'doModifierChoix':
         case 'doSupprimerChoix':
+        case 'doSupprimerTousChoix':
         case 'doChoixRapide':
         case 'doAjouterResume':
         case 'doSupprimerResume':

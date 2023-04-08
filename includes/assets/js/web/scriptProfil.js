@@ -73,7 +73,7 @@ $(function () {
     {
         var idSuccess = $(this).attr('id').replace('agrandir_succes_', '');
 
-        showSuccess(idSuccess);
+        afficherDetailsSucces(idSuccess);
     });
 
     // Ferme au clic sur le fond
@@ -456,7 +456,7 @@ function changeCheckedColor(input)
 }
 
 // Affiche le détail d'un succès débloqué
-function showSuccess(id)
+function afficherDetailsSucces(id)
 {
     var success = listeSuccess[id];
     var html    = '';

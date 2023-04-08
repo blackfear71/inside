@@ -42,7 +42,7 @@
         echo '</form>';
 
         // Mise à jour informations
-        echo '<form method="post" action="profil.php?action=doUpdateInfosMobile" class="form_update_infos">';
+        echo '<form method="post" action="profil.php?action=doModifierInfosMobile" class="form_update_infos">';
             // Pseudo
             echo '<div class="zone_saisie_information">';
                 echo '<img src="../../includes/icons/common/inside_red.png" alt="inside_red" class="logo_information" />';
@@ -77,7 +77,7 @@
         echo '</div>';
 
         // Préférences
-        echo '<form method="post" action="profil.php?action=doUpdatePreferences">';
+        echo '<form method="post" action="profil.php?action=doModifierPreferences">';
             /***************/
             /*** Celsius ***/
             /***************/
@@ -537,7 +537,7 @@
             echo '</div>';
 
             // Modification mot de passe
-            echo '<form method="post" action="profil.php?action=doUpdatePassword" class="form_update_user">';
+            echo '<form method="post" action="profil.php?action=doModifierMotDePasse" class="form_update_user">';
                 echo '<input type="password" name="old_password" placeholder="Ancien mot de passe" maxlength="100" class="saisie_information_2" required />';
                 echo '<input type="password" name="new_password" placeholder="Nouveau mot de passe" maxlength="100" class="saisie_information_2" required />';
                 echo '<input type="password" name="confirm_new_password" placeholder="Confirmer le nouveau mot de passe" maxlength="100" class="saisie_information_2" required />';
@@ -550,7 +550,7 @@
             {
                 echo '<div class="message_form_preferences">Si vous avez fait la demande de réinitialisation de mot de passe mais que vous souhaitez l\'annuler car vous l\'avez retrouvé, cliquez sur ce bouton.</div>';
 
-                echo '<form method="post" action="profil.php?action=cancelResetPassword" class="form_update_user">';
+                echo '<form method="post" action="profil.php?action=doAnnulerMotDePasse" class="form_update_user">';
                     echo '<input type="submit" name="cancel_reset" value="Annuler la demande" class="bouton_validation_form_2" />';
                 echo '</form>';
 
@@ -574,7 +574,7 @@
                 echo '<div class="message_form_preferences message_bold">Une demande est déjà en cours.</div>';
             else
             {
-                echo '<form method="post" action="profil.php?action=doUpdateEquipe" class="form_update_user">';
+                echo '<form method="post" action="profil.php?action=doModifierEquipe" class="form_update_user">';
                     echo '<select name="equipe" class="select_form_update_team" required>';
                         echo '<option value="" hidden>Choisir une équipe</option>';
                             foreach ($listeEquipes as $equipe)
@@ -611,7 +611,7 @@
             if ($profil->getStatus() == 'D')
             {
                 // Annulation
-                echo '<form method="post" action="profil.php?action=cancelDesinscription" class="form_update_user">';
+                echo '<form method="post" action="profil.php?action=doAnnulerDesinscription" class="form_update_user">';
                     echo '<input type="submit" name="cancel_desinscription" value="Annuler la demande" class="bouton_validation_form_2" />';
                 echo '</form>';
 
@@ -620,7 +620,7 @@
             else
             {
                 // Désinscription
-                echo '<form method="post" action="profil.php?action=askDesinscription" class="form_update_user">';
+                echo '<form method="post" action="profil.php?action=doDemanderDesinscription" class="form_update_user">';
                     echo '<input type="submit" name="ask_desinscription" value="Désinscription" class="bouton_validation_form_2" />';
                 echo '</form>';
 

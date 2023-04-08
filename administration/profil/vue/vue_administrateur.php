@@ -9,7 +9,7 @@
             echo '<div class="titre_contribution">CHANGER MOT DE PASSE</div>';
 
             // Modification mot de passe
-            echo '<form method="post" action="profil.php?action=doUpdatePassword">';
+            echo '<form method="post" action="profil.php?action=doModifierMotDePasse">';
                 echo '<input type="password" name="old_password" placeholder="Ancien mot de passe" maxlength="100" class="monoligne_saisie" required />';
                 echo '<input type="password" name="new_password" placeholder="Nouveau mot de passe" maxlength="100" class="monoligne_saisie" required />';
                 echo '<input type="password" name="confirm_new_password" placeholder="Confirmer le nouveau mot de passe" maxlength="100" class="monoligne_saisie" required />';

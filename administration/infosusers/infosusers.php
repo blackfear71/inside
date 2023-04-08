@@ -30,12 +30,12 @@
             $listeUsersParEquipe = getUsers();
             break;
 
-        case 'doModifier':
+        case 'doModifierEquipe':
             // Modification d'une équipe
             updateEquipe($_POST);
             break;
 
-        case 'doSupprimer':
+        case 'doSupprimerEquipe':
             // Suppression d'une équipe
             deleteEquipe($_POST);
             break;
@@ -80,8 +80,8 @@
             unset($usersParEquipe);
             break;
 
-        case 'doModifier':
-        case 'doSupprimer':
+        case 'doModifierEquipe':
+        case 'doSupprimerEquipe':
         case 'changeBeginnerStatus':
         case 'changeDevelopperStatus':
         default:
@@ -91,8 +91,8 @@
     // Redirection affichage
     switch ($_GET['action'])
     {
-        case 'doModifier':
-        case 'doSupprimer':
+        case 'doModifierEquipe':
+        case 'doSupprimerEquipe':
         case 'changeBeginnerStatus':
         case 'changeDevelopperStatus':
             header('location: infosusers.php?action=goConsulter');

@@ -28,7 +28,7 @@ $(function ()
     $('#fermerSaisieRecette').click(function ()
     {
         // Réinitialisation de la saisie
-        resetSaisie();
+        reinitialisationSaisieRecette();
 
         // Fermeture de l'affichage
         afficherMasquerIdWithDelay('zone_saisie_recette');
@@ -52,10 +52,10 @@ $(function ()
             masquerSupprimerIdWithDelay('zoom_image');
 
         if ($(event.target).attr('id') == 'zone_saisie_recette')
-            resetSaisie();
+            reinitialisationSaisieRecette();
     });
 
-    // Bloque la saisie en cas de soumission (recette)
+    // Ouvre la zone de saisie d'une semaine
     $('#semaineCourante, #semaineSuivante').click(function ()
     {
         afficherSaisieSemaine($(this).attr('id'));
@@ -81,7 +81,7 @@ $(function ()
     {
         var idRecette = $(this).attr('id').replace('afficher_recette_', '');
 
-        afficherRecette($(this), idRecette);
+        afficherDetailsRecette($(this), idRecette);
     });
 
     // Ferme le zoom d'une recette (au clic sur la croix)
@@ -194,7 +194,7 @@ function ajoutIngredient(idParent)
 }
 
 // Réinitialise la zone de saisie d'une recette si fermeture modification
-function resetSaisie(zone)
+function reinitialisationSaisieRecette(zone)
 {
     setTimeout(function ()
     {
@@ -326,7 +326,7 @@ function afficherSaisieSemaine(idSemaine)
         semaine = nextWeek;
 
     var titre  = 'Semaine ' + semaine['week'];
-    var action = 'cookingbox.php?year=' + $_GET('year') + '&action=doModifier';
+    var action = 'cookingbox.php?year=' + $_GET('year') + '&action=doModifierSemaine';
 
     // Titre
     $('#zone_saisie_semaine').find('.zone_titre_saisie').html(titre);
@@ -406,7 +406,7 @@ function afficherSaisieSemaine(idSemaine)
 }
 
 // Affiche les détails de la recette
-function afficherRecette(link, id)
+function afficherDetailsRecette(link, id)
 {
     var html             = '';
     var path_mini        = link.children('.image_recette').attr('src');
@@ -501,7 +501,7 @@ function afficherRecette(link, id)
                 {
                     if (recipe['cooked'] == 'Y')
                     {
-                        html += '<form method="post" action="cookingbox.php?year=' + recipe['year'] + '&action=doAnnuler" class="form_details">';
+                        html += '<form method="post" action="cookingbox.php?year=' + recipe['year'] + '&action=doAnnulerSemaine" class="form_details">';
                             html += '<input type="hidden" name="week_cake" value="' + recipe['week'] + '" />';
                             html += '<input type="hidden" name="year_cake" value="' + recipe['year'] + '" />';
                             html += '<input type="submit" name="cancel_cake" value="Annuler" class="bouton_details" />';
@@ -509,7 +509,7 @@ function afficherRecette(link, id)
                     }
                     else
                     {
-                        html += '<form method="post" action="cookingbox.php?year=' + recipe['year'] + '&action=doValider" class="form_details">';
+                        html += '<form method="post" action="cookingbox.php?year=' + recipe['year'] + '&action=doValiderSemaine" class="form_details">';
                             html += '<input type="hidden" name="week_cake" value="' + recipe['week'] + '" />';
                             html += '<input type="hidden" name="year_cake" value="' + recipe['year'] + '" />';
                             html += '<input type="submit" name="validate_cake" value="Je l\'ai fait" class="bouton_details" />';

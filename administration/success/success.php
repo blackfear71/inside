@@ -52,22 +52,22 @@
                 $listeSuccess = initialisationErreurModificationSucces($listeSuccess);
             break;
 
-        case 'doAjouter':
+        case 'doAjouterSucces':
             // Ajout d'un nouveau succès
             insertSuccess($_POST, $_FILES);
             break;
 
-        case 'doSupprimer':
+        case 'doSupprimerSucces':
             // Suppression d'un succès
             deleteSuccess($_POST);
             break;
 
-        case 'doModifier':
+        case 'doModifierSucces':
             // Mise à jour de tous les succès
             $erreurUpdateSuccess = updateSuccess($_POST);
             break;
 
-        case 'doInitialiser':
+        case 'doInitialiserSucces':
             // Récupération de la liste des utilisateurs
             $listeUsers = getUsers();
 
@@ -78,7 +78,7 @@
             initializeSuccess($listeSuccess, $listeUsers);
             break;
 
-        case 'doPurger':
+        case 'doPurgerSucces':
             // Purge des succès
             purgeSuccess();
             break;
@@ -109,11 +109,11 @@
             unset($mission);
             break;
 
-        case 'doAjouter':
-        case 'doSupprimer':
-        case 'doModifier':
-        case 'doInitialiser':
-        case 'doPurger':
+        case 'doAjouterSucces':
+        case 'doSupprimerSucces':
+        case 'doModifierSucces':
+        case 'doInitialiserSucces':
+        case 'doPurgerSucces':
         default:
             break;
     }
@@ -121,17 +121,17 @@
     // Redirection affichage
     switch ($_GET['action'])
     {
-        case 'doModifier':
+        case 'doModifierSucces':
             if ($erreurUpdateSuccess == true)
                 header('location: success.php?error=true&action=goModifier');
             else
                 header('location: success.php?action=goConsulter');
             break;
 
-        case 'doAjouter':
-        case 'doSupprimer':
-        case 'doInitialiser':
-        case 'doPurger':
+        case 'doAjouterSucces':
+        case 'doSupprimerSucces':
+        case 'doInitialiserSucces':
+        case 'doPurgerSucces':
             header('location: success.php?action=goConsulter');
             break;
 

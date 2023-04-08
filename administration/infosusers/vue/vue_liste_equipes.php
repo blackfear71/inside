@@ -21,7 +21,7 @@
                             // Suppression
                             if ($equipe->getNombre_users() == 0)
                             {
-                                echo '<form id="delete_team_' . $equipe->getReference() . '" method="post" action="infosusers.php?action=doSupprimer">';
+                                echo '<form id="delete_team_' . $equipe->getReference() . '" method="post" action="infosusers.php?action=doSupprimerEquipe">';
                                     echo '<input type="hidden" name="team" value="' . $equipe->getReference() . '" />';
                                     echo '<input type="submit" name="delete_team" value="" class="icone_supprimer_equipe eventConfirm" />';
                                     echo '<input type="hidden" value="Supprimer cette équipe ? Ceci supprime également toutes les données liées, il est conseillé de faire une sauvegarde avant de confirmer." class="eventMessage" />';
@@ -31,7 +31,7 @@
 
                         // Nom de l'équipe (en modification)
                         echo '<div id="modifier_equipe_' . $equipe->getId() . '" style="display: none;">';
-                            echo '<form method="post" action="infosusers.php?action=doModifier">';
+                            echo '<form method="post" action="infosusers.php?action=doModifierEquipe">';
                                 echo '<input type="hidden" name="reference" value="' . $equipe->getReference() . '" />';
                                 echo '<input type="text" name="team" value="' . $equipe->getTeam() . '" class="saisie_titre_gestion_equipe" />';
 

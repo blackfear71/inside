@@ -57,7 +57,7 @@
                     /************************/
                     $lvl = 0;
 
-                    echo '<form method="post" action="success.php?action=doModifier" class="zone_succes_admin" style="display: none;">';
+                    echo '<form method="post" action="success.php?action=doModifierSucces" class="zone_succes_admin" style="display: none;">';
                         foreach ($listeSuccess as $keySuccess => $success)
                         {
                             if ($success->getLevel() != $lvl)

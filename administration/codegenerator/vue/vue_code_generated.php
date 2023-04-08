@@ -9,7 +9,7 @@
             // Partie Métier
             echo '<div class="zone_generated_left margin_right_20">';
                 // Zone Métier
-                echo '<form method="post" action="codegenerator.php?action=doDownload" class="zone_code_generator">';
+                echo '<form method="post" action="codegenerator.php?action=doTelecharger" class="zone_code_generator">';
                     // Entête du fichier
                     echo '<div class="zone_entete_fichier_generator">';
                         // Type et actions
@@ -38,7 +38,7 @@
                 echo '</form>';
 
                 // Zone Contrôles
-                echo '<form method="post" action="codegenerator.php?action=doDownload" class="zone_code_generator">';
+                echo '<form method="post" action="codegenerator.php?action=doTelecharger" class="zone_code_generator">';
                     // Entête du fichier
                     echo '<div class="zone_entete_fichier_generator">';
                         // Type et actions
@@ -67,7 +67,7 @@
                 echo '</form>';
 
                 // Zone Physique
-                echo '<form method="post" action="codegenerator.php?action=doDownload" class="zone_code_generator">';
+                echo '<form method="post" action="codegenerator.php?action=doTelecharger" class="zone_code_generator">';
                     // Entête du fichier
                     echo '<div class="zone_entete_fichier_generator">';
                         // Type et actions
@@ -99,7 +99,7 @@
             // Partie Vue
             echo '<div class="zone_generated_middle margin_right_20">';
                 // Zone Vue (web)
-                echo '<form method="post" action="codegenerator.php?action=doDownload" class="zone_code_generator">';
+                echo '<form method="post" action="codegenerator.php?action=doTelecharger" class="zone_code_generator">';
                     // Entête du fichier
                     echo '<div class="zone_entete_fichier_generator">';
                         // Type et actions
@@ -135,7 +135,7 @@
                 // Zone Vue (mobile)
                 if (!empty($listeVues['vue_mobile']))
                 {
-                    echo '<form method="post" action="codegenerator.php?action=doDownload" class="zone_code_generator">';
+                    echo '<form method="post" action="codegenerator.php?action=doTelecharger" class="zone_code_generator">';
                         // Entête du fichier
                         echo '<div class="zone_entete_fichier_generator">';
                             // Type et actions
@@ -168,7 +168,7 @@
             // Partie Contrôleur
             echo '<div class="zone_generated_right">';
                 // Zone contrôleur
-                echo '<form method="post" action="codegenerator.php?action=doDownload" class="zone_code_generator">';
+                echo '<form method="post" action="codegenerator.php?action=doTelecharger" class="zone_code_generator">';
                     // Entête du fichier
                     echo '<div class="zone_entete_fichier_generator">';
                         // Type et actions
@@ -204,7 +204,7 @@
                 // Zone Javascript
                 if (!empty($generatorParameters->getScript_specifique()))
                 {
-                    echo '<form method="post" action="codegenerator.php?action=doDownload" class="zone_code_generator">';
+                    echo '<form method="post" action="codegenerator.php?action=doTelecharger" class="zone_code_generator">';
                         // Entête du fichier
                         echo '<div class="zone_entete_fichier_generator">';
                             // Type et actions

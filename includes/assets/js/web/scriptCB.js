@@ -60,7 +60,7 @@ $(function ()
     // Réinitialise la saisie recette à la fermeture
     $('#fermerSaisieRecette').click(function ()
     {
-        resetSaisie('zone_add_recipe');
+        reinitialisationSaisieRecette('zone_add_recipe');
     });
 
     // Modifier une recette
@@ -82,7 +82,7 @@ $(function ()
     {
         var idRecette = $(this).attr('id').replace('afficher_recette_', '');
 
-        showRecipe($(this), idRecette);
+        afficherDetailsRecette($(this), idRecette);
     });
 
     // Ferme le zoom d'une recette (au clic sur la croix)
@@ -100,7 +100,7 @@ $(function ()
 
         // Ferme la saisie d'une recette
         if ($(event.target).attr('class') == 'fond_saisie_recette')
-            resetSaisie('zone_add_recipe');
+            reinitialisationSaisieRecette('zone_add_recipe');
     });
 
     // Bloque le bouton de soumission si besoin
@@ -265,9 +265,9 @@ function afficherListboxUtilisateurs(idZone, week)
     var html = '';
 
     if (idZone == 'zone_current_week')
-        html += '<form method="post" id="form_current_week" action="cookingbox.php?year=' + $_GET('year') + '&action=doModifier">';
+        html += '<form method="post" id="form_current_week" action="cookingbox.php?year=' + $_GET('year') + '&action=doModifierSemaine">';
     else
-        html += '<form method="post" id="form_next_week" action="cookingbox.php?year=' + $_GET('year') + '&action=doModifier">';
+        html += '<form method="post" id="form_next_week" action="cookingbox.php?year=' + $_GET('year') + '&action=doModifierSemaine">';
 
         html += '<input type="hidden" name="week" value="' + week + '" />';
 
@@ -351,7 +351,7 @@ function addIngredient(id)
 }
 
 // Affiche les détails de la recette
-function showRecipe(link, id)
+function afficherDetailsRecette(link, id)
 {
     var html             = '';
     var path_mini        = link.children('.image_recette').attr('src');
@@ -448,7 +448,7 @@ function showRecipe(link, id)
                 {
                     if (recipe['cooked'] == 'Y')
                     {
-                        html += '<form method="post" action="cookingbox.php?year=' + recipe['year'] + '&action=doAnnuler">';
+                        html += '<form method="post" action="cookingbox.php?year=' + recipe['year'] + '&action=doAnnulerSemaine">';
                             html += '<input type="hidden" name="week_cake" value="' + recipe['week'] + '" />';
                             html += '<input type="hidden" name="year_cake" value="' + recipe['year'] + '" />';
                             html += '<input type="submit" name="cancel_cake" value="Annuler" class="bouton_details" />';
@@ -456,7 +456,7 @@ function showRecipe(link, id)
                     }
                     else
                     {
-                        html += '<form method="post" action="cookingbox.php?year=' + recipe['year'] + '&action=doValider">';
+                        html += '<form method="post" action="cookingbox.php?year=' + recipe['year'] + '&action=doValiderSemaine">';
                             html += '<input type="hidden" name="week_cake" value="' + recipe['week'] + '" />';
                             html += '<input type="hidden" name="year_cake" value="' + recipe['year'] + '" />';
                             html += '<input type="submit" name="validate_cake" value="Je l\'ai fait" class="bouton_details" />';
@@ -497,7 +497,7 @@ function updateRecipe(id, zone)
 }
 
 // Réinitialise la zone de saisie d'une recette si fermeture modification
-function resetSaisie(zone)
+function reinitialisationSaisieRecette(zone)
 {
     // Fermeture zone de saisie
     afficherMasquerIdWithDelay(zone);

@@ -28,12 +28,12 @@
             $listeSuppression = getFilmsToDelete();
             break;
 
-        case 'doDeleteFilm':
+        case 'doSupprimerFilm':
             // Suppression d'un film
             deleteFilm($_POST);
             break;
 
-        case 'doResetFilm':
+        case 'doReinitialiserFilm':
             // Annulation de la demande de suppression d'un film
             resetFilm($_POST);
             break;
@@ -63,8 +63,8 @@
             unset($film);
             break;
 
-        case 'doDeleteFilm':
-        case 'doResetFilm':
+        case 'doSupprimerFilm':
+        case 'doReinitialiserFilm':
         default:
             break;
     }
@@ -72,8 +72,8 @@
     // Redirection affichage
     switch ($_GET['action'])
     {
-        case 'doDeleteFilm':
-        case 'doResetFilm':
+        case 'doSupprimerFilm':
+        case 'doReinitialiserFilm':
             header('location: movies.php?action=goConsulter');
             break;
 

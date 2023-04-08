@@ -3,7 +3,7 @@
         // Titre
         echo '<div class="titre_section"><img src="../../includes/icons/admin/settings_grey.png" alt="settings_grey" class="logo_titre_section" /><div class="texte_titre_section">Paramètres d\'édition</div></div>';
 
-        echo '<form method="post" action="changelog.php?action=doGenerer">';
+        echo '<form method="post" action="changelog.php?action=doInitialiserChangelog">';
             // Action
             echo '<div class="zone_parameter_changelog">';
                 echo '<div class="titre_parameter_changelog">Action</div>';

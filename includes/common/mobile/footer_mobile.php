@@ -92,6 +92,11 @@
         else
             $themeUser = json_encode('');
     }
+    else
+    {
+        // Initialisation du thème
+        $themeUser = json_encode('');
+    }
 ?>
 
 <script>

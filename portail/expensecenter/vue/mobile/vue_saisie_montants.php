@@ -1,6 +1,6 @@
 <?php
     echo '<div id="zone_saisie_montants" class="fond_saisie">';
-        echo '<form method="post" action="expensecenter.php?year=' . $_GET['year'] . '&filter=' . $_GET['filter'] . '&action=doInsererMontantsMobile" class="form_saisie">';
+        echo '<form method="post" action="expensecenter.php?year=' . $_GET['year'] . '&filter=' . $_GET['filter'] . '&action=doAjouterMontantsMobile" class="form_saisie">';
             // Id dépense (modification)
             echo '<input type="hidden" name="id_expense_saisie" value="" />';
 

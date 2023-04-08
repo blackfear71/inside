@@ -22,7 +22,7 @@
                                 // Suppression
                                 if ($collector->getType_collector() == 'I')
                                 {
-                                    echo '<form id="delete_image_' . $collector->getId() . '" method="post" action="collector.php?action=doSupprimer&page=' . $_GET['page'] . '" class="form_delete_collector">';
+                                    echo '<form id="delete_image_' . $collector->getId() . '" method="post" action="collector.php?action=doSupprimerCollector&page=' . $_GET['page'] . '" class="form_delete_collector">';
                                         echo '<input type="hidden" name="id_collector" value="' . $collector->getId() . '" />';
                                         echo '<input type="hidden" name="team_collector" value="' . $collector->getTeam() . '" />';
                                         echo '<input type="submit" name="delete_collector" value="" title="Supprimer l\'image" class="icone_supprimer_collector eventConfirm" />';
@@ -31,7 +31,7 @@
                                 }
                                 else
                                 {
-                                    echo '<form id="delete_collector_' . $collector->getId() . '" method="post" action="collector.php?action=doSupprimer&page=' . $_GET['page'] . '" class="form_delete_collector">';
+                                    echo '<form id="delete_collector_' . $collector->getId() . '" method="post" action="collector.php?action=doSupprimerCollector&page=' . $_GET['page'] . '" class="form_delete_collector">';
                                         echo '<input type="hidden" name="id_collector" value="' . $collector->getId() . '" />';
                                         echo '<input type="hidden" name="team_collector" value="' . $collector->getTeam() . '" />';
                                         echo '<input type="submit" name="delete_collector" value="" title="Supprimer la phrase culte" class="icone_supprimer_collector eventConfirm" />';
@@ -53,7 +53,7 @@
                             echo '</a>';
 
                             // Formulaire vote
-                            echo '<form method="post" action="collector.php?action=doVoter&page=' . $_GET['page'] . '&sort=' . $_GET['sort'] . '&filter=' . $_GET['filter'] . '" name="form_vote_user" id="modifier_vote_' . $collector->getId() . '" class="zone_smileys" style="display: none;">';
+                            echo '<form method="post" action="collector.php?action=doVoterCollector&page=' . $_GET['page'] . '&sort=' . $_GET['sort'] . '&filter=' . $_GET['filter'] . '" name="form_vote_user" id="modifier_vote_' . $collector->getId() . '" class="zone_smileys" style="display: none;">';
                                 echo '<input type="hidden" name="id_collector" value="' . $collector->getId() . '" />';
 
                                 // Gestion smileys vote
@@ -144,7 +144,7 @@
                 /* Caché pour modification */
                 /***************************/
                 echo '<div class="zone_collector zone_collector_update" id="modifier_collector_' . $collector->getId() . '" style="display: none;">';
-                    echo '<form method="post" action="collector.php?action=doModifier&sort=' . $_GET['sort'] . '&filter=' . $_GET['filter'] . '" enctype="multipart/form-data" class="zone_shadow">';
+                    echo '<form method="post" action="collector.php?action=doModifierCollector&sort=' . $_GET['sort'] . '&filter=' . $_GET['filter'] . '" enctype="multipart/form-data" class="zone_shadow">';
                         if ($collector->getNb_votes() >= $minGolden)
                             echo '<div class="zone_collector_haut_golden">';
                         else

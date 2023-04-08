@@ -42,13 +42,13 @@
                     echo '</td>';
 
                     echo '<td class="td_table_admin_actions">';
-                        echo '<form method="post" action="calendars.php?action=doDeleteAnnexe" class="lien_action_table_admin">';
+                        echo '<form method="post" action="calendars.php?action=doSupprimerAnnexe" class="lien_action_table_admin">';
                             echo '<input type="hidden" name="id_annexe" value="' . $annexes->getId() . '" />';
                             echo '<input type="hidden" name="team_annexe" value="' . $annexes->getTeam() . '" />';
                             echo '<input type="submit" name="accepter_suppression_annexe" value="" title="Accepter" class="icone_valider_table_admin" />';
                         echo '</form>';
 
-                        echo '<form method="post" action="calendars.php?action=doResetAnnexe" class="lien_action_table_admin">';
+                        echo '<form method="post" action="calendars.php?action=doReinitialiserAnnexe" class="lien_action_table_admin">';
                             echo '<input type="hidden" name="id_annexe" value="' . $annexes->getId() . '" />';
                             echo '<input type="hidden" name="team_annexe" value="' . $annexes->getTeam() . '" />';
                             echo '<input type="submit" name="annuler_suppression_annexe" value="" title="Refuser" class="icone_annuler_table_admin" />';

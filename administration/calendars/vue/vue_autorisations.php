@@ -5,7 +5,7 @@
     if (!empty($listeAutorisationsParEquipe))
     {
         // Formulaire de gestion des autorisations
-        echo '<form method="post" action="calendars.php?action=doUpdateAutorisations">';
+        echo '<form method="post" action="calendars.php?action=doModifierAutorisations">';
             echo '<div class="zone_autorisations_equipes">';
                 foreach ($listeAutorisationsParEquipe as $referenceEquipe => $equipeAutorisations)
                 {

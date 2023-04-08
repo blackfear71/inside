@@ -52,7 +52,7 @@ $(function ()
         var typeStatistique = $(this).attr('id').replace('statistiques_', '');
 
         // Affiche les détails d'une catégorie
-        showDetailsStatistiques(typeStatistique);
+        afficherDetailsStatistiques(typeStatistique);
     });
 
     // Ferme les détails des statistiques
@@ -98,7 +98,7 @@ $(function ()
         if ($('#zone_affichage_periodes_vacances').css('display') == 'none')
         {
             // Affichage de la période concernée
-            showPeriodesVacances($(this), $(this).text());
+            afficherPeriodesVacances($(this), $(this).text());
         }
         else
         {
@@ -113,14 +113,14 @@ $(function ()
             // Masquage de toutes les périodes
             $('.periode_vacances').each(function ()
             {
-                hidePeriodesVacances($(this));
+                masquerPeriodesVacances($(this));
             });
 
             // Affichage de la période concernée
             setTimeout(function ()
             {
                 if (autrePeriode == true)
-                    showPeriodesVacances(periode, nomFichier);
+                    afficherPeriodesVacances(periode, nomFichier);
             }, 100);
         }
     });
@@ -824,7 +824,7 @@ function afficherAutreEquipe(select, required)
 }
 
 // Affiche les détails d'une catégorie
-function showDetailsStatistiques(typeStatistique)
+function afficherDetailsStatistiques(typeStatistique)
 {
     // Récupération des données à afficher
     var titreDetails;
@@ -1085,7 +1085,7 @@ function closeDetailsStatistiques(id)
 }
 
 // Récupère et affiches les périodes de vacances
-function showPeriodesVacances(periode, nomFichier)
+function afficherPeriodesVacances(periode, nomFichier)
 {
     // Lecture du fichier CSV
     $.post('../../includes/datas/calendars/' + nomFichier + '.csv', function (data)
@@ -1233,7 +1233,7 @@ function showPeriodesVacances(periode, nomFichier)
         html += '<table class="affichage_periodes_vacances">';
             html += '<tr>';
                 html += '<td class="affichage_zone_suppression">';
-                    html += '<form method="post" id="delete_csv_' + nomFichier + '" action="calendars.php?action=doDeleteVacances" class="form_suppression_vacances ">';
+                    html += '<form method="post" id="delete_csv_' + nomFichier + '" action="calendars.php?action=doSupprimerVacances" class="form_suppression_vacances ">';
                         html += '<input type="hidden" name="nom_fichier" value="' + nomFichier + '" />';
                         html += '<input type="submit" name="delete_vacances" value="Supprimer" class="bouton_supprimer_periode eventConfirm" />';
                         html += '<input type="hidden" value="Supprimer la période ' + nomFichier + ' du serveur ?" class="eventMessage" />';
@@ -1276,7 +1276,7 @@ function showPeriodesVacances(periode, nomFichier)
 }
 
 // Masque les périodes de vacances
-function hidePeriodesVacances(periode)
+function masquerPeriodesVacances(periode)
 {
     // Masquage de la zone
     afficherMasquerIdNoDelay('zone_affichage_periodes_vacances');

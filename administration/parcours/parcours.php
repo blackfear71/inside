@@ -28,12 +28,12 @@
             $listeSuppression = getParcoursToDelete();
             break;
 
-        case 'doDeleteParcours':
+        case 'doSupprimerParcours':
             // Suppression d'un parcours
             deleteParcours($_POST);
             break;
 
-        case 'doResetParcours':
+        case 'doReinitialiserParcours':
             // Annulation de la demande de suppression d'un parcours
             resetParcours($_POST);
             break;
@@ -63,8 +63,8 @@
             unset($parcours);
             break;
 
-        case 'doDeleteParcours':
-        case 'doResetParcours':
+        case 'doSupprimerParcours':
+        case 'doReinitialiserParcours':
         default:
             break;
     }
@@ -72,8 +72,8 @@
     // Redirection affichage
     switch ($_GET['action'])
     {
-        case 'doDeleteParcours':
-        case 'doResetParcours':
+        case 'doSupprimerParcours':
+        case 'doReinitialiserParcours':
             header('location: parcours.php?action=goConsulter');
             break;
 

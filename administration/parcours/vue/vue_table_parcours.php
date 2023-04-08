@@ -66,13 +66,13 @@
                     echo '</td>';
 
                     echo '<td class="td_table_admin_actions">';
-                        echo '<form method="post" action="parcours.php?action=doDeleteParcours" class="lien_action_table_admin">';
+                        echo '<form method="post" action="parcours.php?action=doSupprimerParcours" class="lien_action_table_admin">';
                             echo '<input type="hidden" name="id_parcours" value="' . $parcours->getId() . '" />';
                             echo '<input type="hidden" name="team_parcours" value="' . $parcours->getTeam() . '" />';
                             echo '<input type="submit" name="accepter_suppression_parcours" value="" title="Accepter" class="icone_valider_table_admin" />';
                         echo '</form>';
 
-                        echo '<form method="post" action="parcours.php?action=doResetParcours" class="lien_action_table_admin">';
+                        echo '<form method="post" action="parcours.php?action=doReinitialiserParcours" class="lien_action_table_admin">';
                             echo '<input type="hidden" name="id_parcours" value="' . $parcours->getId() . '" />';
                             echo '<input type="hidden" name="team_parcours" value="' . $parcours->getTeam() . '" />';
                             echo '<input type="submit" name="annuler_suppression_parcours" value="" title="Refuser" class="icone_annuler_table_admin" />';

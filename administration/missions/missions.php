@@ -77,17 +77,17 @@
             }
             break;
 
-        case 'doAjouter':
+        case 'doAjouterMission':
             // Ajout d'une mission
             $erreurMission = insertMission($_POST, $_FILES);
             break;
 
-        case 'doModifier':
+        case 'doModifierMission':
             // Modification d'une mission
             $idMission = updateMission($_POST, $_FILES);
             break;
 
-        case 'doSupprimer':
+        case 'doSupprimerMission':
             // Suppression d'une mission
             deleteMission($_POST);
             break;
@@ -144,9 +144,9 @@
             $detailsMission = Mission::secureData($detailsMission);
             break;
 
-        case 'doAjouter':
-        case 'doModifier':
-        case 'doSupprimer':
+        case 'doAjouterMission':
+        case 'doModifierMission':
+        case 'doSupprimerMission':
         default:
             break;
     }
@@ -154,18 +154,18 @@
     // Redirection affichage
     switch ($_GET['action'])
     {
-        case 'doAjouter':
+        case 'doAjouterMission':
             if ($erreurMission == true)
                 header('location: missions.php?action=goAjouter');
             else
                 header('location: missions.php?action=goConsulter');
             break;
 
-        case 'doModifier':
+        case 'doModifierMission':
             header('location: missions.php?id_mission=' . $idMission . '&action=goModifier');
             break;
 
-        case 'doSupprimer':
+        case 'doSupprimerMission':
             header('location: missions.php?action=goConsulter');
             break;
 

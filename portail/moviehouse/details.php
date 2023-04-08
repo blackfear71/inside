@@ -62,17 +62,17 @@
             }
             break;
 
-        case 'doModifier':
+        case 'doModifierFilm':
             // Modification d'un film
             $idFilm = updateFilm($_POST, $_SESSION['user'], false);
             break;
 
-        case 'doModifierMobile':
+        case 'doModifierFilmMobile':
             // Modification d'un film
             $idFilm = updateFilm($_POST, $_SESSION['user'], true);
             break;
 
-        case 'doSupprimer':
+        case 'doSupprimerFilm':
             // Récupération de la vue pour redirection
             $viewMovieHouse = getVueSuppression($_SESSION['user']['identifiant']);
 
@@ -90,7 +90,7 @@
             $idFilm = insertParticipation($_POST, $_SESSION['user']['identifiant']);
             break;
 
-        case 'doCommenter':
+        case 'doAjouterCommentaire':
             // Insertion commentaire de l'utilisateur sur un film
             $idFilm = insertCommentaire($_POST, $_SESSION['user']);
             break;
@@ -158,12 +158,12 @@
             }
             break;
 
-        case 'doModifier':
-        case 'doModifierMobile':
-        case 'doSupprimer':
+        case 'doModifierFilm':
+        case 'doModifierFilmMobile':
+        case 'doSupprimerFilm':
         case 'doVoterFilm':
         case 'doParticiperFilm':
-        case 'doCommenter':
+        case 'doAjouterCommentaire':
         case 'doSupprimerCommentaire':
         case 'doModifierCommentaire':
         default:
@@ -173,18 +173,18 @@
     // Redirection affichage
     switch ($_GET['action'])
     {
-        case 'doModifier':
-        case 'doModifierMobile':
+        case 'doModifierFilm':
+        case 'doModifierFilmMobile':
         case 'doVoterFilm':
         case 'doParticiperFilm':
             header('location: details.php?id_film=' . $idFilm . '&action=goConsulter');
             break;
 
-        case 'doSupprimer':
+        case 'doSupprimerFilm':
             header('location: moviehouse.php?view=' . $viewMovieHouse . '&year=' . date('Y') . '&action=goConsulter');
             break;
 
-        case 'doCommenter':
+        case 'doAjouterCommentaire':
         case 'doSupprimerCommentaire':
             header('location: details.php?id_film=' . $idFilm . '&action=goConsulter&anchor=comments');
             break;

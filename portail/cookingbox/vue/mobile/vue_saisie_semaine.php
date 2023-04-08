@@ -29,14 +29,14 @@
                     // Je l'ai fait
                     echo '<div class="cake_done">Le gâteau a été fait pour cette semaine !</div>';
 
-                    echo '<form method="post" action="cookingbox.php?year=' . $_GET['year'] . '&action=doValider" class="form_saisie_realisation">';
+                    echo '<form method="post" action="cookingbox.php?year=' . $_GET['year'] . '&action=doValiderSemaine" class="form_saisie_realisation">';
                         echo '<input type="hidden" name="week_cake" value="" />';
                         echo '<input type="hidden" name="year_cake" value="" />';
                         echo '<input type="submit" name="validate_cake" value="Je l\'ai fait" class="lien_saisie_form" />';
                     echo '</form>';
 
                     // Annulation
-                    echo '<form method="post" action="cookingbox.php?year=' . $_GET['year'] . '&action=doAnnuler" class="form_saisie_annulation">';
+                    echo '<form method="post" action="cookingbox.php?year=' . $_GET['year'] . '&action=doAnnulerSemaine" class="form_saisie_annulation">';
                         echo '<input type="hidden" name="week_cake" value="" />';
                         echo '<input type="hidden" name="year_cake" value="" />';
                         echo '<input type="submit" name="cancel_cake" value="Annuler" class="lien_saisie_form" />';

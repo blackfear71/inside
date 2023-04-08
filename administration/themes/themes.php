@@ -35,17 +35,17 @@
             $themesMissions = getThemes('M');
             break;
 
-        case 'doAjouter':
+        case 'doAjouterTheme':
             // Ajout d'un nouveau thème
             $idTheme = insertTheme($_POST, $_FILES);
             break;
 
-        case 'doModifier':
+        case 'doModifierTheme':
             // Mise à jour d'un thème
             $idTheme = updateTheme($_POST);
             break;
 
-        case 'doSupprimer':
+        case 'doSupprimerTheme':
             // Suppression d'un thème
             deleteTheme($_POST);
             break;
@@ -75,9 +75,9 @@
             unset($themeMission);
             break;
 
-        case 'doAjouter':
-        case 'doModifier':
-        case 'doSupprimer':
+        case 'doAjouterTheme':
+        case 'doModifierTheme':
+        case 'doSupprimerTheme':
         default:
             break;
     }
@@ -85,15 +85,15 @@
     // Redirection affichage
     switch ($_GET['action'])
     {
-        case 'doAjouter':
-        case 'doModifier':
+        case 'doAjouterTheme':
+        case 'doModifierTheme':
             if (!empty($idTheme))
                 header('location: themes.php?action=goConsulter&anchorTheme=' . $idTheme);
             else
                 header('location: themes.php?action=goConsulter');
             break;
 
-        case 'doSupprimer':
+        case 'doSupprimerTheme':
             header('location: themes.php?action=goConsulter');
             break;
 

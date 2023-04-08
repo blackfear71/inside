@@ -167,7 +167,7 @@
                             echo '</div>';
 
                             // Formulaire
-                            echo '<form method="post" action="index.php?action=doDemanderMdp" class="form_index">';
+                            echo '<form method="post" action="index.php?action=doDemanderMotDePasse" class="form_index">';
                                 // Données utilisateur
                                 echo '<input type="text" name="login" value="' . $_SESSION['save']['identifiant_saisi_mdp'] . '" placeholder="Identifiant" maxlength="3" class="monoligne_index" id="focus_identifiant_3" required />';
 

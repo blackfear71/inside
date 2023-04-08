@@ -11,7 +11,7 @@
             echo '<a id="resetMontants" class="close_add"><img src="../../includes/icons/common/close.png" alt="close" title="Fermer" class="close_img" /></a>';
 
             // Saisie dépense
-            echo '<form method="post" action="expensecenter.php?year=' . $_GET['year'] . '&filter=' . $_GET['filter'] . '&action=doInsererMontants" class="form_saisie_depense">';
+            echo '<form method="post" action="expensecenter.php?year=' . $_GET['year'] . '&filter=' . $_GET['filter'] . '&action=doAjouterMontants" class="form_saisie_depense">';
                 echo '<input type="hidden" name="id_expense_saisie" value="" />';
 
                 // Achat

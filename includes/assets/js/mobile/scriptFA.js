@@ -32,7 +32,7 @@ $(function () {
         }
 
         if (idForm != '')
-            resetLiveSearch(idForm);
+            reinitialisationRechercheLive(idForm);
     });
 
     // Change la couleur d'une case à cocher à la sélection
@@ -46,7 +46,7 @@ $(function () {
     {
         var idProposition = $(this).attr('id').replace('details_proposition_', '');
 
-        showDetailsProposition(idProposition);
+        afficherDetailsProposition(idProposition);
     });
 
     // Ferme la zone de détails d'une proposition
@@ -85,7 +85,7 @@ $(function () {
     $('#fermerSaisieRestaurant').click(function ()
     {
         // Réinitialisation de la saisie
-        resetSaisie();
+        reinitialisationSaisieRestaurant();
 
         // Fermeture de l'affichage
         afficherMasquerIdWithDelay('zone_saisie_restaurant');
@@ -110,7 +110,7 @@ $(function () {
         {
             var idProposition = $(this).attr('id');
 
-            showDetailsRestaurant(idProposition);
+            afficherDetailsRestaurant(idProposition);
         }
     });
 
@@ -125,7 +125,7 @@ $(function () {
     {
         var idRestaurant = $(this).attr('id').replace('modifier_restaurant_', '');
 
-        initialisationModification(idRestaurant);
+        initialisationModificationRestaurant(idRestaurant);
     });
 
     // Réinitialise la saisie à la fermeture au clic sur le fond
@@ -133,7 +133,7 @@ $(function () {
     {
         // Réinitialise la saisie d'un restaurant
         if ($(event.target).attr('id') == 'zone_saisie_restaurant')
-            resetSaisie();
+            reinitialisationSaisieRestaurant();
     });
 
     // Change le statut d'un jour d'ouverture
@@ -258,7 +258,7 @@ $(window).on('load', function ()
 /*** Fonctions ***/
 /*****************/
 // Réinitialise la zone de recherche saisie
-function resetLiveSearch(idForm)
+function reinitialisationRechercheLive(idForm)
 {
     // On vide la saisie
     $('#' + idForm).find('.input_recherche_live').val('');
@@ -388,7 +388,7 @@ function changeRadioColor(idForm, label)
 }
 
 // Affiche la zone de détails d'une proposition
-function showDetailsProposition(idProposition)
+function afficherDetailsProposition(idProposition)
 {
     /***********/
     /* Données */
@@ -767,7 +767,7 @@ function initialisationResume(idForm, date)
 }
 
 // Affiche la zone de détails d'un restaurant
-function showDetailsRestaurant(idRestaurant)
+function afficherDetailsRestaurant(idRestaurant)
 {
     /***********/
     /* Données */
@@ -1063,7 +1063,7 @@ function changeTypeColor(id)
 }
 
 // Affiche la zone de mise à jour d'un restaurant
-function initialisationModification(idRestaurant)
+function initialisationModificationRestaurant(idRestaurant)
 {
     // Récupération des données
     var restaurant = listeRestaurantsJson[idRestaurant];
@@ -1076,7 +1076,7 @@ function initialisationModification(idRestaurant)
     $('#zone_saisie_restaurant').find('.zone_titre_saisie').html(titre);
 
     // Action du formulaire
-    var action = 'restaurants.php?action=doModifier';
+    var action = 'restaurants.php?action=doModifierRestaurant';
     $('#zone_saisie_restaurant').find('.form_saisie').attr('action', action);
 
     // Identifiant restaurant
@@ -1205,7 +1205,7 @@ function initialisationModification(idRestaurant)
 }
 
 // Réinitialise la zone de saisie d'un restaurant si fermeture modification
-function resetSaisie()
+function reinitialisationSaisieRestaurant()
 {
     // Déclenchement après la fermeture
     setTimeout(function ()
@@ -1214,14 +1214,14 @@ function resetSaisie()
         var currentAction = $('#zone_saisie_restaurant').find('.form_saisie').attr('action').split('action=');
         var call          = currentAction[currentAction.length - 1]
 
-        if (call == 'doModifier')
+        if (call == 'doModifierRestaurant')
         {
             // Titre
             var titre = 'Saisir un restaurant';
             $('#zone_saisie_restaurant').find('.zone_titre_saisie').html(titre);
 
             // Action du formulaire
-            var action = 'restaurants.php?action=doAjouter';
+            var action = 'restaurants.php?action=doAjouterRestaurant';
             $('#zone_saisie_restaurant').find('.form_saisie').attr('action', action);
 
             // Identifiant restaurant

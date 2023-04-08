@@ -85,7 +85,7 @@
                             // Saisie
                             echo '<div class="zone_calendrier_generator_left">';
                                 // Saisie des informations
-                                echo '<form method="post" action="calendars_generator.php?action=doGenerer" enctype="multipart/form-data">';
+                                echo '<form method="post" action="calendars_generator.php?action=doGenererCalendrier" enctype="multipart/form-data">';
                                     echo '<div class="zone_saisie_calendrier">';
                                         // Image
                                         echo '<div class="titre_option_calendrier">Image de fond</div>';
@@ -337,7 +337,7 @@
                                     echo '<img src="" title="Calendrier généré" id="generated_calendar" class="image_rendu_calendrier_generator" />';
 
                                     // Formulaire de sauvegarde de l'image générée
-                                    echo '<form method="post" action="calendars_generator.php?action=doSauvegarder" enctype="multipart/form-data" class="form_sauvegarde_calendrier">';
+                                    echo '<form method="post" action="calendars_generator.php?action=doSauvegarderCalendrier" enctype="multipart/form-data" class="form_sauvegarde_calendrier">';
                                         // Image générée
                                         echo '<input type="hidden" name="calendar_generator" id="calendar_generator" value="" />';
 
@@ -500,7 +500,7 @@
                             // Saisie
                             echo '<div class="zone_saisie_calendars_left">';
                                 echo '<div class="zone_saisie_calendrier">';
-                                    echo '<form method="post" action="calendars_generator.php?action=doAjouter" enctype="multipart/form-data">';
+                                    echo '<form method="post" action="calendars_generator.php?action=doAjouterCalendrier" enctype="multipart/form-data">';
                                         // Image
                                         echo '<div class="zone_saisie_image">';
                                             echo '<input type="hidden" name="MAX_FILE_SIZE" value="15728640" />';

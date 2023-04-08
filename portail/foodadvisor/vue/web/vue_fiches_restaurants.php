@@ -121,7 +121,7 @@
                                     echo '</a>';
 
                                     // Suppression
-                                    echo '<form id="delete_restaurant_' . $restaurant->getId() . '" method="post" action="restaurants.php?action=doSupprimer" class="lien_supprimer_restaurant">';
+                                    echo '<form id="delete_restaurant_' . $restaurant->getId() . '" method="post" action="restaurants.php?action=doSupprimerRestaurant" class="lien_supprimer_restaurant">';
                                         echo '<input type="hidden" name="id_restaurant" value="' . $restaurant->getId() . '" />';
                                         echo '<input type="submit" name="delete_restaurant" value="" title="Supprimer le restaurant" class="icon_delete_restaurant eventConfirm" />';
                                         echo '<input type="hidden" value="Supprimer ce restaurant de la liste ?" class="eventMessage" />';
@@ -183,7 +183,7 @@
                         /* Caché pour modification */
                         /***************************/
                         echo '<div class="fiche_restaurant fiche_restaurant_top" id="modifier_restaurant_' . $restaurant->getId() . '" style="display: none;">';
-                            echo '<form method="post" action="restaurants.php?action=doModifier" enctype="multipart/form-data" class="zone_shadow">';
+                            echo '<form method="post" action="restaurants.php?action=doModifierRestaurant" enctype="multipart/form-data" class="zone_shadow">';
                                 echo '<input type="hidden" name="id_restaurant" value="' . $restaurant->getId() . '" />';
 
                                 // Image

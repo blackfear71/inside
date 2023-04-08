@@ -11,7 +11,7 @@
             echo '<a id="fermerCollector" class="zone_close"><img src="../../includes/icons/common/close.png" alt="close" title="Fermer" class="close_img" /></a>';
 
             // Saisie phrase culte
-            echo '<form method="post" action="collector.php?action=doAjouter&page=' . $_GET['page'] . '" class="form_saisie_collector">';
+            echo '<form method="post" action="collector.php?action=doAjouterCollector&page=' . $_GET['page'] . '" class="form_saisie_collector">';
                 // Type de saisie
                 echo '<input type="hidden" name="type_collector" value="T" />';
 

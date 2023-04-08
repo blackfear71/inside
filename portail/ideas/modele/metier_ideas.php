@@ -195,14 +195,17 @@
         // Génération succès
         switch ($status)
         {
+            // Terminée
             case 'D':
                 insertOrUpdateSuccesValue('applier', $ideeExistante->getDevelopper(), 1);
                 break;
 
+            // Rejetée
             case 'R':
                 insertOrUpdateSuccesValue('creator', $ideeExistante->getAuthor(), -1);
                 break;
 
+            // Ouverte
             case 'O':
                 if ($ideeExistante->getStatus() == 'D')
                     insertOrUpdateSuccesValue('applier', $ideeExistante->getDevelopper(), -1);
@@ -211,6 +214,7 @@
                     insertOrUpdateSuccesValue('creator', $ideeExistante->getAuthor(), 1);
                 break;
 
+            // Autres statuts
             default:
                 break;
         }

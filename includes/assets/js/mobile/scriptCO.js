@@ -8,7 +8,7 @@ $(function () {
     $('#afficherSaisiePhraseCulte').click(function ()
     {
         // Initialisation des titres de la saisie
-        initialisationSaisie('zone_saisie_collector', 'T');
+        initialisationSaisieCollector('zone_saisie_collector', 'T');
 
         // Affichage de la zone de saisie
         afficherMasquerIdWithDelay('zone_saisie_collector');
@@ -18,7 +18,7 @@ $(function () {
     $('#fermerSaisiePhraseCulte').click(function ()
     {
         // Réinitialisation de la saisie
-        resetSaisie('T');
+        reinitialisationSaisieCollector('T');
 
         // Fermeture de l'affichage
         afficherMasquerIdWithDelay('zone_saisie_collector');
@@ -28,7 +28,7 @@ $(function () {
     $('#afficherSaisieImageCulte').click(function ()
     {
         // Initialisation des titres de la saisie
-        initialisationSaisie('zone_saisie_image', 'I');
+        initialisationSaisieCollector('zone_saisie_image', 'I');
 
         // Affichage de la zone de saisie
         afficherMasquerIdWithDelay('zone_saisie_image');
@@ -38,7 +38,7 @@ $(function () {
     $('#fermerSaisieImageCulte').click(function ()
     {
         // Réinitialisation de la saisie
-        resetSaisie('I');
+        reinitialisationSaisieCollector('I');
 
         // Fermeture de l'affichage
         afficherMasquerIdWithDelay('zone_saisie_image');
@@ -49,7 +49,7 @@ $(function () {
     {
         var idCollector = $(this).attr('id').replace('modifier_collector_', '');
 
-        initialisationModification(idCollector);
+        initialisationModificationCollector(idCollector);
     });
 
     // Réinitialise la saisie à la fermeture au clic sur le fond
@@ -61,11 +61,11 @@ $(function () {
             switch (event.target.id)
             {
                 case 'zone_saisie_collector':
-                    resetSaisie('T');
+                    reinitialisationSaisieCollector('T');
                     break;
 
                 case 'zone_saisie_image':
-                    resetSaisie('I');
+                    reinitialisationSaisieCollector('I');
                     break;
 
                 default:
@@ -80,7 +80,7 @@ $(function () {
         var idCollector = $(this).attr('id').replace('link_form_vote_', '');
 
         // Initialisation du vote
-        initialisationVote(idCollector);
+        initialisationVoteCollector(idCollector);
     });
 
     // Ferme la zone de saisie de vote
@@ -95,7 +95,7 @@ $(function () {
         var idCollector = $(this).attr('id').replace('link_details_votes_', '');
 
         // Affichage détail des votes
-        showVotes(idCollector);
+        afficherDetailsVotes(idCollector);
     });
 
     // Ferme la zone de visualisation des votes
@@ -200,7 +200,7 @@ function applySortOrFilter(sort, filter)
 }
 
 // Initialisation des titres de la saisie d'une phrase / image culte
-function initialisationSaisie(idZone, typeCollector)
+function initialisationSaisieCollector(idZone, typeCollector)
 {
     // Initialisations
     var titre;
@@ -224,7 +224,7 @@ function initialisationSaisie(idZone, typeCollector)
 }
 
 // Initialisation du vote d'une phrase / image culte
-function initialisationVote(idCollector)
+function initialisationVoteCollector(idCollector)
 {
     // Récupération des données
     var collector     = listeCollectors[idCollector];
@@ -257,7 +257,7 @@ function initialisationVote(idCollector)
 }
 
 // Affiche la zone de mise à jour d'une phrase / image culte
-function initialisationModification(idCollector)
+function initialisationModificationCollector(idCollector)
 {
     // Récupération des données
     var collector     = listeCollectors[idCollector];
@@ -272,7 +272,7 @@ function initialisationModification(idCollector)
     var sousTitre;
 
     // Action du formulaire
-    action = 'collector.php?sort=' + $_GET('sort') + '&filter=' + $_GET('filter') + '&action=doModifierMobile';
+    action = 'collector.php?sort=' + $_GET('sort') + '&filter=' + $_GET('filter') + '&action=doModifierCollectorMobile';
 
     // Titre et sous-titre
     if (typeCollector == 'I')
@@ -373,7 +373,7 @@ function initialisationModification(idCollector)
 }
 
 // Réinitialise la zone de saisie d'une phrase / image culte si fermeture modification
-function resetSaisie(typeCollector)
+function reinitialisationSaisieCollector(typeCollector)
 {
     // Déclenchement après la fermeture
     setTimeout(function ()
@@ -388,17 +388,17 @@ function resetSaisie(typeCollector)
 
         var call = currentAction[currentAction.length - 1]
 
-        if (call == 'doModifierMobile')
+        if (call == 'doModifierCollectorMobile')
         {
             // Action du formulaire
-            var action = 'collector.php?action=doAjouterMobile&page=' + $_GET('page');
+            var action = 'collector.php?action=doAjouterCollectorMobile&page=' + $_GET('page');
 
             $('#zone_saisie_collector').find('.form_saisie').attr('action', action);
             $('#zone_saisie_image').find('.form_saisie').attr('action', action);
 
             // Initialisation des titres des saisies
-            initialisationSaisie('zone_saisie_collector', 'T');
-            initialisationSaisie('zone_saisie_image', 'I');
+            initialisationSaisieCollector('zone_saisie_collector', 'T');
+            initialisationSaisieCollector('zone_saisie_image', 'I');
 
             // Identifiants phrase / image culte
             $('#zone_saisie_collector').find('#id_saisie_collector').val('');
@@ -449,7 +449,7 @@ function resetSaisie(typeCollector)
 }
 
 // Affichage du détail des votes d'une phrase / image culte
-function showVotes(idCollector)
+function afficherDetailsVotes(idCollector)
 {
     // Récupération des données
     var collector     = listeCollectors[idCollector];

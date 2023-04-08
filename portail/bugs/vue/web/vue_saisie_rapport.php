@@ -10,7 +10,7 @@
             // Bouton fermeture
             echo '<a id="fermerRapport" class="zone_close"><img src="../../includes/icons/common/close.png" alt="close" title="Fermer" class="close_img" /></a>';
 
-            echo '<form method="post" action="bugs.php?action=doSignaler" enctype="multipart/form-data" class="form_saisie_report">';
+            echo '<form method="post" action="bugs.php?action=doAjouterRapport" enctype="multipart/form-data" class="form_saisie_report">';
                 // Explications
                 echo '<div class="explications">';
                     echo '<div class="text_saisie_report">';

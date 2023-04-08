@@ -21,7 +21,7 @@
                 // Supprimer tous les choix
                 if ($actions['supprimer_choix'] == true)
                 {
-                    echo '<form method="post" id="delete_choices" action="foodadvisor.php?action=doSupprimerChoix" class="form_action_propositions">';
+                    echo '<form method="post" id="delete_choices" action="foodadvisor.php?action=doSupprimerTousChoix" class="form_action_propositions">';
                         echo '<input type="hidden" name="date" value="' . $_GET['date'] . '" />';
                         echo '<input type="submit" name="delete_choices" value="Supprimer tous mes choix" class="bouton_determination eventConfirm" />';
                         echo '<input type="hidden" value="Supprimer tous les choix saisis ?" class="eventMessage" />';
@@ -74,7 +74,7 @@
                             echo '<a id="modifier_' . $monChoix->getId() . '" title="Modifier le choix" class="icone_update_choix modifierChoix"></a>';
 
                             // Suppression
-                            echo '<form id="delete_choice_' . $monChoix->getId() . '" method="post" action="foodadvisor.php?action=doSupprimer">';
+                            echo '<form id="delete_choice_' . $monChoix->getId() . '" method="post" action="foodadvisor.php?action=doSupprimerChoix">';
                                 echo '<input type="hidden" name="id_choix" value="' . $monChoix->getId() . '" />';
                                 echo '<input type="hidden" name="date" value="' . $_GET['date'] . '" />';
                                 echo '<input type="submit" name="delete_choice" value="" title="Supprimer le choix" class="icon_delete_choix eventConfirm" />';
@@ -194,7 +194,7 @@
                     if ($actions['choix'] == true)
                     {
                         echo '<div class="zone_proposition" id="modifier_choix_' . $monChoix->getId() . '" style="display: none;">';
-                            echo '<form method="post" action="foodadvisor.php?action=doModifier">';
+                            echo '<form method="post" action="foodadvisor.php?action=doModifierChoix">';
                                 echo '<input type="hidden" name="id_choix" value="' . $monChoix->getId() . '" />';
                                 echo '<input type="hidden" name="date" value="' . $_GET['date'] . '" />';
 

@@ -126,13 +126,13 @@ $(function ()
     // Affichage détail notifications (entrée)
     $('#afficherDetailNotifications').mouseover(function ()
     {
-        showNotifications();
+        afficherDetailsNotifications();
     });
 
     // Affichage détail notifications (sortie)
     $('#afficherDetailNotifications').mouseout(function ()
     {
-        hideNotifications();
+        masquerDetailsNotifications();
     });
 });
 
@@ -926,7 +926,7 @@ function afficherMasquerSection(lien, zone, forcage)
 }
 
 // Affiche le détail des notifications
-function showNotifications()
+function afficherDetailsNotifications()
 {
     $.get('/inside/includes/functions/script_commun.php', { function: 'getDetailsNotifications' }, function (data)
     {
@@ -969,7 +969,7 @@ function showNotifications()
 }
 
 // Cache le nombre de notifications
-function hideNotifications()
+function masquerDetailsNotifications()
 {
     $('.zone_details_notifications').remove();
 }

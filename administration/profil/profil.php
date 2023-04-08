@@ -39,12 +39,12 @@
             deleteAvatar($_SESSION['user']['identifiant']);
             break;
 
-        case 'doUpdateInfos':
+        case 'doModifierInfos':
             // Mise à jour des informations
             updateInfos($_SESSION['user']['identifiant'], $_POST);
             break;
 
-        case 'doUpdatePassword':
+        case 'doModifierMotDePasse':
             // Mise à jour du mot de passe
             updatePassword($_SESSION['user']['identifiant'], $_POST);
             break;
@@ -64,8 +64,8 @@
 
         case 'doModifierAvatar':
         case 'doSupprimerAvatar':
-        case 'doUpdateInfos':
-        case 'doUpdatePassword':
+        case 'doModifierInfos':
+        case 'doModifierMotDePasse':
         default:
             break;
     }
@@ -75,8 +75,8 @@
     {
         case 'doModifierAvatar':
         case 'doSupprimerAvatar':
-        case 'doUpdateInfos':
-        case 'doUpdatePassword':
+        case 'doModifierInfos':
+        case 'doModifierMotDePasse':
             header('location: profil.php?action=goConsulter');
             break;
 

@@ -905,7 +905,7 @@ function envoyerMessage()
 
     // Envoi du message si renseignée et non vide
     if (!$.isEmptyObject($.trim(message)) && !$.isEmptyObject(identifiant))
-        $.post('/inside/includes/common/chat/chat.php?action=doSubmit', { 'identifiant': identifiant, 'equipe': teamUser, 'message': message }, afficherConversation);
+        $.post('/inside/includes/common/chat/chat.php?action=doAjouterMessage', { 'identifiant': identifiant, 'equipe': teamUser, 'message': message }, afficherConversation);
     else
     {
         $('#message_chat').val('');

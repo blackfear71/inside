@@ -168,7 +168,7 @@ $(function ()
     // Réinitialise la position de Celsius
     $('#resetCelsius').click(function ()
     {
-        resetCelsius();
+        reinitialisationCelsius();
     });
 
     // Ferme le contenu Celsius
@@ -242,7 +242,7 @@ $(window).on('orientationchange', function (e)
         if ($('.celsius').length)
         {
             // Réinitialisation de la position de Celsius
-            resetCelsius();
+            reinitialisationCelsius();
         }
     }, 200);
 });
@@ -542,7 +542,7 @@ function isUpScreen()
 }
 
 // Réinitialisation de la position de Celsius
-function resetCelsius()
+function reinitialisationCelsius()
 {
     // Réinitialisation des cookies de position Celsius
     deleteCookie('celsius[positionX]');

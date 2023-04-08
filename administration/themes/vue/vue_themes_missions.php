@@ -10,7 +10,7 @@
         /**********************************/
         /* Saisie nouveau thème (mission) */
         /**********************************/
-        echo '<form method="post" action="themes.php?action=doAjouter" enctype="multipart/form-data" class="zone_theme">';
+        echo '<form method="post" action="themes.php?action=doAjouterTheme" enctype="multipart/form-data" class="zone_theme">';
             echo '<input type="hidden" name="MAX_FILE_SIZE" value="15728640" />';
             echo '<input type="hidden" name="theme_type" value="M" />';
             echo '<input type="hidden" name="theme_level" value="" />';
@@ -108,7 +108,7 @@
                     echo '<div id="modifier_theme_2_' . $themeMission->getId() . '" class="zone_theme_infos">';
                         echo '<div class="zone_theme_titre">';
                             // Bouton suppression
-                            echo '<form id="delete_theme_' . $themeMission->getId() . '" method="post" action="themes.php?action=doSupprimer">';
+                            echo '<form id="delete_theme_' . $themeMission->getId() . '" method="post" action="themes.php?action=doSupprimerTheme">';
                                 echo '<input type="hidden" name="id_theme" value="' . $themeMission->getId() . '" />';
                                 echo '<input type="submit" name="delete_theme" value="" title="Supprimer le thème" class="icon_delete_theme eventConfirm" />';
                                 echo '<input type="hidden" value="Supprimer ce thème ?" class="eventMessage" />';
@@ -136,12 +136,11 @@
                     /* Caché pour modification */
                     /***************************/
                     echo '<div id="modifier_theme_' . $themeMission->getId() . '" class="zone_theme_infos" style="display: none;">';
-                        echo '<form method="post" action="themes.php?action=doModifier">';
+                        echo '<form method="post" action="themes.php?action=doModifierTheme">';
                             echo '<input type="hidden" name="id_theme" value="' . $themeMission->getId() . '" />';
+                            echo '<input type="hidden" name="theme_type" value="M" />';
 
                             echo '<div class="zone_theme_modification_titre">';
-                                echo '<input type="hidden" name="theme_type" value="M" />';
-
                                 // Annulation modification
                                 echo '<a id="annuler_theme_' . $themeMission->getId() . '" title="Annuler" class="icone_cancel_theme annulerTheme"></a>';
 

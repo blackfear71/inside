@@ -41,7 +41,7 @@
             $portail = getPortail($alerteEquipes, $alerteUsers, $alerteFilms, $alerteVacances, $alerteCalendars, $alerteAnnexes, $alerteParcours, $alerteCron, $nombreBugs, $nombreEvols);
             break;
 
-        case 'doExtract':
+        case 'doExtraireBase':
             saveBdd();
             break;
 
@@ -66,7 +66,7 @@
             unset($lienPortail);
             break;
 
-        case 'doExtract':
+        case 'doExtraireBase':
         default:
             break;
     }
@@ -74,7 +74,7 @@
     // Redirection affichage
     switch ($_GET['action'])
     {
-        case 'doExtract':
+        case 'doExtraireBase':
             break;
 
         case 'goConsulter':

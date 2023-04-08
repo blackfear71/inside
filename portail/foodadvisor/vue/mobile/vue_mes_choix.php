@@ -26,7 +26,7 @@
                 // Supprimer tous les choix
                 if ($actions['supprimer_choix'] == true)
                 {
-                    echo '<form method="post" id="delete_choices" action="foodadvisor.php?action=doSupprimerChoix">';
+                    echo '<form method="post" id="delete_choices" action="foodadvisor.php?action=doSupprimerTousChoix">';
                         echo '<input type="hidden" name="date" value="' . $_GET['date'] . '" />';
                         echo '<input type="submit" name="delete_choices" value="Supprimer tous mes choix" class="lien_red_normal eventConfirm" />';
                         echo '<input type="hidden" value="Supprimer tous les choix saisis ?" class="eventMessage" />';
@@ -51,7 +51,7 @@
                         // Suppression choix
                         if ($actions['choix'] == true)
                         {
-                            echo '<form id="delete_choice_' . $monChoix->getId() . '" method="post" action="foodadvisor.php?action=doSupprimer" class="form_delete_choix">';
+                            echo '<form id="delete_choice_' . $monChoix->getId() . '" method="post" action="foodadvisor.php?action=doSupprimerChoix" class="form_delete_choix">';
                                 echo '<input type="hidden" name="id_choix" value="' . $monChoix->getId() . '" />';
                                 echo '<input type="hidden" name="date" value="' . $_GET['date'] . '" />';
                                 echo '<input type="submit" name="delete_choice" value="" title="Supprimer le choix" class="bouton_delete_choix eventConfirm" />';

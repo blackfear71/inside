@@ -14,7 +14,7 @@
                         // Titre
                         echo '<div class="zone_report_top" id="' . $bug->getId() . '">';
                             // Supprimer
-                            echo '<form id="delete_report_' . $bug->getId() . '" method="post" action="reports.php?view=' . $_GET['view'] . '&action=doSupprimer" class="form_delete_rapport">';
+                            echo '<form id="delete_report_' . $bug->getId() . '" method="post" action="reports.php?view=' . $_GET['view'] . '&action=doSupprimerRapport" class="form_delete_rapport">';
                                 echo '<input type="hidden" name="id_report" value="' . $bug->getId() . '" />';
                                 echo '<input type="submit" name="delete_bug" value="" title="Supprimer" class="icone_supprimer_rapport eventConfirm" />';
                                 echo '<input type="hidden" value="Supprimer le rapport <strong>#' . $bug->getId() . '</strong> ?" class="eventMessage" />';
@@ -84,7 +84,7 @@
                         echo '</div>';
 
                         // Solution et actions
-                        echo '<form method="post" action="reports.php?view=' . $_GET['view'] . '&action=doChangerStatut">';
+                        echo '<form method="post" action="reports.php?view=' . $_GET['view'] . '&action=doModifierStatutRapport">';
                             // Solution
                             if ($bug->getResolved() == 'N')
                             {
@@ -147,7 +147,7 @@
                         // Titre
                         echo '<div class="zone_report_top" id="' . $evolution->getId() . '">';
                             // Supprimer
-                            echo '<form id="delete_report_' . $evolution->getId() . '" method="post" action="reports.php?view=' . $_GET['view'] . '&action=doSupprimer" class="form_delete_rapport">';
+                            echo '<form id="delete_report_' . $evolution->getId() . '" method="post" action="reports.php?view=' . $_GET['view'] . '&action=doSupprimerRapport" class="form_delete_rapport">';
                                 echo '<input type="hidden" name="id_report" value="' . $evolution->getId() . '" />';
                                 echo '<input type="submit" name="delete_evolution" value="" title="Supprimer" class="icone_supprimer_rapport eventConfirm" />';
                                 echo '<input type="hidden" value="Supprimer le rapport <strong>#' . $evolution->getId() . '</strong> ?" class="eventMessage" />';
@@ -217,7 +217,7 @@
                         echo '</div>';
 
                         // Solution et actions
-                        echo '<form method="post" action="reports.php?view=' . $_GET['view'] . '&action=doChangerStatut">';
+                        echo '<form method="post" action="reports.php?view=' . $_GET['view'] . '&action=doModifierStatutRapport">';
                             // Solution
                             if ($evolution->getResolved() == 'N')
                             {

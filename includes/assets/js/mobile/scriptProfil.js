@@ -33,7 +33,7 @@ $(function ()
     {
         var idSuccess = $(this).attr('id').replace('agrandir_succes_', '');
 
-        showSuccess(idSuccess);
+        afficherDetailsSucces(idSuccess);
     });
 
     // Affiche un aperçu d'un thème
@@ -102,7 +102,7 @@ function changeCheckedColor(zoneParent)
 }
 
 // Affiche le détail d'un succès débloqué
-function showSuccess(id)
+function afficherDetailsSucces(id)
 {
     var success = listeSuccess[id];
     var html    = '';

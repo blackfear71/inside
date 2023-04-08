@@ -50,7 +50,7 @@
             }
             break;
 
-        case 'doChangerStatut':
+        case 'doModifierStatutRapport':
             // Récupération de l'id
             $idRapport = $_POST['id_report'];
 
@@ -58,7 +58,7 @@
             $resolved = updateBug($_POST);
             break;
 
-        case 'doSupprimer':
+        case 'doSupprimerRapport':
             // Suppression d'un bug ou d'une évolution
             deleteBug($_POST);
             break;
@@ -103,8 +103,8 @@
             unset($evolution);
             break;
 
-        case 'doChangerStatut':
-        case 'doSupprimer':
+        case 'doModifierStatutRapport':
+        case 'doSupprimerRapport':
         default:
             break;
     }
@@ -112,14 +112,14 @@
     // Redirection affichage
     switch ($_GET['action'])
     {
-        case 'doChangerStatut':
+        case 'doModifierStatutRapport':
             if ($resolved == 'Y' OR $resolved == 'R')
                 header('location: reports.php?view=resolved&action=goConsulter&anchor=' . $idRapport);
             else
                 header('location: reports.php?view=unresolved&action=goConsulter&anchor=' . $idRapport);
             break;
 
-        case 'doSupprimer':
+        case 'doSupprimerRapport':
             header('location: reports.php?view=' . $_GET['view'] . '&action=goConsulter');
             break;
 

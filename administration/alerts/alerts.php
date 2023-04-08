@@ -31,17 +31,17 @@
             $listeAlertes = getAlerts();
             break;
 
-        case 'doAjouter':
+        case 'doAjouterAlerte':
             // Insertion d'une nouvelle alerte
             $idAlerte = insertAlert($_POST);
             break;
 
-        case 'doModifier':
+        case 'doModifierAlerte':
             // Mise à jour d'une alerte
             $idAlerte = updateAlert($_POST);
             break;
 
-        case 'doSupprimer':
+        case 'doSupprimerAlerte':
             // Suppression d'une alerte
             deleteAlert($_POST);
             break;
@@ -64,9 +64,9 @@
             unset($alerte);
             break;
 
-        case 'doAjouter':
-        case 'doModifier':
-        case 'doSupprimer':
+        case 'doAjouterAlerte':
+        case 'doModifierAlerte':
+        case 'doSupprimerAlerte':
         default:
             break;
     }
@@ -74,18 +74,18 @@
     // Redirection affichage
     switch ($_GET['action'])
     {
-        case 'doAjouter':
+        case 'doAjouterAlerte':
             if (!empty($idAlerte))
                 header('location: alerts.php?action=goConsulter&anchorAlerts=' . $idAlerte);
             else
                 header('location: alerts.php?action=goConsulter');
             break;
 
-        case 'doModifier':
+        case 'doModifierAlerte':
             header('location: alerts.php?action=goConsulter&anchorAlerts=' . $idAlerte);
             break;
 
-        case 'doSupprimer':
+        case 'doSupprimerAlerte':
             header('location: alerts.php?action=goConsulter');
             break;
 

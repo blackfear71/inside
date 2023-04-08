@@ -59,7 +59,7 @@
             $preferences = getPreferences($_SESSION['user']['identifiant']);
             break;
 
-        case 'doSupprimer':
+        case 'doSupprimerCalendrier':
             // Suppression d'un calendrier
             deleteCalendrier($_POST);
             break;
@@ -121,7 +121,7 @@
             $preferences = Preferences::secureData($preferences);
             break;
 
-        case 'doSupprimer':
+        case 'doSupprimerCalendrier':
         case 'doSupprimerAnnexe':
         default:
             break;
@@ -134,7 +134,7 @@
             header('location: calendars.php?action=goConsulterAnnexes');
             break;
 
-        case 'doSupprimer':
+        case 'doSupprimerCalendrier':
             header('location: calendars.php?year=' . $_GET['year'] . '&action=goConsulter');
             break;
 
