@@ -940,217 +940,224 @@
         $value  = NULL;
         $action = NULL;
 
-        // Détermination de la valeur à insérer en fonction de la référence
-        switch ($reference)
+        // Vérification utilisateur existant
+        $isUserInscrit = physiqueUserInscrit($identifiant);
+
+        // Traitement du succès
+        if ($isUserInscrit)
         {
-            // Valeur en entrée conservée
-            case 'beginning':
-            case 'developper':
-            case 'padawan':
-            case 'level_1':
-            case 'level_5':
-            case 'level_10':
-                // Récupération de l'ancienne valeur du succès de l'utilisateur
-                $ancienneValeur = physiqueAncienneValeurSucces($reference, $identifiant);
+            // Détermination de la valeur à insérer en fonction de la référence
+            switch ($reference)
+            {
+                // Valeur en entrée conservée
+                case 'beginning':
+                case 'developper':
+                case 'padawan':
+                case 'level_1':
+                case 'level_5':
+                case 'level_10':
+                    // Récupération de l'ancienne valeur du succès de l'utilisateur
+                    $ancienneValeur = physiqueAncienneValeurSucces($reference, $identifiant);
 
-                // Récupération de la nouvelle valeur
-                $value = $incoming;
-
-                // Vérification si succès débloqué (sauf pour l'admin)
-                if (isset($_SESSION['user']['identifiant']) AND $_SESSION['user']['identifiant'] != 'admin')
-                {
-                    $alreadyUnlocked = false;
-
-                    // Récupération de la valeur limite à atteindre pour le succès
-                    $limite = physiqueLimiteSucces($reference);
-
-                    // Comparaison entre les 2 valeurs
-                    if (!empty($ancienneValeur) AND $ancienneValeur >= $limite)
-                        $alreadyUnlocked = true;
-
-                    // Ajout à la session d'affichage des succès si limite atteinte
-                    if ($alreadyUnlocked == false AND $value == $limite)
-                        $_SESSION['success'][$reference] = true;
-                }
-                break;
-
-            // Incrémentation de la valeur précédente avec la valeur en entrée (cas incoming <= 1)
-            // Pour afficher le déblocage on doit obtenir exactement la valeur limite
-            case 'publisher':
-            case 'viewer':
-            case 'commentator':
-            case 'listener':
-            case 'speaker':
-            case 'funny':
-            case 'self-satisfied':
-            case 'buyer':
-            case 'generous':
-            case 'creator':
-            case 'applier':
-            case 'debugger':
-            case 'compiler':
-            case 'restaurant-finder':
-            case 'star-chief':
-            case 'cooker':
-            case 'recipe-master':
-            case 'explorer':
-            case 'runner':
-            case 'competitor':
-                // Récupération de l'ancienne valeur du succès de l'utilisateur
-                $ancienneValeur = physiqueAncienneValeurSucces($reference, $identifiant);
-
-                // Récupération de la nouvelle valeur
-                if (!empty($ancienneValeur))
-                    $value = $ancienneValeur + $incoming;
-                else
+                    // Récupération de la nouvelle valeur
                     $value = $incoming;
 
-                // Vérification si succès débloqué (sauf pour l'admin)
-                if (isset($_SESSION['user']['identifiant']) AND $_SESSION['user']['identifiant'] != 'admin')
-                {
-                    // Récupération de la valeur limite à atteindre pour le succès
-                    $limite = physiqueLimiteSucces($reference);
+                    // Vérification si succès débloqué (sauf pour l'admin)
+                    if (isset($_SESSION['user']['identifiant']) AND $_SESSION['user']['identifiant'] != 'admin')
+                    {
+                        $alreadyUnlocked = false;
 
-                    // Ajout à la session d'affichage des succès si limite atteinte
-                    if ($value == $limite)
-                        $_SESSION['success'][$reference] = true;
-                }
-                break;
+                        // Récupération de la valeur limite à atteindre pour le succès
+                        $limite = physiqueLimiteSucces($reference);
 
-            // Incrémentation de la valeur précédente avec la valeur en entrée pour les missions (cas incoming <= 1)
-            // Dans le cas particulier des missions, le succès ne peut pas être débloqué directement, on doit attendre le lendemain de la date de fin, on ne peut donc jamais l'afficher
-            case 'christmas2017':
-            case 'christmas2017_2':
-            case 'golden-egg':
-            case 'rainbow-egg':
-            case 'wizard':
-            case 'christmas2018':
-            case 'christmas2018_2':
-            case 'christmas2019':
-            case 'delivery':
-                // Récupération de l'ancienne valeur du succès de l'utilisateur
-                $ancienneValeur = physiqueAncienneValeurSucces($reference, $identifiant);
+                        // Comparaison entre les 2 valeurs
+                        if (!empty($ancienneValeur) AND $ancienneValeur >= $limite)
+                            $alreadyUnlocked = true;
 
-                // Récupération de la nouvelle valeur
-                if (!empty($ancienneValeur))
-                    $value = $ancienneValeur + $incoming;
-                else
-                    $value = $incoming;
-                break;
+                        // Ajout à la session d'affichage des succès si limite atteinte
+                        if ($alreadyUnlocked == false AND $value == $limite)
+                            $_SESSION['success'][$reference] = true;
+                    }
+                    break;
 
-            // Incrémentation de la valeur précédente avec la valeur en entrée (cas incoming > 1)
-            // Pour afficher le déblocage on doit dépasser la valeur limite (si pas déjà fait)
-            case 'eater':
-            case 'marathon':
-                // Récupération de l'ancienne valeur du succès de l'utilisateur
-                $ancienneValeur = physiqueAncienneValeurSucces($reference, $identifiant);
+                // Incrémentation de la valeur précédente avec la valeur en entrée (cas incoming <= 1)
+                // Pour afficher le déblocage on doit obtenir exactement la valeur limite
+                case 'publisher':
+                case 'viewer':
+                case 'commentator':
+                case 'listener':
+                case 'speaker':
+                case 'funny':
+                case 'self-satisfied':
+                case 'buyer':
+                case 'generous':
+                case 'creator':
+                case 'applier':
+                case 'debugger':
+                case 'compiler':
+                case 'restaurant-finder':
+                case 'star-chief':
+                case 'cooker':
+                case 'recipe-master':
+                case 'explorer':
+                case 'runner':
+                case 'competitor':
+                    // Récupération de l'ancienne valeur du succès de l'utilisateur
+                    $ancienneValeur = physiqueAncienneValeurSucces($reference, $identifiant);
 
-                // Récupération de la nouvelle valeur
-                if (!empty($ancienneValeur))
-                    $value = $ancienneValeur + $incoming;
-                else
-                    $value = $incoming;
-
-                // Vérification si succès débloqué (sauf pour l'admin)
-                if (isset($_SESSION['user']['identifiant']) AND $_SESSION['user']['identifiant'] != 'admin')
-                {
-                    $alreadyUnlocked = false;
-
-                    // Récupération de la valeur limite à atteindre pour le succès
-                    $limite = physiqueLimiteSucces($reference);
-
-                    // Comparaison entre les 2 valeurs
-                    if (!empty($ancienneValeur) AND $ancienneValeur >= $limite)
-                        $alreadyUnlocked = true;
-
-                    // Ajout à la session d'affichage des succès si limite atteinte
-                    if ($alreadyUnlocked == false AND $value >= $limite)
-                        $_SESSION['success'][$reference] = true;
-                }
-                break;
-
-            // Valeur maximale conservée
-            case 'greedy':
-                // Récupération de l'ancienne valeur du succès de l'utilisateur
-                $ancienneValeur = physiqueAncienneValeurSucces($reference, $identifiant);
-
-                // Récupération de la nouvelle valeur
-                if (!empty($ancienneValeur))
-                {
-                    if ($incoming > $ancienneValeur)
+                    // Récupération de la nouvelle valeur
+                    if (!empty($ancienneValeur))
+                        $value = $ancienneValeur + $incoming;
+                    else
                         $value = $incoming;
-                }
-                else
-                    $value = $incoming;
 
-                // Vérification si succès débloqué (sauf pour l'admin)
-                if (isset($_SESSION['user']['identifiant']) AND $_SESSION['user']['identifiant'] != 'admin')
-                {
-                    // Récupération de la valeur limite à atteindre pour le succès
-                    $limite = physiqueLimiteSucces($reference);
+                    // Vérification si succès débloqué (sauf pour l'admin)
+                    if (isset($_SESSION['user']['identifiant']) AND $_SESSION['user']['identifiant'] != 'admin')
+                    {
+                        // Récupération de la valeur limite à atteindre pour le succès
+                        $limite = physiqueLimiteSucces($reference);
 
+                        // Ajout à la session d'affichage des succès si limite atteinte
+                        if ($value == $limite)
+                            $_SESSION['success'][$reference] = true;
+                    }
+                    break;
+
+                // Incrémentation de la valeur précédente avec la valeur en entrée pour les missions (cas incoming <= 1)
+                // Dans le cas particulier des missions, le succès ne peut pas être débloqué directement, on doit attendre le lendemain de la date de fin, on ne peut donc jamais l'afficher
+                case 'christmas2017':
+                case 'christmas2017_2':
+                case 'golden-egg':
+                case 'rainbow-egg':
+                case 'wizard':
+                case 'christmas2018':
+                case 'christmas2018_2':
+                case 'christmas2019':
+                case 'delivery':
+                    // Récupération de l'ancienne valeur du succès de l'utilisateur
+                    $ancienneValeur = physiqueAncienneValeurSucces($reference, $identifiant);
+
+                    // Récupération de la nouvelle valeur
+                    if (!empty($ancienneValeur))
+                        $value = $ancienneValeur + $incoming;
+                    else
+                        $value = $incoming;
+                    break;
+
+                // Incrémentation de la valeur précédente avec la valeur en entrée (cas incoming > 1)
+                // Pour afficher le déblocage on doit dépasser la valeur limite (si pas déjà fait)
+                case 'eater':
+                case 'marathon':
+                    // Récupération de l'ancienne valeur du succès de l'utilisateur
+                    $ancienneValeur = physiqueAncienneValeurSucces($reference, $identifiant);
+
+                    // Récupération de la nouvelle valeur
+                    if (!empty($ancienneValeur))
+                        $value = $ancienneValeur + $incoming;
+                    else
+                        $value = $incoming;
+
+                    // Vérification si succès débloqué (sauf pour l'admin)
+                    if (isset($_SESSION['user']['identifiant']) AND $_SESSION['user']['identifiant'] != 'admin')
+                    {
+                        $alreadyUnlocked = false;
+
+                        // Récupération de la valeur limite à atteindre pour le succès
+                        $limite = physiqueLimiteSucces($reference);
+
+                        // Comparaison entre les 2 valeurs
+                        if (!empty($ancienneValeur) AND $ancienneValeur >= $limite)
+                            $alreadyUnlocked = true;
+
+                        // Ajout à la session d'affichage des succès si limite atteinte
+                        if ($alreadyUnlocked == false AND $value >= $limite)
+                            $_SESSION['success'][$reference] = true;
+                    }
+                    break;
+
+                // Valeur maximale conservée
+                case 'greedy':
+                    // Récupération de l'ancienne valeur du succès de l'utilisateur
+                    $ancienneValeur = physiqueAncienneValeurSucces($reference, $identifiant);
+
+                    // Récupération de la nouvelle valeur
                     if (!empty($ancienneValeur))
                     {
-                        // Ajout à la session d'affichage des succès si limite atteinte
-                        if ($ancienneValeur < $limite AND !empty($value) AND $value >= $limite)
-                            $_SESSION['success'][$reference] = true;
+                        if ($incoming > $ancienneValeur)
+                            $value = $incoming;
                     }
                     else
+                        $value = $incoming;
+
+                    // Vérification si succès débloqué (sauf pour l'admin)
+                    if (isset($_SESSION['user']['identifiant']) AND $_SESSION['user']['identifiant'] != 'admin')
                     {
-                        // Ajout à la session d'affichage des succès si limite atteinte
-                        if ($value >= $limite)
-                            $_SESSION['success'][$reference] = true;
+                        // Récupération de la valeur limite à atteindre pour le succès
+                        $limite = physiqueLimiteSucces($reference);
+
+                        if (!empty($ancienneValeur))
+                        {
+                            // Ajout à la session d'affichage des succès si limite atteinte
+                            if ($ancienneValeur < $limite AND !empty($value) AND $value >= $limite)
+                                $_SESSION['success'][$reference] = true;
+                        }
+                        else
+                        {
+                            // Ajout à la session d'affichage des succès si limite atteinte
+                            if ($value >= $limite)
+                                $_SESSION['success'][$reference] = true;
+                        }
                     }
-                }
-                break;
+                    break;
 
-            default:
-                // Valeur par défaut
-                $value = NULL;
-                break;
-        }
-
-        // Détermination de l'action à effectuer en fonction de la valeur
-        if (!is_null($value))
-        {
-            if ($value == 0)
-                $action = 'delete';
-            else
-            {
-                // Vérification de l'exitence d'une valeur du succès pour l'utilisateur
-                if (!empty($ancienneValeur))
-                    $action = 'update';
-                else
-                    $action = 'insert';
+                default:
+                    // Valeur par défaut
+                    $value = NULL;
+                    break;
             }
-        }
 
-        // Traitement de l'enregistrement
-        switch ($action)
-        {
-            case 'insert':
-                // Insertion de l'enregistrement en base
-                $succesUser = array(
-                    'reference'   => $reference,
-                    'identifiant' => $identifiant,
-                    'value'       => $value
-                );
+            // Détermination de l'action à effectuer en fonction de la valeur
+            if (!is_null($value))
+            {
+                if ($value == 0)
+                    $action = 'delete';
+                else
+                {
+                    // Vérification de l'exitence d'une valeur du succès pour l'utilisateur
+                    if (!empty($ancienneValeur))
+                        $action = 'update';
+                    else
+                        $action = 'insert';
+                }
+            }
 
-                physiqueInsertionSuccesUser($succesUser);
-                break;
+            // Traitement de l'enregistrement
+            switch ($action)
+            {
+                case 'insert':
+                    // Insertion de l'enregistrement en base
+                    $succesUser = array(
+                        'reference'   => $reference,
+                        'identifiant' => $identifiant,
+                        'value'       => $value
+                    );
 
-            case 'update':
-                // Modification de l'enregistrement en base
-                physiqueUpdateSuccesUser($reference, $identifiant, $value);
-                break;
+                    physiqueInsertionSuccesUser($succesUser);
+                    break;
 
-            case 'delete':
-                // Suppression de l'enregistrement en base
-                physiqueDeleteSuccesUser($reference, $identifiant);
-                break;
+                case 'update':
+                    // Modification de l'enregistrement en base
+                    physiqueUpdateSuccesUser($reference, $identifiant, $value);
+                    break;
 
-            default:
-                break;
+                case 'delete':
+                    // Suppression de l'enregistrement en base
+                    physiqueDeleteSuccesUser($reference, $identifiant);
+                    break;
+
+                default:
+                    break;
+            }
         }
     }
 
