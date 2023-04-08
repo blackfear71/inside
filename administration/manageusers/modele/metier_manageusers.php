@@ -568,6 +568,9 @@
     // RETOUR : Aucun
     function acceptEquipe($post, $isUpdateEquipe)
     {
+        // Initialisations
+        $control_ok = true;
+
         // Récupération des données
         $identifiant = $post['id_user'];
         $oldTeam     = $post['team_user'];
@@ -585,82 +588,89 @@
         if (isset($post['team_temp_reference']) AND !empty($post['team_temp_reference']))
             $tempTeam = $post['team_temp_reference'];
 
-        // Création ou mise à jour d'une équipe si besoin
+        // Contrôle équipe existante (seulement à la création d'une nouvelle équipe)
         if ($post['team'] == 'other')
-        {
-            $team = array(
-                'reference'  => $teamReference,
-                'team'       => $nameReference,
-                'activation' => 'Y'
-            );
+            $control_ok = controleEquipeUnique($teamReference);
 
-            if (isset($tempTeam) AND !empty($tempTeam))
+        // Création ou mise à jour d'une équipe si besoin
+        if ($control_ok == true)
+        {
+            if ($post['team'] == 'other')
             {
-                // Mise à jour de l'équipe temporaire créée par l'utilisateur et activation
-                physiqueUpdateEquipe($team, $tempTeam);
+                $team = array(
+                    'reference'  => $teamReference,
+                    'team'       => $nameReference,
+                    'activation' => 'Y'
+                );
+    
+                if (isset($tempTeam) AND !empty($tempTeam))
+                {
+                    // Mise à jour de l'équipe temporaire créée par l'utilisateur et activation
+                    physiqueUpdateEquipe($team, $tempTeam);
+                }
+                else
+                {
+                    // Création d'une nouvelle équipe si l'utilisateur a choisi une équipe et que l'admin créé une nouvelle équipe
+                    physiqueInsertionEquipe($team);
+                }
+    
+                // Création d'un fichier XML pour le chat lors de la création d'une nouvelle équipe
+                $folder = '../../includes/common/chat/conversations';
+    
+                if (!is_dir($folder))
+                    mkdir($folder, 0777, true);
+    
+                // Création du fichier s'il n'existe pas
+                if (!file_exists($folder . '/content_chat_' . $teamReference . '.xml'))
+                {
+                    $file    = fopen($folder . '/content_chat_' . $teamReference . '.xml', 'a+');
+                    $balises = '<?xml version="1.0" encoding="UTF-8"?>
+<INSIDERoom>
+</INSIDERoom>';
+    
+                    fputs($file, $balises);
+                    fclose($file);
+                    chmod($folder . '/content_chat_' . $teamReference . '.xml', 0757);
+                }
             }
             else
             {
-                // Création d'une nouvelle équipe si l'utilisateur a choisi une équipe et que l'admin créé une nouvelle équipe
-                physiqueInsertionEquipe($team);
+                // Si il ne faut finalement pas créer d'équipe, on supprime l'équipe temporaire
+                if (isset($tempTeam) AND !empty($tempTeam))
+                    physiqueDeleteEquipe($tempTeam);
             }
-
-            // Création d'un fichier XML pour le chat lors de la création d'une nouvelle équipe
-            $folder = '../../includes/common/chat/conversations';
-
-            if (!is_dir($folder))
-                mkdir($folder, 0777, true);
-
-            // Création du fichier s'il n'existe pas
-            if (!file_exists($folder . '/content_chat_' . $teamReference . '.xml'))
+    
+            // Réinitialisations (seulement lors d'un changement d'équipe)
+            if ($isUpdateEquipe == true)
             {
-                $file    = fopen($folder . '/content_chat_' . $teamReference . '.xml', 'a+');
-                $balises = '<?xml version="1.0" encoding="UTF-8"?>
-<INSIDERoom>
-</INSIDERoom>';
-
-                fputs($file, $balises);
-                fclose($file);
-                chmod($folder . '/content_chat_' . $teamReference . '.xml', 0757);
-            }
-        }
-        else
-        {
-            // Si il ne faut finalement pas créer d'équipe, on supprime l'équipe temporaire
-            if (isset($tempTeam) AND !empty($tempTeam))
-                physiqueDeleteEquipe($tempTeam);
-        }
-
-        // Réinitialisations (seulement lors d'un changement d'équipe)
-        if ($isUpdateEquipe == true)
-        {
-            // Suppression des semaines de gâteaux si non réalisés
-            physiqueDeleteRecette($identifiant, $oldTeam);
-
-            // Remise en cours des idées non terminées ou rejetées
-            physiqueUpdateStatusTheBox($identifiant);
-
-            // Récupération des missions en cours
-            $idMissionsEnCours = physiqueMissionsEnCours();
-
-            // Mise à jour des missions en cours
-            if (!empty($idMissionsEnCours))
-            {
-                foreach ($idMissionsEnCours as $idMission)
+                // Suppression des semaines de gâteaux si non réalisés
+                physiqueDeleteRecette($identifiant, $oldTeam);
+    
+                // Remise en cours des idées non terminées ou rejetées
+                physiqueUpdateStatusTheBox($identifiant);
+    
+                // Récupération des missions en cours
+                $idMissionsEnCours = physiqueMissionsEnCours();
+    
+                // Mise à jour des missions en cours
+                if (!empty($idMissionsEnCours))
                 {
-                    physiqueUpdateMissionsEnCours($idMission, $identifiant, $teamReference);
+                    foreach ($idMissionsEnCours as $idMission)
+                    {
+                        physiqueUpdateMissionsEnCours($idMission, $identifiant, $teamReference);
+                    }
                 }
             }
+    
+            // Mise à jour de la référence de l'équipe et du statut à "U" de l'utilisateur
+            $user = array(
+                'team'     => $teamReference,
+                'new_team' => $newTeam,
+                'status'   => $status
+            );
+    
+            physiqueUpdateProfilUser($user, $identifiant);
         }
-
-        // Mise à jour de la référence de l'équipe et du statut à "U" de l'utilisateur
-        $user = array(
-            'team'     => $teamReference,
-            'new_team' => $newTeam,
-            'status'   => $status
-        );
-
-        physiqueUpdateProfilUser($user, $identifiant);
     }
 
     // METIER : Refus changement d'équipe

@@ -88,6 +88,31 @@
         return $listeEquipes;
     }
 
+    // PHYSIQUE : Lecture équipe existante
+    // RETOUR : Booléen
+    function physiqueEquipeExistante($reference)
+    {
+        // Initialisations
+        $exist = false;
+
+        // Requête
+        global $bdd;
+
+        $req = $bdd->query('SELECT COUNT(*) AS nombreLignes
+                            FROM teams
+                            WHERE reference = "' . $reference . '"');
+
+        $data = $req->fetch();
+
+        if ($data['nombreLignes'] > 0)
+            $exist = true;
+
+        $req->closeCursor();
+
+        // Retour
+        return $exist;
+    }
+
     // PHYSIQUE : Lecture du nombre de films ajoutés
     // RETOUR : Nombre de films ajoutés
     function physiqueFilmsAjoutesUser($identifiant)
