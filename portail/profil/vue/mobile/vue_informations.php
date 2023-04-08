@@ -94,8 +94,14 @@
                 echo '<div class="texte_titre_contribution">LES ENFANTS ! À TABLE !</div>';
             echo '</div>';
 
-            // Réservations
+            // Restaurants ajoutés
             echo '<div class="zone_contribution">';
+                echo '<div class="stat_contribution">' . $statistiques->getNb_restaurants_ajoutes() . '</div>';
+                echo '<div class="texte_contribution">restaurants ajoutés</div>';
+            echo '</div>';
+
+            // Réservations
+            echo '<div class="zone_contribution border_left">';
                 echo '<div class="stat_contribution">' . $statistiques->getNb_reservations() . '</div>';
                 echo '<div class="texte_contribution">réservations</div>';
             echo '</div>';

@@ -48,100 +48,28 @@
         return $equipe;
     }
 
-    // PHYSIQUE : Lecture du nombre de films ajoutés
-    // RETOUR : Nombre de films ajoutés
-    function physiqueFilmsAjoutesUser($identifiant)
+    // PHYSIQUE : Lecture du nombre de lignes dans une table
+    // RETOUR : Nombre de lignes
+    function physiqueNombreLignesTable($table, $colonne, $identifiant)
     {
         // Initialisations
-        $nombreAjouts = 0;
+        $nombreLignes = 0;
 
         // Requête
         global $bdd;
 
-        $req = $bdd->query('SELECT COUNT(*) AS nombreAjouts
-                            FROM movie_house
-                            WHERE identifiant_add = "' . $identifiant . '"');
+        $req = $bdd->query('SELECT COUNT(*) AS nombreLignes
+                            FROM ' . $table . '
+                            WHERE ' . $colonne . ' = "' . $identifiant . '"');
 
         $data = $req->fetch();
 
-        $nombreAjouts = $data['nombreAjouts'];
+        $nombreLignes = $data['nombreLignes'];
 
         $req->closeCursor();
 
         // Retour
-        return $nombreAjouts;
-    }
-
-    // PHYSIQUE : Lecture du nombre de commentaires de films ajoutés
-    // RETOUR : Nombre de commentaires ajoutés
-    function physiqueCommentairesFilmsUser($identifiant)
-    {
-        // Initialisations
-        $nombreComments = 0;
-
-        // Requête
-        global $bdd;
-
-        $req = $bdd->query('SELECT COUNT(*) AS nombreComments
-                            FROM movie_house_comments
-                            WHERE identifiant = "' . $identifiant . '"');
-
-        $data = $req->fetch();
-
-        $nombreComments = $data['nombreComments'];
-
-        $req->closeCursor();
-
-        // Retour
-        return $nombreComments;
-    }
-
-    // PHYSIQUE : Lecture du nombre de phrases cultes ajoutées
-    // RETOUR : Nombre de phrases cultes ajoutés
-    function physiqueCollectorAjoutesUser($identifiant)
-    {
-        // Initialisations
-        $nombreCollector = 0;
-
-        // Requête
-        global $bdd;
-
-        $req = $bdd->query('SELECT COUNT(*) AS nombreCollector
-                            FROM collector
-                            WHERE author = "' . $identifiant . '"');
-
-        $data = $req->fetch();
-
-        $nombreCollector = $data['nombreCollector'];
-
-        $req->closeCursor();
-
-        // Retour
-        return $nombreCollector;
-    }
-
-    // PHYSIQUE : Lecture du nombre de réservations de restaurants
-    // RETOUR : Nombre de réservations
-    function physiqueReservationsUser($identifiant)
-    {
-        // Initialisations
-        $nombreReservations = 0;
-
-        // Requête
-        global $bdd;
-
-        $req = $bdd->query('SELECT COUNT(*) AS nombreReservations
-                            FROM food_advisor_choices
-                            WHERE caller = "' . $identifiant . '"');
-
-        $data = $req->fetch();
-
-        $nombreReservations = $data['nombreReservations'];
-
-        $req->closeCursor();
-
-        // Retour
-        return $nombreReservations;
+        return $nombreLignes;
     }
 
     // PHYSIQUE : Lecture du nombre de gâteaux de la semaine
@@ -216,30 +144,6 @@
         return $bilanUser;
     }
 
-    // PHYSIQUE : Lecture du nombre d'idées #TheBox soumises d'un utilisateur
-    // RETOUR : Nombre d'idées soumises de l'utilisateur
-    function physiqueTheBoxUser($identifiant)
-    {
-        // Initialisations
-        $nombreTheBox = 0;
-
-        // Requête
-        global $bdd;
-
-        $req = $bdd->query('SELECT COUNT(*) AS nombreTheBox
-                            FROM ideas
-                            WHERE author = "' . $identifiant . '"');
-
-        $data = $req->fetch();
-
-        $nombreTheBox = $data['nombreTheBox'];
-
-        $req->closeCursor();
-
-        // Retour
-        return $nombreTheBox;
-    }
-
     // PHYSIQUE : Lecture du nombre de bugs / évolutions soumis d'un utilisateur
     // RETOUR : Nombre de bugs / évolutions soumis de l'utilisateur
     function physiqueBugsEvolutionsSoumisUser($identifiant, $type)
@@ -262,54 +166,6 @@
 
         // Retour
         return $nombreSoumis;
-    }
-
-    // PHYSIQUE : Lecture du nombre de parcours ajoutés
-    // RETOUR : Nombre de parcours ajoutés
-    function physiqueParcoursAjoutesUser($identifiant)
-    {
-        // Initialisations
-        $nombreAjouts = 0;
-
-        // Requête
-        global $bdd;
-
-        $req = $bdd->query('SELECT COUNT(*) AS nombreAjouts
-                            FROM petits_pedestres_parcours
-                            WHERE identifiant_add = "' . $identifiant . '"');
-
-        $data = $req->fetch();
-
-        $nombreAjouts = $data['nombreAjouts'];
-
-        $req->closeCursor();
-
-        // Retour
-        return $nombreAjouts;
-    }
-
-    // PHYSIQUE : Lecture du nombre de participations d'un parcours pour un utilisateur
-    // RETOUR : Nombre de participations d'un parcours
-    function physiqueParticipationsParcoursUser($identifiant)
-    {
-        // Initialisations
-        $nombreParticipations = 0;
-
-        // Requête
-        global $bdd;
-
-        $req = $bdd->query('SELECT COUNT(*) AS nombreParticipations
-                            FROM petits_pedestres_users
-                            WHERE identifiant = "' . $identifiant . '"');
-
-        $data = $req->fetch();
-
-        $nombreParticipations = $data['nombreParticipations'];
-
-        $req->closeCursor();
-
-        // Retour
-        return $nombreParticipations;
     }
 
     // PHYSIQUE : Lecture préférences

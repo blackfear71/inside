@@ -25,8 +25,14 @@
         echo '<div class="zone_contributions">';
             echo '<div class="titre_contribution"><img src="../../includes/icons/profil/food_advisor_grey.png" alt="food_advisor_grey" class="logo_titre_contribution" />LES ENFANTS ! À TABLE !</div>';
 
-            // Réservations
+            // Restaurants ajoutés
             echo '<div class="zone_contribution">';
+                echo '<div class="stat_contribution">' . $statistiques->getNb_restaurants_ajoutes() . '</div>';
+                echo '<div class="texte_contribution">restaurants ajoutés</div>';
+            echo '</div>';
+
+            // Réservations
+            echo '<div class="zone_contribution border_left">';
                 echo '<div class="stat_contribution">' . $statistiques->getNb_reservations() . '</div>';
                 echo '<div class="texte_contribution">réservations</div>';
             echo '</div>';

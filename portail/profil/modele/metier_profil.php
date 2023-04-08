@@ -30,13 +30,16 @@
     function getStatistiques($identifiant)
     {
         // Films ajoutés
-        $nombreFilms = physiqueFilmsAjoutesUser($identifiant);
+        $nombreFilms = physiqueNombreLignesTable('movie_house', 'identifiant_add', $identifiant);
 
         // Commentaires films
-        $nombreComments = physiqueCommentairesFilmsUser($identifiant);
+        $nombreComments = physiqueNombreLignesTable('movie_house_comments', 'identifiant', $identifiant);
+
+        // Restaurants ajoutés
+        $nombreRestaurants = physiqueNombreLignesTable('food_advisor_restaurants', 'identifiant_add', $identifiant);
 
         // Réservations de restaurants
-        $nombreReservations = physiqueReservationsUser($identifiant);
+        $nombreReservations = physiqueNombreLignesTable('food_advisor_choices', 'caller', $identifiant);
 
         // Gâteaux de la semaine
         $nombreGateauxSemaine = physiqueGateauxSemaineUser($identifiant);
@@ -48,16 +51,16 @@
         $bilanUser = physiqueBilanDepensesUser($identifiant);
 
         // Phrases et images cultes ajoutées
-        $nombreCollector = physiqueCollectorAjoutesUser($identifiant);
+        $nombreCollector = physiqueNombreLignesTable('collector', 'author', $identifiant);
 
         // Parcours ajoutés
-        $nombreParcours = physiqueParcoursAjoutesUser($identifiant);
+        $nombreParcours = physiqueNombreLignesTable('petits_pedestres_parcours', 'identifiant_add', $identifiant);
 
         // Participations parcours
-        $nombreParticipations = physiqueParticipationsParcoursUser($identifiant);
+        $nombreParticipations = physiqueNombreLignesTable('petits_pedestres_users', 'identifiant', $identifiant);
 
         // Idées publiées
-        $nombreTheBox = physiqueTheBoxUser($identifiant);
+        $nombreTheBox = physiqueNombreLignesTable('ideas', 'author', $identifiant);
 
         // Bugs soumis
         $nombreBugsSoumis = physiqueBugsEvolutionsSoumisUser($identifiant, 'B');
@@ -67,18 +70,19 @@
 
         // Génération d'un objet StatistiquesProfil
         $statistiques = array(
-            'nb_films_ajoutes'  => $nombreFilms,
-            'nb_comments'       => $nombreComments,
-            'nb_collectors'     => $nombreCollector,
-            'nb_reservations'   => $nombreReservations,
-            'nb_gateaux'        => $nombreGateauxSemaine,
-            'nb_recettes'       => $nombreRecettes,
-            'expenses'          => $bilanUser,
-            'nb_ideas'          => $nombreTheBox,
-            'nb_bugs'           => $nombreBugsSoumis,
-            'nb_evolutions'     => $nombreEvolutionsSoumises,
-            'nb_parcours'       => $nombreParcours,
-            'nb_participations' => $nombreParticipations
+            'nb_films_ajoutes'       => $nombreFilms,
+            'nb_comments'            => $nombreComments,
+            'nb_collectors'          => $nombreCollector,
+            'nb_restaurants_ajoutes' => $nombreRestaurants,
+            'nb_reservations'        => $nombreReservations,
+            'nb_gateaux'             => $nombreGateauxSemaine,
+            'nb_recettes'            => $nombreRecettes,
+            'expenses'               => $bilanUser,
+            'nb_ideas'               => $nombreTheBox,
+            'nb_bugs'                => $nombreBugsSoumis,
+            'nb_evolutions'          => $nombreEvolutionsSoumises,
+            'nb_parcours'            => $nombreParcours,
+            'nb_participations'      => $nombreParticipations
         );
 
         $tableauStatistiques = StatistiquesProfil::withData($statistiques);

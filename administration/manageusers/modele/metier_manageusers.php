@@ -142,16 +142,16 @@
             foreach ($listeUsers as $user)
             {
                 // Films ajoutés
-                $nombreFilms = physiqueFilmsAjoutesUser($user->getIdentifiant());
+                $nombreFilms = physiqueNombreLignesTable('movie_house', 'identifiant_add', $user->getIdentifiant());
 
                 // Commentaires films
-                $nombreComments = physiqueCommentairesFilmsUser($user->getIdentifiant());
+                $nombreComments = physiqueNombreLignesTable('movie_house_comments', 'identifiant', $user->getIdentifiant());
 
                 // Restaurants ajoutés
-                $nombreRestaurants = physiqueRestaurantsAjoutesUser($user->getIdentifiant());
+                $nombreRestaurants = physiqueNombreLignesTable('food_advisor_restaurants', 'identifiant_add', $user->getIdentifiant());
 
                 // Réservations de restaurants
-                $nombreReservations = physiqueReservationsUser($user->getIdentifiant());
+                $nombreReservations = physiqueNombreLignesTable('food_advisor_choices', 'caller', $user->getIdentifiant());
 
                 // Gâteaux de la semaine
                 $nombreGateauxSemaine = physiqueGateauxSemaineUser($user->getIdentifiant());
@@ -163,16 +163,16 @@
                 $bilanUser = physiqueBilanDepensesUser($user->getIdentifiant());
 
                 // Phrases et images cultes ajoutées
-                $nombreCollector = physiqueCollectorAjoutesUser($user->getIdentifiant());
+                $nombreCollector = physiqueNombreLignesTable('collector', 'author', $user->getIdentifiant());
 
                 // Parcours ajoutés
-                $nombreParcours = physiqueParcoursAjoutesUser($user->getIdentifiant());
+                $nombreParcours = physiqueNombreLignesTable('petits_pedestres_parcours', 'identifiant_add', $user->getIdentifiant());
 
                 // Participations parcours
-                $nombreParticipationsParcours = physiqueParticipationsParcoursUser($user->getIdentifiant());
+                $nombreParticipationsParcours = physiqueNombreLignesTable('petits_pedestres_users', 'identifiant', $user->getIdentifiant());
 
                 // Nombre de demandes (bugs / évolutions)
-                $nombreBugsSoumis = physiqueBugsSoumisUser($user->getIdentifiant());
+                $nombreBugsSoumis = physiqueNombreLignesTable('bugs', 'identifiant', $user->getIdentifiant());
 
                 // Nombre de demandes résolues (bugs / évolutions)
                 $nombreBugsResolus = physiqueBugsStatutUser($user->getIdentifiant(), 'Y');
@@ -181,7 +181,7 @@
                 $nombreBugsRejetes = physiqueBugsStatutUser($user->getIdentifiant(), 'R');
 
                 // Nombre d'idées publiées
-                $nombreTheBox = physiqueTheBoxUser($user->getIdentifiant());
+                $nombreTheBox = physiqueNombreLignesTable('ideas', 'author', $user->getIdentifiant());
 
                 // Nombre d'idées en charge
                 $nombreTheBoxEnCharge = physiqueTheBoxEnChargeUser($user->getIdentifiant());
@@ -243,16 +243,16 @@
         foreach ($listeUsersDesinscrits as $userDesinscrit)
         {
             // Films ajoutés
-            $nombreFilms = physiqueFilmsAjoutesUser($userDesinscrit);
+            $nombreFilms = physiqueNombreLignesTable('movie_house', 'identifiant_add', $userDesinscrit);
 
             // Commentaires films
-            $nombreComments = physiqueCommentairesFilmsUser($userDesinscrit);
+            $nombreComments = physiqueNombreLignesTable('movie_house_comments', 'identifiant', $userDesinscrit);
 
             // Restaurants ajoutés
-            $nombreRestaurants = physiqueRestaurantsAjoutesUser($userDesinscrit);
+            $nombreRestaurants = physiqueNombreLignesTable('food_advisor_restaurants', 'identifiant_add', $userDesinscrit);
 
             // Réservations de restaurants
-            $nombreReservations = physiqueReservationsUser($userDesinscrit);
+            $nombreReservations = physiqueNombreLignesTable('food_advisor_choices', 'caller', $userDesinscrit);
 
             // Gâteaux de la semaine
             $nombreGateauxSemaine = physiqueGateauxSemaineUser($userDesinscrit);
@@ -313,16 +313,16 @@
             }
 
             // Phrases cultes ajoutées
-            $nombreCollector = physiqueCollectorAjoutesUser($userDesinscrit);
+            $nombreCollector = physiqueNombreLignesTable('collector', 'author', $userDesinscrit);
 
             // Parcours ajoutés
-            $nombreParcours = physiqueParcoursAjoutesUser($userDesinscrit);
+            $nombreParcours = physiqueNombreLignesTable('petits_pedestres_parcours', 'identifiant_add', $userDesinscrit);
 
             // Participations parcours
-            $nombreParticipationsParcours = physiqueParticipationsParcoursUser($userDesinscrit);
+            $nombreParticipationsParcours = physiqueNombreLignesTable('petits_pedestres_users', 'identifiant', $userDesinscrit);
             
             // Nombre de demandes (bugs / évolutions)
-            $nombreBugsSoumis = physiqueBugsSoumisUser($userDesinscrit);
+            $nombreBugsSoumis = physiqueNombreLignesTable('bugs', 'identifiant', $userDesinscrit);
 
             // Nombre de demandes résolues (bugs / évolutions)
             $nombreBugsResolus = physiqueBugsStatutUser($userDesinscrit, 'Y');
@@ -331,7 +331,7 @@
             $nombreBugsRejetes = physiqueBugsStatutUser($userDesinscrit, 'R');
 
             // Nombre d'idées publiées
-            $nombreTheBox = physiqueTheBoxUser($userDesinscrit);
+            $nombreTheBox = physiqueNombreLignesTable('ideas', 'author', $userDesinscrit);
 
             // Nombre d'idées en charge
             $nombreTheBoxEnCharge = physiqueTheBoxEnChargeUser($userDesinscrit);
@@ -377,13 +377,13 @@
         $sommeBilans = 0;
 
         // Nombre de films ajoutés
-        $nombreFilms = physiqueFilmsAjoutesTotal();
+        $nombreFilms = physiqueNombreLignesTotalTable('movie_house');
 
         // Nombre de commentaires
-        $nombreComments = physiqueCommentairesFilmsTotal();
+        $nombreComments = physiqueNombreLignesTotalTable('movie_house_comments');
 
         // Nombre de restaurants ajoutés
-        $nombreRestaurants = physiqueRestaurantsAjoutesTotal();
+        $nombreRestaurants = physiqueNombreLignesTotalTable('food_advisor_restaurants');
 
         // Nombre de réservations de restaurants
         $nombreReservations = physiqueReservationsTotal();
@@ -419,16 +419,16 @@
         $regularisations = -1 * $expensesNoParts;
 
         // Nombre de phrase cultes
-        $nombreCollector = physiqueCollectorTotal();
+        $nombreCollector = physiqueNombreLignesTotalTable('collector');
         
         // Parcours ajoutés
-        $nombreParcours = physiqueParcoursAjoutesTotal();
+        $nombreParcours = physiqueNombreLignesTotalTable('petits_pedestres_parcours');
 
         // Participations parcours
-        $nombreParticipationsParcours = physiqueParticipationsParcoursTotal();
+        $nombreParticipationsParcours = physiqueNombreLignesTotalTable('petits_pedestres_users');
 
         // Nombre de demandes (bugs / évolutions)
-        $nombreBugsSoumis = physiqueBugsSoumisTotal();
+        $nombreBugsSoumis = physiqueNombreLignesTotalTable('bugs');
 
         // Nombre de demandes résolues (bugs / évolutions)
         $nombreBugsResolus = physiqueBugsStatutTotal('Y');
@@ -437,7 +437,7 @@
         $nombreBugsRejetes = physiqueBugsStatutTotal('R');
 
         // Nombre d'idées publiées
-        $nombreTheBox = physiqueTheBoxTotal();
+        $nombreTheBox = physiqueNombreLignesTotalTable('ideas');
 
         // Nombre d'idées en charge
         $nombreTheBoxEnCharge = physiqueTheBoxEnChargeTotal();

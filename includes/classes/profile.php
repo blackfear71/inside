@@ -406,6 +406,7 @@
     {
         private $nb_films_ajoutes;
         private $nb_comments;
+        private $nb_restaurants_ajoutes;
         private $nb_reservations;
         private $nb_gateaux;
         private $nb_recettes;
@@ -420,18 +421,19 @@
         // Constructeur par défaut (objet vide)
         public function __construct()
         {
-            $this->nb_films_ajoutes  = 0;
-            $this->nb_comments       = 0;
-            $this->nb_reservations   = 0;
-            $this->nb_gateaux        = 0;
-            $this->nb_recettes       = 0;
-            $this->expenses          = 0;
-            $this->nb_collectors     = 0;
-            $this->nb_ideas          = 0;
-            $this->nb_bugs           = 0;
-            $this->nb_evolutions     = 0;
-            $this->nb_parcours       = 0;
-            $this->nb_participations = 0;
+            $this->nb_films_ajoutes       = 0;
+            $this->nb_comments            = 0;
+            $this->nb_restaurants_ajoutes = 0;
+            $this->nb_reservations        = 0;
+            $this->nb_gateaux             = 0;
+            $this->nb_recettes            = 0;
+            $this->expenses               = 0;
+            $this->nb_collectors          = 0;
+            $this->nb_ideas               = 0;
+            $this->nb_bugs                = 0;
+            $this->nb_evolutions          = 0;
+            $this->nb_parcours            = 0;
+            $this->nb_participations      = 0;
         }
 
         // Constructeur de l'objet StatistiquesProfil en fonction des données
@@ -447,40 +449,43 @@
         protected function fillWithData($data)
         {
             if (isset($data['nb_films_ajoutes']))
-                $this->nb_films_ajoutes  = $data['nb_films_ajoutes'];
+                $this->nb_films_ajoutes       = $data['nb_films_ajoutes'];
 
             if (isset($data['nb_comments']))
-                $this->nb_comments       = $data['nb_comments'];
+                $this->nb_comments            = $data['nb_comments'];
+
+            if (isset($data['nb_restaurants_ajoutes']))
+                $this->nb_restaurants_ajoutes = $data['nb_restaurants_ajoutes'];
 
             if (isset($data['nb_reservations']))
-                $this->nb_reservations   = $data['nb_reservations'];
+                $this->nb_reservations        = $data['nb_reservations'];
 
             if (isset($data['nb_gateaux']))
-                $this->nb_gateaux        = $data['nb_gateaux'];
+                $this->nb_gateaux             = $data['nb_gateaux'];
 
             if (isset($data['nb_recettes']))
-                $this->nb_recettes       = $data['nb_recettes'];
+                $this->nb_recettes            = $data['nb_recettes'];
 
             if (isset($data['expenses']))
-                $this->expenses          = $data['expenses'];
+                $this->expenses               = $data['expenses'];
 
             if (isset($data['nb_collectors']))
-                $this->nb_collectors     = $data['nb_collectors'];
+                $this->nb_collectors          = $data['nb_collectors'];
 
             if (isset($data['nb_ideas']))
-                $this->nb_ideas          = $data['nb_ideas'];
+                $this->nb_ideas               = $data['nb_ideas'];
 
             if (isset($data['nb_bugs']))
-                $this->nb_bugs           = $data['nb_bugs'];
+                $this->nb_bugs                = $data['nb_bugs'];
 
             if (isset($data['nb_evolutions']))
-                $this->nb_evolutions     = $data['nb_evolutions'];
+                $this->nb_evolutions          = $data['nb_evolutions'];
 
             if (isset($data['nb_parcours']))
-                $this->nb_parcours       = $data['nb_parcours'];
+                $this->nb_parcours            = $data['nb_parcours'];
 
             if (isset($data['nb_participations']))
-                $this->nb_participations = $data['nb_participations'];
+                $this->nb_participations      = $data['nb_participations'];
         }
 
         // Sécurisation des données
@@ -494,22 +499,23 @@
 
         protected function fillSecureData($data)
         {
-            $this->nb_films_ajoutes  = htmlspecialchars($data->getNb_films_ajoutes());
-            $this->nb_comments       = htmlspecialchars($data->getNb_comments());
-            $this->nb_reservations   = htmlspecialchars($data->getNb_reservations());
-            $this->nb_gateaux        = htmlspecialchars($data->getNb_gateaux());
-            $this->nb_recettes       = htmlspecialchars($data->getNb_recettes());
-            $this->expenses          = htmlspecialchars($data->getExpenses());
-            $this->nb_collectors     = htmlspecialchars($data->getNb_collectors());
-            $this->nb_ideas          = htmlspecialchars($data->getNb_ideas());
-            $this->nb_bugs           = htmlspecialchars($data->getNb_bugs());
-            $this->nb_evolutions     = htmlspecialchars($data->getNb_evolutions());
-            $this->nb_parcours       = htmlspecialchars($data->getNb_parcours());
-            $this->nb_participations = htmlspecialchars($data->getNb_participations());
+            $this->nb_films_ajoutes       = htmlspecialchars($data->getNb_films_ajoutes());
+            $this->nb_comments            = htmlspecialchars($data->getNb_comments());
+            $this->nb_restaurants_ajoutes = htmlspecialchars($data->getNb_restaurants_ajoutes());
+            $this->nb_reservations        = htmlspecialchars($data->getNb_reservations());
+            $this->nb_gateaux             = htmlspecialchars($data->getNb_gateaux());
+            $this->nb_recettes            = htmlspecialchars($data->getNb_recettes());
+            $this->expenses               = htmlspecialchars($data->getExpenses());
+            $this->nb_collectors          = htmlspecialchars($data->getNb_collectors());
+            $this->nb_ideas               = htmlspecialchars($data->getNb_ideas());
+            $this->nb_bugs                = htmlspecialchars($data->getNb_bugs());
+            $this->nb_evolutions          = htmlspecialchars($data->getNb_evolutions());
+            $this->nb_parcours            = htmlspecialchars($data->getNb_parcours());
+            $this->nb_participations      = htmlspecialchars($data->getNb_participations());
         }
 
         // Getters et Setters pour l'objet StatistiquesProfil
-        // Nombre de films ajoutés Movie House
+        // Nombre de films ajoutés
         public function setNb_films_ajoutes($nb_films_ajoutes)
         {
             $this->nb_films_ajoutes = $nb_films_ajoutes;
@@ -520,7 +526,7 @@
             return $this->nb_films_ajoutes;
         }
 
-        // Nombre de commentaires Movie House
+        // Nombre de commentaires
         public function setNb_comments($nb_comments)
         {
             $this->nb_comments = $nb_comments;
@@ -531,7 +537,18 @@
             return $this->nb_comments;
         }
 
-        // Nombre de réservations Food Advisor
+        // Nombre de restaurants ajoutés 
+        public function setNb_restaurants_ajoutes($nb_restaurants_ajoutes)
+        {
+            $this->nb_restaurants_ajoutes = $nb_restaurants_ajoutes;
+        }
+
+        public function getNb_restaurants_ajoutes()
+        {
+            return $this->nb_restaurants_ajoutes;
+        }
+
+        // Nombre de réservations
         public function setNb_reservations($nb_reservations)
         {
             $this->nb_reservations = $nb_reservations;
