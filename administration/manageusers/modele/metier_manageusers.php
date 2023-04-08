@@ -18,9 +18,9 @@
         }
     }
 
-    // METIER : Lecture liste des utilisateurs
-    // RETOUR : Tableau d'utilisateurs
-    function getUsers()
+    // METIER : Lecture liste des utilisateurs inscrits ou en cours d'inscription
+    // RETOUR : Liste des utilisateurs
+    function getUsersInscrits()
     {
         // Initialisations
         $listeUsersParEquipe = array();
@@ -60,60 +60,54 @@
 
     // METIER : Recherche les utilisateurs désinscrits
     // RETOUR : Liste des utilisateurs désinscrits
-    function getUsersDes($listeUsersIns)
+    function getUsersDesinscrits($listeUsersInscrits)
     {
-        // Récupération des identifiants dans les films
-        $listeUsersFilms = physiqueIdentifiantsFilms();
-
-        // Récupération des identifiants dans les commentaires des films
-        $listeUsersComments = physiqueIdentifiantsCommentairesFilms();
-
-        // Récupération des identifiants dans les dépenses
-        $listeUsersExpenses = physiqueIdentifiantsDepenses();
-
-        // Récupération des identifiants dans les parts des dépenses
-        $listeUsersParts = physiqueIdentifiantsPartsDepenses();
-
-        // Récupération des identifiants dans les phrases cultes
-        $listeUsersCollector = physiqueIdentifiantsCollector();
-
-        // Récupération des identifiants dans les parcours
-        $listeUsersParcours = physiqueIdentifiantsParcours();
-
-        // Récupération des identifiants dans les bugs / évolutions
-        $listeUsersBugs = physiqueIdentifiantsBugs();
-
-        // Récupération des identifiants dans les idées #TheBox
-        $listeUsersTheBox = physiqueIdentifiantsTheBox();
-
-        // Fusion des données dans le tableau complet
-        $listeUsersDes = array_merge(
-            $listeUsersFilms,
-            $listeUsersComments,
-            $listeUsersExpenses,
-            $listeUsersParts,
-            $listeUsersCollector,
-            $listeUsersParcours,
-            $listeUsersBugs,
-            $listeUsersTheBox
+        // Initialisations
+        $listeUsersDesinscrits = array();
+        
+        // Liste des tables où chercher des identifiants (on ne cherche jamais dans la table "users")
+        $listeTables = array(
+            'bugs'                      => 'identifiant',
+            'collector'                 => 'author',
+            'cooking_box'               => 'identifiant',
+            'expense_center'            => 'buyer',
+            'expense_center_users'      => 'identifiant',
+            'food_advisor_restaurants'  => 'identifiant_add',
+            'ideas'                     => 'author',
+            'movie_house'               => 'identifiant_add',
+            'movie_house_comments'      => 'identifiant',
+            'notifications'             => 'identifiant',
+            'petits_pedestres_parcours' => 'identifiant_add'
         );
 
-        // Suppression des doublons
-        $listeUsersDes = array_unique($listeUsersDes);
+        // Récupération des identifiants dans les tables
+        foreach ($listeTables as $table => $colonne)
+        {
+            // Lecture des identifiants dans les tables
+            $identifiantsTable = physiqueIdentifiantsTable($table, $colonne);
 
-        // Tri par ordre alphabétique
-        sort($listeUsersDes);
+            // Fusion des données dans le tableau complet
+            $listeUsersDesinscrits = array_merge($listeUsersDesinscrits, $identifiantsTable);
+        }
+
+        // Suppression des doublons et tri
+        $listeUsersDesinscrits = array_unique($listeUsersDesinscrits);
+        sort($listeUsersDesinscrits);
+
+        // Suppression de l'admin du tableau
+        if (in_array('admin', $listeUsersDesinscrits))
+            unset($listeUsersDesinscrits[array_search('admin', $listeUsersDesinscrits)]);
 
         // Filtrage avec les utilisateurs inscrits
-        foreach ($listeUsersDes as $keyUserDes => $userDes)
+        foreach ($listeUsersDesinscrits as $keyUserDesinscrit => $userDesinscrit)
         {
-            foreach ($listeUsersIns as $equipeUsersIns)
+            foreach ($listeUsersInscrits as $equipeUsersInscrits)
             {
-                foreach ($equipeUsersIns as $userIns)
+                foreach ($equipeUsersInscrits as $userInscrit)
                 {
-                    if ($userDes == $userIns->getIdentifiant())
+                    if ($userDesinscrit == $userInscrit->getIdentifiant())
                     {
-                        unset($listeUsersDes[$keyUserDes]);
+                        unset($listeUsersDesinscrits[$keyUserDesinscrit]);
                         break;
                     }
                 }
@@ -121,7 +115,7 @@
         }
 
         // Retour
-        return $listeUsersDes;
+        return $listeUsersDesinscrits;
     }
 
     // METIER : Lecture de la liste des équipes
@@ -240,34 +234,34 @@
 
     // METIER : Lecture statistiques catégories des utilisateurs désinscrits
     // RETOUR : Tableau de nombres de commentaires & bilans des dépenses
-    function getStatistiquesDesinscrits($listeUsersDes)
+    function getStatistiquesDesinscrits($listeUsersDesinscrits)
     {
         // Initialisations
         $tableauStatistiquesDes = array();
 
         // Récupération des statistiques par catégories
-        foreach ($listeUsersDes as $userDes)
+        foreach ($listeUsersDesinscrits as $userDesinscrit)
         {
             // Films ajoutés
-            $nombreFilms = physiqueFilmsAjoutesUser($userDes);
+            $nombreFilms = physiqueFilmsAjoutesUser($userDesinscrit);
 
             // Commentaires films
-            $nombreComments = physiqueCommentairesFilmsUser($userDes);
+            $nombreComments = physiqueCommentairesFilmsUser($userDesinscrit);
 
             // Restaurants ajoutés
-            $nombreRestaurants = physiqueRestaurantsAjoutesUser($userDes);
+            $nombreRestaurants = physiqueRestaurantsAjoutesUser($userDesinscrit);
 
             // Réservations de restaurants
-            $nombreReservations = physiqueReservationsUser($userDes);
+            $nombreReservations = physiqueReservationsUser($userDesinscrit);
 
             // Gâteaux de la semaine
-            $nombreGateauxSemaine = physiqueGateauxSemaineUser($userDes);
+            $nombreGateauxSemaine = physiqueGateauxSemaineUser($userDesinscrit);
 
             // Recettes partagées
-            $nombreRecettes = physiqueRecettesUser($userDes);
+            $nombreRecettes = physiqueRecettesUser($userDesinscrit);
 
             // Récupération de la liste des dépenses où l'utilisateur désinscrit était acheteur ou participant
-            $listeExpenses = physiqueDepensesDesinscrit($userDes);
+            $listeExpenses = physiqueDepensesDesinscrit($userDesinscrit);
 
             // Calcul du bilan des dépenses (non stocké)
             $bilanUser = 0;
@@ -275,31 +269,31 @@
             foreach ($listeExpenses as $expense)
             {
                 // Nombre de parts total et de l'utilisateur
-                $nombreParts = physiquePartsDepensesUser($expense->getId(), $userDes);
+                $nombreParts = physiquePartsDepensesUser($expense->getId(), $userDesinscrit);
 
                 if ($expense->getType() == 'M')
                 {
                     // Montant de la part
-                    $montantUserDes = $nombreParts['utilisateur'];
+                    $montantUserDesinscrit = $nombreParts['utilisateur'];
 
                     // Calcul de la répartition des frais
-                    if (!empty($expense->getPrice()) AND $montantUserDes != 0)
-                        $fraisUserDes = $expense->getPrice() / $nombreParts['nombreUtilisateurs'];
+                    if (!empty($expense->getPrice()) AND $montantUserDesinscrit != 0)
+                        $fraisUserDesinscrit = $expense->getPrice() / $nombreParts['nombreUtilisateurs'];
                     else
-                        $fraisUserDes = 0;
+                        $fraisUserDesinscrit = 0;
 
                     // Calcul du bilan de l'utilisateur (s'il participe ou qu'il est l'acheteur)
-                    if ($expense->getBuyer() == $userDes OR $montantUserDes != 0)
+                    if ($expense->getBuyer() == $userDesinscrit OR $montantUserDesinscrit != 0)
                     {
-                        if ($expense->getBuyer() == $userDes)
+                        if ($expense->getBuyer() == $userDesinscrit)
                         {
                             if (!empty($expense->getPrice()))
-                                $bilanUser += $expense->getPrice() + $nombreParts['total'] - ($montantUserDes + $fraisUserDes);
+                                $bilanUser += $expense->getPrice() + $nombreParts['total'] - ($montantUserDesinscrit + $fraisUserDesinscrit);
                             else
-                                $bilanUser += $nombreParts['total'] - ($montantUserDes + $fraisUserDes);
+                                $bilanUser += $nombreParts['total'] - ($montantUserDesinscrit + $fraisUserDesinscrit);
                         }
                         else
-                            $bilanUser -= $montantUserDes + $fraisUserDes;
+                            $bilanUser -= $montantUserDesinscrit + $fraisUserDesinscrit;
                     }
                 }
                 else
@@ -311,7 +305,7 @@
                         $prixParPart = 0;
 
                     // Somme des dépenses moins les parts consommées pour calculer le bilan
-                    if ($expense->getBuyer() == $userDes)
+                    if ($expense->getBuyer() == $userDesinscrit)
                         $bilanUser += $expense->getPrice() - ($prixParPart * $nombreParts['utilisateur']);
                     else
                         $bilanUser -= $prixParPart * $nombreParts['utilisateur'];
@@ -319,36 +313,36 @@
             }
 
             // Phrases cultes ajoutées
-            $nombreCollector = physiqueCollectorAjoutesUser($userDes);
+            $nombreCollector = physiqueCollectorAjoutesUser($userDesinscrit);
 
             // Parcours ajoutés
-            $nombreParcours = physiqueParcoursAjoutesUser($userDes);
+            $nombreParcours = physiqueParcoursAjoutesUser($userDesinscrit);
 
             // Participations parcours
-            $nombreParticipationsParcours = physiqueParticipationsParcoursUser($userDes);
+            $nombreParticipationsParcours = physiqueParticipationsParcoursUser($userDesinscrit);
             
             // Nombre de demandes (bugs / évolutions)
-            $nombreBugsSoumis = physiqueBugsSoumisUser($userDes);
+            $nombreBugsSoumis = physiqueBugsSoumisUser($userDesinscrit);
 
             // Nombre de demandes résolues (bugs / évolutions)
-            $nombreBugsResolus = physiqueBugsStatutUser($userDes, 'Y');
+            $nombreBugsResolus = physiqueBugsStatutUser($userDesinscrit, 'Y');
 
             // Nombre de demandes rejetés (bugs / évolutions)
-            $nombreBugsRejetes = physiqueBugsStatutUser($userDes, 'R');
+            $nombreBugsRejetes = physiqueBugsStatutUser($userDesinscrit, 'R');
 
             // Nombre d'idées publiées
-            $nombreTheBox = physiqueTheBoxUser($userDes);
+            $nombreTheBox = physiqueTheBoxUser($userDesinscrit);
 
             // Nombre d'idées en charge
-            $nombreTheBoxEnCharge = physiqueTheBoxEnChargeUser($userDes);
+            $nombreTheBoxEnCharge = physiqueTheBoxEnChargeUser($userDesinscrit);
 
             // Nombre d'idées terminées ou rejetées
-            $nombreTheBoxTerminees = physiqueTheBoxTermineesUser($userDes);
+            $nombreTheBoxTerminees = physiqueTheBoxTermineesUser($userDesinscrit);
 
             // Génération d'un objet StatistiquesAdmin
             $statistiquesUser = new StatistiquesAdmin();
 
-            $statistiquesUser->setIdentifiant($userDes);
+            $statistiquesUser->setIdentifiant($userDesinscrit);
             $statistiquesUser->setPseudo('');
             $statistiquesUser->setNb_films_ajoutes($nombreFilms);
             $statistiquesUser->setNb_films_comments($nombreComments);

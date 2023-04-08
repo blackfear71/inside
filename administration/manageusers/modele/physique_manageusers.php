@@ -34,204 +34,29 @@
         return $listeUsers;
     }
 
-    // PHYSIQUE : Lecture des identifiants des films
-    // RETOUR : Liste des utilisateurs uniques
-    function physiqueIdentifiantsFilms()
+    // PHYSIQUE : Lecture des identifiants d'une table
+    // RETOUR : Liste des identifiants uniques
+    function physiqueIdentifiantsTable($table, $colonne)
     {
         // Initialisations
-        $listeUsersFilms = array();
+        $listeIdentifiants = array();
 
         // Requête
         global $bdd;
 
-        $req = $bdd->query('SELECT DISTINCT identifiant_add
-                            FROM movie_house
-                            ORDER BY identifiant_add ASC');
+        $req = $bdd->query('SELECT DISTINCT ' . $colonne . '
+                            FROM ' . $table . '
+                            ORDER BY ' . $colonne . ' ASC');
 
         while ($data = $req->fetch())
         {
-            array_push($listeUsersFilms, $data['identifiant_add']);
+            array_push($listeIdentifiants, $data[$colonne]);
         }
 
         $req->closeCursor();
 
         // Retour
-        return $listeUsersFilms;
-    }
-
-    // PHYSIQUE : Lecture des identifiants des commentaires de films
-    // RETOUR : Liste des utilisateurs uniques
-    function physiqueIdentifiantsCommentairesFilms()
-    {
-        // Initialisations
-        $listeUsersComments = array();
-
-        // Requête
-        global $bdd;
-
-        $req = $bdd->query('SELECT DISTINCT identifiant
-                            FROM movie_house_comments
-                            ORDER BY identifiant ASC');
-
-        while ($data = $req->fetch())
-        {
-            array_push($listeUsersComments, $data['identifiant']);
-        }
-
-        $req->closeCursor();
-
-        // Retour
-        return $listeUsersComments;
-    }
-
-    // PHYSIQUE : Lecture des identifiants des phrases cultes
-    // RETOUR : Liste des utilisateurs uniques
-    function physiqueIdentifiantsCollector()
-    {
-        // Initialisations
-        $listeUsersCollector = array();
-
-        // Requête
-        global $bdd;
-
-        $req = $bdd->query('SELECT DISTINCT author
-                            FROM collector
-                            ORDER BY author ASC');
-
-        while ($data = $req->fetch())
-        {
-            array_push($listeUsersCollector, $data['author']);
-        }
-
-        $req->closeCursor();
-
-        // Retour
-        return $listeUsersCollector;
-    }
-
-    // PHYSIQUE : Lecture des identifiants des dépenses
-    // RETOUR : Liste des utilisateurs uniques
-    function physiqueIdentifiantsDepenses()
-    {
-        // Initialisations
-        $listeUsersExpenses = array();
-
-        // Requête
-        global $bdd;
-
-        $req = $bdd->query('SELECT DISTINCT buyer
-                            FROM expense_center
-                            ORDER BY buyer ASC');
-
-        while ($data = $req->fetch())
-        {
-            array_push($listeUsersExpenses, $data['buyer']);
-        }
-
-        $req->closeCursor();
-
-        // Retour
-        return $listeUsersExpenses;
-    }
-
-    // PHYSIQUE : Lecture des identifiants des parts des dépenses
-    // RETOUR : Liste des utilisateurs uniques
-    function physiqueIdentifiantsPartsDepenses()
-    {
-        // Initialisations
-        $listeUsersParts = array();
-
-        // Requête
-        global $bdd;
-
-        $req = $bdd->query('SELECT DISTINCT identifiant
-                            FROM expense_center_users
-                            ORDER BY identifiant ASC');
-
-        while ($data = $req->fetch())
-        {
-            array_push($listeUsersParts, $data['identifiant']);
-        }
-
-        $req->closeCursor();
-
-        // Retour
-        return $listeUsersParts;
-    }
-
-    // PHYSIQUE : Lecture des identifiants des parcours
-    // RETOUR : Liste des utilisateurs uniques
-    function physiqueIdentifiantsParcours()
-    {
-        // Initialisations
-        $listeUsersParcours = array();
-
-        // Requête
-        global $bdd;
-
-        $req = $bdd->query('SELECT DISTINCT identifiant_add
-                            FROM petits_pedestres_parcours
-                            ORDER BY identifiant_add ASC');
-
-        while ($data = $req->fetch())
-        {
-            array_push($listeUsersParcours, $data['identifiant_add']);
-        }
-
-        $req->closeCursor();
-
-        // Retour
-        return $listeUsersParcours;
-    }
-    
-    // PHYSIQUE : Lecture des identifiants des bugs / évolutions
-    // RETOUR : Liste des utilisateurs uniques
-    function physiqueIdentifiantsBugs()
-    {
-        // Initialisations
-        $listeUsersBugs = array();
-
-        // Requête
-        global $bdd;
-
-        $req = $bdd->query('SELECT DISTINCT identifiant
-                            FROM bugs
-                            ORDER BY identifiant ASC');
-
-        while ($data = $req->fetch())
-        {
-            array_push($listeUsersBugs, $data['identifiant']);
-        }
-
-        $req->closeCursor();
-
-        // Retour
-        return $listeUsersBugs;
-    }
-
-    // PHYSIQUE : Lecture des identifiants des idées #TheBox
-    // RETOUR : Liste des utilisateurs uniques
-    function physiqueIdentifiantsTheBox()
-    {
-        // Initialisations
-        $listeUsersTheBox = array();
-
-        // Requête
-        global $bdd;
-
-        $req = $bdd->query('SELECT DISTINCT author
-                            FROM ideas
-                            ORDER BY author ASC');
-
-        while ($data = $req->fetch())
-        {
-            array_push($listeUsersTheBox, $data['author']);
-        }
-
-        $req->closeCursor();
-
-        // Retour
-        return $listeUsersTheBox;
+        return $listeIdentifiants;
     }
 
     // PHYSIQUE : Lecture de la liste des équipes

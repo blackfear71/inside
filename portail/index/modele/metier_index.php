@@ -170,6 +170,7 @@
     function subscribe($post)
     {
         // Initialisations
+        $listeUsers = array();
         $control_ok = true;
 
         // Récupération des données
@@ -227,44 +228,35 @@
         // Contrôle trigramme existant
         if ($control_ok == true)
         {
-            // Récupération des identifiants inscrits
-            $listeUsersInscrits = physiqueIdentifiantsInscrits();
-
-            // Récupération des identifiants dans les films
-            $listeUsersFilms = physiqueIdentifiantsFilms();
-
-            // Récupération des identifiants dans les commentaires des films
-            $listeUsersComments = physiqueIdentifiantsCommentairesFilms();
-
-            // Récupération des identifiants dans les phrases cultes
-            $listeUsersCollector = physiqueIdentifiantsCollector();
-
-            // Récupération des identifiants dans les dépenses
-            $listeUsersExpenses = physiqueIdentifiantsDepenses();
-
-            // Récupération des identifiants dans les parts des dépenses
-            $listeUsersParts = physiqueIdentifiantsPartsDepenses();
-
-            // Récupération des identifiants dans les bugs / évolutions
-            $listeUsersBugs = physiqueIdentifiantsBugs();
-
-            // Récupération des identifiants dans les idées #TheBox
-            $listeUsersTheBox = physiqueIdentifiantsTheBox();
-
-            // Fusion des données dans le tableau complet
-            $listeUsers = array_merge(
-                $listeUsersInscrits,
-                $listeUsersFilms,
-                $listeUsersComments,
-                $listeUsersCollector,
-                $listeUsersExpenses,
-                $listeUsersParts,
-                $listeUsersBugs,
-                $listeUsersTheBox
+            // Liste des tables où chercher des identifiants
+            $listeTables = array(
+                'bugs'                      => 'identifiant',
+                'collector'                 => 'author',
+                'cooking_box'               => 'identifiant',
+                'expense_center'            => 'buyer',
+                'expense_center_users'      => 'identifiant',
+                'food_advisor_restaurants'  => 'identifiant_add',
+                'ideas'                     => 'author',
+                'movie_house'               => 'identifiant_add',
+                'movie_house_comments'      => 'identifiant',
+                'notifications'             => 'identifiant',
+                'petits_pedestres_parcours' => 'identifiant_add',
+                'users'                     => 'identifiant'
             );
 
-            // Suppression des doublons
+            // Récupération des identifiants dans les tables
+            foreach ($listeTables as $table => $colonne)
+            {
+                // Lecture des identifiants dans les tables
+                $identifiantsTable = physiqueIdentifiantsTable($table, $colonne);
+
+                // Fusion des données dans le tableau complet
+                $listeUsers = array_merge($listeUsers, $identifiantsTable);
+            }
+
+            // Suppression des doublons et tri
             $listeUsers = array_unique($listeUsers);
+            sort($listeUsers);
 
             // Contrôle trigramme existant
             $control_ok = controleTrigrammeUnique($listeUsers, $trigramme);
