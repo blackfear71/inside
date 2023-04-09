@@ -627,7 +627,7 @@ header
 }
 
 /*** Saisies ***/
-.fond_saisie
+.fond_saisie, .fond_saisie_preference
 {
     display: none;
     background-color: rgb(0, 0, 0, 0.5);

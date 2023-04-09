@@ -11,14 +11,6 @@ $(function ()
         afficherMasquerIdWithDelay('zone_saisie_film');
     });
 
-    // Ferme au clic sur le fond
-    $(document).on('click', function (event)
-    {
-        // Ferme la saisie préférence (vue fiches)
-        if ($(event.target).attr('class') == 'fond_saisie_preference')
-            masquerSupprimerIdWithDelay('fond_preference');
-    });
-
     // Bloque le bouton de soumission si besoin
     $('#bouton_saisie_film').click(function ()
     {
@@ -82,7 +74,7 @@ $(function ()
     // Masque la saisie de préférence d'une fiche
     $(document).on('click', '#masquerPreference', function ()
     {
-        masquerSupprimerIdWithDelay('fond_preference');
+        masquerSupprimerIdWithDelay('zone_saisie_preference');
     });
 
     // Redirige vers le détail des films au clic Doodle des fiches
@@ -307,7 +299,7 @@ function afficherSaisiePreference(titre, stars, view, year, idFilm)
 {
     var html = '';
 
-    html += '<div id="fond_preference" class="fond_saisie_preference">';
+    html += '<div id="zone_saisie_preference" class="fond_saisie_preference">';
         html += '<div class="zone_saisie_preference">';
             // Titre
             html += '<div class="zone_titre_saisie">';
@@ -327,9 +319,9 @@ function afficherSaisiePreference(titre, stars, view, year, idFilm)
                     html += '<img src="/inside/includes/icons/moviehouse/stars/star' + i + '.png" alt="star' + i + '" class="icone_preference" />';
 
                     if (i == stars)
-                        html += '<input type="submit" name="preference_' + i + '" value="" class="input_preference rounded" />';
+                        html += '<input type="submit" name="preference_' + i + '" value="" class="saisie_preference rounded" />';
                     else
-                        html += '<input type="submit" name="preference_' + i + '" value="" class="input_preference" />';
+                        html += '<input type="submit" name="preference_' + i + '" value="" class="saisie_preference" />';
                 }
             html += '</form>';
         html += '</div>';
@@ -337,7 +329,8 @@ function afficherSaisiePreference(titre, stars, view, year, idFilm)
 
     $('body').append(html);
 
-    $('.fond_saisie_preference').hide().fadeIn(200);
+    // Affichage zone de saisie
+    afficherMasquerIdWithDelay('zone_saisie_preference');
 }
 
 // Insère un smiley dans la zone de saisie

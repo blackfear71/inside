@@ -141,12 +141,12 @@
                                     if ($j == $detailsFilm->getStars_user())
                                     {
                                         echo '<img src="../../includes/icons/moviehouse/stars/star' . $j . '.png" alt="star' . $j . '" class="icone_preference" />';
-                                        echo '<input type="submit" name="preference_' . $j . '" value="" class="input_preference rounded" />';
+                                        echo '<input type="submit" name="preference_' . $j . '" value="" class="saisie_preference rounded" />';
                                     }
                                     else
                                     {
                                         echo '<img src="../../includes/icons/moviehouse/stars/star' . $j . '.png" alt="star' . $j . '" class="icone_preference" />';
-                                        echo '<input type="submit" name="preference_' . $j . '" value="" class="input_preference" />';
+                                        echo '<input type="submit" name="preference_' . $j . '" value="" class="saisie_preference" />';
                                     }
                                 }
                             echo '</form>';

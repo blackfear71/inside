@@ -14,7 +14,7 @@
                         for ($i = 0; $i <= 5; $i++)
                         {
                             echo '<img src="../../includes/icons/moviehouse/stars/star' . $i . '.png" alt="star' . $i . '" class="icone_preference" />';
-                            echo '<input type="submit" name="preference_' . $i . '" value="" class="input_preference" />';
+                            echo '<input type="submit" name="preference_' . $i . '" value="" class="saisie_preference" />';
                         }
                     echo '</form>';
 

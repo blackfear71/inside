@@ -78,6 +78,10 @@ $(function ()
         // Ferme une zone de saisie
         if ($(event.target).attr('class') == 'fond_saisie')
             afficherMasquerIdWithDelay(event.target.id);
+
+        // Ferme une zone de saisie (préférence film)
+        if ($(event.target).attr('class') == 'fond_saisie_preference')
+            masquerSupprimerIdWithDelay(event.target.id);
     });
 
     // Bouton fermer alerte
