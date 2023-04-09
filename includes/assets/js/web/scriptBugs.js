@@ -17,12 +17,6 @@ $(function ()
         afficherDetailsBug($(this));
     });
 
-    // Ferme le zoom d'une image de bug / évolution
-    $(document).on('click', '#fermerImage', function ()
-    {
-        masquerSupprimerIdWithDelay('zoom_image');
-    });
-
     // Bloque le bouton de soumission si besoin
     $('#bouton_saisie_bug').click(function ()
     {
@@ -116,7 +110,7 @@ function afficherDetailsBug(element)
 
     html += '<div id="zoom_image" class="fond_zoom_image">';
         html += '<div class="zone_image_zoom">';
-            html += '<a id="fermerImage" class="lien_zoom"><img src="../../includes/icons/common/close.png" alt="close" title="Fermer" class="close_zoom" /></a>';
+            html += '<a id="fermerZoomImage" class="lien_zoom"><img src="../../includes/icons/common/close.png" alt="close" title="Fermer" class="close_zoom" /></a>';
             html += '<img src="' + path + '" alt="' + report + '" class="image_zoom" />';
         html += '</div>';
     html += '</div>';

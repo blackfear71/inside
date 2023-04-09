@@ -69,12 +69,6 @@ $(function ()
         afficherDetailsCollector($(this));
     });
 
-    // Ferme le zoom d'une image culte
-    $(document).on('click', '#fermerImage', function ()
-    {
-        masquerSupprimerIdWithDelay('zoom_image');
-    });
-
     // Bloque le bouton de soumission si besoin (phrase culte)
     $('#bouton_saisie_collector').click(function ()
     {
@@ -361,7 +355,7 @@ function afficherDetailsCollector(element)
 
     html += '<div id="zoom_image" class="fond_zoom_image">';
         html += '<div class="zone_image_zoom">';
-            html += '<a id="fermerImage" class="lien_zoom"><img src="../../includes/icons/common/close.png" alt="close" title="Fermer" class="close_zoom" /></a>';
+            html += '<a id="fermerZoomImage" class="lien_zoom"><img src="../../includes/icons/common/close.png" alt="close" title="Fermer" class="close_zoom" /></a>';
             html += '<img src="' + path + '" alt="' + collector + '" class="image_zoom" />';
         html += '</div>';
     html += '</div>';

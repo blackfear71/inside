@@ -17,6 +17,8 @@ $(function ()
         afficherMasquerIdNoDelay('modifier_' + idEquipe);
         afficherMasquerIdNoDelay('visualiser_equipe_' + idEquipe);
         afficherMasquerIdNoDelay('modifier_equipe_' + idEquipe);
+
+        // Réinitialisation Masonry
         initMasonry();
     });
 
@@ -28,6 +30,8 @@ $(function ()
         afficherMasquerIdNoDelay('modifier_' + idEquipe);
         afficherMasquerIdNoDelay('visualiser_equipe_' + idEquipe);
         afficherMasquerIdNoDelay('modifier_equipe_' + idEquipe);
+
+        // Réinitialisation Masonry
         initMasonry();
     });
 
@@ -55,12 +59,6 @@ $(function ()
         afficherDetailsStatistiques(typeStatistique);
     });
 
-    // Ferme les détails des statistiques
-    $(document).on('click', '#fermerDetails', function ()
-    {
-        masquerSupprimerIdWithDelay('zone_details');
-    });
-
     // Affiche la zone de modification d'un thème
     $('.modifierTheme').click(function ()
     {
@@ -68,6 +66,8 @@ $(function ()
 
         afficherMasquerIdNoDelay('modifier_theme_' + idTheme);
         afficherMasquerIdNoDelay('modifier_theme_2_' + idTheme);
+
+        // Réinitialisation Masonry
         initMasonry();
     });
 
@@ -78,6 +78,8 @@ $(function ()
 
         afficherMasquerIdNoDelay('modifier_theme_' + idTheme);
         afficherMasquerIdNoDelay('modifier_theme_2_' + idTheme);
+
+        // Réinitialisation Masonry
         initMasonry();
     });
 
@@ -907,7 +909,7 @@ function afficherDetailsStatistiques(typeStatistique)
                     html += '<div class="texte_titre_section_croix">' + titreDetails + '</div>';
 
                     // Bouton fermeture
-                    html += '<a id="fermerDetails" class="bouton_fermer"><img src="../../includes/icons/common/close_grey.png" alt="close_grey" title="Fermer" class="croix_bouton_fermer" /></a>';
+                    html += '<a id="fermerDetailsAdmin" class="bouton_fermer"><img src="../../includes/icons/common/close_grey.png" alt="close_grey" title="Fermer" class="croix_bouton_fermer" /></a>';
                 html += '</div>';
 
                 // Tableau des statistiques

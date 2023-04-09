@@ -83,7 +83,6 @@ $(function ()
         // Ferme une zone de détails
         if ($(event.target).attr('class') == 'fond_saisie'
         ||  $(event.target).attr('class') == 'fond_details')
-
             afficherMasquerIdWithDelay(event.target.id);
 
         // Ferme une zone de saisie (préférence film)
@@ -94,6 +93,16 @@ $(function ()
         ||  $(event.target).attr('class') == 'fond_zoom_image'
         ||  $(event.target).attr('class') == 'fond_details_admin')
             masquerSupprimerIdWithDelay(event.target.id);
+
+        // Ferme au clic sur une croix
+        if ($(event.target).parent().attr('id') == 'fermerDetails')
+            afficherMasquerIdWithDelay('zone_details');
+
+        if ($(event.target).parent().attr('id') == 'fermerDetailsAdmin')
+            masquerSupprimerIdWithDelay('zone_details');
+
+        if ($(event.target).parent().attr('id') == 'fermerZoomImage')
+            masquerSupprimerIdWithDelay('zoom_image');
     });
 
     // Bouton fermer alerte

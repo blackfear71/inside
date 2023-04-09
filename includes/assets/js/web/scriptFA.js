@@ -196,16 +196,10 @@ $(function ()
     {
         var idDetails = $(this).attr('id').replace('afficher_details_', '');
 
-        afficherDetailsProposition('zone_details_proposition', idDetails);
+        afficherDetailsProposition('zone_details', idDetails);
 
         // Adaptation mobile
         adaptDetails();
-    });
-
-    // Ferme les détails d'une proposition
-    $('#fermerDetails').click(function ()
-    {
-        afficherMasquerIdWithDelay('zone_details_proposition');
     });
 
     // Affiche la description longue d'un restaurant (détails proposition)
