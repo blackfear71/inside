@@ -123,6 +123,30 @@ $(function ()
         loadFile(event, 'image_succes', false);
     });
 
+    // Affiche la zone de modification d'un succès
+    $('.modifierSucces').click(function ()
+    {
+        var idSucces = $(this).attr('id').replace('modifier_', '');
+
+        afficherMasquerIdNoDelay('modifier_succes_' + idSucces);
+        afficherMasquerIdNoDelay('visualiser_succes_' + idSucces);
+
+        // Réinitialisation Masonry
+        initMasonry();
+    });
+
+    // Ferme la zone de modification d'une phrase / image culte
+    $('.annulerSucces').click(function ()
+    {
+        var idSucces = $(this).attr('id').replace('annuler_modifier_succes_', '');
+
+        afficherMasquerIdNoDelay('modifier_succes_' + idSucces);
+        afficherMasquerIdNoDelay('visualiser_succes_' + idSucces);
+
+        // Réinitialisation Masonry
+        initMasonry();
+    });
+
     // Affiche la ligne de modification d'une alerte
     $('.modifierAlerte').click(function ()
     {
@@ -524,34 +548,15 @@ $(window).on('load', function ()
         $('.zone_niveau_succes_admin').masonry(
         {
             // Options
-            itemSelector: '.ensemble_succes',
-            columnWidth: 180,
+            itemSelector: '.zone_ensemble_succes',
+            columnWidth: 340,
             fitWidth: true,
             gutter: 10,
             horizontalOrder: true
-        });
+        });       
 
         // On associe une classe pour y ajouter une transition dans le css
         $('.zone_niveau_succes_admin').addClass('masonry');
-    }
-
-    // Masonry (Modification succès)
-    if ($('.zone_niveau_mod_succes_admin').length)
-    {
-        $('.zone_niveau_mod_succes_admin').masonry().masonry('destroy');
-
-        $('.zone_niveau_mod_succes_admin').masonry(
-        {
-            // Options
-            itemSelector: '.succes_liste_mod',
-            columnWidth: 320,
-            fitWidth: true,
-            gutter: 25,
-            horizontalOrder: true
-        });
-
-        // On associe une classe pour y ajouter une transition dans le css
-        $('.zone_niveau_mod_succes_admin').addClass('masonry');
     }
 
     // On n'affiche la zone qu'à ce moment là, sinon le premier titre apparait puis la suite de la page
@@ -618,6 +623,14 @@ $(window).on('load', function ()
 
     // Scroll vers l'id
     scrollToId(idTheme, offsetTheme, shadowTheme);
+
+    // Déclenchement du scroll pour "anchorSuccess" : on récupère l'id de l'ancre dans l'url (fonction JS)
+    var idSuccess     = $_GET('anchorSuccess');
+    var offsetSuccess = 70;
+    var shadowSuccess = true;
+
+    // Scroll vers l'id
+    scrollToId(idSuccess, offsetSuccess, shadowSuccess);
 });
 
 /*****************/
@@ -740,6 +753,17 @@ function initMasonry()
         gutter: 20,
         horizontalOrder: true
     });
+
+    // On lance Masonry pour les succès
+    $('.zone_niveau_succes_admin').masonry(
+    {
+        // Options
+        itemSelector: '.zone_ensemble_succes',
+        columnWidth: 340,
+        fitWidth: true,
+        gutter: 10,
+        horizontalOrder: true
+    });       
 }
 
 // Rotation icône affichage log

@@ -37,36 +37,21 @@
             $listeMissions = getMissions();
             break;
 
-        case 'goModifier':
-            // Récupération de la liste des succès
-            $listeSuccess = getSuccess();
-
-            // Récupération de la liste des missions
-            $listeMissions = getMissions();
-
-            // Initialisation de la sauvegarde en session et récupération erreur
-            $erreurSuccess = initializeSaveSession($_GET['action']);
-
-            // Sauvegarde des données saisies en cas d'erreur
-            if ($erreurSuccess == true)
-                $listeSuccess = initialisationErreurModificationSucces($listeSuccess);
-            break;
-
         case 'doAjouterSucces':
             // Ajout d'un nouveau succès
-            insertSuccess($_POST, $_FILES);
+            $idSucces = insertSuccess($_POST, $_FILES);
+            break;
+
+        case 'doModifierSucces':
+            // Mise à jour d'un succès
+            $idSucces = updateSuccess($_POST);
             break;
 
         case 'doSupprimerSucces':
             // Suppression d'un succès
             deleteSuccess($_POST);
             break;
-
-        case 'doModifierSucces':
-            // Mise à jour de tous les succès
-            $erreurUpdateSuccess = updateSuccess($_POST);
-            break;
-
+            
         case 'doInitialiserSucces':
             // Récupération de la liste des utilisateurs
             $listeUsers = getUsers();
@@ -93,7 +78,6 @@
     switch ($_GET['action'])
     {
         case 'goConsulter':
-        case 'goModifier':
             foreach ($listeSuccess as &$success)
             {
                 $success = Success::secureData($success);
@@ -110,8 +94,8 @@
             break;
 
         case 'doAjouterSucces':
-        case 'doSupprimerSucces':
         case 'doModifierSucces':
+        case 'doSupprimerSucces':
         case 'doInitialiserSucces':
         case 'doPurgerSucces':
         default:
@@ -121,24 +105,23 @@
     // Redirection affichage
     switch ($_GET['action'])
     {
-        case 'doModifierSucces':
-            if ($erreurUpdateSuccess == true)
-                header('location: success.php?error=true&action=goModifier');
+        case 'doAjouterSucces':
+            if (!empty($idSucces))
+                header('location: success.php?action=goConsulter&anchorSuccess=' . $idSucces);
             else
                 header('location: success.php?action=goConsulter');
             break;
 
-        case 'doAjouterSucces':
+        case 'doModifierSucces':
+            header('location: success.php?action=goConsulter&anchorSuccess=' . $idSucces);
+            break;
+            
         case 'doSupprimerSucces':
         case 'doInitialiserSucces':
         case 'doPurgerSucces':
             header('location: success.php?action=goConsulter');
             break;
-
-        case 'goModifier':
-            include_once('vue/vue_update_success.php');
-            break;
-
+                
         case 'goConsulter':
         default:
             include_once('vue/vue_success.php');

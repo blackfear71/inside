@@ -3,20 +3,18 @@
     echo '<div class="titre_section"><img src="../../includes/icons/admin/settings_grey.png" alt="settings_grey" class="logo_titre_section" /><div class="texte_titre_section">Gérer les succès des utilisateurs</div></div>';
 
     // Modification
-    echo '<div class="zone_gestion_succes">';
-        echo '<a href="/inside/administration/success/success.php?action=goModifier" class="bouton_gestion_succes">';
-            echo 'Modifier les succès';
-        echo '</a>';
+    echo '<div class="titre_explications">Modifier les succès</div>';
 
-        echo '<div class="explications_gestion_succes">';
-            echo 'Il est possible de modifier le niveau, l\'ordonnancement, le titre, la description, la condition et les explications des succès. Bien contrôler l\'ordonnancement par rapport au
-            niveau pour éviter les doublons. Il n\'est pas possible de modifier la référence ni l\'image, il faut donc supprimer le succès via cet écran. Pour les explications, insérer les caractères
-            <i>%limit%</i> permet de les remplacer par la valeur de la conditon d\'obtention du succès.';
-        echo '</div>';
+    echo '<div class="explications_gestion_succes_full">';
+        echo 'Il est possible de modifier le niveau, l\'ordonnancement, le titre, la description, la condition et les explications des succès. Bien contrôler l\'ordonnancement par rapport au
+              niveau pour éviter les doublons. Il n\'est pas possible de modifier la référence ni l\'image, il faut donc supprimer le succès via cet écran. Pour les explications, insérer les caractères
+              <i>%limit%</i> permet de les remplacer par la valeur de la conditon d\'obtention du succès.';
     echo '</div>';
 
     // Purge
-    echo '<div class="zone_gestion_succes margin_top_20">';
+    echo '<div class="titre_explications">Gérer les succès</div>';
+
+    echo '<div class="zone_gestion_succes">';
         echo '<form id="purgeSuccess" method="post" action="success.php?action=doPurgerSucces" class="form_gestion_succes">';
             echo '<input type="submit" name="purge_success" value="Purger les succès" class="bouton_gestion_succes eventConfirm" />';
             echo '<input type="hidden" value="Voulez-vous vraiment purger les succès ? Ceci est définitif." class="eventMessage" />';

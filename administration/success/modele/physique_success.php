@@ -142,6 +142,31 @@
         return $isUnique;
     }
 
+    // PHYSIQUE : Lecture du nombre d'ordonnancements existants
+    // RETOUR : Booléen
+    function physiqueOrdonnancementUniqueModification($niveau, $ordre, $reference)
+    {
+        // Initialisations
+        $isUnique = true;
+
+        // Requête
+        global $bdd;
+
+        $req = $bdd->query('SELECT COUNT(*) AS nombreOrdres
+                            FROM success
+                            WHERE level = "' . $niveau . '" AND order_success = "' . $ordre . '" AND reference != "' . $reference . '"');
+
+        $data = $req->fetch();
+
+        if ($data['nombreOrdres'] > 0)
+            $isUnique = false;
+
+        $req->closeCursor();
+
+        // Retour
+        return $isUnique;
+    }
+
     // PHYSIQUE : Lecture données succès
     // RETOUR : Objet Success
     function physiqueSuccess($idSuccess)
@@ -505,6 +530,9 @@
     // RETOUR : Aucun
     function physiqueInsertionSuccess($success)
     {
+        // Initialisations
+        $newId = NULL;
+        
         // Requête
         global $bdd;
 
@@ -532,6 +560,11 @@
         $req->execute($success);
 
         $req->closeCursor();
+
+        $newId = $bdd->lastInsertId();
+
+        // Retour
+        return $newId;
     }
 
     // PHYSIQUE : Insertion valeur succès utilisateur
@@ -558,12 +591,8 @@
     /****************************************************************************/
     // PHYSIQUE : Mise à jour succès
     // RETOUR : Aucun
-    function physiqueUpdateSuccess($success)
+    function physiqueUpdateSuccess($idSuccess, $success)
     {
-        // Initialisations
-        $idSuccess = $success['id'];
-        unset($success['id']);
-
         // Requête
         global $bdd;
 

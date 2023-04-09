@@ -21,13 +21,16 @@
 
     // CONTROLE : Ordonnancement succès unique
     // RETOUR : Booléen
-    function controleOrdonnancementUnique($niveau, $ordre)
+    function controleOrdonnancementUnique($niveau, $ordre, $reference, $isUpdate)
     {
         // Initialisations
         $control_ok = true;
 
         // Contrôle
-        $isUnique = physiqueOrdonnancementUnique($niveau, $ordre);
+        if ($isUpdate == true)
+            $isUnique = physiqueOrdonnancementUniqueModification($niveau, $ordre, $reference);
+        else
+            $isUnique = physiqueOrdonnancementUnique($niveau, $ordre);
 
         if ($isUnique == false)
         {
@@ -51,30 +54,6 @@
         {
             $_SESSION['alerts'][$error] = true;
             $control_ok                 = false;
-        }
-
-        // Retour
-        return $control_ok;
-    }
-
-    // CONTROLE : Contrôle doublons mise à jour succès
-    // RETOUR : Booléen
-    function controleDoublons($listeSuccess, $successToCheck)
-    {
-        // Initialisations
-        $control_ok = true;
-
-        // Contrôle
-        foreach ($listeSuccess as $success)
-        {
-            if ($successToCheck['id']            != $success['id']
-            AND $successToCheck['order_success'] == $success['order_success']
-            AND $successToCheck['level']         == $success['level'])
-            {
-                $_SESSION['alerts']['already_ordered'] = true;
-                $control_ok                            = false;
-                break;
-            }
         }
 
         // Retour

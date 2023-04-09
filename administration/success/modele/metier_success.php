@@ -5,52 +5,32 @@
     include_once('../../includes/classes/success.php');
 
     // METIER : Initialise les données de sauvegarde en session
-    // RETOUR : Erreur
-    function initializeSaveSession($action)
+    // RETOUR : Aucun
+    function initializeSaveSession()
     {
-        // Initialisations
-        $erreurSuccess = false;
-
-        switch ($action)
+        // On initialise les champs de saisie s'il n'y a pas d'erreur
+        if ((!isset($_SESSION['alerts']['already_referenced']) OR $_SESSION['alerts']['already_referenced'] != true)
+        AND (!isset($_SESSION['alerts']['level_not_numeric'])  OR $_SESSION['alerts']['level_not_numeric']  != true)
+        AND (!isset($_SESSION['alerts']['order_not_numeric'])  OR $_SESSION['alerts']['order_not_numeric']  != true)
+        AND (!isset($_SESSION['alerts']['already_ordered'])    OR $_SESSION['alerts']['already_ordered']    != true)
+        AND (!isset($_SESSION['alerts']['limit_not_numeric'])  OR $_SESSION['alerts']['limit_not_numeric']  != true)
+        AND (!isset($_SESSION['alerts']['file_too_big'])       OR $_SESSION['alerts']['file_too_big']       != true)
+        AND (!isset($_SESSION['alerts']['temp_not_found'])     OR $_SESSION['alerts']['temp_not_found']     != true)
+        AND (!isset($_SESSION['alerts']['wrong_file_type'])    OR $_SESSION['alerts']['wrong_file_type']    != true)
+        AND (!isset($_SESSION['alerts']['wrong_file'])         OR $_SESSION['alerts']['wrong_file']         != true))
         {
-            case 'goModifier':
-                // On initialise les champs de saisie s'il n'y a pas d'erreur (modification)
-                if (!isset($_GET['error']) OR $_GET['error'] != true)
-                    unset($_SESSION['save']);
-                else
-                    $erreurSuccess = true;
-                break;
+            unset($_SESSION['save']);
 
-            case 'goConsulter':
-            default:
-                // On initialise les champs de saisie s'il n'y a pas d'erreur (saisie)
-                if ((!isset($_SESSION['alerts']['already_referenced']) OR $_SESSION['alerts']['already_referenced'] != true)
-                AND (!isset($_SESSION['alerts']['level_not_numeric'])  OR $_SESSION['alerts']['level_not_numeric']  != true)
-                AND (!isset($_SESSION['alerts']['order_not_numeric'])  OR $_SESSION['alerts']['order_not_numeric']  != true)
-                AND (!isset($_SESSION['alerts']['already_ordered'])    OR $_SESSION['alerts']['already_ordered']    != true)
-                AND (!isset($_SESSION['alerts']['limit_not_numeric'])  OR $_SESSION['alerts']['limit_not_numeric']  != true)
-                AND (!isset($_SESSION['alerts']['file_too_big'])       OR $_SESSION['alerts']['file_too_big']       != true)
-                AND (!isset($_SESSION['alerts']['temp_not_found'])     OR $_SESSION['alerts']['temp_not_found']     != true)
-                AND (!isset($_SESSION['alerts']['wrong_file_type'])    OR $_SESSION['alerts']['wrong_file_type']    != true)
-                AND (!isset($_SESSION['alerts']['wrong_file'])         OR $_SESSION['alerts']['wrong_file']         != true))
-                {
-                    unset($_SESSION['save']);
-
-                    $_SESSION['save']['reference_success']   = '';
-                    $_SESSION['save']['level']               = '';
-                    $_SESSION['save']['unicity']             = '';
-                    $_SESSION['save']['mission']             = '';
-                    $_SESSION['save']['order_success']       = '';
-                    $_SESSION['save']['title_success']       = '';
-                    $_SESSION['save']['description_success'] = '';
-                    $_SESSION['save']['limit_success']       = '';
-                    $_SESSION['save']['explanation_success'] = '';
-                }
-                break;
+            $_SESSION['save']['reference_success']   = '';
+            $_SESSION['save']['level']               = '';
+            $_SESSION['save']['unicity']             = '';
+            $_SESSION['save']['mission']             = '';
+            $_SESSION['save']['order_success']       = '';
+            $_SESSION['save']['title_success']       = '';
+            $_SESSION['save']['description_success'] = '';
+            $_SESSION['save']['limit_success']       = '';
+            $_SESSION['save']['explanation_success'] = '';
         }
-
-        // Retour
-        return $erreurSuccess;
     }
 
     // METIER : Lecture liste des utilisateurs
@@ -87,10 +67,11 @@
     }
 
     // METIER : Insertion nouveau succès
-    // RETOUR : Aucun
+    // RETOUR : Id succès
     function insertSuccess($post, $files)
     {
         // Initialisations
+        $idSucces   = NULL;
         $control_ok = true;
 
         // Récupération des données
@@ -133,7 +114,7 @@
 
         // Contrôle ordonnancement unique
         if ($control_ok == true)
-            $control_ok = controleOrdonnancementUnique($level, $orderSuccess);
+            $control_ok = controleOrdonnancementUnique($level, $orderSuccess, $reference, false);
 
         // Contrôle condition numérique et positif
         if ($control_ok == true)
@@ -176,11 +157,75 @@
                 'explanation'   => $explanation
             );
 
-            physiqueInsertionSuccess($success);
+            $idSucces = physiqueInsertionSuccess($success);
 
             // Message d'alerte
             $_SESSION['alerts']['success_added'] = true;
         }
+
+        // Retour
+        return $idSucces;
+    }
+
+    // METIER : Modification succès
+    // RETOUR : Id succès
+    function updateSuccess($post)
+    {
+        // Initialisations
+        $control_ok = true;
+
+        // Récupération des données
+        $idSucces     = $post['id_succes'];
+        $reference    = $post['reference_succes'];
+        $niveau       = $post['niveau_succes'];
+        $ordre        = $post['ordre_succes'];
+        $defini       = $post['code_succes'];
+        $unicite      = $post['unicite_succes'];
+        $mission      = $post['mission_succes'];
+        $titre        = $post['titre_succes'];
+        $description  = $post['description_succes'];
+        $limite       = formatNumericForInsert($post['limite_succes']);
+        $explications = $post['explications_succes'];
+
+        // Contrôle niveau numérique et positif
+        if ($control_ok == true)
+            $control_ok = controleNumerique($niveau, 'level_not_numeric');
+
+        // Contrôle ordonnancement numérique et positif
+        if ($control_ok == true)
+            $control_ok = controleNumerique($ordre, 'order_not_numeric');
+
+        // Contrôle ordonnancement unique
+        if ($control_ok == true)
+            $control_ok = controleOrdonnancementUnique($niveau, $ordre, $reference, true);
+
+        // Contrôle condition numérique et positif
+        if ($control_ok == true)
+            $control_ok = controleNumerique($limite, 'limit_not_numeric');
+
+        // Modification de l'enregistrement en base
+        if ($control_ok == true)
+        {
+            $succes = array(
+                'level'         => $niveau,
+                'order_success' => $ordre,
+                'defined'       => $defini,
+                'unicity'       => $unicite,
+                'mission'       => $mission,
+                'title'         => $titre,
+                'description'   => $description,
+                'limit_success' => $limite,
+                'explanation'   => $explications
+            );
+
+            physiqueUpdateSuccess($idSucces, $succes);
+
+            // Message d'alerte
+            $_SESSION['alerts']['success_updated'] = true;
+        }
+
+        // Retour
+        return $idSucces;
     }
 
     // METIER : Suppression succès
@@ -201,116 +246,6 @@
 
         // Message d'alerte
         $_SESSION['alerts']['success_deleted'] = true;
-    }
-
-    // METIER : Modification succès
-    // RETOUR : Aucun
-    function updateSuccess($post)
-    {
-        // Initialisations
-        $control_ok = true;
-        $erreur     = NULL;
-
-        // Récupération des données
-        $listeUpdateSuccess = array();
-
-        foreach ($post['id'] as $id)
-        {
-            $update = array(
-                'id'            => $post['id'][$id],
-                'level'         => $post['level'][$id],
-                'order_success' => $post['order_success'][$id],
-                'defined'       => $post['defined'][$id],
-                'unicity'       => $post['unicity'][$id],
-                'mission'       => $post['mission'][$id],
-                'title'         => $post['title'][$id],
-                'description'   => $post['description'][$id],
-                'limit_success' => formatNumericForInsert($post['limit_success'][$id]),
-                'explanation'   => $post['explanation'][$id],
-            );
-
-            array_push($listeUpdateSuccess, $update);
-        }
-
-        // Sauvegarde en session en cas d'erreur
-        $_SESSION['save']['save_success'] = $post;
-
-        // Boucle de traitement des succès
-        foreach ($listeUpdateSuccess as $success)
-        {
-            // Contrôle niveau numérique et positif
-            if ($control_ok == true)
-                $control_ok = controleNumerique($success['level'], 'level_not_numeric');
-
-            // Contrôle ordonnancement numérique et positif
-            if ($control_ok == true)
-                $control_ok = controleNumerique($success['order_success'], 'order_not_numeric');
-
-            // Contrôle doublon saisie
-            if ($control_ok == true)
-                $control_ok = controleDoublons($listeUpdateSuccess, $success);
-
-            // Contrôle condition numérique et positif
-            if ($control_ok == true)
-                $control_ok = controleNumerique($success['limit_success'], 'limit_not_numeric');
-
-            // Arrêt de la boucle en cas d'erreur
-            if ($control_ok == false)
-            {
-                $erreur = true;
-                break;
-            }
-        }
-
-        // Mise à jour des succès
-        if ($control_ok == true)
-        {
-            foreach ($listeUpdateSuccess as $success)
-            {
-                physiqueUpdateSuccess($success);
-            }
-
-            $_SESSION['alerts']['success_updated'] = true;
-        }
-
-        // Retour
-        return $erreur;
-    }
-
-    // METIER : Initialisation champs erreur modification succès
-    // RETOUR : Tableau sauvegardé et trié
-    function initialisationErreurModificationSucces($listeSuccess)
-    {
-        // Récupération des données modifiées
-        foreach ($listeSuccess as $success)
-        {
-            $success->setLevel($_SESSION['save']['save_success']['level'][$success->getId()]);
-            $success->setOrder_success($_SESSION['save']['save_success']['order_success'][$success->getId()]);
-            $success->setDefined($_SESSION['save']['save_success']['defined'][$success->getId()]);
-            $success->setUnicity($_SESSION['save']['save_success']['unicity'][$success->getId()]);
-            $success->setMission($_SESSION['save']['save_success']['mission'][$success->getId()]);
-            $success->setTitle($_SESSION['save']['save_success']['title'][$success->getId()]);
-            $success->setDescription($_SESSION['save']['save_success']['description'][$success->getId()]);
-            $success->setLimit_success($_SESSION['save']['save_success']['limit_success'][$success->getId()]);
-            $success->setExplanation($_SESSION['save']['save_success']['explanation'][$success->getId()]);
-        }
-
-        // Retour
-        return $listeSuccess;
-    }
-
-    // METIER : Purge tous les succès
-    // RETOUR : Aucun
-    function purgeSuccess()
-    {
-        // Suppression des succès (sauf exceptions)
-        physiqueDeleteSuccessAdmin();
-
-        // Rénumérotation des enregistrements restants
-        physiqueRenumerotationSuccess();
-
-        // Message d'alerte
-        $_SESSION['alerts']['success_purged'] = true;
     }
 
     // METIER : Initialisation des succès
@@ -830,5 +765,19 @@
 
         // Message d'alerte
         $_SESSION['alerts']['success_initialized'] = true;
+    }
+
+    // METIER : Purge tous les succès
+    // RETOUR : Aucun
+    function purgeSuccess()
+    {
+        // Suppression des succès (sauf exceptions)
+        physiqueDeleteSuccessAdmin();
+
+        // Rénumérotation des enregistrements restants
+        physiqueRenumerotationSuccess();
+
+        // Message d'alerte
+        $_SESSION['alerts']['success_purged'] = true;
     }
 ?>

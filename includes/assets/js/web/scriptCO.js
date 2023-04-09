@@ -40,6 +40,8 @@ $(function ()
         afficherMasquerIdNoDelay('modifier_collector_' + idCollector);
         afficherMasquerIdNoDelay('visualiser_collector_' + idCollector);
         adaptBrowse(idCollector);
+
+        // Réinitialisation Masonry
         initMasonry();
     });
 
@@ -50,6 +52,8 @@ $(function ()
 
         afficherMasquerIdNoDelay('modifier_collector_' + idCollector);
         afficherMasquerIdNoDelay('visualiser_collector_' + idCollector);
+
+        // Réinitialisation Masonry
         initMasonry();
     });
 
@@ -196,6 +200,8 @@ $(function ()
         var idImage = $(this).attr('id').replace('image_collector_', '');
 
         adaptBrowse(idImage);
+
+        // Réinitialisation Masonry
         initMasonry();
     });
 
