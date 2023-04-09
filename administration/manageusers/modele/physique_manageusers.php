@@ -805,6 +805,24 @@
         $req->closeCursor();
     }
 
+    // PHYSIQUE : Mise à jour notification inscription
+    // RETOUR : Aucun
+    function physiqueUpdateNotificationInscription($identifiant, $equipe)
+    {
+        // Requête
+        global $bdd;
+
+        $req = $bdd->prepare('UPDATE notifications
+                              SET team = :team
+                              WHERE category = "inscrit" AND content = "' . $identifiant . '"');
+
+        $req->execute(array(
+            'team' => $equipe
+        ));
+
+        $req->closeCursor();
+    }
+
     /****************************************************************************/
     /********************************** DELETE **********************************/
     /****************************************************************************/

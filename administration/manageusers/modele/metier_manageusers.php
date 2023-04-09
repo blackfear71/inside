@@ -660,6 +660,9 @@
                         physiqueUpdateMissionsEnCours($idMission, $identifiant, $teamReference);
                     }
                 }
+
+                // Transfert de la notification d'inscription dans la nouvelle équipe
+                physiqueUpdateNotificationInscription($identifiant, $teamReference);
             }
     
             // Mise à jour de la référence de l'équipe et du statut à "U" de l'utilisateur

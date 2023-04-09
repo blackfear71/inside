@@ -582,11 +582,11 @@
             unlink('../../includes/images/missions/buttons/' . $mission->getReference() . '_d.png');
         }
 
-        // Suppression de l'enregistrement en base
-        physiqueDeleteMission($idMission);
-
         // Suppression des participations
         physiqueDeleteMissionUsers($idMission);
+
+        // Suppression de l'enregistrement en base
+        physiqueDeleteMission($idMission);
 
         // Mise à jour des références de missions des succès
         physiqueUpdateSuccesMission($mission->getReference());
