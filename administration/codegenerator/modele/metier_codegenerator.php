@@ -21,7 +21,7 @@
             array('option' => 'onglets',     'checked' => 'Y', 'titre' => 'Onglets',                    'categorie' => 'Vue'),
             array('option' => 'alerts',      'checked' => 'Y', 'titre' => 'Alertes',                    'categorie' => 'Vue'),
             array('option' => 'success',     'checked' => 'Y', 'titre' => 'Déblocage succès',           'categorie' => 'Vue'),
-            array('option' => 'mobile',      'checked' => 'N', 'titre' => 'Avec version mobile',        'categorie' => 'Vue')
+            array('option' => 'mobile',      'checked' => 'Y', 'titre' => 'Avec version mobile',        'categorie' => 'Vue')
         );
 
         // Retour
