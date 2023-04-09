@@ -1,20 +1,24 @@
 <?php
-    /**************************/
-    /* Zone de saisie d'image */
-    /**************************/
-    echo '<div id="zone_add_image" class="fond_saisie_collector">';
-        echo '<div class="zone_saisie_collector">';
+    /********************************/
+    /* Zone de saisie d'image culte */
+    /********************************/
+    echo '<div id="zone_saisie_image_culte" class="fond_saisie">';
+        echo '<div class="zone_saisie">';
             // Titre
-            echo '<div class="titre_saisie_collector">Ajouter une image</div>';
+            echo '<div class="zone_titre_saisie">';
+                // Texte
+                echo '<div class="texte_titre_saisie">Ajouter une image culte</div>';
 
-            // Bouton fermeture
-            echo '<a id="fermerImage" class="zone_close"><img src="../../includes/icons/common/close.png" alt="close" title="Fermer" class="close_img" /></a>';
+                // Bouton fermeture
+                echo '<a id="fermerImage" class="bouton_fermeture_saisie"><img src="../../includes/icons/common/close.png" alt="close" title="Fermer" class="image_fermeture_saisie" /></a>';
+            echo '</div>';
 
-            echo '<form method="post" action="collector.php?action=doAjouterCollector&page=' . $_GET['page'] . '" enctype="multipart/form-data" class="form_saisie_image">';
+            // Saisie image culte
+            echo '<form method="post" action="collector.php?action=doAjouterCollector&page=' . $_GET['page'] . '" enctype="multipart/form-data" class="form_saisie">';
                 // Type de saisie
                 echo '<input type="hidden" name="type_collector" value="I" />';
 
-                // Zone saisie image
+                // Image
                 echo '<div class="zone_image_left">';
                     // Saisie image
                     echo '<input type="hidden" name="MAX_FILE_SIZE" value="15728640" />';
@@ -31,7 +35,7 @@
 
                 // Zone saisie infos
                 echo '<div class="zone_image_right">';
-                    // Saisie speaker
+                    // Speaker
                     if (!empty($_SESSION['save']['other_speaker']))
                         echo '<select name="speaker" id="speaker_2" class="saisie_speaker speaker_autre" required>';
                     else
@@ -55,21 +59,22 @@
                             echo '<option value="other">Autre</option>';
                     echo '</select>';
 
-                    // Saisie "Autre"
+                    // "Autre"
                     if (!empty($_SESSION['save']['other_speaker']))
                         echo '<input type="text" name="other_speaker" value="' . $_SESSION['save']['other_speaker'] . '" placeholder="Nom" maxlength="255" id="other_name_2" class="saisie_other_collector" />';
                     else
                         echo '<input type="text" name="other_speaker" value="' . $_SESSION['save']['other_speaker'] . '" placeholder="Nom" maxlength="255" id="other_name_2" class="saisie_other_collector" style="display: none;" />';
 
-                    // Saisie date
+                    // Date
                     echo '<input type="text" name="date_collector" value="' . $_SESSION['save']['date_collector'] . '" placeholder="Date" maxlength="10" autocomplete="off" id="datepicker_image" class="saisie_date_collector" required />';
 
-                    // Bouton
+                    // Boutons d'action
                     echo '<div class="zone_bouton_saisie_image">';
-                        echo '<input type="submit" name="insert_collector" value="Ajouter" id="bouton_saisie_image" class="saisie_bouton" />';
+                        // Ajouter
+                        echo '<input type="submit" name="insert_collector" value="Ajouter l\'image culte" id="bouton_saisie_image" class="saisie_bouton" />';
                     echo '</div>';
 
-                    // Saisie contexte
+                    // Contexte
                     echo '<textarea placeholder="Contexte (facultatif)" name="context" class="saisie_contexte_image">' . $_SESSION['save']['context'] . '</textarea>';
                 echo '</div>';
             echo '</form>';

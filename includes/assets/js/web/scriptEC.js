@@ -8,43 +8,51 @@ $(function ()
     // Ajouter une dépense
     $('#ajouterDepense').click(function ()
     {
-        afficherMasquerIdWithDelay('zone_add_depense');
+        afficherMasquerIdWithDelay('zone_saisie_depense');
         initMasonry();
     });
 
     // Réinitialise la saisie dépense à la fermeture
     $('#resetDepense').click(function ()
     {
-        reinitialisationSaisieDepense('zone_add_depense', $_GET('year'), $_GET('filter'), 'P');
+        // Ferme la saisie d'une dépense
+        afficherMasquerIdWithDelay('zone_saisie_depense');
+
+        // Réinitialise la saisie d'une dépense
+        reinitialisationSaisieDepense('zone_saisie_depense', $_GET('year'), $_GET('filter'), 'P');
     });
 
     // Ajouter des montants
     $('#ajouterMontants').click(function ()
     {
-        afficherMasquerIdWithDelay('zone_add_montants');
+        afficherMasquerIdWithDelay('zone_saisie_montants');
         initMasonry();
     });
 
     // Réinitialise la saisie montants à la fermeture
     $('#resetMontants').click(function ()
     {
-        reinitialisationSaisieDepense('zone_add_montants', $_GET('year'), $_GET('filter'), 'M');
+        // Ferme la saisie d'une dépense
+        afficherMasquerIdWithDelay('zone_saisie_montants');
+
+        // Réinitialise la saisie d'une dépense
+        reinitialisationSaisieDepense('zone_saisie_montants', $_GET('year'), $_GET('filter'), 'M');
     });
 
     // Ferme au clic sur le fond
     $(document).on('click', function (event)
     {
         // Ferme la saisie d'une dépense
-        if ($(event.target).attr('class') == 'fond_saisie_depense')
+        if ($(event.target).attr('class') == 'fond_saisie')
         {
             switch (event.target.id)
             {
-                case 'zone_add_depense':
-                    reinitialisationSaisieDepense('zone_add_depense', $_GET('year'), $_GET('filter'), 'P');
+                case 'zone_saisie_depense':
+                    reinitialisationSaisieDepense('zone_saisie_depense', $_GET('year'), $_GET('filter'), 'P');
                     break;
 
-                case 'zone_add_montants':
-                    reinitialisationSaisieDepense('zone_add_montants', $_GET('year'), $_GET('filter'), 'M');
+                case 'zone_saisie_montants':
+                    reinitialisationSaisieDepense('zone_saisie_montants', $_GET('year'), $_GET('filter'), 'M');
                     break;
 
                 default:
@@ -56,13 +64,24 @@ $(function ()
     // Bloque le bouton de soumission si besoin
     $('#bouton_saisie_depense').click(function ()
     {
-        var zoneButton   = $('.zone_bouton_saisie');
+        var zoneButton   = $('.zone_bouton_saisie_depense');
         var submitButton = $(this);
         var formSaisie   = submitButton.closest('form');
         var tabBlock     = [];
 
         // Blocage spécifique (bouton modification parts dépense)
         tabBlock.push({ element: '.bouton_quantite', property: 'pointer-events', value: 'none' });
+
+        // Blocage spécifique (saisie montants)
+        tabBlock.push({ element: '#zone_saisie_montants input', property: 'readonly', value: true });
+        tabBlock.push({ element: '#zone_saisie_montants input', property: 'pointer-events', value: 'none' });
+        tabBlock.push({ element: '#zone_saisie_montants input', property: 'color', value: '#a3a3a3' });
+        tabBlock.push({ element: '#zone_saisie_montants select', property: 'readonly', value: true });
+        tabBlock.push({ element: '#zone_saisie_montants select', property: 'pointer-events', value: 'none' });
+        tabBlock.push({ element: '#zone_saisie_montants select', property: 'color', value: '#a3a3a3' });
+        tabBlock.push({ element: '#zone_saisie_montants textarea', property: 'readonly', value: true });
+        tabBlock.push({ element: '#zone_saisie_montants textarea', property: 'pointer-events', value: 'none' });
+        tabBlock.push({ element: '#zone_saisie_montants textarea', property: 'color', value: '#a3a3a3' });
 
         hideSubmitButton(zoneButton, submitButton, formSaisie, tabBlock);
     });
@@ -72,8 +91,20 @@ $(function ()
     {
         var zoneButton   = $('.zone_bouton_saisie_montants');
         var submitButton = $(this);
-        var formSaisie   = submitButton.closest('form');
-        var tabBlock     = null;
+        // var formSaisie   = submitButton.closest('form');
+        var formSaisie   = submitButton.closest('.form_saisie');
+        var tabBlock     = [];
+
+        // Blocage spécifique (saisie dépense)
+        tabBlock.push({ element: '#zone_saisie_montants input', property: 'readonly', value: true });
+        tabBlock.push({ element: '#zone_saisie_montants input', property: 'pointer-events', value: 'none' });
+        tabBlock.push({ element: '#zone_saisie_montants input', property: 'color', value: '#a3a3a3' });
+        tabBlock.push({ element: '#zone_saisie_montants select', property: 'readonly', value: true });
+        tabBlock.push({ element: '#zone_saisie_montants select', property: 'pointer-events', value: 'none' });
+        tabBlock.push({ element: '#zone_saisie_montants select', property: 'color', value: '#a3a3a3' });
+        tabBlock.push({ element: '#zone_saisie_montants textarea', property: 'readonly', value: true });
+        tabBlock.push({ element: '#zone_saisie_montants textarea', property: 'pointer-events', value: 'none' });
+        tabBlock.push({ element: '#zone_saisie_montants textarea', property: 'color', value: '#a3a3a3' });
 
         hideSubmitButton(zoneButton, submitButton, formSaisie, tabBlock);
     });
@@ -200,14 +231,15 @@ function adaptExpenses()
         $('.zone_expenses_right').css('margin-left', '0');
 
         // Saisie dépense
-        if ($('.zone_saisie_depense').length)
+        if ($('#zone_saisie_depense').length)
         {
             $('.zone_saisie_left').css('display', 'block');
-            $('.zone_saisie_left').css('width', 'calc(100% - 20px)');
+            $('.zone_saisie_left').css('width', '100%');
 
             $('.zone_saisie_right').css('display', 'block');
-            $('.zone_saisie_right').css('width', 'calc(100% - 20px)');
-            $('.zone_saisie_right').css('padding', '0 10px 0 10px');
+            $('.zone_saisie_right').css('width', '100%');
+            $('.zone_saisie_right').css('margin-left', '0');
+            $('.zone_saisie_right').css('margin-top', '10px');
         }
     }
     else
@@ -221,14 +253,15 @@ function adaptExpenses()
         $('.zone_expenses_right').css('margin-left', '20px');
 
         // Saisie dépense
-        if ($('.zone_saisie_depense').length)
+        if ($('#zone_saisie_depense').length)
         {
             $('.zone_saisie_left').css('display', 'inline-block');
             $('.zone_saisie_left').css('width', '280px');
 
             $('.zone_saisie_right').css('display', 'inline-block');
-            $('.zone_saisie_right').css('width', 'calc(100% - 320px)');
-            $('.zone_saisie_right').css('padding', '10px 10px 0 10px');
+            $('.zone_saisie_right').css('width', 'calc(100% - 290px)');
+            $('.zone_saisie_right').css('margin-left', '10px');
+            $('.zone_saisie_right').css('margin-top', '0');
         }
     }
 }
@@ -353,8 +386,8 @@ function updateExpense(idDepense, year, filter)
     var comment = depense['comment'];
 
     // Modification des données
-    $('.form_saisie_depense').attr('action', action);
-    $('.titre_saisie_depense').html(titre);
+    $('.form_saisie').attr('action', action);
+    $('.texte_titre_saisie').html(titre);
     $('input[name=id_expense_saisie]').val(idDepense);
     $('.saisie_buyer').val(buyer);
     $('.saisie_prix').val(price);
@@ -367,7 +400,7 @@ function updateExpense(idDepense, year, filter)
         $('.saisie_reduction').val(reduction);
 
         // Alimentation des zones utilisateurs inscrits
-        $('#zone_add_montants').find('.zone_saisie_utilisateur').each(function ()
+        $('#zone_saisie_montants').find('.zone_saisie_utilisateur').each(function ()
         {
             // Initialisation du montant
             $(this).find('.montant').val('');
@@ -413,7 +446,7 @@ function updateExpense(idDepense, year, filter)
 
                     // Montant
                     montantDes += '<div class="zone_saisie_montant">';
-                        montantDes += '<input type="text" name="montant_user[]" maxlength="6" value="' + formatAmountForDisplay(user.parts) + '" class="montant_des" />';
+                        montantDes += '<input type="text" name="montant_user[]" maxlength="6" value="' + formatAmountForDisplay(user.parts) + '" class="montant_desinscrit" />';
                     montantDes += '</div>';
 
                     montantDes += '<img src="../../includes/icons/expensecenter/euro_grey.png" alt="euro_grey" title="Euros" class="euro_saisie" />';
@@ -423,12 +456,12 @@ function updateExpense(idDepense, year, filter)
             }
         });
 
-        $('#zone_add_montants').find('.zone_saisie_utilisateurs').append(listeMontantsDes).masonry().masonry('reloadItems');
+        $('#zone_saisie_montants').find('.zone_saisie_utilisateurs').append(listeMontantsDes).masonry().masonry('reloadItems');
     }
     else
     {
         // Alimentation des zones utilisateurs inscrits
-        $('#zone_add_depense').find('.zone_saisie_utilisateur').each(function ()
+        $('#zone_saisie_depense').find('.zone_saisie_utilisateur').each(function ()
         {
             $(this).children('.quantite').val('0');
 
@@ -473,7 +506,7 @@ function updateExpense(idDepense, year, filter)
 
                     // Parts
                     partsDes += '<div class="zone_saisie_quantite">';
-                        partsDes += '<input type="text" name="quantite_user[]" value="' + user.parts + '" class="quantite_des" readonly />';
+                        partsDes += '<input type="text" name="quantite_user[]" value="' + user.parts + '" class="quantite_desinscrit" readonly />';
                     partsDes += '</div>';
 
                     // Symbole
@@ -484,14 +517,14 @@ function updateExpense(idDepense, year, filter)
             }
         });
 
-        $('#zone_add_depense').find('.zone_saisie_utilisateurs').append(listePartsDes).masonry().masonry('reloadItems');
+        $('#zone_saisie_depense').find('.zone_saisie_utilisateurs').append(listePartsDes).masonry().masonry('reloadItems');
     }
 
     // Affiche la zone de saisie
     if (type == 'M')
-        afficherMasquerIdWithDelay('zone_add_montants');
+        afficherMasquerIdWithDelay('zone_saisie_montants');
     else
-        afficherMasquerIdWithDelay('zone_add_depense');
+        afficherMasquerIdWithDelay('zone_saisie_depense');
 
     // Initialisation de la masonry
     initMasonry();
@@ -500,13 +533,11 @@ function updateExpense(idDepense, year, filter)
 // Réinitialise la zone de saisie d'une dépense si fermeture modification
 function reinitialisationSaisieDepense(zone, year, filter, type)
 {
-    // Fermeture zone de saisie
-    afficherMasquerIdWithDelay(zone);
-
+    // Déclenchement après la fermeture de la zone de saisie (dans script.js)
     setTimeout(function ()
     {
         // Test si action = modification
-        var currentAction = $('.form_saisie_depense').attr('action').split('&action=');
+        var currentAction = $('#' + zone).find('.form_saisie').attr('action').split('&action=');
         var call          = currentAction[currentAction.length - 1]
 
         if (call == 'doModifierDepense' || call == 'doModifierMontants')
@@ -561,21 +592,21 @@ function reinitialisationSaisieDepense(zone, year, filter, type)
             var comment = '';
 
             // Modification des données
-            $('.form_saisie_depense').attr('action', action);
-            $('.titre_saisie_depense').html(titre);
-            $('input[name=id_expense_saisie]').val('');
-            $('.saisie_buyer').val(buyer);
-            $('.saisie_prix').val(price);
-            $('.saisie_date_depense').val(date);
-            $('.saisie_commentaire').html(comment);
+            $('#' + zone).find('.form_saisie').attr('action', action);
+            $('#' + zone).find('.texte_titre_saisie').html(titre);
+            $('#' + zone).find('input[name=id_expense_saisie]').val('');
+            $('#' + zone).find('.saisie_buyer').val(buyer);
+            $('#' + zone).find('.saisie_prix').val(price);
+            $('#' + zone).find('.saisie_date_depense').val(date);
+            $('#' + zone).find('.saisie_commentaire').html(comment);
 
             if (type == 'M')
             {
                 // Réduction
-                $('.saisie_reduction').val(reduction);
+                $('#' + zone).find('.saisie_reduction').val(reduction);
 
                 // Alimentation des zones utilisateurs
-                $('#zone_add_montants').find('.zone_saisie_utilisateur').each(function ()
+                $('#' + zone).find('.zone_saisie_utilisateur').each(function ()
                 {
                     // Initialisation du montant ou suppression zone utilisateur désinscrit
                     if ($(this).attr('id') == undefined)
@@ -594,7 +625,7 @@ function reinitialisationSaisieDepense(zone, year, filter, type)
             else
             {
                 // Alimentation des zones utilisateurs
-                $('#zone_add_depense').find('.zone_saisie_utilisateur').each(function ()
+                $('#' + zone).find('.zone_saisie_utilisateur').each(function ()
                 {
                     // Initialisation de la quantité ou suppression zone utilisateur désinscrit
                     if ($(this).attr('id') == undefined)
@@ -613,11 +644,11 @@ function reinitialisationSaisieDepense(zone, year, filter, type)
         }
 
         // On réinitialise l'affichage des explications
-        $('.lien_explications').css('display', 'block');
-        $('.explications').css('display', 'none');
+        $('#' + zone).find('.lien_explications').css('display', 'block');
+        $('#' + zone).find('.explications').css('display', 'none');
 
         // Réinitialisation de la masonry
-        $('.zone_saisie_utilisateurs').masonry().masonry('destroy');
+        $('#' + zone).find('.zone_saisie_utilisateurs').masonry().masonry('destroy');
     }, 200);
 }
 

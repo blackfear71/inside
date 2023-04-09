@@ -183,25 +183,18 @@
     box-sizing : border-box;
 }
 
-.quantite_des
+.quantite_desinscrit
 {
     display: inline-block;
-    vertical-align: middle;
-    width: 75%;
+    width: calc(100% - 6vh);
     height: 10vh;
     line-height: 10vh;
+    border: 0;
     font-family: inside_font_light, Verdana, sans-serif;
     font-size: 3vh;
     color: white;
-    border: 0;
-    background-color: #e3e3e3;
     text-align: center;
-    pointer-events: none;
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    box-sizing : border-box;
+    background-color: transparent;
 }
 
 .part_selected
@@ -235,7 +228,7 @@
     background-color: white;
 }
 
-.montant_des
+.montant_desinscrit
 {
     display: inline-block;
     width: calc(100% - 6vh);

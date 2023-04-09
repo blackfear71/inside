@@ -450,7 +450,7 @@ function initialisationModificationDepense(idDepense, year, filter)
 
                     // Montant
                     montantDes += '<div class="zone_saisie_montant">';
-                        montantDes += '<input type="text" name="montant_user[]" maxlength="6" value="' + formatAmountForDisplay(user.parts) + '" class="montant_des" />';
+                        montantDes += '<input type="text" name="montant_user[]" maxlength="6" value="' + formatAmountForDisplay(user.parts) + '" class="montant_desinscrit" />';
                         montantDes += '<img src="../../includes/icons/expensecenter/euro_grey.png" alt="euro_grey" title="Euros" class="euro_saisie" />';
                     montantDes += '</div>';
                 montantDes += '</div>';
@@ -513,7 +513,7 @@ function initialisationModificationDepense(idDepense, year, filter)
 
                     // Parts
                     partsDes += '<div class="zone_saisie_montant">';
-                        partsDes += '<input type="text" name="quantite_user[]" value="' + user.parts + '" class="montant_des" readonly />';
+                        partsDes += '<input type="text" name="quantite_user[]" value="' + user.parts + '" class="quantite_desinscrit" readonly />';
                         partsDes += '<img src="../../includes/icons/expensecenter/part_grey.png" alt="part_grey" title="Parts" class="euro_saisie" />';
                     partsDes += '</div>';
                 partsDes += '</div>';

@@ -8,16 +8,16 @@ $(function ()
     // Ajouter un rapport
     $('#ajouterRapport, #fermerRapport').click(function ()
     {
-        afficherMasquerIdWithDelay('zone_add_report');
+        afficherMasquerIdWithDelay('zone_saisie_rapport');
     });
 
-    // Affiche une image de bug/évolution en grand
+    // Affiche une image de bug / évolution en grand
     $('.agrandirImage').click(function ()
     {
         afficherDetailsBug($(this));
     });
 
-    // Ferme le zoom d'une image de bug/évolution
+    // Ferme le zoom d'une image de bug / évolution
     $(document).on('click', '#fermerImage', function ()
     {
         masquerSupprimerIdWithDelay('zoom_image');
@@ -26,13 +26,9 @@ $(function ()
     // Ferme au clic sur le fond
     $(document).on('click', function (event)
     {
-        // Ferme le zoom d'une image de bug/évolution
+        // Ferme le zoom d'une image de bug / évolution
         if ($(event.target).attr('class') == 'fond_zoom')
             masquerSupprimerIdWithDelay('zoom_image');
-
-        // Ferme la saisie d'une image de bug/évolution
-        if ($(event.target).attr('class') == 'fond_saisie_report')
-            afficherMasquerIdWithDelay('zone_add_report');
     });
 
     // Bloque le bouton de soumission si besoin

@@ -19,95 +19,19 @@
 }
 
 /*** Saisie film ***/
-.fond_saisie_film
-{
-    display: none;
-    background-color: rgb(0, 0, 0, 0.5);
-    position: fixed;
-    z-index: 10;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-}
-
-.zone_saisie_film
-{
-    width: 85%;
-    margin-top: 50px;
-    margin-left: auto;
-    margin-right: auto;
-    border-radius: 2px;
-    overflow: hidden;
-}
-
-.titre_saisie_film
-{
-    display: inline-block;
-    line-height: 50px;
-    background-color: #ff1937;
-    width: calc(100% - 40px);
-    padding-left: 20px;
-    padding-right: 20px;
-    font-family: inside_font_light, Verdana, sans-serif;
-    font-size: 120%;
-    color: white;
-    border-bottom: solid 2px #c81932;
-}
-
-.close_add
-{
-    float: right;
-    width: 30px;
-    height: 30px;
-    margin-top: -40px;
-    margin-right: 10px;
-    cursor: pointer;
-    text-align: center;
-}
-
-.close_img
-{
-    width: 20px;
-    padding: 5px;
-    transform: rotate(0deg);
-    transition: transform 0.2s ease;
-}
-
-.close_img:hover
-{
-    transform: rotate(90deg);
-    transition: transform 0.2s ease;
-}
-
-.form_saisie_film
-{
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-    background-color: white;
-    border-top: solid 1px #d3d3d3;
-    color: #262626;
-    max-height: calc(100vh - 150px);
-    overflow-y: auto;
-}
-
 .zone_saisie_left
 {
     display: inline-block;
-    width: calc(50% - 20px);
-    padding: 10px;
     vertical-align: top;
+    width: calc(50% - 10px);
 }
 
 .zone_saisie_right
 {
     display: inline-block;
-    width: calc(50% - 20px);
-    padding: 10px;
     vertical-align: top;
+    width: calc(50% - 10px);
+    margin-left: 20px;
 }
 
 .sous_titre_saisie_film
@@ -116,6 +40,7 @@
     background-color: #13a2e9;
     font-family: inside_font_light, Verdana, sans-serif;
     color: white;
+    text-align: center;
     border-radius: 2px;
     box-shadow: 0 0 3px #7c7c7c;
 }
@@ -123,9 +48,10 @@
 .zone_liens_saisie_film
 {
     display: block;
+    text-align: center;
 }
 
-.link_saisie_film
+.lien_saisie_film
 {
     display: inline-block;
     background-color: #fecc00;
@@ -135,28 +61,28 @@
     text-decoration: none;
 }
 
-.link_allocine
+.lien_allocine
 {
     font-family: roboto_black, Verdana, sans-serif;
     background-color: #fecc00;
     color: #262626;
 }
 
-.link_youtube
+.lien_youtube
 {
     font-family: roboto_condensed_bold, Verdana, sans-serif;
     background-color: #ff0000;
     color: white;
 }
 
-.link_dailymotion
+.lien_dailymotion
 {
     font-family: roboto_bold, Verdana, sans-serif;
     background-color: #00bff9;
     color: white;
 }
 
-.link_vimeo
+.lien_vimeo
 {
     font-family: roboto_black_italic, Verdana, sans-serif;
     background-color: #1a2e3b;
@@ -244,7 +170,7 @@
     display: inline-block;
     width: calc(20% - 10px);
     margin-left: 10px;
-    padding: 6px 10px 6px 10px;
+    padding: 8px 10px 8px 10px;
     border: 0;
     box-shadow: 0 0 3px #7c7c7c;
     font-family: inside_font_light, Verdana, sans-serif;
@@ -252,6 +178,13 @@
     color: #262626;
     vertical-align: middle;
     border-radius: 2px;
+}
+
+.zone_switch_restaurant
+{
+    display: block;
+    margin-top: 10px;
+    text-align: center;
 }
 
 .switch_restaurant
@@ -296,37 +229,11 @@
 
 .zone_bouton_saisie
 {
-    display: inline-block;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
     margin-top: 10px;
     width: 200px;
-    vertical-align: middle;
-}
-
-.form_saisie_film .zone_loading_form
-{
-    padding-top: 14.5px;
-    padding-bottom: 14.5px;
-}
-
-.saisie_bouton
-{
-    width: 100%;
-    height: 34px;
-    line-height: 34px;
-    border-radius: 2px;
-    border: 0;
-    font-family: inside_font_light, Verdana, sans-serif;
-    font-size: 100%;
-    color: #262626;
-    background-color: #e3e3e3;
-    cursor: pointer;
-    box-shadow: 0 0 3px #7c7c7c;
-}
-
-.saisie_bouton:hover
-{
-    background-color: #ff1937;
-    color: white;
 }
 
 /*** Vues et années ***/
@@ -832,41 +739,6 @@
     background-color: white;
     border-radius: 2px;
     overflow: hidden;
-}
-
-.titre_saisie_preference
-{
-    display: inline-block;
-    background-color: #ff1937;
-    width: calc(100% - 40px);
-    margin-right: 5px;
-    padding-left: 20px;
-    padding-right: 20px;
-    border-bottom: solid 2px #c81932;
-}
-
-.titre_preference
-{
-    width: calc(100% - 30px);
-    padding-top: 10px;
-    padding-bottom: 10px;
-    line-height: 25px;
-    font-family: inside_font_light, Verdana, sans-serif;
-    font-size: 120%;
-    color: white;
-    text-align: justify;
-}
-
-.close_preference
-{
-    float: right;
-    vertical-align: top;
-    margin-top: 8px;
-    margin-right: -10px;
-    width: 30px;
-    height: 30px;
-    cursor: pointer;
-    text-align: center;
 }
 
 .form_saisie_preference

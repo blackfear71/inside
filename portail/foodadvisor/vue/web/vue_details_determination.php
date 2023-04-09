@@ -2,7 +2,7 @@
     /***********************************/
     /*** Détails de la détermination ***/
     /***********************************/
-    echo '<div id="zone_details" class="fond_saisie_restaurant">';
+    echo '<div id="zone_details_proposition" class="fond_saisie">';
         echo '<div class="zone_details_proposition">';
             /**************************/
             /*** Détails restaurant ***/

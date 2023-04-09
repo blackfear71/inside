@@ -2,16 +2,19 @@
     /************************************/
     /*** Zone de saisie de restaurant ***/
     /************************************/
-    echo '<div id="zone_add_restaurant" style="display: none;" class="fond_saisie_restaurant">';
-        echo '<div class="zone_saisie_restaurant">';
+    echo '<div id="zone_saisie_restaurant" class="fond_saisie">';
+        echo '<div class="zone_saisie">';
             // Titre
-            echo '<div class="titre_saisie_restaurant">Ajouter un restaurant</div>';
+            echo '<div class="zone_titre_saisie">';
+                // Texte
+                echo '<div class="texte_titre_saisie">Ajouter un restaurant</div>';
 
-            // Bouton fermeture
-            echo '<a id="fermerRestaurant" class="close_add"><img src="../../includes/icons/common/close.png" alt="close" title="Fermer" class="close_img" /></a>';
+                // Bouton fermeture
+                echo '<a id="fermerRestaurant" class="bouton_fermeture_saisie"><img src="../../includes/icons/common/close.png" alt="close" title="Fermer" class="image_fermeture_saisie" /></a>';
+            echo '</div>';
 
             // Saisie restaurant
-            echo '<form method="post" action="restaurants.php?action=doAjouterRestaurant" enctype="multipart/form-data" class="form_saisie_restaurant">';
+            echo '<form method="post" action="restaurants.php?action=doAjouterRestaurant" enctype="multipart/form-data" class="form_saisie">';
                 // Photo, jours d'ouverture & prix
                 echo '<div class="zone_saisie_left">';
                     // Photo
@@ -63,7 +66,7 @@
                 echo '<div class="zone_saisie_right">';
                     // Nom
                     if ($_SESSION['save']['location'] == 'other_location')
-                        echo '<input type="text" name="name_restaurant" value="' . $_SESSION['save']['name_restaurant'] . '" placeholder="Nom du restaurant" id="saisie_nom" class="saisie_nom_restaurant_other" required />';
+                        echo '<input type="text" name="name_restaurant" value="' . $_SESSION['save']['name_restaurant'] . '" placeholder="Nom du restaurant" id="saisie_nom" class="saisie_nom_restaurant_autre" required />';
                     else
                         echo '<input type="text" name="name_restaurant" value="' . $_SESSION['save']['name_restaurant'] . '" placeholder="Nom du restaurant" id="saisie_nom" class="saisie_nom_restaurant" required />';
 
@@ -91,13 +94,14 @@
                     else
                         echo '<input type="text" name="saisie_other_location" placeholder="Lieu personnalisé" maxlength="255" id="saisie_other_location" class="saisie_lieu_autre_restaurant" style="display: none;" />';
 
-                    // Bouton d'ajout
-                    echo '<div class="zone_bouton_saisie">';
-                        echo '<input type="submit" name="insert_restaurant" value="Ajouter" id="bouton_saisie_restaurant" class="saisie_bouton" />';
+                    // Boutons d'action
+                    echo '<div class="zone_bouton_saisie_restaurant">';
+                        // Ajouter
+                        echo '<input type="submit" name="insert_restaurant" value="Ajouter le restaurant" id="bouton_saisie_restaurant" class="saisie_bouton" />';
                     echo '</div>';
 
                     // Types
-                    echo '<div id="types_restaurants">';
+                    echo '<div id="types_restaurant" class="zone_types_restaurant">';
                         $i = 0;
 
                         // Types existants
@@ -175,7 +179,7 @@
                 echo '</div>';
 
                 // Téléphone, site web, plan et description
-                echo '<div class="zone_saisie_under">';
+                echo '<div class="zone_saisie_bottom">';
                     // Numéro
                     echo '<input type="text" name="phone_restaurant" value="' . $_SESSION['save']['phone_restaurant'] . '" maxlength="15" placeholder="Téléphone" class="saisie_telephone_restaurant" />';
 

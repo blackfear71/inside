@@ -23,13 +23,13 @@ $(function ()
     // Ajouter une phrase culte
     $('#ajouterCollector, #fermerCollector').click(function ()
     {
-        afficherMasquerIdWithDelay('zone_add_collector');
+        afficherMasquerIdWithDelay('zone_saisie_phrase_culte');
     });
 
     // Ajouter une image culte
     $('#ajouterImage, #fermerImage').click(function ()
     {
-        afficherMasquerIdWithDelay('zone_add_image');
+        afficherMasquerIdWithDelay('zone_saisie_image_culte');
     });
 
     // Ferme au clic sur le fond
@@ -38,13 +38,6 @@ $(function ()
         // Ferme le zoom d'une image culte
         if ($(event.target).attr('class') == 'fond_zoom')
             masquerSupprimerIdWithDelay('zoom_image');
-
-        // Ferme la saisie d'une phrase / image culte
-        if ($(event.target).attr('class') == 'fond_saisie_collector')
-        {
-            closeInput('zone_add_collector');
-            closeInput('zone_add_image');
-        }
     });
 
     // Affiche la zone de modification d'une phrase / image culte
@@ -110,7 +103,18 @@ $(function ()
         var zoneButton   = $('.zone_bouton_saisie_collector');
         var submitButton = $(this);
         var formSaisie   = submitButton.closest('form');
-        var tabBlock     = null;
+        var tabBlock     = [];
+
+        // Blocage spécifique (saisie image culte)
+        tabBlock.push({ element: '#zone_saisie_image_culte input', property: 'readonly', value: true });
+        tabBlock.push({ element: '#zone_saisie_image_culte input', property: 'pointer-events', value: 'none' });
+        tabBlock.push({ element: '#zone_saisie_image_culte input', property: 'color', value: '#a3a3a3' });
+        tabBlock.push({ element: '#zone_saisie_image_culte textarea', property: 'readonly', value: true });
+        tabBlock.push({ element: '#zone_saisie_image_culte textarea', property: 'pointer-events', value: 'none' });
+        tabBlock.push({ element: '#zone_saisie_image_culte textarea', property: 'color', value: '#a3a3a3' });
+        tabBlock.push({ element: '#zone_saisie_image_culte select', property: 'readonly', value: true });
+        tabBlock.push({ element: '#zone_saisie_image_culte select', property: 'pointer-events', value: 'none' });
+        tabBlock.push({ element: '#zone_saisie_image_culte select', property: 'color', value: '#a3a3a3' });
 
         hideSubmitButton(zoneButton, submitButton, formSaisie, tabBlock);
     });
@@ -121,7 +125,18 @@ $(function ()
         var zoneButton   = $('.zone_bouton_saisie_image');
         var submitButton = $(this);
         var formSaisie   = submitButton.closest('form');
-        var tabBlock     = null;
+        var tabBlock     = [];
+
+        // Blocage spécifique (saisie phrase culte)
+        tabBlock.push({ element: '#zone_saisie_phrase_culte input', property: 'readonly', value: true });
+        tabBlock.push({ element: '#zone_saisie_phrase_culte input', property: 'pointer-events', value: 'none' });
+        tabBlock.push({ element: '#zone_saisie_phrase_culte input', property: 'color', value: '#a3a3a3' });
+        tabBlock.push({ element: '#zone_saisie_phrase_culte textarea', property: 'readonly', value: true });
+        tabBlock.push({ element: '#zone_saisie_phrase_culte textarea', property: 'pointer-events', value: 'none' });
+        tabBlock.push({ element: '#zone_saisie_phrase_culte textarea', property: 'color', value: '#a3a3a3' });
+        tabBlock.push({ element: '#zone_saisie_phrase_culte select', property: 'readonly', value: true });
+        tabBlock.push({ element: '#zone_saisie_phrase_culte select', property: 'pointer-events', value: 'none' });
+        tabBlock.push({ element: '#zone_saisie_phrase_culte select', property: 'color', value: '#a3a3a3' });
 
         hideSubmitButton(zoneButton, submitButton, formSaisie, tabBlock);
     });
@@ -176,7 +191,7 @@ $(function ()
         afficherOther('speaker', 'other_name');
     });
 
-    // Affiche la saisie "Autre" (image)
+    // Affiche la saisie "Autre" (image culte)
     $('#speaker_2').on('change', function ()
     {
         afficherOther('speaker_2', 'other_name_2');
@@ -310,13 +325,6 @@ function initMasonry()
     $('.text_collector').wrapInner();
 }
 
-// Ferme la saisie d'une phrase / image culte
-function closeInput(id)
-{
-    if ($('#' + id).css('display') != 'none')
-        afficherMasquerIdWithDelay(id);
-}
-
 // Adapte la zone "Parcourir" en fonction de la taille de l'image à son chargement
 function adaptBrowse(id)
 {
@@ -334,7 +342,7 @@ function afficherOther(select, required)
     {
         $('#' + required).css('display', 'inline-block');
         $('#' + required).prop('required', true);
-        $('#' + select).addClass('saisie_speaker speaker_autre');
+        $('#' + select).addClass('speaker_autre');
     }
     else
     {

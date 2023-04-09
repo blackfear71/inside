@@ -2,19 +2,22 @@
     /******************************/
     /*** Zone de saisie de film ***/
     /******************************/
-    echo '<div id="zone_saisie_film" style="display: none;" class="fond_saisie_film">';
-        echo '<div class="zone_saisie_film">';
+    echo '<div id="zone_saisie_film" class="fond_saisie">';
+        echo '<div class="zone_saisie">';
             // Titre
-            echo '<div class="titre_saisie_film">Ajouter un film</div>';
+            echo '<div class="zone_titre_saisie">';
+                // Texte
+                echo '<div class="texte_titre_saisie">Ajouter un film</div>';
 
-            // Bouton fermeture
-            echo '<a id="annulerFilm" class="close_add"><img src="../../includes/icons/common/close.png" alt="close" title="Fermer" class="close_img" /></a>';
+                // Bouton fermeture
+                echo '<a id="annulerFilm" class="bouton_fermeture_saisie"><img src="../../includes/icons/common/close.png" alt="close" title="Fermer" class="image_fermeture_saisie" /></a>';
+            echo '</div>';
 
             // Saisie film
             if ($_SERVER['PHP_SELF'] == '/inside/portail/moviehouse/moviehouse.php')
-                echo '<form method="post" action="moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&action=doAjouterFilm" class="form_saisie_film">';
+                echo '<form method="post" action="moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&action=doAjouterFilm" class="form_saisie">';
             else
-                echo '<form method="post" action="details.php?action=doModifierFilm" class="form_saisie_film">';
+                echo '<form method="post" action="details.php?action=doModifierFilm" class="form_saisie">';
                 echo '<input type="hidden" name="id_film" value="" />';
 
                 // Informations film
@@ -26,10 +29,10 @@
 
                     // Liens utiles
                     echo '<div class="zone_liens_saisie_film">';
-                        echo '<a href="https://www.allocine.fr/" target="_blank" class="link_saisie_film link_allocine">ALLOCINÉ</a>';
-                        echo '<a href="https://www.youtube.com/" target="_blank" class="link_saisie_film link_youtube">YouTube</a>';
-                        echo '<a href="https://www.dailymotion.com/fr" target="_blank" class="link_saisie_film link_dailymotion">dailymotion</a>';
-                        echo '<a href="https://vimeo.com/fr/watch" target="_blank" class="link_saisie_film link_vimeo">vimeo</a>';
+                        echo '<a href="https://www.allocine.fr/" target="_blank" class="lien_saisie_film lien_allocine">ALLOCINÉ</a>';
+                        echo '<a href="https://www.youtube.com/" target="_blank" class="lien_saisie_film lien_youtube">YouTube</a>';
+                        echo '<a href="https://www.dailymotion.com/fr" target="_blank" class="lien_saisie_film lien_dailymotion">dailymotion</a>';
+                        echo '<a href="https://vimeo.com/fr/watch" target="_blank" class="lien_saisie_film lien_vimeo">vimeo</a>';
                     echo '</div>';
 
                     // Titre du film
@@ -158,7 +161,7 @@
                     echo '</div>';
 
                     // Choix restaurant
-                    echo '<div class="zone_saisie_ligne">';
+                    echo '<div class="zone_switch_restaurant">';
                         if ($_SESSION['save']['restaurant_saisi'] == 'N' OR empty($_SESSION['save']['restaurant_saisi']))
                         {
                             echo '<div id="bouton_none" class="switch_restaurant bouton_checked">';
@@ -211,8 +214,9 @@
                         echo '<input type="text" name="place" value="' . $_SESSION['save']['place_saisie'] . '" placeholder="Lieu proposé" class="saisie_ligne" />';
                     echo '</div>';
 
-                    // Bouton d'ajout
+                    // Boutons d'action
                     echo '<div class="zone_bouton_saisie">';
+                        // Ajouter
                         echo '<input type="submit" name="saisie_film" value="Ajouter le film" id="bouton_saisie_film" class="saisie_bouton" />';
                     echo '</div>';
                 echo '</div>';

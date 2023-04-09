@@ -17,13 +17,13 @@ $(function ()
         afficherMasquerIdWithDelay('zone_saisie_rapport');
     });
 
-    // Affiche une image de bug/évolution en grand
+    // Affiche une image de bug / évolution en grand
     $('.agrandirImage').click(function ()
     {
         afficherDetailsBug($(this));
     });
 
-    // Ferme le zoom d'une image de bug/évolution
+    // Ferme le zoom d'une image de bug / évolution
     $(document).on('click', '#fermerImage', function ()
     {
         masquerSupprimerIdWithDelay('zoom_image');

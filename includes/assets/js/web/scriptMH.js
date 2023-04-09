@@ -14,10 +14,6 @@ $(function ()
     // Ferme au clic sur le fond
     $(document).on('click', function (event)
     {
-        // Ferme la saisie d'un film
-        if ($(event.target).attr('class') == 'fond_saisie_film')
-            closeInput('zone_saisie_film');
-
         // Ferme la saisie préférence (vue fiches)
         if ($(event.target).attr('class') == 'fond_saisie_preference')
             masquerSupprimerIdWithDelay('fond_preference');
@@ -227,13 +223,6 @@ $(window).on('load', function ()
 /*****************/
 /*** Fonctions ***/
 /*****************/
-// Ferme la saisie d'un film
-function closeInput(id)
-{
-    if ($('#' + id).css('display') != 'none')
-        afficherMasquerIdWithDelay(id);
-}
-
 // Change la couleur des radio boutons (saisie film)
 function switchCheckedColor(zone, input)
 {
@@ -320,13 +309,13 @@ function afficherSaisiePreference(titre, stars, view, year, idFilm)
 
     html += '<div id="fond_preference" class="fond_saisie_preference">';
         html += '<div class="zone_saisie_preference">';
-            // Zone titre
-            html += '<div class="titre_saisie_preference">';
-                // Bouton fermeture
-                html += '<a id="masquerPreference" class="close_preference"><img src="/inside/includes/icons/common/close.png" alt="close" title="Fermer" class="close_img" /></a>';
+            // Titre
+            html += '<div class="zone_titre_saisie">';
+                // Texte
+                html += '<div class="texte_titre_saisie">Votre préférence pour "' + titre + '"</div>';
 
-                // Titre
-                html += '<div class="titre_preference">Votre préférence pour "' + titre + '"</div>';
+                // Bouton fermeture
+                html += '<a id="masquerPreference" class="bouton_fermeture_saisie"><img src="/inside/includes/icons/common/close.png" alt="close" title="Fermer" class="image_fermeture_saisie" /></a>';
             html += '</div>';
 
             // Etoiles
@@ -407,7 +396,7 @@ function insertSmileyCommentaires(smiley, id)
 // Modification d'un film
 function initialisationModificationFilm(zone)
 {
-    var titre  = 'Modifier un film';
+    var titre  = 'Modifier le film';
     var bouton = 'Modifier le film';
     var action = 'details.php?action=doModifierFilm';
 
@@ -417,21 +406,21 @@ function initialisationModificationFilm(zone)
     var dateDoodle  = formatDateForDisplay(detailsFilm['date_doodle']);
 
     // Modification des données
-    $('.titre_saisie_film').html(titre);
-    $('.form_saisie_film').attr('action', action);
+    $('#' + zone).find('.texte_titre_saisie').html(titre);
+    $('#' + zone).find('.form_saisie').attr('action', action);
 
-    $('input[name=id_film]').val(detailsFilm['id']);
-    $('input[name=nom_film]').val(detailsFilm['film']);
-    $('input[name=date_theater]').val(dateTheater);
-    $('input[name=date_release]').val(dateRelease);
-    $('input[name=trailer]').val(detailsFilm['trailer']);
-    $('input[name=link]').val(detailsFilm['link']);
-    $('input[name=poster]').val(detailsFilm['poster']);
-    $('textarea[name=synopsis]').html(detailsFilm['synopsis']);
+    $('#' + zone).find('input[name=id_film]').val(detailsFilm['id']);
+    $('#' + zone).find('input[name=nom_film]').val(detailsFilm['film']);
+    $('#' + zone).find('input[name=date_theater]').val(dateTheater);
+    $('#' + zone).find('input[name=date_release]').val(dateRelease);
+    $('#' + zone).find('input[name=trailer]').val(detailsFilm['trailer']);
+    $('#' + zone).find('input[name=link]').val(detailsFilm['link']);
+    $('#' + zone).find('input[name=poster]').val(detailsFilm['poster']);
+    $('#' + zone).find('textarea[name=synopsis]').html(detailsFilm['synopsis']);
 
-    $('input[name=doodle]').val(detailsFilm['doodle']);
-    $('input[name=date_doodle]').val(dateDoodle);
-    $('input[name=place]').val(detailsFilm['place']);
+    $('#' + zone).find('input[name=doodle]').val(detailsFilm['doodle']);
+    $('#' + zone).find('input[name=date_doodle]').val(dateDoodle);
+    $('#' + zone).find('input[name=place]').val(detailsFilm['place']);
 
     switch (detailsFilm['restaurant'])
     {
@@ -452,16 +441,16 @@ function initialisationModificationFilm(zone)
     }
 
     if (detailsFilm['hours_doodle'] != '')
-        $('select[name=hours_doodle]').val(detailsFilm['hours_doodle']);
+        $('#' + zone).find('select[name=hours_doodle]').val(detailsFilm['hours_doodle']);
     else
-        $('select[name=hours_doodle]').val('');
+        $('#' + zone).find('select[name=hours_doodle]').val('');
 
     if (detailsFilm['minutes_doodle'] != '')
-        $('select[name=minutes_doodle]').val(detailsFilm['minutes_doodle']);
+        $('#' + zone).find('select[name=minutes_doodle]').val(detailsFilm['minutes_doodle']);
     else
-        $('select[name=minutes_doodle]').val('');
+        $('#' + zone).find('select[name=minutes_doodle]').val('');
 
-    $('.saisie_bouton').val(bouton);
+    $('#' + zone).find('.saisie_bouton').val(bouton);
 
     // Affichage zone de saisie
     afficherMasquerIdWithDelay(zone);
@@ -507,14 +496,15 @@ function adaptMovies()
         }
 
         // Saisie film
-        if ($('.zone_saisie_film').length)
+        if ($('#zone_saisie_film').length)
         {
             $('.zone_saisie_left').css('display', 'block');
-            $('.zone_saisie_left').css('width', 'calc(100% - 20px)');
+            $('.zone_saisie_left').css('width', '100%');
 
             $('.zone_saisie_right').css('display', 'block');
-            $('.zone_saisie_right').css('width', 'calc(100% - 20px)');
-            $('.zone_saisie_right').css('margin-top', '-12px');
+            $('.zone_saisie_right').css('width', '100%');
+            $('.zone_saisie_right').css('margin-top', '10px');
+            $('.zone_saisie_right').css('margin-left', '0');
         }
     }
     else
@@ -554,14 +544,15 @@ function adaptMovies()
         }
 
         // Saisie film
-        if ($('.zone_saisie_film').length)
+        if ($('#zone_saisie_film').length)
         {
             $('.zone_saisie_left').css('display', 'inline-block');
-            $('.zone_saisie_left').css('width', 'calc(50% - 20px)');
+            $('.zone_saisie_left').css('width', 'calc(50% - 10px)');
 
             $('.zone_saisie_right').css('display', 'inline-block');
-            $('.zone_saisie_right').css('width', 'calc(50% - 20px)');
+            $('.zone_saisie_right').css('width', 'calc(50% - 10px)');
             $('.zone_saisie_right').css('margin-top', '0');
+            $('.zone_saisie_right').css('margin-left', '20px');
         }
     }
 }

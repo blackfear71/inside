@@ -39,18 +39,6 @@ $(function ()
         afficherMasquerIdWithDelay('zone_saisie_participation');
     });
 
-    // Ferme au clic sur le fond
-    $(document).on('click', function (event)
-    {
-        // Ferme la saisie d'un parcours
-        if ($(event.target).attr('class') == 'fond_saisie_parcours')
-            closeInput('zone_saisie_parcours');
-
-        // Ferme la saisie participation
-        if ($(event.target).attr('class') == 'fond_saisie_participation')
-            closeInput('zone_saisie_participation');
-    });
-
     // Bloque le bouton de soumission si besoin (parcours)
     $('#bouton_saisie_parcours').click(function ()
     {
@@ -60,6 +48,7 @@ $(function ()
         var tabBlock     = [];
 
         // Blocage spécifique (liens actions)
+        tabBlock.push({ element: '.ajouterParticipation', property: 'display', value: 'none' });
         tabBlock.push({ element: '.icone_modifier_participation', property: 'display', value: 'none' });
         tabBlock.push({ element: '.icone_supprimer_participation', property: 'display', value: 'none' });
 
@@ -75,16 +64,17 @@ $(function ()
         var tabBlock     = [];
 
         // Blocage spécifique (liens actions)
+        tabBlock.push({ element: '.ajouterParticipation', property: 'display', value: 'none' });
         tabBlock.push({ element: '.icone_modifier_participation', property: 'display', value: 'none' });
         tabBlock.push({ element: '.icone_supprimer_participation', property: 'display', value: 'none' });
 
         // Blocage spécifique (saisie parcours)
-        tabBlock.push({ element: '.zone_saisie_parcours input', property: 'readonly', value: true });
-        tabBlock.push({ element: '.zone_saisie_parcours input', property: 'pointer-events', value: 'none' });
-        tabBlock.push({ element: '.zone_saisie_parcours input', property: 'color', value: '#a3a3a3' });
-        tabBlock.push({ element: '.zone_saisie_parcours label', property: 'readonly', value: true });
-        tabBlock.push({ element: '.zone_saisie_parcours label', property: 'pointer-events', value: 'none' });
-        tabBlock.push({ element: '.zone_saisie_parcours label', property: 'color', value: '#a3a3a3' });
+        tabBlock.push({ element: '#zone_saisie_parcours input', property: 'readonly', value: true });
+        tabBlock.push({ element: '#zone_saisie_parcours input', property: 'pointer-events', value: 'none' });
+        tabBlock.push({ element: '#zone_saisie_parcours input', property: 'color', value: '#a3a3a3' });
+        tabBlock.push({ element: '#zone_saisie_parcours label', property: 'readonly', value: true });
+        tabBlock.push({ element: '#zone_saisie_parcours label', property: 'pointer-events', value: 'none' });
+        tabBlock.push({ element: '#zone_saisie_parcours label', property: 'color', value: '#a3a3a3' });
 
         hideSubmitButton(zoneButton, submitButton, formSaisie, tabBlock);
     });
@@ -200,23 +190,16 @@ function adaptParcours()
     }
 }
 
-// Ferme la saisie d'un parcours
-function closeInput(id)
-{
-    if ($('#' + id).css('display') != 'none')
-        afficherMasquerIdWithDelay(id);
-}
-
 // Initialisation modification d'un parcours
 function initialisationModificationParcours(zone)
 {
-    var titre  = 'Modifier un parcours';
+    var titre  = 'Modifier le parcours';
     var bouton = 'Modifier le parcours';
     var action = 'details.php?action=doModifierParcours';
 
     // Modification des données
-    $('#' + zone).find('.titre_saisie_parcours').html(titre);
-    $('#' + zone).find('.form_saisie_parcours').attr('action', action);
+    $('#' + zone).find('.texte_titre_saisie').html(titre);
+    $('#' + zone).find('.form_saisie').attr('action', action);
     
     $('#' + zone).find('input[name=id_parcours]').val(detailsParcours['id']);
     $('#' + zone).find('input[name=nom_parcours]').val(detailsParcours['name']);
@@ -252,8 +235,8 @@ function initialisationSaisieParticipation(zone, idParcours)
     }
 
     // Modification des données
-    $('#' + zone).find('.titre_saisie_participation').html(titre);
-    $('#' + zone).find('.form_saisie_participation').attr('action', action);
+    $('#' + zone).find('.texte_titre_saisie').html(titre);
+    $('#' + zone).find('.form_saisie').attr('action', action);
 
     $('#' + zone).find('input[name=id_parcours]').val(idParcours);
     $('#' + zone).find('input[name=id_participation]').val('');
@@ -282,8 +265,8 @@ function initialisationModificationParticipation(zone, idParticipation)
     var participation = listeParticipations[idParticipation];
 
     // Modification des données
-    $('#' + zone).find('.titre_saisie_participation').html(titre);
-    $('#' + zone).find('.form_saisie_participation').attr('action', action);
+    $('#' + zone).find('.texte_titre_saisie').html(titre);
+    $('#' + zone).find('.form_saisie').attr('action', action);
 
     $('#' + zone).find('input[name=id_parcours]').val(detailsParcours['id']);
     $('#' + zone).find('input[name=id_participation]').val(idParticipation);

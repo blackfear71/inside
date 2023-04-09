@@ -1072,7 +1072,7 @@ function initialisationModificationRestaurant(idRestaurant)
     var image      = restaurant['picture'];
 
     // Titre
-    var titre = 'Modifier un restaurant';
+    var titre = 'Modifier le restaurant';
     $('#zone_saisie_restaurant').find('.zone_titre_saisie').html(titre);
 
     // Action du formulaire

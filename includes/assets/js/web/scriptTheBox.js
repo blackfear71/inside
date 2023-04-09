@@ -8,19 +8,11 @@ $(function ()
     // Ajouter une idée
     $('#ajouterIdee, #fermerIdee').click(function ()
     {
-        afficherMasquerIdWithDelay('zone_add_idea');
-    });
-
-    // Ferme au clic sur le fond
-    $(document).on('click', function (event)
-    {
-        // Ferme la saisie d'une idée
-        if ($(event.target).attr('class') == 'fond_saisie_idea')
-            closeInput('zone_add_idea');
+        afficherMasquerIdWithDelay('zone_saisie_idee');
     });
 
     // Bloque le bouton de soumission si besoin
-    $('#bouton_saisie_idea').click(function ()
+    $('#bouton_saisie_idee').click(function ()
     {
         var zoneButton   = $('.zone_bouton_saisie');
         var submitButton = $(this);
@@ -143,13 +135,6 @@ function initMasonry()
         gutter: 20,
         horizontalOrder: true
     });
-}
-
-// Ferme la saisie d'une idée
-function closeInput(id)
-{
-    if ($('#' + id).css('display') != 'none')
-        afficherMasquerIdWithDelay(id);
 }
 
 // Adaptations des idées sur mobile

@@ -282,7 +282,7 @@
 
                                 echo '<div class="zone_fiche_bottom">';
                                     // Types
-                                    echo '<div id="update_types_restaurants_' . $restaurant->getId() . '" class="zone_update_types">';
+                                    echo '<div id="update_types_restaurant_' . $restaurant->getId() . '" class="zone_update_types">';
                                         // Types existants
                                         $explodedTypes = array_filter(explode(';', $restaurant->getTypes()));
                                         $k             = 0;
@@ -304,14 +304,14 @@
                                             if ($matching == true)
                                             {
                                                 echo '<div id="bouton_' . $idType . '" class="switch_types bouton_checked">';
-                                                    echo '<input id="' . $idType . '" type="checkbox" value="' . $type . '" name="update_types_restaurants_' . $restaurant->getId() . '[' . $k . ']" checked />';
+                                                    echo '<input id="' . $idType . '" type="checkbox" value="' . $type . '" name="update_types_restaurant_' . $restaurant->getId() . '[' . $k . ']" checked />';
                                                     echo '<label for="' . $idType . '" class="label_switch checkTypeUpdate">' . $type . '</label>';
                                                 echo '</div>';
                                             }
                                             else
                                             {
                                                 echo '<div id="bouton_' . $idType . '" class="switch_types">';
-                                                    echo '<input id="' . $idType . '" type="checkbox" value="' . $type . '" name="update_types_restaurants_' . $restaurant->getId() . '[' . $k . ']" />';
+                                                    echo '<input id="' . $idType . '" type="checkbox" value="' . $type . '" name="update_types_restaurant_' . $restaurant->getId() . '[' . $k . ']" />';
                                                     echo '<label for="' . $idType . '" class="label_switch checkTypeUpdate">' . $type . '</label>';
                                                 echo '</div>';
                                             }

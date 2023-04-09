@@ -1,29 +1,33 @@
 <?php
-    /**************************/
-    /* Zone de saisie rapport */
-    /**************************/
-    echo '<div id="zone_add_report" class="fond_saisie_report">';
-        echo '<div class="zone_saisie_report">';
+    /*****************************/
+    /* Zone de saisie de rapport */
+    /*****************************/
+    echo '<div id="zone_saisie_rapport" class="fond_saisie">';
+        echo '<div class="zone_saisie">';
             // Titre
-            echo '<div class="titre_saisie_report">Rapporter un bug ou une évolution</div>';
+            echo '<div class="zone_titre_saisie">';
+                // Texte
+                echo '<div class="texte_titre_saisie">Rapporter un bug ou une évolution</div>';
 
-            // Bouton fermeture
-            echo '<a id="fermerRapport" class="zone_close"><img src="../../includes/icons/common/close.png" alt="close" title="Fermer" class="close_img" /></a>';
+                // Bouton fermeture
+                echo '<a id="fermerRapport" class="bouton_fermeture_saisie"><img src="../../includes/icons/common/close.png" alt="close" title="Fermer" class="image_fermeture_saisie" /></a>';
+            echo '</div>';
 
-            echo '<form method="post" action="bugs.php?action=doAjouterRapport" enctype="multipart/form-data" class="form_saisie_report">';
+            // Saisie rapport
+            echo '<form method="post" action="bugs.php?action=doAjouterRapport" enctype="multipart/form-data" class="form_saisie">';
                 // Explications
-                echo '<div class="explications">';
-                    echo '<div class="text_saisie_report">';
+                echo '<div class="zone_explications_rapport">';
+                    echo '<div class="texte_explications_rapport">';
                         echo 'Cette page vous permet de remonter d\'éventuelles <strong>évolutions techniques</strong> à apporter au site et les rapports seront envoyés à l\'administrateur. Vous pouvez inclure
                               une image pour plus de précision.';
                     echo '</div>';
 
-                    echo '<div class="text_saisie_report">';
+                    echo '<div class="texte_explications_rapport">';
                         echo 'Pour toute demande d\'<strong>évolution fonctionnelle</strong>, veuillez utiliser la page #TheBox.';
                     echo '</div>';
                 echo '</div>';
 
-                // Zone saisie image
+                // Image
                 echo '<div class="zone_saisie_left">';
                     // Saisie image
                     echo '<input type="hidden" name="MAX_FILE_SIZE" value="15728640" />';
@@ -38,7 +42,7 @@
                     echo '</div>';
                 echo '</div>';
 
-                // Zone saisie rapport
+                // Rapport
                 echo '<div class="zone_saisie_right">';
                     // Sujet
                     echo '<input type="text" name="subject_bug" placeholder="Objet" value="' . $_SESSION['save']['subject_bug'] . '" maxlength="255" class="saisie_objet" required />';
@@ -58,9 +62,10 @@
                             echo '<option value="E">Evolution</option>';
                     echo '</select>';
 
-                    // Bouton d'ajout
+                    // Boutons d'action
                     echo '<div class="zone_bouton_saisie">';
-                        echo '<input type="submit" name="report" value="Soumettre" id="bouton_saisie_bug" class="saisie_bouton width_100" />';
+                        // Ajouter
+                        echo '<input type="submit" name="report" value="Soumettre la demande" id="bouton_saisie_bug" class="saisie_bouton" />';
                     echo '</div>';
 
                     // Description

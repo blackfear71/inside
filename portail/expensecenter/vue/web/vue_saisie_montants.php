@@ -2,16 +2,20 @@
     /**********************************/
     /*** Zone de saisie de montants ***/
     /**********************************/
-    echo '<div id="zone_add_montants" style="display: none;" class="fond_saisie_depense">';
-        echo '<div class="zone_saisie_depense">';
+    echo '<div id="zone_saisie_montants" class="fond_saisie">';
+        echo '<div class="zone_saisie">';
             // Titre
-            echo '<div class="titre_saisie_depense">Saisir des montants</div>';
+            echo '<div class="zone_titre_saisie">';
+                // Texte
+                echo '<div class="texte_titre_saisie">Saisir des montants</div>';
 
-            // Bouton fermeture
-            echo '<a id="resetMontants" class="close_add"><img src="../../includes/icons/common/close.png" alt="close" title="Fermer" class="close_img" /></a>';
+                // Bouton fermeture
+                echo '<a id="resetMontants" class="bouton_fermeture_saisie"><img src="../../includes/icons/common/close.png" alt="close" title="Fermer" class="image_fermeture_saisie" /></a>';
+            echo '</div>';
 
-            // Saisie dépense
-            echo '<form method="post" action="expensecenter.php?year=' . $_GET['year'] . '&filter=' . $_GET['filter'] . '&action=doAjouterMontants" class="form_saisie_depense">';
+            // Saisie montants
+            echo '<form method="post" action="expensecenter.php?year=' . $_GET['year'] . '&filter=' . $_GET['filter'] . '&action=doAjouterMontants" class="form_saisie">';
+                // Id dépense
                 echo '<input type="hidden" name="id_expense_saisie" value="" />';
 
                 // Achat
@@ -52,7 +56,7 @@
 
                     // Bouton validation
                     echo '<div class="zone_bouton_saisie_montants">';
-                        echo '<input type="submit" name="add_depense" value="Valider" id="bouton_saisie_montants" class="saisie_bouton" />';
+                        echo '<input type="submit" name="add_depense" value="Valider les montants" id="bouton_saisie_montants" class="saisie_bouton" />';
                     echo '</div>';
 
                     // Affichage explications

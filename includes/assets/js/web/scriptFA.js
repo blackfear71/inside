@@ -196,7 +196,7 @@ $(function ()
     {
         var idDetails = $(this).attr('id').replace('afficher_details_', '');
 
-        afficherDetailsProposition('zone_details', idDetails);
+        afficherDetailsProposition('zone_details_proposition', idDetails);
 
         // Adaptation mobile
         adaptDetails();
@@ -205,7 +205,7 @@ $(function ()
     // Ferme les détails d'une proposition
     $('#fermerDetails').click(function ()
     {
-        afficherMasquerIdWithDelay('zone_details');
+        afficherMasquerIdWithDelay('zone_details_proposition');
     });
 
     // Affiche la description longue d'un restaurant (détails proposition)
@@ -239,7 +239,7 @@ $(function ()
     // Affiche la saisie de restaurant
     $('#saisieRestaurant, #fermerRestaurant').click(function ()
     {
-        afficherMasquerIdWithDelay('zone_add_restaurant');
+        afficherMasquerIdWithDelay('zone_saisie_restaurant');
     });
 
     // Change le statut d'un jour d'ouverture (saisie restaurant)
@@ -255,7 +255,7 @@ $(function ()
     $('#addType').click(function ()
     {
         var idBouton = $(this).attr('id');
-        var idParent = 'types_restaurants';
+        var idParent = 'types_restaurant';
 
         addOtherType(idBouton, idParent);
     });
@@ -339,30 +339,13 @@ $(function ()
         var idBouton     = $(this).attr('id');
         var idRestaurant = $(this).attr('id').replace('type_update_', '');
 
-        addOtherType(idBouton, 'update_types_restaurants_' + idRestaurant);
-    });
-
-    // Ferme au clic sur le fond
-    $(document).on('click', function (event)
-    {
-        // Ferme la saisie des choix, la saisie d'un restaurant et les détails d'un choix du jour
-        if ($(event.target).attr('class') == 'fond_saisie_restaurant')
-        {
-            if ($('#zone_saisie_propositions').length)
-                closeInputOrDetails('zone_saisie_propositions');
-
-            if ($('#zone_add_restaurant').length)
-                closeInputOrDetails('zone_add_restaurant');
-
-            if ($('#zone_details').length)
-                closeInputOrDetails('zone_details');
-        }
+        addOtherType(idBouton, 'update_types_restaurant_' + idRestaurant);
     });
 
     // Bloque le bouton de soumission si besoin (ajout restaurant)
     $('#bouton_saisie_restaurant').click(function ()
     {
-        var zoneButton   = $('.zone_bouton_saisie');
+        var zoneButton   = $('.zone_bouton_saisie_restaurant');
         var submitButton = $(this);
         var formSaisie   = submitButton.closest('form');
         var tabBlock     = [];

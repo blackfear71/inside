@@ -72,6 +72,14 @@ $(function ()
         }
     });
 
+    // Ferme un élément au clic sur le fond
+    $(document).on('click', function (event)
+    {
+        // Ferme une zone de saisie
+        if ($(event.target).attr('class') == 'fond_saisie')
+            afficherMasquerIdWithDelay(event.target.id);
+    });
+
     // Bouton fermer alerte
     $('#fermerAlerte').click(function ()
     {
@@ -781,7 +789,7 @@ function hideSubmitButton(zone, button, form, tabBlock)
         }
 
         // Contrôle format numérique
-        if ($(this).attr('type') == 'number')
+        if ($(this).attr('type') == 'number' && $(this).val() != '' && $(this).val() != null)
         {
             if (!$.isNumeric($(this).val())
                 || ($(this).val().attr('min') != '' && $(this).val() < $(this).val().attr('min'))

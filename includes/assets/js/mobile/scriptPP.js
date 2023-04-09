@@ -71,7 +71,7 @@ $(window).on('load', function ()
 // Initialisation modification d'un parcours
 function initialisationModificationParcours(zone)
 {
-    var titre  = 'Modifier un parcours';
+    var titre  = 'Modifier le parcours';
     var action = 'details.php?action=doModifierParcours';
 
     // Modification des données

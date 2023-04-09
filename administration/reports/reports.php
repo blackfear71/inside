@@ -1,12 +1,12 @@
 <?php
-    /*****************************
-    **** Gestion des rapports ****
-    ******************************
+    /*******************************
+    ***** Gestion des rapports *****
+    ********************************
     Fonctionnalités :
-    - Résolution de bug/évolution
-    - Suppression de bug/évolution
-    - Rejet de bug/évolution
-    *****************************/
+    - Résolution de bug / évolution
+    - Suppression de bug / évolution
+    - Rejet de bug / évolution
+    *******************************/
 
     // Fonctions communes
     include_once('../../includes/functions/metier_commun.php');

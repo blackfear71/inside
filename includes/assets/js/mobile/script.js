@@ -73,7 +73,7 @@ $(function ()
         openSection($(this), idZone, '');
     });
 
-    // Ferme un menu au clic sur le fond
+    // Ferme un élément au clic sur le fond
     $(document).on('click', function (event)
     {
         // Ferme la zone de recherche
@@ -777,7 +777,7 @@ function blockValidationSubmission(form, zoneForm, zoneContenuForm, rechercheLiv
         }
 
         // Contrôle format numérique
-        if ($(this).attr('type') == 'number')
+        if ($(this).attr('type') == 'number' && $(this).val() != '' && $(this).val() != null)
         {
             if (!$.isNumeric($(this).val())
                 || ($(this).val().attr('min') != '' && $(this).val() < $(this).val().attr('min'))
@@ -833,7 +833,7 @@ function blockValidationSubmissionPage(form)
         }
 
         // Contrôle format numérique
-        if ($(this).attr('type') == 'number')
+        if ($(this).attr('type') == 'number' && $(this).val() != '' && $(this).val() != null)
         {
             if (!$.isNumeric($(this).val())
                 || ($(this).val().attr('min') != '' && $(this).val() < $(this).val().attr('min'))

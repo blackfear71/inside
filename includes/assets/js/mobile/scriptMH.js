@@ -180,7 +180,7 @@ function switchCheckedColor(zone, input)
 // Modification d'un film
 function initialisationModificationFilm(zone)
 {
-    var titre  = 'Modifier un film';
+    var titre  = 'Modifier le film';
     var action = 'details.php?action=doModifierFilmMobile';
 
     // Conversion des dates

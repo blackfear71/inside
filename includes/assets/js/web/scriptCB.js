@@ -54,13 +54,17 @@ $(function ()
     // Ajouter une recette
     $('#ajouterRecette').click(function ()
     {
-        afficherMasquerIdWithDelay('zone_add_recipe');
+        afficherMasquerIdWithDelay('zone_saisie_recette');
     });
 
     // Réinitialise la saisie recette à la fermeture
     $('#fermerSaisieRecette').click(function ()
     {
-        reinitialisationSaisieRecette('zone_add_recipe');
+        // Ferme la saisie d'une recette
+        afficherMasquerIdWithDelay('zone_saisie_recette');
+
+        // Réinitialise la saisie d'une recette
+        reinitialisationSaisieRecette('zone_saisie_recette');
     });
 
     // Modifier une recette
@@ -68,7 +72,7 @@ $(function ()
     {
         var idRecette = $(this).attr('id').replace('modifier_', '');
 
-        updateRecipe(idRecette, 'zone_add_recipe');
+        updateRecipe(idRecette, 'zone_saisie_recette');
     });
 
     // Ajoute un champ de saisie ingrédient (saisie)
@@ -98,9 +102,9 @@ $(function ()
         if ($(event.target).attr('class') == 'fond_zoom')
             masquerSupprimerIdWithDelay('zoom_image');
 
-        // Ferme la saisie d'une recette
-        if ($(event.target).attr('class') == 'fond_saisie_recette')
-            reinitialisationSaisieRecette('zone_add_recipe');
+        // Réinitialise la saisie d'une recette
+        if ($(event.target).attr('class') == 'fond_saisie')
+            reinitialisationSaisieRecette('zone_saisie_recette');
     });
 
     // Bloque le bouton de soumission si besoin
@@ -493,19 +497,17 @@ function updateRecipe(id, zone)
     var action      = 'cookingbox.php?year=' + annee + '&action=doModifierRecette';
 
     // Modification des données
-    generateSaisie(id, image, annee, semaine, nom, ingredients, preparation, remarques, titre, action, 'mod');
+    generateSaisie(zone, id, image, annee, semaine, nom, ingredients, preparation, remarques, titre, action, 'mod');
 }
 
 // Réinitialise la zone de saisie d'une recette si fermeture modification
 function reinitialisationSaisieRecette(zone)
 {
-    // Fermeture zone de saisie
-    afficherMasquerIdWithDelay(zone);
-
+    // Déclenchement après la fermeture de la zone de saisie (dans script.js)
     setTimeout(function ()
     {
         // Test si action = modification
-        var currentAction = $('.form_saisie_recette').attr('action').split('&action=');
+        var currentAction = $('#' + zone).find('.form_saisie').attr('action').split('&action=');
         var call          = currentAction[currentAction.length - 1]
 
         if (call == 'doModifierRecette')
@@ -521,60 +523,60 @@ function reinitialisationSaisieRecette(zone)
             var titre       = 'Ajouter une recette';
             var action      = 'cookingbox.php?action=doAjouterRecette';
 
-            generateSaisie(id, image, annee, semaine, nom, ingredients, preparation, remarques, titre, action, 'reset');
+            generateSaisie(zone, id, image, annee, semaine, nom, ingredients, preparation, remarques, titre, action, 'reset');
         }
     }, 200);
 }
 
 // Génère la zone de saisie recette
-function generateSaisie(id, image, annee, semaine, nom, ingredients, preparation, remarques, titre, action, mode)
+function generateSaisie(zone, id, image, annee, semaine, nom, ingredients, preparation, remarques, titre, action, mode)
 {
     var ingredient;
     var numIngredient;
 
     // Modification des données générales
-    $('input[name=id_recipe]').val(id);
-    $('.titre_saisie_recette').html(titre);
-    $('.form_saisie_recette').attr('action', action);
-    $('#saisie_nom').val(nom);
-    $('#saisie_preparation').val(preparation);
-    $('#saisie_remarques').val(remarques);
+    $('#' + zone).find('input[name=id_recipe]').val(id);
+    $('#' + zone).find('.texte_titre_saisie').html(titre);
+    $('#' + zone).find('.form_saisie').attr('action', action);
+    $('#' + zone).find('#saisie_nom').val(nom);
+    $('#' + zone).find('#saisie_preparation').val(preparation);
+    $('#' + zone).find('#saisie_remarques').val(remarques);
 
     // Modification des données spécifiques
     if (mode == 'mod')
     {
-        $('#saisie_annee').css('display', 'none');
-        $('#saisie_annee').prop('required', false);
+        $('#' + zone).find('#saisie_annee').css('display', 'none');
+        $('#' + zone).find('#saisie_annee').prop('required', false);
 
-        $('#saisie_semaine').css('display', 'none');
-        $('#saisie_semaine').prop('required', false);
+        $('#' + zone).find('#saisie_semaine').css('display', 'none');
+        $('#' + zone).find('#saisie_semaine').prop('required', false);
 
-        $('.zone_recette_right').prepend('<input type="hidden" id="hidden_week_recipe" name="hidden_week_recipe" value="' + semaine + '" />');
-        $('.zone_recette_right').prepend('<input type="hidden" id="hidden_year_recipe" name="hidden_year_recipe" value="' + annee + '" />');
+        $('#' + zone).find('.zone_recette_right').prepend('<input type="hidden" id="hidden_week_recipe" name="hidden_week_recipe" value="' + semaine + '" />');
+        $('#' + zone).find('.zone_recette_right').prepend('<input type="hidden" id="hidden_year_recipe" name="hidden_year_recipe" value="' + annee + '" />');
 
-        $('#saisie_nom').css('width', 'calc(100% - 20px)');
+        $('#' + zone).find('#saisie_nom').css('width', 'calc(100% - 20px)');
 
-        $('#image_recette').attr('src', '../../includes/images/cookingbox/' + annee + '/mini/' + image);
-        $('input[name=image]').prop('required', false);
-        $('input[name=insert_recipe]').val('Modifier');
+        $('#' + zone).find('#image_recette').attr('src', '../../includes/images/cookingbox/' + annee + '/mini/' + image);
+        $('#' + zone).find('input[name=image]').prop('required', false);
+        $('#' + zone).find('input[name=insert_recipe]').val('Modifier');
     }
     else
     {
-        $('#saisie_annee').css('display', 'inline-block');
-        $('#saisie_annee').prop('required', true);
+        $('#' + zone).find('#saisie_annee').css('display', 'inline-block');
+        $('#' + zone).find('#saisie_annee').prop('required', true);
 
-        $('#hidden_week_recipe').remove();
-        $('#hidden_year_recipe').remove();
+        $('#' + zone).find('#hidden_week_recipe').remove();
+        $('#' + zone).find('#hidden_year_recipe').remove();
 
-        $('#saisie_nom').css('width', 'calc(100% - 150px)');
+        $('#' + zone).find('#saisie_nom').css('width', 'calc(100% - 150px)');
 
-        $('#image_recette').removeAttr('src');
-        $('input[name=image]').prop('required', true);
-        $('input[name=insert_recipe]').val('Ajouter');
+        $('#' + zone).find('#image_recette').removeAttr('src');
+        $('#' + zone).find('input[name=image]').prop('required', true);
+        $('#' + zone).find('input[name=insert_recipe]').val('Ajouter');
     }
 
     // Modification des données ingrédients
-    $('.zone_ingredient').remove();
+    $('#' + zone).find('.zone_ingredient').remove();
 
     addIngredient('zone_ingredients');
     addIngredient('zone_ingredients');
@@ -593,15 +595,15 @@ function generateSaisie(id, image, annee, semaine, nom, ingredients, preparation
             if (numIngredient > 4)
                 addIngredient('zone_ingredients');
 
-            $('#ingredient_' + numIngredient).val(ingredient[0]);
-            $('#quantite_ingredient_' + numIngredient).val(ingredient[1]);
+            $('#' + zone).find('#ingredient_' + numIngredient).val(ingredient[0]);
+            $('#' + zone).find('#quantite_ingredient_' + numIngredient).val(ingredient[1]);
 
-            $('#ingredient_' + numIngredient).addClass('filled');
+            $('#' + zone).find('#ingredient_' + numIngredient).addClass('filled');
 
             if (ingredient[2] == '')
-                $('#unite_ingredient_' + numIngredient).val('sans');
+                $('#' + zone).find('#unite_ingredient_' + numIngredient).val('sans');
             else
-                $('#unite_ingredient_' + numIngredient).val(ingredient[2]);
+                $('#' + zone).find('#unite_ingredient_' + numIngredient).val(ingredient[2]);
         }
     });
 }

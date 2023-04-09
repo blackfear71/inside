@@ -30,90 +30,12 @@
     box-shadow: 0 0 3px #7c7c7c;
 }
 
-/*** Saisie dépense ***/
-.fond_saisie_depense
-{
-    display: none;
-    background-color: rgb(0, 0, 0, 0.5);
-    position: fixed;
-    z-index: 10;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-}
-
-.zone_saisie_depense
-{
-    width: 85%;
-    margin-top: 50px;
-    margin-left: auto;
-    margin-right: auto;
-    border-radius: 2px;
-    overflow: hidden;
-}
-
-.titre_saisie_depense
-{
-    display: inline-block;
-    line-height: 50px;
-    background-color: #ff1937;
-    width: calc(100% - 40px);
-    padding-left: 20px;
-    padding-right: 20px;
-    font-family: inside_font_light, Verdana, sans-serif;
-    font-size: 120%;
-    color: white;
-    border-bottom: solid 2px #c81932;
-}
-
-.close_add
-{
-    float: right;
-    width: 30px;
-    height: 30px;
-    margin-top: -40px;
-    margin-right: 10px;
-    cursor: pointer;
-    text-align: center;
-}
-
-.close_img
-{
-    width: 20px;
-    padding: 5px;
-    transform: rotate(0deg);
-    transition: transform 0.2s ease;
-}
-
-.close_img:hover
-{
-    transform: rotate(90deg);
-    transition: transform 0.2s ease;
-}
-
-.form_saisie_depense
-{
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-    background-color: white;
-    border-top: solid 1px #d3d3d3;
-    max-height: calc(100vh - 150px);
-    overflow-y: auto;
-    color: #262626;
-}
-
-/*** Achat ***/
+/*** Saisie dépense / montants ***/
 .zone_saisie_left
 {
     display: inline-block;
-    width: 280px;
-    text-align: center;
-    margin: 10px;
     vertical-align: top;
+    width: 280px;
 }
 
 .saisie_buyer
@@ -159,17 +81,16 @@
 .euro
 {
     display: inline-block;
-    margin-left: 5px;
     vertical-align: middle;
+    margin-left: 5px;
     width: 20px;
     height: 20px;
 }
 
 .saisie_date_depense
 {
-    display: inline-block;
+    display: block;
     width: calc(100% - 20px);
-    vertical-align: middle;
     padding-left: 10px;
     padding-right: 10px;
     line-height: 32px;
@@ -200,47 +121,20 @@
     resize: vertical;
 }
 
-.zone_bouton_saisie, .zone_bouton_saisie_montants
+.zone_bouton_saisie_depense, .zone_bouton_saisie_montants
 {
     display: block;
     width: 100%;
     margin-top: 10px;
 }
 
-.form_saisie_depense .zone_loading_form
-{
-    padding-top: 13.5px;
-    padding-bottom: 13.5px;
-}
-
-.saisie_bouton
-{
-    width: 100%;
-    background-color: #e3e3e3;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    border-radius: 2px;
-    font-family: inside_font_light, Verdana, sans-serif;
-    font-size: 100%;
-    color: #262626;
-    cursor: pointer;
-    text-align: center;
-    border: 0;
-    vertical-align: top;
-    box-shadow: 0 0 3px #7c7c7c;
-}
-
-.saisie_bouton:hover
-{
-    color: white;
-    background-color: #ff1937;
-}
-
 .lien_explications
 {
     display: block;
     width: calc(100% - 20px);
-    padding: 5px 10px 5px 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    line-height: 32px;
     margin-left: auto;
     margin-right: auto;
     margin-top: 10px;
@@ -252,6 +146,18 @@
     border-radius: 2px;
     box-shadow: 0 0 3px #7c7c7c;
     cursor: pointer;
+}
+
+.lien_explications:hover
+{
+    background-color: #70d55d;
+    color: white;
+}
+
+.lien_explications:hover .fond_plus
+{
+    background-color: white;
+    color: #262626;
 }
 
 .fond_plus
@@ -268,26 +174,13 @@
     line-height: 20px;
 }
 
-.lien_explications:hover
-{
-    background-color: #70d55d;
-    color: white;
-}
-
-.lien_explications:hover .fond_plus
-{
-    background-color: white;
-    color: #262626;
-}
-
-/*** Parts utilisateurs ***/
 .zone_saisie_right
 {
     display: inline-block;
-    width: calc(100% - 320px);
-    padding: 10px 10px 0 10px;
-    text-align: left;
     vertical-align: top;
+    width: calc(100% - 290px);
+    margin-left: 10px;
+    margin-bottom: -10px;
 }
 
 .zone_saisie_utilisateurs
@@ -348,7 +241,8 @@
 {
     display: inline-block;
     width: 20px;
-    line-height: 20px;
+    height: 20px;
+    line-height: 18px;
     vertical-align: middle;
     border-radius: 2px;
     font-family: inside_font_regular, Verdana, sans-serif;
@@ -386,7 +280,7 @@
     user-select: none;
 }
 
-.quantite_des
+.quantite_desinscrit
 {
     display: inline-block;
     vertical-align: middle;
@@ -423,7 +317,7 @@
     background-color: white;
 }
 
-.montant_des
+.montant_desinscrit
 {
     display: inline-block;
     vertical-align: middle;

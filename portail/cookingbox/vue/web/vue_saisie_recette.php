@@ -2,15 +2,19 @@
     /*****************************/
     /* Zone de saisie de recette */
     /*****************************/
-    echo '<div id="zone_add_recipe" class="fond_saisie_recette">';
-        echo '<div class="zone_saisie_recette">';
+    echo '<div id="zone_saisie_recette" class="fond_saisie">';
+        echo '<div class="zone_saisie">';
             // Titre
-            echo '<div class="titre_saisie_recette">Ajouter une recette</div>';
+            echo '<div class="zone_titre_saisie">';
+                // Texte
+                echo '<div class="texte_titre_saisie">Ajouter une recette</div>';
 
-            // Bouton fermeture
-            echo '<a id="fermerSaisieRecette" class="zone_close"><img src="../../includes/icons/common/close.png" alt="close" title="Fermer" class="close_img" /></a>';
+                // Bouton fermeture
+                echo '<a id="fermerSaisieRecette" class="bouton_fermeture_saisie"><img src="../../includes/icons/common/close.png" alt="close" title="Fermer" class="image_fermeture_saisie" /></a>';
+            echo '</div>';
 
-            echo '<form method="post" action="cookingbox.php?action=doAjouterRecette" enctype="multipart/form-data" class="form_saisie_recette">';
+            // Saisie recette
+            echo '<form method="post" action="cookingbox.php?action=doAjouterRecette" enctype="multipart/form-data" class="form_saisie">';
                 echo '<input type="hidden" name="id_recipe" value="" />';
 
                 // Zone saisie image
@@ -27,9 +31,10 @@
                         echo '<img id="image_recette" alt="" class="image" />';
                     echo '</div>';
 
-                    // Bouton d'ajout
+                    // Boutons d'action
                     echo '<div class="zone_bouton_saisie">';
-                        echo '<input type="submit" name="insert_recipe" value="Ajouter" id="bouton_saisie_recette" class="saisie_bouton" />';
+                        // Ajouter
+                        echo '<input type="submit" name="insert_recipe" value="Ajouter la recette" id="bouton_saisie_recette" class="saisie_bouton" />';
                     echo '</div>';
                 echo '</div>';
 
