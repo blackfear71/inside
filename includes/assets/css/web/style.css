@@ -627,7 +627,7 @@ header
 }
 
 /*** Saisies ***/
-.fond_saisie, .fond_saisie_preference
+.fond_saisie, .fond_saisie_preference, .fond_details, .fond_details_admin
 {
     display: none;
     background-color: rgb(0, 0, 0, 0.5);
@@ -967,7 +967,7 @@ header
 }
 
 /*** Zoom images ***/
-.fond_zoom
+.fond_zoom_image
 {
     display: none;
     background-color: rgb(0, 0, 0, 0.5);
@@ -1053,7 +1053,7 @@ header
 /*** Déblocage succès & zoom ***/
 .fond_zoom_succes
 {
-    display: block;
+    display: none;
     background-color: rgb(0, 0, 0, 0.5);
     position: fixed;
     z-index: 10;

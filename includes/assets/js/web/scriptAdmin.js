@@ -58,17 +58,7 @@ $(function ()
     // Ferme les détails des statistiques
     $(document).on('click', '#fermerDetails', function ()
     {
-        closeDetailsStatistiques('zone_details');
-    });
-
-    // Ferme au clic sur le fond
-    $(document).on('click', function (event)
-    {
-        // Ferme les détails d'une catégorie
-        if ($(event.target).attr('class') == 'fond_details_statistiques')
-        {
-            closeDetailsStatistiques('zone_details');
-        }
+        masquerSupprimerIdWithDelay('zone_details');
     });
 
     // Affiche la zone de modification d'un thème
@@ -908,7 +898,7 @@ function afficherDetailsStatistiques(typeStatistique)
     {
         var html = '';
 
-        html += '<div id="zone_details" class="fond_details_statistiques">';
+        html += '<div id="zone_details" class="fond_details_admin">';
             html += '<div class="zone_details_statistiques">';
                 // Titre
                 html += '<div class="titre_section">';
@@ -1064,23 +1054,7 @@ function afficherDetailsStatistiques(typeStatistique)
         $('body').append(html);
 
         // Affichage de la zone
-        $('#zone_details').fadeIn(200);
-    }
-}
-
-// Ferme les détails des statistiques
-function closeDetailsStatistiques(id)
-{
-    if ($('#' + id).css('display') != 'none')
-    {
-        // Masquage de la zone
-        afficherMasquerIdWithDelay(id);
-
-        // Suppression de la zone
-        setTimeout(function ()
-        {
-            $('#' + id).remove();
-        }, 200);
+        afficherMasquerIdWithDelay('zone_details');
     }
 }
 

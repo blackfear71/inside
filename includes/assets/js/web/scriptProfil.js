@@ -76,14 +76,6 @@ $(function () {
         afficherDetailsSucces(idSuccess);
     });
 
-    // Ferme au clic sur le fond
-    $(document).on('click', function (event)
-    {
-        // Ferme le zoom d'un succès
-        if ($(event.target).attr('class') == 'fond_zoom_succes')
-            masquerSupprimerIdWithDelay('zoom_succes');
-    });
-
     // Plie ou déplie les thèmes
     $('#fold_themes_user, #fold_themes_missions').click(function ()
     {
@@ -461,7 +453,7 @@ function afficherDetailsSucces(id)
     var success = listeSuccess[id];
     var html    = '';
 
-    html += '<div id="zoom_succes" class="fond_zoom_succes" style="display: none;">';
+    html += '<div id="zoom_succes" class="fond_zoom_succes">';
         // Affichage du succès
         html += '<div class="zone_success_zoom">';
             // Succès

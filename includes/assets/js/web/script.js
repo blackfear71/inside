@@ -38,6 +38,10 @@ $(function ()
         });
     }
 
+    // Affichage des succès
+    if ($('#zoom_succes').length)
+        afficherMasquerIdWithDelay('zoom_succes');
+
     // Positionnement du nom de l'équipe
     if ($('.separation_nav').length)
         $('.zone_equipe_bandeau').css('top', '83px');
@@ -76,11 +80,19 @@ $(function ()
     $(document).on('click', function (event)
     {
         // Ferme une zone de saisie
-        if ($(event.target).attr('class') == 'fond_saisie')
+        // Ferme une zone de détails
+        if ($(event.target).attr('class') == 'fond_saisie'
+        ||  $(event.target).attr('class') == 'fond_details')
+
             afficherMasquerIdWithDelay(event.target.id);
 
         // Ferme une zone de saisie (préférence film)
-        if ($(event.target).attr('class') == 'fond_saisie_preference')
+        // Ferme le zoom d'un succès
+        // Ferme le zoom d'une image
+        if ($(event.target).attr('class') == 'fond_saisie_preference'
+        ||  $(event.target).attr('class') == 'fond_zoom_succes'
+        ||  $(event.target).attr('class') == 'fond_zoom_image'
+        ||  $(event.target).attr('class') == 'fond_details_admin')
             masquerSupprimerIdWithDelay(event.target.id);
     });
 

@@ -674,13 +674,6 @@ function tailleAutoZones()
     $('.zone_proposition_resume').css('min-height', maxHeight);
 }
 
-// Ferme la saisie des choix
-function closeInputOrDetails(id)
-{
-    if ($('#' + id).css('display') != 'none')
-        afficherMasquerIdWithDelay(id);
-}
-
 // Réinitialise la zone de recherche saisie
 function reinitialisationRechercheLive(idForm)
 {

@@ -98,10 +98,6 @@ $(function ()
     // Ferme au clic sur le fond
     $(document).on('click', function (event)
     {
-        // Ferme le zoom d'une recette
-        if ($(event.target).attr('class') == 'fond_zoom')
-            masquerSupprimerIdWithDelay('zoom_image');
-
         // Réinitialise la saisie d'une recette
         if ($(event.target).attr('class') == 'fond_saisie')
             reinitialisationSaisieRecette('zone_saisie_recette');
@@ -368,7 +364,7 @@ function afficherDetailsRecette(link, id)
     var ingredients      = [];
     var avatarFormatted;
 
-    html += '<div id="zoom_image" class="fond_zoom">';
+    html += '<div id="zoom_image" class="fond_zoom_image">';
         // Photo
         html += '<div class="zone_image_zoom">';
             html += '<img src="' + path_full + '" alt="' + image + '" class="image_zoom_2" />';
