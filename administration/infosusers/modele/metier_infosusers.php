@@ -296,5 +296,8 @@
 
         // Suppression de l'équipe
         physiqueDeleteEquipe($equipe);
+
+        // Message d'alerte
+        $_SESSION['alerts']['team_deleted'] = true;
     }
 ?>
