@@ -156,7 +156,7 @@
 
         $req = $bdd->query('SELECT petits_pedestres_parcours.*, COUNT(petits_pedestres_users.id) AS nombreRuns
                             FROM petits_pedestres_parcours
-                            JOIN petits_pedestres_users ON petits_pedestres_parcours.id = petits_pedestres_users.id_parcours
+                            LEFT JOIN petits_pedestres_users ON petits_pedestres_parcours.id = petits_pedestres_users.id_parcours
                             WHERE petits_pedestres_parcours.id = ' . $idParcours);
 
         $data = $req->fetch();
