@@ -153,7 +153,7 @@
         {
             $fichiersQuotidiens = scandir($dossierQuotidien, 1);
 
-            // Suppression des racines du dossier de la liste
+            // Suppression des racines de dossier
             unset($fichiersQuotidiens[array_search('..', $fichiersQuotidiens)]);
             unset($fichiersQuotidiens[array_search('.', $fichiersQuotidiens)]);
 

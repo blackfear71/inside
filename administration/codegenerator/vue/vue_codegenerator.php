@@ -52,7 +52,7 @@
                             echo 'Ce bouton sert à télécharger une fiche détaillée permettant de déterminer un maximum d\'impacts pouvant intervenir lors de nouveaux développements sur le site.';
                         echo '</div>';
 
-                        echo '<a href="../../fiche_impacts_developpements.xlsx" class="bouton_fiche_generator" download>Télécharger la fiche</a>';
+                        echo '<a href="../../tools/fiche_impacts_developpements.xlsx" class="bouton_fiche_generator" download>Télécharger la fiche</a>';
 
                         // Web
                         echo '<div class="titre_section"><img src="../../includes/icons/admin/informations_grey.png" alt="informations_grey" class="logo_titre_section" /><div class="texte_titre_section">Aide au développement d\'une nouvelle page (web)</div></div>';
