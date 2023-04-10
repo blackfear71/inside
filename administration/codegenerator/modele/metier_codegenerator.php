@@ -488,7 +488,7 @@
         return $javascript;
     }
 
-    // METIER : Télécharge un fichier
+    // METIER : Télécharge le code généré sous forme d'un fichier
     // RETOUR : Fichier
     function downloadCode($post)
     {

@@ -33,27 +33,27 @@
     {
         // Tableau des catégories
         $listCategories = array(
-            'general'          => 'GÉNÉRAL',
-            'portail'          => 'PORTAIL',
-            'movie_house'      => 'MOVIE HOUSE',
-            'food_advisor'     => 'LES ENFANTS ! À TABLE !',
-            'cooking_box'      => 'COOKING BOX',
-            'expense_center'   => 'EXPENSE CENTER',
-            'collector'        => 'COLLECTOR ROOM',
+            'admin'            => 'ADMINISTRATION',
+            'other'            => 'AUTRE',
             'calendars'        => 'CALENDARS',
-            'petits_pedestres' => 'LES PETITS PÉDESTRES',
-            'missions'         => 'MISSIONS : INSIDER',
-            'notifications'    => 'NOTIFICATIONS',
-            'search'           => 'RECHERCHE',
-            'profile'          => 'PROFIL',
+            'collector'        => 'COLLECTOR ROOM',
+            'cooking_box'      => 'COOKING BOX',
+            'bugs'             => 'DEMANDES D\'ÉVOLUTION',
+            'expense_center'   => 'EXPENSE CENTER',
+            'general'          => 'GÉNÉRAL',
             'chat'             => 'INSIDE ROOM',
             'change_log'       => 'JOURNAL DES MODIFICATIONS',
-            'bugs'             => 'DEMANDES D\'ÉVOLUTION',
-            'ideas'            => '#THEBOX',
-            'admin'            => 'ADMINISTRATION',
+            'food_advisor'     => 'LES ENFANTS ! À TABLE !',
+            'petits_pedestres' => 'LES PETITS PÉDESTRES',
+            'missions'         => 'MISSIONS : INSIDER',
+            'movie_house'      => 'MOVIE HOUSE',
+            'notifications'    => 'NOTIFICATIONS',
+            'portail'          => 'PORTAIL',
+            'profile'          => 'PROFIL',
+            'search'           => 'RECHERCHE',
             'cron'             => 'TÂCHES CRON',
             'technical'        => 'TECHNIQUE',
-            'other'            => 'AUTRE'
+            'ideas'            => '#THEBOX'
         );
 
         // Retour

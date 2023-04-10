@@ -45,6 +45,15 @@
                     /* Aide au développement d'une nouvelle page */
                     /*********************************************/
                     echo '<div class="zone_generator_left margin_right_20">';
+                        // Fiche des impacts de développements
+                        echo '<div class="titre_section"><img src="../../includes/icons/admin/download_grey.png" alt="download_grey" class="logo_titre_section" /><div class="texte_titre_section">Fiche des impacts de développements</div></div>';
+
+                        echo '<div class="explications_generator">';
+                            echo 'Ce bouton sert à télécharger une fiche détaillée permettant de déterminer un maximum d\'impacts pouvant intervenir lors de nouveaux développements sur le site.';
+                        echo '</div>';
+
+                        echo '<a href="../../fiche_impacts_developpements.xlsx" class="bouton_fiche_generator" download>Télécharger la fiche</a>';
+
                         // Web
                         echo '<div class="titre_section"><img src="../../includes/icons/admin/informations_grey.png" alt="informations_grey" class="logo_titre_section" /><div class="texte_titre_section">Aide au développement d\'une nouvelle page (web)</div></div>';
 
@@ -84,7 +93,7 @@
                     /* Données de la page à générer */
                     /********************************/
                     echo '<div class="zone_generator_right">';
-                    include('vue/vue_saisie_codegenerator.php');
+                        include('vue/vue_saisie_codegenerator.php');
                     echo '</div>';
 
                     /***************/

@@ -45,7 +45,7 @@
             saveParameters($_POST);
             break;
 
-        case 'doTelecharger':
+        case 'doTelechargerCode':
             downloadCode($_POST);
             break;
 
@@ -84,7 +84,7 @@
             break;
 
         case 'doGenererCode':
-        case 'doTelecharger':
+        case 'doTelechargerCode':
         default:
             break;
     }
@@ -92,7 +92,7 @@
     // Redirection affichage
     switch ($_GET['action'])
     {
-        case 'doTelecharger':
+        case 'doTelechargerCode':
             break;
 
         case 'doGenererCode':
