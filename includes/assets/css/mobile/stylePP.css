@@ -516,6 +516,7 @@
     width: 100%;
     margin-bottom: 1.5vh;
     background-color: #e3e3e3;
+    border-radius: 0.5vh;
 }
 
 .zone_date_participation
