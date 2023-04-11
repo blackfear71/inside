@@ -31,7 +31,7 @@
 
             // Bouton
             echo '<div class="zone_bouton_saisie">';
-                echo '<input type="submit" name="post_avatar" value="Modifier l\'avatar" id="bouton_saisie_avatar" class="saisie_bouton" />';
+                echo '<input type="submit" name="post_avatar" value="Modifier l\'avatar" id="bouton_saisie_avatar" class="bouton_validation" />';
             echo '</div>';
         echo '</form>';
 

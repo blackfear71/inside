@@ -295,7 +295,7 @@
     padding-bottom: 13.5px;
 }
 
-.saisie_bouton
+.saisie_bouton_generator
 {
     width: 100%;
     background-color: #e3e3e3;
@@ -311,7 +311,7 @@
     box-shadow: 0 0 3px #7c7c7c;
 }
 
-.saisie_bouton:hover
+.saisie_bouton_generator:hover
 {
     background-color: #ff1937;
     color: white;

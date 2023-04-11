@@ -324,7 +324,7 @@
 
                                     // Bouton validation
                                     echo '<div class="zone_bouton_saisie">';
-                                        echo '<input type="submit" name="send" value="Générer le calendrier" id="bouton_saisie_generator" class="saisie_bouton" />';
+                                        echo '<input type="submit" name="send" value="Générer le calendrier" id="bouton_saisie_generator" class="saisie_bouton_generator" />';
                                     echo '</div>';
                                 echo '</form>';
                             echo '</div>';
@@ -352,7 +352,7 @@
 
                                         // Bouton sauvegarde
                                         echo '<div class="zone_bouton_saisie">';
-                                            echo '<input type="submit" name="save" value="Sauvegarder le calendrier" id="bouton_saisie_generated" class="saisie_bouton" />';
+                                            echo '<input type="submit" name="save" value="Sauvegarder le calendrier" id="bouton_saisie_generated" class="saisie_bouton_generator" />';
                                         echo '</div>';
                                     echo '</form>';
                                 echo '</div>';
@@ -437,7 +437,7 @@
 
                                     // Bouton validation
                                     echo '<div class="zone_bouton_saisie">';
-                                        echo '<input type="submit" name="send_annexe" value="Générer l\'annexe" id="bouton_saisie_annexe_generator" class="saisie_bouton" />';
+                                        echo '<input type="submit" name="send_annexe" value="Générer l\'annexe" id="bouton_saisie_annexe_generator" class="saisie_bouton_generator" />';
                                     echo '</div>';
                                 echo '</form>';
                             echo '</div>';
@@ -462,7 +462,7 @@
 
                                         // Bouton sauvegarde
                                         echo '<div class="zone_bouton_saisie">';
-                                            echo '<input type="submit" name="save" value="Sauvegarder l\'annexe" id="bouton_saisie_annexe_generated" class="saisie_bouton" />';
+                                            echo '<input type="submit" name="save" value="Sauvegarder l\'annexe" id="bouton_saisie_annexe_generated" class="saisie_bouton_generator" />';
                                         echo '</div>';
                                     echo '</form>';
                                 echo '</div>';
@@ -537,7 +537,7 @@
 
                                         // Bouton validation
                                         echo '<div class="zone_bouton_saisie">';
-                                            echo '<input type="submit" name="send" value="Valider" id="bouton_saisie_calendrier" class="saisie_bouton" />';
+                                            echo '<input type="submit" name="send" value="Valider" id="bouton_saisie_calendrier" class="saisie_bouton_generator" />';
                                         echo '</div>';
                                     echo '</form>';
                                 echo '</div>';
@@ -590,7 +590,7 @@
 
                                         // Bouton validation
                                         echo '<div class="zone_bouton_saisie">';
-                                            echo '<input type="submit" name="send_annexe" value="Valider" id="bouton_saisie_annexe" class="saisie_bouton" />';
+                                            echo '<input type="submit" name="send_annexe" value="Valider" id="bouton_saisie_annexe" class="saisie_bouton_generator" />';
                                         echo '</div>';
                                     echo '</form>';
                                 echo '</div>';

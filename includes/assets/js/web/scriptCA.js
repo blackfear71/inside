@@ -36,7 +36,7 @@ $(function ()
         tabBlock.push({ element: '.zone_bouton_option', property: 'readonly', value: true });
         tabBlock.push({ element: '.zone_bouton_option', property: 'pointer-events', value: 'none' });
         tabBlock.push({ element: '.zone_bouton_option', property: 'color', value: '#a3a3a3' });
-        tabBlock.push({ element: '.saisie_bouton', property: 'display', value: 'none' });
+        tabBlock.push({ element: '.saisie_bouton_generator', property: 'display', value: 'none' });
         
         hideSubmitButton(zoneButton, submitButton, formSaisie, tabBlock);
     });
