@@ -99,7 +99,7 @@
             if (!empty($detailsParcours->getDescription()))
             {
                 echo '<div class="zone_donnee_details_parcours">';
-                    echo '<div class="texte_details_parcours">' . $detailsParcours->getDescription() . '</div>';
+                    echo '<div class="texte_details_parcours">' . nl2br($detailsParcours->getDescription()) . '</div>';
                 echo '</div>';  
             }          
         echo '</div>';

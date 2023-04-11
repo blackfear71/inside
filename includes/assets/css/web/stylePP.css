@@ -555,6 +555,7 @@
     font-size: 100%;
     color: #262626;
     text-align: justify;
+    line-height: 30px;
 }
 
 .texte_details_parcours::first-letter
