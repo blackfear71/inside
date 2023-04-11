@@ -47,7 +47,7 @@ Au travers de l'architecture MVC (Modèle-Vue-Contrôleur) utilisée, plusieurs 
 ### jQuery
 > Utilisé pour les **interactions côté client**. Le jQuery est une bibliothèque Javascript permettant de gérer également des animations et autres modifications sur l'écran de l'utilisateur. Il repose sur le même fonctionnement que l'Ajax en simplifiant toutefois les instructions à taper.
 ### XML
-> Utilisé pour la **structure de données**. Actuellement utilisé uniquement afin de stocker les conversations du Chat, le formatage des données entre balises permet une extraction simple de chaque propriété d'un noeud.
+> Utilisé pour la **structure de données**. Actuellement utilisé uniquement afin de stocker les conversations du Chat, le formatage des données entre balises permet une extraction simple de chaque propriété d'un nœud.
 
 ## Variables utiles
 ### Les couleurs
@@ -112,4 +112,4 @@ Les variables globales ($_SESSION et $_COOKIE) sont généralement organisées s
 | windowChat    | Choix de la fenêtre de chat                         |
 | ***Index***   |                                                     |
 | identifiant   | Identifiant de l'utilisateur connecté               |
-| password      | Mot de passse crypté                                |
+| password      | Mot de passe crypté                                 |
