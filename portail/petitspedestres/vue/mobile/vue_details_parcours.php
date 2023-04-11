@@ -6,7 +6,7 @@
         // Titre
         echo '<div class="titre_section">';
             echo '<img src="../../includes/icons/petitspedestres/parcours_grey.png" alt="parcours_grey" class="logo_titre_section" />';
-            echo '<div class="texte_titre_section">' . $detailsParcours->getName() . '</div>';
+            echo '<div class="texte_titre_section">Le parcours</div>';
         echo '</div>';
 
         // Image

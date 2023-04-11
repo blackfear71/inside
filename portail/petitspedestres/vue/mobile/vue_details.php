@@ -66,7 +66,7 @@
                     /*********/
                     /* Titre */
                     /*********/
-                    echo '<div class="titre_section_mobile">' . mb_strtoupper($titleHead) . '</div>';
+                    echo '<div class="titre_section_mobile">' . mb_strtoupper($detailsParcours->getName()) . '</div>';
 
                     /***********/
                     /* Saisies */
