@@ -39,7 +39,7 @@
             // Distance
             echo '<div class="zone_donnee_details_parcours">';
                 echo '<img src="../../includes/icons/petitspedestres/path_grey.png" alt="path_grey" title="Distance" class="icone_donnee_details_parcours" />';
-                echo '<div class="donnee_details_parcours">' . formatDistanceForDisplay($detailsParcours->getDistance()) . '</div>'; 
+                echo '<div class="donnee_details_parcours">' . formatDistanceForDisplay($detailsParcours->getDistance()) . '</div>';
             echo '</div>';
             
             // Lieu
@@ -94,6 +94,14 @@
                 echo '<img src="../../includes/icons/petitspedestres/participate_grey.png" alt="participate_grey" class="icone_donnee_details_parcours" />';
                 echo '<div class="donnee_details_parcours">Participer à cette course</div>';
             echo '</a>';
+
+            // Description
+            if (!empty($detailsParcours->getDescription()))
+            {
+                echo '<div class="zone_donnee_details_parcours">';
+                    echo '<div class="texte_details_parcours">' . $detailsParcours->getDescription() . '</div>';
+                echo '</div>';  
+            }          
         echo '</div>';
     echo '</div>';
 ?>

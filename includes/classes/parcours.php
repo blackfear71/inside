@@ -90,6 +90,7 @@
         private $name;
         private $distance;
         private $location;
+        private $description;
         private $picture;
         private $document;
         private $type;
@@ -109,6 +110,7 @@
             $this->name            = '';
             $this->distance        = '';
             $this->location        = '';
+            $this->description     = '';
             $this->picture         = '';
             $this->document        = '';
             $this->type            = '';
@@ -152,6 +154,9 @@
             if (isset($data['location']))
                 $this->location        = $data['location'];
 
+            if (isset($data['description']))
+                $this->description     = $data['description'];
+
             if (isset($data['picture']))
                 $this->picture         = $data['picture'];
 
@@ -183,6 +188,7 @@
             $this->name            = htmlspecialchars($data->getName());
             $this->distance        = htmlspecialchars($data->getDistance());
             $this->location        = htmlspecialchars($data->getLocation());
+            $this->description     = htmlspecialchars($data->getDescription());
             $this->picture         = htmlspecialchars($data->getPicture());
             $this->document        = htmlspecialchars($data->getDocument());
             $this->type            = htmlspecialchars($data->getType());
@@ -299,6 +305,17 @@
         public function getLocation()
         {
             return $this->location;
+        }
+
+        // Description
+        public function setDescription($description)
+        {
+            $this->description = $description;
+        }
+
+        public function getDescription()
+        {
+            return $this->description;
         }
 
         // Image

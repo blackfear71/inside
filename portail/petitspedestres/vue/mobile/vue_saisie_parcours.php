@@ -53,6 +53,12 @@
                             echo '<input type="text" name="lieu_parcours" value="' . $_SESSION['save']['lieu_parcours_saisie'] . '" placeholder="Lieu" class="saisie_ligne" required />';
                         echo '</div>';
 
+                        // Description
+                        echo '<div class="zone_saisie_ligne">';
+                            echo '<img src="../../includes/icons/petitspedestres/description_grey.png" alt="description_grey" title="Lieu" class="icone_saisie_textearea" />';
+                            echo '<textarea name="description_parcours" placeholder="Description du parcours" class="saisie_textearea">' . $_SESSION['save']['description_parcours_saisie'] . '</textarea>';
+                        echo '</div>';
+                        
                         // Document
                         echo '<div class="zone_saisie_ligne">';
                             echo '<img src="../../includes/icons/petitspedestres/document_grey.png" alt="document_grey" title="Document" class="icone_saisie" />';

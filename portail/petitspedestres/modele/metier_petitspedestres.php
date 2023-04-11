@@ -15,9 +15,10 @@
         {
             unset($_SESSION['save']);
 
-            $_SESSION['save']['nom_parcours_saisie']      = '';
-            $_SESSION['save']['distance_parcours_saisie'] = '';
-            $_SESSION['save']['lieu_parcours_saisie']     = '';
+            $_SESSION['save']['nom_parcours_saisie']         = '';
+            $_SESSION['save']['distance_parcours_saisie']    = '';
+            $_SESSION['save']['lieu_parcours_saisie']        = '';
+            $_SESSION['save']['description_parcours_saisie'] = '';
         }
     }
 
@@ -118,19 +119,21 @@
         $control_ok = true;
 
         // Récupération des données
-        $identifiant      = $sessionUser['identifiant'];
-        $toDelete         = 'N';
-        $equipe           = $sessionUser['equipe'];
-        $identifiantAdd   = $sessionUser['identifiant'];
-        $identifiantDel   = '';
-        $nomParcours      = $post['nom_parcours'];
-        $distanceParcours = formatNumericForInsert($post['distance_parcours']);
-        $lieuParcours     = $post['lieu_parcours'];
+        $identifiant         = $sessionUser['identifiant'];
+        $toDelete            = 'N';
+        $equipe              = $sessionUser['equipe'];
+        $identifiantAdd      = $sessionUser['identifiant'];
+        $identifiantDel      = '';
+        $nomParcours         = $post['nom_parcours'];
+        $distanceParcours    = formatNumericForInsert($post['distance_parcours']);
+        $lieuParcours        = $post['lieu_parcours'];
+        $descriptionParcours = $post['description_parcours'];
 
         // Sauvegarde en session en cas d'erreur
-        $_SESSION['save']['nom_parcours_saisie']      = $post['nom_parcours'];
-        $_SESSION['save']['distance_parcours_saisie'] = $post['distance_parcours'];
-        $_SESSION['save']['lieu_parcours_saisie']     = $post['lieu_parcours'];
+        $_SESSION['save']['nom_parcours_saisie']         = $post['nom_parcours'];
+        $_SESSION['save']['distance_parcours_saisie']    = $post['distance_parcours'];
+        $_SESSION['save']['lieu_parcours_saisie']        = $post['lieu_parcours'];
+        $_SESSION['save']['description_parcours_saisie'] = $post['description_parcours'];
 
         // Contrôle distance numérique
         $control_ok = controleDonneeNumerique($distanceParcours, 'wrong_distance');
@@ -170,6 +173,7 @@
                 'name'            => $nomParcours,
                 'distance'        => $distanceParcours,
                 'location'        => $lieuParcours,
+                'description'     => $descriptionParcours,
                 'picture'         => $imageParcours['new_name'],
                 'document'        => $documentParcours['new_name'],
                 'type'            => $documentParcours['type']
@@ -202,12 +206,13 @@
         $control_ok = true;
 
         // Récupération des données
-        $idParcours       = $post['id_parcours'];
-        $identifiant      = $sessionUser['identifiant'];
-        $equipe           = $sessionUser['equipe'];
-        $nomParcours      = $post['nom_parcours'];
-        $distanceParcours = formatNumericForInsert($post['distance_parcours']);
-        $lieuParcours     = $post['lieu_parcours'];
+        $idParcours          = $post['id_parcours'];
+        $identifiant         = $sessionUser['identifiant'];
+        $equipe              = $sessionUser['equipe'];
+        $nomParcours         = $post['nom_parcours'];
+        $distanceParcours    = formatNumericForInsert($post['distance_parcours']);
+        $lieuParcours        = $post['lieu_parcours'];
+        $descriptionParcours = $post['description_parcours'];
 
         // Lecture des données du parcours
         $ancienParcours = physiqueParcours($idParcours);
@@ -283,12 +288,13 @@
         if ($control_ok == true)
         {
             $parcours = array(
-                'name'     => $nomParcours,
-                'distance' => $distanceParcours,
-                'location' => $lieuParcours,
-                'picture'  => $imageParcours['new_name'],
-                'document' => $documentParcours['new_name'],
-                'type'     => $documentParcours['type']
+                'name'        => $nomParcours,
+                'distance'    => $distanceParcours,
+                'location'    => $lieuParcours,
+                'description' => $descriptionParcours,
+                'picture'     => $imageParcours['new_name'],
+                'document'    => $documentParcours['new_name'],
+                'type'        => $documentParcours['type']
             );
 
             physiqueUpdateParcours($ancienParcours->getId(), $parcours);
@@ -729,13 +735,14 @@
     {
         // Conversion de l'objet en tableau pour envoyer au Javascript
         $detailsAConvertir = array(
-            'id'       => $detailsParcours->getId(),
-            'name'     => $detailsParcours->getName(),
-            'distance' => $detailsParcours->getDistance(),
-            'location' => $detailsParcours->getLocation(),
-            'picture'  => $detailsParcours->getPicture(),
-            'document' => $detailsParcours->getDocument(),
-            'type'     => $detailsParcours->getType()
+            'id'          => $detailsParcours->getId(),
+            'name'        => $detailsParcours->getName(),
+            'distance'    => $detailsParcours->getDistance(),
+            'location'    => $detailsParcours->getLocation(),
+            'description' => $detailsParcours->getDescription(),
+            'picture'     => $detailsParcours->getPicture(),
+            'document'    => $detailsParcours->getDocument(),
+            'type'        => $detailsParcours->getType()
         );
 
         // Retour

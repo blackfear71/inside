@@ -553,7 +553,7 @@ $(window).on('load', function ()
             fitWidth: true,
             gutter: 10,
             horizontalOrder: true
-        });       
+        });
 
         // On associe une classe pour y ajouter une transition dans le css
         $('.zone_niveau_succes_admin').addClass('masonry');
@@ -763,7 +763,7 @@ function initMasonry()
         fitWidth: true,
         gutter: 10,
         horizontalOrder: true
-    });       
+    });
 }
 
 // Rotation icône affichage log

@@ -302,6 +302,7 @@
                                                                     name,
                                                                     distance,
                                                                     location,
+                                                                    description,
                                                                     picture,
                                                                     document,
                                                                     type)
@@ -312,6 +313,7 @@
                                                                    :name,
                                                                    :distance,
                                                                    :location,
+                                                                   :description,
                                                                    :picture,
                                                                    :document,
                                                                    :type)');
@@ -368,12 +370,13 @@
         global $bdd;
 
         $req = $bdd->prepare('UPDATE petits_pedestres_parcours
-                              SET name     = :name,
-                                  distance = :distance,
-                                  location = :location,
-                                  picture  = :picture,
-                                  document = :document,
-                                  type     = :type
+                              SET name        = :name,
+                                  distance    = :distance,
+                                  location    = :location,
+                                  description = :description,
+                                  picture     = :picture,
+                                  document    = :document,
+                                  type        = :type
                               WHERE id = ' . $idParcours);
 
         $req->execute($parcours);

@@ -98,7 +98,10 @@
     switch ($_GET['action'])
     {
         case 'doAjouterParcours':
-            header('location: details.php?id_parcours=' . $idParcours . '&action=goConsulter');
+            if (!empty($idParcours))
+                header('location: details.php?id_parcours=' . $idParcours . '&action=goConsulter');
+            else
+                header('location: petitspedestres.php?action=goConsulter');
             break;
 
         case 'doAjouterParticipation':

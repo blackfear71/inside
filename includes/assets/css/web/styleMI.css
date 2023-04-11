@@ -109,8 +109,8 @@
 
 .texte_details_mission::first-letter
 {
-    font-size: 250%;
     font-family: inside_font_regular, Verdana, sans-serif;
+    font-size: 250%;
 }
 
 .zone_images_conclusion

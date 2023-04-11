@@ -82,6 +82,7 @@ function initialisationModificationParcours(zone)
     $('#' + zone).find('input[name=nom_parcours]').val(detailsParcours['name']);
     $('#' + zone).find('input[name=distance_parcours]').val(formatNumericForDisplay(detailsParcours['distance']));
     $('#' + zone).find('input[name=lieu_parcours]').val(detailsParcours['location']);
+    $('#' + zone).find('textarea[name=description_parcours]').val(detailsParcours['description']);
     $('#' + zone).find('input[name=document_parcours]').prop('required', false);
     $('#' + zone).find('#document_parcours').html(detailsParcours['document']);
 
