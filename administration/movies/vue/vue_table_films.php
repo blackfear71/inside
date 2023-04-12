@@ -93,7 +93,7 @@
         else
         {
             echo '<tr class="tr_table_admin_empty">';
-                echo '<td colspan="7" class="empty">Pas de films à supprimer...</td>';
+                echo '<td colspan="8" class="empty">Pas de films à supprimer...</td>';
             echo '</tr>';
         }
     echo '</table>';
