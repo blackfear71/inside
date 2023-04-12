@@ -144,6 +144,7 @@
     color: #262626;
     font-size: 2.5vh;
     text-align: justify;
+    word-wrap: break-word;
 }
 
 .distance_parcours
@@ -166,6 +167,7 @@
     color: #262626;
     font-size: 2.5vh;
     text-align: justify;
+    word-wrap: break-word;
 }
 
 .zone_nombre_participations_parcours
