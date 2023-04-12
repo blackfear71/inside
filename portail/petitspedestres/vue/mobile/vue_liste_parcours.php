@@ -25,7 +25,7 @@
                             echo '<div class="distance_parcours">' . formatDistanceForDisplay($parcours->getDistance()) . '</div>';
 
                             // Localisation
-                            echo '<div class="lieu_parcours">' . formatString($parcours->getLocation(), 30) . '</div>';
+                            echo '<div class="lieu_parcours">' . formatString($parcours->getLocation(), 20) . '</div>';
 
                             // Nombre de participations
                             echo '<div class="zone_nombre_participations_parcours">';
