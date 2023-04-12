@@ -21,6 +21,12 @@
 
                         // Localisation
                         echo '<div class="lieu_parcours">' . $parcours->getLocation() . '</div>';
+
+                        // Nombre de participations
+                        echo '<div class="zone_nombre_participations_parcours">';
+                            echo '<img src="../../includes/icons/petitspedestres/users_grey.png" alt="users_grey" title="Nombre de participations" class="icone_nombre_participations" />';
+                            echo '<span class="nombre_participations">' . $parcours->getRuns() . '</span>';
+                        echo '</div>';
                     echo '</a>';
 
                     // Participation

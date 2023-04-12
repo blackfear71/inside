@@ -106,6 +106,12 @@
         // Lecture des parcours
         $listeParcours = physiqueListeParcours($equipe);
         
+        // Récupération du nombre de courses réalisées
+        foreach ($listeParcours as $parcours)
+        {
+            $parcours->setRuns(physiqueNombreRuns($parcours->getId()));
+        }
+
         // Retour
         return $listeParcours;
     }

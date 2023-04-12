@@ -139,7 +139,7 @@
 {
     display: inline-block;
     vertical-align: middle;
-    width: calc(100% - 24vh);
+    width: calc(100% - 30vh);
     font-family: inside_font_regular, Verdana, sans-serif;
     color: #262626;
     font-size: 2.5vh;
@@ -168,6 +168,43 @@
     text-align: justify;
 }
 
+.zone_nombre_participations_parcours
+{
+    display: inline-block;
+    vertical-align: middle;
+    width: 6vh;
+    height: 6vh;
+}
+
+.icone_nombre_participations
+{
+    display: block;
+    margin-top: 0.5vh;
+    margin-left: auto;
+    margin-right: auto;
+    width: 5vh;
+    height: 5vh;
+    filter: drop-shadow(0 0 0.1vh #7c7c7c);
+}
+
+.nombre_participations
+{
+    float: right;
+    position: relative;
+    z-index: 1;
+    margin-top: -2vh;
+    margin-right: -0.5vh;
+    width: 2.5vh;
+    height: 2.5vh;
+    line-height: 2.5vh;
+    background-color: #70d55d;
+    font-family: inside_font_light, Verdana, sans-serif;
+    font-size: 2vh;
+    color: white;
+    border-radius: 50%;
+    text-align: center;
+}
+
 .lien_participer_parcours
 {
     display: inline-block;
@@ -180,6 +217,7 @@
 .icone_parcours
 {
     width: 5vh;
+    filter: drop-shadow(0 0 0.1vh #7c7c7c);
 }
 
 /*** Commun saisies ***/

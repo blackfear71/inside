@@ -97,6 +97,30 @@
         return $listeParcours;
     }
 
+    // PHYSIQUE : Lecture nombre de participations d'un parcours
+    // RETOUR : Nombre de participations
+    function physiqueNombreRuns($idParcours)
+    {
+        // Initialisations
+        $count = 0;
+
+        // Requête
+        global $bdd;
+
+        $req = $bdd->query('SELECT COUNT(*) AS nombreRuns
+                            FROM petits_pedestres_users
+                            WHERE id_parcours = ' . $idParcours);
+
+        $data = $req->fetch();
+
+        $count = $data['nombreRuns'];
+
+        $req->closeCursor();
+
+        // Retour
+        return $count;
+    }
+
     // PHYSIQUE : Lecture participation existante
     // RETOUR : Booléen
     function physiqueParticipationExistante($identifiant, $equipe, $idParcours, $date)
