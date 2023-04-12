@@ -18,11 +18,11 @@
                 echo 'Equipe';
             echo '</td>';
 
-            echo '<td class="width_15">';
+            echo '<td class="width_10">';
                 echo 'Demande par';
             echo '</td>';
 
-            echo '<td class="width_15">';
+            echo '<td class="width_10">';
                 echo 'Ajouté par';
             echo '</td>';
 
@@ -30,6 +30,10 @@
                 echo 'Personnes intéressées';
             echo '</td>';
 
+            echo '<td class="width_10">';
+                echo 'Commentaires';
+            echo '</td>';
+            
             echo '<td class="width_20">';
                 echo 'Actions';
             echo '</td>';
@@ -66,6 +70,10 @@
                         echo $film->getNb_users();
                     echo '</td>';
 
+                    echo '<td class="td_table_admin_centre">';
+                        echo $film->getNb_comments();
+                    echo '</td>';
+                    
                     echo '<td class="td_table_admin_actions">';
                         echo '<form method="post" action="movies.php?action=doSupprimerFilm" class="lien_action_table_admin">';
                             echo '<input type="hidden" name="id_film" value="' . $film->getId() . '" />';

@@ -31,6 +31,9 @@
 
             // Nombre de participants
             $film->setNb_users(physiqueNombreParticipants($film->getId()));
+
+            // Nombre de commentaires
+            $film->setNb_comments(physiqueNombreCommentaires($film->getId()));
         }
 
         // Retour

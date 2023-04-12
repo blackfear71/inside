@@ -109,6 +109,30 @@
         return $count;
     }
 
+    // PHYSIQUE : Comptage du nombre de commentaires
+    // RETOUR : Nombre de commentaires
+    function physiqueNombreCommentaires($idFilm)
+    {
+        // Initialisations
+        $count = 0;
+
+        // Requête
+        global $bdd;
+
+        $req = $bdd->query('SELECT COUNT(*) AS nombreCommentaires
+                            FROM movie_house_comments
+                            WHERE id_film = ' . $idFilm);
+
+        $data = $req->fetch();
+
+        $count = $data['nombreCommentaires'];
+
+        $req->closeCursor();
+
+        // Retour
+        return $count;
+    }
+
     // PHYSIQUE : Lecture données film
     // RETOUR : Objet Movie
     function physiqueDonneesFilm($idFilm)
