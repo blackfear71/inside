@@ -484,6 +484,24 @@
     box-shadow: 0 0 0.5vh #7c7c7c;
 }
 
+.texte_details_parcours
+{
+    display: block;
+    width: 100%;
+    font-family: inside_font_light, Verdana, sans-serif;
+    font-size: 3vh;
+    color: #262626;
+    text-align: justify;
+    line-height: 4.5vh;
+    margin-bottom: 2vh;
+}
+
+.texte_details_parcours::first-letter
+{
+    font-family: inside_font_regular, Verdana, sans-serif;
+    font-size: 6vh;
+}
+
 .document_details_document
 {
     display: block;
@@ -509,22 +527,6 @@
 {
     display: block;
     padding-bottom: 2vh;
-}
-
-.texte_details_parcours
-{
-    font-family: inside_font_light, Verdana, sans-serif;
-    font-size: 3vh;
-    color: #262626;
-    text-align: justify;
-    line-height: 4.5vh;
-    padding-bottom: 2vh;
-}
-
-.texte_details_parcours::first-letter
-{
-    font-family: inside_font_regular, Verdana, sans-serif;
-    font-size: 6vh;
 }
 
 .icone_donnee_details_parcours

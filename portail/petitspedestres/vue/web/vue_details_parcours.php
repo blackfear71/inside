@@ -17,6 +17,10 @@
             echo '</div>';
         }
 
+        // Description
+        if (!empty($detailsParcours->getDescription()))
+            echo '<div class="texte_details_parcours">' . nl2br($detailsParcours->getDescription()) . '</div>';
+        
         // Parcours
         echo '<div class="zone_details_parcours_left">';
             switch ($detailsParcours->getType())
@@ -94,14 +98,6 @@
                 echo '<img src="../../includes/icons/petitspedestres/participate_grey.png" alt="participate_grey" class="icone_donnee_details_parcours" />';
                 echo '<div class="donnee_details_parcours">Participer à cette course</div>';
             echo '</a>';
-
-            // Description
-            if (!empty($detailsParcours->getDescription()))
-            {
-                echo '<div class="zone_donnee_details_parcours">';
-                    echo '<div class="texte_details_parcours">' . nl2br($detailsParcours->getDescription()) . '</div>';
-                echo '</div>';  
-            }          
         echo '</div>';
     echo '</div>';
 ?>

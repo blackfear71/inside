@@ -127,7 +127,7 @@
         $nomParcours         = $post['nom_parcours'];
         $distanceParcours    = formatNumericForInsert($post['distance_parcours']);
         $lieuParcours        = $post['lieu_parcours'];
-        $descriptionParcours = $post['description_parcours'];
+        $descriptionParcours = trim($post['description_parcours']);
 
         // Sauvegarde en session en cas d'erreur
         $_SESSION['save']['nom_parcours_saisie']         = $post['nom_parcours'];
@@ -212,7 +212,7 @@
         $nomParcours         = $post['nom_parcours'];
         $distanceParcours    = formatNumericForInsert($post['distance_parcours']);
         $lieuParcours        = $post['lieu_parcours'];
-        $descriptionParcours = $post['description_parcours'];
+        $descriptionParcours = trim($post['description_parcours']);
 
         // Lecture des données du parcours
         $ancienParcours = physiqueParcours($idParcours);
