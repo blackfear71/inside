@@ -139,7 +139,7 @@
 {
     display: inline-block;
     vertical-align: middle;
-    width: calc(100% - 30vh);
+    width: calc(100% - 26vh);
     font-family: inside_font_regular, Verdana, sans-serif;
     color: #262626;
     font-size: 2.5vh;
@@ -151,7 +151,7 @@
 {
     display: inline-block;
     vertical-align: middle;
-    width: 12vh;
+    width: 10vh;
     font-family: inside_font_light, Verdana, sans-serif;
     color: #262626;
     font-size: 2.5vh;
@@ -162,7 +162,7 @@
 {
     display: inline-block;
     vertical-align: middle;
-    width: 12vh;
+    width: 10vh;
     font-family: inside_font_light, Verdana, sans-serif;
     color: #262626;
     font-size: 2.5vh;
