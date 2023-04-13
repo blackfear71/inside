@@ -136,7 +136,8 @@
     display: inline-block;
     vertical-align: middle;
     width: calc(100% - 70px);
-    padding: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .nom_parcours
@@ -148,6 +149,8 @@
     color: #262626;
     font-size: 100%;
     text-align: justify;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .distance_parcours
@@ -170,6 +173,8 @@
     color: #262626;
     font-size: 100%;
     text-align: justify;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .zone_nombre_participations_parcours
