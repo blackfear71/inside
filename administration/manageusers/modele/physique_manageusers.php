@@ -224,7 +224,7 @@
                             LEFT JOIN expense_center_users ON expense_center.id = expense_center_users.id_expense
                             WHERE expense_center.buyer = "' . $identifiant . '" OR expense_center_users.identifiant = "' . $identifiant . '"
                             GROUP BY expense_center.id
-                            ORDER BY id ASC');
+                            ORDER BY expense_center.id ASC');
 
         while ($data = $req->fetch())
         {
@@ -461,7 +461,7 @@
                             WHERE NOT EXISTS (SELECT id, id_expense
                                               FROM expense_center_users
                                               WHERE expense_center.id = expense_center_users.id_expense)
-                            ORDER BY id ASC');
+                            ORDER BY expense_center.id ASC');
 
         while ($data = $req->fetch())
         {
