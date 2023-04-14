@@ -374,4 +374,16 @@
 
         $req->closeCursor();
     }
+
+    /****************************************************************************/
+    /********************************** DELETE **********************************/
+    /****************************************************************************/
+    function physiqueDeleteSemaineGateau($semaine, $annee, $equipe)
+    {
+        // Requête
+        global $bdd;
+
+        $req = $bdd->exec('DELETE FROM cooking_box
+                           WHERE week = "' . $semaine . '" AND year = "' . $annee . '" AND team = "' . $equipe . '"');
+    }
 ?>

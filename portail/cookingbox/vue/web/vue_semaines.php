@@ -24,10 +24,27 @@
                     if ($currentWeek->getCooked() == 'N')
                     {
                         echo '<div id="boutons_current_week">';
+                            // Ajout utilisateur
                             echo '<a id="choix_semaine_courante_' . date('W') . '" class="bouton_semaine afficherUtilisateursCurrent">';
                                 echo 'Modifier';
                             echo '</a>';
 
+                            // Suppression utilisateur
+                            if (empty($currentWeek->getName())
+                            AND empty($currentWeek->getPicture())
+                            AND empty($currentWeek->getIngredients())
+                            AND empty($currentWeek->getRecipe())
+                            AND empty($currentWeek->getTips()))
+                            {
+                                echo '<form id="delete_current_week" method="post" action="cookingbox.php?year=' . $_GET['year'] . '&action=doSupprimerSemaine">';
+                                    echo '<input type="hidden" name="week_cake" value="' . $currentWeek->getWeek() . '" />';
+                                    echo '<input type="hidden" name="year_cake" value="' . $currentWeek->getYear() . '" />';
+                                    echo '<input type="submit" name="delete_cake" value="Supprimer" title="Supprimer" class="bouton_semaine_2 eventConfirm" />';
+                                    echo '<input type="hidden" value="Supprimer ' . $currentWeek ->getPseudo() . ' de la semaine ' . formatWeekForDisplay(date('W')) . ' ?" class="eventMessage" />';
+                                echo '</form>';
+                            }
+
+                            // Validation utilisateur
                             if ($currentWeek->getIdentifiant() == $_SESSION['user']['identifiant'])
                             {
                                 echo '<form method="post" action="cookingbox.php?year=' . $_GET['year'] . '&action=doValiderSemaine">';
@@ -42,6 +59,7 @@
                     {
                         echo '<div class="cake_done">Le gâteau a été fait pour cette semaine !</div>';
 
+                        // Annulation utilisateur
                         if ($currentWeek->getIdentifiant() == $_SESSION['user']['identifiant'])
                         {
                             echo '<form method="post" action="cookingbox.php?year=' . $_GET['year'] . '&action=doAnnulerSemaine">';
@@ -62,6 +80,7 @@
                 // Bouton d'action
                 echo '<div class="zone_boutons_2" id="zone_current_week">';
                     echo '<div id="boutons_current_week">';
+                        // Ajout utilisateur
                         echo '<a id="choix_semaine_courante_' . date('W') . '" class="bouton_semaine afficherUtilisateursCurrent">';
                             echo 'Modifier';
                         echo '</a>';
@@ -96,9 +115,25 @@
                 // Bouton d'action
                 echo '<div class="zone_boutons" id="zone_next_week">';
                     echo '<div id="boutons_next_week">';
+                        // Ajout utilisateur
                         echo '<a id="choix_semaine_suivante_' . $weekNext . '" class="bouton_semaine afficherUtilisateursNext">';
                             echo 'Modifier';
                         echo '</a>';
+
+                        // Suppression utilisateur
+                        if (empty($nextWeek->getName())
+                        AND empty($nextWeek->getPicture())
+                        AND empty($nextWeek->getIngredients())
+                        AND empty($nextWeek->getRecipe())
+                        AND empty($nextWeek->getTips()))
+                        {
+                            echo '<form id="delete_next_week" method="post" action="cookingbox.php?year=' . $_GET['year'] . '&action=doSupprimerSemaine">';
+                                echo '<input type="hidden" name="week_cake" value="' . $nextWeek->getWeek() . '" />';
+                                echo '<input type="hidden" name="year_cake" value="' . $nextWeek->getYear() . '" />';
+                                echo '<input type="submit" name="delete_cake" value="Supprimer" title="Supprimer" class="bouton_semaine_2 eventConfirm" />';
+                                echo '<input type="hidden" value="Supprimer ' . $nextWeek ->getPseudo() . ' de la semaine ' . $weekNext . ' ?" class="eventMessage" />';
+                            echo '</form>';
+                        }
                     echo '</div>';
                 echo '</div>';
             }
@@ -111,6 +146,7 @@
                 // Bouton d'action
                 echo '<div class="zone_boutons_2" id="zone_next_week">';
                     echo '<div id="boutons_next_week">';
+                        // Ajout utilisateur
                         echo '<a id="choix_semaine_suivante_' . $weekNext . '" class="bouton_semaine afficherUtilisateursNext">';
                             echo 'Modifier';
                         echo '</a>';

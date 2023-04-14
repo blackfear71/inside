@@ -227,7 +227,7 @@
 }
 
 /*** Saisie semaine ***/
-.form_saisie_semaine, .form_saisie_realisation, .form_saisie_annulation
+.form_saisie_semaine, .form_saisie_suppression, .form_saisie_realisation, .form_saisie_annulation
 {
     width: 100%;
 }

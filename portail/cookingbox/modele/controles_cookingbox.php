@@ -35,6 +35,29 @@
         return $control_ok;
     }
 
+    // CONTROLE : Semaine renseignée (lors de la suppression de la semaine)
+    // RETOUR : Booléen
+    function controleSemaineRenseignee($semaineGateau)
+    {
+        // Initialisations
+        $control_ok = true;
+
+        // Contrôle
+        if ($semaineGateau->getCooked() == 'Y'
+        OR  !empty($semaineGateau->getName())
+        OR  !empty($semaineGateau->getPicture())
+        OR  !empty($semaineGateau->getIngredients())
+        OR  !empty($semaineGateau->getRecipe())
+        OR  !empty($semaineGateau->getTips()))
+        {
+            $_SESSION['alerts']['recipe_not_empty'] = true;
+            $control_ok                             = false;
+        }
+
+        // Retour
+        return $control_ok;
+    }
+
     // CONTROLE : Element numérique et positif
     // RETOUR : Booléen
     function controleNumerique($element, $error)

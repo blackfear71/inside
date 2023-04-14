@@ -349,6 +349,22 @@ function afficherSaisieSemaine(idSemaine)
         else
             $('#zone_saisie_semaine').find('select[name=select_user] option:selected').prop('selected', false);
 
+        // Suppression semaine
+        if (semaine['name'] == '' && semaine['picture'] == '' && semaine['ingredients'] == '' && semaine['recipe'] == '' && semaine['tips'] == '')
+        {
+            $('#zone_saisie_semaine').find('.form_saisie_suppression').css('display', 'block');
+            $('#zone_saisie_semaine').find('.form_saisie_suppression').find('input[name=week_cake]').val(semaine['week']);
+            $('#zone_saisie_semaine').find('.form_saisie_suppression').find('input[name=year_cake]').val(semaine['year']);
+            $('#zone_saisie_semaine').find('.form_saisie_suppression').find('input[name=message]').val('Supprimer ' + semaine['pseudo'] + ' de la semaine ' + semaine['week'] + ' ?');
+        }
+        else
+        {
+            $('#zone_saisie_semaine').find('.form_saisie_suppression').css('display', 'none');
+            $('#zone_saisie_semaine').find('.form_saisie_suppression').find('input[name=week_cake]').val('');
+            $('#zone_saisie_semaine').find('.form_saisie_suppression').find('input[name=year_cake]').val('');
+            $('#zone_saisie_semaine').find('.form_saisie_suppression').find('input[name=message]').val('');
+        }
+
         // Je l'ai fait
         $('#zone_saisie_semaine').find('.cake_done').css('display', 'none');
 
@@ -365,6 +381,7 @@ function afficherSaisieSemaine(idSemaine)
             $('#zone_saisie_semaine').find('.form_saisie_realisation').find('input[name=year_cake]').val('');
         }
 
+        // Annulation semaine
         $('#zone_saisie_semaine').find('.form_saisie_annulation').css('display', 'none');
         $('#zone_saisie_semaine').find('.form_saisie_annulation').find('input[name=week_cake]').val('');
         $('#zone_saisie_semaine').find('.form_saisie_annulation').find('input[name=year_cake]').val('');
@@ -380,9 +397,20 @@ function afficherSaisieSemaine(idSemaine)
         // Numéro de semaine
         $('#zone_saisie_semaine').find('input[name=week]').val('');
 
+        // Suppression semaine
+        $('#zone_saisie_semaine').find('.form_saisie_suppression').css('display', 'none');
+        $('#zone_saisie_semaine').find('.form_saisie_suppression').find('input[name=week_cake]').val('');
+        $('#zone_saisie_semaine').find('.form_saisie_suppression').find('input[name=year_cake]').val('');
+        $('#zone_saisie_semaine').find('.form_saisie_suppression').find('input[name=message]').val('');
+
         // Je l'ai fait
         $('#zone_saisie_semaine').find('.cake_done').css('display', 'block');
+        
+        $('#zone_saisie_semaine').find('.form_saisie_realisation').css('display', 'none');
+        $('#zone_saisie_semaine').find('.form_saisie_realisation').find('input[name=week_cake]').val('');
+        $('#zone_saisie_semaine').find('.form_saisie_realisation').find('input[name=year_cake]').val('');
 
+        // Annulation semaine
         if (semaine['identifiant'] == userSession)
         {
             $('#zone_saisie_semaine').find('.form_saisie_annulation').css('display', 'block');
@@ -395,10 +423,6 @@ function afficherSaisieSemaine(idSemaine)
             $('#zone_saisie_semaine').find('.form_saisie_annulation').find('input[name=week_cake]').val('');
             $('#zone_saisie_semaine').find('.form_saisie_annulation').find('input[name=year_cake]').val('');
         }
-
-        $('#zone_saisie_semaine').find('.form_saisie_realisation').css('display', 'none');
-        $('#zone_saisie_semaine').find('.form_saisie_realisation').find('input[name=week_cake]').val('');
-        $('#zone_saisie_semaine').find('.form_saisie_realisation').find('input[name=year_cake]').val('');
     }
 
     // Affichage zone de saisie

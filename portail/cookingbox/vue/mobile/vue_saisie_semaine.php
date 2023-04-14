@@ -26,6 +26,14 @@
                         echo '<input type="submit" name="submit_week" value="Valider" class="lien_saisie_form" />';
                     echo '</form>';
 
+                    // Suppression
+                    echo '<form id="delete_week" method="post" action="cookingbox.php?year=' . $_GET['year'] . '&action=doSupprimerSemaine" class="form_saisie_suppression">';
+                        echo '<input type="hidden" name="week_cake" value="" />';
+                        echo '<input type="hidden" name="year_cake" value="" />';
+                        echo '<input type="submit" name="delete_cake" value="Supprimer" title="Supprimer" class="lien_saisie_form eventConfirm" />';
+                        echo '<input type="hidden" name="message" value="" class="eventMessage" />';
+                    echo '</form>';
+                    
                     // Je l'ai fait
                     echo '<div class="cake_done">Le gâteau a été fait pour cette semaine !</div>';
 

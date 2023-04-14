@@ -75,6 +75,11 @@
         $semaineAConvertir['week']        = $semaine->getWeek();
         $semaineAConvertir['year']        = $semaine->getYear();
         $semaineAConvertir['cooked']      = $semaine->getCooked();
+        $semaineAConvertir['name']        = $semaine->getName();
+        $semaineAConvertir['picture']     = $semaine->getPicture();
+        $semaineAConvertir['ingredients'] = $semaine->getIngredients();
+        $semaineAConvertir['recipe']      = $semaine->getRecipe();
+        $semaineAConvertir['tips']        = $semaine->getTips();
 
         // Retour
         return $semaineAConvertir;
@@ -234,6 +239,31 @@
             // Modification de l'enregistrement en base
             else
                 physiqueUpdateSemaineGateau($week, $year, $identifiant, $equipe);
+        }
+    }
+
+    // METIER : Supprime l'utilisateur d'une semaine
+    // RETOUR : Aucun
+    function deleteCake($post, $equipe)
+    {
+        // Initialisations
+        $control_ok = true;
+
+        // Récupération des données
+        $week = $post['week_cake'];
+        $year = $post['year_cake'];
+
+        // Récupération des données de la semaine concernée
+        $semaineGateau = physiqueSemaineGateau($equipe, $week, $year);
+
+        if (!empty($semaineGateau->getIdentifiant()))
+        {
+            // Contrôle semaine réalisée
+            $controle_ok = controleSemaineRenseignee($semaineGateau);
+
+            // Suppression de l'enregistrement en base
+            if ($controle_ok == true)
+                physiqueDeleteSemaineGateau($week, $year, $equipe);
         }
     }
 

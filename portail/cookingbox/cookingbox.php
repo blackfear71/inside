@@ -66,6 +66,11 @@
             updateCake($_POST, $_SESSION['user']['equipe']);
             break;
 
+        case 'doSupprimerSemaine':
+            // Suppression d'une semaine (utilisateur choisi)
+            deleteCake($_POST, $_SESSION['user']['equipe']);
+            break;
+
         case 'doValiderSemaine':
             // Validation d'une semaine (par l'utilisateur choisi)
             validateCake('Y', $_POST, $_SESSION['user']);
@@ -153,6 +158,7 @@
             break;
 
         case 'doModifierSemaine':
+        case 'doSupprimerSemaine':
         case 'doValiderSemaine':
         case 'doAnnulerSemaine':
         case 'doAjouterRecette':
@@ -166,6 +172,7 @@
     switch ($_GET['action'])
     {
         case 'doModifierSemaine':
+        case 'doSupprimerSemaine':
         case 'doValiderSemaine':
         case 'doAnnulerSemaine':
         case 'doSupprimerRecette':
