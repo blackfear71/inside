@@ -1495,6 +1495,7 @@
 {
     display: block;
     margin-top: 5px;
+    margin-bottom: 5px;
     font-family: inside_font_regular, Verdana, sans-serif;
     font-size: 120%;
     background-color: #ff1937;

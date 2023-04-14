@@ -38,6 +38,9 @@
                             // Logo succès
                             echo '<img src="../../includes/images/profil/success/' . $success->getReference() . '.png" alt="' . $success->getReference() . '" class="logo_succes" />';
 
+                            // Référence
+                            echo '<div class="reference_succes">Ref. ' . $success->getReference() . '</div>';
+                            
                             // Titre succès
                             echo '<div class="titre_succes">' . $success->getTitle() . '</div>';
 
