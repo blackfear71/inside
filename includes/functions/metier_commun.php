@@ -1502,7 +1502,7 @@
 
     // METIER : Extraction de la base de données
     // RETOUR : Contenu du fichier à générer
-    function extractBdd()
+    function extractBdd($isKitInstallation)
     {
         // Initialisations
         $contenu = '';
@@ -1515,8 +1515,8 @@
 -- Généré le :  ' . $semaine[date('w')] . ' ' . date('d') . ' ' . $mois[date('n')] . ' ' . date('Y') . ' à ' . date('H:i') . '
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
 SET time_zone = "+00:00";
-
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -1526,6 +1526,13 @@ SET time_zone = "+00:00";
 --
 -- Base de données :  `inside`
 --
+
+DROP DATABASE IF EXISTS `inside`;
+CREATE DATABASE IF NOT EXISTS `inside`
+
+/*!40100 DEFAULT CHARACTER SET latin1 */;
+
+USE `inside`;
 
 ';
 
@@ -1543,27 +1550,90 @@ SET time_zone = "+00:00";
 
 --
 -- Structure de la table `' . $table . '`
---';
+--
+
+DROP TABLE IF EXISTS `' . $table . '`;
+';
 
             // Initialisation du contenu de la table (CREATE TABLE)
-            $contenu .= physiqueCreateTable($table);
+            $create = physiqueCreateTable($table);
 
-            // Description de la table
-            $contenu .= '--
--- Contenu de la table `' . $table . '`
+            // Remplacements
+            $create = str_replace('CREATE TABLE', 'CREATE TABLE IF NOT EXISTS', $create);
+
+            if ($isKitInstallation == true)
+            {
+                switch ($table)
+                {
+                    case 'alerts':
+                    case 'success':
+                        break;
+    
+                    case 'users':
+                        $create = str_replace('AUTO_INCREMENT=' . physiqueAutoIncrementTable($table), 'AUTO_INCREMENT=2', $create);
+                        break;
+    
+                    default:
+                        $create = str_replace('AUTO_INCREMENT=' . physiqueAutoIncrementTable($table) . ' ', '', $create);
+                        break;
+                }
+            }
+
+            $contenu .= $create;
+
+            // Contenu de la table
+            if ($isKitInstallation == true)
+            {
+                switch ($table)
+                {
+                    case 'alerts':
+                    case 'success':
+                        // Description de la table
+                        $contenu .= '--
+-- Déchargement des données de la table `' . $table . '`
 --
 ';
 
-            // Récupération du contenu de chaque table
-            $contenu .= physiqueContenuTable($table, $dimensionsTable);
+                        // Récupération du contenu de la table
+                        $contenu .= physiqueContenuTable($table, $dimensionsTable);
+                        break;
+
+                    case 'users':
+                        $contenu .= '--
+-- Déchargement des données de la table `' . $table . '`
+--
+
+';
+
+                        $contenu .= 'INSERT INTO `users` (`id`, `identifiant`, `team`, `new_team`, `salt`, `password`, `ping`, `status`, `pseudo`, `avatar`, `email`, `anniversary`, `experience`, `expenses`) VALUES
+(1, \'admin\', \'\', \'\', 1168419731, \'cffa135df4cccc4ddb6cc581aa4a238bf12cd6d7\', \'\', \'U\', \'Administrateur\', \'\', \'\', \'\', 0, 0);';
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+            else
+            {
+                // Description de la table
+                $contenu .= '--
+-- Déchargement des données de la table `' . $table . '`
+--
+';
+
+                // Récupération du contenu de chaque table
+                $contenu .= physiqueContenuTable($table, $dimensionsTable);
+            }
         }
 
         // Fin de la table
-        $contenu .= "
+        $contenu .= '
+
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-";
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;';
 
         // Retour
         return $contenu;

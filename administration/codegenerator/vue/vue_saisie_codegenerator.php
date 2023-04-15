@@ -1,4 +1,23 @@
 <?php
+    /********************************/
+    /*** Extraction structure BDD ***/ 
+    /********************************/
+    // Titre
+    echo '<div class="titre_section"><img src="../../includes/icons/admin/tools_grey.png" alt="tools_grey" class="logo_titre_section" /><div class="texte_titre_section">Génération du script pour le kit d\'installation</div></div>';
+
+    // Explications
+    echo '<div class="explications_generator">';
+        echo 'Ce bouton sert à télécharger la structure de la base de données ainsi que le contenu des tables <strong>alerts</strong> et <strong>success</strong>. Un enregistrement <strong>admin</strong> est également présent dans la table <strong>users</strong>. Le script téléchargé doit être inséré dans le kit d\'installation <strong>install.rar</strong> à chaque mise à jour de la base ou des enregistrements cités.';
+    echo '</div>';
+
+    // Extraction structure BDD
+    echo '<form method="post" action="codegenerator.php?action=doExtraireStructureBase">';
+        echo '<input type="submit" name="export" value="Extraire la structure" class="bouton_fiche_generator" />';
+    echo '</form>';
+
+    /****************************************/
+    /*** Paramètres de géénration du code ***/ 
+    /****************************************/
     // Titre
     echo '<div class="titre_section"><img src="../../includes/icons/admin/datas_grey.png" alt="datas_grey" class="logo_titre_section" /><div class="texte_titre_section">Données de la page à générer</div></div>';
 

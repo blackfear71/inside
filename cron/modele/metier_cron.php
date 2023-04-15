@@ -617,7 +617,7 @@
     function createExtractBdd()
     {
         // Appel extraction BDD
-        $contenu = extractBdd();
+        $contenu = extractBdd(false);
 
         // On vérifie la présence des dossiers, sinon on les créé
         $dossier = 'databases';

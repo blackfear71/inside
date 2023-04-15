@@ -377,7 +377,7 @@
     function saveBdd()
     {
         // Appel extraction BDD
-        $contenu = extractBdd();
+        $contenu = extractBdd(false);
 
         // Génération nom du fichier
         $fileName = 'inside_(' . date('d-m-Y') . '_' . date('H-i-s') . ')_' . rand(1, 11111111) . '.sql';

@@ -442,6 +442,25 @@
         return $dimensionsTable;
     }
 
+    // PHYSIQUE : Lecture du AUTO_INCREMENT d'une table
+    // RETOUR : AUTO_INCREMENT d'une table
+    function physiqueAutoIncrementTable($table)
+    {
+        // Requête
+        global $bdd;
+        
+        $req = $bdd->query('SELECT `AUTO_INCREMENT`
+                            FROM  INFORMATION_SCHEMA.TABLES
+                            WHERE TABLE_SCHEMA = "inside"
+                            AND   TABLE_NAME   = "' . $table . '"');
+                
+        $data = $req->fetch();
+
+        $req->closeCursor();
+
+        return $data[0];
+    }
+
     // PHYSIQUE : Lecture du CREATE TABLE d'une table
     // RETOUR : CREATE TABLE d'une table
     function physiqueCreateTable($table)
@@ -453,10 +472,10 @@
 
         $data = $req->fetch();
 
-        $createTable = "\n\n" . $data[1] . ";\n\n";
+        $createTable = $data[1] . ";\n\n";
 
         $req->closeCursor();
-
+        
         // Retour
         return $createTable;
     }
@@ -472,13 +491,14 @@
         global $bdd;
 
         $req = $bdd->query('SELECT *
-                            FROM ' . $table);
+                            FROM ' . $table . '
+                            ORDER BY id ASC');
 
         for ($i = 0, $lignesInserees = 0; $i < $dimensionsTable['nombre_colonnes']; $i++, $lignesInserees = 0)
         {
             while ($data = $req->fetch())
             {
-                // Si c'est la première ligne, on insère une instruction INSERT INTO)
+                // Si c'est la première ligne, on insère une instruction INSERT INTO
                 if ($lignesInserees == 0)
                     $contenu .= "\nINSERT INTO `" . $table . '` (' . $dimensionsTable['colonnes'] . ') VALUES';
 

@@ -49,7 +49,7 @@
                         echo '<div class="titre_section"><img src="../../includes/icons/admin/download_grey.png" alt="download_grey" class="logo_titre_section" /><div class="texte_titre_section">Fiche des impacts de développements</div></div>';
 
                         echo '<div class="explications_generator">';
-                            echo 'Ce bouton sert à télécharger une fiche détaillée permettant de déterminer un maximum d\'impacts pouvant intervenir lors de nouveaux développements sur le site.';
+                            echo 'Ce bouton sert à télécharger une fiche détaillée permettant de déterminer un maximum d\'impacts pouvant intervenir lors de nouveaux développements sur le site. Il est conseillé de la télécharger, d\'en prendre connaissance et de la compléter au fur et à mesure des développements.';
                         echo '</div>';
 
                         echo '<a href="../../tools/fiche_impacts_developpements.xlsx" class="bouton_fiche_generator" download>Télécharger la fiche</a>';

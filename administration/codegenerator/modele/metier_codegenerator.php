@@ -503,4 +503,23 @@
         // Retour
         echo $contenu;
     }
+
+    // METIER : Extraction de la structure base de données
+    // RETOUR : Aucun
+    function extractStructureBdd()
+    {
+        // Appel extraction BDD
+        $contenu = extractBdd(true);
+
+        // Génération nom du fichier
+        $fileName = 'inside.sql';
+
+        // Génération du fichier
+        header('Content-Type: application/octet-stream');
+        header('Content-Transfer-Encoding: Binary');
+        header('Content-disposition: attachment; filename="' . $fileName . '"');
+
+        // Retour
+        echo $contenu;
+    }
 ?>

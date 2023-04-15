@@ -49,6 +49,10 @@
             downloadCode($_POST);
             break;
 
+        case 'doExtraireStructureBase':
+            extractStructureBdd();
+            break;
+
         default:
             // Contrôle action renseignée URL
             header('location: codegenerator.php?action=goConsulter');
@@ -85,6 +89,7 @@
 
         case 'doGenererCode':
         case 'doTelechargerCode':
+        case 'doExtraireStructureBase':
         default:
             break;
     }
@@ -93,6 +98,7 @@
     switch ($_GET['action'])
     {
         case 'doTelechargerCode':
+        case 'doExtraireStructureBase':
             break;
 
         case 'doGenererCode':
