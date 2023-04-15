@@ -212,6 +212,23 @@
     text-align: center;
 }
 
+.nombre_participations_zero
+{
+    float: right;
+    position: relative;
+    z-index: 1;
+    margin-top: -12px;
+    width: 18px;
+    height: 18px;
+    line-height: 18px;
+    background-color: #b3b3b3;
+    font-family: inside_font_light, Verdana, sans-serif;
+    font-size: 70%;
+    color: white;
+    border-radius: 50%;
+    text-align: center;
+}
+
 .lien_participer_parcours
 {
     display: inline-block;
