@@ -110,7 +110,7 @@
             /* Caché pour modification */
             /***************************/
             echo '<div id="modifier_succes_' . $success->getId() . '" class="zone_ensemble_succes" style="display: none;">';
-                echo '<form method="post" action="success.php?action=doModifierSucces">';
+                echo '<form method="post" action="success.php?action=doModifierSucces" enctype="multipart/form-data">';
                     // Valider
                     echo '<input type="submit" name="update_success" value="" title="Valider" class="icone_valider_succes" />';
 
@@ -131,7 +131,18 @@
 
                         echo '<div class="zone_succes_gauche">';
                             // Logo succès
-                            echo '<img src="../../includes/images/profil/success/' . $success->getReference() . '.png" alt="' . $success->getReference() . '" class="logo_succes" />';
+                            echo '<div class="zone_modification_image_succes">';
+                                echo '<input type="hidden" name="MAX_FILE_SIZE" value="15728640" />';
+                    
+                                echo '<div class="zone_parcourir_modification_succes">';
+                                    echo '<img src="../../includes/icons/common/picture.png" alt="picture" class="logo_saisie_image" />';
+                                    echo '<input type="file" accept=".png" name="success" id="fichier_' . $success->getId() . '" class="bouton_parcourir_modification_succes loadModifierSucces" />';
+                                echo '</div>';
+                    
+                                echo '<div class="mask_modification_succes">';
+                                    echo '<img src="../../includes/images/profil/success/' . $success->getReference() . '" id="image_succes_' . $success->getId() . '" alt="' . $success->getReference() . '" class="image_succes" />';
+                                echo '</div>';
+                            echo '</div>';
 
                             // Référence
                             echo '<div class="reference_succes">Ref. ' . $success->getReference() . '</div>';

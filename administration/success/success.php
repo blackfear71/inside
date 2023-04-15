@@ -44,7 +44,7 @@
 
         case 'doModifierSucces':
             // Mise à jour d'un succès
-            $idSucces = updateSuccess($_POST);
+            $idSucces = updateSuccess($_POST, $_FILES);
             break;
 
         case 'doSupprimerSucces':

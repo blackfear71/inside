@@ -169,7 +169,7 @@
 
     // METIER : Modification succès
     // RETOUR : Id succès
-    function updateSuccess($post)
+    function updateSuccess($post, $files)
     {
         // Initialisations
         $control_ok = true;
@@ -202,6 +202,37 @@
         // Contrôle condition numérique et positif
         if ($control_ok == true)
             $control_ok = controleNumerique($limite, 'limit_not_numeric');
+
+        // Suppression ancienne image et insertion nouvelle
+        if (!empty($files['success']['name']))
+        {
+            // Vérification des dossiers et contrôle des fichiers
+            if ($control_ok == true)
+            {
+                // Dossier de destination
+                $dossier = '../../includes/images/profil/success';
+
+                // Contrôles communs d'un fichier
+                $fileDatas = controlsUploadFile($files['success'], $reference, 'png');
+
+                // Récupération contrôles
+                $control_ok = controleFichier($fileDatas);
+            }
+
+            // Traitement des images
+            if ($control_ok == true)
+            {
+                // Suppression de l'ancienne image
+                unlink('../../includes/images/profil/success/' . $reference . '.png');
+
+                // Upload nouvelle image
+                $control_ok = uploadFile($fileDatas, $dossier);
+            }
+
+            // Création miniature avec une hauteur/largeur max de 500px
+            if ($control_ok == true)
+                imageThumb($dossier . '/' . $fileDatas['new_name'], $dossier . '/' . $fileDatas['new_name'], 500, false, true);
+        }
 
         // Modification de l'enregistrement en base
         if ($control_ok == true)

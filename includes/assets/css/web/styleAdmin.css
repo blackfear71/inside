@@ -1009,8 +1009,7 @@
     line-height: 116px;
     border-style: dashed;
     border-width: 3px;
-    border-top-left-radius: 2px;
-    border-top-right-radius: 2px;
+    border-radius: 2px;
     border-color: #a3a3a3;
     color: #a3a3a3;
     text-align: center;
@@ -1489,12 +1488,13 @@
 {
     display: block;
     width: 140px;
+    border-radius: 2px;
 }
 
 .reference_succes
 {
     display: block;
-    margin-top: 5px;
+    margin-top: 10px;
     margin-bottom: 5px;
     font-family: inside_font_regular, Verdana, sans-serif;
     font-size: 120%;
@@ -1622,6 +1622,49 @@
     padding: 10px;
     font-family: inside_font_light, Verdana, sans-serif;
     color: #262626;
+    text-align: center;
+}
+
+/*** Modification succès ***/
+.zone_modification_image_succes
+{
+    display: block;
+    width: 139.5px;
+}
+
+.zone_parcourir_modification_succes
+{
+    display: inline-block;
+    width: 133.5px;
+    height: 133.5px;
+    line-height: 133.5px;
+    border-style: dashed;
+    border-width: 3px;
+    border-radius: 2px;
+    border-color: white;
+    color: #a3a3a3;
+    text-align: center;
+    overflow: hidden;
+}
+
+.bouton_parcourir_modification_succes
+{
+    display: block;
+    opacity: 0;
+    width: 133.5px;
+    height: 133.5px;
+    margin-top: -133.5px;
+    cursor: pointer;
+}
+
+.mask_modification_succes
+{
+    width: 133.5px;
+    height: 133.5px;
+    overflow: hidden;
+    margin-left: 3px;
+    margin-top: -139.5px;
+    line-height: 133.5px;
     text-align: center;
 }
 

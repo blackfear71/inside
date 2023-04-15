@@ -117,10 +117,18 @@ $(function ()
         }
     });
 
-    // Charge le succès
+    // Charge le succès (saisie)
     $('.loadImageSucces').on('change', function (event)
     {
         loadFile(event, 'image_succes', false);
+    });
+
+    // Charge le succès (modification)
+    $('.loadModifierSucces').on('change', function (event)
+    {
+        var idImage = $(this).attr('id').replace('fichier_', '');
+
+        loadFile(event, 'image_succes_' + idImage, false);
     });
 
     // Affiche la zone de modification d'un succès

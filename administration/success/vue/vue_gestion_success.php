@@ -6,8 +6,10 @@
     echo '<div class="titre_explications">Modifier les succès</div>';
 
     echo '<div class="explications_gestion_succes_full">';
-        echo 'Il est possible de modifier le niveau, l\'ordonnancement, le titre, la description, la condition et les explications des succès. Bien contrôler l\'ordonnancement par rapport au
-              niveau pour éviter les doublons. Il n\'est pas possible de modifier la référence ni l\'image, il faut donc supprimer le succès via cet écran. Pour les explications, insérer les caractères
+        echo 'Il est possible de modifier l\'image, le titre, la description, le niveau, l\'ordonnancement, la condition, la mission liée,
+              l\'unicité, la définition du code et les explications des succès. Bien contrôler l\'ordonnancement par rapport au niveau pour
+              éviter les doublons. Il n\'est pas possible de modifier la référence afin d\'éviter les impacts sur les succès utilisateurs,
+              s\'il y en a besoin il faut donc supprimer le succès via cet écran. Pour les explications, insérer les caractères
               <i>%limit%</i> permet de les remplacer par la valeur de la conditon d\'obtention du succès.';
     echo '</div>';
 
