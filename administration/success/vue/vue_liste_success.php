@@ -140,7 +140,7 @@
                                 echo '</div>';
                     
                                 echo '<div class="mask_modification_succes">';
-                                    echo '<img src="../../includes/images/profil/success/' . $success->getReference() . '" id="image_succes_' . $success->getId() . '" alt="' . $success->getReference() . '" class="image_succes" />';
+                                    echo '<img src="../../includes/images/profil/success/' . $success->getReference() . '.png" id="image_succes_' . $success->getId() . '" alt="' . $success->getReference() . '" class="image_succes" />';
                                 echo '</div>';
                             echo '</div>';
 
