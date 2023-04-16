@@ -6,8 +6,6 @@
     echo '<form method="post" action="success.php?action=doAjouterSucces" class="form_saisie_admin" enctype="multipart/form-data">';
         // Image
         echo '<div class="zone_saisie_image_succes">';
-            echo '<input type="hidden" name="MAX_FILE_SIZE" value="15728640" />';
-
             echo '<div class="zone_parcourir_succes">';
                 echo '<img src="../../includes/icons/common/picture.png" alt="picture" class="logo_saisie_image" />';
                 echo '<input type="file" accept=".png" name="success" class="bouton_parcourir_succes loadImageSucces" required />';

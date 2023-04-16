@@ -91,6 +91,10 @@
 
 .avatar_profil
 {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 23px;
     width: 120px;
     height: 120px;
     border-radius: 50%;
@@ -263,7 +267,9 @@
 
 .zone_parcourir_avatar
 {
-    display: inline-block;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
     height: 120px;
     line-height: 120px;
     width: 120px;
@@ -271,7 +277,6 @@
     border-radius: 50%;
     border-color: #a3a3a3;
     text-align: center;
-    margin-bottom: 20px;
     overflow: hidden;
 }
 
@@ -283,12 +288,14 @@
 
 .bouton_parcourir_avatar
 {
+    display: block;
     opacity: 0;
-    height: 122px;
+    height: 120px;
     width: 120px;
     margin-top: -120px;
-    display: block;
     cursor: pointer;
+    position: relative;
+    z-index: 1;
 }
 
 .mask_avatar
@@ -299,7 +306,7 @@
     height: 120px;
     border-radius: 50%;
     overflow: hidden;
-    margin-top: -146px;
+    margin-top: -123px;
     margin-bottom: 20px;
     line-height: 120px;
 }
@@ -310,8 +317,6 @@
     max-height: 120px;
     margin-left: auto;
     margin-right: auto;
-    margin-top: -5px;
-    vertical-align: middle;
 }
 
 .zone_bouton_saisie

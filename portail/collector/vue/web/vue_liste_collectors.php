@@ -211,11 +211,9 @@
 
                                 // Image
                                 echo '<div>';
-                                    echo '<input type="hidden" name="MAX_FILE_SIZE" value="15728640" />';
-
-                                    echo '<span class="zone_parcourir_update" id="zone_parcourir_' . $collector->getId() . '">';
+                                    echo '<div class="zone_parcourir_update" id="zone_parcourir_' . $collector->getId() . '">';
                                         echo '<input id="fichier_' . $collector->getId() . '" type="file" accept=".jpg, .jpeg, .bmp, .gif, .png" name="image" class="bouton_parcourir_update loadModifierCollector" />';
-                                    echo '</span>';
+                                    echo '</div>';
 
                                     echo '<div class="mask_update" id="mask_collector_' . $collector->getId() . '">';
                                         echo '<img src="../../includes/images/collector/' . $collector->getCollector() . '" id="image_collector_' . $collector->getId() . '" alt="' . $collector->getCollector() . '" class="image_update loadImage" />';

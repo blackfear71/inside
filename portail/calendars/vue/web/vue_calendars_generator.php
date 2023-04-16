@@ -91,8 +91,6 @@
                                         echo '<div class="titre_option_calendrier">Image de fond</div>';
 
                                         echo '<div class="zone_saisie_image">';
-                                            echo '<input type="hidden" name="MAX_FILE_SIZE" value="15728640" />';
-
                                             echo '<div class="zone_parcourir_image_generator">';
                                                 echo '<img src="../../includes/icons/common/picture.png" alt="picture" class="logo_saisie_image" />';
                                                 echo '<input type="file" accept=".jpg, .jpeg, .bmp, .gif, .png" name="picture_calendar" class="bouton_parcourir_image_generator loadCalendrierGenere" />';
@@ -409,8 +407,6 @@
                                     echo '<div class="zone_saisie_calendrier">';
                                         // Image
                                         echo '<div class="zone_saisie_image">';
-                                            echo '<input type="hidden" name="MAX_FILE_SIZE" value="15728640" />';
-
                                             echo '<div class="zone_parcourir_annexe_generator">';
                                                 echo '<img src="../../includes/icons/common/picture.png" alt="picture" class="logo_saisie_image" />';
 
@@ -503,8 +499,6 @@
                                     echo '<form method="post" action="calendars_generator.php?action=doAjouterCalendrier" enctype="multipart/form-data">';
                                         // Image
                                         echo '<div class="zone_saisie_image">';
-                                            echo '<input type="hidden" name="MAX_FILE_SIZE" value="15728640" />';
-
                                             echo '<div class="zone_parcourir_image">';
                                                 echo '<img src="../../includes/icons/common/picture.png" alt="picture" class="logo_saisie_image" />';
                                                 echo '<input type="file" accept=".jpg, .jpeg, .bmp, .gif, .png" name="calendar" class="bouton_parcourir_image loadCalendrier" required />';
@@ -573,8 +567,6 @@
                                     echo '<form method="post" action="calendars_generator.php?action=doAjouterAnnexe" enctype="multipart/form-data">';
                                         // Image
                                         echo '<div class="zone_saisie_image">';
-                                            echo '<input type="hidden" name="MAX_FILE_SIZE" value="15728640" />';
-
                                             echo '<div class="zone_parcourir_image">';
                                                 echo '<img src="../../includes/icons/common/picture.png" alt="picture" class="logo_saisie_image" />';
                                                 echo '<input type="file" accept=".jpg, .jpeg, .bmp, .gif, .png" name="annexe" class="bouton_parcourir_image loadAnnexe" required />';

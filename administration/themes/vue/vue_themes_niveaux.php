@@ -11,7 +11,6 @@
         /* Saisie nouveau thème (utilisateurs) */
         /***************************************/
         echo '<form method="post" action="themes.php?action=doAjouterTheme" enctype="multipart/form-data" class="zone_theme">';
-            echo '<input type="hidden" name="MAX_FILE_SIZE" value="15728640" />';
             echo '<input type="hidden" name="theme_type" value="U" />';
 
             echo '<div class="zone_theme_saisie">';

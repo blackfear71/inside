@@ -132,8 +132,6 @@
                         echo '<div class="zone_succes_gauche">';
                             // Logo succès
                             echo '<div class="zone_modification_image_succes">';
-                                echo '<input type="hidden" name="MAX_FILE_SIZE" value="15728640" />';
-                    
                                 echo '<div class="zone_parcourir_modification_succes">';
                                     echo '<img src="../../includes/icons/common/picture.png" alt="picture" class="logo_saisie_image" />';
                                     echo '<input type="file" accept=".png" name="success" id="fichier_' . $success->getId() . '" class="bouton_parcourir_modification_succes loadModifierSucces" />';

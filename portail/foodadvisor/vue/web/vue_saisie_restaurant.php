@@ -18,12 +18,10 @@
                 // Photo, jours d'ouverture & prix
                 echo '<div class="zone_saisie_left">';
                     // Photo
-                    echo '<input type="hidden" name="MAX_FILE_SIZE" value="15728640" />';
-
-                    echo '<span class="zone_parcourir_restaurant_saisie">';
+                    echo '<div class="zone_parcourir_restaurant_saisie">';
                         echo '<img src="../../includes/icons/common/picture.png" alt="picture" class="logo_saisie_image" />';
                         echo '<input type="file" accept=".jpg, .jpeg, .bmp, .gif, .png" name="image_restaurant" class="bouton_parcourir_restaurant_saisie loadSaisieRestaurant" />';
-                    echo '</span>';
+                    echo '</div>';
 
                     echo '<div class="mask_saisie_restaurant">';
                         echo '<img id="image_restaurant_saisie" alt="" class="image_saisie_restaurant" />';
