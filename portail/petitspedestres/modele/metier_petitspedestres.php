@@ -757,7 +757,7 @@
 
     // METIER : Conversion de la liste d'objets des participations en tableau simple pour JSON
     // RETOUR : Tableau des participations
-    function convertForJsonListeParticipations($listeParticipationsParDate)
+    function convertForJsonListeParticipations($listeParticipationsParDate, $identifiant)
     {
         // Initialisations
         $listeParticipationsAConvertir = array();
@@ -767,18 +767,21 @@
         {
             foreach ($participationsParDate as $participation)
             {
-                $duree = formatSecondsForInput($participation->getTime());
+                if ($participation->getIdentifiant() == $identifiant)
+                {
+                    $duree = formatSecondsForInput($participation->getTime());
 
-                $listeParticipationsAConvertir[$participation->getId()] = array(
-                    'date'        => $participation->getDate(),
-                    'distance'    => $participation->getDistance(),
-                    'heures'      => $duree['heures'],
-                    'minutes'     => $duree['minutes'],
-                    'secondes'    => $duree['secondes'],
-                    'vitesse'     => $participation->getSpeed(),
-                    'cardio'      => $participation->getCardio(),
-                    'competition' => $participation->getCompetition()
-                );
+                    $listeParticipationsAConvertir[$participation->getId()] = array(
+                        'date'        => $participation->getDate(),
+                        'distance'    => $participation->getDistance(),
+                        'heures'      => $duree['heures'],
+                        'minutes'     => $duree['minutes'],
+                        'secondes'    => $duree['secondes'],
+                        'vitesse'     => $participation->getSpeed(),
+                        'cardio'      => $participation->getCardio(),
+                        'competition' => $participation->getCompetition()
+                    );
+                }
             }
         }
 

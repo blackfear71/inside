@@ -126,7 +126,7 @@
 
                 // Conversion JSON
                 $detailsParcoursJson     = json_encode(convertForJsonDetailsParcours($detailsParcours));
-                $listeParticipationsJson = json_encode(convertForJsonListeParticipations($listeParticipationsParDate));
+                $listeParticipationsJson = json_encode(convertForJsonListeParticipations($listeParticipationsParDate, $_SESSION['user']['identifiant']));
             }
             break;
 
