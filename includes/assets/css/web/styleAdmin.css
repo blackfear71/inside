@@ -1396,9 +1396,13 @@
 .form_suppression_succes
 {
     float: right;
+    height: 30px;
     margin-right: -20px;
     margin-top: 60px;
     box-shadow: 0 0 3px #7c7c7c;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+    overflow: hidden;
 }
 
 .icone_supprimer_succes
@@ -1406,15 +1410,12 @@
     border: 0;
     width: 20px;
     height: 30px;
-    margin-top: -2px;
     background-color: #d3d3d3;
     background-image: url("/inside/includes/icons/common/delete_grey.png");
     background-size: 20px 20px;
     background-repeat: no-repeat;
     background-position: center;
     cursor: pointer;
-    border-top-right-radius: 2px;
-    border-bottom-right-radius: 2px;
 }
 
 .icone_supprimer_succes:hover
