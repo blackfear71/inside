@@ -102,6 +102,19 @@
     background-color: #262626;
 }
 
+.avatar_profil_infos
+{
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: auto;
+    margin-right: auto;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    box-shadow: 0 0 3px #7c7c7c;
+    background-color: #262626;
+}
+
 .zone_profil_experience
 {
     display: inline-block;
