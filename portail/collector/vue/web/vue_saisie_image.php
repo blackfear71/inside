@@ -21,8 +21,6 @@
                 // Image
                 echo '<div class="zone_image_left">';
                     // Saisie image
-                    echo '<input type="hidden" name="MAX_FILE_SIZE" value="15728640" />';
-
                     echo '<div class="zone_parcourir_image">';
                         echo '<img src="../../includes/icons/common/picture.png" alt="picture" class="logo_saisie_image" />';
                         echo '<input type="file" accept=".jpg, .jpeg, .bmp, .gif, .png" name="image" class="bouton_parcourir_image loadSaisieCollector" required />';

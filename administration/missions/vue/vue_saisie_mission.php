@@ -6,10 +6,6 @@
         echo '<form method="post" action="missions.php?action=doModifierMission" enctype="multipart/form-data" class="form_saisie_mission_terminee">';
             echo '<input type="hidden" name="id_mission" value="' . $detailsMission->getId() . '" />';
     }
-
-        // Taille maximale images
-        echo '<input type="hidden" name="MAX_FILE_SIZE" value="15728640" />';
-
         // Titre
         echo '<div class="titre_section">';
             echo '<img src="../../includes/icons/missions/missions_to_come.png" alt="missions_to_come" class="logo_titre_section" />';
@@ -18,7 +14,6 @@
 
         // Bannière
         echo '<div class="zone_saisie_image_mission">';
-            echo '<input type="hidden" name="MAX_FILE_SIZE" value="15728640" />';
             echo '<div class="info_image_mission">Bannière (1920 x 800 px)</div>';
 
             if ($_GET['action'] == 'goAjouter')

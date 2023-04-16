@@ -768,7 +768,7 @@
 /*** Modification images ***/
 .zone_parcourir_update
 {
-    display: inline-block;
+    display: block;
     width: calc(100% - 6px);
     border-style: dashed;
     border-color: #a3a3a3;
@@ -778,6 +778,8 @@
     color: #a3a3a3;
     text-align: center;
     overflow: hidden;
+    position: relative;
+    z-index: 1;
 }
 
 .bouton_parcourir_update
@@ -796,14 +798,13 @@
     margin-left: auto;
     margin-right: auto;
     width: calc(100% - 6px);
-    height: calc(100% - 6px);
     overflow: hidden;
-    text-align: center;
 }
 
 .image_update
 {
+    margin-left: auto;
+    margin-right: auto;
     max-width: 100%;
     max-height: 100%;
-    vertical-align: bottom;
 }

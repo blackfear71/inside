@@ -1355,7 +1355,7 @@
         return $pseudo;
     }
 
-    // METIER : Contrôle une image avant de la télécharger
+    // METIER : Contrôle un fichier avant de le télécharger
     // RETOUR : Booléen
     function controlsUploadFile($file, $name, $type)
     {
@@ -1368,7 +1368,7 @@
         );
         $control_ok = true;
 
-        // Contrôles de l'image si elle est bien renseignée
+        // Contrôles du fichier s'il est bien renseigné
         if (!empty($file['name']))
         {
             // Récupération des données

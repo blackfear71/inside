@@ -1792,7 +1792,9 @@
 
 .zone_parcourir_restaurant_saisie
 {
-    display: inline-block;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
     height: 120px;
     line-height: 120px;
     width: 120px;
@@ -1815,7 +1817,7 @@
     opacity: 0;
     height: 120px;
     width: 120px;
-    margin-top: -115px;
+    margin-top: -120px;
     cursor: pointer;
     position: relative;
     z-index: 1;
@@ -1829,7 +1831,7 @@
     overflow: hidden;
     margin-left: auto;
     margin-right: auto;
-    margin-top: -127px;
+    margin-top: -123px;
     margin-bottom: 14px;
     line-height: 120px;
 }
@@ -1840,7 +1842,6 @@
     margin-right: auto;
     max-width: 120px;
     max-height: 120px;
-    vertical-align: middle;
 }
 
 .zone_saisie_prix
@@ -2582,8 +2583,6 @@
     margin-right: auto;
     max-width: 80px;
     max-height: 80px;
-    margin-top: -4px;
-    vertical-align: middle;
 }
 
 .zone_update_prix
