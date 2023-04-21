@@ -73,21 +73,24 @@
         // Réinitialisation des cookies
         setcookie('index[identifiant]', null, -1, '/');
         setcookie('index[password]', null, -1, '/');
+        setcookie('index[page]', null, -1, '/');
 
         // Récupération des données
         if ($autoConnect == true)
         {
             $identifiant = $dataConnect['identifiant'];
             $password    = $dataConnect['password'];
+            $page        = $dataConnect['page'];
         }
         else
         {
-            $password = $dataConnect['mdp'];
-
             if (strtolower($dataConnect['login']) == 'admin')
                 $identifiant = htmlspecialchars(strtolower($dataConnect['login']));
             else
                 $identifiant = htmlspecialchars(strtoupper($dataConnect['login']));
+
+            $password = $dataConnect['mdp'];
+            $page     = '';
         }
 
         // Lecture des données de l'utilisateur
@@ -149,8 +152,23 @@
                     $_SESSION['chat']['show_chat'] = false;
 
                 // Définition des cookies de connexion
-                setCookie('index[identifiant]', $user->getIdentifiant(), time() + 60 * 60 * 24 * 365, '/');
-                setCookie('index[password]', $crypted, time() + 60 * 60 * 24 * 365, '/');
+                setCookie('index[identifiant]', $user->getIdentifiant(), [
+                    'expires'  => time() + 60 * 60 * 24 * 365,
+                    'path'     => '/',
+                    'SameSite' => 'Lax'
+                ]);
+
+                setCookie('index[password]', $crypted, [
+                    'expires'  => time() + 60 * 60 * 24 * 365,
+                    'path'     => '/',
+                    'SameSite' => 'Lax'
+                ]);
+
+                setCookie('index[page]', $page, [
+                    'expires'  => time() + 60 * 60 * 24 * 365,
+                    'path'     => '/',
+                    'SameSite' => 'Lax'
+                ]);
             }
 
             // Positionnement indicateur connexion

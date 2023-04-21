@@ -1476,7 +1476,7 @@ function setCookie(cookieName, cookieValue)
     var today   = new Date();
     var expires = new Date();
 
-    expires.setTime(today.getTime() + (60 * 60 * 24 * 365));
+    expires.setTime(today.getTime() + (1000 * 60 * 60 * 24 * 365));
 
     // Cookie global (path=/)
     if (location.host.toLowerCase().includes('localhost'))

@@ -14,10 +14,18 @@
             session_start();
 
         // Redirection si déjà connecté
-        if (isset($_SESSION['index']['connected']) AND $_SESSION['index']['connected'] == true AND $_SESSION['user']['identifiant'] != 'admin')
-            header('location: /inside/portail/portail/portail.php?action=goConsulter');
-        elseif (isset($_SESSION['index']['connected']) AND $_SESSION['index']['connected'] == true AND $_SESSION['user']['identifiant'] == 'admin')
-            header('location: /inside/administration/portail/portail.php?action=goConsulter');
+        if (isset($_SESSION['index']['connected']) AND $_SESSION['index']['connected'] == true)
+        {
+            if ($_SESSION['user']['identifiant'] == 'admin')
+                header('location: /inside/administration/portail/portail.php?action=goConsulter');
+            else
+            {
+                if (isset($_COOKIE['index']['page']) AND !empty($_COOKIE['index']['page']))
+                    header('location: ' . $_COOKIE['index']['page']);
+                else
+                    header('location: /inside/portail/portail/portail.php?action=goConsulter');
+            }
+        }
         else
             $_SESSION['index']['connected'] = false;
 
@@ -58,7 +66,7 @@
             session_start();
     }
 
-    // METIER : Contrôles Utilisateur, initialisation session, mission et thème
+    // METIER : Contrôles Utilisateur, initialisation session, cookie, mission et thème
     // RETOUR : Aucun
     function controlsUser()
     {
@@ -105,6 +113,13 @@
 
                     // Détermination du thème
                     getTheme($_SESSION['user']['identifiant']);
+
+                    // Mise à jour du cookie de page
+                    setCookie('index[page]', $_SERVER['REQUEST_URI'], [
+                        'expires'  => time() + 60 * 60 * 24 * 365,
+                        'path'     => '/',
+                        'SameSite' => 'Lax'
+                    ]);
                 }
             }
         }

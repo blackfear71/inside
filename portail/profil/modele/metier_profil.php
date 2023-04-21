@@ -361,8 +361,17 @@
                 setcookie('index[password]', null, -1, '/');
 
                 // Définition des nouveaux cookies de connexion
-                setCookie('index[identifiant]', $identifiant, time() + 60 * 60 * 24 * 365, '/');
-                setCookie('index[password]', $newPassword, time() + 60 * 60 * 24 * 365, '/');
+                setCookie('index[identifiant]', $identifiant, [
+                    'expires'  => time() + 60 * 60 * 24 * 365,
+                    'path'     => '/',
+                    'SameSite' => 'Lax'
+                ]);
+
+                setCookie('index[password]', $newPassword, [
+                    'expires'  => time() + 60 * 60 * 24 * 365,
+                    'path'     => '/',
+                    'SameSite' => 'Lax'
+                ]);
 
                 // Message d'alerte
                 $_SESSION['alerts']['password_updated'] = true;

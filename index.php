@@ -80,10 +80,13 @@
     switch ($_GET['action'])
     {
         case 'doConnecter':
-            if ($connected == true AND $_SESSION['user']['identifiant'] == 'admin')
-                header('location: administration/portail/portail.php?action=goConsulter');
-            elseif ($connected == true AND $_SESSION['user']['identifiant'] != 'admin')
-                header('location: portail/portail/portail.php?action=goConsulter');
+            if ($connected == true)
+            {
+                if ($_SESSION['user']['identifiant'] == 'admin')
+                    header('location: administration/portail/portail.php?action=goConsulter');
+                else
+                    header('location: portail/portail/portail.php?action=goConsulter');
+            }
             else
                 header('location: index.php?action=goConsulter');
             break;
@@ -96,7 +99,12 @@
         case 'goConsulter':
         default:
             if (isset($connected) AND $connected == true AND $_SESSION['user']['identifiant'] != 'admin')
-                header('location: portail/portail/portail.php?action=goConsulter');
+            {
+                if (isset($_COOKIE['index']['page']) AND !empty($_COOKIE['index']['page']))
+                    header('location: ' . $_COOKIE['index']['page']);
+                else
+                    header('location: portail/portail/portail.php?action=goConsulter');
+            }                
             else
                 include_once('portail/index/vue/' . $_SESSION['index']['plateforme'] . '/vue_index.php');
             break;

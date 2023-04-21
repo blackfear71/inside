@@ -113,3 +113,4 @@ Les variables globales ($_SESSION et $_COOKIE) sont généralement organisées s
 | ***Index***   |                                                     |
 | identifiant   | Identifiant de l'utilisateur connecté               |
 | password      | Mot de passe crypté                                 |
+| page          | Dernière page visitée                               |
