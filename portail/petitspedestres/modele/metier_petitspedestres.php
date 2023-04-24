@@ -429,6 +429,10 @@
         if ($control_ok == true)
             $control_ok = controleParticipationExistante($identifiant, $equipe, $idParcours, $date);
 
+        // Contrôle date cohérente
+        if ($control_ok == true)
+            $control_ok = controleDateSaisie($date);
+
         // Contrôle temps valide
         if ($control_ok == true)
         {

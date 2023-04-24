@@ -121,6 +121,24 @@
         return $control_ok;
     }
 
+    // CONTROLE : Date participation <= date du jour
+    // RETOUR : Booléen
+    function controleDateSaisie($date)
+    {
+        // Initialisations
+        $control_ok = true;
+
+        // Contrôle
+        if ($date > date('Ymd'))
+        {
+            $_SESSION['alerts']['participation_date'] = true;
+            $control_ok                               = false;
+        }
+
+        // Retour
+        return $control_ok;
+    }
+
     // CONTROLE : Parcours disponible
     // RETOUR : Booléen
     function controleParcoursDisponible($idParcours, $equipe)

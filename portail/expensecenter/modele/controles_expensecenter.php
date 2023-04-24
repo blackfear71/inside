@@ -29,7 +29,7 @@
         return $control_ok;
     }
 
-    // CONTROLE : Date dépense < date du jour
+    // CONTROLE : Date dépense <= date du jour
     // RETOUR : Booléen
     function controleDateSaisie($date, $isMobile)
     {

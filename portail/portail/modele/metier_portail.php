@@ -203,6 +203,42 @@
             array_push($tableauNews, $news);
         }
 
+        /***********************/
+        /* Dernier film ajouté */
+        /***********************/
+        $movie = physiqueDernierFilm($equipe);
+
+        if (!empty($movie))
+        {
+            $news = new News();
+
+            $news->setTitle('Le dernier de la collection');
+            $news->setContent($movie->getFilm());
+            $news->setDetails('');
+            $news->setLogo('movie_house');
+            $news->setLink('/inside/portail/moviehouse/details.php?id_film=' . $movie->getId() . '&action=goConsulter');
+
+            array_push($tableauNews, $news);
+        }
+
+        /***************************/
+        /* Prochaine sortie cinéma */
+        /***************************/
+        $film = physiqueSortieFilm($equipe);
+
+        if (!empty($film))
+        {
+            $news = new News();
+
+            $news->setTitle('On y court !');
+            $news->setContent($film->getFilm());
+            $news->setDetails('Rendez-vous le ' . formatDateForDisplay($film->getDate_doodle()) . ' au cinéma !');
+            $news->setLogo('movie_house');
+            $news->setLink('/inside/portail/moviehouse/details.php?id_film=' . $film->getId() . '&action=goConsulter');
+
+            array_push($tableauNews, $news);
+        }
+        
         /**************/
         /* Vote repas */
         /**************/
@@ -308,42 +344,6 @@
                 $news->setContent(nl2br(htmlspecialchars(formatString(unformatCollector($collector->getCollector()), 90))));
             else
                 $news->setContent(nl2br(htmlspecialchars(unformatCollector($collector->getCollector()))));
-
-            array_push($tableauNews, $news);
-        }
-
-        /***********************/
-        /* Dernier film ajouté */
-        /***********************/
-        $movie = physiqueDernierFilm($equipe);
-
-        if (!empty($movie))
-        {
-            $news = new News();
-
-            $news->setTitle('Le dernier de la collection');
-            $news->setContent($movie->getFilm());
-            $news->setDetails('');
-            $news->setLogo('movie_house');
-            $news->setLink('/inside/portail/moviehouse/details.php?id_film=' . $movie->getId() . '&action=goConsulter');
-
-            array_push($tableauNews, $news);
-        }
-
-        /***************************/
-        /* Prochaine sortie cinéma */
-        /***************************/
-        $film = physiqueSortieFilm($equipe);
-
-        if (!empty($film))
-        {
-            $news = new News();
-
-            $news->setTitle('On y court !');
-            $news->setContent($film->getFilm());
-            $news->setDetails('Rendez-vous le ' . formatDateForDisplay($film->getDate_doodle()) . ' au cinéma !');
-            $news->setLogo('movie_house');
-            $news->setLink('/inside/portail/moviehouse/details.php?id_film=' . $film->getId() . '&action=goConsulter');
 
             array_push($tableauNews, $news);
         }
