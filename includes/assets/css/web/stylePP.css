@@ -255,6 +255,7 @@
 
 .zone_parcourir_image
 {
+    display: block;
     width: 120px;
     height: 120px;
     line-height: 120px;
@@ -293,6 +294,7 @@
     margin-left: auto;
     margin-right: auto;
     margin-top: -123px;
+    text-align: center;
 }
 
 .image
@@ -302,6 +304,7 @@
     max-width: 100%;
     max-height: 100%;
     vertical-align: middle;
+    margin-top: -3px;
 }
 
 .zone_saisie_parcours_right

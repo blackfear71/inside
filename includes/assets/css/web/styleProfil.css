@@ -283,9 +283,9 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
+    width: 120px;
     height: 120px;
     line-height: 120px;
-    width: 120px;
     border-style: dashed;
     border-radius: 50%;
     border-color: #a3a3a3;
@@ -303,8 +303,8 @@
 {
     display: block;
     opacity: 0;
-    height: 120px;
     width: 120px;
+    height: 120px;
     margin-top: -120px;
     cursor: pointer;
     position: relative;
@@ -313,23 +313,25 @@
 
 .mask_avatar
 {
-    margin-left: auto;
-    margin-right: auto;
     width: 120px;
     height: 120px;
-    border-radius: 50%;
+    line-height: 120px;
     overflow: hidden;
+    margin-left: auto;
+    margin-right: auto;
     margin-top: -123px;
     margin-bottom: 20px;
-    line-height: 120px;
+    border-radius: 50%;
 }
 
 .avatar_update_profil
 {
-    max-width: 120px;
-    max-height: 120px;
     margin-left: auto;
     margin-right: auto;
+    max-width: 100%;
+    max-height: 100%;
+    vertical-align: middle;
+    margin-top: -4px;
 }
 
 .zone_bouton_saisie

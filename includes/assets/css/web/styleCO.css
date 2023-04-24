@@ -142,6 +142,7 @@
 
 .zone_parcourir_image
 {
+    display: block;
     width: 120px;
     height: 120px;
     line-height: 120px;
@@ -180,6 +181,7 @@
     margin-left: auto;
     margin-right: auto;
     margin-top: -123px;
+    text-align: center;
 }
 
 .image

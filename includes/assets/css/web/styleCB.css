@@ -377,6 +377,7 @@
 
 .zone_parcourir_image
 {
+    display: block;
     width: 200px;
     height: 200px;
     line-height: 200px;

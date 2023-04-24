@@ -31,17 +31,27 @@
         // Icône gauche
         echo '<div class="zone_saisie_icone_mission">';
             echo '<div class="saisie_icone_mission_gauche">';
-                echo '<div class="info_icone_mission">Icône gauche (500 x 500 px)</div>';
-
                 if ($_GET['action'] == 'goAjouter')
                 {
-                    echo '<input type="file" accept=".png" name="mission_icone_g" class="bouton_parcourir_icone_mission loadLeft" required />';
-                    echo '<img id="button_g" alt="" class="preview_icone_mission" />';
+                    echo '<div class="zone_parcourir_bouton_mission">';
+                        echo '<div class="info_icone_mission">Icône gauche (500 x 500 px)</div>';
+                        echo '<input type="file" accept=".png" name="mission_icone_g" class="bouton_parcourir_icone_mission loadLeft" required />';
+                    echo '</div>';
+
+                    echo '<div class="mask_bouton_mission">';
+                        echo '<img id="button_g" alt="" class="image_bouton_mission" />';
+                    echo '</div>';
                 }
                 else
                 {
-                    echo '<input type="file" accept=".png" name="mission_icone_g" class="bouton_parcourir_icone_mission loadLeft" />';
-                    echo '<img src="../../includes/images/missions/buttons/' . $detailsMission->getReference() . '_g.png" alt="' . $detailsMission->getReference() . '_g" id="button_g" class="preview_icone_mission" />';
+                    echo '<div class="zone_parcourir_bouton_mission">';
+                        echo '<div class="info_icone_mission">Icône gauche (500 x 500 px)</div>';
+                        echo '<input type="file" accept=".png" name="mission_icone_g" class="bouton_parcourir_icone_mission loadLeft" />';
+                    echo '</div>';
+
+                    echo '<div class="mask_bouton_mission">';
+                        echo '<img src="../../includes/images/missions/buttons/' . $detailsMission->getReference() . '_g.png" alt="' . $detailsMission->getReference() . '_g" id="button_g" class="image_bouton_mission" />';
+                    echo '</div>';
                 }
             echo '</div>';
         echo '</div>';
@@ -49,17 +59,27 @@
         // Icône milieu
         echo '<div class="zone_saisie_icone_mission">';
             echo '<div class="saisie_icone_mission_milieu">';
-                echo '<div class="info_icone_mission">Icône milieu (500 x 500 px)</div>';
-
                 if ($_GET['action'] == 'goAjouter')
                 {
-                    echo '<input type="file" accept=".png" name="mission_icone_m" class="bouton_parcourir_icone_mission loadMiddle" required />';
-                    echo '<img id="button_m" alt="" class="preview_icone_mission" />';
+                    echo '<div class="zone_parcourir_bouton_mission">';
+                        echo '<div class="info_icone_mission">Icône gauche (500 x 500 px)</div>';
+                        echo '<input type="file" accept=".png" name="mission_icone_m" class="bouton_parcourir_icone_mission loadMiddle" required />';
+                    echo '</div>';
+
+                    echo '<div class="mask_bouton_mission">';
+                        echo '<img id="button_m" alt="" class="image_bouton_mission" />';
+                    echo '</div>';
                 }
                 else
                 {
-                    echo '<input type="file" accept=".png" name="mission_icone_m" class="bouton_parcourir_icone_mission loadMiddle" />';
-                    echo '<img src="../../includes/images/missions/buttons/' . $detailsMission->getReference() . '_m.png" alt="' . $detailsMission->getReference() . '_m" id="button_m" class="preview_icone_mission" />';
+                    echo '<div class="zone_parcourir_bouton_mission">';
+                        echo '<div class="info_icone_mission">Icône gauche (500 x 500 px)</div>';
+                        echo '<input type="file" accept=".png" name="mission_icone_m" class="bouton_parcourir_icone_mission loadMiddle" />';
+                    echo '</div>';
+
+                    echo '<div class="mask_bouton_mission">';
+                        echo '<img src="../../includes/images/missions/buttons/' . $detailsMission->getReference() . '_m.png" alt="' . $detailsMission->getReference() . '_m" id="button_m" class="image_bouton_mission" />';
+                    echo '</div>';
                 }
             echo '</div>';
         echo '</div>';
@@ -67,17 +87,27 @@
         // Icône droite
         echo '<div class="zone_saisie_icone_mission">';
             echo '<div class="saisie_icone_mission_droite">';
-                echo '<div class="info_icone_mission">Icône droite (500 x 500 px)</div>';
-
                 if ($_GET['action'] == 'goAjouter')
                 {
-                    echo '<input type="file" accept=".png" name="mission_icone_d" class="bouton_parcourir_icone_mission loadRight" required />';
-                    echo '<img id="button_d" alt="" class="preview_icone_mission" />';
+                    echo '<div class="zone_parcourir_bouton_mission">';
+                        echo '<div class="info_icone_mission">Icône gauche (500 x 500 px)</div>';
+                        echo '<input type="file" accept=".png" name="mission_icone_d" class="bouton_parcourir_icone_mission loadRight" required />';
+                    echo '</div>';
+
+                    echo '<div class="mask_bouton_mission">';
+                        echo '<img id="button_d" alt="" class="image_bouton_mission" />';
+                    echo '</div>';
                 }
                 else
                 {
-                    echo '<input type="file" accept=".png" name="mission_icone_d" class="bouton_parcourir_icone_mission loadRight" />';
-                    echo '<img src="../../includes/images/missions/buttons/' . $detailsMission->getReference() . '_d.png" alt="' . $detailsMission->getReference() . '_d" id="button_d" class="preview_icone_mission" />';
+                    echo '<div class="zone_parcourir_bouton_mission">';
+                        echo '<div class="info_icone_mission">Icône gauche (500 x 500 px)</div>';
+                        echo '<input type="file" accept=".png" name="mission_icone_d" class="bouton_parcourir_icone_mission loadRight" />';
+                    echo '</div>';
+
+                    echo '<div class="mask_bouton_mission">';
+                        echo '<img src="../../includes/images/missions/buttons/' . $detailsMission->getReference() . '_d.png" alt="' . $detailsMission->getReference() . '_d" id="button_d" class="image_bouton_mission" />';
+                    echo '</div>';
                 }
             echo '</div>';
         echo '</div>';

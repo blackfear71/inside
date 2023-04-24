@@ -1003,7 +1003,7 @@
 
 .zone_parcourir_succes
 {
-    display: inline-block;
+    display: block;
     width: 116px;
     height: 116px;
     line-height: 116px;
@@ -1037,10 +1037,10 @@
 {
     width: 116px;
     height: 116px;
-    overflow: hidden;
-    margin-left: 3px;
-    margin-top: -122px;
     line-height: 116px;
+    overflow: hidden;
+    margin-top: -119px;
+    margin-left: 3px;
     text-align: center;
 }
 
@@ -1051,7 +1051,7 @@
     max-width: 100%;
     max-height: 100%;
     vertical-align: middle;
-    margin-top: -4px;
+    margin-top: -3px;
 }
 
 .zone_saisie_donnees_succes
@@ -2082,10 +2082,8 @@
 .saisie_icone_mission_gauche
 {
     float: left;
-    width: 150px;
-    height: 150px;
-    border-style: dashed;
-    border-width: 3px;
+    width: 156px;
+    height: 156px;
     border-color: #a3a3a3;
     border-radius: 2px;
     background-color: white;
@@ -2095,10 +2093,8 @@
 {
     margin-left: auto;
     margin-right: auto;
-    width: 150px;
-    height: 150px;
-    border-style: dashed;
-    border-width: 3px;
+    width: 156px;
+    height: 156px;
     border-color: #a3a3a3;
     border-radius: 2px;
     background-color: white;
@@ -2107,13 +2103,25 @@
 .saisie_icone_mission_droite
 {
     float: right;
-    width: 150px;
-    height: 150px;
-    border-style: dashed;
-    border-width: 3px;
+    width: 156px;
+    height: 156px;
     border-color: #a3a3a3;
     border-radius: 2px;
     background-color: white;
+}
+
+.zone_parcourir_bouton_mission
+{
+    display: block;
+    width: 150px;
+    height: 150px;
+    line-height: 150px;
+    border-style: dashed;
+    border-width: 3px;
+    border-radius: 2px;
+    border-color: #a3a3a3;
+    text-align: center;
+    overflow: hidden;
 }
 
 .info_icone_mission
@@ -2130,22 +2138,36 @@
 
 .bouton_parcourir_icone_mission
 {
+    display: block;
     opacity: 0;
     width: 150px;
     height: 150px;
     margin-top: -150px;
-    display: block;
     cursor: pointer;
+    position: relative;
+    z-index: 1;
 }
 
-.preview_icone_mission
+.mask_bouton_mission
 {
-    display: block;
-    max-height: 100%;
-    max-width: 100%;
-    margin-top: -150px;
+    width: 150px;
+    height: 150px;
+    line-height: 150px;
+    overflow: hidden;
     margin-left: auto;
     margin-right: auto;
+    margin-top: -153px;
+    text-align: center;
+}
+
+.image_bouton_mission
+{
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100%;
+    max-height: 100%;
+    vertical-align: middle;
+    margin-top: -3px;
 }
 
 .zone_saisie_informations_mission

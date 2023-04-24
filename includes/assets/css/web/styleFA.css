@@ -1827,21 +1827,24 @@
 {
     width: 120px;
     height: 120px;
-    border-radius: 50%;
+    line-height: 120px;
     overflow: hidden;
     margin-left: auto;
     margin-right: auto;
     margin-top: -123px;
     margin-bottom: 14px;
-    line-height: 120px;
+    border-radius: 50%;
+    text-align: center;
 }
 
 .image_saisie_restaurant
 {
     margin-left: auto;
     margin-right: auto;
-    max-width: 120px;
-    max-height: 120px;
+    max-width: 100%;
+    max-height: 100%;
+    vertical-align: middle;
+    margin-top: -3px;
 }
 
 .zone_saisie_prix
@@ -2568,21 +2571,24 @@
 {
     width: 80px;
     height: 80px;
-    border-radius: 50%;
+    line-height: 80px;
     overflow: hidden;
     margin-left: auto;
     margin-right: auto;
-    text-align: center;
     margin-top: -83px;
-    line-height: 80px;
+    text-align: center;
+    border-radius: 50%;
+    text-align: center;
 }
 
 .update_image_restaurant
 {
     margin-left: auto;
     margin-right: auto;
-    max-width: 80px;
-    max-height: 80px;
+    max-width: 100%;
+    max-height: 100%;
+    vertical-align: middle;
+    margin-top: -3px;
 }
 
 .zone_update_prix
