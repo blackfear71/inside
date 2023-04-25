@@ -20,7 +20,7 @@
             $_SESSION['save']['prix_min']                = '';
             $_SESSION['save']['prix_max']                = '';
             $_SESSION['save']['phone_restaurant']        = '';
-            $_SESSION['save']['types_restaurants']       = '';
+            $_SESSION['save']['types_restaurant']        = '';
             $_SESSION['save']['description_restaurant']  = '';
             $_SESSION['save']['location']                = '';
             $_SESSION['save']['ouverture_restaurant']    = '';
@@ -114,9 +114,9 @@
             $lieuRestaurant = $post['location'];
 
         // Filtrage et remplacement des caractères pour les types
-        if (isset($post['types_restaurants']))
+        if (isset($post['types_restaurant']))
         {
-            $typesRestaurant = array_unique($post['types_restaurants']);
+            $typesRestaurant = array_unique($post['types_restaurant']);
 
             foreach ($typesRestaurant as $keyType => $type)
             {
@@ -140,10 +140,10 @@
         $_SESSION['save']['prix_max']                = $post['prix_max_restaurant'];
 
         if (isset($post['ouverture_restaurant']))
-            $_SESSION['save']['ouverture_restaurant']  = $ouvertureRestaurant;
+            $_SESSION['save']['ouverture_restaurant'] = $ouvertureRestaurant;
 
-        if (isset($post['types_restaurants']))
-            $_SESSION['save']['types_restaurants']     = $typesRestaurant;
+        if (isset($post['types_restaurant']))
+            $_SESSION['save']['types_restaurant'] = $typesRestaurant;
 
         // Contrôle prix min numérique et positif
         $control_ok = controlePrixNumerique($prixMin, 'min');
@@ -308,9 +308,9 @@
             $lieuRestaurant = $post['update_location_' . $idRestaurant];
 
         // Filtrage et remplacement des caractères pour les types
-        if (isset($post['update_types_restaurants_' . $idRestaurant]))
+        if (isset($post['update_types_restaurant_' . $idRestaurant]))
         {
-            $typesRestaurant = array_unique($post['update_types_restaurants_' . $idRestaurant]);
+            $typesRestaurant = array_unique($post['update_types_restaurant_' . $idRestaurant]);
 
             foreach ($typesRestaurant as $keyType => $type)
             {

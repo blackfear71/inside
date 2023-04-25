@@ -90,7 +90,7 @@
                     echo '</div>';
 
                     // Types
-                    echo '<div id="types_restaurants" class="zone_saisie_types">';
+                    echo '<div id="types_restaurant" class="zone_saisie_types">';
                         $i = 0;
 
                         // Types existants
@@ -99,9 +99,9 @@
                             $idType  = 'type_' . formatId($type);
                             $checked = false;
 
-                            if (!empty($_SESSION['save']['types_restaurants']))
+                            if (!empty($_SESSION['save']['types_restaurant']))
                             {
-                                foreach ($_SESSION['save']['types_restaurants'] as $savedTypes)
+                                foreach ($_SESSION['save']['types_restaurant'] as $savedTypes)
                                 {
                                     if ($savedTypes == $type)
                                     {
@@ -118,7 +118,7 @@
                                 else
                                     echo '<div id="bouton_' . $idType . '" class="switch_types bouton_checked">';
                                     echo '<div class="zone_checkbox_type">';
-                                        echo '<input id="' . $idType . '" type="checkbox" value="' . $type . '" name="types_restaurants[' . $i . ']" class="checkbox_type" checked />';
+                                        echo '<input id="' . $idType . '" type="checkbox" value="' . $type . '" name="types_restaurant[' . $i . ']" class="checkbox_type" checked />';
                                     echo '</div>';
 
                                     echo '<label for="' . $idType . '" class="label_switch checkType">' . $type . '</label>';
@@ -131,7 +131,7 @@
                                 else
                                     echo '<div id="bouton_' . $idType . '" class="switch_types">';
                                     echo '<div class="zone_checkbox_type">';
-                                        echo '<input id="' . $idType . '" type="checkbox" value="' . $type . '" name="types_restaurants[' . $i . ']" class="checkbox_type" />';
+                                        echo '<input id="' . $idType . '" type="checkbox" value="' . $type . '" name="types_restaurant[' . $i . ']" class="checkbox_type" />';
                                     echo '</div>';
 
                                     echo '<label for="' . $idType . '" class="label_switch checkType">' . $type . '</label>';
@@ -151,11 +151,11 @@
                         echo '</a>';
 
                         // Types personnalisés (sauvegardés en cas d'erreur)
-                        if (!empty($_SESSION['save']['types_restaurants']))
+                        if (!empty($_SESSION['save']['types_restaurant']))
                         {
                             $j = $i;
 
-                            foreach ($_SESSION['save']['types_restaurants'] as $savedTypes)
+                            foreach ($_SESSION['save']['types_restaurant'] as $savedTypes)
                             {
                                 $customType = true;
 
@@ -174,9 +174,9 @@
                                     $labelCustomType = 'label_' . formatId($savedTypes);
 
                                     if ($j % 2 == 0)
-                                        echo '<input type="text" placeholder="Type" value="' . $savedTypes . '" id="' . $idCustomType . '" name="types_restaurants[' . $j . ']" class="type_other type_other_margin filled saisieType" />';
+                                        echo '<input type="text" placeholder="Type" value="' . $savedTypes . '" id="' . $idCustomType . '" name="types_restaurant[' . $j . ']" class="type_other type_other_margin filled saisieType" />';
                                     else
-                                        echo '<input type="text" placeholder="Type" value="' . $savedTypes . '" id="' . $idCustomType . '" name="types_restaurants[' . $j . ']" class="type_other filled saisieType" />';
+                                        echo '<input type="text" placeholder="Type" value="' . $savedTypes . '" id="' . $idCustomType . '" name="types_restaurant[' . $j . ']" class="type_other filled saisieType" />';
 
                                     $j++;
                                 }

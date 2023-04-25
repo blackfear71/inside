@@ -1166,12 +1166,12 @@ function initialisationModificationRestaurant(idRestaurant)
             $(this).removeClass('bouton_checked');
         }
 
-        input.attr('name', 'update_types_restaurants_' + idRestaurant + '[' + i + ']');
+        input.attr('name', 'update_types_restaurant_' + idRestaurant + '[' + i + ']');
         i++;
     });
 
     // Types libres
-    $('#zone_saisie_restaurant').find('.zone_saisie_types').attr('id', 'update_types_restaurants_' + idRestaurant);
+    $('#zone_saisie_restaurant').find('.zone_saisie_types').attr('id', 'update_types_restaurant_' + idRestaurant);
     $('#zone_saisie_restaurant').find('.type_other').remove();
 
     // Téléphone
@@ -1270,13 +1270,13 @@ function reinitialisationSaisieRestaurant()
             {
                 $(this).find('input').prop('checked', false);
                 $(this).removeClass('bouton_checked');
-                $(this).find('input').attr('name', 'types_restaurants[' + i + ']');
+                $(this).find('input').attr('name', 'types_restaurant[' + i + ']');
 
                 i++;
             });
 
             // Types libres
-            $('#zone_saisie_restaurant').find('.zone_saisie_types').attr('id', 'types_restaurants');
+            $('#zone_saisie_restaurant').find('.zone_saisie_types').attr('id', 'types_restaurant');
             $('#zone_saisie_restaurant').find('.type_other').remove();
 
             // Téléphone
