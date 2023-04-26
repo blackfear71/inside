@@ -30,7 +30,7 @@
             // Récupération des news
             $news = getNews($_SESSION['user']);
 
-            // Récupération du nombre de news multiples
+            // Récupération du nombre de news de la même catégorie
             $nombreNews = getNombreNews($news);
 
             // Récupération du portail

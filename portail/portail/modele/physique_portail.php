@@ -74,45 +74,85 @@
         return $anniversaires;
     }
 
+    // PHYSIQUE : Lecture dernier film ajouté
+    // RETOUR : Objet Movie
+    function physiqueDernierFilm($equipe)
+    {
+        // Initialisations
+        $film = NULL;
+
+        // Requête
+        global $bdd;
+
+        $req = $bdd->query('SELECT *
+                            FROM movie_house
+                            WHERE to_delete != "Y" AND team = "' . $equipe . '"
+                            ORDER BY date_add DESC, id DESC
+                            LIMIT 1');
+
+        $data = $req->fetch();
+
+        if (!empty($data))
+        {
+            // Instanciation d'un objet Movie à partir des données remontées de la bdd
+            $film = Movie::withData($data);
+        }
+
+        $req->closeCursor();
+
+        // Retour
+        return $film;
+    }
+
+    // PHYSIQUE : Lecture film sortie cinéma
+    // RETOUR : Objet Movie
+    function physiqueSortieFilm($equipe)
+    {
+        // Initialisations
+        $film = NULL;
+
+        // Requête
+        global $bdd;
+
+        $req = $bdd->query('SELECT *
+                            FROM movie_house
+                            WHERE to_delete != "Y" AND team = "' . $equipe . '" AND date_doodle >= "' . date('Ymd') . '"
+                            ORDER BY date_doodle ASC, id ASC
+                            LIMIT 1');
+
+        $data = $req->fetch();
+
+        if (!empty($data))
+        {
+            // Instanciation d'un objet Movie à partir des données remontées de la bdd
+            $film = Movie::withData($data);
+        }
+
+        $req->closeCursor();
+
+        // Retour
+        return $film;
+    }
+
     // PHYSIQUE : Lecture réservation restaurant
     // RETOUR : Id restaurant
     function physiqueRestaurantReserved($equipe)
     {
         // Initialisations
-        $idRestaurant = NULL;
+        $nomRestaurant = '';
 
         // Requête
         global $bdd;
 
-        $req = $bdd->query('SELECT *, COUNT(*) AS nombreLignes
+        $req = $bdd->query('SELECT food_advisor_restaurants.name
                             FROM food_advisor_choices
-                            WHERE date = "' . date('Ymd') . '" AND reserved = "Y" AND team = "' . $equipe . '"');
+                            LEFT JOIN food_advisor_restaurants ON food_advisor_restaurants.id = food_advisor_choices.id_restaurant
+                            WHERE food_advisor_choices.date = "' . date('Ymd') . '" AND food_advisor_choices.reserved = "Y" AND food_advisor_choices.team = "' . $equipe . '"');
 
         $data = $req->fetch();
 
-        if ($data['nombreLignes'] > 0)
-            $idRestaurant = $data['id_restaurant'];
-
-        $req->closeCursor();
-
-        // Retour
-        return $idRestaurant;
-    }
-
-    // PHYSIQUE : Lecture nom restaurant
-    // RETOUR : Nom restaurant
-    function physiqueNomRestaurant($idRestaurant)
-    {
-        // Requête
-        global $bdd;
-
-        $req = $bdd->query('SELECT *
-                            FROM food_advisor_restaurants
-                            WHERE id = ' . $idRestaurant);
-
-        $data = $req->fetch();
-
-        $nomRestaurant = $data['name'];
+        if (!empty($data))
+            $nomRestaurant = $data['name'];
 
         $req->closeCursor();
 
@@ -145,35 +185,13 @@
         return $voted;
     }
 
-    // PHYSIQUE : Lecture présence gâteau
-    // RETOUR : Booléen
-    function physiqueGateauSemainePresent($equipe)
-    {
-        // Initialisations
-        $present = false;
-
-        // Requête
-        global $bdd;
-
-        $req = $bdd->query('SELECT COUNT(*) AS nombreLignes
-                            FROM cooking_box
-                            WHERE team = "' . $equipe . '" AND week = "' . date('W') . '" AND year = "' . date('Y') . '"');
-
-        $data = $req->fetch();
-
-        if ($data['nombreLignes'] > 0)
-            $present = true;
-
-        $req->closeCursor();
-
-        // Retour
-        return $present;
-    }
-
     // PHYSIQUE : Lecture gâteau de la semaine
     // RETOUR : Objet WeekCake
     function physiqueGateauSemaine($equipe)
     {
+        // Initialisations
+        $gateau = NULL;
+
         // Requête
         global $bdd;
 
@@ -183,8 +201,11 @@
 
         $data = $req->fetch();
 
-        // Instanciation d'un objet WeekCake à partir des données remontées de la bdd
-        $gateau = WeekCake::withData($data);
+        if (!empty($data))
+        {
+            // Instanciation d'un objet WeekCake à partir des données remontées de la bdd
+            $gateau = WeekCake::withData($data);
+        }
 
         $req->closeCursor();
 
@@ -202,16 +223,15 @@
         // Requête
         global $bdd;
 
-        $req = $bdd->query('SELECT *, COUNT(*) AS nombreCollector
+        $req = $bdd->query('SELECT *
                             FROM collector
                             WHERE type_collector = "T" AND team = "' . $equipe . '"
-                            GROUP BY id
                             ORDER BY date_add DESC, id DESC
                             LIMIT 1');
 
         $data = $req->fetch();
 
-        if ($data AND $data['nombreCollector'] > 0)
+        if (!empty($data))
         {
             // Instanciation d'un objet Collector à partir des données remontées de la bdd
             $collector = Collector::withData($data);
@@ -252,70 +272,9 @@
         return $position;
     }
 
-    // PHYSIQUE : Lecture dernier film ajouté
-    // RETOUR : Objet Movie
-    function physiqueDernierFilm($equipe)
-    {
-        // Initialisations
-        $film = NULL;
-
-        // Requête
-        global $bdd;
-
-        $req = $bdd->query('SELECT *, COUNT(*) AS nombreFilms
-                            FROM movie_house
-                            WHERE to_delete != "Y" AND team = "' . $equipe . '"
-                            GROUP BY id
-                            ORDER BY date_add DESC, id DESC
-                            LIMIT 1');
-
-        $data = $req->fetch();
-
-        if ($data AND $data['nombreFilms'] > 0)
-        {
-            // Instanciation d'un objet Movie à partir des données remontées de la bdd
-            $film = Movie::withData($data);
-        }
-
-        $req->closeCursor();
-
-        // Retour
-        return $film;
-    }
-
-    // PHYSIQUE : Lecture film sortie cinéma
-    // RETOUR : Objet Movie
-    function physiqueSortieFilm($equipe)
-    {
-        // Initialisations
-        $film = NULL;
-
-        // Requête
-        global $bdd;
-
-        $req = $bdd->query('SELECT *, COUNT(*) AS nombreLignes
-                            FROM movie_house
-                            WHERE to_delete != "Y" AND team = "' . $equipe . '" AND date_doodle >= "' . date('Ymd') . '"
-                            ORDER BY date_doodle ASC, id ASC
-                            LIMIT 1');
-
-        $data = $req->fetch();
-
-        if ($data['nombreLignes'] > 0)
-        {
-            // Instanciation d'un objet Movie à partir des données remontées de la bdd
-            $film = Movie::withData($data);
-        }
-
-        $req->closeCursor();
-
-        // Retour
-        return $film;
-    }
-
-    // PHYSIQUE : Lecture missions
-    // RETOUR : Objet Mission
-    function physiqueMissions($date1, $date2)
+    // PHYSIQUE : Lecture missions actives ou récentes
+    // RETOUR : Liste des missions
+    function physiqueMissionsRecentes($date1, $date2)
     {
         // Initialisations
         $listeMissions = array();

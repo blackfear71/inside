@@ -224,17 +224,17 @@
         /***************************/
         /* Prochaine sortie cinéma */
         /***************************/
-        $film = physiqueSortieFilm($equipe);
+        $sortie = physiqueSortieFilm($equipe);
 
-        if (!empty($film))
+        if (!empty($sortie))
         {
             $news = new News();
 
             $news->setTitle('On y court !');
-            $news->setContent($film->getFilm());
-            $news->setDetails('Rendez-vous le ' . formatDateForDisplay($film->getDate_doodle()) . ' au cinéma !');
+            $news->setContent($sortie->getFilm());
+            $news->setDetails('Rendez-vous le ' . formatDateForDisplay($sortie->getDate_doodle()) . ' au cinéma !');
             $news->setLogo('movie_house');
-            $news->setLink('/inside/portail/moviehouse/details.php?id_film=' . $film->getId() . '&action=goConsulter');
+            $news->setLink('/inside/portail/moviehouse/details.php?id_film=' . $sortie->getId() . '&action=goConsulter');
 
             array_push($tableauNews, $news);
         }
@@ -252,15 +252,10 @@
             $news->setLink('/inside/portail/foodadvisor/foodadvisor.php?date=' . date('Ymd') . '&action=goConsulter');
 
             // Récupération Id restaurant réservé
-            $idRestaurant = physiqueRestaurantReserved($equipe);
+            $nomRestaurant = physiqueRestaurantReserved($equipe);
 
-            if (!empty($idRestaurant))
-            {
-                // Lecture du nom du restaurant
-                $nomRestaurant = physiqueNomRestaurant($idRestaurant);
-
+            if (!empty($nomRestaurant))
                 $news->setContent('Le restaurant a été reservé ! Rendez-vous à <strong>' . htmlspecialchars($nomRestaurant) . '</strong> !');
-            }
             else
             {
                 // Contrôle vote effectué
@@ -284,14 +279,11 @@
         $news->setLogo('cooking_box');
         $news->setLink('/inside/portail/cookingbox/cookingbox.php?year=' . date('Y') . '&action=goConsulter');
 
-        // Vérification gâteau de la semaine présent
-        $gateauSemainePresent = physiqueGateauSemainePresent($equipe);
+        // Récupération gâteau de la semaine
+        $gateauSemaine = physiqueGateauSemaine($equipe);
 
-        if ($gateauSemainePresent == true)
+        if (!empty($gateauSemaine))
         {
-            // Récupération des données du gâteau de la semaine
-            $gateauSemaine = physiqueGateauSemaine($equipe);
-
             // Récupération du pseudo
             $pseudoGateau = physiquePseudoUser($gateauSemaine->getIdentifiant());
 
@@ -355,7 +347,7 @@
         $dateJourMoins3 = date('Ymd', strtotime(date('Ymd') . ' - 3 days'));
 
         // Récupération missions actives + missions terminées depuis moins de 3 jours pour les résultats
-        $missions = physiqueMissions($dateJour, $dateJourMoins3);
+        $missions = physiqueMissionsRecentes($dateJour, $dateJourMoins3);
 
         if (!empty($missions))
         {
