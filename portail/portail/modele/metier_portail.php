@@ -284,17 +284,14 @@
 
         if (!empty($gateauSemaine))
         {
-            // Récupération du pseudo
-            $pseudoGateau = physiquePseudoUser($gateauSemaine->getIdentifiant());
-
             if ($gateauSemaine->getCooked() == 'Y')
             {
-                $news->setContent('Le gâteau a été fait par <strong>' . htmlspecialchars(formatUnknownUser($pseudoGateau, false, false)) . '</strong>, c\'était très bon !');
+                $news->setContent('Le gâteau a été fait par <strong>' . htmlspecialchars(formatUnknownUser($gateauSemaine->getPseudo(), false, false)) . '</strong>, c\'était très bon !');
                 $news->setDetails('A la semaine prochaine pour de nouvelles expériences...');
             }
             else
             {
-                $news->setContent('Cette semaine, c\'est à <strong>' . htmlspecialchars(formatUnknownUser($pseudoGateau, false, false)) . '</strong> de faire le gâteau !');
+                $news->setContent('Cette semaine, c\'est à <strong>' . htmlspecialchars(formatUnknownUser($gateauSemaine->getPseudo(), false, false)) . '</strong> de faire le gâteau !');
                 $news->setDetails('Spécialité culinaire en préparation...');
             }
         }

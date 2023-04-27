@@ -8,6 +8,9 @@
     // RETOUR : Pseudo utilisateur
     function physiquePseudoUser($identifiant)
     {
+        // Initialisations
+        $pseudo = '';
+
         // Requête
         global $bdd;
 
@@ -17,7 +20,8 @@
 
         $data = $req->fetch();
 
-        $pseudo = $data['pseudo'];
+        if (!empty($data))
+            $pseudo = $data['pseudo'];
 
         $req->closeCursor();
 
@@ -195,9 +199,10 @@
         // Requête
         global $bdd;
 
-        $req = $bdd->query('SELECT *
+        $req = $bdd->query('SELECT cooking_box.*, users.pseudo
                             FROM cooking_box
-                            WHERE team = "' . $equipe . '" AND week = "' . date('W') . '" AND year = "' . date('Y') . '"');
+                            LEFT JOIN users ON cooking_box.identifiant = users.identifiant
+                            WHERE cooking_box.team = "' . $equipe . '" AND cooking_box.week = "' . date('W') . '" AND cooking_box.year = "' . date('Y') . '"');
 
         $data = $req->fetch();
 
@@ -205,6 +210,8 @@
         {
             // Instanciation d'un objet WeekCake à partir des données remontées de la bdd
             $gateau = WeekCake::withData($data);
+
+            $gateau->setPseudo($data['pseudo']);
         }
 
         $req->closeCursor();
