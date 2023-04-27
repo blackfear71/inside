@@ -325,8 +325,7 @@
 
         $req = $bdd->query('SELECT expense_center.type, expense_center_users.*
                             FROM expense_center_users
-                            LEFT JOIN expense_center
-                            ON (expense_center.id = expense_center_users.id_expense)
+                            LEFT JOIN expense_center ON (expense_center.id = expense_center_users.id_expense)
                             WHERE expense_center_users.identifiant = "' . $identifiant . '"');
 
         while ($data = $req->fetch())
@@ -355,8 +354,7 @@
 
         $req = $bdd->query('SELECT collector.*, COUNT(collector_users.id) AS nombreAutoVotes
                             FROM collector
-                            LEFT JOIN collector_users
-                            ON (collector.id = collector_users.id_collector)                             
+                            LEFT JOIN collector_users ON (collector.id = collector_users.id_collector)                             
                             WHERE collector.speaker = "' . $identifiant . '" AND collector_users.identifiant = "' . $identifiant . '"');
 
         $data = $req->fetch();

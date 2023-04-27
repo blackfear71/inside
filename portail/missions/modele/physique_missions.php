@@ -224,8 +224,7 @@
 
         $req = $bdd->query('SELECT success.*, success_users.value
                             FROM success
-                            LEFT JOIN success_users
-                            ON (success.reference = success_users.reference AND success_users.identifiant = "' . $identifiant . '")
+                            LEFT JOIN success_users ON (success.reference = success_users.reference AND success_users.identifiant = "' . $identifiant . '")
                             WHERE success.mission = "' . $reference . '" AND success.defined = "Y"
                             ORDER BY success.level ASC, success.order_success ASC');
 
