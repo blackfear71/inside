@@ -14,12 +14,11 @@
         // Requête
         global $bdd;
 
-        $req = $bdd->query('SELECT id, identifiant, team, pseudo, avatar
-                            FROM users
-                            WHERE (identifiant != "admin" AND team = "' . $equipe . '" AND status != "I")
-                            OR EXISTS (SELECT id, identifiant, team
-                                       FROM bugs
-                                       WHERE bugs.identifiant = users.identifiant AND bugs.team = "' . $equipe . '")');
+        $req = $bdd->query('SELECT DISTINCT bugs.identifiant, users.pseudo, users.avatar
+                            FROM bugs
+                            LEFT JOIN users ON (bugs.identifiant = users.identifiant AND users.identifiant != "admin" AND users.status != "I")
+                            WHERE bugs.team = "' . $equipe . '"
+                            ORDER BY bugs.identifiant ASC');
 
         while ($data = $req->fetch())
         {
