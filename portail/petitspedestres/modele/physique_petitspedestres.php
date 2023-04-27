@@ -67,7 +67,7 @@
         return $dernieresCourses;
     }
 
-    // PHYSIQUE : Lecture parcours
+    // PHYSIQUE : Lecture parcours et nombre participations par course
     // RETOUR : Liste des parcours
     function physiqueListeParcours($equipe)
     {
@@ -76,16 +76,20 @@
 
         // Requête
         global $bdd;
-        
-        $req = $bdd->query('SELECT *
+
+        $req = $bdd->query('SELECT petits_pedestres_parcours.*, COUNT(petits_pedestres_users.id) AS nombreRuns
                             FROM petits_pedestres_parcours
-                            WHERE team = "' . $equipe . '" AND to_delete != "Y"
-                            ORDER BY location ASC, name ASC');
+                            LEFT JOIN petits_pedestres_users ON petits_pedestres_parcours.id = petits_pedestres_users.id_parcours
+                            WHERE petits_pedestres_parcours.team = "' . $equipe . '" AND petits_pedestres_parcours.to_delete != "Y"
+                            GROUP BY petits_pedestres_parcours.id
+                            ORDER BY petits_pedestres_parcours.location ASC, petits_pedestres_parcours.name ASC');
 
         while ($data = $req->fetch())
         {
             // Instanciation d'un objet Parcours à partir des données remontées de la bdd
             $parcours = Parcours::withData($data);
+
+            $parcours->setRuns($data['nombreRuns']);
 
             // On ajoute la ligne au tableau
             array_push($listeParcours, $parcours);
@@ -95,30 +99,6 @@
 
         // Retour
         return $listeParcours;
-    }
-
-    // PHYSIQUE : Lecture nombre de participations d'un parcours
-    // RETOUR : Nombre de participations
-    function physiqueNombreRuns($idParcours)
-    {
-        // Initialisations
-        $count = 0;
-
-        // Requête
-        global $bdd;
-
-        $req = $bdd->query('SELECT COUNT(*) AS nombreRuns
-                            FROM petits_pedestres_users
-                            WHERE id_parcours = ' . $idParcours);
-
-        $data = $req->fetch();
-
-        $count = $data['nombreRuns'];
-
-        $req->closeCursor();
-
-        // Retour
-        return $count;
     }
 
     // PHYSIQUE : Lecture participation existante
@@ -227,13 +207,11 @@
         // Requête
         global $bdd;
 
-        $req = $bdd->query('SELECT id, identifiant, team, pseudo, avatar
-                            FROM users
-                            WHERE (identifiant != "admin" AND status != "I" AND team = "' . $equipe . '")
-                            OR EXISTS (SELECT id, id_parcours, identifiant
-                                       FROM petits_pedestres_users
-                                       WHERE petits_pedestres_users.identifiant = users.identifiant AND petits_pedestres_users.id_parcours = "' . $idParcours . '")
-                            ORDER BY identifiant ASC');
+        $req = $bdd->query('SELECT DISTINCT petits_pedestres_users.identifiant, users.pseudo, users.team, users.avatar
+                            FROM petits_pedestres_users
+                            LEFT JOIN users ON (petits_pedestres_users.identifiant = users.identifiant AND users.identifiant != "admin" AND users.status != "I")
+                            WHERE petits_pedestres_users.team = "' . $equipe . '" AND petits_pedestres_users.id_parcours = ' . $idParcours . '
+                            ORDER BY petits_pedestres_users.identifiant ASC');
 
         while ($data = $req->fetch())
         {

@@ -103,15 +103,9 @@
     // RETOUR : Liste des parcours
     function getListeParcours($equipe)
     {
-        // Lecture des parcours
+        // Lecture des parcours et du nombre de participations par course
         $listeParcours = physiqueListeParcours($equipe);
         
-        // Récupération du nombre de courses réalisées
-        foreach ($listeParcours as $parcours)
-        {
-            $parcours->setRuns(physiqueNombreRuns($parcours->getId()));
-        }
-
         // Retour
         return $listeParcours;
     }
