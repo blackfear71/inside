@@ -240,7 +240,7 @@
                         $speaker = htmlspecialchars($collector->getSpeaker());
 
                     // Recherche du numéro de page pour redirection
-                    $numeroPage = numeroPageCollector($notification->getContent(), $equipe);
+                    $numeroPage = getNumeroPageCollector($notification->getContent(), $equipe);
 
                     // Formatage de la notification
                     $icone  = 'collector';
@@ -270,7 +270,7 @@
                         $speaker = htmlspecialchars($collector->getSpeaker());
 
                     // Recherche du numéro de page pour redirection
-                    $numeroPage = numeroPageCollector($collector->getId(), $equipe);
+                    $numeroPage = getNumeroPageCollector($collector->getId(), $equipe);
 
                     // Formatage de la notification
                     $icone  = 'collector';
@@ -348,7 +348,7 @@
                         $auteur = formatUnknownUser('', false, true);
 
                     // Recherche du numéro de page pour redirection
-                    $numeroPage = getNumeroPageIdea($idee->getId(), $view, $equipe, $identifiant);
+                    $numeroPage = getNumeroPageIdee($idee->getId(), $view, $equipe, $identifiant);
 
                     // Formatage de la notification
                     $icone  = 'ideas';
@@ -455,7 +455,7 @@
 
     // METIER : Récupère le numéro de page pour une notification Collector
     // RETOUR : Numéro de page
-    function numeroPageCollector($idCollector, $equipe)
+    function getNumeroPageCollector($idCollector, $equipe)
     {
         // Initialisations
         $nombreParPage = 18;
@@ -472,7 +472,7 @@
 
     // METIER : Récupère le numéro de page pour une notification #TheBox
     // RETOUR : Numéro de page
-    function getNumeroPageIdea($idIdee, $view, $equipe, $identifiant)
+    function getNumeroPageIdee($idIdee, $view, $equipe, $identifiant)
     {
         // Initialisations
         $nombreParPage = 18;

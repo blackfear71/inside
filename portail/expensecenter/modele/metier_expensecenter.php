@@ -33,14 +33,14 @@
 
     // METIER : Contrôle année existante (pour les onglets)
     // RETOUR : Booléen
-    function controlYear($year, $equipe)
+    function controlYear($annee, $equipe)
     {
         // Initialisations
         $anneeExistante = false;
 
         // Vérification année présente en base
-        if (isset($year) AND is_numeric($year))
-            $anneeExistante = physiqueAnneeExistante($year, $equipe);
+        if (isset($annee) AND is_numeric($annee))
+            $anneeExistante = physiqueAnneeExistante($annee, $equipe);
 
         // Retour
         return $anneeExistante;
@@ -85,14 +85,16 @@
 
     // METIER : Lecture liste des dépenses
     // RETOUR : Liste des dépenses
-    function getExpenses($year, $filtre, $sessionUser)
+    function getExpenses($get, $sessionUser)
     {
         // Récupération des données
         $identifiant = $sessionUser['identifiant'];
         $equipe      = $sessionUser['equipe'];
+        $annee       = $get['year'];
+        $filtre      = $get['filter'];
 
         // Récupération de la liste des dépenses
-        $listeDepenses = physiqueDepenses($year, $filtre, $identifiant, $equipe);
+        $listeDepenses = physiqueDepenses($annee, $filtre, $identifiant, $equipe);
 
         // Récupération des données complémentaires
         foreach ($listeDepenses as $depense)

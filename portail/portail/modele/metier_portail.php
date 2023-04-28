@@ -311,7 +311,7 @@
         if (!empty($collector))
         {
             // Numéro de page de la phrase culte
-            $numeroPage = numeroPageCollector($collector->getId(), $equipe);
+            $numeroPage = getNumeroPageCollector($collector->getId(), $equipe);
 
             $news = new News();
 
@@ -369,7 +369,7 @@
 
     // METIER : Récupère le numéro de page pour un lien News
     // RETOUR : Numéro de page
-    function numeroPageCollector($idCollector, $equipe)
+    function getNumeroPageCollector($idCollector, $equipe)
     {
         // Initialisations
         $nombreParPage = 18;

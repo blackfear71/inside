@@ -50,7 +50,7 @@
                 $onglets = getOnglets($_SESSION['user']['equipe']);
 
                 // Récupération de la liste des dépenses
-                $listeDepenses = getExpenses($_GET['year'], $_GET['filter'], $_SESSION['user']);
+                $listeDepenses = getExpenses($_GET, $_SESSION['user']);
             }
             break;
 

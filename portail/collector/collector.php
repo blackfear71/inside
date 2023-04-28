@@ -62,7 +62,7 @@
                     elseif ($_GET['page'] < 1)
                         header('location: collector.php?action=goConsulter&page=1&sort=' . $_GET['sort'] . '&filter=' . $_GET['filter']);
                     else
-                        $listeCollectors = getCollectors($listeUsers, $nombrePages, $minGolden, $_GET['page'], $_SESSION['user'], $_GET['sort'], $_GET['filter']);
+                        $listeCollectors = getCollectors($listeUsers, $nombrePages, $minGolden, $_GET, $_SESSION['user']);
                 }
             }
             break;
@@ -73,7 +73,7 @@
 
             // Récupération du numéro de page
             if (!empty($idCollector))
-                $numeroPage = numeroPageCollector($idCollector, $_SESSION['user']['equipe']);
+                $numeroPage = getNumeroPageCollector($idCollector, $_SESSION['user']['equipe']);
             break;
 
         case 'doAjouterCollectorMobile':
@@ -82,7 +82,7 @@
 
             // Récupération du numéro de page
             if (!empty($idCollector))
-                $numeroPage = numeroPageCollector($idCollector, $_SESSION['user']['equipe']);
+                $numeroPage = getNumeroPageCollector($idCollector, $_SESSION['user']['equipe']);
             break;
 
         case 'doSupprimerCollector':
@@ -95,7 +95,7 @@
             $idCollector = updateCollector($_POST, $_FILES, false);
 
             // Récupération du numéro de page
-            $numeroPage = numeroPageCollector($idCollector, $_SESSION['user']['equipe']);
+            $numeroPage = getNumeroPageCollector($idCollector, $_SESSION['user']['equipe']);
             break;
 
         case 'doModifierCollectorMobile':
@@ -103,7 +103,7 @@
             $idCollector = updateCollector($_POST, $_FILES, true);
 
             // Récupération du numéro de page
-            $numeroPage = numeroPageCollector($idCollector, $_SESSION['user']['equipe']);
+            $numeroPage = getNumeroPageCollector($idCollector, $_SESSION['user']['equipe']);
             break;
 
         case 'doVoterCollector':

@@ -109,7 +109,7 @@
 
     // METIER : Lecture des phrases cultes
     // RETOUR : Liste phrases cultes
-    function getCollectors($listeUsers, $nombrePages, $minGolden, $page, $sessionUser, $tri, $filtre)
+    function getCollectors($listeUsers, $nombrePages, $minGolden, $get, $sessionUser)
     {
         // Initialisations
         $nombreParPage = 18;
@@ -117,6 +117,9 @@
         // Récupération des données
         $identifiant = $sessionUser['identifiant'];
         $equipe      = $sessionUser['equipe'];
+        $page        = $get['page'];
+        $tri         = $get['sort'];
+        $filtre      = $get['filter'];
 
         // Vérification dépassement dernière page
         if ($page > $nombrePages)
@@ -471,7 +474,7 @@
 
     // METIER : Récupère le numéro de page lors de l'ajout ou de la modification
     // RETOUR : Numéro de page
-    function numeroPageCollector($idCollector, $equipe)
+    function getNumeroPageCollector($idCollector, $equipe)
     {
         // Initialisations
         $nombreParPage = 18;
