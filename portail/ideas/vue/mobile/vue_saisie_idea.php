@@ -2,7 +2,7 @@
     echo '<div id="zone_saisie_idee" class="fond_saisie">';
         echo '<form method="post" action="ideas.php?view=' . $_GET['view'] . '&action=doAjouterIdee" class="form_saisie">';
             // Id idée (modification)
-            echo '<input type="hidden" name="id_idea" id="id_saisie_idee" value="" />';
+            echo '<input type="hidden" name="id_idee" id="id_saisie_idee" value="" />';
 
             // Titre
             echo '<div class="zone_titre_saisie">Proposer une idée</div>';
@@ -29,10 +29,10 @@
                     echo '</div>';
 
                     // Titre de l'idée
-                    echo '<input type="text" name="subject_idea" placeholder="Titre" maxlength="255" class="saisie_titre_idee" required />';
+                    echo '<input type="text" name="sujet_idee" placeholder="Titre" maxlength="255" class="saisie_titre_idee" required />';
 
                     // Description de l'idée
-                    echo '<textarea placeholder="Description de l\'idée" name="content_idea" class="saisie_description_idee" required></textarea>';
+                    echo '<textarea placeholder="Description de l\'idée" name="contenu_idee" class="saisie_description_idee" required></textarea>';
                 echo '</div>';
             echo '</div>';
 

@@ -124,7 +124,7 @@
                             // Boutons de prise en charge (disponibles si personne n'a pris en charge OU si le développeur est sur la page OU si l'idée est terminée / rejetée)
                             echo '<div class="zone_idea_actions">';
                                 echo '<form method="post" action="ideas.php?view=' . $_GET['view'] . '&action=doModifierStatutIdee" class="form_manage_idea">';
-                                    echo '<input type="hidden" name="id_idea" value="' . $idee->getId() . '" />';
+                                    echo '<input type="hidden" name="id_idee" value="' . $idee->getId() . '" />';
 
                                     switch ($idee->getStatus())
                                     {

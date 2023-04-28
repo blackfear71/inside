@@ -148,7 +148,7 @@
                                 // Boutons de prise en charge (disponibles si personne n'a pris en charge OU si le développeur est affecté à l'idée OU si l'idée est terminée / rejetée)
                                 echo '<div class="zone_idea_actions">';
                                     echo '<form method="post" action="ideas.php?view=' . $_GET['view'] . '&action=doModifierStatutIdee" class="form_manage_idea">';
-                                        echo '<input type="hidden" name="id_idea" value="' . $idee->getId() . '" />';
+                                        echo '<input type="hidden" name="id_idee" value="' . $idee->getId() . '" />';
 
                                         switch ($idee->getStatus())
                                         {
@@ -203,7 +203,7 @@
                         echo '<div class="zone_idea zone_idea_update" id="modifier_idee_' . $idee->getId() . '" style="display: none;">';
                             echo '<form method="post" action="ideas.php?view=' . $_GET['view'] . '&action=doModifierIdee" class="zone_shadow">';
                                 echo '<div class="zone_idea_top">';
-                                    echo '<input type="hidden" name="id_idea" value="' . $idee->getId() . '" />';
+                                    echo '<input type="hidden" name="id_idee" value="' . $idee->getId() . '" />';
 
                                     // Boutons d'action
                                     echo '<div id="zone_bouton_validation_' . $idee->getId() . '" class="zone_bouton_validation">';
@@ -215,7 +215,7 @@
                                     echo '</div>';
 
                                     // Titre de l'idée
-                                    echo '<input type="text" name="subject_idea" value="' . $idee->getSubject() . '" placeholder="Titre" maxlength="255" class="update_saisie_idee" required />';
+                                    echo '<input type="text" name="sujet_idee" value="' . $idee->getSubject() . '" placeholder="Titre" maxlength="255" class="update_saisie_idee" required />';
 
                                     // Numéro
                                     echo '<div class="zone_idea_id">#' . $idee->getId() . '</div>';
@@ -223,7 +223,7 @@
 
                                 // Contenu de l'idée
                                 echo '<div class="zone_idea_middle">';
-                                    echo '<textarea placeholder="Description de l\'idée" name="content_idea" class="update_saisie_contenu" required>' . $idee->getContent() . '</textarea>';
+                                    echo '<textarea placeholder="Description de l\'idée" name="contenu_idee" class="update_saisie_contenu" required>' . $idee->getContent() . '</textarea>';
                                 echo '</div>';
                             echo '</form>';
                         echo '</div>';

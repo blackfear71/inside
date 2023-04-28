@@ -41,7 +41,13 @@
 
                         // Récupération des idées
                         if ($nombrePages > 0)
-                            $listeIdees = getIdees($_GET['view'], $_GET['page'], $nombrePages, $_SESSION['user']);
+                        {
+                            // Récupération de la liste des utilisateurs
+                            $listeUsers = getListeUsers($_SESSION['user']['equipe']);
+
+                            // Récupération des idées
+                            $listeIdees = getIdees($_GET, $nombrePages, $_SESSION['user'], $listeUsers);
+                        }
                         break;
 
                     default:
@@ -65,18 +71,18 @@
             $idIdee = updateIdee($_POST);
 
             // Récupération du numéro de page pour la redirection
-            $numeroPage = getNumeroPageIdea($idIdee, $view, $_SESSION['user']);
+            $numeroPage = getNumeroPageIdee($idIdee, $view, $_SESSION['user']);
             break;
 
         case 'doModifierStatutIdee':
             // Récupération de l'id de l'idée
-            $idIdee = $_POST['id_idea'];
+            $idIdee = $_POST['id_idee'];
 
             // Modification du statut d'une idée
             $view = updateStatutIdee($_POST, $_GET['view'], $_SESSION['user']['identifiant']);
 
             // Récupération du numéro de page pour la redirection
-            $numeroPage = getNumeroPageIdea($idIdee, $view, $_SESSION['user']);
+            $numeroPage = getNumeroPageIdee($idIdee, $view, $_SESSION['user']);
             break;
 
         default:

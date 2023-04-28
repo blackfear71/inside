@@ -53,6 +53,38 @@
         return $nombreIdees;
     }
 
+    // PHYSIQUE : Lecture données utilisateurs
+    // RETOUR : Aucun
+    function physiqueListeUsers($equipe)
+    {
+        // Initialisations
+        $listeUsers = array();
+
+        // Requête
+        global $bdd;
+
+        $req = $bdd->query('SELECT users.id, users.identifiant, users.pseudo, users.avatar
+                            FROM users
+                            WHERE (users.identifiant != "admin" AND users.team = "' . $equipe . '" AND users.status != "I")
+                            OR EXISTS (SELECT ideas.id, ideas.author, ideas.team
+                                       FROM ideas
+                                       WHERE (ideas.author = users.identifiant OR ideas.developper = users.identifiant) AND ideas.team = "' . $equipe . '")
+                            ORDER BY users.identifiant ASC');
+
+        while ($data = $req->fetch())
+        {
+            $listeUsers[$data['identifiant']] = array(
+                'pseudo' => $data['pseudo'],
+                'avatar' => $data['avatar']
+            );
+        }
+
+        $req->closeCursor();
+
+        // Retour
+        return $listeUsers;
+    }
+
     // PHYSIQUE : Lecture des idées en fonction de la vue
     // RETOUR : Liste des idées
     function physiqueIdees($vue, $premiereEntree, $nombreParPage, $equipe, $identifiant)
@@ -116,32 +148,6 @@
 
         // Retour
         return $listeIdees;
-    }
-
-    // PHYSIQUE : Lecture des données d'un utilisateur
-    // RETOUR : Objet Profile
-    function physiqueUser($identifiant)
-    {
-        // Initialisations
-        $user = NULL;
-
-        // Requête
-        global $bdd;
-
-        $req = $bdd->query('SELECT id, identifiant, pseudo, avatar, COUNT(*) AS nombreUser
-                            FROM users
-                            WHERE identifiant = "' . $identifiant . '"');
-
-        $data = $req->fetch();
-
-        // Instanciation d'un objet Profile à partir des données remontées de la bdd
-        if ($data['nombreUser'] > 0)
-            $user = Profile::withData($data);
-
-        $req->closeCursor();
-
-        // Retour
-        return $user;
     }
 
     // PHYSIQUE : Lecture d'une idée

@@ -23,9 +23,20 @@
         return $nombrePages;
     }
 
+    // METIER : Lecture de la liste des utilisateurs
+    // RETOUR : Liste des utilisateurs
+    function getListeUsers($equipe)
+    {
+        // Lecture de la liste des équipes
+        $listeUsers = physiqueListeUsers($equipe);
+
+        // Retour
+        return $listeUsers;
+    }
+
     // METIER : Lecture liste des idées
     // RETOUR : Tableau d'idées
-    function getIdees($view, $page, $nombrePages, $sessionUser)
+    function getIdees($get, $nombrePages, $sessionUser, $listeUsers)
     {
         // Initialisations
         $nombreParPage = 18;
@@ -33,6 +44,8 @@
         // Récupération des données
         $identifiant = $sessionUser['identifiant'];
         $equipe      = $sessionUser['equipe'];
+        $view        = $get['view'];
+        $page        = $get['page'];
 
         // Vérification que l'on ne dépasse pas la dernière page
         if ($page > $nombrePages)
@@ -48,23 +61,17 @@
         foreach ($listeIdees as $idee)
         {
             // Recherche du pseudo et de l'avatar de l'auteur
-            $auteur = physiqueUser($idee->getAuthor());
+            if (isset($listeUsers[$idee->getAuthor()]))
+            {
+                $idee->setPseudo_author($listeUsers[$idee->getAuthor()]['pseudo']);
+                $idee->setAvatar_author($listeUsers[$idee->getAuthor()]['avatar']);
+            }
 
             // Recherche du pseudo et de l'avatar du developpeur (si renseigné)
             if (!empty($idee->getDevelopper()))
-                $developpeur = physiqueUser($idee->getDevelopper());
-
-            // Ajout des données complémentaires à l'idée
-            if (isset($auteur) AND !empty($auteur))
             {
-                $idee->setPseudo_author($auteur->getPseudo());
-                $idee->setAvatar_author($auteur->getAvatar());
-            }
-
-            if (isset($developpeur) AND !empty($developpeur))
-            {
-                $idee->setPseudo_developper($developpeur->getPseudo());
-                $idee->setAvatar_developper($developpeur->getAvatar());
+                $idee->setPseudo_developper($listeUsers[$idee->getDevelopper()]['pseudo']);
+                $idee->setAvatar_developper($listeUsers[$idee->getDevelopper()]['avatar']);
             }
         }
 
@@ -79,8 +86,8 @@
         // Récupération des données
         $author     = $sessionUser['identifiant'];
         $equipe     = $sessionUser['equipe'];
-        $subject    = $post['subject_idea'];
-        $content    = $post['content_idea'];
+        $subject    = $post['sujet_idee'];
+        $content    = $post['contenu_idee'];
         $date       = date('Ymd');
         $status     = 'O';
         $developper = '';
@@ -119,9 +126,9 @@
     function updateIdee($post)
     {
         // Récupération des données
-        $idIdee  = $post['id_idea'];
-        $subject = $post['subject_idea'];
-        $content = $post['content_idea'];
+        $idIdee  = $post['id_idee'];
+        $subject = $post['sujet_idee'];
+        $content = $post['contenu_idee'];
 
         // Modification de l'enregistrement en base
         $idee = array(
@@ -143,45 +150,45 @@
     function updateStatutIdee($post, $view, $identifiant)
     {
         // Récupération des données
-        $idIdee = $post['id_idea'];
-        $action = $post;
-
-        unset($action['id_idea']);
+        $idIdee = $post['id_idee'];
 
         // Récupération des données existantes de l'idée
         $ideeExistante = physiqueIdee($idIdee);
 
         // Détermination des données à insérer et de la vue en fonction de l'action effectuée
-        switch (key($action))
+        if (isset($post['take']))
         {
-            case 'take':
-                $status     = 'C';
-                $developper = $identifiant;
-                break;
-
-            case 'developp':
-                $status     = 'P';
-                $developper = $identifiant;
-                break;
-
-            case 'end':
-                $status     = 'D';
-                $developper = $identifiant;
-                $view       = 'done';
-                break;
-
-            case 'reject':
-                $status     = 'R';
-                $developper = $identifiant;
-                $view       = 'done';
-                break;
-
-            case 'reset':
-            default:
-                $status     = 'O';
-                $developper = '';
-                $view       = 'inprogress';
-                break;
+            $status     = 'C';
+            $developper = $identifiant;
+        }
+        elseif (isset($post['developp']))
+        {
+            $status     = 'P';
+            $developper = $identifiant;
+        }
+        elseif (isset($post['end']))
+        {
+            $status     = 'D';
+            $developper = $identifiant;
+            $view       = 'done';
+        }
+        elseif (isset($post['reject']))
+        {
+            $status     = 'R';
+            $developper = $identifiant;
+            $view       = 'done';
+        }
+        elseif (isset($post['reset']))
+        {
+            $status     = 'O';
+            $developper = '';
+            $view       = 'inprogress';
+        }
+        else
+        {
+            $status     = 'O';
+            $developper = '';
+            $view       = 'inprogress';
         }
 
         // Insertion de l'enregistrement en base
@@ -225,7 +232,7 @@
 
     // METIER : Récupère le numéro de page pour la redirection après changement de statut
     // RETOUR : Numéro de page
-    function getNumeroPageIdea($idIdee, $view, $sessionUser)
+    function getNumeroPageIdee($idIdee, $view, $sessionUser)
     {
         // Initialisations
         $nombreParPage = 18;

@@ -27,7 +27,7 @@
                 // Zone saisie idée
                 echo '<div class="zone_saisie_right">';
                     // Titre de l'idée
-                    echo '<input type="text" name="subject_idea" placeholder="Titre" maxlength="255" class="saisie_titre" required />';
+                    echo '<input type="text" name="sujet_idee" placeholder="Titre" maxlength="255" class="saisie_titre" required />';
 
                     // Boutons d'action
                     echo '<div class="zone_bouton_saisie">';
@@ -36,7 +36,7 @@
                     echo '</div>';
 
                     // Contenu de l'idée
-                    echo '<textarea placeholder="Description de l\'idée" name="content_idea" class="saisie_contenu" required></textarea>';
+                    echo '<textarea placeholder="Description de l\'idée" name="contenu_idee" class="saisie_contenu" required></textarea>';
                 echo '</div>';
             echo '</form>';
         echo '</div>';
