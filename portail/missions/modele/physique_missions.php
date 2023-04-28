@@ -92,7 +92,7 @@
 
     // PHYSIQUE : Lecture d'une mission
     // RETOUR : Objet Mission
-    function physiqueMission($idMission)
+    function physiqueDetailsMission($idMission)
     {
         // Requête
         global $bdd;

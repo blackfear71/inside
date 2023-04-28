@@ -35,10 +35,10 @@
                 if ($missionExistante == true)
                 {
                     // Récupération des détails de la mission
-                    $detailsMission = getMission($_GET['id_mission']);
+                    $detailsMission = getDetailsMission($_GET['id_mission']);
 
                     // Récupération des participants
-                    $participants = getParticipants($_GET['id_mission'], $_SESSION['user']['equipe']);
+                    $participants = getParticipantsMission($_GET['id_mission'], $_SESSION['user']['equipe']);
 
                     // Récupération des pourcentages d'avancement de l'utilisateur (quotidien et évènement)
                     $missionUser = getMissionUser($detailsMission, $_GET['id_mission'], $_SESSION['user']['identifiant']);
@@ -50,7 +50,7 @@
                         $succesMission = getSuccesMission($detailsMission, $_SESSION['user']['identifiant']);
 
                         // Récupération du classement des participants
-                        $ranking = getRankingMission($_GET['id_mission'], $participants);
+                        $ranking = getClassementMission($_GET['id_mission'], $participants);
 
                         // Récupération de l'utilisateur hors classement (suite à un changement d'équipe)
                         if (!isset($participants[$_SESSION['user']['identifiant']]) OR empty($participants[$_SESSION['user']['identifiant']]))

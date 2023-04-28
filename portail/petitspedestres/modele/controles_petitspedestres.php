@@ -147,9 +147,7 @@
         $control_ok = true;
 
         // Contrôle
-        $parcoursDisponible = physiqueParcoursDisponible($idParcours, $equipe);
-
-        if ($parcoursDisponible != true)
+        if (physiqueParcoursDisponible($idParcours, $equipe) != true)
         {
             $_SESSION['alerts']['parcours_doesnt_exist'] = true;
             $control_ok                                  = false;

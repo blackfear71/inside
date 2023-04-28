@@ -119,7 +119,7 @@
 
     // METIER : Récupération des participants d'une mission
     // RETOUR : Liste des participants
-    function getParticipants($idMission)
+    function getParticipantsMission($idMission)
     {
         // Récupération de la liste des participants de la mission
         $listeUsersParEquipes = physiqueUsersMission($idMission);
@@ -180,7 +180,7 @@
 
     // METIER : Lecture des équipes des participants
     // RETOUR : Liste des équipes
-    function getEquipesParticipants($listeParticipantsParEquipes)
+    function getEquipesParticipantsMission($listeParticipantsParEquipes)
     {
         // Initialisations
         $listeEquipes = array();
@@ -188,7 +188,7 @@
         // Récupération de la liste des équipes
         foreach ($listeParticipantsParEquipes as $equipe => $participantsParEquipes)
         {
-            $listeEquipes[$equipe] = physiqueEquipeParticipants($equipe);
+            $listeEquipes[$equipe] = physiqueEquipeParticipantsMission($equipe);
         }
 
         // Retour

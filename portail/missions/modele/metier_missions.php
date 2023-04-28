@@ -104,10 +104,10 @@
 
     // METIER : Lecture des détails d'une mission
     // RETOUR : Objet mission
-    function getMission($idMission)
+    function getDetailsMission($idMission)
     {
         // Récupération de la mission
-        $mission = physiqueMission($idMission);
+        $mission = physiqueDetailsMission($idMission);
 
         // Retour
         return $mission;
@@ -115,7 +115,7 @@
 
     // METIER : Récupération des participants d'une mission
     // RETOUR : Liste des participants
-    function getParticipants($idMission, $equipe)
+    function getParticipantsMission($idMission, $equipe)
     {
         // Récupération de la liste des participants d'une mission
         $listeParticipants = physiqueParticipantsMission($idMission, $equipe);
@@ -156,7 +156,7 @@
 
     // METIER : Lecture du classement des utilisateurs d'une mission
     // RETOUR : Tableau de classement d'une mission
-    function getRankingMission($idMission, $participants)
+    function getClassementMission($idMission, $participants)
     {
         // Initialisations
         $rankingUsers = array();

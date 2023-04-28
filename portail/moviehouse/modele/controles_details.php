@@ -7,9 +7,7 @@
         $control_ok = true;
 
         // Contrôle
-        $filmDisponible = physiqueFilmDisponible($idFilm, $equipe);
-
-        if ($filmDisponible != true)
+        if (physiqueFilmDisponible($idFilm, $equipe) != true)
         {
             $_SESSION['alerts']['film_doesnt_exist'] = true;
             $control_ok                              = false;

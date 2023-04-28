@@ -70,10 +70,10 @@
                 $succesMission = getSuccesMission($detailsMission);
 
                 // Récupération du classement des participants
-                $listeParticipantsParEquipes = getParticipants($_GET['id_mission']);
+                $listeParticipantsParEquipes = getParticipantsMission($_GET['id_mission']);
 
                 // Récupération des équipes des participants
-                $listeEquipesParticipants = getEquipesParticipants($listeParticipantsParEquipes);
+                $listeEquipesParticipants = getEquipesParticipantsMission($listeParticipantsParEquipes);
             }
             break;
 

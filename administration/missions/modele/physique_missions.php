@@ -164,7 +164,7 @@
 
     // PHYSIQUE : Lecture des données d'une équipe
     // RETOUR : Objet Team
-    function physiqueEquipeParticipants($equipe)
+    function physiqueEquipeParticipantsMission($equipe)
     {
         // Requête
         global $bdd;
