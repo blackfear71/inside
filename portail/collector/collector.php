@@ -70,19 +70,19 @@
         case 'doAjouterCollector':
             // Insertion d'une phrase / image culte
             $idCollector = insertCollector($_POST, $_FILES, $_SESSION['user'], false);
-
+            
             // Récupération du numéro de page
             if (!empty($idCollector))
-                $numeroPage = getNumeroPageCollector($idCollector, $_SESSION['user']['equipe']);
+                $numeroPage = getNumeroPageCollector($idCollector, $_SESSION['user'], 'dateDesc', 'none', 0);
             break;
 
         case 'doAjouterCollectorMobile':
             // Insertion d'une phrase / image culte
             $idCollector = insertCollector($_POST, $_FILES, $_SESSION['user'], true);
-
+            
             // Récupération du numéro de page
             if (!empty($idCollector))
-                $numeroPage = getNumeroPageCollector($idCollector, $_SESSION['user']['equipe']);
+                $numeroPage = getNumeroPageCollector($idCollector, $_SESSION['user'], 'dateDesc', 'none', 0);
             break;
 
         case 'doSupprimerCollector':
@@ -94,16 +94,40 @@
             // Modification d'une phrase / image culte
             $idCollector = updateCollector($_POST, $_FILES, false);
 
+            // Récupération des données complémentaires seulement en cas de besoin
+            if ($_GET['filter'] == 'topCulte')
+            {
+                // Récupération de la liste des utilisateurs
+                $listeUsers = getUsers($_SESSION['user']['equipe']);
+
+                // Calcul du minimum de smileys pour être culte (75%)
+                $minGolden = getMinGolden($listeUsers, $_SESSION['user']['equipe']);
+            }
+            else
+                $minGolden = 0;
+            
             // Récupération du numéro de page
-            $numeroPage = getNumeroPageCollector($idCollector, $_SESSION['user']['equipe']);
+            $numeroPage = getNumeroPageCollector($idCollector, $_SESSION['user'], $_GET['sort'], $_GET['filter'], $minGolden);
             break;
 
         case 'doModifierCollectorMobile':
             // Modification d'une phrase / image culte
             $idCollector = updateCollector($_POST, $_FILES, true);
 
+            // Récupération des données complémentaires seulement en cas de besoin
+            if ($_GET['filter'] == 'topCulte')
+            {
+                // Récupération de la liste des utilisateurs
+                $listeUsers = getUsers($_SESSION['user']['equipe']);
+
+                // Calcul du minimum de smileys pour être culte (75%)
+                $minGolden = getMinGolden($listeUsers, $_SESSION['user']['equipe']);
+            }
+            else
+                $minGolden = 0;
+
             // Récupération du numéro de page
-            $numeroPage = getNumeroPageCollector($idCollector, $_SESSION['user']['equipe']);
+            $numeroPage = getNumeroPageCollector($idCollector, $_SESSION['user'], $_GTT['sort'], $_GET['filter'], $minGolden);
             break;
 
         case 'doVoterCollector':

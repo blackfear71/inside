@@ -380,20 +380,99 @@
         return $selfSatisfied;
     }
 
-    // PHYSIQUE : Lecture position phrase / image culte dans la table
+    // PHYSIQUE : Lecture position phrase / image culte dans la table en fonction du filtre
     // RETOUR : Position
-    function physiquePositionCollector($idCollector, $equipe)
+    function physiquePositionCollector($idCollector, $identifiant, $equipe, $tri, $filtre, $minGolden)
     {
         // Initialisations
         $position = 1;
 
+        // Détermination du tri
+        switch ($tri)
+        {
+            case 'dateAsc':
+                $order = 'collector.date_collector ASC, collector.id ASC';
+                break;
+
+            case 'dateDesc':
+            default:
+                $order = 'collector.date_collector DESC, collector.id DESC';
+                break;
+        }
+        
         // Requête
         global $bdd;
 
-        $req = $bdd->query('SELECT id, date_collector
-                            FROM collector
-                            WHERE team = "' . $equipe . '"
-                            ORDER BY date_collector DESC, id DESC');
+        switch ($filtre)
+        {
+            case 'noVote':
+                $req = $bdd->query('SELECT id, date_collector
+                                    FROM collector
+                                    WHERE team = "' . $equipe . '" AND NOT EXISTS (SELECT id, id_collector, identifiant
+                                                                                   FROM collector_users
+                                                                                   WHERE (collector.id = collector_users.id_collector AND collector_users.identifiant = "' . $identifiant . '"))
+                                    ORDER BY ' . $order);
+                break;
+
+            case 'meOnly':
+                $req = $bdd->query('SELECT id, date_collector
+                                    FROM collector
+                                    WHERE team = "' . $equipe . '" AND speaker = "' . $identifiant . '"
+                                    ORDER BY ' . $order);
+                break;
+
+            case 'byMe':
+                $req = $bdd->query('SELECT id, date_collector
+                                    FROM collector
+                                    WHERE team = "' . $equipe . '" AND author = "' . $identifiant . '"
+                                    ORDER BY ' . $order);
+                break;
+
+            case 'usersOnly':
+                $req = $bdd->query('SELECT id, date_collector
+                                    FROM collector
+                                    WHERE team = "' . $equipe . '" AND type_speaker = "user" AND speaker != "' . $identifiant . '"
+                                    ORDER BY ' . $order);
+                break;
+
+            case 'othersOnly':
+                $req = $bdd->query('SELECT id, date_collector
+                                    FROM collector
+                                    WHERE team = "' . $equipe . '" AND type_speaker = "other"
+                                    ORDER BY ' . $order);
+                break;
+
+            case 'textOnly':
+                $req = $bdd->query('SELECT id, date_collector
+                                    FROM collector
+                                    WHERE team = "' . $equipe . '" AND type_collector = "T"
+                                    ORDER BY ' . $order);
+                break;
+
+            case 'picturesOnly':
+                $req = $bdd->query('SELECT id, date_collector
+                                    FROM collector
+                                    WHERE team = "' . $equipe . '" AND type_collector = "I"
+                                    ORDER BY ' . $order);
+                break;
+
+            case 'topCulte':
+                $req = $bdd->query('SELECT id, date_collector
+                                    FROM collector
+                                    WHERE team = "' . $equipe . '" AND (SELECT COUNT(*)
+                                                                        FROM collector_users
+                                                                        WHERE collector_users.id_collector = collector.id) >= ' . $minGolden . '
+                                    ORDER BY ' . $order);
+                break;
+
+            case 'none':
+            default:
+                $req = $bdd->query('SELECT id, date_collector
+                                    FROM collector
+                                    WHERE team = "' . $equipe . '"
+                                    ORDER BY ' . $order);
+                break;
+        }
 
         while ($data = $req->fetch())
         {

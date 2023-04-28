@@ -474,13 +474,17 @@
 
     // METIER : Récupère le numéro de page lors de l'ajout ou de la modification
     // RETOUR : Numéro de page
-    function getNumeroPageCollector($idCollector, $equipe)
+    function getNumeroPageCollector($idCollector, $sessionUser, $tri, $filtre, $minGolden)
     {
         // Initialisations
         $nombreParPage = 18;
 
+        // Récupération des données
+        $identifiant = $sessionUser['identifiant'];
+        $equipe      = $sessionUser['equipe'];
+
         // Recherche de la position de la phrase culte dans la table
-        $positionCollector = physiquePositionCollector($idCollector, $equipe);
+        $positionCollector = physiquePositionCollector($idCollector, $identifiant, $equipe, $tri, $filtre, $minGolden);
 
         // Calcul du numéro de page
         $numeroPage = ceil($positionCollector / $nombreParPage);
