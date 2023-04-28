@@ -40,7 +40,7 @@
             'titre' => 'EXPENSE CENTER'
         ),
         array(
-            'lien'  => '/inside/portail/collector/collector.php?action=goConsulter&page=1&sort=dateDesc&filter=none',
+            'lien'  => '/inside/portail/collector/collector.php?sort=dateDesc&filter=none&action=goConsulter&page=1',
             'image' => 'collector',
             'titre' => 'COLLECTOR ROOM'
         ),

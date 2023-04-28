@@ -153,7 +153,7 @@
                 $req = $bdd->query('SELECT collector.*, COUNT(collector_users.id) AS nombreVotes
                                     FROM collector
                                     LEFT JOIN collector_users ON collector.id = collector_users.id_collector
-                                    WHERE collector.team = "' . $equipe . '" AND NOT EXISTS (SELECT id, id_collector, identifiant
+                                    WHERE collector.team = "' . $equipe . '" AND NOT EXISTS (SELECT collector_users.id, collector_users.id_collector, collector_users.identifiant
                                                                                              FROM collector_users
                                                                                              WHERE (collector.id = collector_users.id_collector AND collector_users.identifiant = "' . $identifiant . '"))
                                     GROUP BY collector.id

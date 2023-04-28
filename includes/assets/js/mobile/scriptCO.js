@@ -196,7 +196,7 @@ function afficherOther(select, required)
 // Redirige pour appliquer le tri ou le filtre
 function applySortOrFilter(sort, filter)
 {
-    document.location.href = 'collector.php?action=goConsulter&page=1&sort=' + sort + '&filter=' + filter;
+    document.location.href = 'collector.php?sort=' + sort + '&filter=' + filter + '&action=goConsulter&page=1';
 }
 
 // Initialisation des titres de la saisie d'une phrase / image culte

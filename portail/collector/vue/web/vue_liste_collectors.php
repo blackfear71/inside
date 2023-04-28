@@ -53,7 +53,7 @@
                             echo '</a>';
 
                             // Formulaire vote
-                            echo '<form method="post" action="collector.php?action=doVoterCollector&page=' . $_GET['page'] . '&sort=' . $_GET['sort'] . '&filter=' . $_GET['filter'] . '" name="form_vote_user" id="modifier_vote_' . $collector->getId() . '" class="zone_smileys" style="display: none;">';
+                            echo '<form method="post" action="collector.php?sort=' . $_GET['sort'] . '&filter=' . $_GET['filter'] . '&action=doVoterCollector&page=' . $_GET['page'] . '" name="form_vote_user" id="modifier_vote_' . $collector->getId() . '" class="zone_smileys" style="display: none;">';
                                 echo '<input type="hidden" name="id_collector" value="' . $collector->getId() . '" />';
 
                                 // Gestion smileys vote
@@ -144,7 +144,7 @@
                 /* Caché pour modification */
                 /***************************/
                 echo '<div class="zone_collector zone_collector_update" id="modifier_collector_' . $collector->getId() . '" style="display: none;">';
-                    echo '<form method="post" action="collector.php?action=doModifierCollector&sort=' . $_GET['sort'] . '&filter=' . $_GET['filter'] . '" enctype="multipart/form-data" class="zone_shadow">';
+                    echo '<form method="post" action="collector.php?sort=' . $_GET['sort'] . '&filter=' . $_GET['filter'] . '&action=doModifierCollector" enctype="multipart/form-data" class="zone_shadow">';
                         if ($collector->getNb_votes() >= $minGolden)
                             echo '<div class="zone_collector_haut_golden">';
                         else

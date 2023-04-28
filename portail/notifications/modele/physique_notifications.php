@@ -350,7 +350,7 @@
 
         $req = $bdd->query('SELECT id, date_collector
                             FROM collector
-                            WHERE team = "' . $equipe . '" OR team = ""
+                            WHERE team = "' . $equipe . '"
                             ORDER BY date_collector DESC, id DESC');
 
         while ($data = $req->fetch())

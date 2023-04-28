@@ -8,7 +8,7 @@
             echo '<div class="zone_contenu_saisie">';
                 echo '<div class="contenu_saisie">';
                     // Formulaire de vote (smileys)
-                    echo '<form method="post" action="collector.php?action=doVoterCollector&page=' . $_GET['page'] . '&sort=' . $_GET['sort'] . '&filter=' . $_GET['filter'] . '" class="zone_smileys">';
+                    echo '<form method="post" action="collector.php?sort=' . $_GET['sort'] . '&filter=' . $_GET['filter'] . '&action=doVoterCollector&page=' . $_GET['page'] . '" class="zone_smileys">';
                         // Identifiant collector
                         echo '<input type="hidden" name="id_collector" value="" />';
 

@@ -458,7 +458,7 @@
         $req = $bdd->query('SELECT expense_center.*
                             FROM expense_center
                             LEFT JOIN expense_center_users ON expense_center.id = expense_center_users.id_expense
-                            WHERE NOT EXISTS (SELECT id, id_expense
+                            WHERE NOT EXISTS (SELECT expense_center_users.id, expense_center_users.id_expense
                                               FROM expense_center_users
                                               WHERE expense_center.id = expense_center_users.id_expense)
                             ORDER BY expense_center.id ASC');

@@ -19,7 +19,7 @@
                     else
                     {
                         echo '<div class="numero_page_inactive">';
-                            echo '<a href="collector.php?action=goConsulter&page=' . $i . '&sort=' . $_GET['sort'] . '&filter=' . $_GET['filter'] . '" class="lien_pagination">' . $i . '</a>';
+                            echo '<a href="collector.php?sort=' . $_GET['sort'] . '&filter=' . $_GET['filter'] . '&action=goConsulter&page=' . $i . '" class="lien_pagination">' . $i . '</a>';
                         echo '</div>';
                     }
                 }
@@ -38,7 +38,7 @@
                         else
                         {
                             echo '<div class="numero_page_inactive">';
-                                echo '<a href="collector.php?action=goConsulter&page=' . $i . '&sort=' . $_GET['sort'] . '&filter=' . $_GET['filter'] . '" class="lien_pagination">' . $i . '</a>';
+                                echo '<a href="collector.php?sort=' . $_GET['sort'] . '&filter=' . $_GET['filter'] . '&action=goConsulter&page=' . $i . '" class="lien_pagination">' . $i . '</a>';
                             echo '</div>';
                         }
                     }

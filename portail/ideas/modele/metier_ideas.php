@@ -70,8 +70,11 @@
             // Recherche du pseudo et de l'avatar du developpeur (si renseigné)
             if (!empty($idee->getDevelopper()))
             {
-                $idee->setPseudo_developper($listeUsers[$idee->getDevelopper()]['pseudo']);
-                $idee->setAvatar_developper($listeUsers[$idee->getDevelopper()]['avatar']);
+                if (isset($listeUsers[$idee->getDevelopper()]))
+                {
+                    $idee->setPseudo_developper($listeUsers[$idee->getDevelopper()]['pseudo']);
+                    $idee->setAvatar_developper($listeUsers[$idee->getDevelopper()]['avatar']);
+                }
             }
         }
 

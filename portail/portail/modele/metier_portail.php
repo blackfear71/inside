@@ -71,7 +71,7 @@
             ),
             array(
                 'categorie' => 'COLLECTOR<br />ROOM',
-                'lien'      => '../collector/collector.php?action=goConsulter&page=1&sort=dateDesc&filter=none',
+                'lien'      => '../collector/collector.php?sort=dateDesc&filter=none&action=goConsulter&page=1',
                 'title'     => 'Collector Room',
                 'image'     => '../../includes/icons/common/collector.png',
                 'alt'       => 'collector',
@@ -317,7 +317,7 @@
 
             $news->setTitle('La der des ders');
             $news->setLogo('collector');
-            $news->setLink('/inside/portail/collector/collector.php?action=goConsulter&page=' . $numeroPage . '&sort=dateDesc&filter=none&anchor=' . $collector->getId());
+            $news->setLink('/inside/portail/collector/collector.php?sort=dateDesc&filter=none&action=goConsulter&page=' . $numeroPage . '&anchor=' . $collector->getId());
 
             // Recherche pseudo speaker
             if ($collector->getType_speaker() == 'other')

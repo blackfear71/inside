@@ -349,7 +349,7 @@ function afficherModifierOther(select, id)
 // Redirige pour appliquer le tri ou le filtre
 function applySortOrFilter(sort, filter)
 {
-    document.location.href = 'collector.php?action=goConsulter&page=1&sort=' + sort + '&filter=' + filter;
+    document.location.href = 'collector.php?sort=' + sort + '&filter=' + filter + '&action=goConsulter&page=1';
 }
 
 // Affiche l'image d'une phrase culte

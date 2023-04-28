@@ -36,7 +36,7 @@
             if (!isset($_GET['page'])   OR empty($_GET['page'])   OR !is_numeric($_GET['page'])
             OR  !isset($_GET['sort'])   OR empty($_GET['sort'])
             OR  !isset($_GET['filter']) OR empty($_GET['filter']))
-                header('location: collector.php?action=goConsulter&page=1&sort=dateDesc&filter=none');
+                header('location: collector.php?sort=dateDesc&filter=none&action=goConsulter&page=1');
             else
             {
                 // Initialisation de la sauvegarde en session
@@ -58,9 +58,9 @@
                 if ($nombrePages > 0)
                 {
                     if ($_GET['page'] > $nombrePages)
-                        header('location: collector.php?action=goConsulter&page=' . $nombrePages . '&sort=' . $_GET['sort'] . '&filter=' . $_GET['filter']);
+                        header('location: collector.php?sort=' . $_GET['sort'] . '&filter=' . $_GET['filter'] . '&action=goConsulter&page=' . $nombrePages);
                     elseif ($_GET['page'] < 1)
-                        header('location: collector.php?action=goConsulter&page=1&sort=' . $_GET['sort'] . '&filter=' . $_GET['filter']);
+                        header('location: collector.php?sort=' . $_GET['sort'] . '&filter=' . $_GET['filter'] . '&action=goConsulter&page=1');
                     else
                         $listeCollectors = getCollectors($listeUsers, $nombrePages, $minGolden, $_GET, $_SESSION['user']);
                 }
@@ -137,7 +137,7 @@
 
         default:
             // Contrôle action renseignée URL
-            header('location: collector.php?action=goConsulter&page=1&sort=dateDesc&filter=none');
+            header('location: collector.php?sort=dateDesc&filter=none&action=goConsulter&page=1');
             break;
     }
 
@@ -200,22 +200,22 @@
         case 'doAjouterCollector':
         case 'doAjouterCollectorMobile':
             if (!empty($idCollector) AND !empty($numeroPage))
-                header('location: collector.php?action=goConsulter&page=' . $numeroPage . '&sort=dateDesc&filter=none&anchor=' . $idCollector);
+                header('location: collector.php?sort=dateDesc&filter=none&action=goConsulter&page=' . $numeroPage . '&anchor=' . $idCollector);
             else
-                header('location: collector.php?action=goConsulter&page=' . $_GET['page'] . '&sort=dateDesc&filter=none');
+                header('location: collector.php?sort=dateDesc&filter=none&action=goConsulter&page=' . $_GET['page']);
             break;
 
         case 'doModifierCollector':
         case 'doModifierCollectorMobile':
-            header('location: collector.php?action=goConsulter&page=' . $numeroPage . '&sort=' . $_GET['sort'] . '&filter=' . $_GET['filter'] . '&anchor=' . $idCollector);
+            header('location: collector.php?sort=' . $_GET['sort'] . '&filter=' . $_GET['filter'] . '&action=goConsulter&page=' . $numeroPage . '&anchor=' . $idCollector);
             break;
 
         case 'doSupprimerCollector':
-            header('location: collector.php?action=goConsulter&page=' . $_GET['page'] . '&sort=dateDesc&filter=none');
+            header('location: collector.php?sort=dateDesc&filter=none&action=goConsulter&page=' . $_GET['page']);
             break;
 
         case 'doVoterCollector':
-            header('location: collector.php?action=goConsulter&page=' . $_GET['page'] . '&sort=' . $_GET['sort'] . '&filter=' . $_GET['filter'] . '&anchor=' . $idCollector);
+            header('location: collector.php?sort=' . $_GET['sort'] . '&filter=' . $_GET['filter'] . '&action=goConsulter&page=' . $_GET['page'] . '&anchor=' . $idCollector);
             break;
 
         case 'goConsulter':
