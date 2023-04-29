@@ -98,7 +98,6 @@ Les variables globales ($_SESSION et $_COOKIE) sont généralement organisées s
 | missions  | Contient les données des missions générées               |
 | search    | Contient les données de la recherche                     |
 | success   | Contient les données des succès débloqués                |
-| theme     | Contient les données des thèmes                          |
 | user      | Contient les données utilisateurs et préférences         |
 
 | COOKIE        | Description                                         |

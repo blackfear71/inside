@@ -140,6 +140,7 @@
                 // Récupération des préférences
                 $preferences = physiquePreferences($user->getIdentifiant());
 
+                $_SESSION['user']['theme']              = getTheme($preferences->getRef_theme());
                 $_SESSION['user']['font']               = $preferences->getFont();
                 $_SESSION['user']['celsius']            = $preferences->getCelsius();
                 $_SESSION['user']['view_movie_house']   = $preferences->getView_movie_house();

@@ -160,6 +160,7 @@
         if ($control_ok == true)
             $control_ok = uploadFile($fileDatas, $dossier);
 
+        // Traitement de l'image
         if ($control_ok == true)
         {
             $newName = $fileDatas['new_name'];
@@ -474,8 +475,7 @@
         foreach ($listeUsers as $user)
         {
             // Récupération du niveau
-            $level = convertExperience($user->getExperience());
-            $user->setLevel($level);
+            $user->setLevel(convertExperience($user->getExperience()));
         }
 
         // Tri sur expérience puis identifiant
@@ -719,6 +719,9 @@
         // Modification de l'enregistrement en base
         physiqueUpdateTheme($identifiant, $referenceTheme);
 
+        // Mise à jour de la session
+        $_SESSION['user']['theme'] = getTheme($referenceTheme);
+        
         // Message d'alerte
         $_SESSION['alerts']['theme_updated'] = true;
     }
@@ -730,6 +733,9 @@
         // Modification de l'enregistrement en base
         physiqueUpdateTheme($identifiant, '');
 
+        // Mise à jour de la session
+        $_SESSION['user']['theme'] = getTheme('');
+        
         // Message d'alerte
         $_SESSION['alerts']['theme_deleted'] = true;
     }

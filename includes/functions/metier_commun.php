@@ -111,9 +111,6 @@
                     // Récupération des missions
                     generateMissions();
 
-                    // Détermination du thème
-                    getTheme($_SESSION['user']['identifiant']);
-
                     // Mise à jour du cookie de page
                     setCookie('index[page]', $_SERVER['REQUEST_URI'], [
                         'expires'  => time() + 60 * 60 * 24 * 365,
@@ -723,7 +720,7 @@
 
     // METIER : Détermination du thème en fonction du type
     // RETOUR : Aucun
-    function getTheme($identifiant)
+    function getTheme($referenceTheme)
     {
         // Initialisations
         $tableauTheme = array();
@@ -756,9 +753,6 @@
         }
         else
         {
-            // Lecture préférence thème utilisateur
-            $referenceTheme = physiquePreferenceTheme($identifiant);
-
             // Thème personnalisé
             if (!empty($referenceTheme))
             {
@@ -790,8 +784,8 @@
             }
         }
 
-        // Mise en session des données
-        $_SESSION['theme'] = $tableauTheme;
+        // Retour
+        return $tableauTheme;
     }
 
     // METIER : Formatage titres niveaux pour les succès

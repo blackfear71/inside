@@ -87,8 +87,8 @@
         include($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/common/missions.php');
 
         // Chargement des données du thème pour le script
-        if (!empty($_SESSION['theme']))
-            $themeUser = json_encode($_SESSION['theme']);
+        if (isset($_SESSION['user']['theme']) AND !empty($_SESSION['user']['theme']))
+            $themeUser = json_encode($_SESSION['user']['theme']);
         else
             $themeUser = json_encode('');
     }
