@@ -1,5 +1,5 @@
 <?php
-    // Génération des boutons de missions déterminés automatiquement dans le métier commun (fonction controlsUser) et récupéré par les différentes pages appelant ce fichier
+    // Génération des boutons de missions déterminés automatiquement dans le métier commun (fonction controlsUser) et récupérés par les différentes pages appelant ce fichier
     if (isset($_SESSION['missions']) AND !empty($_SESSION['missions']))
     {
         // Page courante
