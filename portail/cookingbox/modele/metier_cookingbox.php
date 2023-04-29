@@ -31,25 +31,28 @@
     function getWeek($equipe, $date)
     {
         // Récupération des données
-        $week = substr($date, 0, 2);
-        $year = substr($date, 2, 4);
+        $semaine = substr($date, 0, 2);
+        $annee   = substr($date, 2, 4);
 
         // Récupération des données de la semaine concernée
-        $semaineGateau = physiqueSemaineGateau($equipe, $week, $year);
-
-        // Récupération des données utilisateur
-        $user = physiqueUser($semaineGateau->getIdentifiant());
+        $semaineGateau = physiqueSemaineGateau($equipe, $semaine, $annee);
 
         // Ajout des données complémentaires à la semaine
-        $semaineGateau->setWeek($week);
-        $semaineGateau->setYear($year);
-
-        if (!empty($user))
+        $semaineGateau->setWeek($semaine);
+        $semaineGateau->setYear($annee);
+        
+        if (!empty($semaineGateau->getIdentifiant()))
         {
-            $semaineGateau->setPseudo($user->getPseudo());
-            $semaineGateau->setAvatar($user->getAvatar());
-        }
+            // Récupération des données utilisateur
+            $user = physiqueUser($semaineGateau->getIdentifiant());
 
+            if (!empty($user))
+            {
+                $semaineGateau->setPseudo($user->getPseudo());
+                $semaineGateau->setAvatar($user->getAvatar());
+            }
+        }
+        
         // Retour
         return $semaineGateau;
     }
@@ -95,6 +98,7 @@
         // Conversion de la liste d'objets en tableau pour envoyer au Javascript
         foreach ($listeCookers as $identifiant => $cooker)
         {
+            // On ne conserve que les utilisateurs de l'équipe courante
             if ($cooker['team'] == $equipe)
                 $listeCookersAConvertir[$identifiant] = $cooker;
         }
@@ -120,14 +124,14 @@
 
     // METIER : Contrôle année existante (pour les onglets)
     // RETOUR : Booléen
-    function controlYear($year, $equipe)
+    function controlYear($annee, $equipe)
     {
         // Initialisations
         $anneeExistante = false;
 
         // Vérification année présente en base
-        if (isset($year) AND is_numeric($year))
-            $anneeExistante = physiqueAnneeExistante($year, $equipe);
+        if (isset($annee) AND is_numeric($annee))
+            $anneeExistante = physiqueAnneeExistante($annee, $equipe);
 
         // Retour
         return $anneeExistante;
@@ -146,10 +150,10 @@
 
     // METIER : Lecture des recettes saisies
     // RETOUR : Liste des recettes
-    function getRecipes($year, $equipe, $listeCookers)
+    function getRecipes($annee, $equipe, $listeCookers)
     {
         // Récupération de la liste des recettes
-        $listeRecettes = physiqueRecettes($year, $equipe);
+        $listeRecettes = physiqueRecettes($annee, $equipe);
 
         // Recherche pseudo et avatar recettes
         foreach ($listeRecettes as $recette)
@@ -207,11 +211,11 @@
 
         // Récupération des données
         $identifiant = $post['select_user'];
-        $week        = $post['week'];
-        $year        = date('Y');
+        $semaine     = $post['week'];
+        $annee       = date('Y');
 
         // Vérification si enregistrement existant
-        $semaineExistante = physiqueSemaineExistante($equipe, $week, $year);
+        $semaineExistante = physiqueSemaineExistante($equipe, $semaine, $annee);
 
         // Contrôle recette semaine déjà validée
         $control_ok = controleSemaineValidee($semaineExistante);
@@ -224,8 +228,8 @@
                 $cooking = array(
                     'identifiant' => $identifiant,
                     'team'        => $equipe,
-                    'week'        => $week,
-                    'year'        => $year,
+                    'week'        => $semaine,
+                    'year'        => $annee,
                     'cooked'      => 'N',
                     'name'        => '',
                     'picture'     => '',
@@ -238,7 +242,7 @@
             }
             // Modification de l'enregistrement en base
             else
-                physiqueUpdateSemaineGateau($week, $year, $identifiant, $equipe);
+                physiqueUpdateSemaineGateau($semaine, $annee, $identifiant, $equipe);
         }
     }
 
@@ -250,11 +254,11 @@
         $control_ok = true;
 
         // Récupération des données
-        $week = $post['week_cake'];
-        $year = $post['year_cake'];
+        $semaine = $post['week_cake'];
+        $annee   = $post['year_cake'];
 
         // Récupération des données de la semaine concernée
-        $semaineGateau = physiqueSemaineGateau($equipe, $week, $year);
+        $semaineGateau = physiqueSemaineGateau($equipe, $semaine, $annee);
 
         if (!empty($semaineGateau->getIdentifiant()))
         {
@@ -263,7 +267,7 @@
 
             // Suppression de l'enregistrement en base
             if ($controle_ok == true)
-                physiqueDeleteSemaineGateau($week, $year, $equipe);
+                physiqueDeleteSemaineGateau($semaine, $annee, $equipe);
         }
     }
 
@@ -277,11 +281,11 @@
         // Récupération des données
         $identifiant = $sessionUser['identifiant'];
         $equipe      = $sessionUser['equipe'];
-        $week        = $post['week_cake'];
-        $year        = $post['year_cake'];
+        $semaine     = $post['week_cake'];
+        $annee       = $post['year_cake'];
 
         // Vérification si enregistrement existant
-        $semaineExistante = physiqueSemaineExistante($equipe, $week, $year);
+        $semaineExistante = physiqueSemaineExistante($equipe, $semaine, $annee);
 
         // Contrôle recette déjà validée par un autre utilisateur
         $control_ok = controleSemaineValideeAutre($semaineExistante['identifiant'], $identifiant);
@@ -290,7 +294,7 @@
         if ($control_ok == true)
         {
             // Modification de l'enregistrement en base
-            physiqueUpdateStatusSemaineGateau($equipe, $week, $year, $cooked);
+            physiqueUpdateStatusSemaineGateau($equipe, $semaine, $annee, $cooked);
 
             // Génération succès
             if ($cooked == 'Y')
@@ -380,7 +384,7 @@
         {
             $imageRecipe = uploadImage($files, $nameFile, $yearRecipe);
 
-            // Contrôle image insérée (obligatoire)
+            // Contrôle image insérée (image obligatoire)
             $control_ok = controleImageInseree($imageRecipe);
         }
 
@@ -526,17 +530,17 @@
         // Récupération des données
         $identifiant = $sessionUser['identifiant'];
         $equipe      = $sessionUser['equipe'];
-        $week        = $post['week_cake'];
-        $year        = $post['year_cake'];
+        $semaine     = $post['week_cake'];
+        $annee       = $post['year_cake'];
 
         // Lecture des données de la recette
-        $recette = physiqueRecette($equipe, $week, $year);
+        $recette = physiqueRecette($equipe, $semaine, $annee);
 
         // Suppression des images
         if (!empty($recette->getPicture()))
         {
-            unlink('../../includes/images/cookingbox/' . $year . '/' . $recette->getPicture());
-            unlink('../../includes/images/cookingbox/' . $year . '/mini/' . $recette->getPicture());
+            unlink('../../includes/images/cookingbox/' . $annee . '/' . $recette->getPicture());
+            unlink('../../includes/images/cookingbox/' . $annee . '/mini/' . $recette->getPicture());
         }
 
         // Modification de l'enregistrement en base
@@ -548,7 +552,7 @@
             'tips'        => ''
         );
 
-        physiqueResetRecette($week, $year, $reinitialisationRecette);
+        physiqueResetRecette($semaine, $annee, $reinitialisationRecette);
 
         // Suppression des notifications
         deleteNotification('recipe', $equipe, $recette->getId());
@@ -557,16 +561,16 @@
         insertOrUpdateSuccesValue('recipe-master', $identifiant, -1);
     }
 
-    // METIER : Formatage et insertion image Cooking Box
+    // METIER : Formatage et insertion image recette
     // RETOUR : Nom fichier avec extension
-    function uploadImage($files, $name, $year)
+    function uploadImage($files, $name, $annee)
     {
         // Initialisations
         $newName    = '';
         $control_ok = true;
 
         // Dossier de destination des miniatures
-        $dossier           = '../../includes/images/cookingbox/' . $year;
+        $dossier           = '../../includes/images/cookingbox/' . $annee;
         $dossierMiniatures = $dossier . '/mini';
 
         // On vérifie la présence du dossier des miniatures, sinon on le créé
