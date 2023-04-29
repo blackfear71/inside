@@ -124,10 +124,11 @@
 
         while ($data = $req->fetch())
         {
-            // Création tableau de correspondance identifiant / pseudo / avatar / email
+            // Création tableau de correspondance identifiant / équipe / pseudo / avatar / email
             if ($data['team'] == $equipe)
             {
                 $listeUsers[$data['identifiant']] = array(
+                    'equipe' => $data['team'],
                     'pseudo' => $data['pseudo'],
                     'avatar' => $data['avatar'],
                     'email'  => $data['email']
@@ -159,7 +160,7 @@
         while ($data = $req->fetch())
         {
             // On ne récupère que les étoiles des utilisateurs de l'équipe
-            if (isset($listeUsers[$data['identifiant']]) AND !empty($listeUsers[$data['identifiant']]))
+            if (isset($listeUsers[$data['identifiant']]) AND !empty($listeUsers[$data['identifiant']]) AND $listeUsers[$data['identifiant']]['equipe'] == $equipe)
             {
                 // Instanciation d'un objet Stars à partir des données remontées de la bdd
                 $etoile = Stars::withData($data);
