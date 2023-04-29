@@ -7,9 +7,7 @@
         $control_ok = true;
 
         // Contrôle
-        $isUnique = physiqueReferenceUnique($reference);
-
-        if ($isUnique == false)
+        if (physiqueReferenceUnique($reference) == false)
         {
             $_SESSION['alerts']['already_referenced'] = true;
             $control_ok                               = false;
@@ -27,9 +25,7 @@
         $control_ok = true;
 
         // Contrôle
-        $isUnique = physiqueReferenceUniqueUpdate($reference, $idAlert);
-
-        if ($isUnique == false)
+        if (physiqueReferenceUniqueUpdate($reference, $idAlert) == false)
         {
             $_SESSION['alerts']['already_referenced'] = true;
             $control_ok                               = false;
