@@ -15,12 +15,12 @@
             $previousYear = $onglets[0];
             $lastYear     = true;
 
-            foreach ($onglets as $year)
+            foreach ($onglets as $annee)
             {
                 // Année inexistante (première ou au milieu)
                 if ($_GET['action'] != 'goConsulterAnnexes')
                 {
-                    if ($lastYear != false AND $anneeExistante == false AND (($_GET['year'] < $previousYear AND $_GET['year'] > $year) OR $_GET['year'] > $onglets[0]))
+                    if ($lastYear != false AND $anneeExistante == false AND (($_GET['year'] < $previousYear AND $_GET['year'] > $annee) OR $_GET['year'] > $onglets[0]))
                     {
                         if ($i % 2 == 0)
                             echo '<span class="year active margin_right_20">' . $_GET['year'] . '</span>';
@@ -35,20 +35,20 @@
                 // Année existante
                 if ($i % 2 == 0)
                 {
-                    if (isset($_GET['year']) AND $year == $_GET['year'])
-                        echo '<span class="year active margin_right_20">' . $year . '</span>';
+                    if (isset($_GET['year']) AND $annee == $_GET['year'])
+                        echo '<span class="year active margin_right_20">' . $annee . '</span>';
                     else
-                        echo '<a href="calendars.php?year=' . $year . '&action=goConsulter" class="year inactive margin_right_20">' . $year . '</a>';
+                        echo '<a href="calendars.php?year=' . $annee . '&action=goConsulter" class="year inactive margin_right_20">' . $annee . '</a>';
                 }
                 else
                 {
-                    if (isset($_GET['year']) AND $year == $_GET['year'])
-                        echo '<span class="year active">' . $year . '</span>';
+                    if (isset($_GET['year']) AND $annee == $_GET['year'])
+                        echo '<span class="year active">' . $annee . '</span>';
                     else
-                        echo '<a href="calendars.php?year=' . $year . '&action=goConsulter" class="year inactive">' . $year . '</a>';
+                        echo '<a href="calendars.php?year=' . $annee . '&action=goConsulter" class="year inactive">' . $annee . '</a>';
                 }
 
-                $previousYear = $year;
+                $previousYear = $annee;
                 $i++;
             }
 

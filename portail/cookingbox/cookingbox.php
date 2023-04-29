@@ -83,7 +83,7 @@
 
         case 'doAjouterRecette':
             // Récupération de l'année pour redirection
-            $year = $_POST['year_recipe'];
+            $annee = $_POST['year_recipe'];
 
             // Insertion d'une recette
             $idRecette = insertRecipe($_POST, $_FILES, $_SESSION['user']);
@@ -91,7 +91,7 @@
 
         case 'doModifierRecette':
             // Récupération de l'année pour redirection
-            $year = $_POST['hidden_year_recipe'];
+            $annee = $_POST['hidden_year_recipe'];
 
             // Modification d'une recette
             $idRecette = updateRecipe($_POST, $_FILES, $_SESSION['user']);
@@ -123,24 +123,24 @@
 
             unset($user);
 
-            foreach ($listeSemaines as &$year)
+            foreach ($listeSemaines as &$annee)
             {
-                foreach ($year as &$week)
+                foreach ($annee as &$semaine)
                 {
-                    $week = htmlspecialchars($week);
+                    $semaine = htmlspecialchars($semaine);
                 }
 
-                unset($week);
+                unset($semaine);
             }
 
-            unset($year);
+            unset($annee);
 
-            foreach ($onglets as &$year)
+            foreach ($onglets as &$annee)
             {
-                $year = htmlspecialchars($year);
+                $annee = htmlspecialchars($annee);
             }
 
-            unset($year);
+            unset($annee);
 
             foreach ($recettes as &$recette)
             {
@@ -181,7 +181,7 @@
 
         case 'doAjouterRecette':
         case 'doModifierRecette':
-            header('location: cookingbox.php?year=' . $year . '&action=goConsulter&anchor=' . $idRecette);
+            header('location: cookingbox.php?year=' . $annee . '&action=goConsulter&anchor=' . $idRecette);
             break;
 
         case 'goConsulter':

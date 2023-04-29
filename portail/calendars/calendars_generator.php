@@ -83,7 +83,7 @@
 
         case 'doSauvegarderCalendrier':
             // Sauvegarde de l'image générée
-            $year = insertCalendrierGenere($_POST, $_SESSION['user']);
+            $annee = insertCalendrierGenere($_POST, $_SESSION['user']);
             break;
 
         case 'doSauvegarderAnnexe':
@@ -93,7 +93,7 @@
 
         case 'doAjouterCalendrier':
             // Insertion d'un calendrier
-            $year = insertCalendrier($_POST, $_FILES, $_SESSION['user']);
+            $annee = insertCalendrier($_POST, $_FILES, $_SESSION['user']);
             break;
 
         case 'doAjouterAnnexe':
@@ -141,7 +141,7 @@
     {
         case 'doAjouterCalendrier':
         case 'doSauvegarderCalendrier':
-            header('location: calendars.php?year=' . $year . '&action=goConsulter');
+            header('location: calendars.php?year=' . $annee . '&action=goConsulter');
             break;
 
         case 'doAjouterAnnexe':

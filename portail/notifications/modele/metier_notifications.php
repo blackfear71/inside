@@ -423,12 +423,12 @@
 
                 case 'changelog':
                     // Extraction des données du journal
-                    list($week, $year) = explode(';', $notification->getContent());
+                    list($semaine, $annee) = explode(';', $notification->getContent());
 
                     // Formatage de la notification
                     $icone  = 'inside';
-                    $phrase = 'Un <strong>nouveau journal</strong> vient d\'être ajouté pour la <strong>semaine ' . formatWeekForDisplay($week) . '</strong> (' . $year . '), allez vite voir comment le site a évolué !';
-                    $lien   = '/inside/portail/changelog/changelog.php?year=' . $year . '&action=goConsulter&anchor=' . $week;
+                    $phrase = 'Un <strong>nouveau journal</strong> vient d\'être ajouté pour la <strong>semaine ' . formatWeekForDisplay($semaine) . '</strong> (' . $annee . '), allez vite voir comment le site a évolué !';
+                    $lien   = '/inside/portail/changelog/changelog.php?year=' . $annee . '&action=goConsulter&anchor=' . $semaine;
                     break;
 
                 default:

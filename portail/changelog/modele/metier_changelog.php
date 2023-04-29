@@ -3,14 +3,14 @@
 
     // METIER : Contrôle année existante (pour les onglets)
     // RETOUR : Booléen
-    function controlYear($year)
+    function controlYear($annee)
     {
         // Initialisations
         $anneeExistante = false;
 
         // Vérification année présente en base
-        if (isset($year) AND is_numeric($year))
-            $anneeExistante = physiqueAnneeExistante($year);
+        if (isset($annee) AND is_numeric($annee))
+            $anneeExistante = physiqueAnneeExistante($annee);
 
         // Retour
         return $anneeExistante;
@@ -62,10 +62,10 @@
 
     // METIER : Lecture de la liste des logs
     // RETOUR : Liste des logs
-    function getLogs($year, $categories)
+    function getLogs($annee, $categories)
     {
         // Récupération de la liste de logs de l'année
-        $listeLogs = physiqueChangelog($year);
+        $listeLogs = physiqueChangelog($annee);
 
         // Traitement des logs
         if (!empty($listeLogs))

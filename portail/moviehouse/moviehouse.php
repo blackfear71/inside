@@ -145,12 +145,12 @@
     switch ($_GET['action'])
     {
         case 'goConsulter':
-            foreach ($onglets as &$year)
+            foreach ($onglets as &$annee)
             {
-                $year = htmlspecialchars($year);
+                $annee = htmlspecialchars($annee);
             }
 
-            unset($year);
+            unset($annee);
 
             $preferences = Preferences::secureData($preferences);
 

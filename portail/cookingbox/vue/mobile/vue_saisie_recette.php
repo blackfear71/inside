@@ -41,12 +41,12 @@
                     echo '<select name="year_recipe" id="saisie_annee" class="saisie_annee_semaine" required>';
                         echo '<option value="" hidden>Année</option>';
 
-                        foreach ($listeSemaines as $year => $week)
+                        foreach ($listeSemaines as $annee => $semaine)
                         {
-                            if ($year == $_SESSION['save']['year_recipe'])
-                                echo '<option value="' . $year . '" selected>' . $year . '</option>';
+                            if ($annee == $_SESSION['save']['year_recipe'])
+                                echo '<option value="' . $annee . '" selected>' . $annee . '</option>';
                             else
-                                echo '<option value="' . $year . '">' . $year . '</option>';
+                                echo '<option value="' . $annee . '">' . $annee . '</option>';
                         }
                     echo '</select>';
 
@@ -57,12 +57,12 @@
                         echo '<select name="week_recipe" id="saisie_semaine" class="saisie_annee_semaine" required>';
                             echo '<option value="" hidden>Semaine</option>';
 
-                            foreach ($listeSemaines[$_SESSION['save']['year_recipe']] as $week)
+                            foreach ($listeSemaines[$_SESSION['save']['year_recipe']] as $semaine)
                             {
-                                if ($week == $_SESSION['save']['week_recipe'])
-                                    echo '<option value="' . $week . '" selected>' . $week . '</option>';
+                                if ($semaine == $_SESSION['save']['week_recipe'])
+                                    echo '<option value="' . $semaine . '" selected>' . $semaine . '</option>';
                                 else
-                                    echo '<option value="' . $week . '">' . $week . '</option>';
+                                    echo '<option value="' . $semaine . '">' . $semaine . '</option>';
                             }
                         echo '</select>';
                     }

@@ -59,12 +59,12 @@
     switch ($_GET['action'])
     {
         case 'goConsulter':
-            foreach ($onglets as &$year)
+            foreach ($onglets as &$annee)
             {
-                $year = htmlspecialchars($year);
+                $annee = htmlspecialchars($annee);
             }
 
-            unset($year);
+            unset($annee);
 
             foreach ($categories as &$categorie)
             {
@@ -82,12 +82,12 @@
             break;
 
         case 'goConsulterHistoire':
-            foreach ($onglets as &$year)
+            foreach ($onglets as &$annee)
             {
-                $year = htmlspecialchars($year);
+                $annee = htmlspecialchars($annee);
             }
 
-            unset($year);
+            unset($annee);
 
             foreach ($histoires as &$histoire)
             {
