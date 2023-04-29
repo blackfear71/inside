@@ -23,12 +23,6 @@
         // Récupération des données complémentaires
         foreach ($listeParcoursToDelete as $parcours)
         {
-            // Pseudo du suppresseur
-            $parcours->setPseudo_del(physiquePseudoUser($parcours->getIdentifiant_del()));
-
-            // Pseudo de l'ajouteur
-            $parcours->setPseudo_add(physiquePseudoUser($parcours->getIdentifiant_add()));
-
             // Nombre de participants
             $parcours->setRuns(physiqueNombreParticipants($parcours->getId()));
         }

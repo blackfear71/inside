@@ -44,10 +44,12 @@
         // Requête
         global $bdd;
 
-        $req = $bdd->query('SELECT id, to_delete, team, identifiant_add, identifiant_del, name
+        $req = $bdd->query('SELECT petits_pedestres_parcours.id, petits_pedestres_parcours.to_delete, petits_pedestres_parcours.team, petits_pedestres_parcours.identifiant_add, petits_pedestres_parcours.identifiant_del, petits_pedestres_parcours.name, U1.pseudo AS pseudo_add, U2.pseudo AS pseudo_del
                             FROM petits_pedestres_parcours
-                            WHERE to_delete = "Y"
-                            ORDER BY id ASC');
+                            LEFT JOIN users AS U1 ON petits_pedestres_parcours.identifiant_add = U1.identifiant
+                            LEFT JOIN users AS U2 ON petits_pedestres_parcours.identifiant_del = U2.identifiant
+                            WHERE petits_pedestres_parcours.to_delete = "Y"
+                            ORDER BY petits_pedestres_parcours.id ASC');
 
         while ($data = $req->fetch())
         {
@@ -62,27 +64,6 @@
 
         // Retour
         return $listeParcoursToDelete;
-    }
-
-    // PHYSIQUE : Lecture des informations utilisateur
-    // RETOUR : Pseudo utilisateur
-    function physiquePseudoUser($identifiant)
-    {
-        // Requête
-        global $bdd;
-
-        $req = $bdd->query('SELECT id, identifiant, pseudo
-                            FROM users
-                            WHERE identifiant = "' . $identifiant . '"');
-
-        $data = $req->fetch();
-
-        $pseudo = $data['pseudo'];
-
-        $req->closeCursor();
-
-        // Retour
-        return $pseudo;
     }
 
     // PHYSIQUE : Comptage du nombre de participants

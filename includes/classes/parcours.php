@@ -142,8 +142,14 @@
             if (isset($data['identifiant_add']))
                 $this->identifiant_add = $data['identifiant_add'];
                 
+            if (isset($data['pseudo_add']))
+                $this->pseudo_add      = $data['pseudo_add'];
+
             if (isset($data['identifiant_del']))
                 $this->identifiant_del = $data['identifiant_del'];
+
+            if (isset($data['pseudo_del']))
+                $this->pseudo_del      = $data['pseudo_del'];
 
             if (isset($data['name']))
                 $this->name            = $data['name'];
