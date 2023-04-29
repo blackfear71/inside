@@ -107,27 +107,6 @@
         return $etoileExistante;
     }
 
-    // PHYSIQUE : Lecture participation utilisateur
-    // RETOUR : Etat de la participation
-    function physiqueParticipation($idFilm, $identifiant)
-    {
-        // Requête
-        global $bdd;
-
-        $req = $bdd->query('SELECT *
-                            FROM movie_house_users
-                            WHERE id_film = ' . $idFilm . ' AND identifiant = "' . $identifiant . '"');
-
-        $data = $req->fetch();
-
-        $participation = $data['participation'];
-
-        $req->closeCursor();
-
-        // Retour
-        return $participation;
-    }
-
     // PHYSIQUE : Lecture des utilisateurs inscrits
     // RETOUR : Liste des utilisateurs
     function physiqueUsers($equipe)
@@ -138,20 +117,22 @@
         // Requête
         global $bdd;
 
-        $req = $bdd->query('SELECT id, identifiant, team, pseudo, avatar, email
-                            FROM users
-                            WHERE identifiant != "admin" AND status != "I" AND team = "' . $equipe . '"
-                            ORDER BY identifiant ASC');
+        $req = $bdd->query('SELECT DISTINCT movie_house_users.identifiant, users.pseudo, users.team, users.avatar, users.email
+                            FROM movie_house_users
+                            LEFT JOIN users ON (movie_house_users.identifiant = users.identifiant AND users.identifiant != "admin" AND users.status != "I" AND users.team = "' . $equipe . '")
+                            ORDER BY movie_house_users.identifiant ASC');
 
         while ($data = $req->fetch())
         {
-            // Création tableau de correspondance identifiant / pseudo / avatar
-            $listeUsers[$data['identifiant']] = array(
-                'pseudo' => $data['pseudo'],
-                'equipe' => $data['team'],
-                'avatar' => $data['avatar'],
-                'email'  => $data['email']
-            );
+            // Création tableau de correspondance identifiant / pseudo / avatar / email
+            if ($data['team'] == $equipe)
+            {
+                $listeUsers[$data['identifiant']] = array(
+                    'pseudo' => $data['pseudo'],
+                    'avatar' => $data['avatar'],
+                    'email'  => $data['email']
+                );
+            }
         }
 
         $req->closeCursor();
@@ -178,10 +159,17 @@
         while ($data = $req->fetch())
         {
             // On ne récupère que les étoiles des utilisateurs de l'équipe
-            if (isset($listeUsers[$data['identifiant']]) AND !empty($listeUsers[$data['identifiant']]) AND $listeUsers[$data['identifiant']]['equipe'] == $equipe)
+            if (isset($listeUsers[$data['identifiant']]) AND !empty($listeUsers[$data['identifiant']]))
             {
                 // Instanciation d'un objet Stars à partir des données remontées de la bdd
                 $etoile = Stars::withData($data);
+
+                if (isset($listeUsers[$etoile->getIdentifiant()]))
+                {
+                    $etoile->setPseudo($listeUsers[$etoile->getIdentifiant()]['pseudo']);
+                    $etoile->setAvatar($listeUsers[$etoile->getIdentifiant()]['avatar']);
+                    $etoile->setEmail($listeUsers[$etoile->getIdentifiant()]['email']);
+                }
 
                 // On ajoute la ligne au tableau
                 array_push($listeEtoilesFilm, $etoile);
@@ -196,20 +184,27 @@
 
     // PHYSIQUE : Lecture film
     // RETOUR : Objet Movie
-    function physiqueFilm($idFilm)
+    function physiqueFilm($idFilm, $identifiant)
     {
         // Requête
         global $bdd;
 
-        $req = $bdd->query('SELECT *
+        $req = $bdd->query('SELECT movie_house.*, movie_house_users.stars, movie_house_users.participation
                             FROM movie_house
-                            WHERE id = ' . $idFilm);
+                            LEFT JOIN movie_house_users ON (movie_house_users.id_film = movie_house.id AND movie_house_users.identifiant = "' . $identifiant . '")
+                            WHERE movie_house.id = ' . $idFilm);
 
         $data = $req->fetch();
 
         // Instanciation d'un objet Movie à partir des données remontées de la bdd
         $film = Movie::withData($data);
 
+        if (isset($data['stars']))
+            $film->setStars_user($data['stars']);
+
+        if (isset($data['participation']))
+            $film->setParticipation($data['participation']);
+            
         $req->closeCursor();
 
         // Retour

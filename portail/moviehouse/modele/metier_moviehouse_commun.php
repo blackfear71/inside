@@ -121,16 +121,13 @@
         if (isset($post['participate']) OR isset($post['seen']))
         {
             // Lecture des données du film
-            $film = physiqueFilm($idFilm);
-
-            // Lecture de l'état de la participation
-            $participationActuelle = physiqueParticipation($idFilm, $identifiant);
+            $film = physiqueFilm($idFilm, $identifiant);
 
             // Gestion de la participation
             if (isset($post['participate']))
             {
                 // Inversion de la participation
-                if ($participationActuelle == 'P')
+                if ($film->getParticipation() == 'P')
                     $participationNouvelle = 'N';
                 else
                     $participationNouvelle = 'P';
@@ -140,7 +137,7 @@
             if (isset($post['seen']))
             {
                 // Inversion de la vue
-                if ($participationActuelle == 'S')
+                if ($film->getParticipation() == 'S')
                     $participationNouvelle = 'N';
                 else
                     $participationNouvelle = 'S';
@@ -152,7 +149,7 @@
             // Génération succès (participation)
             if (isset($post['participate']))
             {
-                if ($participationActuelle == 'S')
+                if ($film->getParticipation() == 'S')
                     insertOrUpdateSuccesValue('viewer', $identifiant, -1);
 
                 if (stripos($film->getFilm(), 'Les derniers Jedi') !== false)

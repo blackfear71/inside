@@ -1,17 +1,17 @@
 <?php
     // METIER : Contrôle année existante (pour les onglets)
     // RETOUR : Booléen
-    function controlYear($year, $equipe)
+    function controlYear($annee, $equipe)
     {
         // Initialisations
         $anneeExistante = false;
 
         // Vérification année présente en base
-        if (isset($year))
+        if (isset($annee))
         {
-            if (is_numeric($year))
-                $anneeExistante = physiqueAnneeExistante($year, $equipe);
-            elseif ($year == 'none')
+            if (is_numeric($annee))
+                $anneeExistante = physiqueAnneeExistante($annee, $equipe);
+            elseif ($annee == 'none')
                 $anneeExistante = physiqueSansAnnee($equipe);
         }
 
@@ -32,7 +32,7 @@
 
     // METIER : Lecture liste des films récents
     // RETOUR : Liste des films récents
-    function getFilmsRecents($year, $equipe, $isMobile)
+    function getFilmsRecents($annee, $equipe, $isMobile)
     {
         // Initialisations
         if ($isMobile == true)
@@ -41,7 +41,7 @@
             $limite = 5;
 
         // Récupération de la liste des films récents
-        $listeFilmsRecents = physiqueFilmsRecents($year, $equipe, $limite);
+        $listeFilmsRecents = physiqueFilmsRecents($annee, $equipe, $limite);
 
         // Retour
         return $listeFilmsRecents;
@@ -49,7 +49,7 @@
 
     // METIER : Vérifie si la semaine en cours doit être affichée pour les sorties de la semaine
     // RETOUR : Booléen
-    function isWeekYear($year)
+    function isWeekYear($annee)
     {
         // Initialisations
         $afficherSemaine = true;
@@ -65,7 +65,7 @@
         $anneeDuDimanche = substr($dimanche, 0, 4);
 
         // Vérification si la semaine fait partie de l'année affichée
-        if ($year != $anneeDuLundi AND $year != $anneeDuDimanche)
+        if ($annee != $anneeDuLundi AND $annee != $anneeDuDimanche)
             $afficherSemaine = false;
 
         // Retour
@@ -91,7 +91,7 @@
 
     // METIER : Lecture liste des films les plus attendus
     // RETOUR : Liste des films attendus
-    function getFilmsAttendus($year, $equipe, $isMobile)
+    function getFilmsAttendus($annee, $equipe, $isMobile)
     {
         // Initialisations
         $listeFilmsAttendus = array();
@@ -105,14 +105,14 @@
         $dateJourMoins1Mois = date('Ymd', strtotime('now - 1 Month'));
 
         // Récupération de la liste des films de l'année recherchée
-        $listeFilmsAnnee = physiqueFilmsAnnee($year, $dateJourMoins1Mois, $equipe);
+        $listeFilmsAnnee = physiqueFilmsAnnee($annee, $dateJourMoins1Mois, $equipe);
 
         // Récupération du nombre d'utilisateurs et de la moyenne des étoiles pour chaque film
         foreach ($listeFilmsAnnee as $film)
         {
             $statsFilm = physiqueStatsFilm($film->getId());
 
-            // Si il y a au moins un utilisateur avec de étoiles, on calcule la moyenne
+            // Si il y a au moins un utilisateur avec des étoiles, on calcule la moyenne
             if ($statsFilm['nombre_users'] > 0)
             {
                 $average = str_replace('.', ',', round($statsFilm['total_etoiles'] / $statsFilm['nombre_users'], 1));
@@ -157,7 +157,7 @@
 
     // METIER : Lecture des prochaines sorties cinéma organisées
     // RETOUR : Liste des prochaines sorties cinéma organisées
-    function getSortiesOrganisees($year, $equipe, $isMobile)
+    function getSortiesOrganisees($annee, $equipe, $isMobile)
     {
         // Initialisations
         if ($isMobile == true)
@@ -166,7 +166,7 @@
             $limite = 5;
 
         // Récupération de la liste des films avec une sortie cinéma organisée
-        $listeFilmsSorties = physiqueSortiesOrganisees($year, $equipe, $limite);
+        $listeFilmsSorties = physiqueSortiesOrganisees($annee, $equipe, $limite);
 
         // Retour
         return $listeFilmsSorties;
@@ -174,28 +174,18 @@
 
     // METIER : Lecture des films par année
     // RETOUR : Liste des films
-    function getFilms($year, $sessionUser)
+    function getFilms($annee, $sessionUser)
     {
         // Récupération des données
         $identifiant = $sessionUser['identifiant'];
         $equipe      = $sessionUser['equipe'];
 
         // Récupération de la liste des films de l'année
-        $listeFilms = physiqueFilms($year, $equipe);
+        $listeFilms = physiqueFilms($annee, $equipe, $identifiant);
 
-        // Récupération des données complémentaires
+        // Récupération du nombre de participants
         foreach ($listeFilms as $film)
         {
-            // Récupération du nombre de commentaires
-            $film->setNb_comments(physiqueNombreCommentaires($film->getId()));
-
-            // Récupération des étoiles et de la participation de l'utilisateur
-            $actionsUser = physiqueActionsUser($film->getId(), $identifiant);
-
-            $film->setStars_user($actionsUser['etoiles']);
-            $film->setParticipation($actionsUser['participation']);
-
-            // Récupération du nombre de participants
             $film->setNb_users(physiqueNombreParticipants($film->getId()));
         }
 
@@ -215,13 +205,6 @@
         {
             // Récupération des étoiles
             $listeEtoilesFilm = physiqueEtoilesFilm($film->getId(), $listeUsers, $equipe);
-
-            // Récupération pseudo et avatar
-            foreach ($listeEtoilesFilm as $etoilesFilm)
-            {
-                $etoilesFilm->setPseudo($listeUsers[$etoilesFilm->getIdentifiant()]['pseudo']);
-                $etoilesFilm->setAvatar($listeUsers[$etoilesFilm->getIdentifiant()]['avatar']);
-            }
 
             // On ajoute la ligne au tableau
             $listeEtoiles[$film->getId()] = $listeEtoilesFilm;

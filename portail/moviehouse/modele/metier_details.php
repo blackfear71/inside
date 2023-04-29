@@ -15,13 +15,7 @@
     function getDetails($idFilm, $identifiant)
     {
         // Récupération des données du film
-        $film = physiqueFilm($idFilm);
-
-        // Récupération des étoiles et de la participation de l'utilisateur
-        $actionsUser = physiqueActionsUser($idFilm, $identifiant);
-
-        $film->setStars_user($actionsUser['etoiles']);
-        $film->setParticipation($actionsUser['participation']);
+        $film = physiqueFilm($idFilm, $identifiant);
 
         // Récupération du nombre de participants
         $film->setNb_users(physiqueNombreParticipants($idFilm));
@@ -67,7 +61,7 @@
         // Création du bouton film précédent
         if (isset($filmPrecedent) AND !empty($filmPrecedent))
         {
-            $titreFilmPrecedent      = formatString($filmPrecedent->getFilm(), 15);
+            $titreFilmPrecedent      = $filmPrecedent->getFilm();
             $boutonPrecedent['id']   = $filmPrecedent->getId();
             $boutonPrecedent['film'] = $titreFilmPrecedent;
         }
@@ -75,7 +69,7 @@
         // Création du bouton film suivant
         if (isset($filmSuivant) AND !empty($filmSuivant))
         {
-            $titreFilmSuivant      = formatString($filmSuivant->getFilm(), 15);
+            $titreFilmSuivant      = $filmSuivant->getFilm();
             $boutonSuivant['id']   = $filmSuivant->getId();
             $boutonSuivant['film'] = $titreFilmSuivant;
         }
@@ -107,14 +101,6 @@
     {
         // Récupération des étoiles
         $listeEtoilesFilm = physiqueEtoilesFilm($idFilm, $listeUsers, $equipe);
-
-        // Récupération pseudo et avatar
-        foreach ($listeEtoilesFilm as $etoilesFilm)
-        {
-            $etoilesFilm->setPseudo($listeUsers[$etoilesFilm->getIdentifiant()]['pseudo']);
-            $etoilesFilm->setAvatar($listeUsers[$etoilesFilm->getIdentifiant()]['avatar']);
-            $etoilesFilm->setEmail($listeUsers[$etoilesFilm->getIdentifiant()]['email']);
-        }
 
         // Retour
         return $listeEtoilesFilm;
@@ -368,8 +354,11 @@
         // Récupération pseudo et avatar
         foreach ($listeCommentaires as $commentaire)
         {
-            $commentaire->setPseudo($listeUsers[$commentaire->getIdentifiant()]['pseudo']);
-            $commentaire->setAvatar($listeUsers[$commentaire->getIdentifiant()]['avatar']);
+            if (isset($listeUsers[$commentaire->getIdentifiant()]))
+            {
+                $commentaire->setPseudo($listeUsers[$commentaire->getIdentifiant()]['pseudo']);
+                $commentaire->setAvatar($listeUsers[$commentaire->getIdentifiant()]['avatar']);
+            }
         }
 
         // Retour

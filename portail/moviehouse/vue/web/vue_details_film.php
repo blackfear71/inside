@@ -69,7 +69,7 @@
                             if (!empty($listeNavigation['previous']['id']) AND !empty($listeNavigation['previous']['film']))
                             {
                                 echo '<a href="details.php?id_film=' . $listeNavigation['previous']['id'] . '&action=goConsulter" class="link_prev_movie"><img src="../../includes/icons/moviehouse/left.png" alt="left" class="fleche_detail" /></a>';
-                                echo '<span class="titre_prev_movie">' . $listeNavigation['previous']['film'] . '</span>';
+                                echo '<span class="titre_prev_movie">' . formatString($listeNavigation['previous']['film'], 15) . '</span>';
                             }
                             else
                                 echo '<div class="link_prev_movie_empty"></div>';
@@ -78,7 +78,7 @@
                             if (!empty($listeNavigation['next']['id']) AND !empty($listeNavigation['next']['film']))
                             {
                                 echo '<a href="details.php?id_film=' . $listeNavigation['next']['id'] . '&action=goConsulter" class="link_next_movie"><img src="../../includes/icons/moviehouse/right.png" alt="right" class="fleche_detail" /></a>';
-                                echo '<span class="titre_next_movie">' . $listeNavigation['next']['film'] . '</span>';
+                                echo '<span class="titre_next_movie">' . formatString($listeNavigation['next']['film'], 15) . '</span>';
                             }
                             else
                                 echo '<div class="link_next_movie_empty"></div>';

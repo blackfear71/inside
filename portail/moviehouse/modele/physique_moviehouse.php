@@ -93,7 +93,7 @@
 
         $req = $bdd->query('SELECT *
                             FROM movie_house
-                            WHERE to_delete != "Y" AND SUBSTR(date_add, 1, 4) = "' . $annee . '" AND team = "' . $equipe . '"
+                            WHERE to_delete != "Y" AND SUBSTR(date_theater, 1, 4) = "' . $annee . '" AND team = "' . $equipe . '"
                             ORDER BY SUBSTR(date_add, 1, 4) DESC, id DESC
                             LIMIT ' . $limite);
 
@@ -256,7 +256,7 @@
 
     // PHYSIQUE : Lecture des films de l'année
     // RETOUR : Liste des films
-    function physiqueFilms($annee, $equipe)
+    function physiqueFilms($annee, $equipe, $identifiant)
     {
         // Initialisations
         $listeFilms = array();
@@ -266,24 +266,38 @@
 
         if ($annee == 'none')
         {
-            $req = $bdd->query('SELECT *
+            $req = $bdd->query('SELECT movie_house.*, COUNT(movie_house_comments.id) AS nombreCommentaires, movie_house_users.stars, movie_house_users.participation
                                 FROM movie_house
-                                WHERE date_theater = "" AND to_delete != "Y" AND team = "' . $equipe . '"
-                                ORDER BY date_add DESC, film ASC');
+                                LEFT JOIN movie_house_comments ON movie_house_comments.id_film = movie_house.id
+                                LEFT JOIN movie_house_users ON (movie_house_users.id_film = movie_house.id AND movie_house_users.identifiant = "' . $identifiant . '")
+                                WHERE movie_house.date_theater = "" AND movie_house.to_delete != "Y" AND movie_house.team = "' . $equipe . '"
+                                GROUP BY movie_house.id
+                                ORDER BY movie_house.date_add DESC, movie_house.film ASC');
         }
         else
         {
-            $req = $bdd->query('SELECT *
+            $req = $bdd->query('SELECT movie_house.*, COUNT(movie_house_comments.id) AS nombreCommentaires, movie_house_users.stars, movie_house_users.participation
                                 FROM movie_house
-                                WHERE SUBSTR(date_theater, 1, 4) = "' . $annee . '" AND to_delete != "Y" AND team = "' . $equipe . '"
-                                ORDER BY date_theater ASC, film ASC');
+                                LEFT JOIN movie_house_comments ON movie_house_comments.id_film = movie_house.id
+                                LEFT JOIN movie_house_users ON (movie_house_users.id_film = movie_house.id AND movie_house_users.identifiant = "' . $identifiant . '")
+                                WHERE SUBSTR(movie_house.date_theater, 1, 4) = "' . $annee . '" AND movie_house.to_delete != "Y" AND movie_house.team = "' . $equipe . '"
+                                GROUP BY movie_house.id
+                                ORDER BY movie_house.date_theater ASC, movie_house.film ASC');
         }
 
         while ($data = $req->fetch())
         {
             // Instanciation d'un objet Movie à partir des données remontées de la bdd
             $film = Movie::withData($data);
+            
+            $film->setNb_comments($data['nombreCommentaires']);
 
+            if (isset($data['stars']))
+                $film->setStars_user($data['stars']);
+
+            if (isset($data['participation']))
+                $film->setParticipation($data['participation']);
+                
             // On ajoute la ligne au tableau
             array_push($listeFilms, $film);
         }
@@ -292,31 +306,6 @@
 
         // Retour
         return $listeFilms;
-    }
-
-    // PHYSIQUE : Lecture du nombre de commentaires d'un film
-    // RETOUR : Nombre de commentaires
-    function physiqueNombreCommentaires($idFilm)
-    {
-        // Initialisations
-        $nombreCommentaires = 0;
-
-        // Requête
-        global $bdd;
-
-        $req = $bdd->query('SELECT COUNT(*) AS nombreCommentaires
-                            FROM movie_house_comments
-                            WHERE id_film = "' . $idFilm . '"');
-
-        $data = $req->fetch();
-
-        if ($data['nombreCommentaires'] > 0)
-            $nombreCommentaires = $data['nombreCommentaires'];
-
-        $req->closeCursor();
-
-        // Retour
-        return $nombreCommentaires;
     }
 
     /****************************************************************************/
