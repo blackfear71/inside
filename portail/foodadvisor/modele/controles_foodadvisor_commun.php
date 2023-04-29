@@ -96,9 +96,7 @@
         $control_ok = true;
 
         // Contrôle
-        $exist = physiqueChoixExistant($idRestaurant, $identifiant, $equipe, $date);
-
-        if ($exist == true)
+        if (physiqueChoixExistant($idRestaurant, $identifiant, $equipe, $date) == true)
         {
             $_SESSION['alerts'][$alerte] = true;
             $control_ok                  = false;

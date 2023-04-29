@@ -76,9 +76,7 @@
         $control_ok = true;
 
         // Contrôle
-        $exist = physiqueChoixExistantDate($date, $equipe);
-
-        if ($exist == true)
+        if (physiqueChoixExistantDate($date, $equipe) == true)
         {
             $_SESSION['alerts']['already_resume'] = true;
             $control_ok                           = false;

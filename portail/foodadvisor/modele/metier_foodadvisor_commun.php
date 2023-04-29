@@ -13,7 +13,7 @@
         return $listeLieux;
     }
 
-    // METIER : Récupération de la liste des restaurants
+    // METIER : Récupération de la liste des restaurants par lieu
     // RETOUR : Liste des restaurants
     function getListeRestaurants($listeLieux, $equipe)
     {
@@ -55,10 +55,14 @@
         // On ne récupère les propositions que si la date sélectionnée est un jour de la semaine
         if (date('N', strtotime($date)) <= 5)
         {
+            // Récupération des utilisateurs pour la détermination et les détails
+            if ($recuperationDetails == true)
+                $listeUtilisateurs = physiqueUsersPropositions($equipe, $date);
+            
             // Récupération des différents restaurants proposés
             $listePropositions = physiquePropositions($equipe, $date);
 
-            // Récupération des données de chaque restaurant
+            // Récupération des données de chaque proposition
             foreach ($listePropositions as $proposition)
             {
                 // Lecture des données restaurant
@@ -107,30 +111,32 @@
                         $proposition->setDetermined('Y');
                         $proposition->setCaller($propositionDeterminee->getCaller());
                         $proposition->setReserved($propositionDeterminee->getReserved());
-
-                        // Recherche pseudo et avatar appelant
-                        if (!empty($proposition->getCaller()))
-                        {
-                            $appelant = physiqueUser($proposition->getCaller());
-
-                            $proposition->setPseudo($appelant->getPseudo());
-                            $proposition->setAvatar($appelant->getAvatar());
-                        }
                     }
 
                     // Récupération détails proposition
                     if ($recuperationDetails == true)
                     {
+                        // Recherche pseudo et avatar appelant
+                        if (!empty($propositionDeterminee) AND !empty($proposition->getCaller()))
+                        {
+                            if (isset($listeUtilisateurs[$proposition->getCaller()]))
+                            {
+                                $proposition->setPseudo($listeUtilisateurs[$proposition->getCaller()]['pseudo']);
+                                $proposition->setAvatar($listeUtilisateurs[$proposition->getCaller()]['avatar']);
+                            }
+                        }
+
                         // Lecture détail de chaque utilisateur
                         $detailsProposition = physiqueDetailsProposition($proposition->getId_restaurant(), $date);
 
-                        // Recherche pseudo et avatar utilisateur
+                        // Recherche pseudo et avatar utilisateurs
                         foreach ($detailsProposition as $detail)
                         {
-                            $user = physiqueUser($detail->getIdentifiant());
-
-                            $detail->setPseudo($user->getPseudo());
-                            $detail->setAvatar($user->getAvatar());
+                            if (isset($listeUtilisateurs[$detail->getIdentifiant()]))
+                            {
+                                $detail->setPseudo($listeUtilisateurs[$detail->getIdentifiant()]['pseudo']);
+                                $detail->setAvatar($listeUtilisateurs[$detail->getIdentifiant()]['avatar']);
+                            }
                         }
 
                         // Récupération des détails
@@ -211,9 +217,7 @@
             foreach ($listePropositions as $proposition)
             {
                 if ($proposition->getClassement() == 1)
-                {
                     array_push($idRestaurants, $proposition->getId_restaurant());
-                }
             }
 
             // Détermination Id aléatoire

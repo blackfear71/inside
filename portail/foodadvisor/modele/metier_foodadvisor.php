@@ -32,9 +32,6 @@
         for ($i = $lundi; $i <= $vendredi; $i = date('Ymd', strtotime($i . ' + 1 days')))
         {
             // Formatage de la date
-            $dateWeb    = '';
-            $dateMobile = '';
-
             switch (date('N', strtotime($i)))
             {
                 case 1:
@@ -63,6 +60,8 @@
                     break;
 
                 default:
+                    $dateWeb    = '';
+                    $dateMobile = '';
                     break;
             }
 
@@ -318,17 +317,7 @@
 
         // On ne récupère les utilisateurs qui font bande à part que si la date sélectionnée est un jour de la semaine
         if (date('N', strtotime($date)) <= 5)
-        {
-            // Récupération de la liste des utilisateurs
-            $identifiantsSolos = physiqueIdentifiantsSolos($equipe, $date);
-
-            // Récupération des données utilisateurs
-            foreach ($identifiantsSolos as $identifiantSolo)
-            {
-                // On ajoute la ligne au tableau
-                array_push($solos, physiqueUser($identifiantSolo));
-            }
-        }
+            $solos = physiqueUtilisateursSolos($equipe, $date);
 
         // Retour
         return $solos;
@@ -601,6 +590,9 @@
         // Initialisations
         $listeChoixSemaine = array();
 
+        // Récupération des utilisateurs pour le résumé
+        $listeUtilisateurs = physiqueUsersResume($equipe, $joursSemaine[0]['date'], end($joursSemaine)['date']);
+
         // Récupération du résumé de la semaine à la date demandée
         foreach ($joursSemaine as $jourSemaine)
         {
@@ -619,19 +611,17 @@
                 // Nombre de participants
                 $nombreParticipants = physiqueNombreParticipants($choixSemaine['choix']->getId_restaurant(), $jourSemaine['date']);
 
-                // Récupération pseudo et avatar
-                $user = physiqueUser($choixSemaine['choix']->getCaller());
-
                 // Concaténation des données
                 $choixSemaine['choix']->setName($restaurant->getName());
                 $choixSemaine['choix']->setPicture($restaurant->getPicture());
                 $choixSemaine['choix']->setLocation($restaurant->getLocation());
                 $choixSemaine['choix']->setNb_participants($nombreParticipants);
 
-                if (!empty($user))
+                // Récupération pseudo et avatar
+                if (!empty($choixSemaine['choix']->getCaller()) AND isset($listeUtilisateurs[$choixSemaine['choix']->getCaller()]))
                 {
-                    $choixSemaine['choix']->setPseudo($user->getPseudo());
-                    $choixSemaine['choix']->setAvatar($user->getAvatar());
+                    $choixSemaine['choix']->setPseudo($listeUtilisateurs[$choixSemaine['choix']->getCaller()]['pseudo']);
+                    $choixSemaine['choix']->setAvatar($listeUtilisateurs[$choixSemaine['choix']->getCaller()]['avatar']);
                 }
             }
 
@@ -692,7 +682,7 @@
         if ($control_ok == true)
             $control_ok = controleSoloSaisie($isSolo);
 
-        // Contrôle choix déjà existant (non bloquant)
+        // Contrôle choix déjà existant et restaurant ouvert (non bloquants)
         if ($control_ok == true)
         {
             // On parcourt tous les choix
@@ -706,26 +696,18 @@
                     // On supprime la ligne du tableau si déjà saisi
                     if ($choixNonExistant == false)
                         unset($listeRestaurants[$keyId]);
-                }
-            }
-        }
+                    else
+                    {
+                        // Lecture des données du restaurant
+                        $restaurant = physiqueDonneesRestaurant($idRestaurant);
 
-        // Contrôle restaurant ouvert (non bloquant)
-        if ($control_ok == true)
-        {
-            if (!empty($listeRestaurants))
-            {
-                foreach ($listeRestaurants as $keyId => $idRestaurant)
-                {
-                    // Lecture des données du restaurant
-                    $restaurant = physiqueDonneesRestaurant($idRestaurant);
+                        // Contrôle restaurant ouvert
+                        $restaurantOuvert = controleRestaurantOuvert($restaurant->getOpened(), $date);
 
-                    // Contrôle restaurant ouvert
-                    $restaurantOuvert = controleRestaurantOuvert($restaurant->getOpened(), $date);
-
-                    // On supprime la ligne du tableau si le restaurant n'est pas ouvert
-                    if ($restaurantOuvert == false)
-                        unset($listeRestaurants[$keyId]);
+                        // On supprime la ligne du tableau si le restaurant n'est pas ouvert
+                        if ($restaurantOuvert == false)
+                            unset($listeRestaurants[$keyId]);
+                    }
                 }
             }
         }

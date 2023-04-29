@@ -40,33 +40,37 @@
         return $listeUsers;
     }
 
-    // PHYSIQUE : Lecture bande à part
-    // RETOUR : Liste identifiants
-    function physiqueIdentifiantsSolos($equipe, $date)
+    // PHYSIQUE : Lecture utilisateurs faisant bande à part
+    // RETOUR : Liste utilisateurs
+    function physiqueUtilisateursSolos($equipe, $date)
     {
         // Initialisations
-        $identifiantsSolos = array();
+        $listeUtilisateurs = array();
 
         // Requête
         global $bdd;
 
-        $req = $bdd->query('SELECT *
+        $req = $bdd->query('SELECT DISTINCT food_advisor_users.identifiant, users.*
                             FROM food_advisor_users
-                            WHERE id_restaurant = 0 AND team = "' . $equipe . '" AND date = "' . $date . '"
-                            ORDER BY identifiant ASC');
+                            LEFT JOIN users ON food_advisor_users.identifiant = users.identifiant
+                            WHERE food_advisor_users.id_restaurant = 0 AND food_advisor_users.team = "' . $equipe . '" AND food_advisor_users.date = "' . $date . '"
+                            ORDER BY food_advisor_users.identifiant ASC');
 
         while ($data = $req->fetch())
         {
+            // Instanciation d'un objet Profile à partir des données remontées de la bdd
+            $user = Profile::withData($data);
+            
             // On ajoute la ligne au tableau
-            array_push($identifiantsSolos, $data['identifiant']);
+            array_push($listeUtilisateurs, $user);
         }
 
         $req->closeCursor();
 
         // Retour
-        return $identifiantsSolos;
+        return $listeUtilisateurs;
     }
-
+    
     // PHYSIQUE : Lecture nombre de propositions d'un utilisateur
     // RETOUR : Nombre de propositions
     function physiqueNombrePropositions($equipe, $identifiant, $date)
@@ -90,6 +94,37 @@
 
         // Retour
         return $nombrePropositions;
+    }
+
+    // PHYSIQUE : Lecture utilisateurs résumé
+    // RETOUR : Liste des utilisateurs
+    function physiqueUsersResume($equipe, $dateMin, $dateMax)
+    {
+        // Initialisations
+        $listeUsers = array();
+
+        // Requête
+        global $bdd;
+        
+        $req = $bdd->query('SELECT DISTINCT food_advisor_choices.caller, users.*
+                            FROM food_advisor_choices
+                            LEFT JOIN users ON food_advisor_choices.caller = users.identifiant
+                            WHERE food_advisor_choices.caller != "" AND food_advisor_choices.team = "' . $equipe . '" AND food_advisor_choices.date >= "' . $dateMin . '" AND food_advisor_choices.date <= "' . $dateMax . '"
+                            ORDER BY food_advisor_choices.caller ASC');
+
+        while ($data = $req->fetch())
+        {
+            // Création tableau de correspondance identifiant / pseudo / avatar
+            $listeUsers[$data['identifiant']] = array(
+                'pseudo' => $data['pseudo'],
+                'avatar' => $data['avatar']
+            );
+        }
+
+        $req->closeCursor();
+
+        // Retour
+        return $listeUsers;
     }
 
     // PHYSIQUE : Lecture choix à date

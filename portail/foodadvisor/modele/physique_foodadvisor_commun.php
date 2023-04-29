@@ -4,34 +4,6 @@
     /****************************************************************************/
     /********************************** SELECT **********************************/
     /****************************************************************************/
-    // PHYSIQUE : Lecture données utilisateur
-    // RETOUR : Objet Profile
-    function physiqueUser($identifiant)
-    {
-        // Initialisations
-        $user = NULL;
-
-        // Requête
-        global $bdd;
-
-        $req = $bdd->query('SELECT *, COUNT(*) AS nombreLignes
-                            FROM users
-                            WHERE identifiant = "' . $identifiant . '"');
-
-        $data = $req->fetch();
-
-        if ($data['nombreLignes'] > 0)
-        {
-            // Instanciation d'un objet Profile à partir des données remontées de la bdd
-            $user = Profile::withData($data);
-        }
-
-        $req->closeCursor();
-
-        // Retour
-        return $user;
-    }
-
     // PHYSIQUE : Lecture des lieux
     // RETOUR : Lieux
     function physiqueLieux($equipe)
@@ -272,6 +244,37 @@
 
         // Retour
         return $propositionDeterminee;
+    }
+
+    // PHYSIQUE : Lecture utilisateurs propositions
+    // RETOUR : Liste des utilisateurs
+    function physiqueUsersPropositions($equipe, $date)
+    {
+        // Initialisations
+        $listeUsers = array();
+
+        // Requête
+        global $bdd;
+        
+        $req = $bdd->query('SELECT DISTINCT food_advisor_users.identifiant, users.*
+                            FROM food_advisor_users
+                            LEFT JOIN users ON food_advisor_users.identifiant = users.identifiant
+                            WHERE food_advisor_users.date = "' . $date . '" AND food_advisor_users.team = "' . $equipe . '"
+                            ORDER BY food_advisor_users.identifiant ASC');
+
+        while ($data = $req->fetch())
+        {
+            // Création tableau de correspondance identifiant / pseudo / avatar
+            $listeUsers[$data['identifiant']] = array(
+                'pseudo' => $data['pseudo'],
+                'avatar' => $data['avatar']
+            );
+        }
+
+        $req->closeCursor();
+
+        // Retour
+        return $listeUsers;
     }
 
     // PHYSIQUE : Lecture détails proposition

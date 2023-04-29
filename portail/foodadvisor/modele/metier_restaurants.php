@@ -204,35 +204,8 @@
             // Vérification des dossiers et contrôle des fichiers
             if (!empty($files['image_restaurant']['name']))
             {
-                // Nom du fichier
-                $name = rand();
-
-                // Dossier de destination
-                $dossier = '../../includes/images/foodadvisor';
-
-                // Contrôle du fichier
-                $fileDatas = controlsUploadFile($files['image_restaurant'], $name, 'all');
-
-                // Récupération contrôles
-                $control_ok = $fileDatas['control_ok'];
-
-                // Upload fichier
-                if ($control_ok == true)
-                    $control_ok = uploadFile($fileDatas, $dossier);
-
-                // Traitement de l'image
-                if ($control_ok == true)
-                {
-                    $newName   = $fileDatas['new_name'];
-                    $typeImage = $fileDatas['type_file'];
-
-                    // Rotation automatique de l'image (si JPEG)
-                    if ($typeImage == 'jpg' OR $typeImage == 'jpeg')
-                        rotateImage($dossier . '/' . $newName, $typeImage);
-
-                    // Création miniature avec une hauteur/largeur max de 500px
-                    imageThumb($dossier . '/' . $newName, $dossier . '/' . $newName, 500, false, true);
-                }
+                // Insertion image
+                $newName = uploadImage($files['image_restaurant'], rand());
             }
             else
                 $newName = '';
@@ -383,42 +356,12 @@
             // Vérification des dossiers et contrôle des fichiers
             if (!empty($files['update_image_restaurant_' . $idRestaurant]['name']))
             {
-                // Nom du fichier
-                $name = rand();
+                // Insertion image
+                $newName = uploadImage($files['update_image_restaurant_' . $idRestaurant], rand());
 
-                // Dossier de destination
-                $dossier = '../../includes/images/foodadvisor';
-
-                // Contrôles communs d'un fichier
-                $fileDatas = controlsUploadFile($files['update_image_restaurant_' . $idRestaurant], $name, 'all');
-
-                // Récupération contrôles
-                $control_ok = controleFichier($fileDatas);
-
-                // Suppression ancienne image
-                if ($control_ok == true)
-                {
-                    // Suppression de l'image
-                    if (!empty($restaurant->getPicture()))
-                        unlink('../../includes/images/foodadvisor/' . $restaurant->getPicture());
-
-                    // Upload fichier
-                    $control_ok = uploadFile($fileDatas, $dossier);
-
-                    // Traitement de l'image
-                    if ($control_ok == true)
-                    {
-                        $newName   = $fileDatas['new_name'];
-                        $typeImage = $fileDatas['type_file'];
-
-                        // Rotation automatique de l'image (si JPEG)
-                        if ($typeImage == 'jpg' OR $typeImage == 'jpeg')
-                            rotateImage($dossier . '/' . $newName, $typeImage);
-
-                        // Création miniature avec une hauteur/largeur max de 500px
-                        imageThumb($dossier . '/' . $newName, $dossier . '/' . $newName, 500, false, true);
-                    }
-                }
+                // Suppression des anciennes images
+                if (!empty($restaurant->getPicture()))
+                    unlink('../../includes/images/foodadvisor/' . $restaurant->getPicture());
             }
             else
                 $newName = $restaurant->getPicture();
@@ -452,6 +395,45 @@
         return $idRestaurant;
     }
 
+    // METIER : Formatage et insertion image restaurant
+    // RETOUR : Nom fichier avec extension
+    function uploadImage($file, $name)
+    {
+        // Initialisations
+        $newName    = '';
+        $control_ok = true;
+        
+        // Dossier de destination
+        $dossier = '../../includes/images/foodadvisor';
+
+        // Contrôles fichier
+        $fileDatas = controlsUploadFile($file, $name, 'all');
+
+        // Récupération contrôles
+        $control_ok = controleFichier($fileDatas);
+
+        // Upload fichier
+        if ($control_ok == true)
+            $control_ok = uploadFile($fileDatas, $dossier);
+
+        // Traitement de l'image (rotation et miniature)
+        if ($control_ok == true)
+        {
+            $newName   = $fileDatas['new_name'];
+            $typeImage = $fileDatas['type_file'];
+
+            // Rotation automatique de l'image (si JPEG)
+            if ($typeImage == 'jpg' OR $typeImage == 'jpeg')
+                rotateImage($dossier . '/' . $newName, $typeImage);
+
+            // Création miniature avec une hauteur/largeur max de 500px
+            imageThumb($dossier . '/' . $newName, $dossier . '/' . $newName, 500, false, true);
+        }
+
+        // Retour
+        return $newName;
+    }
+
     // METIER : Supprime un restaurant
     // RETOUR : Aucun
     function deleteRestaurant($post)
@@ -461,6 +443,9 @@
 
         // Récupération des données du restaurant
         $restaurant = physiqueDonneesRestaurant($idRestaurant);
+
+        // Récupération des déterminations associées
+        $determinations = physiqueDeterminationsRestaurant($idRestaurant);
 
         // Suppression des images
         if (!empty($restaurant->getPicture()))
@@ -477,6 +462,11 @@
 
         // Génération succès
         insertOrUpdateSuccesValue('restaurant-finder', $restaurant->getIdentifiant_add(), -1);
+
+        foreach ($determinations as $determination)
+        {
+            insertOrUpdateSuccesValue('star-chief', $determination->getCaller(), -1);
+        }
 
         // Message alerte
         $_SESSION['alerts']['restaurant_deleted'] = true;

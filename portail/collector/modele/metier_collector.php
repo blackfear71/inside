@@ -458,12 +458,13 @@
         if ($control_ok == true)
             $control_ok = uploadFile($fileDatas, $dossier);
 
-        // Rotation de l'image
+        // Traitement de l'image (rotation)
         if ($control_ok == true)
         {
             $newName   = $fileDatas['new_name'];
             $typeImage = $fileDatas['type_file'];
 
+            // Rotation automatique de l'image (si JPEG)
             if ($typeImage == 'jpg' OR $typeImage == 'jpeg')
                 rotateImage($dossier . '/' . $newName, $typeImage);
         }

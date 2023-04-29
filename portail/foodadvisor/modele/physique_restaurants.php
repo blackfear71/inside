@@ -29,6 +29,33 @@
         return $types;
     }
 
+    // PHYSIQUE : Lecture déterminations restaurants
+    // RETOUR : Liste des déterminations
+    function physiqueDeterminationsRestaurant($idRestaurant)
+    {
+        // Initialisations
+        $listeDeterminations = array();
+
+        // Requête
+        global $bdd;
+
+        $req = $bdd->query('SELECT *
+                            FROM food_advisor_choices
+                            WHERE id_restaurant = "' . $idRestaurant . '" AND caller != ""');
+
+        while ($data = $req->fetch()) 
+        {
+            // Instanciation d'un objet Proposition à partir des données remontées de la bdd
+            $determination = Proposition::withData($data);
+
+            // On ajoute la ligne au tableau
+            array_push($listeDeterminations, $determination);
+        }
+
+        // Retour
+        return $listeDeterminations;
+    }
+
     /****************************************************************************/
     /********************************** INSERT **********************************/
     /****************************************************************************/

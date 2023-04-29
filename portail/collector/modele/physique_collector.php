@@ -27,7 +27,7 @@
 
         while ($data = $req->fetch())
         {
-            // Création tableau de correspondance identifiant / pseudo / avatar
+            // Création tableau de correspondance identifiant / équipe / pseudo / avatar
             $listeUsers[$data['identifiant']] = array(
                 'team'   => $data['team'],
                 'pseudo' => $data['pseudo'],
