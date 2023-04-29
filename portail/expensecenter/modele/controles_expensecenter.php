@@ -179,7 +179,7 @@
         {
             $montantFormat = formatAmountForInsert($montant);
 
-        if (!is_numeric($montantFormat) OR $montantFormat <= 0)
+            if (!is_numeric($montantFormat) OR $montantFormat <= 0)
             {
                 $_SESSION['alerts']['amounts_not_numeric'] = true;
                 $control_ok                                = false;

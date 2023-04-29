@@ -4,14 +4,14 @@
 
     // METIER : Contrôle année existante (pour les onglets)
     // RETOUR : Booléen
-    function controlYear($year, $equipe)
+    function controlYear($annee, $equipe)
     {
         // Initialisations
         $anneeExistante = false;
 
         // Vérification année présente en base
-        if (isset($year) AND is_numeric($year))
-            $anneeExistante = physiqueAnneeExistante($year, $equipe);
+        if (isset($annee) AND is_numeric($annee))
+            $anneeExistante = physiqueAnneeExistante($annee, $equipe);
 
         // Retour
         return $anneeExistante;
@@ -54,10 +54,10 @@
 
     // METIER : Lecture calendriers pour l'année renseignée
     // RETOUR : Liste des calendriers
-    function getCalendars($year, $equipe)
+    function getCalendars($annee, $equipe)
     {
         // Récupération de la liste des calendriers
-        $listeCalendriers = physiqueCalendriers($year, $equipe);
+        $listeCalendriers = physiqueCalendriers($annee, $equipe);
 
         // Retour
         return $listeCalendriers;
@@ -122,11 +122,11 @@
         // Récupération des données
         $identifiant = $sessionUser['identifiant'];
         $equipe      = $sessionUser['equipe'];
-        $month       = $post['month_calendar'];
-        $year        = $post['year_calendar'];
+        $mois        = $post['month_calendar'];
+        $annee       = $post['year_calendar'];
         $toDelete    = 'N';
         $name        = $post['month_calendar'] . '-' . $post['year_calendar'] . '-' . rand();
-        $folder      = '../../includes/images/calendars/' . $year;
+        $folder      = '../../includes/images/calendars/' . $annee;
 
         // Insertion image
         $nameCalendar = uploadImage($files, $name, 'calendar', $folder);
@@ -140,8 +140,8 @@
             $calendar = array(
                 'to_delete' => $toDelete,
                 'team'      => $equipe,
-                'month'     => $month,
-                'year'      => $year,
+                'month'     => $mois,
+                'year'      => $annee,
                 'calendar'  => $nameCalendar
             );
 
@@ -155,7 +155,7 @@
         }
 
         // Retour
-        return $year;
+        return $annee;
     }
 
     // METIER : Ajout annexe avec création miniature
@@ -398,23 +398,23 @@
         $vacances = array();
 
         // Récupération des données
-        $year      = $calendarParameters->getYear();
-        $month     = $calendarParameters->getMonth();
+        $annee     = $calendarParameters->getYear();
+        $mois      = $calendarParameters->getMonth();
         $vacations = $calendarParameters->getVacations();
 
         // On ne récupère les périodes de vacances scolaires que si demandées
         if (!empty($vacations))
         {
-            // Lecture du fichier des périodes de vacances
-            if ($month >= 10)
+            // Lecture du fichier des périodes de vacances (les CSV vont d'Octobre à Septembre)
+            if ($mois >= 10)
             {
-                $anneeInitiale = $year;
-                $anneeFinale   = $year + 1;
+                $anneeInitiale = $annee;
+                $anneeFinale   = $annee + 1;
             }
             else
             {
-                $anneeInitiale = $year - 1;
-                $anneeFinale   = $year;
+                $anneeInitiale = $annee - 1;
+                $anneeFinale   = $annee;
             }
 
             $nomFichier = $anneeInitiale . '-' . $anneeFinale . '.csv';
@@ -434,7 +434,7 @@
                     $line[] = fgetcsv($file, 1024);
 
                     // Récupération des dates
-                    if (substr($line[$i][0], 0, 4) == $year AND substr($line[$i][0], 5, 2) == $month)
+                    if (substr($line[$i][0], 0, 4) == $annee AND substr($line[$i][0], 5, 2) == $mois)
                     {
                         $vacances[str_replace('-', '', $line[$i][0])] = array(
                             'date'            => $line[$i][0],
@@ -446,7 +446,7 @@
                     }
 
                     // Arrêt de la boucle si dates dépassées
-                    if (substr($line[$i][0], 0, 4) > $year OR (substr($line[$i][0], 0, 4) == $year AND substr($line[$i][0], 5, 2) > $month))
+                    if (substr($line[$i][0], 0, 4) > $annee OR (substr($line[$i][0], 0, 4) == $annee AND substr($line[$i][0], 5, 2) > $mois))
                         break;
 
                     $i++;
@@ -590,8 +590,8 @@
         $identifiant = $sessionUser['identifiant'];
         $equipe      = $sessionUser['equipe'];
         $picture     = $post['calendar_generator'];
-        $month       = $post['month_generator'];
-        $year        = $post['year_generator'];
+        $mois        = $post['month_generator'];
+        $annee       = $post['year_generator'];
         $tempName    = $post['temp_name_generator'];
         $toDelete    = 'N';
         $name        = $post['month_generator'] . '-' . $post['year_generator'] . '-' . rand() . '.jpg';
@@ -601,7 +601,7 @@
         $decodedPicture = base64_decode($encodedPicture);
 
         // On vérifie la présence du dossier, sinon on le créé de manière récursive
-        $dossier = '../../includes/images/calendars/' . $year;
+        $dossier = '../../includes/images/calendars/' . $annee;
 
         if (!is_dir($dossier))
             mkdir($dossier, 0777, true);
@@ -625,8 +625,8 @@
         $calendar = array(
             'to_delete' => $toDelete,
             'team'      => $equipe,
-            'month'     => $month,
-            'year'      => $year,
+            'month'     => $mois,
+            'year'      => $annee,
             'calendar'  => $name
         );
 
@@ -645,7 +645,7 @@
         $_SESSION['alerts']['calendar_added'] = true;
 
         // Retour
-        return $year;
+        return $annee;
     }
 
     // METIER : Initialise les paramètres d'annexe
