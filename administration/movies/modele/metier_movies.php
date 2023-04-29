@@ -23,12 +23,6 @@
         // Récupération des données complémentaires
         foreach ($listeFilmsToDelete as $film)
         {
-            // Pseudo du suppresseur
-            $film->setPseudo_del(physiquePseudoUser($film->getIdentifiant_del()));
-
-            // Pseudo de l'ajouteur
-            $film->setPseudo_add(physiquePseudoUser($film->getIdentifiant_add()));
-
             // Nombre de participants
             $film->setNb_users(physiqueNombreParticipants($film->getId()));
 

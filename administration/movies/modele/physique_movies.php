@@ -44,10 +44,12 @@
         // Requête
         global $bdd;
 
-        $req = $bdd->query('SELECT id, film, to_delete, team, identifiant_add, identifiant_del, poster
+        $req = $bdd->query('SELECT movie_house.id, movie_house.film, movie_house.to_delete, movie_house.team, movie_house.identifiant_add, movie_house.identifiant_del, movie_house.poster, U1.pseudo AS pseudo_add, U2.pseudo AS pseudo_del
                             FROM movie_house
-                            WHERE to_delete = "Y"
-                            ORDER BY id ASC');
+                            LEFT JOIN users AS U1 ON movie_house.identifiant_add = U1.identifiant
+                            LEFT JOIN users AS U2 ON movie_house.identifiant_del = U2.identifiant
+                            WHERE movie_house.to_delete = "Y"
+                            ORDER BY movie_house.id ASC');
 
         while ($data = $req->fetch())
         {
@@ -62,27 +64,6 @@
 
         // Retour
         return $listeFilmsToDelete;
-    }
-
-    // PHYSIQUE : Lecture des informations utilisateur
-    // RETOUR : Pseudo utilisateur
-    function physiquePseudoUser($identifiant)
-    {
-        // Requête
-        global $bdd;
-
-        $req = $bdd->query('SELECT id, identifiant, pseudo
-                            FROM users
-                            WHERE identifiant = "' . $identifiant . '"');
-
-        $data = $req->fetch();
-
-        $pseudo = $data['pseudo'];
-
-        $req->closeCursor();
-
-        // Retour
-        return $pseudo;
     }
 
     // PHYSIQUE : Comptage du nombre de participants
