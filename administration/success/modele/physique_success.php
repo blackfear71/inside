@@ -14,9 +14,9 @@
         // Requête
         global $bdd;
 
-        $req = $bdd->query('SELECT id, identifiant, team, status, pseudo, avatar, email, anniversary, experience
+        $req = $bdd->query('SELECT *
                             FROM users
-                            WHERE identifiant != "admin"
+                            WHERE identifiant != "admin" AND status != "I"
                             ORDER BY identifiant ASC');
 
         while ($data = $req->fetch())
@@ -270,7 +270,7 @@
 
     // PHYSIQUE : Somme de lignes pour un succès
     // RETOUR : Somme des lignes
-    function physiqueSumSuccess($table, $listeConditions, $sumColumn)
+    function physiqueSommeSucces($table, $listeConditions, $sumColumn)
     {
         // Initialisations
         $value = 0;

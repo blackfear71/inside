@@ -199,9 +199,9 @@
             }
         }
 
+        // Traitement de l'image
         if ($control_ok == true)
         {
-            // Vérification des dossiers et contrôle des fichiers
             if (!empty($files['image_restaurant']['name']))
             {
                 // Insertion image
@@ -348,12 +348,13 @@
             }
         }
 
+        // Traitement de l'image
         if ($control_ok == true)
         {
             // Lecture des données en base
             $restaurant = physiqueDonneesRestaurant($idRestaurant);
 
-            // Vérification des dossiers et contrôle des fichiers
+            // Insertion nouvelle image et suppression ancienne
             if (!empty($files['update_image_restaurant_' . $idRestaurant]['name']))
             {
                 // Insertion image

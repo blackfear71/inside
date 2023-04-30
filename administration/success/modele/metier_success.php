@@ -120,30 +120,13 @@
         if ($control_ok == true)
             $control_ok = controleNumerique($limitSuccess, 'limit_not_numeric');
 
-        // Vérification des dossiers et contrôle des fichiers
+        // Traitement de l'image
+        if ($control_ok == true)
+            uploadImage($files['success'], $reference);
+
+        // Insertion de l'enregistrement en base
         if ($control_ok == true)
         {
-            // Dossier de destination
-            $dossier = '../../includes/images/profil/success';
-
-            // Contrôles communs d'un fichier
-            $fileDatas = controlsUploadFile($files['success'], $reference, 'png');
-
-            // Récupération contrôles
-            $control_ok = controleFichier($fileDatas);
-        }
-
-        // Upload fichier
-        if ($control_ok == true)
-            $control_ok = uploadFile($fileDatas, $dossier);
-
-        // Création miniature et insertion en base
-        if ($control_ok == true)
-        {
-            // Création miniature avec une hauteur/largeur max de 500px
-            imageThumb($dossier . '/' . $fileDatas['new_name'], $dossier . '/' . $fileDatas['new_name'], 500, false, true);
-
-            // Insertion de l'enregistrement en base
             $success = array(
                 'reference'     => $reference,
                 'level'         => $level,
@@ -203,35 +186,18 @@
         if ($control_ok == true)
             $control_ok = controleNumerique($limite, 'limit_not_numeric');
 
-        // Suppression ancienne image et insertion nouvelle
-        if (!empty($files['success']['name']))
+        // Traitement de l'image
+        if ($control_ok == true)
         {
-            // Vérification des dossiers et contrôle des fichiers
-            if ($control_ok == true)
+            // Suppression ancienne image et insertion nouvelle
+            if (!empty($files['success']['name']))
             {
-                // Dossier de destination
-                $dossier = '../../includes/images/profil/success';
-
-                // Contrôles communs d'un fichier
-                $fileDatas = controlsUploadFile($files['success'], $reference, 'png');
-
-                // Récupération contrôles
-                $control_ok = controleFichier($fileDatas);
-            }
-
-            // Traitement des images
-            if ($control_ok == true)
-            {
-                // Suppression de l'ancienne image
+                // Suppression des anciennes images
                 unlink('../../includes/images/profil/success/' . $reference . '.png');
 
-                // Upload nouvelle image
-                $control_ok = uploadFile($fileDatas, $dossier);
+                // Insertion image
+                uploadImage($files['success'], $reference);
             }
-
-            // Création miniature avec une hauteur/largeur max de 500px
-            if ($control_ok == true)
-                imageThumb($dossier . '/' . $fileDatas['new_name'], $dossier . '/' . $fileDatas['new_name'], 500, false, true);
         }
 
         // Modification de l'enregistrement en base
@@ -257,6 +223,34 @@
 
         // Retour
         return $idSucces;
+    }
+
+    // METIER : Formatage et insertion image succès
+    // RETOUR : Aucun
+    function uploadImage($file, $name)
+    {
+        // Initialisations
+        $control_ok = true;
+
+        // Dossier de destination
+        $dossier = '../../includes/images/profil/success';
+
+        // Contrôles fichier
+        $fileDatas = controlsUploadFile($file, $name, 'png');
+
+        // Récupération contrôles
+        $control_ok = controleFichier($fileDatas);
+
+        // Upload fichier
+        if ($control_ok == true)
+            $control_ok = uploadFile($fileDatas, $dossier);
+
+        // Traitement de l'image (miniature)
+        if ($control_ok == true)
+        {
+            // Création miniature avec une hauteur/largeur max de 500px
+            imageThumb($dossier . '/' . $fileDatas['new_name'], $dossier . '/' . $fileDatas['new_name'], 500, false, true);
+        }
     }
 
     // METIER : Suppression succès
@@ -729,7 +723,7 @@
                                     )
                                 );
 
-                                $value = physiqueSumSuccess('missions_users', $listeConditions, 'avancement');
+                                $value = physiqueSommeSucces('missions_users', $listeConditions, 'avancement');
                             }
                             break;
 
