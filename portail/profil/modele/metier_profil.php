@@ -650,7 +650,7 @@
     function getPolicesCaracteres()
     {
         // Récupération des dossiers de polices
-        $polices = scandir('../../includes/fonts');
+        $polices = scandir('../../includes/fonts', SCANDIR_SORT_ASCENDING);
 
         // Suppression des racines de dossier
         unset($polices[array_search('..', $polices)]);

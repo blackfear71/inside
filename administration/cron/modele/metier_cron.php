@@ -13,7 +13,7 @@
         if (is_dir($dirJournalier))
         {
             // Récupération liste des fichiers journaliers par ordre décroissant
-            $filesJournalier = scandir($dirJournalier, 1);
+            $filesJournalier = scandir($dirJournalier, SCANDIR_SORT_DESCENDING);
 
             // Suppression des racines de dossier
             unset($filesJournalier[array_search('..', $filesJournalier)]);
@@ -51,7 +51,7 @@
         if (is_dir($dirHebdomadaire))
         {
             // Récupération fichiers hebdomadaires et tri
-            $filesHebdomadaire = scandir($dirHebdomadaire, 1);
+            $filesHebdomadaire = scandir($dirHebdomadaire, SCANDIR_SORT_DESCENDING);
 
             // Suppression des racines de dossier
             unset($filesHebdomadaire[array_search('..', $filesHebdomadaire)]);

@@ -91,7 +91,7 @@
         if (is_dir($dossierDonnees))
         {
             // Récupération liste des fichiers journaliers
-            $fichiersDonnees = scandir($dossierDonnees);
+            $fichiersDonnees = scandir($dossierDonnees, SCANDIR_SORT_ASCENDING);
 
             // Suppression des racines de dossier
             unset($fichiersDonnees[array_search('..', $fichiersDonnees)]);

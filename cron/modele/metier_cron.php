@@ -151,7 +151,7 @@
         // Scan des fichiers présents par ordre décroissant
         if (is_dir($dossierQuotidien))
         {
-            $fichiersQuotidiens = scandir($dossierQuotidien, 1);
+            $fichiersQuotidiens = scandir($dossierQuotidien, SCANDIR_SORT_DESCENDING);
 
             // Suppression des racines de dossier
             unset($fichiersQuotidiens[array_search('..', $fichiersQuotidiens)]);
@@ -344,7 +344,7 @@
         if (is_dir($dossierTemporaire))
         {
             // Récupération liste des fichiers journaliers
-            $fichiersTemporaires = scandir($dossierTemporaire);
+            $fichiersTemporaires = scandir($dossierTemporaire, SCANDIR_SORT_ASCENDING);
 
             // Suppression des racines de dossier
             unset($fichiersTemporaires[array_search('..', $fichiersTemporaires)]);
