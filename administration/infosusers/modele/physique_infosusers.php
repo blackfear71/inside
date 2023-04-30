@@ -14,15 +14,19 @@
         // Requête
         global $bdd;
 
-        $req = $bdd->query('SELECT *
+        $req = $bdd->query('SELECT teams.*, COUNT(users.id) AS nombreUsers
                             FROM teams
-                            WHERE activation = "Y"
-                            ORDER BY reference ASC');
+                            LEFT JOIN users on users.team = teams.reference
+                            WHERE teams.activation = "Y"
+                            GROUP BY teams.reference
+                            ORDER BY teams.reference ASC');
 
         while ($data = $req->fetch())
         {
             // Instanciation d'un objet Team à partir des données remontées de la bdd
             $equipe = Team::withData($data);
+
+            $equipe->setNombre_users($data['nombreUsers']);
 
             // On ajoute la ligne au tableau
             $listeEquipes[$equipe->getReference()] = $equipe;
@@ -34,83 +38,43 @@
         return $listeEquipes;
     }
 
-    // PHYSIQUE : Lecture du nombre d'utilisateurs d'une équipe
-    // RETOUR : Nombre d'utilisateurs
-    function physiqueNombreUsersEquipe($equipe)
-    {
-        // Initialisations
-        $nombreUsers = 0;
-
-        // Requête
-        global $bdd;
-
-        $req = $bdd->query('SELECT COUNT(*) AS nombreUsers
-                            FROM users
-                            WHERE team = "' . $equipe . '"');
-
-        $data = $req->fetch();
-
-        $nombreUsers = $data['nombreUsers'];
-
-        $req->closeCursor();
-
-        // Retour
-        return $nombreUsers;
-    }
-
-    // PHYSIQUE : Lecture des utilisateurs
+    // PHYSIQUE : Lecture des utilisateurs par équipe
     // RETOUR : Tableau des utilisateurs
-    function physiqueUsers()
+    function physiqueUsersParEquipe()
     {
         // Initialisations
-        $listeUsers = array();
+        $listeUsersParEquipe = array();
 
         global $bdd;
 
         // Requête
-        $req = $bdd->query('SELECT id, identifiant, team, ping, status, pseudo, avatar, email, anniversary, experience
+        $req = $bdd->query('SELECT users.*, SU1.value AS beginningValue, SU2.value AS developperValue
                             FROM users
-                            WHERE identifiant != "admin" AND status != "I"
-                            ORDER BY identifiant ASC');
+                            LEFT JOIN success_users AS SU1 ON (SU1.identifiant = users.identifiant AND SU1.reference = "beginning")
+                            LEFT JOIN success_users AS SU2 ON (SU2.identifiant = users.identifiant AND SU2.reference = "developper")
+                            WHERE users.team != "" AND users.identifiant != "admin" AND users.status != "I"
+                            ORDER BY users.team ASC, users.identifiant ASC');
 
         while ($data = $req->fetch())
         {
             // Instanciation d'un objet Profile à partir des données remontées de la bdd
             $user = Profile::withData($data);
 
-            // On ajoute la ligne au tableau
-            array_push($listeUsers, $user);
+            $user->setLevel(convertExperience($user->getExperience()));
+            $user->setBeginner($data['beginningValue'] ?? 0);
+            $user->setDevelopper($data['developperValue'] ?? 0);
+
+            // Ajout de l'utilisateur à son équipe
+            if (!isset($listeUsersParEquipe[$user->getTeam()]))
+                $listeUsersParEquipe[$user->getTeam()] = array();
+
+            array_push($listeUsersParEquipe[$user->getTeam()], $user);
         }
 
         $req->closeCursor();
 
         // Retour
-        return $listeUsers;
-    }
-
-    // PHYSIQUE : Lecture des succès administrateur
-    // RETOUR : Valeur succès
-    function physiqueSuccessAdmin($success, $identifiant)
-    {
-        // Initialisation
-        $value = 0;
-
-        // Requête
-        global $bdd;
-
-        $req = $bdd->query('SELECT *, COUNT(*) AS nombreLignes
-                            FROM success_users
-                            WHERE reference = "' . $success . '" AND identifiant = "' . $identifiant . '"');
-
-        $data = $req->fetch();
-
-        if ($data['nombreLignes'] > 0)
-            $value = $data['value'];
-
-        $req->closeCursor();
-
-        // Retour
-        return $value;
+        return $listeUsersParEquipe;
     }
 
     // PHYSIQUE : Lecture d'une table pour une équipe

@@ -16,12 +16,6 @@
         // Lecture de la liste des équipes
         $listeEquipes = physiqueListeEquipes();
 
-        // Recherche du nombre d'utilisateurs par équipe
-        foreach ($listeEquipes as $equipe)
-        {
-            $equipe->setNombre_users(physiqueNombreUsersEquipe($equipe->getReference()));
-        }
-
         // Retour
         return $listeEquipes;
     }
@@ -30,89 +24,28 @@
     // RETOUR : Tableau d'utilisateurs
     function getUsers()
     {
-        // Initialisations
-        $listeUsersParEquipe = array();
-
-        // Récupération liste des utilisateurs
-        $listeUsers = physiqueUsers();
-
-        // Récupération des données complémentaires et ajout à la liste par équipes
-        foreach ($listeUsers as $user)
-        {
-            // Récupération du niveau
-            $level = convertExperience($user->getExperience());
-            $user->setLevel($level);
-
-            // Récupération succès Beginner / Developper
-            $listeSuccess = array('beginning', 'developper');
-
-            foreach ($listeSuccess as $success)
-            {
-                // Récupération valeur succès
-                $valueSuccess = physiqueSuccessAdmin($success, $user->getIdentifiant());
-
-                // Affectation de la valeur
-                switch ($success)
-                {
-                    case 'beginning':
-                        $user->setBeginner($valueSuccess);
-                        break;
-
-                    case 'developper':
-                        $user->setDevelopper($valueSuccess);
-                        break;
-
-                    default:
-                        break;
-                }
-            }
-
-            // Ajout de l'utilisateur à son équipe
-            if (!isset($listeUsersParEquipe[$user->getTeam()]))
-                $listeUsersParEquipe[$user->getTeam()] = array();
-
-            array_push($listeUsersParEquipe[$user->getTeam()], $user);
-        }
-
-        // Tri
-        ksort($listeUsersParEquipe);
+        // Récupération liste des utilisateurs par équipe
+        $listeUsersParEquipe = physiqueUsersParEquipe();
 
         // Retour
         return $listeUsersParEquipe;
     }
 
-    // METIER : Modification top Beginner
+    // METIER : Modification succès "beginning" ou "developper"
     // RETOUR : Aucun
-    function changeBeginner($post)
+    function updateSuccesAdmin($post, $succes)
     {
         // Récupération des données saisies
-        $identifiant = $post['user_infos'];
-        $topBeginner = $post['top_infos'];
+        $identifiant  = $post['user_infos'];
+        $valeurSucces = $post['top_infos'];
 
-        if ($topBeginner == 1)
-            $value = 0;
+        if ($valeurSucces == 1)
+            $nouvelleValeur = 0;
         else
-            $value = 1;
+            $nouvelleValeur = 1;
 
         // Mise à jour succès
-        insertOrUpdateSuccesValue('beginning', $identifiant, $value);
-    }
-
-    // METIER : Modification top Developper
-    // RETOUR : Aucun
-    function changeDevelopper($post)
-    {
-        // Récupération des données saisies
-        $identifiant   = $post['user_infos'];
-        $topDevelopper = $post['top_infos'];
-
-        if ($topDevelopper == 1)
-            $value = 0;
-        else
-            $value = 1;
-
-        // Mise à jour succès
-        insertOrUpdateSuccesValue('developper', $identifiant, $value);
+        insertOrUpdateSuccesValue($succes, $identifiant, $nouvelleValeur);
     }
 
     // METIER : Mise à jour d'une équipe

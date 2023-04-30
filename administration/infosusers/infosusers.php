@@ -41,13 +41,13 @@
             break;
 
         case 'changeBeginnerStatus':
-            // Mise à jour du succès "beginner"
-            changeBeginner($_POST);
+            // Mise à jour du succès "beginning"
+            updateSuccesAdmin($_POST, 'beginning');
             break;
 
         case 'changeDevelopperStatus':
             // Mise à jour du succès "developper"
-            changeDevelopper($_POST);
+            updateSuccesAdmin($_POST, 'developper');
             break;
 
         default:
