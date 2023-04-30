@@ -14,16 +14,13 @@
         // Requête
         global $bdd;
 
-        $req = $bdd->query('SELECT id, identifiant, team, pseudo, avatar
+        $req = $bdd->query('SELECT users.id, users.identifiant, users.team, users.pseudo, users.avatar
                             FROM users
-                            WHERE (identifiant != "admin" AND team = "' . $equipe . '" AND status != "D"  AND status != "I")
-                            OR EXISTS (SELECT id, team, date, caller
-                                       FROM food_advisor_choices
-                                       WHERE food_advisor_choices.caller = users.identifiant AND food_advisor_choices.team = "' . $equipe . '" AND date = "' . $date . '")
-                            OR EXISTS (SELECT id, team, identifiant, date
-                                       FROM food_advisor_users
-                                       WHERE food_advisor_users.identifiant = users.identifiant AND food_advisor_users.team = "' . $equipe . '" AND date = "' . $date . '")
-                            ORDER BY identifiant ASC');
+                            LEFT JOIN food_advisor_choices ON food_advisor_choices.caller = users.identifiant
+                            LEFT JOIN food_advisor_users ON food_advisor_users.identifiant = users.identifiant
+                            WHERE (users.identifiant != "admin" AND users.team = "' . $equipe . '") OR (food_advisor_choices.team = "' . $equipe . '" AND food_advisor_choices.date = "' . $date . '") OR (food_advisor_users.team = "' . $equipe . '" AND food_advisor_users.date = "' . $date . '")
+                            GROUP BY users.identifiant
+                            ORDER BY users.identifiant ASC');
 
         while ($data = $req->fetch())
         {

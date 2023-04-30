@@ -63,12 +63,10 @@
         // Requête
         global $bdd;
 
-        $req = $bdd->query('SELECT users.id, users.identifiant, users.pseudo, users.avatar
+        $req = $bdd->query('SELECT users.id, users.identifiant, users.team, users.pseudo, users.avatar
                             FROM users
-                            WHERE (users.identifiant != "admin" AND users.team = "' . $equipe . '" AND users.status != "I")
-                            OR EXISTS (SELECT ideas.id, ideas.author, ideas.team
-                                       FROM ideas
-                                       WHERE (ideas.author = users.identifiant OR ideas.developper = users.identifiant) AND ideas.team = "' . $equipe . '")
+                            LEFT JOIN ideas ON (ideas.author = users.identifiant OR ideas.developper = users.identifiant)
+                            WHERE users.identifiant != "admin" AND ideas.team = "' . $equipe . '"
                             ORDER BY users.identifiant ASC');
 
         while ($data = $req->fetch())

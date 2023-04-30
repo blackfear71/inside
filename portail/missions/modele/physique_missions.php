@@ -165,12 +165,11 @@
         // Requête
         global $bdd;
 
-        $req = $bdd->query('SELECT id, identifiant, team, pseudo, avatar
+        $req = $bdd->query('SELECT users.id, users.identifiant, users.team, users.pseudo, users.avatar
                             FROM users
-                            WHERE EXISTS (SELECT id, id_mission, team, identifiant
-                                          FROM missions_users
-                                          WHERE missions_users.identifiant = users.identifiant AND missions_users.id_mission = "' . $idMission . '" AND missions_users.team = "' . $equipe . '")
-                            ORDER BY identifiant ASC');
+                            LEFT JOIN missions_users ON missions_users.identifiant = users.identifiant
+                            WHERE users.identifiant != "admin" AND missions_users.id_mission = "' . $idMission . '" AND missions_users.team = "' . $equipe . '"
+                            ORDER BY users.identifiant ASC');
 
         while ($data = $req->fetch())
         {

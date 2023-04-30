@@ -14,16 +14,13 @@
         // Requête
         global $bdd;
 
-        $req = $bdd->query('SELECT id, identifiant, team, pseudo, avatar, expenses
+        $req = $bdd->query('SELECT users.id, users.identifiant, users.team, users.pseudo, users.avatar, users.expenses
                             FROM users
-                            WHERE (identifiant != "admin" AND team = "' . $equipe . '" AND status != "I")
-                            OR EXISTS (SELECT id, team, date, buyer
-                                       FROM expense_center
-                                       WHERE expense_center.buyer = users.identifiant AND expense_center.team = "' . $equipe . '" AND SUBSTR(date, 1, 4) = "' . $annee . '")
-                            OR EXISTS (SELECT id, team, identifiant
-                                       FROM expense_center_users
-                                       WHERE expense_center_users.identifiant = users.identifiant AND expense_center_users.team = "' . $equipe . '")
-                            ORDER BY identifiant ASC');
+                            LEFT JOIN expense_center ON expense_center.buyer = users.identifiant
+                            LEFT JOIN expense_center_users ON expense_center_users.identifiant = users.identifiant
+                            WHERE (users.identifiant != "admin" AND users.team = "' . $equipe . '") OR (expense_center.team = "' . $equipe . '" AND SUBSTR(date, 1, 4) = "' . $annee . '") OR expense_center_users.team = "' . $equipe . '"
+                            GROUP BY users.identifiant
+                            ORDER BY users.identifiant ASC');
 
         while ($data = $req->fetch())
         {

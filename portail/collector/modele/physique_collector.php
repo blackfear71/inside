@@ -14,16 +14,13 @@
         // Requête
         global $bdd;
 
-        $req = $bdd->query('SELECT id, identifiant, team, pseudo, avatar
+        $req = $bdd->query('SELECT users.id, users.identifiant, users.team, users.pseudo, users.avatar
                             FROM users
-                            WHERE (identifiant != "admin" AND team = "' . $equipe . '" AND status != "I")
-                            OR EXISTS (SELECT id, author, speaker, team
-                                       FROM collector
-                                       WHERE (collector.author = users.identifiant OR collector.speaker = users.identifiant) AND collector.team = "' . $equipe . '" AND collector.type_speaker != "other")
-                            OR EXISTS (SELECT id, team, identifiant
-                                       FROM collector_users
-                                       WHERE collector_users.identifiant = users.identifiant AND collector_users.team = "' . $equipe . '")
-                            ORDER BY identifiant ASC');
+                            LEFT JOIN collector ON (collector.author = users.identifiant OR collector.speaker = users.identifiant)
+                            LEFT JOIN collector_users ON collector_users.identifiant = users.identifiant
+                            WHERE (users.identifiant != "admin" AND users.team = "' . $equipe . '") OR (collector.team = "' . $equipe . '" AND collector.type_speaker != "other") OR collector_users.team = "' . $equipe . '"
+                            GROUP BY users.identifiant
+                            ORDER BY users.identifiant ASC');
 
         while ($data = $req->fetch())
         {
