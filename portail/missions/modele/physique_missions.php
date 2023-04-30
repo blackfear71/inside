@@ -6,7 +6,7 @@
     /****************************************************************************/
     // PHYSIQUE : Lecture des missions
     // RETOUR : Liste des missions
-    function physiqueMissions()
+    function physiqueListeMissions()
     {
         // Initialisations
         $listeMissions = array();

@@ -32,22 +32,22 @@
     function getMissions()
     {
         // Récupération de la liste des missions
-        $missions = physiqueListeMissions();
+        $listeMissions = physiqueListeMissions();
 
         // Tri des missions sur statut (V : à venir, C : en cours, A : ancienne) puis date
-        if (!empty($missions))
+        if (!empty($listeMissions))
         {
-            foreach ($missions as $triMissions)
+            foreach ($listeMissions as $triMissions)
             {
                 $triStatut[]    = $triMissions->getStatut();
                 $triDateDebut[] = $triMissions->getDate_deb();
             }
 
-            array_multisort($triStatut, SORT_DESC, $triDateDebut, SORT_DESC, $missions);
+            array_multisort($triStatut, SORT_DESC, $triDateDebut, SORT_DESC, $listeMissions);
         }
 
         // Retour
-        return $missions;
+        return $listeMissions;
     }
 
     // METIER : Initialisation ajout mission

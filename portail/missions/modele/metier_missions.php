@@ -8,7 +8,7 @@
     function getMissions()
     {
         // Récupération de la liste des missions
-        $listeMissions = physiqueMissions();
+        $listeMissions = physiqueListeMissions();
 
         // Tri des missions sur statut (V : à venir, C : en cours, A : ancienne) puis date
         if (!empty($listeMissions))
