@@ -14,13 +14,16 @@
         // Requête
         global $bdd;
 
-        $req = $bdd->query('SELECT identifiant, pseudo, avatar
-                            FROM users');
+        $req = $bdd->query('SELECT DISTINCT bugs.identifiant, users.pseudo, users.avatar
+                            FROM bugs
+                            LEFT JOIN users ON (bugs.identifiant = users.identifiant AND users.identifiant != "admin" AND users.status != "I")
+                            ORDER BY bugs.identifiant ASC');
 
         $data = $req->fetch();
 
         while ($data = $req->fetch())
         {
+            // Création tableau de correspondance identifiant / pseudo / avatar
             $listeUsers[$data['identifiant']] = array(
                 'pseudo' => $data['pseudo'],
                 'avatar' => $data['avatar'],
@@ -43,10 +46,10 @@
         // Requête
         global $bdd;
 
-        $req = $bdd->query('SELECT *
-                            FROM teams
-                            WHERE activation = "Y"
-                            ORDER BY reference ASC');
+        $req = $bdd->query('SELECT DISTINCT bugs.team, teams.*
+                            FROM bugs
+                            LEFT JOIN teams ON (bugs.team = teams.reference AND teams.activation = "Y")
+                            ORDER BY bugs.team ASC');
 
         while ($data = $req->fetch())
         {
