@@ -34,8 +34,8 @@
             $alerteCron      = getAlerteCron();
 
             // Récupération du nombre de bugs et évolutions
-            $nombreBugs  = getNombreBugs();
-            $nombreEvols = getNombreEvols();
+            $nombreBugs  = getNombreBugsEvolutions('B');
+            $nombreEvols = getNombreBugsEvolutions('E');
 
             // Création du portail administrateur
             $portail = getPortail($alerteEquipes, $alerteUsers, $alerteFilms, $alerteVacances, $alerteCalendars, $alerteAnnexes, $alerteParcours, $alerteCron, $nombreBugs, $nombreEvols);

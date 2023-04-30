@@ -57,9 +57,9 @@
         return $alert;
     }
 
-    // PHYSIQUE : Lecture alerte films
+    // PHYSIQUE : Lecture alerte suppression
     // RETOUR : Booléen
-    function physiqueAlerteFilms()
+    function physiqueAlerteSuppression($table)
     {
         // Initialisations
         $alert = false;
@@ -67,13 +67,13 @@
         // Requête
         global $bdd;
 
-        $req = $bdd->query('SELECT COUNT(*) AS nombreFilmsToDelete
-                            FROM movie_house
+        $req = $bdd->query('SELECT COUNT(*) AS nombreSuppressions
+                            FROM ' . $table . '
                             WHERE to_delete = "Y"');
 
         $data = $req->fetch();
 
-        if ($data['nombreFilmsToDelete'] > 0)
+        if ($data['nombreSuppressions'] > 0)
             $alert = true;
 
         $req->closeCursor();
@@ -82,126 +82,28 @@
         return $alert;
     }
 
-    // PHYSIQUE : Lecture alerte calendriers
-    // RETOUR : Booléen
-    function physiqueAlerteCalendars()
+    // PHYSIQUE : Lecture du nombre de bugs ou évolutions en cours
+    // RETOUR : Nombre de demandes
+    function physiqueNombreBugsEvolutions($type)
     {
         // Initialisations
-        $alert = false;
+        $nombreBugsEvolutions = 0;
 
         // Requête
         global $bdd;
 
-        $req = $bdd->query('SELECT COUNT(*) AS nombreCalendarsToDelete
-                            FROM calendars
-                            WHERE to_delete = "Y"');
-
-        $data = $req->fetch();
-
-        if ($data['nombreCalendarsToDelete'] > 0)
-            $alert = true;
-
-        $req->closeCursor();
-
-        // Retour
-        return $alert;
-    }
-
-    // PHYSIQUE : Lecture alerte annexes
-    // RETOUR : Booléen
-    function physiqueAlerteAnnexes()
-    {
-        // Initialisations
-        $alert = false;
-
-        // Requête
-        global $bdd;
-
-        $req = $bdd->query('SELECT COUNT(*) AS nombreAnnexesToDelete
-                            FROM calendars_annexes
-                            WHERE to_delete = "Y"');
-
-        $data = $req->fetch();
-
-        if ($data['nombreAnnexesToDelete'] > 0)
-            $alert = true;
-
-        $req->closeCursor();
-
-        // Retour
-        return $alert;
-    }
-
-    // PHYSIQUE : Lecture alerte parcours
-    // RETOUR : Booléen
-    function physiqueAlerteParcours()
-    {
-        // Initialisations
-        $alert = false;
-
-        // Requête
-        global $bdd;
-
-        $req = $bdd->query('SELECT COUNT(*) AS nombreParcoursToDelete
-                            FROM petits_pedestres_parcours
-                            WHERE to_delete = "Y"');
-
-        $data = $req->fetch();
-
-        if ($data['nombreParcoursToDelete'] > 0)
-            $alert = true;
-
-        $req->closeCursor();
-
-        // Retour
-        return $alert;
-    }
-
-    // PHYSIQUE : Lecture du nombre de bugs
-    // RETOUR : Nombre de bugs
-    function physiqueNombreBugs()
-    {
-        // Initialisations
-        $nombreBugs = 0;
-
-        // Requête
-        global $bdd;
-
-        $req = $bdd->query('SELECT COUNT(*) AS nombreBugs
+        $req = $bdd->query('SELECT COUNT(*) AS nombreLignes
                             FROM bugs
-                            WHERE type = "B" AND resolved = "N"');
+                            WHERE type = "' . $type . '" AND resolved = "N"');
 
         $data = $req->fetch();
 
-        $nombreBugs = $data['nombreBugs'];
+        if ($data['nombreLignes'] > 0)
+            $nombreBugsEvolutions = $data['nombreLignes'];
 
         $req->closeCursor();
 
         // Retour
-        return $nombreBugs;
-    }
-
-    // PHYSIQUE : Lecture du nombre d'évolutions
-    // RETOUR : Nombre d'évolutions
-    function physiqueNombreEvolutions()
-    {
-        // Initialisations
-        $nombreEvolutions = 0;
-
-        // Requête
-        global $bdd;
-
-        $req = $bdd->query('SELECT COUNT(*) AS nombreEvolutions
-                            FROM bugs
-                            WHERE type = "E" AND resolved = "N"');
-
-        $data = $req->fetch();
-
-        $nombreEvolutions = $data['nombreEvolutions'];
-
-        $req->closeCursor();
-
-        // Retour
-        return $nombreEvolutions;
+        return $nombreBugsEvolutions;
     }
 ?>

@@ -178,7 +178,7 @@
     function getAlerteFilms()
     {
         // Appel physique
-        $alert = physiqueAlerteFilms();
+        $alert = physiqueAlerteSuppression('movie_house');
 
         // Retour
         return $alert;
@@ -209,7 +209,7 @@
     function getAlerteCalendars()
     {
         // Appel physique
-        $alert = physiqueAlerteCalendars();
+        $alert = physiqueAlerteSuppression('calendars');
 
         // Retour
         return $alert;
@@ -220,7 +220,7 @@
     function getAlerteAnnexes()
     {
         // Appel physique
-        $alert = physiqueAlerteAnnexes();
+        $alert = physiqueAlerteSuppression('calendars_annexes');
 
         // Retour
         return $alert;
@@ -231,7 +231,7 @@
     function getAlerteParcours()
     {
         // Appel physique
-        $alert = physiqueAlerteParcours();
+        $alert = physiqueAlerteSuppression('petits_pedestres_parcours');
 
         // Retour
         return $alert;
@@ -252,7 +252,7 @@
         if (is_dir($dirJournalier))
         {
             // Récupération liste des fichiers journaliers par ordre décroissant
-            $filesJournalier = scandir($dirJournalier, 1);
+            $filesJournalier = scandir($dirJournalier, SCANDIR_SORT_DESCENDING);
 
             // Suppression des racines de dossier
             unset($filesJournalier[array_search('..', $filesJournalier)]);
@@ -290,7 +290,7 @@
         if (is_dir($dirHebdomadaire))
         {
             // Récupération fichiers hebdomadaires et tri
-            $filesHebdomadaire = scandir($dirHebdomadaire, 1);
+            $filesHebdomadaire = scandir($dirHebdomadaire, SCANDIR_SORT_DESCENDING);
 
             // Suppression des racines de dossier
             unset($filesHebdomadaire[array_search('..', $filesHebdomadaire)]);
@@ -350,26 +350,15 @@
         return $alert;
     }
 
-    // METIER : Nombre de bugs en attente
+    // METIER : Nombre de bugs / évolutions en attente
     // RETOUR : Nombre de bugs
-    function getNombreBugs()
+    function getNombreBugsEvolutions($type)
     {
         // Appel physique
-        $nombreBugs = physiqueNombreBugs();
+        $nombreBugsEvolutions = physiqueNombreBugsEvolutions($type);
 
         // Retour
-        return $nombreBugs;
-    }
-
-    // METIER : Nombre d'évolutions en attente
-    // RETOUR : Nombre d'évolutions
-    function getNombreEvols()
-    {
-        // Appel physique
-        $nombreEvolutions = physiqueNombreEvolutions();
-
-        // Retour
-        return $nombreEvolutions;
+        return $nombreBugsEvolutions;
     }
 
     // METIER : Sauvegarde de la base de données

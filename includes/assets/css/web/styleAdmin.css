@@ -109,12 +109,12 @@
     margin-top: -5px;
     width: 30px;
     height: 30px;
-    line-height: 30px;
+    line-height: 29px;
     border-radius: 50%;
     background-color: white;
     color: #262626;
     font-family: inside_font_medium, Verdana, sans-serif;
-    font-size: 70%;
+    font-size: 65%;
 }
 
 /*** Infos équipes ***/
