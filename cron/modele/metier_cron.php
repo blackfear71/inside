@@ -160,7 +160,7 @@
             // Détermination si la chaîne CRON est déjà passée
             if (!empty($fichiersQuotidiens))
             {
-                // Tri sur date
+                // Récupération du tri sur date
                 foreach ($fichiersQuotidiens as $fichier)
                 {
                     $triAnnee[]   = substr($fichier, 12, 4);
@@ -171,7 +171,16 @@
                     $triSeconde[] = substr($fichier, 23, 2);
                 }
 
+                // Tri
                 array_multisort($triAnnee, SORT_DESC, $triMois, SORT_DESC, $triJour, SORT_DESC, $triHeure, SORT_DESC, $triMinute, SORT_DESC, $triSeconde, SORT_DESC, $fichiersQuotidiens);
+
+                // Réinitialisation du tri
+                unset($triAnnee);
+                unset($triMois);
+                unset($triJour);
+                unset($triHeure);
+                unset($triMinute);
+                unset($triSeconde);
 
                 // Test si CRON déjà passé
                 foreach ($fichiersQuotidiens as $fichier)
@@ -222,15 +231,16 @@
                         // Traitements des participants par équipes
                         foreach ($listeParticipantsParEquipe as &$listeParticipants)
                         {
-                            // Tri sur avancement
+                            // Récupération du tri sur avancement
                             foreach ($listeParticipants as $participant)
                             {
                                 $triRank[] = $participant['avancement'];
                             }
 
+                            // Tri
                             array_multisort($triRank, SORT_DESC, $listeParticipants);
 
-                            // Réinitialisation du tri pour la prochaine occurence
+                            // Réinitialisation du tri
                             unset($triRank);
 
                             // Affectation du rang

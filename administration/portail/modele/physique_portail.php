@@ -14,11 +14,10 @@
         // Requête
         global $bdd;
 
-        $req = $bdd->query('SELECT COUNT(*) AS nombreEquipes
+        $req = $bdd->query('SELECT COUNT(teams.id) AS nombreEquipes
                             FROM teams
-                            WHERE activation = "Y" AND NOT EXISTS (SELECT id, identifiant, team
-                                                                   FROM users
-                                                                   WHERE teams.reference = users.team)');
+                            LEFT JOIN users ON users.team = teams.reference
+                            WHERE teams.activation = "Y" AND users.id IS NULL');
 
         $data = $req->fetch();
 

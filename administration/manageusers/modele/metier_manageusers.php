@@ -187,13 +187,17 @@
         // Tri par identifiant
         if (!empty($tableauStatistiques))
         {
+            // Récupération du tri sur l'identifiant
             foreach ($tableauStatistiques as $statistiquesIns)
             {
-                $triStatistiquesIns[] = $statistiquesIns->getIdentifiant();
+                $triStatistiquesInscrit[] = $statistiquesIns->getIdentifiant();
             }
 
             // Tri
-            array_multisort($triStatistiquesIns, SORT_ASC, $tableauStatistiques);
+            array_multisort($triStatistiquesInscrit, SORT_ASC, $tableauStatistiques);
+
+            // Réinitialisation du tri
+            unset($triStatistiquesInscrit);
         }
 
         // Retour

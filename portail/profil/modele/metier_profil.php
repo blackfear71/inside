@@ -478,16 +478,22 @@
             $user->setLevel(convertExperience($user->getExperience()));
         }
 
-        // Tri sur expérience puis identifiant
+        // Traitement s'il y a des utilisateurs
         if (!empty($listeUsers))
         {
+            // Récupération du tri sur expérience puis identifiant
             foreach ($listeUsers as $user)
             {
                 $triExp[] = $user->getExperience();
                 $triId[]  = $user->getIdentifiant();
             }
 
+            // Tri
             array_multisort($triExp, SORT_DESC, $triId, SORT_ASC, $listeUsers);
+
+            // Réinitialisation du tri
+            unset($triExp);
+            unset($triId);
         }
 
         // Retour
@@ -549,9 +555,10 @@
                     }
                 }
 
-                // Tri sur la valeur du succès des utilisateurs
+                // Traitement s'il y a des utilisateurs
                 if (!empty($listeRangSuccess))
                 {
+                    // Récupération du tri sur la valeur du succès des utilisateurs
                     foreach ($listeRangSuccess as &$rangSuccessUser)
                     {
                         $triSuccess[] = $rangSuccessUser->getValue();
@@ -562,6 +569,7 @@
                     // Tri
                     array_multisort($triSuccess, SORT_DESC, $listeRangSuccess);
 
+                    // Réinitialisation du tri
                     unset($triSuccess);
                 }
 

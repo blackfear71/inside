@@ -37,13 +37,19 @@
         // Tri des missions sur statut (V : à venir, C : en cours, A : ancienne) puis date
         if (!empty($listeMissions))
         {
+            // Récupération du tri sur le statut et la date de début
             foreach ($listeMissions as $triMissions)
             {
                 $triStatut[]    = $triMissions->getStatut();
                 $triDateDebut[] = $triMissions->getDate_deb();
             }
 
+            // Tri
             array_multisort($triStatut, SORT_DESC, $triDateDebut, SORT_DESC, $listeMissions);
+
+            // Réinitialisation du tri
+            unset($triStatut);
+            unset($triDateDebut);
         }
 
         // Retour
@@ -122,15 +128,17 @@
             // Tri et affectation du rang par équipes
             foreach ($listeUsersParEquipes as &$usersParEquipe)
             {
-                // Tri sur avancement puis identifiant
+                // Récupération du tri sur avancement puis identifiant
                 foreach ($usersParEquipe as $user)
                 {
                     $triTotal[]       = $user->getTotal();
                     $triIdentifiant[] = $user->getIdentifiant();
                 }
 
+                // Tri
                 array_multisort($triTotal, SORT_DESC, $triIdentifiant, SORT_ASC, $usersParEquipe);
 
+                // Réinitialisation du tri
                 unset($triTotal);
                 unset($triIdentifiant);
 

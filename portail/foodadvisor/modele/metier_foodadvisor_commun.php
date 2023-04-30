@@ -157,6 +157,7 @@
                 // Tri
                 array_multisort($triNombreParticipants, SORT_DESC, $listePropositions);
 
+                // Réinitialisation du tri
                 unset($triNombreParticipants);
 
                 // Affectation du classement
@@ -186,6 +187,10 @@
 
                 // Tri
                 array_multisort($triDetermined, SORT_DESC, $triNombreParticipants, SORT_DESC, $listePropositions);
+
+                // Réinitialisation du tri
+                unset($triDetermined);
+                unset($triNombreParticipants);
             }
         }
 

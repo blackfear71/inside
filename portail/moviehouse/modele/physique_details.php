@@ -183,13 +183,12 @@
         // Requête
         global $bdd;
 
-        $req = $bdd->query('SELECT id, identifiant, team, pseudo, avatar, email
+        $req = $bdd->query('SELECT users.identifiant, users.team, users.pseudo, users.avatar, users.email
                             FROM users
-                            WHERE (identifiant != "admin" AND status != "I" AND team = "' . $equipe . '")
-                            OR EXISTS (SELECT id, id_film, identifiant
-                                       FROM movie_house_comments
-                                       WHERE movie_house_comments.identifiant = users.identifiant AND movie_house_comments.id_film = "' . $idFilm . '")
-                            ORDER BY identifiant ASC');
+                            INNER JOIN movie_house_comments ON movie_house_comments.identifiant = users.identifiant
+                            INNER JOIN movie_house_users ON movie_house_users.identifiant = users.identifiant
+                            WHERE movie_house_comments.id_film = ' . $idFilm . ' OR movie_house_users.id_film = ' . $idFilm . '
+                            ORDER BY users.identifiant ASC');
 
         while ($data = $req->fetch())
         {

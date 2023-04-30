@@ -178,7 +178,7 @@
 
     // PHYSIQUE : Lecture des statistiques d'un film
     // RETOUR : Statistiques d'un film
-    function physiqueStatsFilm($idFilm)
+    function physiqueStatsFilm($idFilm, $equipe)
     {
         // Initialisations
         $statsFilm = array(
@@ -189,9 +189,10 @@
         // Requête
         global $bdd;
 
-        $req = $bdd->query('SELECT *
+        $req = $bdd->query('SELECT movie_house_users.*
                             FROM movie_house_users
-                            WHERE id_film = ' . $idFilm);
+                            INNER JOIN users ON (users.identifiant = movie_house_users.identifiant AND users.team = "' . $equipe . '")
+                            WHERE movie_house_users.id_film = ' . $idFilm);
 
         while ($data = $req->fetch())
         {

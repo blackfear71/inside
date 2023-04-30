@@ -79,8 +79,15 @@
 
                             // Nombre d'utilisateurs intéressés et moyenne des étoiles
                             echo '<div class="zone_icones_accueil">';
-                                echo '<span class="users_interested"><img src="../../includes/icons/moviehouse/users.png" alt="users" class="icone_accueil" />' . $filmAttendu->getNb_users() . '</span>';
-                                echo '<span class="average_star"><img src="../../includes/icons/moviehouse/star.png" alt="star" class="icone_accueil" />' . $filmAttendu->getAverage() . ' / 5</span>';
+                                echo '<div class="users_interested">';
+                                    echo '<img src="../../includes/icons/moviehouse/users.png" alt="users" class="icone_accueil" />';
+                                    echo '<div class="texte_icones_accueil">' . $filmAttendu->getNb_users() . '</div>';
+                                echo '</div>';
+
+                                echo '<div class="average_star">';
+                                    echo '<img src="../../includes/icons/moviehouse/star.png" alt="star" class="icone_accueil" />';
+                                    echo '<div class="texte_icones_accueil">' . $filmAttendu->getAverage() . ' / 5</div>';
+                                echo '</div>';
                             echo '</div>';
                         echo '</a>';
                     }

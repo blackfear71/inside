@@ -169,7 +169,12 @@
 
         unset($user);
 
+        // Tri
         array_multisort($triStatut, SORT_DESC, $triIdentifiant, SORT_ASC, $listeUsers);
+
+        // Réinitialisation du tri
+        unset($triStatut);
+        unset($triIdentifiant);
 
         // Concaténation des données pour JS
         $listeUsersJson = json_encode($listeUsers);

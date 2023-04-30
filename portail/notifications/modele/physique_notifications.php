@@ -142,13 +142,11 @@
         // Requête
         global $bdd;
 
-        $req = $bdd->query('SELECT id, identifiant, team, pseudo
+        $req = $bdd->query('SELECT users.id, users.identifiant, users.team, users.pseudo
                             FROM users
-                            WHERE (identifiant != "admin" AND team = "' . $equipe . '" AND status != "I")
-                            OR EXISTS (SELECT id, identifiant, team
-                                       FROM notifications
-                                       WHERE (notifications.identifiant = users.identifiant OR notifications.content = users.identifiant) AND (notifications.team = "' . $equipe . '" OR notifications.team = ""))
-                            ORDER BY identifiant ASC');
+                            LEFT JOIN notifications ON (notifications.identifiant = users.identifiant OR notifications.content = users.identifiant)
+                            WHERE users.identifiant != "admin" AND (users.team = "' . $equipe . '" OR notifications.team = "' . $equipe . '" OR notifications.team = "")
+                            ORDER BY users.identifiant ASC');
 
         while ($data = $req->fetch())
         {

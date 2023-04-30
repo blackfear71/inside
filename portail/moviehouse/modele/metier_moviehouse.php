@@ -110,7 +110,7 @@
         // Récupération du nombre d'utilisateurs et de la moyenne des étoiles pour chaque film
         foreach ($listeFilmsAnnee as $film)
         {
-            $statsFilm = physiqueStatsFilm($film->getId());
+            $statsFilm = physiqueStatsFilm($film->getId(), $equipe);
 
             // Si il y a au moins un utilisateur avec des étoiles, on calcule la moyenne
             if ($statsFilm['nombre_users'] > 0)
@@ -130,25 +130,34 @@
         // Tris
         if (isset($listeFilmsAttendus) AND !empty($listeFilmsAttendus))
         {
-            // Tri des films par nombre d'utilisateurs puis par moyenne
+            // Récupération du tri sur le nombre d'utilisateurs puis par moyenne
             foreach ($listeFilmsAttendus as $film)
             {
                 $triNombreUsers[] = $film->getNb_users();
                 $triMoyenne[]     = $film->getAverage();
             }
 
+            // Tri
             array_multisort($triNombreUsers, SORT_DESC, $triMoyenne, SORT_DESC, $listeFilmsAttendus);
+
+            // Réinitialisation du tri
+            unset($triNombreUsers);
+            unset($triMoyenne);
 
             // Extraction des X premièrs films les plus attentus
             $listeFilmsAttendus = array_slice($listeFilmsAttendus, 0, $limite);
 
-            // Tri des films restants sur la moyenne
+            // Récupération du tri des films restants sur la moyenne
             foreach ($listeFilmsAttendus as $film)
             {
                 $triAverage[] = $film->getAverage();
             }
 
+            // Tri
             array_multisort($triAverage, SORT_DESC, $listeFilmsAttendus);
+
+            // Réinitialisation du tri
+            unset($triAverage);
         }
 
         // Retour

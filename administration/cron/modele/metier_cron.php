@@ -40,6 +40,14 @@
                                 $triMinuteJournalier, SORT_DESC,
                                 $triSecondeJournalier, SORT_DESC,
                                 $filesJournalier);
+
+                // Réinitialisation du tri
+                unset($triAnneeJournalier);
+                unset($triMoisJournalier);
+                unset($triJourJournalier);
+                unset($triHeureJournalier);
+                unset($triMinuteJournalier);
+                unset($triSecondeJournalier);
             }
 
             $logsJournalier = array_slice($filesJournalier, 0, 10);
@@ -78,6 +86,14 @@
                                 $triMinuteHebdomadaire, SORT_DESC,
                                 $triSecondeHebdomadaire, SORT_DESC,
                                 $filesHebdomadaire);
+
+                // Réinitialisation du tri
+                unset($triAnneeHebdomadaire);
+                unset($triMoisHebdomadaire);
+                unset($triJourHebdomadaire);
+                unset($triHeureHebdomadaire);
+                unset($triMinuteHebdomadaire);
+                unset($triSecondeHebdomadaire);
             }
 
             $logsHebdomadaire = array_slice($filesHebdomadaire, 0, 10);

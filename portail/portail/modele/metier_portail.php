@@ -403,25 +403,17 @@
                 // Traitement s'il y a des participants
                 if (!empty($listeUsers))
                 {
-                    // Récupération des données complémentaires des participants
-                    foreach ($listeUsers as &$user)
+                    // Récupération du tri sur avancement puis identifiant
+                    foreach ($listeUsers as $user)
                     {
-                        // Pseudo
-                        $user['pseudo'] = physiquePseudoUser($user['identifiant']);
-
-                        // Total de la mission
-                        $user['total'] = physiqueTotalUser($mission->getId(), $user['equipe'], $user['identifiant']);
-
-                        // Récupération du tri sur avancement puis identifiant
                         $triTotal[]       = $user['total'];
                         $triIdentifiant[] = $user['identifiant'];
                     }
 
-                    unset($user);
-
                     // Tri
                     array_multisort($triTotal, SORT_DESC, $triIdentifiant, SORT_ASC, $listeUsers);
 
+                    // Réinitialisation du tri
                     unset($triTotal);
                     unset($triIdentifiant);
 

@@ -368,10 +368,20 @@
 {
     display: inline-block;
     vertical-align: middle;
-    margin-top: -5px;
     margin-right: 5px;
     width: 20px;
     height: 20px;
+}
+
+.average_star .icone_accueil
+{
+    margin-top: -2px;
+}
+
+.texte_icones_accueil
+{
+    display: inline-block;
+    vertical-align: middle;
 }
 
 /*** Fiches ***/

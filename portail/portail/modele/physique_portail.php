@@ -319,14 +319,12 @@
         // Requête
         global $bdd;
 
-        $req = $bdd->query('SELECT id, id_mission, team, identifiant
+        $req = $bdd->query('SELECT missions_users.id, missions_users.id_mission, missions_users.team, missions_users.identifiant, SUM(missions_users.avancement) AS total, users.pseudo
                             FROM missions_users
-                            WHERE (id_mission = ' . $idMission . ' AND team = "' . $equipe . '")
-                            AND EXISTS (SELECT id, identifiant, team
-                                        FROM users
-                                        WHERE users.identifiant = missions_users.identifiant AND users.team = "' . $equipe . '")
-                            GROUP BY identifiant
-                            ORDER BY identifiant ASC');
+                            INNER JOIN users ON (users.identifiant = missions_users.identifiant AND users.team = "' . $equipe . '")
+                            WHERE missions_users.id_mission = ' . $idMission . ' AND missions_users.team = "' . $equipe . '"
+                            GROUP BY missions_users.identifiant
+                            ORDER BY missions_users.identifiant ASC');
 
         while ($data = $req->fetch())
         {
@@ -334,8 +332,8 @@
             $user = array(
                 'identifiant' => $data['identifiant'],
                 'equipe'      => $data['team'],
-                'pseudo'      => '',
-                'total'       => 0,
+                'pseudo'      => $data['pseudo'],
+                'total'       => $data['total'],
                 'rank'        => 0
             );
 
@@ -347,30 +345,5 @@
 
         // Retour
         return $listeUsers;
-    }
-
-    // PHYSIQUE : Lecture des informations utilisateur de la mission
-    // RETOUR : Total utilisateur
-    function physiqueTotalUser($idMission, $equipe, $identifiant)
-    {
-        // Initialisations
-        $totalMission = 0;
-
-        // Requête
-        global $bdd;
-
-        $req = $bdd->query('SELECT *
-                            FROM missions_users
-                            WHERE id_mission = ' . $idMission . ' AND team = "' . $equipe . '" AND identifiant = "' . $identifiant . '"');
-
-        while ($data = $req->fetch())
-        {
-            $totalMission += $data['avancement'];
-        }
-
-        $req->closeCursor();
-
-        // Retour
-        return $totalMission;
     }
 ?>
