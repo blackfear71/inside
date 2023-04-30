@@ -27,46 +27,46 @@
 
     // METIER : Lecture des données statistiques profil
     // RETOUR : Objet Statistiques
-    function getStatistiques($identifiant)
+    function getStatistiques($user)
     {
         // Films ajoutés
-        $nombreFilms = physiqueNombreLignesTable('movie_house', 'identifiant_add', $identifiant);
+        $nombreFilms = physiqueNombreLignesTable('movie_house', 'identifiant_add', $user->getIdentifiant());
 
         // Commentaires films
-        $nombreComments = physiqueNombreLignesTable('movie_house_comments', 'identifiant', $identifiant);
+        $nombreComments = physiqueNombreLignesTable('movie_house_comments', 'identifiant', $user->getIdentifiant());
 
         // Restaurants ajoutés
-        $nombreRestaurants = physiqueNombreLignesTable('food_advisor_restaurants', 'identifiant_add', $identifiant);
+        $nombreRestaurants = physiqueNombreLignesTable('food_advisor_restaurants', 'identifiant_add', $user->getIdentifiant());
 
         // Réservations de restaurants
-        $nombreReservations = physiqueNombreLignesTable('food_advisor_choices', 'caller', $identifiant);
+        $nombreReservations = physiqueNombreLignesTable('food_advisor_choices', 'caller', $user->getIdentifiant());
 
         // Gâteaux de la semaine
-        $nombreGateauxSemaine = physiqueGateauxSemaineUser($identifiant);
+        $nombreGateauxSemaine = physiqueGateauxSemaineUser($user->getIdentifiant());
 
         // Recettes partagées
-        $nombreRecettes = physiqueRecettesUser($identifiant);
+        $nombreRecettes = physiqueRecettesUser($user->getIdentifiant());
 
         // Bilan des dépenses
-        $bilanUser = physiqueBilanDepensesUser($identifiant);
+        $bilanUser = $user->getExpenses();
 
         // Phrases et images cultes ajoutées
-        $nombreCollector = physiqueNombreLignesTable('collector', 'author', $identifiant);
+        $nombreCollector = physiqueNombreLignesTable('collector', 'author', $user->getIdentifiant());
 
         // Parcours ajoutés
-        $nombreParcours = physiqueNombreLignesTable('petits_pedestres_parcours', 'identifiant_add', $identifiant);
+        $nombreParcours = physiqueNombreLignesTable('petits_pedestres_parcours', 'identifiant_add', $user->getIdentifiant());
 
         // Participations parcours
-        $nombreParticipations = physiqueNombreLignesTable('petits_pedestres_users', 'identifiant', $identifiant);
+        $nombreParticipations = physiqueNombreLignesTable('petits_pedestres_users', 'identifiant', $user->getIdentifiant());
 
         // Idées publiées
-        $nombreTheBox = physiqueNombreLignesTable('ideas', 'author', $identifiant);
+        $nombreTheBox = physiqueNombreLignesTable('ideas', 'author', $user->getIdentifiant());
 
         // Bugs soumis
-        $nombreBugsSoumis = physiqueBugsEvolutionsSoumisUser($identifiant, 'B');
+        $nombreBugsSoumis = physiqueBugsEvolutionsSoumisUser($user->getIdentifiant(), 'B');
 
         // Evolutions soumises
-        $nombreEvolutionsSoumises = physiqueBugsEvolutionsSoumisUser($identifiant, 'E');
+        $nombreEvolutionsSoumises = physiqueBugsEvolutionsSoumisUser($user->getIdentifiant(), 'E');
 
         // Génération d'un objet StatistiquesProfil
         $statistiques = array(

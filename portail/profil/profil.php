@@ -84,7 +84,7 @@
                         $equipe = getEquipe($profil->getTeam());
 
                         // Récupération des statistiques de l'utilisateur
-                        $statistiques = getStatistiques($_SESSION['user']['identifiant']);
+                        $statistiques = getStatistiques($profil);
 
                         // Récupération de la progression de l'utilisateur
                         $progression = getProgress($profil->getExperience());

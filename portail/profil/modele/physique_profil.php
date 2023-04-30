@@ -120,30 +120,6 @@
         return $nombreRecettes;
     }
 
-    // PHYSIQUE : Lecture du bilan des dépenses d'un utilisateur
-    // RETOUR : Bilan des dépenses de l'utilisateur
-    function physiqueBilanDepensesUser($identifiant)
-    {
-        // Initialisations
-        $bilanUser = 0;
-
-        // Requête
-        global $bdd;
-
-        $req = $bdd->query('SELECT id, identifiant, expenses
-                            FROM users
-                            WHERE identifiant = "' . $identifiant . '"');
-
-        $data = $req->fetch();
-
-        $bilanUser = $data['expenses'];
-
-        $req->closeCursor();
-
-        // Retour
-        return $bilanUser;
-    }
-
     // PHYSIQUE : Lecture du nombre de bugs / évolutions soumis d'un utilisateur
     // RETOUR : Nombre de bugs / évolutions soumis de l'utilisateur
     function physiqueBugsEvolutionsSoumisUser($identifiant, $type)
