@@ -7,9 +7,7 @@
         $control_ok = true;
 
         // Contrôle
-        $isUnique = physiqueReferenceUnique($reference);
-
-        if ($isUnique == false)
+        if (physiqueReferenceUnique($reference) == false)
         {
             $_SESSION['alerts']['already_ref_theme'] = true;
             $control_ok                              = false;
@@ -63,9 +61,7 @@
         $control_ok = true;
 
         // Contrôle
-        $isOver = physiqueSuperpositionDates($dateDeb, $dateFin, $idTheme);
-
-        if ($isOver == true)
+        if (physiqueSuperpositionDates($dateDeb, $dateFin, $idTheme) == true)
         {
             $_SESSION['alerts']['date_conflict'] = true;
             $control_ok                          = false;
