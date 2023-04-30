@@ -426,12 +426,12 @@
             $controler = str_replace('/*common_functions*/', 'include_once(\'../../includes/functions/fonctions_dates.php\');
     /*common_functions*/', $controler);
 
-        // Fonctions regex
-        if ($options['regex']->getChecked() == 'Y')
+        // Fonctions regex (obligatoire si le déblocage des succès est sélectionné)
+        if ($options['regex']->getChecked() == 'Y' OR $options['success']->getChecked() == 'Y')
             $controler = str_replace('/*common_functions*/', 'include_once(\'../../includes/functions/fonctions_regex.php\');
     /*common_functions*/', $controler);
 
-        // Fonctions dates
+        // Fonctions images
         if ($options['images']->getChecked() == 'Y')
             $controler = str_replace('/*common_functions*/', 'include_once(\'../../includes/functions/fonctions_images.php\');
     /*common_functions*/', $controler);
