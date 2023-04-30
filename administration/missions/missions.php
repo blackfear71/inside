@@ -73,7 +73,7 @@
                 $listeParticipantsParEquipes = getParticipantsMission($_GET['id_mission']);
 
                 // Récupération des équipes des participants
-                $listeEquipesParticipants = getEquipesParticipantsMission($listeParticipantsParEquipes);
+                $listeEquipesParticipants = getEquipesParticipantsMission($_GET['id_mission']);
             }
             break;
 

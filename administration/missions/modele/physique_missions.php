@@ -22,6 +22,14 @@
             // Instanciation d'un objet Mission à partir des données remontées de la bdd
             $mission = Mission::withData($data);
 
+            // Assignation du statut en fonction de la date
+            if (date('Ymd') < $mission->getDate_deb() OR (date('Ymd') == $mission->getDate_deb() AND date('His') < $mission->getHeure()))
+                $mission->setStatut('V');
+            elseif (((date('Ymd') == $mission->getDate_deb() AND date('His') >= $mission->getHeure()) OR date('Ymd') > $mission->getDate_deb()) AND date('Ymd') <= $mission->getDate_fin())
+                $mission->setStatut('C');
+            elseif (date('Ymd') > $mission->getDate_fin())
+                $mission->setStatut('A');
+
             // On ajoute la ligne au tableau
             array_push($listeMissions, $mission);
         }
@@ -64,11 +72,12 @@
         // Requête
         global $bdd;
 
-        $req = $bdd->query('SELECT id, team, identifiant
+        $req = $bdd->query('SELECT missions_users.id, missions_users.team, missions_users.identifiant, users.pseudo, users.avatar, SUM(missions_users.avancement) AS total
                             FROM missions_users
-                            WHERE id_mission = ' . $idMission . '
-                            GROUP BY identifiant
-                            ORDER BY team ASC, identifiant ASC');
+                            LEFT JOIN users ON users.identifiant = missions_users.identifiant
+                            WHERE missions_users.id_mission = ' . $idMission . '
+                            GROUP BY missions_users.identifiant
+                            ORDER BY missions_users.team ASC, missions_users.identifiant ASC');
 
         while ($data = $req->fetch())
         {
@@ -77,6 +86,9 @@
 
             $user->setIdentifiant($data['identifiant']);
             $user->setTeam($data['team']);
+            $user->setPseudo($data['pseudo']);
+            $user->setAvatar($data['avatar']);
+            $user->setTotal($data['total']);
 
             // On ajoute la ligne au tableau
             if (!isset($listeUsersParEquipes[$user->getTeam()]))
@@ -89,52 +101,6 @@
 
         // Retour
         return $listeUsersParEquipes;
-    }
-
-    // PHYSIQUE : Lecture des informations utilisateur
-    // RETOUR : Pseudo utilisateur
-    function physiquePseudoUser($identifiant)
-    {
-        // Requête
-        global $bdd;
-
-        $req = $bdd->query('SELECT id, identifiant, pseudo
-                            FROM users
-                            WHERE identifiant = "' . $identifiant . '"');
-
-        $data = $req->fetch();
-
-        $pseudo = $data['pseudo'];
-
-        $req->closeCursor();
-
-        // Retour
-        return $pseudo;
-    }
-
-    // PHYSIQUE : Lecture des informations utilisateur de la mission
-    // RETOUR : Total utilisateur
-    function physiqueTotalUser($idMission, $identifiant)
-    {
-        // Initialisations
-        $totalMission = 0;
-
-        // Requête
-        global $bdd;
-
-        $req = $bdd->query('SELECT *
-                            FROM missions_users
-                            WHERE id_mission = ' . $idMission . ' AND identifiant = "' . $identifiant . '"');
-
-        while ($data = $req->fetch())
-        {
-            $totalMission += $data['avancement'];
-        }
-
-        $req->closeCursor();
-
-        // Retour
-        return $totalMission;
     }
 
     // PHYSIQUE : Lecture du nombre de références existantes
@@ -162,26 +128,35 @@
         return $isUnique;
     }
 
-    // PHYSIQUE : Lecture des données d'une équipe
-    // RETOUR : Objet Team
-    function physiqueEquipeParticipantsMission($equipe)
+    // PHYSIQUE : Lecture des équipes dont les utilisateurs participent à une mission
+    // RETOUR : Liste des équipe
+    function physiqueEquipesMission($idMission)
     {
+        // Initialisations
+        $listeEquipes = array();
+
         // Requête
         global $bdd;
 
-        $req = $bdd->query('SELECT *
-                            FROM teams
-                            WHERE reference = "' . $equipe . '"');
+        $req = $bdd->query('SELECT DISTINCT missions_users.team, teams.*
+                            FROM missions_users
+                            LEFT JOIN teams ON teams.reference = missions_users.team
+                            WHERE missions_users.id_mission = ' . $idMission . '
+                            ORDER BY missions_users.team ASC');
 
-        $data = $req->fetch();
+        while ($data = $req->fetch())
+        {
+            // Instanciation d'un objet Team à partir des données remontées de la bdd
+            $equipe = Team::withData($data);
 
-        // Instanciation d'un objet Team à partir des données remontées de la bdd
-        $team = Team::withData($data);
+            // On ajoute la ligne au tableau
+            $listeEquipes[$equipe->getReference()] = $equipe;
+        }
 
         $req->closeCursor();
 
         // Retour
-        return $team;
+        return $listeEquipes;
     }
 
     /****************************************************************************/

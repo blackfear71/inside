@@ -783,7 +783,7 @@
             }
         }
 
-        // Tri
+        // Tri par Id
         ksort($listeParticipationsAConvertir);
 
         // Retour

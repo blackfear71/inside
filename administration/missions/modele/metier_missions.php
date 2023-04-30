@@ -34,25 +34,17 @@
         // Récupération de la liste des missions
         $missions = physiqueListeMissions();
 
-        // Traitement des missions
-        foreach ($missions as $mission)
-        {
-            // Affectation du statut
-            if (date('Ymd') < $mission->getDate_deb() OR (date('Ymd') == $mission->getDate_deb() AND date('His') < $mission->getHeure()))
-                $mission->setStatut('V');
-            elseif (((date('Ymd') == $mission->getDate_deb() AND date('His') >= $mission->getHeure()) OR date('Ymd') > $mission->getDate_deb()) AND date('Ymd') <= $mission->getDate_fin())
-                $mission->setStatut('C');
-            elseif (date('Ymd') > $mission->getDate_fin())
-                $mission->setStatut('A');
-
-            // Récupération du tri sur statut puis date de début
-            $triStatut[]  = $mission->getStatut();
-            $triDateDeb[] = $mission->getDate_deb();
-        }
-
-        // Tri (V : à venir, C : en cours, A : ancienne)
+        // Tri des missions sur statut (V : à venir, C : en cours, A : ancienne) puis date
         if (!empty($missions))
-            array_multisort($triStatut, SORT_DESC, $triDateDeb, SORT_DESC, $missions);
+        {
+            foreach ($missions as $triMissions)
+            {
+                $triStatut[]    = $triMissions->getStatut();
+                $triDateDebut[] = $triMissions->getDate_deb();
+            }
+
+            array_multisort($triStatut, SORT_DESC, $triDateDebut, SORT_DESC, $missions);
+        }
 
         // Retour
         return $missions;
@@ -127,25 +119,16 @@
         // Traitement s'il y a des participants
         if (!empty($listeUsersParEquipes))
         {
-            // Récupération des données complémentaires des participants
+            // Tri et affectation du rang par équipe
             foreach ($listeUsersParEquipes as &$usersParEquipe)
             {
-                foreach ($usersParEquipe as &$user)
+                // Tri sur avancement puis identifiant
+                foreach ($usersParEquipe as $user)
                 {
-                    // Pseudo
-                    $user->setPseudo(physiquePseudoUser($user->getIdentifiant()));
-
-                    // Total de la mission
-                    $user->setTotal(physiqueTotalUser($idMission, $user->getIdentifiant()));
-
-                    // Récupération du tri sur avancement puis identifiant
                     $triTotal[]       = $user->getTotal();
                     $triIdentifiant[] = $user->getIdentifiant();
                 }
 
-                unset($user);
-
-                // Tri
                 array_multisort($triTotal, SORT_DESC, $triIdentifiant, SORT_ASC, $usersParEquipe);
 
                 unset($triTotal);
@@ -180,16 +163,10 @@
 
     // METIER : Lecture des équipes des participants
     // RETOUR : Liste des équipes
-    function getEquipesParticipantsMission($listeParticipantsParEquipes)
+    function getEquipesParticipantsMission($idMission)
     {
-        // Initialisations
-        $listeEquipes = array();
-
         // Récupération de la liste des équipes
-        foreach ($listeParticipantsParEquipes as $equipe => $participantsParEquipes)
-        {
-            $listeEquipes[$equipe] = physiqueEquipeParticipantsMission($equipe);
-        }
+        $listeEquipes = physiqueEquipesMission($idMission);
 
         // Retour
         return $listeEquipes;
