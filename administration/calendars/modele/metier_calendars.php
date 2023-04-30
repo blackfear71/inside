@@ -18,31 +18,8 @@
     // RETOUR : Liste des préférences
     function getAutorisationsCalendars()
     {
-        // Initialisations
-        $listeAutorisationsParEquipe = array();
-
         // Récupération des autorisations de gestion
-        $listeAutorisations = physiqueAutorisationsCalendars();
-
-        // Récupération des données complémentaires
-        foreach ($listeAutorisations as $autorisation)
-        {
-            // Récupération du pseudo et de l'équipe de l'utilisateur
-            $user = physiqueDonneesUser($autorisation->getIdentifiant());
-
-            $autorisation->setPseudo($user['pseudo']);
-            $autorisation->setTeam($user['team']);
-
-            // Ajout de l'utilisateur à son équipe
-            if (!isset($listeAutorisationsParEquipe[$autorisation->getTeam()]))
-                $listeAutorisationsParEquipe[$autorisation->getTeam()] = array();
-
-            array_push($listeAutorisationsParEquipe[$autorisation->getTeam()], $autorisation);
-        }
-
-        // Tri
-        if (!empty($listeAutorisationsParEquipe))
-            ksort($listeAutorisationsParEquipe);
+        $listeAutorisationsParEquipe = physiqueAutorisationsCalendars();
 
         // Retour
         return $listeAutorisationsParEquipe;
@@ -172,7 +149,7 @@
         return $saisiesVacances;
     }
 
-    // METIER : Créé un fichier de périodes de vacances scolaires
+    // METIER : Créé un fichier de périodes de vacances scolaires (d'Octobre à Septembre)
     // RETOUR : Aucun
     function insertVacancesCSV($post)
     {

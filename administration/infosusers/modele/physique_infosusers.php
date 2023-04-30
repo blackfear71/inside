@@ -52,7 +52,7 @@
                             FROM users
                             LEFT JOIN success_users AS SU1 ON (SU1.identifiant = users.identifiant AND SU1.reference = "beginning")
                             LEFT JOIN success_users AS SU2 ON (SU2.identifiant = users.identifiant AND SU2.reference = "developper")
-                            WHERE users.team != "" AND users.identifiant != "admin" AND users.status != "I"
+                            WHERE users.identifiant != "admin" AND users.status != "I"
                             ORDER BY users.team ASC, users.identifiant ASC');
 
         while ($data = $req->fetch())

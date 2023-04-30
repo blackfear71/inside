@@ -34,57 +34,37 @@
         return $listeEquipes;
     }
 
-    // PHYSIQUE : Lecture préférences utilisateurs
-    // RETOUR : Préférences utilisateurs
+    // PHYSIQUE : Lecture autorisations calendriers utilisateurs
+    // RETOUR : Liste des autorisations
     function physiqueAutorisationsCalendars()
     {
         // Initialisations
-        $listeAutorisations = array();
+        $listeAutorisationsParEquipe = array();
 
-        // Requête
         global $bdd;
 
-        $req = $bdd->query('SELECT *
+        // Requête
+        $req = $bdd->query('SELECT preferences.identifiant, users.pseudo, users.team, preferences.manage_calendars
                             FROM preferences
-                            ORDER BY identifiant ASC');
+                            INNER JOIN users ON users.identifiant = preferences.identifiant AND users.identifiant != "admin" AND users.status != "I"
+                            ORDER BY users.team ASC, users.identifiant ASC');
 
         while ($data = $req->fetch())
         {
-            // Instanciation d'un objet AutorisationCalendriers à partir des données remontées de la bdd
+            // Instanciation d'un objet Profile à partir des données remontées de la bdd
             $autorisation = AutorisationCalendriers::withData($data);
 
-            // On ajoute la ligne au tableau
-            array_push($listeAutorisations, $autorisation);
+            // Ajout de l'utilisateur à son équipe
+            if (!isset($listeAutorisationsParEquipe[$autorisation->getTeam()]))
+                $listeAutorisationsParEquipe[$autorisation->getTeam()] = array();
+
+            array_push($listeAutorisationsParEquipe[$autorisation->getTeam()], $autorisation);
         }
 
         $req->closeCursor();
 
         // Retour
-        return $listeAutorisations;
-    }
-
-    // PHYSIQUE : Lecture des informations utilisateur
-    // RETOUR : Données utilisateur
-    function physiqueDonneesUser($identifiant)
-    {
-        // Requête
-        global $bdd;
-
-        $req = $bdd->query('SELECT id, identifiant, team, pseudo
-                            FROM users
-                            WHERE identifiant = "' . $identifiant . '"');
-
-        $data = $req->fetch();
-
-        $user = array(
-            'pseudo' => $data['pseudo'],
-            'team'   => $data['team']
-        );
-
-        $req->closeCursor();
-
-        // Retour
-        return $user;
+        return $listeAutorisationsParEquipe;
     }
 
     // PHYSIQUE : Lecture des utilisateurs
@@ -99,7 +79,7 @@
 
         $req = $bdd->query('SELECT id, identifiant
                             FROM users
-                            WHERE identifiant != "admin"
+                            WHERE identifiant != "admin" AND users.status != "I"
                             ORDER BY identifiant ASC');
 
         while ($data = $req->fetch())

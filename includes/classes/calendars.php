@@ -303,6 +303,12 @@
             if (isset($data['identifiant']))
                 $this->identifiant      = $data['identifiant'];
 
+            if (isset($data['pseudo']))
+                $this->pseudo           = $data['pseudo'];
+
+            if (isset($data['team']))
+                $this->team             = $data['team'];
+
             if (isset($data['manage_calendars']))
                 $this->manage_calendars = $data['manage_calendars'];
         }
