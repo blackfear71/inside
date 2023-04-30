@@ -21,7 +21,7 @@
         $listeFilmsSortie = physiqueSortiesOrganisees();
 
         // Contrôle et insertion des notifications
-        if (count($listeFilmsSortie) > 0)
+        if (!empty($listeFilmsSortie))
         {
             foreach ($listeFilmsSortie as $film)
             {
@@ -64,7 +64,7 @@
         $dureesMissions = physiqueDureesMissions();
 
         // Contrôle et insertion des notifications
-        if (count($dureesMissions) > 0)
+        if (!empty($dureesMissions))
         {
             foreach ($dureesMissions as $mission)
             {
@@ -422,14 +422,14 @@
         // Récupération de la liste des utilisateurs
         $listeUsers = physiqueUsers();
 
+        // Récupération de la liste des dépenses
+        $listeDepenses = physiqueDepenses();
+        
         // Traitement du bilan de chaque utilisateur
         foreach ($listeUsers as $user)
         {
             // Initialisations
             $bilanUser = 0;
-
-            // Récupération des dépenses
-            $listeDepenses = physiqueDepenses();
 
             // Récupération des parts des dépense
             foreach ($listeDepenses as $depense)
