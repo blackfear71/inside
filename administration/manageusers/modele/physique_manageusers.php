@@ -4,20 +4,20 @@
     /****************************************************************************/
     /********************************** SELECT **********************************/
     /****************************************************************************/
-    // PHYSIQUE : Lecture des utilisateurs
+    // PHYSIQUE : Lecture des utilisateurs par équipes
     // RETOUR : Liste des utilisateurs
-    function physiqueUsers()
+    function physiqueUsersParEquipes()
     {
         // Initialisations
-        $listeUsers = array();
+        $listeUsersParEquipes = array('new_users' => array());
 
         // Requête
         global $bdd;
 
-        $req = $bdd->query('SELECT id, identifiant, team, new_team, status, pseudo, avatar, email, anniversary, experience
+        $req = $bdd->query('SELECT *
                             FROM users
                             WHERE identifiant != "admin"
-                            ORDER BY identifiant ASC');
+                            ORDER BY team ASC, identifiant ASC');
 
         while ($data = $req->fetch())
         {
@@ -25,13 +25,21 @@
             $user = Profile::withData($data);
 
             // On ajoute la ligne au tableau
-            array_push($listeUsers, $user);
+            if (empty($user->getTeam()))
+                $listeUsersParEquipes['new_users'][$user->getIdentifiant()] = $user;
+            else
+            {
+                if (!isset($listeUsersParEquipes[$user->getTeam()]))
+                    $listeUsersParEquipes[$user->getTeam()] = array();
+
+                $listeUsersParEquipes[$user->getTeam()][$user->getIdentifiant()] = $user;
+            }
         }
 
         $req->closeCursor();
 
         // Retour
-        return $listeUsers;
+        return $listeUsersParEquipes;
     }
 
     // PHYSIQUE : Lecture des identifiants d'une table
@@ -185,30 +193,6 @@
         return $nombreRecettes;
     }
 
-    // PHYSIQUE : Lecture du bilan des dépenses d'un utilisateur
-    // RETOUR : Bilan des dépenses de l'utilisateur
-    function physiqueBilanDepensesUser($identifiant)
-    {
-        // Initialisations
-        $bilanUser = 0;
-
-        // Requête
-        global $bdd;
-
-        $req = $bdd->query('SELECT id, identifiant, expenses
-                            FROM users
-                            WHERE identifiant = "' . $identifiant . '"');
-
-        $data = $req->fetch();
-
-        $bilanUser = $data['expenses'];
-
-        $req->closeCursor();
-
-        // Retour
-        return $bilanUser;
-    }
-
     // PHYSIQUE : Lecture de la liste des dépenses liées à un utilisateur désinscrit
     // RETOUR : Liste des dépenses
     function physiqueDepensesDesinscrit($identifiant)
@@ -350,101 +334,6 @@
         return $nombreTheBoxTerminees;
     }
 
-    // PHYSIQUE : Lecture du nombre de lignes total dans une table
-    // RETOUR : Nombre de lignes total
-    function physiqueNombreLignesTotalTable($table)
-    {
-        // Initialisations
-        $nombreLignes = 0;
-
-        // Requête
-        global $bdd;
-
-        $req = $bdd->query('SELECT COUNT(*) AS nombreLignes
-                            FROM ' . $table);
-
-        $data = $req->fetch();
-
-        $nombreLignes = $data['nombreLignes'];
-
-        $req->closeCursor();
-
-        // Retour
-        return $nombreLignes;
-    }
-
-    // PHYSIQUE : Lecture du nombre total de réservations de restaurants
-    // RETOUR : Nombre total de réservations de restaurants
-    function physiqueReservationsTotal()
-    {
-        // Initialisations
-        $nombreReservations = 0;
-
-        // Requête
-        global $bdd;
-
-        $req = $bdd->query('SELECT COUNT(*) AS nombreReservations
-                            FROM food_advisor_choices
-                            WHERE caller != ""');
-
-        $data = $req->fetch();
-
-        $nombreReservations = $data['nombreReservations'];
-
-        $req->closeCursor();
-
-        // Retour
-        return $nombreReservations;
-    }
-
-    // PHYSIQUE : Lecture du nombre total de gâteaux de la semaine
-    // RETOUR : Nombre total de gâteaux de la semaine
-    function physiqueGateauxSemaineTotal()
-    {
-        // Initialisations
-        $nombreGateauxSemaine = 0;
-
-        // Requête
-        global $bdd;
-
-        $req = $bdd->query('SELECT COUNT(*) AS nombreGateauxSemaine
-                            FROM cooking_box
-                            WHERE cooked = "Y"');
-
-        $data = $req->fetch();
-
-        $nombreGateauxSemaine = $data['nombreGateauxSemaine'];
-
-        $req->closeCursor();
-
-        // Retour
-        return $nombreGateauxSemaine;
-    }
-
-    // PHYSIQUE : Lecture du nombre total de recettes partagées
-    // RETOUR : Nombre total de recettes partagées
-    function physiqueRecettesTotal()
-    {
-        // Initialisations
-        $nombreRecettes = 0;
-
-        // Requête
-        global $bdd;
-
-        $req = $bdd->query('SELECT COUNT(*) AS nombreRecettes
-                            FROM cooking_box
-                            WHERE name != "" AND picture != ""');
-
-        $data = $req->fetch();
-
-        $nombreRecettes = $data['nombreRecettes'];
-
-        $req->closeCursor();
-
-        // Retour
-        return $nombreRecettes;
-    }
-
     // PHYSIQUE : Lecture de la liste des dépenses sans parts
     // RETOUR : Liste des dépenses
     function physiqueDepensesSansParts()
@@ -457,10 +346,8 @@
 
         $req = $bdd->query('SELECT expense_center.*
                             FROM expense_center
-                            LEFT JOIN expense_center_users ON expense_center.id = expense_center_users.id_expense
-                            WHERE NOT EXISTS (SELECT expense_center_users.id, expense_center_users.id_expense
-                                              FROM expense_center_users
-                                              WHERE expense_center.id = expense_center_users.id_expense)
+                            LEFT JOIN expense_center_users ON expense_center_users.id_expense = expense_center.id
+                            WHERE expense_center_users.id IS NULL
                             ORDER BY expense_center.id ASC');
 
         while ($data = $req->fetch())
@@ -476,78 +363,6 @@
 
         // Retour
         return $listeExpenses;
-    }
-
-    // PHYSIQUE : Lecture du nombre total de bugs résolus / rejetés
-    // RETOUR : Nombre total de bugs / évolutions résolus / rejetés
-    function physiqueBugsStatutTotal($statut)
-    {
-        // Initialisations
-        $nombreBugs = 0;
-
-        // Requête
-        global $bdd;
-
-        $req = $bdd->query('SELECT COUNT(*) AS nombreBugs
-                            FROM bugs
-                            WHERE resolved = "' . $statut . '"');
-
-        $data = $req->fetch();
-
-        $nombreBugs = $data['nombreBugs'];
-
-        $req->closeCursor();
-
-        // Retour
-        return $nombreBugs;
-    }
-
-    // PHYSIQUE : Lecture du nombre total d'idées #TheBox en charge
-    // RETOUR : Nombre total d'idées en charge
-    function physiqueTheBoxEnChargeTotal()
-    {
-        // Initialisations
-        $nombreTheBoxEnCharge = 0;
-
-        // Requête
-        global $bdd;
-
-        $req = $bdd->query('SELECT COUNT(*) AS nombreTheBoxEnCharge
-                            FROM ideas
-                            WHERE developper != "" AND (status = "C" OR status = "P")');
-
-        $data = $req->fetch();
-
-        $nombreTheBoxEnCharge = $data['nombreTheBoxEnCharge'];
-
-        $req->closeCursor();
-
-        // Retour
-        return $nombreTheBoxEnCharge;
-    }
-
-    // PHYSIQUE : Lecture du nombre total d'idées #TheBox terminées
-    // RETOUR : Nombre total d'idées terminées ou rejetées
-    function physiqueTheBoxTermineesTotal()
-    {
-        // Initialisations
-        $nombreTheBoxTerminees = 0;
-
-        // Requête
-        global $bdd;
-
-        $req = $bdd->query('SELECT COUNT(*) AS nombreTheBoxTerminees
-                            FROM ideas
-                            WHERE (status = "D" OR status = "R")');
-
-        $data = $req->fetch();
-
-        $nombreTheBoxTerminees = $data['nombreTheBoxTerminees'];
-
-        $req->closeCursor();
-
-        // Retour
-        return $nombreTheBoxTerminees;
     }
 
     // PHYSIQUE : Lecture du pseudo d'un utilisateur

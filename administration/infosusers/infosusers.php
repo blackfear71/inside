@@ -27,7 +27,7 @@
             $listeEquipes = getListeEquipes();
 
             // Récupération de la liste des utilisateurs inscrits
-            $listeUsersParEquipe = getUsers();
+            $listeUsersParEquipes = getUsers();
             break;
 
         case 'doModifierEquipe':
@@ -67,7 +67,7 @@
 
             unset($equipe);
 
-            foreach ($listeUsersParEquipe as &$usersParEquipe)
+            foreach ($listeUsersParEquipes as &$usersParEquipe)
             {
                 foreach ($usersParEquipe as &$user)
                 {

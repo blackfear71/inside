@@ -128,7 +128,7 @@
     }
 
     // PHYSIQUE : Lecture des participants d'une mission
-    // RETOUR : Liste des participants par équipe
+    // RETOUR : Liste des participants par équipes
     function physiqueParticipantsMission($idMission)
     {
         // Initialisations
@@ -144,7 +144,7 @@
 
         while ($data = $req->fetch())
         {
-            // Création du tableau des données participants par équipe
+            // Création du tableau des données participants par équipes
             if (!isset($listeParticipantsParEquipe[$data['team']][$data['identifiant']]) OR empty($listeParticipantsParEquipe[$data['team']][$data['identifiant']]))
             {
                 $listeParticipantsParEquipe[$data['team']][$data['identifiant']] = array(

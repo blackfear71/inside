@@ -2,7 +2,7 @@
     echo '<div class="zone_infos_equipes">';
         $i = 0;
 
-        foreach ($listeUsersParEquipe as $referenceEquipe => $usersParEquipe)
+        foreach ($listeUsersParEquipes as $referenceEquipe => $usersParEquipe)
         {
             // Titre
             echo '<div class="titre_section">';
@@ -14,7 +14,7 @@
                 echo '</a>';
             echo '</div>';
 
-            // Liste des équipes par équipe
+            // Liste des équipes par équipes
             echo '<div id="zone_infos_' . $i . '" class="zone_infos">';
                 foreach ($usersParEquipe as $user)
                 {

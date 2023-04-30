@@ -23,12 +23,12 @@
             echo '</td>';
         echo '</tr>';
 
-        if (!empty($listeUsersParEquipe))
+        if (!empty($listeUsersParEquipes))
         {
-            foreach ($listeUsersParEquipe as $referenceEquipe => $equipeUsers)
+            foreach ($listeUsersParEquipes as $referenceEquipe => $equipeUsers)
             {
                 // Nom de l'équipe
-                if (!empty($listeUsersParEquipe[$referenceEquipe]))
+                if (!empty($listeUsersParEquipes[$referenceEquipe]))
                 {
                     echo '<tr>';
                         echo '<td class="td_table_admin_fusion" colspan="4">';

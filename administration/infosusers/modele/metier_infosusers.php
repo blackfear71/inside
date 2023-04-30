@@ -24,11 +24,11 @@
     // RETOUR : Tableau d'utilisateurs
     function getUsers()
     {
-        // Récupération liste des utilisateurs par équipe
-        $listeUsersParEquipe = physiqueUsersParEquipe();
+        // Récupération liste des utilisateurs par équipes
+        $listeUsersParEquipes = physiqueUsersParEquipes();
 
         // Retour
-        return $listeUsersParEquipe;
+        return $listeUsersParEquipes;
     }
 
     // METIER : Modification succès "beginning" ou "developper"

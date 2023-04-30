@@ -38,12 +38,12 @@
         return $listeEquipes;
     }
 
-    // PHYSIQUE : Lecture des utilisateurs par équipe
+    // PHYSIQUE : Lecture des utilisateurs par équipes
     // RETOUR : Tableau des utilisateurs
-    function physiqueUsersParEquipe()
+    function physiqueUsersParEquipes()
     {
         // Initialisations
-        $listeUsersParEquipe = array();
+        $listeUsersParEquipes = array();
 
         global $bdd;
 
@@ -65,16 +65,16 @@
             $user->setDevelopper($data['developperValue'] ?? 0);
 
             // Ajout de l'utilisateur à son équipe
-            if (!isset($listeUsersParEquipe[$user->getTeam()]))
-                $listeUsersParEquipe[$user->getTeam()] = array();
+            if (!isset($listeUsersParEquipes[$user->getTeam()]))
+                $listeUsersParEquipes[$user->getTeam()] = array();
 
-            array_push($listeUsersParEquipe[$user->getTeam()], $user);
+            array_push($listeUsersParEquipes[$user->getTeam()], $user);
         }
 
         $req->closeCursor();
 
         // Retour
-        return $listeUsersParEquipe;
+        return $listeUsersParEquipes;
     }
 
     // PHYSIQUE : Lecture d'une table pour une équipe

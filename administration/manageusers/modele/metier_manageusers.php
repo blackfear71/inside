@@ -22,45 +22,16 @@
     // RETOUR : Liste des utilisateurs
     function getUsersInscrits()
     {
-        // Initialisations
-        $listeUsersParEquipe = array();
-        $inscriptionsEnCours = array('new_users' => array());
-
         // Récupération liste des utilisateurs
-        $listeUsers = physiqueUsers();
+        $listeUsersParEquipes = physiqueUsersParEquipes();
 
-        // Ajout à la liste par équipes
-        foreach ($listeUsers as $user)
-        {
-            // Ajout de l'utilisateur à son équipe
-            if (!empty($user->getTeam()))
-            {
-                $team = $user->getTeam();
-
-                // Ajout de l'utilisateur à son équipe
-                if (!isset($listeUsersParEquipe[$team]))
-                    $listeUsersParEquipe[$team] = array();
-
-                array_push($listeUsersParEquipe[$team], $user);
-            }
-            else
-                array_push($inscriptionsEnCours['new_users'], $user);
-        }
-
-        // Tri
-        ksort($listeUsersParEquipe);
-
-        // S'il y a des utilisateurs en cours d'inscription, on les remet au début du tableau
-        if (!empty($inscriptionsEnCours['new_users']))
-            $listeUsersParEquipe = $inscriptionsEnCours + $listeUsersParEquipe;
-        
         // Retour
-        return $listeUsersParEquipe;
+        return $listeUsersParEquipes;
     }
 
     // METIER : Recherche les utilisateurs désinscrits
     // RETOUR : Liste des utilisateurs désinscrits
-    function getUsersDesinscrits($listeUsersInscrits)
+    function getUsersDesinscrits($listeUsersInscritsParEquipes)
     {
         // Initialisations
         $listeUsersDesinscrits = array();
@@ -101,15 +72,12 @@
         // Filtrage avec les utilisateurs inscrits
         foreach ($listeUsersDesinscrits as $keyUserDesinscrit => $userDesinscrit)
         {
-            foreach ($listeUsersInscrits as $equipeUsersInscrits)
+            foreach ($listeUsersInscritsParEquipes as $equipeUsersInscrits)
             {
-                foreach ($equipeUsersInscrits as $userInscrit)
+                if (isset($equipeUsersInscrits[$userDesinscrit]))
                 {
-                    if ($userDesinscrit == $userInscrit->getIdentifiant())
-                    {
-                        unset($listeUsersDesinscrits[$keyUserDesinscrit]);
-                        break;
-                    }
+                    unset($listeUsersDesinscrits[$keyUserDesinscrit]);
+                    break;
                 }
             }
         }
@@ -131,13 +99,13 @@
 
     // METIER : Lecture statistiques catégories des utilisateurs inscrits
     // RETOUR : Tableau des statistiques
-    function getStatistiquesInscrits($listeUsersParEquipe)
+    function getStatistiquesInscrits($listeUsersParEquipes)
     {
         // Initialisations
         $tableauStatistiques = array();
 
         // Récupération des statistiques par catégories
-        foreach ($listeUsersParEquipe as $listeUsers)
+        foreach ($listeUsersParEquipes as $listeUsers)
         {
             foreach ($listeUsers as $user)
             {
@@ -160,7 +128,7 @@
                 $nombreRecettes = physiqueRecettesUser($user->getIdentifiant());
 
                 // Bilan des dépenses
-                $bilanUser = physiqueBilanDepensesUser($user->getIdentifiant());
+                $bilanUser = $user->getExpenses();
 
                 // Phrases et images cultes ajoutées
                 $nombreCollector = physiqueNombreLignesTable('collector', 'author', $user->getIdentifiant());
@@ -177,7 +145,7 @@
                 // Nombre de demandes résolues (bugs / évolutions)
                 $nombreBugsResolus = physiqueBugsStatutUser($user->getIdentifiant(), 'Y');
 
-                // Nombre de demandes rejetés (bugs / évolutions)
+                // Nombre de demandes rejetées (bugs / évolutions)
                 $nombreBugsRejetes = physiqueBugsStatutUser($user->getIdentifiant(), 'R');
 
                 // Nombre d'idées publiées
@@ -371,79 +339,78 @@
 
     // METIER : Lecture total catégories des utilisateurs
     // RETOUR : Tableau des totaux des catégories
-    function getTotalStatistiques($tableauIns, $tableauDes)
+    function getTotalStatistiques($tableauInscrits, $tableauDesinscrit)
     {
         // Initialisations
+        $nombreFilms = 0;
+        $nombreComments = 0;
+        $nombreRestaurants = 0;
+        $nombreReservations = 0;
+        $nombreGateauxSemaine = 0;
+        $nombreRecettes = 0;
         $sommeBilans = 0;
+        $nombreCollector = 0;
+        $nombreParcours = 0;
+        $nombreParticipationsParcours = 0;
+        $nombreBugsSoumis = 0;
+        $nombreBugsResolus = 0;
+        $nombreBugsRejetes = 0;
+        $nombreTheBox = 0;
+        $nombreTheBoxEnCharge = 0;
+        $nombreTheBoxTerminees = 0;
+        $depensesSansParts = 0;
 
-        // Nombre de films ajoutés
-        $nombreFilms = physiqueNombreLignesTotalTable('movie_house');
-
-        // Nombre de commentaires
-        $nombreComments = physiqueNombreLignesTotalTable('movie_house_comments');
-
-        // Nombre de restaurants ajoutés
-        $nombreRestaurants = physiqueNombreLignesTotalTable('food_advisor_restaurants');
-
-        // Nombre de réservations de restaurants
-        $nombreReservations = physiqueReservationsTotal();
-
-        // Nombre de gâteaux de la semaine
-        $nombreGateauxSemaine = physiqueGateauxSemaineTotal();
-
-        // Nombre de recettes partagées
-        $nombreRecettes = physiqueRecettesTotal();
-
-        // Calcul somme bilans utilisateurs inscrits
-        foreach ($tableauIns as $userIns)
+        // Concaténation des données des utilisateurs inscrits
+        foreach ($tableauInscrits as $userInscrit)
         {
-            $sommeBilans += $userIns->getExpenses();
+            $nombreFilms                  += $userInscrit->getNb_films_ajoutes();
+            $nombreComments               += $userInscrit->getNb_films_comments();
+            $nombreRestaurants            += $userInscrit->getNb_restaurants_ajoutes();
+            $nombreReservations           += $userInscrit->getNb_reservations();
+            $nombreGateauxSemaine         += $userInscrit->getNb_gateaux_semaine();
+            $nombreRecettes               += $userInscrit->getNb_recettes();
+            $sommeBilans                  += $userInscrit->getExpenses();
+            $nombreCollector              += $userInscrit->getNb_collectors();
+            $nombreParcours               += $userInscrit->getNb_parcours_ajoutes();
+            $nombreParticipationsParcours += $userInscrit->getNb_parcours_participations();
+            $nombreBugsSoumis             += $userInscrit->getNb_bugs_soumis();
+            $nombreBugsResolus            += $userInscrit->getNb_bugs_resolus();
+            $nombreBugsRejetes            += $userInscrit->getNb_bugs_rejetes();
+            $nombreTheBox                 += $userInscrit->getNb_idees_soumises();
+            $nombreTheBoxEnCharge         += $userInscrit->getNb_idees_en_charge();
+            $nombreTheBoxTerminees        += $userInscrit->getNb_idees_terminees();
         }
 
-        // Calcul somme bilans utilisateurs désinscrits
-        foreach ($tableauDes as $userDes)
+        // Concaténation des données des utilisateurs désinscrits
+        foreach ($tableauDesinscrit as $userDesinscrit)
         {
-            $sommeBilans += $userDes->getExpenses();
+            $nombreFilms                  += $userDesinscrit->getNb_films_ajoutes();
+            $nombreComments               += $userDesinscrit->getNb_films_comments();
+            $nombreRestaurants            += $userDesinscrit->getNb_restaurants_ajoutes();
+            $nombreReservations           += $userDesinscrit->getNb_reservations();
+            $nombreGateauxSemaine         += $userDesinscrit->getNb_gateaux_semaine();
+            $nombreRecettes               += $userDesinscrit->getNb_recettes();
+            $sommeBilans                  += $userDesinscrit->getExpenses();
+            $nombreCollector              += $userDesinscrit->getNb_collectors();
+            $nombreParcours               += $userDesinscrit->getNb_parcours_ajoutes();
+            $nombreParticipationsParcours += $userDesinscrit->getNb_parcours_participations();
+            $nombreBugsSoumis             += $userDesinscrit->getNb_bugs_soumis();
+            $nombreBugsResolus            += $userDesinscrit->getNb_bugs_resolus();
+            $nombreBugsRejetes            += $userDesinscrit->getNb_bugs_rejetes();
+            $nombreTheBox                 += $userDesinscrit->getNb_idees_soumises();
+            $nombreTheBoxEnCharge         += $userDesinscrit->getNb_idees_en_charge();
+            $nombreTheBoxTerminees        += $userDesinscrit->getNb_idees_terminees();
         }
 
         // Récupération des dépenses sans parts
-        $expensesNoParts = 0;
-
         $listeExpenses = physiqueDepensesSansParts();
 
         foreach ($listeExpenses as $expense)
         {
-            $expensesNoParts += $expense->getPrice();
+            $depensesSansParts += $expense->getPrice();
         }
 
-        $regularisations = -1 * $expensesNoParts;
-
-        // Nombre de phrase cultes
-        $nombreCollector = physiqueNombreLignesTotalTable('collector');
-        
-        // Parcours ajoutés
-        $nombreParcours = physiqueNombreLignesTotalTable('petits_pedestres_parcours');
-
-        // Participations parcours
-        $nombreParticipationsParcours = physiqueNombreLignesTotalTable('petits_pedestres_users');
-
-        // Nombre de demandes (bugs / évolutions)
-        $nombreBugsSoumis = physiqueNombreLignesTotalTable('bugs');
-
-        // Nombre de demandes résolues (bugs / évolutions)
-        $nombreBugsResolus = physiqueBugsStatutTotal('Y');
-
-        // Nombre de demandes rejetées (bugs / évolutions)
-        $nombreBugsRejetes = physiqueBugsStatutTotal('R');
-
-        // Nombre d'idées publiées
-        $nombreTheBox = physiqueNombreLignesTotalTable('ideas');
-
-        // Nombre d'idées en charge
-        $nombreTheBoxEnCharge = physiqueTheBoxEnChargeTotal();
-
-        // Nombre d'idées terminées ou rejetées
-        $nombreTheBoxTerminees = physiqueTheBoxTermineesTotal();
+        $regularisations = -1 * $depensesSansParts;
 
         // Génération d'un objet TotalStatistiquesAdmin
         $totalStatistiques = new TotalStatistiquesAdmin();
@@ -564,7 +531,7 @@
         physiqueUpdateStatusUser($identifiant, $status);
     }
 
-    // METIER : Validation changement d'équipe (mise à jour de l'équipe et du status utilisateur)
+    // METIER : Validation changement d'équipe (mise à jour de l'équipe et du statut utilisateur)
     // RETOUR : Aucun
     function acceptEquipe($post, $isUpdateEquipe)
     {
@@ -700,7 +667,7 @@
         physiqueUpdateProfilUser($user, $identifiant);
     }
 
-    // METIER : Validation inscription (mise à jour de l'équipe et du status utilisateur)
+    // METIER : Validation inscription (mise à jour de l'équipe et du statut utilisateur)
     // RETOUR : Aucun
     function acceptInscription($post)
     {

@@ -119,7 +119,7 @@
         // Traitement s'il y a des participants
         if (!empty($listeUsersParEquipes))
         {
-            // Tri et affectation du rang par équipe
+            // Tri et affectation du rang par équipes
             foreach ($listeUsersParEquipes as &$usersParEquipe)
             {
                 // Tri sur avancement puis identifiant

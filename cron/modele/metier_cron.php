@@ -219,7 +219,7 @@
 
                     if (!empty($listeParticipantsParEquipe))
                     {
-                        // Traitements des participants par équipe
+                        // Traitements des participants par équipes
                         foreach ($listeParticipantsParEquipe as &$listeParticipants)
                         {
                             // Tri sur avancement

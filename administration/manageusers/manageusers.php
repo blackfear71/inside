@@ -33,11 +33,11 @@
             $listeEquipes = getListeEquipes();
 
             // Récupération des utilisateurs inscrits et désinscrits
-            $listeUsersParEquipe   = getUsersInscrits();
-            $listeUsersDesinscrits = getUsersDesinscrits($listeUsersParEquipe);
+            $listeUsersParEquipes  = getUsersInscrits();
+            $listeUsersDesinscrits = getUsersDesinscrits($listeUsersParEquipes);
 
             // Récupération des statistiques par catégories et des statistiques de demandes et publications
-            $tableauStatistiquesIns = getStatistiquesInscrits($listeUsersParEquipe);
+            $tableauStatistiquesIns = getStatistiquesInscrits($listeUsersParEquipes);
             $tableauStatistiquesDes = getStatistiquesDesinscrits($listeUsersDesinscrits);
 
             // Récupération des totaux
@@ -106,7 +106,7 @@
 
             unset($equipe);
 
-            foreach ($listeUsersParEquipe as &$usersParEquipe)
+            foreach ($listeUsersParEquipes as &$usersParEquipe)
             {
                 foreach ($usersParEquipe as &$user)
                 {
