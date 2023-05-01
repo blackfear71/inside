@@ -119,6 +119,23 @@
 }
 
 /*** Bugs & Evolutions ***/
+.nombre_bugs
+{
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 1.5vh;
+    margin-top: -0.5vh;
+    width: 4vh;
+    height: 4vh;
+    text-align: center;
+    line-height: 4vh;
+    background-color: #262626;
+    border-radius: 50%;
+    font-family: inside_font_thin, Verdana, sans-serif;
+    color: white;
+    font-size: 2vh;
+}
+
 .zone_bugs_evolutions
 {
     width: 100%;

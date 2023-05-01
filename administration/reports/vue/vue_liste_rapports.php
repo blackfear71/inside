@@ -2,7 +2,11 @@
     // Bugs
     echo '<div class="zone_bugs">';
         // Titre
-        echo '<div class="titre_section"><img src="../../includes/icons/reports/bug.png" alt="bug" class="logo_titre_section" /><div class="texte_titre_section">Bugs</div></div>';
+        echo '<div class="titre_section">';
+            echo '<img src="../../includes/icons/reports/bug.png" alt="bug" class="logo_titre_section" />';
+            echo '<div class="texte_titre_section_fold">Bugs</div>';
+            echo '<div class="nombre_bugs">' . count($listeBugs) . '</div>';
+        echo '</div>';
 
         // Liste des bugs
         if (!empty($listeBugs))
@@ -135,7 +139,11 @@
     // Evolutions
     echo '<div class="zone_evolutions">';
         // Titre
-        echo '<div class="titre_section"><img src="../../includes/icons/reports/evolution.png" alt="evolution" class="logo_titre_section" /><div class="texte_titre_section">Evolutions</div></div>';
+        echo '<div class="titre_section">';
+            echo '<img src="../../includes/icons/reports/evolution.png" alt="evolution" class="logo_titre_section" />';
+            echo '<div class="texte_titre_section_fold">Evolutions</div>';
+            echo '<div class="nombre_bugs">' . count($listeEvolutions) . '</div>';
+        echo '</div>';
 
         // Liste des évolutions
         if (!empty($listeEvolutions))

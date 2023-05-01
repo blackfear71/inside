@@ -217,6 +217,22 @@
 }
 
 /*** Rapports ***/
+.nombre_bugs
+{
+    display: inline-block;
+    vertical-align: middle;
+    width: 25px;
+    height: 25px;
+    margin-left: 10px;
+    text-align: center;
+    line-height: 25px;
+    background-color: #262626;
+    border-radius: 50%;
+    font-family: inside_font_light, Verdana, sans-serif;
+    color: white;
+    font-size: 60%;
+}
+
 .zone_report
 {
     margin-bottom: 20px;

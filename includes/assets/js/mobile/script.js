@@ -1129,7 +1129,7 @@ function updateBugs()
                 if (!$('.count_bugs').length)
                 {
                     html += '<div class="count_bugs">';
-                    html += '<div class="number_bugs"></div>';
+                        html += '<div class="number_bugs"></div>';
                     html += '</div>';
 
                     $('.zone_compteur_footer').html(html);
