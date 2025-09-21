@@ -295,8 +295,8 @@
         // Réinitialisation des cookies de position Celsius
         if ($celsius == 'N')
         {
-            setcookie('celsius[positionX]', null, -1, '/');
-            setcookie('celsius[positionY]', null, -1, '/');
+            setcookie('celsius[positionX]', '', -1, '/');
+            setcookie('celsius[positionY]', '', -1, '/');
         }
 
         // Modification de l'enregistrement en base
@@ -358,8 +358,8 @@
                 physiqueUpdatePasswordUser($salt, $newPassword, $identifiant);
 
                 // Réinitialisation des cookies de connexion
-                setcookie('index[identifiant]', null, -1, '/');
-                setcookie('index[password]', null, -1, '/');
+                setcookie('index[identifiant]', '', -1, '/');
+                setcookie('index[password]', '', -1, '/');
 
                 // Définition des nouveaux cookies de connexion
                 setCookie('index[identifiant]', $identifiant, [

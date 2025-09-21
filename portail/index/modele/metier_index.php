@@ -71,9 +71,9 @@
         $_SESSION['index']['connected'] = NULL;
 
         // Réinitialisation des cookies
-        setcookie('index[identifiant]', null, -1, '/');
-        setcookie('index[password]', null, -1, '/');
-        setcookie('index[page]', null, -1, '/');
+        setcookie('index[identifiant]', '', -1, '/');
+        setcookie('index[password]', '', -1, '/');
+        setcookie('index[page]', '', -1, '/');
 
         // Récupération des données
         if ($autoConnect == true)

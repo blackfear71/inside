@@ -62,7 +62,7 @@
                 if ($_GET['action'] == 'goAjouter')
                 {
                     echo '<div class="zone_parcourir_bouton_mission">';
-                        echo '<div class="info_icone_mission">Icône gauche (500 x 500 px)</div>';
+                        echo '<div class="info_icone_mission">Icône milieu (500 x 500 px)</div>';
                         echo '<input type="file" accept=".png" name="mission_icone_m" class="bouton_parcourir_icone_mission loadMiddle" required />';
                     echo '</div>';
 
@@ -73,7 +73,7 @@
                 else
                 {
                     echo '<div class="zone_parcourir_bouton_mission">';
-                        echo '<div class="info_icone_mission">Icône gauche (500 x 500 px)</div>';
+                        echo '<div class="info_icone_mission">Icône milieu (500 x 500 px)</div>';
                         echo '<input type="file" accept=".png" name="mission_icone_m" class="bouton_parcourir_icone_mission loadMiddle" />';
                     echo '</div>';
 
@@ -90,7 +90,7 @@
                 if ($_GET['action'] == 'goAjouter')
                 {
                     echo '<div class="zone_parcourir_bouton_mission">';
-                        echo '<div class="info_icone_mission">Icône gauche (500 x 500 px)</div>';
+                        echo '<div class="info_icone_mission">Icône droite (500 x 500 px)</div>';
                         echo '<input type="file" accept=".png" name="mission_icone_d" class="bouton_parcourir_icone_mission loadRight" required />';
                     echo '</div>';
 
@@ -101,7 +101,7 @@
                 else
                 {
                     echo '<div class="zone_parcourir_bouton_mission">';
-                        echo '<div class="info_icone_mission">Icône gauche (500 x 500 px)</div>';
+                        echo '<div class="info_icone_mission">Icône droite (500 x 500 px)</div>';
                         echo '<input type="file" accept=".png" name="mission_icone_d" class="bouton_parcourir_icone_mission loadRight" />';
                     echo '</div>';
 
