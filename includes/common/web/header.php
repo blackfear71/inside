@@ -6,10 +6,10 @@
             echo '<div class="zone_bandeau_left">';
                 // Logo
                 if ($_SESSION['user']['identifiant'] == 'admin')
-                    echo '<a href="/inside/administration/portail/portail.php?action=goConsulter">';
+                    echo '<a href="/administration/portail/portail.php?action=goConsulter">';
                 else
-                    echo '<a href="/inside/portail/portail/portail.php?action=goConsulter">';
-                    echo '<img src="/inside/includes/icons/common/inside.png" alt="inside" class="logo_bandeau" id="logo_inside_header" />';
+                    echo '<a href="/portail/portail/portail.php?action=goConsulter">';
+                    echo '<img src="/includes/icons/common/inside.png" alt="inside" class="logo_bandeau" id="logo_inside_header" />';
                 echo '</a>';
 
                 // Notifications & Recherche (utilisateur)
@@ -20,7 +20,7 @@
 
                     // Recherche
                     echo '<div id="resizeBar" class="zone_recherche_bandeau">';
-                        echo '<form method="post" action="/inside/portail/search/search.php?action=doRechercher" class="form_recherche_bandeau">';
+                        echo '<form method="post" action="/portail/search/search.php?action=doRechercher" class="form_recherche_bandeau">';
                             echo '<input type="submit" name="search" value="" class="logo_rechercher" />';
                             echo '<input type="text" id="color_search" name="text_search" placeholder="Rechercher..." class="recherche_bandeau" />';
                         echo '</form>';
@@ -37,9 +37,9 @@
 
                 // Profil
                 if ($_SESSION['user']['identifiant'] == 'admin')
-                    echo '<a href="/inside/administration/profil/profil.php?action=goConsulter" title="Mon profil" class="zone_profil_bandeau">';
+                    echo '<a href="/administration/profil/profil.php?action=goConsulter" title="Mon profil" class="zone_profil_bandeau">';
                 else
-                    echo '<a href="/inside/portail/profil/profil.php?view=profile&action=goConsulter" title="Mon profil" class="zone_profil_bandeau">';
+                    echo '<a href="/portail/profil/profil.php?view=profile&action=goConsulter" title="Mon profil" class="zone_profil_bandeau">';
                     // Expérience utilisateur
                     if ($_SESSION['user']['identifiant'] != 'admin')
                     {
@@ -63,13 +63,13 @@
                 // Actions
                 echo '<div class="zone_actions_header">';
                     // Déconnexion
-                    echo '<form method="post" action="/inside/includes/functions/script_commun.php?function=disconnectUser" title="Déconnexion">';
+                    echo '<form method="post" action="/includes/functions/script_commun.php?function=disconnectUser" title="Déconnexion">';
                         echo '<input type="submit" name="disconnect" value="" title="Déconnexion" class="icone_deconnexion_header" />';
                     echo '</form>';
 
                     // Succès
                     if ($_SESSION['user']['identifiant'] != 'admin')
-                        echo '<a href="/inside/portail/profil/profil.php?view=success&action=goConsulter" title="Succès"><img src="/inside/includes/icons/common/cup.png" alt="cup" class="icone_action_header" /></a>';
+                        echo '<a href="/portail/profil/profil.php?view=success&action=goConsulter" title="Succès"><img src="/includes/icons/common/cup.png" alt="cup" class="icone_action_header" /></a>';
                 echo '</div>';
 
                 // Libellé court équipe
@@ -87,7 +87,7 @@
             // Boutons missions
             $zoneInside = 'header';
             
-            include($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/common/missions.php');
+            include($_SERVER['DOCUMENT_ROOT'] . '/includes/common/missions.php');
         echo '</div>';
     }
     else
@@ -96,8 +96,8 @@
             // Partie gauche header
             echo '<div class="zone_bandeau_left">';
                 // Logo
-                echo '<a href="/inside/index.php?action=goConsulter">';
-                    echo '<img src="/inside/includes/icons/common/inside.png" alt="inside" class="logo_bandeau" id="logo_inside_header" />';
+                echo '<a href="/index.php?action=goConsulter">';
+                    echo '<img src="/includes/icons/common/inside.png" alt="inside" class="logo_bandeau" id="logo_inside_header" />';
                 echo '</a>';
 
                 // Boutons

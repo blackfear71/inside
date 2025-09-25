@@ -1,9 +1,9 @@
 <?php
-    include_once($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/classes/alerts.php');
-    include_once($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/classes/missions.php');
-    include_once($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/classes/success.php');
-    include_once($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/classes/teams.php');
-    include_once($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/classes/themes.php');
+    include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/classes/alerts.php');
+    include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/classes/missions.php');
+    include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/classes/success.php');
+    include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/classes/teams.php');
+    include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/classes/themes.php');
 
     // METIER : Contrôles Index, initialisation session
     // RETOUR : Aucun
@@ -17,13 +17,13 @@
         if (isset($_SESSION['index']['connected']) AND $_SESSION['index']['connected'] == true)
         {
             if ($_SESSION['user']['identifiant'] == 'admin')
-                header('location: /inside/administration/portail/portail.php?action=goConsulter');
+                header('location: /administration/portail/portail.php?action=goConsulter');
             else
             {
                 if (isset($_COOKIE['index']['page']) AND !empty($_COOKIE['index']['page']))
                     header('location: ' . $_COOKIE['index']['page']);
                 else
-                    header('location: /inside/portail/portail/portail.php?action=goConsulter');
+                    header('location: /portail/portail/portail.php?action=goConsulter');
             }
         }
         else
@@ -44,12 +44,12 @@
 
         // Contrôle non utilisateur normal
         if (isset($_SESSION['index']['connected']) AND $_SESSION['index']['connected'] == true AND $_SESSION['user']['identifiant'] != 'admin')
-            header('location: /inside/portail/portail/portail.php?action=goConsulter');
+            header('location: /portail/portail/portail.php?action=goConsulter');
 
         // Contrôle administrateur connecté
         if ($_SESSION['index']['connected'] == false)
         {
-            header('location: /inside/index.php?action=goConsulter');
+            header('location: /index.php?action=goConsulter');
             exit;
         }
 
@@ -76,12 +76,12 @@
 
         // Contrôle non administrateur
         if (isset($_SESSION['index']['connected']) AND $_SESSION['index']['connected'] == true AND $_SESSION['user']['identifiant'] == 'admin')
-            header('location: /inside/administration/portail/portail.php?action=goConsulter');
+            header('location: /administration/portail/portail.php?action=goConsulter');
 
         // Contrôle utilisateur connecté
         if ($_SESSION['index']['connected'] == false)
         {
-            header('location: /inside/index.php?action=goConsulter');
+            header('location: /index.php?action=goConsulter');
             exit;
         }
         else
@@ -91,7 +91,7 @@
 
             // Déconnexion si non inscrit
             if ($isUserInscrit == false)
-                header('location: /inside/includes/functions/script_commun.php?function=disconnectUser');
+                header('location: /includes/functions/script_commun.php?function=disconnectUser');
             else
             {
                 // Contrôle page accessible mobile
@@ -99,7 +99,7 @@
 
                 // Redirection si non accessible
                 if ($isAccessibleMobile == false)
-                    header('location: /inside/portail/portail/portail.php?action=goConsulter');
+                    header('location: /portail/portail/portail.php?action=goConsulter');
                 else
                 {
                     // Contrôle changement d'équipe
@@ -167,27 +167,27 @@
         // Vérification section accessible sur mobile
         if ($_SESSION['index']['plateforme'] == 'mobile')
         {
-            if ($path != '/inside/portail/bugs/bugs.php'
-            AND $path != '/inside/portail/calendars/calendars.php'
-            AND $path != '/inside/portail/calendars/calendars_generator.php'
-            AND $path != '/inside/portail/changelog/changelog.php'
-            AND $path != '/inside/portail/collector/collector.php'
-            AND $path != '/inside/portail/cookingbox/cookingbox.php'
-            AND $path != '/inside/portail/expensecenter/expensecenter.php'
-            AND $path != '/inside/portail/foodadvisor/foodadvisor.php'
-            AND $path != '/inside/portail/foodadvisor/restaurants.php'
-            AND $path != '/inside/portail/ideas/ideas.php'
-            AND $path != '/inside/portail/missions/missions.php'
-            AND $path != '/inside/portail/missions/details.php'
-            AND $path != '/inside/portail/moviehouse/details.php'
-            AND $path != '/inside/portail/moviehouse/mailing.php'
-            AND $path != '/inside/portail/moviehouse/moviehouse.php'
-            AND $path != '/inside/portail/notifications/notifications.php'
-            AND $path != '/inside/portail/petitspedestres/details.php'
-            AND $path != '/inside/portail/petitspedestres/petitspedestres.php'
-            AND $path != '/inside/portail/portail/portail.php'
-            AND $path != '/inside/portail/search/search.php'
-            AND $path != '/inside/portail/profil/profil.php')
+            if ($path != '/portail/bugs/bugs.php'
+            AND $path != '/portail/calendars/calendars.php'
+            AND $path != '/portail/calendars/calendars_generator.php'
+            AND $path != '/portail/changelog/changelog.php'
+            AND $path != '/portail/collector/collector.php'
+            AND $path != '/portail/cookingbox/cookingbox.php'
+            AND $path != '/portail/expensecenter/expensecenter.php'
+            AND $path != '/portail/foodadvisor/foodadvisor.php'
+            AND $path != '/portail/foodadvisor/restaurants.php'
+            AND $path != '/portail/ideas/ideas.php'
+            AND $path != '/portail/missions/missions.php'
+            AND $path != '/portail/missions/details.php'
+            AND $path != '/portail/moviehouse/details.php'
+            AND $path != '/portail/moviehouse/mailing.php'
+            AND $path != '/portail/moviehouse/moviehouse.php'
+            AND $path != '/portail/notifications/notifications.php'
+            AND $path != '/portail/petitspedestres/details.php'
+            AND $path != '/portail/petitspedestres/petitspedestres.php'
+            AND $path != '/portail/portail/portail.php'
+            AND $path != '/portail/search/search.php'
+            AND $path != '/portail/profil/profil.php')
                 $isAccessibleMobile = false;
         }
 
@@ -542,27 +542,27 @@
 
         // Définition des pages disponibles
         $listePages = array(
-            '/inside/portail/bugs/bugs.php',
-            '/inside/portail/calendars/calendars.php',
-            '/inside/portail/changelog/changelog.php',
-            '/inside/portail/collector/collector.php',
-            '/inside/portail/cookingbox/cookingbox.php',
-            //'/inside/portail/eventmanager/eventmanager.php',
-            '/inside/portail/expensecenter/expensecenter.php',
-            '/inside/portail/foodadvisor/foodadvisor.php',
-            '/inside/portail/foodadvisor/restaurants.php',
-            '/inside/portail/ideas/ideas.php',
-            '/inside/portail/missions/details.php',
-            '/inside/portail/missions/missions.php',
-            '/inside/portail/moviehouse/details.php',
-            '/inside/portail/moviehouse/mailing.php',
-            '/inside/portail/moviehouse/moviehouse.php',
-            '/inside/portail/notifications/notifications.php',
-            '/inside/portail/petitspedestres/details.php',
-            '/inside/portail/petitspedestres/petitspedestres.php',
-            '/inside/portail/portail/portail.php',
-            '/inside/portail/profil/profil.php',
-            '/inside/portail/search/search.php'
+            '/portail/bugs/bugs.php',
+            '/portail/calendars/calendars.php',
+            '/portail/changelog/changelog.php',
+            '/portail/collector/collector.php',
+            '/portail/cookingbox/cookingbox.php',
+            //'/portail/eventmanager/eventmanager.php',
+            '/portail/expensecenter/expensecenter.php',
+            '/portail/foodadvisor/foodadvisor.php',
+            '/portail/foodadvisor/restaurants.php',
+            '/portail/ideas/ideas.php',
+            '/portail/missions/details.php',
+            '/portail/missions/missions.php',
+            '/portail/moviehouse/details.php',
+            '/portail/moviehouse/mailing.php',
+            '/portail/moviehouse/moviehouse.php',
+            '/portail/notifications/notifications.php',
+            '/portail/petitspedestres/details.php',
+            '/portail/petitspedestres/petitspedestres.php',
+            '/portail/portail/portail.php',
+            '/portail/profil/profil.php',
+            '/portail/search/search.php'
         );
 
         // Définition des zones disponibles
@@ -649,13 +649,13 @@
             {
                 // Cas des pages sans onglets
                 if  ($zone == 'article' AND ($position == 'top_left' OR $position == 'top_right')
-                AND ($page == '/inside/portail/bugs/bugs.php'
-                OR   $page == '/inside/portail/changelog/changelog.php'
-                OR   $page == '/inside/portail/ideas/ideas.php'
-                OR   $page == '/inside/portail/notifications/notifications.php'
-                OR   $page == '/inside/portail/portail/portail.php'
-                OR   $page == '/inside/portail/profil/profil.php'
-                OR   $page == '/inside/portail/search/search.php'))
+                AND ($page == '/portail/bugs/bugs.php'
+                OR   $page == '/portail/changelog/changelog.php'
+                OR   $page == '/portail/ideas/ideas.php'
+                OR   $page == '/portail/notifications/notifications.php'
+                OR   $page == '/portail/portail/portail.php'
+                OR   $page == '/portail/profil/profil.php'
+                OR   $page == '/portail/search/search.php'))
                     $classe = $zone . '_' . $position . '_mission_no_nav';
                 else
                     $classe = $zone . '_' . $position . '_mission';
@@ -735,18 +735,18 @@
             if ($themeMissionActive->getLogo() == 'Y')
             {
                 $tableauTheme = array(
-                    'background' => '/inside/includes/images/themes/backgrounds/' . $themeMissionActive->getReference() . '.png',
-                    'header'     => '/inside/includes/images/themes/headers/' . $themeMissionActive->getReference() . '_h.png',
-                    'footer'     => '/inside/includes/images/themes/footers/' . $themeMissionActive->getReference() . '_f.png',
-                    'logo'       => '/inside/includes/images/themes/logos/' . $themeMissionActive->getReference() . '_l.png'
+                    'background' => '/includes/images/themes/backgrounds/' . $themeMissionActive->getReference() . '.png',
+                    'header'     => '/includes/images/themes/headers/' . $themeMissionActive->getReference() . '_h.png',
+                    'footer'     => '/includes/images/themes/footers/' . $themeMissionActive->getReference() . '_f.png',
+                    'logo'       => '/includes/images/themes/logos/' . $themeMissionActive->getReference() . '_l.png'
                 );
             }
             else
             {
                 $tableauTheme = array(
-                    'background' => '/inside/includes/images/themes/backgrounds/' . $themeMissionActive->getReference() . '.png',
-                    'header'     => '/inside/includes/images/themes/headers/' . $themeMissionActive->getReference() . '_h.png',
-                    'footer'     => '/inside/includes/images/themes/footers/' . $themeMissionActive->getReference() . '_f.png',
+                    'background' => '/includes/images/themes/backgrounds/' . $themeMissionActive->getReference() . '.png',
+                    'header'     => '/includes/images/themes/headers/' . $themeMissionActive->getReference() . '_h.png',
+                    'footer'     => '/includes/images/themes/footers/' . $themeMissionActive->getReference() . '_f.png',
                     'logo'       => NULL
                 );
             }
@@ -765,18 +765,18 @@
                     if ($themePersonnalise->getLogo() == 'Y')
                     {
                         $tableauTheme = array(
-                            'background' => '/inside/includes/images/themes/backgrounds/' . $themePersonnalise->getReference() . '.png',
-                            'header'     => '/inside/includes/images/themes/headers/' . $themePersonnalise->getReference() . '_h.png',
-                            'footer'     => '/inside/includes/images/themes/footers/' . $themePersonnalise->getReference() . '_f.png',
-                            'logo'       => '/inside/includes/images/themes/logos/' . $themePersonnalise->getReference() . '_l.png'
+                            'background' => '/includes/images/themes/backgrounds/' . $themePersonnalise->getReference() . '.png',
+                            'header'     => '/includes/images/themes/headers/' . $themePersonnalise->getReference() . '_h.png',
+                            'footer'     => '/includes/images/themes/footers/' . $themePersonnalise->getReference() . '_f.png',
+                            'logo'       => '/includes/images/themes/logos/' . $themePersonnalise->getReference() . '_l.png'
                         );
                     }
                     else
                     {
                         $tableauTheme = array(
-                            'background' => '/inside/includes/images/themes/backgrounds/' . $themePersonnalise->getReference() . '.png',
-                            'header'     => '/inside/includes/images/themes/headers/' . $themePersonnalise->getReference() . '_h.png',
-                            'footer'     => '/inside/includes/images/themes/footers/' . $themePersonnalise->getReference() . '_f.png',
+                            'background' => '/includes/images/themes/backgrounds/' . $themePersonnalise->getReference() . '.png',
+                            'header'     => '/includes/images/themes/headers/' . $themePersonnalise->getReference() . '_h.png',
+                            'footer'     => '/includes/images/themes/footers/' . $themePersonnalise->getReference() . '_f.png',
                             'logo'       => NULL
                         );
                     }
@@ -797,7 +797,7 @@
         {
             case '1';
                 $nameLevel = '<div class="titre_section">';
-                    $nameLevel .= '<img src="/inside/includes/icons/profil/crown_grey.png" alt="crown_grey" class="logo_titre_section" />';
+                    $nameLevel .= '<img src="/includes/icons/profil/crown_grey.png" alt="crown_grey" class="logo_titre_section" />';
                     $nameLevel .= '<div class="number_level">' . $level . '</div>';
                     $nameLevel .= '<div class="texte_titre_section">Seuls les plus forts y parviendront.</div>';
                 $nameLevel .= '</div>';
@@ -805,7 +805,7 @@
 
             case '2';
                 $nameLevel = '<div class="titre_section">';
-                    $nameLevel .= '<img src="/inside/includes/icons/profil/crown_grey.png" alt="crown_grey" class="logo_titre_section" />';
+                    $nameLevel .= '<img src="/includes/icons/profil/crown_grey.png" alt="crown_grey" class="logo_titre_section" />';
                     $nameLevel .= '<div class="number_level">' . $level . '</div>';
                     $nameLevel .= '<div class="texte_titre_section">Vous êtes encore là ?</div>';
                 $nameLevel .= '</div>';
@@ -813,7 +813,7 @@
 
             case '3';
                 $nameLevel = '<div class="titre_section">';
-                    $nameLevel .= '<img src="/inside/includes/icons/profil/crown_grey.png" alt="crown_grey" class="logo_titre_section" />';
+                    $nameLevel .= '<img src="/includes/icons/profil/crown_grey.png" alt="crown_grey" class="logo_titre_section" />';
                     $nameLevel .= '<div class="number_level">' . $level . '</div>';
                     $nameLevel .= '<div class="texte_titre_section">Votre charisme doit être impressionnant.</div>';
                 $nameLevel .= '</div>';
@@ -821,7 +821,7 @@
 
             default:
                 $nameLevel = '<div class="titre_section">';
-                    $nameLevel .= '<img src="/inside/includes/icons/profil/crown_grey.png" alt="crown_grey" class="logo_titre_section" />';
+                    $nameLevel .= '<img src="/includes/icons/profil/crown_grey.png" alt="crown_grey" class="logo_titre_section" />';
                     $nameLevel .= '<div class="number_level">' . $level . '</div>';
                     $nameLevel .= '<div class="texte_titre_section">Niveau ' . $level . '</div>';
                 $nameLevel .= '</div>';
@@ -1299,7 +1299,7 @@
 
             case 0:
             default:
-                $level = '/inside';
+                $level = '';
                 break;
         }
 

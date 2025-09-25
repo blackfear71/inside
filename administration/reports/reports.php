@@ -75,8 +75,8 @@
         case 'goConsulter':
             foreach ($listeUsers as &$user)
             {
-                $user['pseudo'] = htmlspecialchars($user['pseudo']);
-                $user['avatar'] = htmlspecialchars($user['avatar']);
+                $user['pseudo'] = htmlspecialchars($user['pseudo'] ?? '');
+                $user['avatar'] = htmlspecialchars($user['avatar'] ?? '');
             }
 
             unset($user);

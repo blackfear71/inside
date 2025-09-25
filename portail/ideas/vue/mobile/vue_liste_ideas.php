@@ -6,21 +6,21 @@
             case 'inprogress':
                 echo '<div class="titre_section">';
                     echo '<img src="../../includes/icons/ideas/ideas_grey.png" alt="ideas_grey" class="logo_titre_section" />';
-                    echo '<div class="texte_titre_section">Idées proposées<div class="nombre_idees">' . count($listeIdees) . '</div></div>';
+                    echo '<div class="texte_titre_section">Idées proposées<div class="nombre_idees">' . (isset($listeIdees) ? count($listeIdees) : 0) . '</div></div>';
                 echo '</div>';
                 break;
 
             case 'mine':
                 echo '<div class="titre_section">';
                     echo '<img src="../../includes/icons/ideas/ideas_grey.png" alt="ideas_grey" class="logo_titre_section" />';
-                    echo '<div class="texte_titre_section">Idées que j\'ai en charge<div class="nombre_idees">' . count($listeIdees) . '</div></div>';
+                    echo '<div class="texte_titre_section">Idées que j\'ai en charge<div class="nombre_idees">' . (isset($listeIdees) ? count($listeIdees) : 0) . '</div></div>';
                 echo '</div>';
                 break;
 
             case 'done':
                 echo '<div class="titre_section">';
                     echo '<img src="../../includes/icons/ideas/ideas_grey.png" alt="ideas_grey" class="logo_titre_section" />';
-                    echo '<div class="texte_titre_section">Idées terminées ou rejetées<div class="nombre_idees">' . count($listeIdees) . '</div></div>';
+                    echo '<div class="texte_titre_section">Idées terminées ou rejetées<div class="nombre_idees">' . (isset($listeIdees) ? count($listeIdees) : 0) . '</div></div>';
                 echo '</div>';
                 break;
 
@@ -28,7 +28,7 @@
             default:
                 echo '<div class="titre_section">';
                     echo '<img src="../../includes/icons/ideas/ideas_grey.png" alt="ideas_grey" class="logo_titre_section" />';
-                    echo '<div class="texte_titre_section">Toutes les idées<div class="nombre_idees">' . count($listeIdees) . '</div></div>';
+                    echo '<div class="texte_titre_section">Toutes les idées<div class="nombre_idees">' . (isset($listeIdees) ? count($listeIdees) : 0) . '</div></div>';
                 echo '</div>';
                 break;
         }

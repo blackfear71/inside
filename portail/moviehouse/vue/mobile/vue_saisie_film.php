@@ -1,6 +1,6 @@
 <?php
     echo '<div id="zone_saisie_film" class="fond_saisie">';
-        if ($_SERVER['PHP_SELF'] == '/inside/portail/moviehouse/moviehouse.php')
+        if ($_SERVER['PHP_SELF'] == '/portail/moviehouse/moviehouse.php')
             echo '<form method="post" action="moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&action=doAjouterFilmMobile" class="form_saisie">';
         else
             echo '<form method="post" action="details.php?action=doModifierFilmMobile" class="form_saisie">';

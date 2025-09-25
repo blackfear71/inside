@@ -14,7 +14,7 @@
             echo '</div>';
 
             // Saisie film
-            if ($_SERVER['PHP_SELF'] == '/inside/portail/moviehouse/moviehouse.php')
+            if ($_SERVER['PHP_SELF'] == '/portail/moviehouse/moviehouse.php')
                 echo '<form method="post" action="moviehouse.php?view=' . $_GET['view'] . '&year=' . $_GET['year'] . '&action=doAjouterFilm" class="form_saisie">';
             else
                 echo '<form method="post" action="details.php?action=doModifierFilm" class="form_saisie">';

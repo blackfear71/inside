@@ -405,14 +405,14 @@ function initView(cookieShowChat, cookieWindowChat)
         // Saisie
         html += '<form action="#" method="post" id="form_chat" class="form_saisie_chat">';
             html += '<div class="zone_insert_smiley">';
-                html += '<a id="smiley_1" class="click_smiley"><img src="/inside/includes/icons/common/smileys/1.png" alt="smiley" title=":)" class="insert_smiley_chat" /></a>';
-                html += '<a id="smiley_2" class="click_smiley"><img src="/inside/includes/icons/common/smileys/2.png" alt="smiley" title=";)" class="insert_smiley_chat" /></a>';
-                html += '<a id="smiley_3" class="click_smiley"><img src="/inside/includes/icons/common/smileys/3.png" alt="smiley" title=":(" class="insert_smiley_chat" /></a>';
-                html += '<a id="smiley_4" class="click_smiley"><img src="/inside/includes/icons/common/smileys/4.png" alt="smiley" title=":|" class="insert_smiley_chat" /></a>';
-                html += '<a id="smiley_5" class="click_smiley"><img src="/inside/includes/icons/common/smileys/5.png" alt="smiley" title=":D" class="insert_smiley_chat" /></a>';
-                html += '<a id="smiley_6" class="click_smiley"><img src="/inside/includes/icons/common/smileys/6.png" alt="smiley" title=":O" class="insert_smiley_chat" /></a>';
-                html += '<a id="smiley_7" class="click_smiley"><img src="/inside/includes/icons/common/smileys/7.png" alt="smiley" title=":P" class="insert_smiley_chat" /></a>';
-                html += '<a id="smiley_8" class="click_smiley"><img src="/inside/includes/icons/common/smileys/8.png" alt="smiley" title=":facepalm:" class="insert_smiley_chat" /></a>';
+                html += '<a id="smiley_1" class="click_smiley"><img src="/includes/icons/common/smileys/1.png" alt="smiley" title=":)" class="insert_smiley_chat" /></a>';
+                html += '<a id="smiley_2" class="click_smiley"><img src="/includes/icons/common/smileys/2.png" alt="smiley" title=";)" class="insert_smiley_chat" /></a>';
+                html += '<a id="smiley_3" class="click_smiley"><img src="/includes/icons/common/smileys/3.png" alt="smiley" title=":(" class="insert_smiley_chat" /></a>';
+                html += '<a id="smiley_4" class="click_smiley"><img src="/includes/icons/common/smileys/4.png" alt="smiley" title=":|" class="insert_smiley_chat" /></a>';
+                html += '<a id="smiley_5" class="click_smiley"><img src="/includes/icons/common/smileys/5.png" alt="smiley" title=":D" class="insert_smiley_chat" /></a>';
+                html += '<a id="smiley_6" class="click_smiley"><img src="/includes/icons/common/smileys/6.png" alt="smiley" title=":O" class="insert_smiley_chat" /></a>';
+                html += '<a id="smiley_7" class="click_smiley"><img src="/includes/icons/common/smileys/7.png" alt="smiley" title=":P" class="insert_smiley_chat" /></a>';
+                html += '<a id="smiley_8" class="click_smiley"><img src="/includes/icons/common/smileys/8.png" alt="smiley" title=":facepalm:" class="insert_smiley_chat" /></a>';
             html += '</div>';
 
             html += '<div class="triangle_chat_smileys"></div>';
@@ -420,7 +420,7 @@ function initView(cookieShowChat, cookieWindowChat)
             html += '<input type="hidden" id="identifiant_chat" value="' + currentUser + '" />';
 
             html += '<a id="insert_smiley" class="inserer_smiley">';
-                html += '<img src="/inside/includes/icons/common/smileys.png" alt="smileys" title="Insérer un smiley" class="smileys" />';
+                html += '<img src="/includes/icons/common/smileys.png" alt="smileys" title="Insérer un smiley" class="smileys" />';
             html += '</a>';
 
             html += '<input type="text" id="message_chat" name="message_chat" placeholder="Saisir un message..." autocomplete="off" class="saisie_chat" />';
@@ -479,7 +479,7 @@ function initMessagesChat()
 function lectureInitialeConversation()
 {
     // Gestion de l'affichage (on utilise $.post plutôt que $.get car le GET met en cache le fichier XML)
-    $.post('/inside/includes/datas/conversations/content_chat_' + teamUser + '.xml', function (display)
+    $.post('/includes/datas/conversations/content_chat_' + teamUser + '.xml', function (display)
     {
         // Initialisations
         var previousDate  = '';
@@ -574,7 +574,7 @@ function rafraichirConversation(scrollUpdate)
     var lastTime = $('#conversation_chat .time_chat').last().text();
 
     // Recherche de messages plus récents et affichage
-    $.post('/inside/includes/datas/conversations/content_chat_' + teamUser + '.xml', function (display)
+    $.post('/includes/datas/conversations/content_chat_' + teamUser + '.xml', function (display)
     {
         // Initialisations
         var previousDate = '';
@@ -663,7 +663,7 @@ function afficherAnciensMessages()
     var scrollDown = isScrollbarDown();
 
     // Gestion de l'affichage (on utilise $.post plutôt que $.get car le GET met en cache le fichier XML)
-    $.post('/inside/includes/datas/conversations/content_chat_' + teamUser + '.xml', function (display)
+    $.post('/includes/datas/conversations/content_chat_' + teamUser + '.xml', function (display)
     {
         // Initialisations
         var previousDate     = '';
@@ -819,7 +819,7 @@ function formatDatesChat(dateToFormat)
 function rafraichirUtilisateurs()
 {
     // Lecture des utilisateurs et du statut de connexion
-    $.post('/inside/includes/functions/script_commun.php', { function: 'getPings' }, function (users)
+    $.post('/includes/functions/script_commun.php', { function: 'getPings' }, function (users)
     {
         $('#utilisateurs_chat').html('');
         var offline = false;
@@ -905,7 +905,7 @@ function envoyerMessage()
 
     // Envoi du message si renseignée et non vide
     if (!$.isEmptyObject($.trim(message)) && !$.isEmptyObject(identifiant))
-        $.post('/inside/includes/common/chat/chat.php?action=doAjouterMessage', { 'identifiant': identifiant, 'equipe': teamUser, 'message': message }, afficherConversation);
+        $.post('/includes/common/chat/chat.php?action=doAjouterMessage', { 'identifiant': identifiant, 'equipe': teamUser, 'message': message }, afficherConversation);
     else
     {
         $('#message_chat').val('');
@@ -983,21 +983,21 @@ function changeSmileys(text)
 {
     var emoticons =
     {
-        ':)'         : '<img src="/inside/includes/icons/common/smileys/1.png" alt=":)" class="smiley_chat" />',
-        ':-)'        : '<img src="/inside/includes/icons/common/smileys/1.png" alt=":)" class="smiley_chat" />',
-        ';)'         : '<img src="/inside/includes/icons/common/smileys/2.png" alt=":)" class="smiley_chat" />',
-        ';-)'        : '<img src="/inside/includes/icons/common/smileys/2.png" alt=":)" class="smiley_chat" />',
-        ':('         : '<img src="/inside/includes/icons/common/smileys/3.png" alt=":)" class="smiley_chat" />',
-        ':-('        : '<img src="/inside/includes/icons/common/smileys/3.png" alt=":)" class="smiley_chat" />',
-        ':|'         : '<img src="/inside/includes/icons/common/smileys/4.png" alt=":)" class="smiley_chat" />',
-        ':-|'        : '<img src="/inside/includes/icons/common/smileys/4.png" alt=":)" class="smiley_chat" />',
-        ':D'         : '<img src="/inside/includes/icons/common/smileys/5.png" alt=":)" class="smiley_chat" />',
-        ':-D'        : '<img src="/inside/includes/icons/common/smileys/5.png" alt=":)" class="smiley_chat" />',
-        ':O'         : '<img src="/inside/includes/icons/common/smileys/6.png" alt=":)" class="smiley_chat" />',
-        ':-O'        : '<img src="/inside/includes/icons/common/smileys/6.png" alt=":)" class="smiley_chat" />',
-        ':P'         : '<img src="/inside/includes/icons/common/smileys/7.png" alt=":P" class="smiley_chat" />',
-        ':-P'        : '<img src="/inside/includes/icons/common/smileys/7.png" alt=":P" class="smiley_chat" />',
-        ':facepalm:' : '<img src="/inside/includes/icons/common/smileys/8.png" alt=":facepalm:" class="smiley_chat" />'
+        ':)'         : '<img src="/includes/icons/common/smileys/1.png" alt=":)" class="smiley_chat" />',
+        ':-)'        : '<img src="/includes/icons/common/smileys/1.png" alt=":)" class="smiley_chat" />',
+        ';)'         : '<img src="/includes/icons/common/smileys/2.png" alt=":)" class="smiley_chat" />',
+        ';-)'        : '<img src="/includes/icons/common/smileys/2.png" alt=":)" class="smiley_chat" />',
+        ':('         : '<img src="/includes/icons/common/smileys/3.png" alt=":)" class="smiley_chat" />',
+        ':-('        : '<img src="/includes/icons/common/smileys/3.png" alt=":)" class="smiley_chat" />',
+        ':|'         : '<img src="/includes/icons/common/smileys/4.png" alt=":)" class="smiley_chat" />',
+        ':-|'        : '<img src="/includes/icons/common/smileys/4.png" alt=":)" class="smiley_chat" />',
+        ':D'         : '<img src="/includes/icons/common/smileys/5.png" alt=":)" class="smiley_chat" />',
+        ':-D'        : '<img src="/includes/icons/common/smileys/5.png" alt=":)" class="smiley_chat" />',
+        ':O'         : '<img src="/includes/icons/common/smileys/6.png" alt=":)" class="smiley_chat" />',
+        ':-O'        : '<img src="/includes/icons/common/smileys/6.png" alt=":)" class="smiley_chat" />',
+        ':P'         : '<img src="/includes/icons/common/smileys/7.png" alt=":P" class="smiley_chat" />',
+        ':-P'        : '<img src="/includes/icons/common/smileys/7.png" alt=":P" class="smiley_chat" />',
+        ':facepalm:' : '<img src="/includes/icons/common/smileys/8.png" alt=":facepalm:" class="smiley_chat" />'
     };
 
     var patterns  = [];

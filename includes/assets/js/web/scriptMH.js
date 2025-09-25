@@ -307,7 +307,7 @@ function afficherSaisiePreference(titre, stars, view, year, idFilm)
                 html += '<div class="texte_titre_saisie">Votre préférence pour "' + titre + '"</div>';
 
                 // Bouton fermeture
-                html += '<a id="masquerPreference" class="bouton_fermeture_saisie"><img src="/inside/includes/icons/common/close.png" alt="close" title="Fermer" class="image_fermeture_saisie" /></a>';
+                html += '<a id="masquerPreference" class="bouton_fermeture_saisie"><img src="/includes/icons/common/close.png" alt="close" title="Fermer" class="image_fermeture_saisie" /></a>';
             html += '</div>';
 
             // Etoiles
@@ -316,7 +316,7 @@ function afficherSaisiePreference(titre, stars, view, year, idFilm)
 
                 for (var i = 0; i <= 5; i++)
                 {
-                    html += '<img src="/inside/includes/icons/moviehouse/stars/star' + i + '.png" alt="star' + i + '" class="icone_preference" />';
+                    html += '<img src="/includes/icons/moviehouse/stars/star' + i + '.png" alt="star' + i + '" class="icone_preference" />';
 
                     if (i == stars)
                         html += '<input type="submit" name="preference_' + i + '" value="" class="saisie_preference rounded" />';

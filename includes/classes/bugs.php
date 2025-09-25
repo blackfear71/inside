@@ -89,8 +89,8 @@
             $this->subject     = htmlspecialchars($data->getSubject());
             $this->date        = htmlspecialchars($data->getDate());
             $this->identifiant = htmlspecialchars($data->getIdentifiant());
-            $this->pseudo      = htmlspecialchars($data->getPseudo());
-            $this->avatar      = htmlspecialchars($data->getAvatar());
+            $this->pseudo      = htmlspecialchars($data->getPseudo() ?? '');
+            $this->avatar      = htmlspecialchars($data->getAvatar() ?? '');
             $this->team        = $data->getTeam();
             $this->content     = htmlspecialchars($data->getContent());
             $this->picture     = htmlspecialchars($data->getPicture());

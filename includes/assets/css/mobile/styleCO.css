@@ -174,47 +174,47 @@
 
 .smiley_0
 {
-    background-image: url("/inside/includes/icons/common/smileys/0.png");
+    background-image: url("/includes/icons/common/smileys/0.png");
 }
 
 .smiley_1
 {
-    background-image: url("/inside/includes/icons/common/smileys/1.png");
+    background-image: url("/includes/icons/common/smileys/1.png");
 }
 
 .smiley_2
 {
-    background-image: url("/inside/includes/icons/common/smileys/2.png");
+    background-image: url("/includes/icons/common/smileys/2.png");
 }
 
 .smiley_3
 {
-    background-image: url("/inside/includes/icons/common/smileys/3.png");
+    background-image: url("/includes/icons/common/smileys/3.png");
 }
 
 .smiley_4
 {
-    background-image: url("/inside/includes/icons/common/smileys/4.png");
+    background-image: url("/includes/icons/common/smileys/4.png");
 }
 
 .smiley_5
 {
-    background-image: url("/inside/includes/icons/common/smileys/5.png");
+    background-image: url("/includes/icons/common/smileys/5.png");
 }
 
 .smiley_6
 {
-    background-image: url("/inside/includes/icons/common/smileys/6.png");
+    background-image: url("/includes/icons/common/smileys/6.png");
 }
 
 .smiley_7
 {
-    background-image: url("/inside/includes/icons/common/smileys/7.png");
+    background-image: url("/includes/icons/common/smileys/7.png");
 }
 
 .smiley_8
 {
-    background-image: url("/inside/includes/icons/common/smileys/8.png");
+    background-image: url("/includes/icons/common/smileys/8.png");
 }
 
 /*** Phrases / images cultes ***/
@@ -433,7 +433,7 @@
     width: 6vh;
     height: 6vh;
     border: 0;
-    background-image: url("/inside/includes/icons/common/delete.png");
+    background-image: url("/includes/icons/common/delete.png");
     background-size: 4.5vh 4.5vh;
     background-repeat: no-repeat;
     background-position: center;
@@ -446,7 +446,7 @@
     vertical-align: middle;
     width: 6vh;
     height: 6vh;
-    background-image: url("/inside/includes/icons/common/edit.png");
+    background-image: url("/includes/icons/common/edit.png");
     background-size: 4.5vh 4.5vh;
     background-repeat: no-repeat;
     background-position: center;

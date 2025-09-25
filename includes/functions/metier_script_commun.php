@@ -21,7 +21,7 @@
         $_SESSION['index']['connected'] = false;
 
         // Retour sur index.php
-        header('location: /inside/index.php?action=goConsulter');
+        header('location: /index.php?action=goConsulter');
     }
 
     // METIER : Bascule entre la version web et la version mobile

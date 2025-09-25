@@ -101,14 +101,14 @@ $(function () {
         else
             reference = $(this).attr('id');
 
-        var background = '/inside/includes/images/themes/backgrounds/' + reference + '.png';
-        var header     = '/inside/includes/images/themes/headers/' + reference + '_h.png';
-        var footer     = '/inside/includes/images/themes/footers/' + reference + '_f.png';
+        var background = '/includes/images/themes/backgrounds/' + reference + '.png';
+        var header     = '/includes/images/themes/headers/' + reference + '_h.png';
+        var footer     = '/includes/images/themes/footers/' + reference + '_f.png';
 
         if (withLogo != 'nologo')
-            logo = '/inside/includes/images/themes/logos/' + reference + '_l.png';
+            logo = '/includes/images/themes/logos/' + reference + '_l.png';
         else
-            logo = '/inside/includes/icons/common/inside.png';
+            logo = '/includes/icons/common/inside.png';
 
         changeTheme(background, header, footer, logo);
     });
@@ -462,7 +462,7 @@ function afficherDetailsSucces(id)
                 html += '<div class="titre_succes_zoom">' + success['title'] + '</div>';
 
                 // Logo du succès
-                html += '<img src="/inside/includes/images/profil/success/' + success['reference'] + '.png" alt="' + success['reference'] + '" class="logo_succes_zoom" />';
+                html += '<img src="/includes/images/profil/success/' + success['reference'] + '.png" alt="' + success['reference'] + '" class="logo_succes_zoom" />';
 
                 // Description du succès
                 html += '<div class="description_succes_zoom">' + success['description'] + '</div>';

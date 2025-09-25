@@ -26,10 +26,10 @@
                     // Affichage sur la zone correspondante
                     if ($zoneMission == $zoneInside)
                     {
-                        echo '<form method="post" action="/inside/portail/missions/missions.php?action=doMission" class="' . $classIconeMission . '">';
+                        echo '<form method="post" action="/portail/missions/missions.php?action=doMission" class="' . $classIconeMission . '">';
                             echo '<input type="hidden" name="ref_mission" value="' . $referenceMission . '" />';
                             echo '<input type="hidden" name="key_mission" value="' . $keyMission . '" />';
-                            echo '<input type="image" name="' . $referenceMission . '" src="/inside/includes/images/missions/buttons/' . $iconeMission . '.png" alt="' . $iconeMission . '" />';
+                            echo '<input type="image" name="' . $referenceMission . '" src="/includes/images/missions/buttons/' . $iconeMission . '.png" alt="' . $iconeMission . '" />';
                         echo '</form>';
                     }
                 }

@@ -3,8 +3,8 @@
     if (isset($_SERVER['DOCUMENT_ROOT']) AND !empty($_SERVER['DOCUMENT_ROOT']))
     {
         // Inclusions web
-        require($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/libraries/php/phpmailer/class.phpmailer.php');
-        require($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/libraries/php/phpmailer/class.smtp.php');
+        require($_SERVER['DOCUMENT_ROOT'] . '/includes/libraries/php/phpmailer/class.phpmailer.php');
+        require($_SERVER['DOCUMENT_ROOT'] . '/includes/libraries/php/phpmailer/class.smtp.php');
     }
     else
     {

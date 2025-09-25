@@ -4,7 +4,7 @@
         // Titre et repli
         echo '<div class="zone_titre_chat">';
             echo '<a id="onglet_chat" class="titre_onglet">';
-                echo '<img src="/inside/includes/icons/common/comments.png" alt="comments" title="Inside Room" class="logo_inside_room" />';
+                echo '<img src="/includes/icons/common/comments.png" alt="comments" title="Inside Room" class="logo_inside_room" />';
                 echo 'INSIDE Room';
             echo '</a>';
 
@@ -12,7 +12,7 @@
 
             echo '<a id="zone_hide_chat" class="lien_reduire_chat">';
                 echo '<div class="triangle_reduire_chat"></div>';
-                echo '<img src="/inside/includes/icons/common/open.png" alt="open" id="hide_chat" class="reduire_chat" />';
+                echo '<img src="/includes/icons/common/open.png" alt="open" id="hide_chat" class="reduire_chat" />';
             echo '</a>';
         echo '</div>';
 

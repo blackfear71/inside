@@ -633,7 +633,7 @@
     height: 30px;
     border: 0;
     background-color: transparent;
-    background-image: url("/inside/includes/icons/moviehouse/participate.png");
+    background-image: url("/includes/icons/moviehouse/participate.png");
     background-size: 25px;
     background-repeat: no-repeat;
     background-position: center;
@@ -649,7 +649,7 @@
     height: 30px;
     border: 0;
     background-color: transparent;
-    background-image: url("/inside/includes/icons/moviehouse/participate_grey.png");
+    background-image: url("/includes/icons/moviehouse/participate_grey.png");
     background-size: 25px;
     background-repeat: no-repeat;
     background-position: center;
@@ -665,7 +665,7 @@
     height: 30px;
     border: 0;
     background-color: transparent;
-    background-image: url("/inside/includes/icons/moviehouse/seen.png");
+    background-image: url("/includes/icons/moviehouse/seen.png");
     background-size: 30px;
     background-repeat: no-repeat;
     background-position: center;
@@ -681,7 +681,7 @@
     height: 30px;
     border: 0;
     background-color: transparent;
-    background-image: url("/inside/includes/icons/moviehouse/view_grey.png");
+    background-image: url("/includes/icons/moviehouse/view_grey.png");
     background-size: 30px;
     background-repeat: no-repeat;
     background-position: center;
@@ -999,7 +999,7 @@
     height: 30px;
     border: 0;
     background-color: transparent;
-    background-image: url("/inside/includes/icons/common/delete_grey.png");
+    background-image: url("/includes/icons/common/delete_grey.png");
     background-size: 30px 30px;
     background-repeat: no-repeat;
     background-position: center;
@@ -1340,7 +1340,7 @@
     border: 0;
     border-radius: 50%;
     background-color: #ff1937;
-    background-image: url("/inside/includes/icons/moviehouse/link.png");
+    background-image: url("/includes/icons/moviehouse/link.png");
     background-size: 20px 20px;
     background-repeat: no-repeat;
     background-position: center;
@@ -1384,7 +1384,7 @@
     border: 0;
     border-radius: 2px;
     background-color: #ff1937;
-    background-image: url("/inside/includes/icons/common/edit.png");
+    background-image: url("/includes/icons/common/edit.png");
     background-size: 20px 20px;
     background-repeat: no-repeat;
     background-position: center;
@@ -1403,7 +1403,7 @@
     border: 0;
     border-radius: 2px;
     background-color: #ff1937;
-    background-image: url("/inside/includes/icons/common/delete.png");
+    background-image: url("/includes/icons/common/delete.png");
     background-size: 20px 20px;
     background-repeat: no-repeat;
     background-position: center;
@@ -1421,7 +1421,7 @@
     border: 0;
     border-radius: 2px;
     background-color: #ff1937;
-    background-image: url("/inside/includes/icons/common/validate.png");
+    background-image: url("/includes/icons/common/validate.png");
     background-size: 25px 25px;
     background-repeat: no-repeat;
     background-position: center;
@@ -1440,7 +1440,7 @@
     border: 0;
     border-radius: 2px;
     background-color: #ff1937;
-    background-image: url("/inside/includes/icons/common/cancel.png");
+    background-image: url("/includes/icons/common/cancel.png");
     background-size: 20px 20px;
     background-repeat: no-repeat;
     background-position: center;

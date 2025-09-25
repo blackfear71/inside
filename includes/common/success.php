@@ -48,7 +48,7 @@
                         echo '<div class="titre_succes_zoom">' . $ligneSuccesDebloque->getTitle() . '</div>';
 
                         // Logo du succès
-                        echo '<img src="/inside/includes/images/profil/success/' . $ligneSuccesDebloque->getReference() . '.png" alt="' . $ligneSuccesDebloque->getReference() . '" class="logo_succes_zoom" />';
+                        echo '<img src="/includes/images/profil/success/' . $ligneSuccesDebloque->getReference() . '.png" alt="' . $ligneSuccesDebloque->getReference() . '" class="logo_succes_zoom" />';
 
                         // Description du succès
                         echo '<div class="description_succes_zoom">' . $ligneSuccesDebloque->getDescription() . '</div>';
@@ -64,7 +64,7 @@
                     echo '<a id="closeZoomSuccess" class="bouton_succes_zoom bouton_succes_zoom_margin">Trop bien !</a>';
 
                     // Bouton redirection
-                    echo '<a href="/inside/portail/profil/profil.php?view=success&action=goConsulter" class="bouton_succes_zoom">Voir mes succès</a>';
+                    echo '<a href="/portail/profil/profil.php?view=success&action=goConsulter" class="bouton_succes_zoom">Voir mes succès</a>';
                 echo '</div>';
             echo '</div>';
         echo '</div>';

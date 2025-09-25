@@ -17,7 +17,7 @@
     margin-right: 1vh;
     width: 4vh;
     height: 4vh;
-    background-image: url("/inside/includes/icons/common/open_grey.png");
+    background-image: url("/includes/icons/common/open_grey.png");
     background-size: 3vh 3vh;
     background-repeat: no-repeat;
     background-position: center;
@@ -31,7 +31,7 @@
     margin-left: 1vh;
     width: 4vh;
     height: 4vh;
-    background-image: url("/inside/includes/icons/common/open_grey.png");
+    background-image: url("/includes/icons/common/open_grey.png");
     background-size: 3vh 3vh;
     background-repeat: no-repeat;
     background-position: center;
@@ -138,7 +138,7 @@
     height: 5vh;
     width: 5vh;
     vertical-align: middle;
-    background-image: url("/inside/includes/icons/common/delete_grey.png");
+    background-image: url("/includes/icons/common/delete_grey.png");
     background-size: 4vh 4vh;
     background-repeat: no-repeat;
     background-position: center;
@@ -345,7 +345,7 @@
     height: 8vh;
     width: 8vh;
     vertical-align: middle;
-    background-image: url("/inside/includes/icons/common/delete_grey.png");
+    background-image: url("/includes/icons/common/delete_grey.png");
     background-size: 4vh 4vh;
     background-repeat: no-repeat;
     background-position: center;
@@ -825,7 +825,7 @@
     height: 6vh;
     width: 100%;
     vertical-align: middle;
-    background-image: url("/inside/includes/icons/common/delete_grey.png");
+    background-image: url("/includes/icons/common/delete_grey.png");
     background-size: 4vh 4vh;
     background-repeat: no-repeat;
     background-position: center;
@@ -859,7 +859,7 @@
     margin-right: 1vh;
     width: 3vh;
     height: 3vh;
-    background-image: url("/inside/includes/icons/foodadvisor/location.png");
+    background-image: url("/includes/icons/foodadvisor/location.png");
     background-size: 3vh 3vh;
     background-repeat: no-repeat;
     border: 0;
@@ -880,7 +880,7 @@
 
 .lien_lieu:active .image_lieu
 {
-    background-image: url("/inside/includes/icons/foodadvisor/location_grey.png");
+    background-image: url("/includes/icons/foodadvisor/location_grey.png");
 }
 
 .lien_lieu:active .nom_lieu
@@ -936,7 +936,7 @@
     height: 8vh;
     width: 8vh;
     vertical-align: middle;
-    background-image: url("/inside/includes/icons/foodadvisor/propositions_grey.png");
+    background-image: url("/includes/icons/foodadvisor/propositions_grey.png");
     background-size: 4vh 4vh;
     background-repeat: no-repeat;
     background-position: center;

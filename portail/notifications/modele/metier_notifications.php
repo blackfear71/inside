@@ -142,7 +142,7 @@
                     {
                         $icone  = 'movie_house';
                         $phrase = 'Le film <strong>' . htmlspecialchars($film->getFilm()) . '</strong> vient d\'être ajouté ! Allez vite le voir &nbsp;<img src="../../includes/icons/common/smileys/1.png" alt="smiley_1" class="smiley" />';
-                        $lien   = '/inside/portail/moviehouse/details.php?id_film=' . $film->getId() . '&action=goConsulter';
+                        $lien   = '/portail/moviehouse/details.php?id_film=' . $film->getId() . '&action=goConsulter';
                     }
                     break;
 
@@ -168,7 +168,7 @@
                     {
                         $icone  = 'way_out';
                         $phrase = 'Une sortie cinéma a été programmée <u>aujourd\'hui</u> pour le film <strong>' . htmlspecialchars($film->getFilm()) . '</strong>.';
-                        $lien   = '/inside/portail/moviehouse/details.php?id_film=' . $film->getId() . '&action=goConsulter';
+                        $lien   = '/portail/moviehouse/details.php?id_film=' . $film->getId() . '&action=goConsulter';
                     }
                     break;
 
@@ -181,7 +181,7 @@
                     {
                         $icone  = 'comments';
                         $phrase = 'Des commentaires ont été publiés pour le film <strong>' . htmlspecialchars($film->getFilm()) . '</strong>, n\'oubliez pas de les suivre dans la journée !';
-                        $lien   = '/inside/portail/moviehouse/details.php?id_film=' . $film->getId() . '&action=goConsulter&anchor=comments';
+                        $lien   = '/portail/moviehouse/details.php?id_film=' . $film->getId() . '&action=goConsulter&anchor=comments';
                     }
                     break;
 
@@ -201,7 +201,7 @@
                         else
                             $phrase = 'Un calendrier vient d\'être mis en ligne pour le mois de <strong>' . $mois . ' ' . $annee . '</strong>.';
 
-                        $lien = '/inside/portail/calendars/calendars.php?year=' . $annee . '&action=goConsulter';
+                        $lien = '/portail/calendars/calendars.php?year=' . $annee . '&action=goConsulter';
                     }
                     break;
 
@@ -214,7 +214,7 @@
                     {
                         $icone  = 'calendars';
                         $phrase = 'Une annexe vient d\'être mise en ligne (<strong>' . htmlspecialchars($annexe->getTitle()) . '</strong>).';
-                        $lien   = '/inside/portail/calendars/calendars.php?action=goConsulterAnnexes';
+                        $lien   = '/portail/calendars/calendars.php?action=goConsulterAnnexes';
                     }
                     break;
 
@@ -245,7 +245,7 @@
                     // Formatage de la notification
                     $icone  = 'collector';
                     $phrase = '<strong>' . $speaker . '</strong> en a encore dit une belle ! Merci <strong>' . $author . '</strong> &nbsp;<img src="../../includes/icons/common/smileys/2.png" alt="smiley_2" class="smiley" />';
-                    $lien   = '/inside/portail/collector/collector.php?sort=dateDesc&filter=none&action=goConsulter&page=' . $numeroPage . '&anchor=' . $notification->getContent();
+                    $lien   = '/portail/collector/collector.php?sort=dateDesc&filter=none&action=goConsulter&page=' . $numeroPage . '&anchor=' . $notification->getContent();
                     break;
 
                 case 'culte_image':
@@ -275,7 +275,7 @@
                     // Formatage de la notification
                     $icone  = 'collector';
                     $phrase = 'Regarde ce qu\'a fait <strong>' . $speaker . '</strong> ! Merci <strong>' . $author . '</strong> pour ce moment &nbsp;<img src="../../includes/icons/common/smileys/1.png" alt="smiley_2" class="smiley" />';
-                    $lien   = '/inside/portail/collector/collector.php?sort=dateDesc&filter=none&action=goConsulter&page=' . $numeroPage . '&anchor=' . $collector->getId();
+                    $lien   = '/portail/collector/collector.php?sort=dateDesc&filter=none&action=goConsulter&page=' . $numeroPage . '&anchor=' . $collector->getId();
                     break;
 
                 case 'depense':
@@ -353,7 +353,7 @@
                     // Formatage de la notification
                     $icone  = 'ideas';
                     $phrase = 'Une nouvelle idée <strong>' . htmlspecialchars($idee->getSubject()) . '</strong> vient tout juste d\'être publiée par <strong>' . $auteur . '</strong> !';
-                    $lien   = '/inside/portail/ideas/ideas.php?view=' . $view . '&page=' . $numeroPage . '&action=goConsulter&anchor=' . $idee->getId();
+                    $lien   = '/portail/ideas/ideas.php?view=' . $view . '&page=' . $numeroPage . '&action=goConsulter&anchor=' . $idee->getId();
                     break;
 
                 case 'start_mission':
@@ -366,13 +366,13 @@
 
                     // Premier jour, avant l'heure
                     if (date('Ymd') == $mission->getDate_deb() AND date('His') < $mission->getHeure())
-                        $lien = '/inside/portail/missions/missions.php?action=goConsulter';
+                        $lien = '/portail/missions/missions.php?action=goConsulter';
                     // Premier jour, après l'heure
                     elseif (date('Ymd') == $mission->getDate_deb() AND date('His') >= $mission->getHeure())
-                        $lien = '/inside/portail/missions/details.php?id_mission=' . $mission->getId() . '&action=goConsulter';
+                        $lien = '/portail/missions/details.php?id_mission=' . $mission->getId() . '&action=goConsulter';
                     // Autre jour
                     else
-                        $lien = '/inside/portail/missions/details.php?id_mission=' . $mission->getId() . '&action=goConsulter';
+                        $lien = '/portail/missions/details.php?id_mission=' . $mission->getId() . '&action=goConsulter';
                     break;
 
                 case 'end_mission':
@@ -382,7 +382,7 @@
                     // Formatage de la notification
                     $icone  = 'missions';
                     $phrase = 'La mission <strong>' . htmlspecialchars($mission->getMission()) . '</strong> se termine aujourd\'hui ! Trouvez vite les derniers objectifs !';
-                    $lien   = '/inside/portail/missions/details.php?id_mission=' . $mission->getId() . '&action=goConsulter';
+                    $lien   = '/portail/missions/details.php?id_mission=' . $mission->getId() . '&action=goConsulter';
                     break;
 
                 case 'one_mission':
@@ -395,10 +395,10 @@
 
                     // Mission de 1 jour (avant l'heure)
                     if (date('Ymd') <= $mission->getDate_deb() AND date('His') < $mission->getHeure())
-                        $lien = '/inside/portail/missions/missions.php?action=goConsulter';
+                        $lien = '/portail/missions/missions.php?action=goConsulter';
                     // Mission de 1 jour (après l'heure)
                     else
-                        $lien = '/inside/portail/missions/details.php?id_mission=' . $mission->getId() . '&action=goConsulter';
+                        $lien = '/portail/missions/details.php?id_mission=' . $mission->getId() . '&action=goConsulter';
                     break;
 
                 case 'recipe':
@@ -408,7 +408,7 @@
                     // Formatage de la notification
                     $icone  = 'cooking_box';
                     $phrase = 'Une <strong>nouvelle recette</strong> vient d\'être ajoutée, allez vite la consulter !';
-                    $lien   = '/inside/portail/cookingbox/cookingbox.php?year=' . $recette->getYear() . '&action=goConsulter&anchor=' . $recette->getId();
+                    $lien   = '/portail/cookingbox/cookingbox.php?year=' . $recette->getYear() . '&action=goConsulter&anchor=' . $recette->getId();
                     break;
 
                 case 'parcours':
@@ -418,7 +418,7 @@
                     // Formatage de la notification
                     $icone  = 'petits_pedestres';
                     $phrase = 'Un <strong>nouveau parcours</strong> vient d\'être ajouté, à vos baskets !';
-                    $lien   = '/inside/portail/petitspedestres/details.php?id_parcours=' . $parcours->getId() . '&action=goConsulter';
+                    $lien   = '/portail/petitspedestres/details.php?id_parcours=' . $parcours->getId() . '&action=goConsulter';
                     break;
 
                 case 'changelog':
@@ -428,7 +428,7 @@
                     // Formatage de la notification
                     $icone  = 'inside';
                     $phrase = 'Un <strong>nouveau journal</strong> vient d\'être ajouté pour la <strong>semaine ' . formatWeekForDisplay($semaine) . '</strong> (' . $annee . '), allez vite voir comment le site a évolué !';
-                    $lien   = '/inside/portail/changelog/changelog.php?year=' . $annee . '&action=goConsulter&anchor=' . $semaine;
+                    $lien   = '/portail/changelog/changelog.php?year=' . $annee . '&action=goConsulter&anchor=' . $semaine;
                     break;
 
                 default:

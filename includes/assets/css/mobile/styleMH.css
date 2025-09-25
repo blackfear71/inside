@@ -424,7 +424,7 @@
     height: 6vh;
     border: 0;
     background-color: transparent;
-    background-image: url("/inside/includes/icons/moviehouse/participate.png");
+    background-image: url("/includes/icons/moviehouse/participate.png");
     background-size: 5vh;
     background-repeat: no-repeat;
     background-position: center;
@@ -439,7 +439,7 @@
     height: 6vh;
     border: 0;
     background-color: transparent;
-    background-image: url("/inside/includes/icons/moviehouse/participate_grey.png");
+    background-image: url("/includes/icons/moviehouse/participate_grey.png");
     background-size: 5vh;
     background-repeat: no-repeat;
     background-position: center;
@@ -454,7 +454,7 @@
     height: 6vh;
     border: 0;
     background-color: transparent;
-    background-image: url("/inside/includes/icons/moviehouse/seen.png");
+    background-image: url("/includes/icons/moviehouse/seen.png");
     background-size: 5vh;
     background-repeat: no-repeat;
     background-position: center;
@@ -469,7 +469,7 @@
     height: 6vh;
     border: 0;
     background-color: transparent;
-    background-image: url("/inside/includes/icons/moviehouse/view_grey.png");
+    background-image: url("/includes/icons/moviehouse/view_grey.png");
     background-size: 5vh;
     background-repeat: no-repeat;
     background-position: center;
@@ -518,7 +518,7 @@
     height: 5vh;
     border: 0;
     background-color: transparent;
-    background-image: url("/inside/includes/icons/common/delete_grey.png");
+    background-image: url("/includes/icons/common/delete_grey.png");
     background-size: 5vh 5vh;
     background-repeat: no-repeat;
     background-position: center;
@@ -838,7 +838,7 @@
     border: 0;
     border-radius: 0.5vh;
     background-color: transparent;
-    background-image: url("/inside/includes/icons/common/edit_grey.png");
+    background-image: url("/includes/icons/common/edit_grey.png");
     background-size: 4vh 4vh;
     background-repeat: no-repeat;
     background-position: center;
@@ -852,7 +852,7 @@
     border: 0;
     border-radius: 0.5vh;
     background-color: transparent;
-    background-image: url("/inside/includes/icons/common/delete_grey.png");
+    background-image: url("/includes/icons/common/delete_grey.png");
     background-size: 4vh 4vh;
     background-repeat: no-repeat;
     background-position: center;
@@ -866,7 +866,7 @@
     border: 0;
     border-radius: 0.5vh;
     background-color: transparent;
-    background-image: url("/inside/includes/icons/common/validate_grey.png");
+    background-image: url("/includes/icons/common/validate_grey.png");
     background-size: 5vh 5vh;
     background-repeat: no-repeat;
     background-position: center;
@@ -880,7 +880,7 @@
     border: 0;
     border-radius: 0.5vh;
     background-color: transparent;
-    background-image: url("/inside/includes/icons/common/cancel_grey.png");
+    background-image: url("/includes/icons/common/cancel_grey.png");
     background-size: 4vh 4vh;
     background-repeat: no-repeat;
     background-position: center;
@@ -911,7 +911,7 @@
     border: 0;
     border-radius: 50%;
     background-color: #ff1937;
-    background-image: url("/inside/includes/icons/moviehouse/link.png");
+    background-image: url("/includes/icons/moviehouse/link.png");
     background-size: 2.5vh 2.5vh;
     background-repeat: no-repeat;
     background-position: center;

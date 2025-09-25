@@ -16,6 +16,6 @@ $(function ()
     {
         var idFilm = $(this).attr('id').replace('lien_details_', '');
 
-        document.location.href = '/inside/portail/moviehouse/details.php?id_film=' + idFilm + '&action=goConsulter';
+        document.location.href = '/portail/moviehouse/details.php?id_film=' + idFilm + '&action=goConsulter';
     });
 });

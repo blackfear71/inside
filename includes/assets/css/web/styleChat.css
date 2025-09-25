@@ -137,7 +137,7 @@
     height: 40px;
     width: 60px;
     cursor: pointer;
-    background-image: url("/inside/includes/icons/common/send_red.png");
+    background-image: url("/includes/icons/common/send_red.png");
     background-size: 30px;
     background-repeat: no-repeat;
     background-position: center;
@@ -148,7 +148,7 @@
     background-color: #ff1937;
     font-family: inside_font_regular, Verdana, sans-serif;
     color: white;
-    background-image: url("/inside/includes/icons/common/send.png");
+    background-image: url("/includes/icons/common/send.png");
     background-size: 30px;
     background-repeat: no-repeat;
     background-position: center;

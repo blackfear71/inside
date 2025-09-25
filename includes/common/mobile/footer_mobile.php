@@ -32,24 +32,24 @@
             }
 
             // Version et lien Journal des modifications
-            echo '<a href="/inside/portail/changelog/changelog.php?year=' . date('Y') . '&action=goConsulter" title="Journal des modifications" class="version">v' . $version . '</a>';
+            echo '<a href="/portail/changelog/changelog.php?year=' . date('Y') . '&action=goConsulter" title="Journal des modifications" class="version">v' . $version . '</a>';
 
             // Lien #TheBox
-            if ($path == '/inside/portail/ideas/ideas.php')
-                echo '<a href="/inside/portail/ideas/ideas.php?view=' . $viewTheBox . '&action=goConsulter&page=1" title="&#35;TheBox" class="link_footer_active">';
+            if ($path == '/portail/ideas/ideas.php')
+                echo '<a href="/portail/ideas/ideas.php?view=' . $viewTheBox . '&action=goConsulter&page=1" title="&#35;TheBox" class="link_footer_active">';
             else
-                echo '<a href="/inside/portail/ideas/ideas.php?view=' . $viewTheBox . '&action=goConsulter&page=1" title="&#35;TheBox" class="link_footer">';
+                echo '<a href="/portail/ideas/ideas.php?view=' . $viewTheBox . '&action=goConsulter&page=1" title="&#35;TheBox" class="link_footer">';
                 // Logo
-                echo '<img src="/inside/includes/icons/common/ideas.png" alt="ideas" title="&#35;TheBox" class="icone_footer" />';
+                echo '<img src="/includes/icons/common/ideas.png" alt="ideas" title="&#35;TheBox" class="icone_footer" />';
             echo '</a>';
 
             // Lien Bugs
-            if ($path == '/inside/portail/bugs/bugs.php')
-                echo '<a href="/inside/portail/bugs/bugs.php?view=unresolved&action=goConsulter" title="Signaler un bug" class="link_footer_active">';
+            if ($path == '/portail/bugs/bugs.php')
+                echo '<a href="/portail/bugs/bugs.php?view=unresolved&action=goConsulter" title="Signaler un bug" class="link_footer_active">';
             else
-                echo '<a href="/inside/portail/bugs/bugs.php?view=unresolved&action=goConsulter" title="Signaler un bug" class="link_footer">';
+                echo '<a href="/portail/bugs/bugs.php?view=unresolved&action=goConsulter" title="Signaler un bug" class="link_footer">';
                 // Logo
-                echo '<img src="/inside/includes/icons/common/alert.png" alt="alert" title="Signaler un bug" class="icone_footer" />';
+                echo '<img src="/includes/icons/common/alert.png" alt="alert" title="Signaler un bug" class="icone_footer" />';
 
                 // Compteur
                 echo '<div class="zone_compteur_footer"></div>';
@@ -70,8 +70,8 @@
         // Affichage switch version sur mobile
         if ($plateforme == 'mobile')
         {
-            echo '<a href="/inside/includes/functions/script_commun.php?function=switchMobile" class="link_footer" title="Basculer vers la version classique">';
-                echo '<img src="/inside/includes/icons/common/classic.png" alt="classic" title="Basculer vers la version classique" class="icone_footer" />';
+            echo '<a href="/includes/functions/script_commun.php?function=switchMobile" class="link_footer" title="Basculer vers la version classique">';
+                echo '<img src="/includes/icons/common/classic.png" alt="classic" title="Basculer vers la version classique" class="icone_footer" />';
             echo '</a>';
         }
 
@@ -84,7 +84,7 @@
         // Boutons missions
         $zoneInside = 'footer';
         
-        include($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/common/missions.php');
+        include($_SERVER['DOCUMENT_ROOT'] . '/includes/common/missions.php');
 
         // Chargement des données du thème pour le script
         if (isset($_SESSION['user']['theme']) AND !empty($_SESSION['user']['theme']))

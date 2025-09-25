@@ -502,7 +502,7 @@ function deleteCookie(cookieName)
 // Exécute le script php de mise à jour du ping
 function updatePing()
 {
-    $.post('/inside/includes/functions/script_commun.php', { function: 'updatePing' }, function (data)
+    $.post('/includes/functions/script_commun.php', { function: 'updatePing' }, function (data)
     {
         // Récupération des données
         var userConnected = JSON.parse(data);
@@ -516,7 +516,7 @@ function updatePing()
 // Exécute le script php de mise à jour du compteur de notifications
 function updateNotifications()
 {
-    $.get('/inside/includes/functions/script_commun.php', { function: 'countNotifications' }, function (data)
+    $.get('/includes/functions/script_commun.php', { function: 'countNotifications' }, function (data)
     {
         var identifiant             = data.identifiant;
         var nombreNotificationsJour = data.nombreNotificationsJour;
@@ -530,11 +530,11 @@ function updateNotifications()
             // La première fois on génère la zone
             if (!$('.link_notifications').length)
             {
-                html += '<a href="/inside/portail/notifications/notifications.php?view=all&action=goConsulter&page=1" class="link_notifications">';
+                html += '<a href="/portail/notifications/notifications.php?view=all&action=goConsulter&page=1" class="link_notifications">';
                     if (nombreNotificationsJour > 0)
-                        html += '<img src="/inside/includes/icons/common/notifications.png" alt="notifications" class="icon_notifications" />';
+                        html += '<img src="/includes/icons/common/notifications.png" alt="notifications" class="icon_notifications" />';
                     else
-                        html += '<img src="/inside/includes/icons/common/notifications_blue.png" alt="notifications" class="icon_notifications" />';
+                        html += '<img src="/includes/icons/common/notifications_blue.png" alt="notifications" class="icon_notifications" />';
 
                     html += '<div class="number_notifications"></div>';
                 html += '</a>';
@@ -545,8 +545,8 @@ function updateNotifications()
             // On met à jour le contenu
             if (nombreNotificationsJour > 0)
             {
-                $('.link_notifications').attr('href', '/inside/portail/notifications/notifications.php?view=' + view + '&action=goConsulter' + page)
-                $('.icon_notifications').attr('src', '/inside/includes/icons/common/notifications_blue.png');
+                $('.link_notifications').attr('href', '/portail/notifications/notifications.php?view=' + view + '&action=goConsulter' + page)
+                $('.icon_notifications').attr('src', '/includes/icons/common/notifications_blue.png');
 
                 if (nombreNotificationsJour <= 9)
                 {
@@ -561,8 +561,8 @@ function updateNotifications()
             }
             else
             {
-                $('.link_notifications').attr('href', '/inside/portail/notifications/notifications.php?view=' + view + '&action=goConsulter' + page)
-                $('.icon_notifications').attr('src', '/inside/includes/icons/common/notifications.png');
+                $('.link_notifications').attr('href', '/portail/notifications/notifications.php?view=' + view + '&action=goConsulter' + page)
+                $('.icon_notifications').attr('src', '/includes/icons/common/notifications.png');
                 $('.number_notifications').html('0');
                 $('.number_notifications').css('color', '#262626');
             }
@@ -575,7 +575,7 @@ function updateNotifications()
 // Exécute le script php de mise à jour du compteur de bugs / évolutions
 function updateBugs()
 {
-    $.get('/inside/includes/functions/script_commun.php', { function: 'countBugs' }, function (data)
+    $.get('/includes/functions/script_commun.php', { function: 'countBugs' }, function (data)
     {
         var identifiant = data.identifiant;
         var nombreBugs  = data.nombreBugs;
@@ -730,14 +730,14 @@ function confirmAction(form, message)
 
             // Titre
             html += '<div class="zone_titre_alerte">';
-                html += '<img src="/inside/includes/icons/common/inside_grey.png" alt="inside_grey" class="image_alerte" />';
+                html += '<img src="/includes/icons/common/inside_grey.png" alt="inside_grey" class="image_alerte" />';
                 html += '<div class="titre_alerte">Inside - Confirmation</div>';
             html += '</div>';
 
             // Affichage du message
             html += '<div class="zone_alertes">';
                 html += '<div class="zone_texte_alerte">';
-                    html += '<img src="/inside/includes/icons/common/question_grey.png" alt="question_grey" title="Confirmer ?" class="logo_alerte" />';
+                    html += '<img src="/includes/icons/common/question_grey.png" alt="question_grey" title="Confirmer ?" class="logo_alerte" />';
 
                     html += '<div class="texte_alerte">';
                         html += message;
@@ -961,7 +961,7 @@ function afficherMasquerSection(lien, zone, forcage)
 // Affiche le détail des notifications
 function afficherDetailsNotifications()
 {
-    $.get('/inside/includes/functions/script_commun.php', { function: 'getDetailsNotifications' }, function (data)
+    $.get('/includes/functions/script_commun.php', { function: 'getDetailsNotifications' }, function (data)
     {
         var identifiant                = data.identifiant;
         var nombreNotificationsJour    = data.nombreNotificationsJour;
@@ -1138,7 +1138,7 @@ function formatAvatar(avatar, pseudo, niveau, alt)
 
         case 0:
         default:
-            level = '/inside';
+            level = '';
             break;
     }
 

@@ -101,7 +101,7 @@
             $this->description   = htmlspecialchars($data->getDescription());
             $this->limit_success = htmlspecialchars($data->getLimit_success());
             $this->explanation   = htmlspecialchars($data->getExplanation());
-            $this->value_user    = htmlspecialchars($data->getValue_user());
+            $this->value_user    = htmlspecialchars($data->getValue_user() ?? 0);
             $this->classement    = Classement::secureData($data->getClassement());
         }
 

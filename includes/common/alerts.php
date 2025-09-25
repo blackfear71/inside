@@ -9,7 +9,7 @@
             echo '<div class="zone_affichage_alerte" id="alerte">';
                 // Titre
                 echo '<div class="zone_titre_alerte">';
-                    echo '<img src="/inside/includes/icons/common/inside_grey.png" alt="inside_grey" class="image_alerte" />';
+                    echo '<img src="/includes/icons/common/inside_grey.png" alt="inside_grey" class="image_alerte" />';
                     echo '<div class="titre_alerte">Inside - Alerte</div>';
                 echo '</div>';
 
@@ -22,15 +22,15 @@
                             switch ($message['logo'])
                             {
                                 case 'erreur':
-                                    echo '<img src="/inside/includes/icons/common/alert_grey.png" alt="alert_grey" title="Alerte" class="logo_alerte" />';
+                                    echo '<img src="/includes/icons/common/alert_grey.png" alt="alert_grey" title="Alerte" class="logo_alerte" />';
                                     break;
 
                                 case 'info':
-                                    echo '<img src="/inside/includes/icons/common/information_grey.png" alt="information_grey" title="Information" class="logo_alerte" />';
+                                    echo '<img src="/includes/icons/common/information_grey.png" alt="information_grey" title="Information" class="logo_alerte" />';
                                     break;
 
                                 case 'question':
-                                    echo '<img src="/inside/includes/icons/common/question_grey.png" alt="question_grey" title="Inconnu" class="logo_alerte" />';
+                                    echo '<img src="/includes/icons/common/question_grey.png" alt="question_grey" title="Inconnu" class="logo_alerte" />';
                                     break;
 
                                 default:

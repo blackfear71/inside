@@ -89,21 +89,21 @@
         );
 
         $out = array(
-            '<img src="/inside/includes/icons/common/smileys/1.png" alt=":)" class="smiley" />',
-            '<img src="/inside/includes/icons/common/smileys/1.png" alt=":-)" class="smiley" />',
-            '<img src="/inside/includes/icons/common/smileys/2.png" alt=";)" class="smiley" />',
-            '<img src="/inside/includes/icons/common/smileys/2.png" alt=";-)" class="smiley" />',
-            '<img src="/inside/includes/icons/common/smileys/3.png" alt=":(" class="smiley" />',
-            '<img src="/inside/includes/icons/common/smileys/3.png" alt=":-(" class="smiley" />',
-            '<img src="/inside/includes/icons/common/smileys/4.png" alt=":|" class="smiley" />',
-            '<img src="/inside/includes/icons/common/smileys/4.png" alt=":-|" class="smiley" />',
-            '<img src="/inside/includes/icons/common/smileys/5.png" alt=":D" class="smiley" />',
-            '<img src="/inside/includes/icons/common/smileys/5.png" alt=":-D" class="smiley" />',
-            '<img src="/inside/includes/icons/common/smileys/6.png" alt=":O" class="smiley" />',
-            '<img src="/inside/includes/icons/common/smileys/6.png" alt=":-O" class="smiley" />',
-            '<img src="/inside/includes/icons/common/smileys/7.png" alt=":P" class="smiley" />',
-            '<img src="/inside/includes/icons/common/smileys/7.png" alt=":-P" class="smiley" />',
-            '<img src="/inside/includes/icons/common/smileys/8.png" alt=":facepalm:" class="smiley" />'
+            '<img src="/includes/icons/common/smileys/1.png" alt=":)" class="smiley" />',
+            '<img src="/includes/icons/common/smileys/1.png" alt=":-)" class="smiley" />',
+            '<img src="/includes/icons/common/smileys/2.png" alt=";)" class="smiley" />',
+            '<img src="/includes/icons/common/smileys/2.png" alt=";-)" class="smiley" />',
+            '<img src="/includes/icons/common/smileys/3.png" alt=":(" class="smiley" />',
+            '<img src="/includes/icons/common/smileys/3.png" alt=":-(" class="smiley" />',
+            '<img src="/includes/icons/common/smileys/4.png" alt=":|" class="smiley" />',
+            '<img src="/includes/icons/common/smileys/4.png" alt=":-|" class="smiley" />',
+            '<img src="/includes/icons/common/smileys/5.png" alt=":D" class="smiley" />',
+            '<img src="/includes/icons/common/smileys/5.png" alt=":-D" class="smiley" />',
+            '<img src="/includes/icons/common/smileys/6.png" alt=":O" class="smiley" />',
+            '<img src="/includes/icons/common/smileys/6.png" alt=":-O" class="smiley" />',
+            '<img src="/includes/icons/common/smileys/7.png" alt=":P" class="smiley" />',
+            '<img src="/includes/icons/common/smileys/7.png" alt=":-P" class="smiley" />',
+            '<img src="/includes/icons/common/smileys/8.png" alt=":facepalm:" class="smiley" />'
         );
 
         // Récupération de l'image à partir du texte

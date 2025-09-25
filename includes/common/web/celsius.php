@@ -22,7 +22,7 @@
                 echo '</div>';
 
                 // Icône
-                echo '<img src="/inside/includes/icons/common/celsius.png" alt="celsius" title="Celsius" class="celsius" />';
+                echo '<img src="/includes/icons/common/celsius.png" alt="celsius" title="Celsius" class="celsius" />';
             echo '</div>';
         }
     }

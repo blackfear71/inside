@@ -763,7 +763,7 @@
     border: 0;
     border-radius: 2px;
     background-color: #ff1937;
-    background-image: url("/inside/includes/icons/common/edit.png");
+    background-image: url("/includes/icons/common/edit.png");
     background-size: 20px 20px;
     background-repeat: no-repeat;
     background-position: center;
@@ -782,7 +782,7 @@
     border: 0;
     border-radius: 2px;
     background-color: #ff1937;
-    background-image: url("/inside/includes/icons/common/delete.png");
+    background-image: url("/includes/icons/common/delete.png");
     background-size: 20px 20px;
     background-repeat: no-repeat;
     background-position: center;

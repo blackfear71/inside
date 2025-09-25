@@ -912,22 +912,22 @@ function afficherCheckboxTransports(idRestaurant, zone)
     html += '<div id="' + idZone + '" class="zone_transports">';
         html += '<div id="bouton_' + idCheckF + '" class="switch_transport">';
             html += '<input id="' + idCheckF + '" type="checkbox" value="F" name="checkbox_feet[' + idRestaurant + ']" />';
-            html += '<label for="' + idCheckF + '" class="label_switch_transport cocherTransport"><img src="/inside/includes/icons/foodadvisor/feet.png" alt="feet" title="A pieds" class="icone_checkbox_transport" /></label>';
+            html += '<label for="' + idCheckF + '" class="label_switch_transport cocherTransport"><img src="/includes/icons/foodadvisor/feet.png" alt="feet" title="A pieds" class="icone_checkbox_transport" /></label>';
         html += '</div>';
 
         html += '<div id="bouton_' + idCheckB + '" class="switch_transport">';
             html += '<input id="' + idCheckB + '" type="checkbox" value="B" name="checkbox_bike[' + idRestaurant + ']" />';
-            html += '<label for="' + idCheckB + '" class="label_switch_transport cocherTransport"><img src="/inside/includes/icons/foodadvisor/bike.png" alt="bike" title="A vélo" class="icone_checkbox_transport" /></label>';
+            html += '<label for="' + idCheckB + '" class="label_switch_transport cocherTransport"><img src="/includes/icons/foodadvisor/bike.png" alt="bike" title="A vélo" class="icone_checkbox_transport" /></label>';
         html += '</div>';
 
         html += '<div id="bouton_' + idCheckT + '" class="switch_transport">';
             html += '<input id="' + idCheckT + '" type="checkbox" value="T" name="checkbox_tram[' + idRestaurant + ']" />';
-            html += '<label for="' + idCheckT + '" class="label_switch_transport cocherTransport"><img src="/inside/includes/icons/foodadvisor/tram.png" alt="tram" title="En tram" class="icone_checkbox_transport" /></label>';
+            html += '<label for="' + idCheckT + '" class="label_switch_transport cocherTransport"><img src="/includes/icons/foodadvisor/tram.png" alt="tram" title="En tram" class="icone_checkbox_transport" /></label>';
         html += '</div>';
 
         html += '<div id="bouton_' + idCheckC + '" class="switch_transport">';
             html += '<input id="' + idCheckC + '" type="checkbox" value="C" name="checkbox_car[' + idRestaurant + ']" />';
-            html += '<label for="' + idCheckC + '" class="label_switch_transport cocherTransport"><img src="/inside/includes/icons/foodadvisor/car.png" alt="car" title="En voiture" class="icone_checkbox_transport" /></label>';
+            html += '<label for="' + idCheckC + '" class="label_switch_transport cocherTransport"><img src="/includes/icons/foodadvisor/car.png" alt="car" title="En voiture" class="icone_checkbox_transport" /></label>';
         html += '</div>';
     html += '</div>';
 

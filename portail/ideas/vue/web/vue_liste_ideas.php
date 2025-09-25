@@ -7,7 +7,7 @@
                 echo '<div class="titre_section">';
                     echo '<img src="../../includes/icons/ideas/ideas_grey.png" alt="ideas_grey" class="logo_titre_section" />';
                     echo '<div class="texte_titre_section_fold">Idées proposées</div>';
-                    echo '<div class="nombre_idees">' . count($listeIdees) . '</div>';
+                    echo '<div class="nombre_idees">' . (isset($listeIdees) ? count($listeIdees) : 0) . '</div>';
                 echo '</div>';
                 break;
 
@@ -15,7 +15,7 @@
                 echo '<div class="titre_section">';
                     echo '<img src="../../includes/icons/ideas/ideas_grey.png" alt="ideas_grey" class="logo_titre_section" />';
                     echo '<div class="texte_titre_section_fold">Idées que j\'ai en charge</div>';
-                    echo '<div class="nombre_idees">' . count($listeIdees) . '</div>';
+                    echo '<div class="nombre_idees">' . (isset($listeIdees) ? count($listeIdees) : 0) . '</div>';
                 echo '</div>';
                 break;
 
@@ -23,7 +23,7 @@
                 echo '<div class="titre_section">';
                     echo '<img src="../../includes/icons/ideas/ideas_grey.png" alt="ideas_grey" class="logo_titre_section" />';
                     echo '<div class="texte_titre_section_fold">Idées terminées ou rejetées</div>';
-                    echo '<div class="nombre_idees">' . count($listeIdees) . '</div>';
+                    echo '<div class="nombre_idees">' . (isset($listeIdees) ? count($listeIdees) : 0) . '</div>';
                 echo '</div>';
                 break;
 
@@ -32,7 +32,7 @@
                 echo '<div class="titre_section">';
                     echo '<img src="../../includes/icons/ideas/ideas_grey.png" alt="ideas_grey" class="logo_titre_section" />';
                     echo '<div class="texte_titre_section_fold">Toutes les idées</div>';
-                    echo '<div class="nombre_idees">' . count($listeIdees) . '</div>';
+                    echo '<div class="nombre_idees">' . (isset($listeIdees) ? count($listeIdees) : 0) . '</div>';
                 echo '</div>';
                 break;
         }

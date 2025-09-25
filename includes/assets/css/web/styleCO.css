@@ -276,7 +276,7 @@
     vertical-align: middle;
     width: 30px;
     height: 30px;
-    background-image: url("/inside/includes/icons/common/edit.png");
+    background-image: url("/includes/icons/common/edit.png");
     background-size: 25px 25px;
     background-repeat: no-repeat;
     background-position: center;
@@ -296,7 +296,7 @@
     width: 30px;
     height: 30px;
     border: 0;
-    background-image: url("/inside/includes/icons/common/delete.png");
+    background-image: url("/includes/icons/common/delete.png");
     background-size: 25px 25px;
     background-repeat: no-repeat;
     background-position: center;
@@ -326,7 +326,7 @@
     width: 30px;
     height: 30px;
     border: 0;
-    background-image: url("/inside/includes/icons/common/validate.png");
+    background-image: url("/includes/icons/common/validate.png");
     background-size: 25px 25px;
     background-repeat: no-repeat;
     background-position: center;
@@ -342,7 +342,7 @@
     width: 30px;
     height: 30px;
     border: 0;
-    background-image: url("/inside/includes/icons/common/cancel.png");
+    background-image: url("/includes/icons/common/cancel.png");
     background-size: 20px 20px;
     background-repeat: no-repeat;
     background-position: center;
@@ -574,47 +574,47 @@
 
 .smiley_0
 {
-    background-image: url("/inside/includes/icons/common/smileys/0.png");
+    background-image: url("/includes/icons/common/smileys/0.png");
 }
 
 .smiley_1
 {
-    background-image: url("/inside/includes/icons/common/smileys/1.png");
+    background-image: url("/includes/icons/common/smileys/1.png");
 }
 
 .smiley_2
 {
-    background-image: url("/inside/includes/icons/common/smileys/2.png");
+    background-image: url("/includes/icons/common/smileys/2.png");
 }
 
 .smiley_3
 {
-    background-image: url("/inside/includes/icons/common/smileys/3.png");
+    background-image: url("/includes/icons/common/smileys/3.png");
 }
 
 .smiley_4
 {
-    background-image: url("/inside/includes/icons/common/smileys/4.png");
+    background-image: url("/includes/icons/common/smileys/4.png");
 }
 
 .smiley_5
 {
-    background-image: url("/inside/includes/icons/common/smileys/5.png");
+    background-image: url("/includes/icons/common/smileys/5.png");
 }
 
 .smiley_6
 {
-    background-image: url("/inside/includes/icons/common/smileys/6.png");
+    background-image: url("/includes/icons/common/smileys/6.png");
 }
 
 .smiley_7
 {
-    background-image: url("/inside/includes/icons/common/smileys/7.png");
+    background-image: url("/includes/icons/common/smileys/7.png");
 }
 
 .smiley_8
 {
-    background-image: url("/inside/includes/icons/common/smileys/8.png");
+    background-image: url("/includes/icons/common/smileys/8.png");
 }
 
 .smiley_votes_1, .smiley_votes_2, .smiley_votes_3, .smiley_votes_4, .smiley_votes_5, .smiley_votes_6, .smiley_votes_7, .smiley_votes_8

@@ -181,7 +181,7 @@
     margin-right: -30px;
     width: 30px;
     height: 30px;
-    background-image: url("/inside/includes/icons/common/edit.png");
+    background-image: url("/includes/icons/common/edit.png");
     background-size: 25px 25px;
     background-repeat: no-repeat;
     background-position: center;
@@ -391,7 +391,7 @@
     width: 30px;
     height: 30px;
     border: 0;
-    background-image: url("/inside/includes/icons/common/validate.png");
+    background-image: url("/includes/icons/common/validate.png");
     background-size: 25px 25px;
     background-repeat: no-repeat;
     background-position: center;
@@ -407,7 +407,7 @@
     width: 30px;
     height: 30px;
     border: 0;
-    background-image: url("/inside/includes/icons/common/cancel.png");
+    background-image: url("/includes/icons/common/cancel.png");
     background-size: 20px 20px;
     background-repeat: no-repeat;
     background-position: center;

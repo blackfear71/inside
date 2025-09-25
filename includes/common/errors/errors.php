@@ -7,8 +7,8 @@
     ******************************/
 
     // Fonctions communes
-    include_once($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/functions/metier_commun.php');
-    include_once($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/functions/physique_commun.php');
+    include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/functions/metier_commun.php');
+    include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/functions/physique_commun.php');
 
     // Modèle de données
     include_once('modele/metier_errors.php');
@@ -21,7 +21,7 @@
             $plateforme = getPlateforme();
 
             // Récupération de la date de dernière modification pour mise à jour automatique du cache du navigateur
-            $dateModificationCssErrors = filemtime($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/assets/css/' . $plateforme . '/styleErrors.css');
+            $dateModificationCssErrors = filemtime($_SERVER['DOCUMENT_ROOT'] . '/includes/assets/css/' . $plateforme . '/styleErrors.css');
 
             // Récupération de l'erreur
             $erreur = getErreurServeur($_GET['code']);

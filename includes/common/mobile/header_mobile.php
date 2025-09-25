@@ -6,7 +6,7 @@
         {
             // Logo Inside
             echo '<a id="deployAsidePortail" class="zone_bandeau_logo">';
-                echo '<img src="/inside/includes/icons/common/inside.png" alt="inside" class="logo_bandeau" id="logo_inside_header" />';
+                echo '<img src="/includes/icons/common/inside.png" alt="inside" class="logo_bandeau" id="logo_inside_header" />';
             echo '</a>';
 
             // Notifications, recherche et profil
@@ -17,7 +17,7 @@
 
                     // Recherche
                     echo '<div id="afficherBarreRecherche" class="zone_recherche_bandeau">';
-                        echo '<img src="/inside/includes/icons/common/search.png" alt="search" title="Rechercher" class="icone_recherche" />';
+                        echo '<img src="/includes/icons/common/search.png" alt="search" title="Rechercher" class="icone_recherche" />';
                     echo '</div>';
                 echo '</div>';
 
@@ -32,13 +32,13 @@
             // Boutons missions
             $zoneInside = 'header';
 
-            include($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/common/missions.php');
+            include($_SERVER['DOCUMENT_ROOT'] . '/includes/common/missions.php');
         }
         else
         {
             // Logo Inside
             echo '<div class="zone_bandeau_logo">';
-                echo '<img src="/inside/includes/icons/common/inside.png" alt="inside" class="logo_bandeau" />';
+                echo '<img src="/includes/icons/common/inside.png" alt="inside" class="logo_bandeau" />';
             echo '</div>';
         }
     echo '</div>';

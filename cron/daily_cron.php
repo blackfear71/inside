@@ -73,6 +73,6 @@
         $_SESSION['alerts']['daily_cron'] = true;
 
         // Redirection
-        header('location: /inside/administration/cron/cron.php?action=goConsulter');
+        header('location: /administration/cron/cron.php?action=goConsulter');
     }
 ?>

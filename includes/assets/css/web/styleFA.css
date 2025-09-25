@@ -107,7 +107,7 @@
     margin-right: 10px;
     width: 30px;
     height: 30px;
-    background-image: url("/inside/includes/icons/common/open_grey.png");
+    background-image: url("/includes/icons/common/open_grey.png");
     background-size: 25px 25px;
     background-repeat: no-repeat;
     background-position: center;
@@ -121,7 +121,7 @@
     margin-left: 10px;
     width: 30px;
     height: 30px;
-    background-image: url("/inside/includes/icons/common/open_grey.png");
+    background-image: url("/includes/icons/common/open_grey.png");
     background-size: 25px 25px;
     background-repeat: no-repeat;
     background-position: center;
@@ -703,7 +703,7 @@
     height: 30px;
     border: 0;
     border-radius: 50%;
-    background-image: url("/inside/includes/icons/common/food_advisor.png");
+    background-image: url("/includes/icons/common/food_advisor.png");
     background-size: 20px 20px;
     background-repeat: no-repeat;
     background-position: center;
@@ -1276,7 +1276,7 @@
     width: 30px;
     height: 30px;
     border: 0;
-    background-image: url("/inside/includes/icons/common/delete_grey.png");
+    background-image: url("/includes/icons/common/delete_grey.png");
     background-size: 25px 25px;
     background-repeat: no-repeat;
     background-position: center;
@@ -1293,7 +1293,7 @@
     width: 25px;
     height: 25px;
     border: 0;
-    background-image: url("/inside/includes/icons/common/edit_grey.png");
+    background-image: url("/includes/icons/common/edit_grey.png");
     background-size: 20px 20px;
     background-repeat: no-repeat;
     background-position: center;
@@ -1309,7 +1309,7 @@
     width: 30px;
     height: 30px;
     border: 0;
-    background-image: url("/inside/includes/icons/common/validate_grey.png");
+    background-image: url("/includes/icons/common/validate_grey.png");
     background-size: 25px 25px;
     background-repeat: no-repeat;
     background-position: center;
@@ -1325,7 +1325,7 @@
     width: 30px;
     height: 30px;
     border: 0;
-    background-image: url("/inside/includes/icons/common/cancel_grey.png");
+    background-image: url("/includes/icons/common/cancel_grey.png");
     background-size: 20px 20px;
     background-repeat: no-repeat;
     background-position: center;
@@ -1665,7 +1665,7 @@
     width: 30px;
     height: 30px;
     border: 0;
-    background-image: url("/inside/includes/icons/common/delete_grey.png");
+    background-image: url("/includes/icons/common/delete_grey.png");
     background-size: 25px 25px;
     background-repeat: no-repeat;
     background-position: center;
@@ -2217,7 +2217,7 @@
     margin-right: 5px;
     width: 20px;
     height: 20px;
-    background-image: url("/inside/includes/icons/foodadvisor/location.png");
+    background-image: url("/includes/icons/foodadvisor/location.png");
     background-size: 20px 20px;
     background-repeat: no-repeat;
 }
@@ -2237,7 +2237,7 @@
 
 .lien_lieu:hover .image_lieu
 {
-    background-image: url("/inside/includes/icons/foodadvisor/location_grey.png");
+    background-image: url("/includes/icons/foodadvisor/location_grey.png");
 }
 
 .lien_lieu:hover .nom_lieu
@@ -2447,7 +2447,7 @@
     height: 35px;
     border: 0;
     border-radius: 50%;
-    background-image: url("/inside/includes/icons/common/delete.png");
+    background-image: url("/includes/icons/common/delete.png");
     background-size: 25px 25px;
     background-repeat: no-repeat;
     background-position: center;
@@ -2465,7 +2465,7 @@
     height: 35px;
     border: 0;
     border-radius: 50%;
-    background-image: url("/inside/includes/icons/common/food_advisor.png");
+    background-image: url("/includes/icons/common/food_advisor.png");
     background-size: 25px 25px;
     background-repeat: no-repeat;
     background-position: center;
@@ -2677,7 +2677,7 @@
     height: 35px;
     border: 0;
     border-radius: 50%;
-    background-image: url("/inside/includes/icons/common/validate.png");
+    background-image: url("/includes/icons/common/validate.png");
     background-size: 25px 25px;
     background-repeat: no-repeat;
     background-position: center;
@@ -2695,7 +2695,7 @@
     height: 35px;
     border: 0;
     border-radius: 50%;
-    background-image: url("/inside/includes/icons/common/cancel.png");
+    background-image: url("/includes/icons/common/cancel.png");
     background-size: 20px 20px;
     background-repeat: no-repeat;
     background-position: center;

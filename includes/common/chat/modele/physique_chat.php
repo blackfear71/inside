@@ -1,5 +1,5 @@
 <?php
-    include_once($_SERVER['DOCUMENT_ROOT'] . '/inside/includes/functions/appel_bdd.php');
+    include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/functions/appel_bdd.php');
 
     /****************************************************************************/
     /********************************** SELECT **********************************/
