@@ -75,11 +75,19 @@
 
             // Boutons
             echo '<div class="zone_boutons_saisie">';
-                // Valider
-                echo '<input type="submit" name="submit_choices" value="Valider" id="validerSaisiePropositions" class="bouton_saisie_gauche" />';
+                if (!empty($listeRestaurants))
+                {
+                    // Valider
+                    echo '<input type="submit" name="submit_choices" value="Valider" id="validerSaisiePropositions" class="bouton_saisie_gauche" />';
 
-                // Annuler
-                echo '<a id="fermerSaisiePropositions" class="bouton_saisie_droite">Annuler</a>';
+                    // Annuler
+                    echo '<a id="fermerSaisiePropositions" class="bouton_saisie_droite">Annuler</a>';
+                }
+                else
+                {
+                    // Annuler
+                    echo '<a id="fermerSaisiePropositions" class="bouton_saisie_complet">Annuler</a>';
+                }
             echo '</div>';
         echo '</form>';
     echo '</div>';

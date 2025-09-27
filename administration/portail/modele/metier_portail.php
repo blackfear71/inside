@@ -151,6 +151,35 @@
         return $listeCategories;
     }
 
+    // METIER : Génération du lien phpMyAdmin
+    // RETOUR : Lien
+    function getPhpMyAdminUrl()
+    {
+        $host     = $_SERVER['HTTP_HOST'];
+        $clientIp = $_SERVER['REMOTE_ADDR'];
+
+        // Cas 1 : WAMP (virtualhost inside) ou LAN (accès local)
+        if ((strpos($host, 'inside') !== false AND strpos($host, ':') === false) OR preg_match('/^(127\.0\.0\.1|192\.168\.)/', $clientIp))
+        {
+            $url = '/phpmyadmin/';
+        }
+        // Cas 2 : Internet
+        else
+        {
+            $url = 'https://hamonicp.synology.me:8443/phpmyadmin/';
+        }
+
+        $lien = array(
+            'categorie' => 'PHPMYADMIN',
+            'lien'      => $url,
+            'title'     => 'phpMyAdmin',
+            'image'     => '../../includes/icons/admin/php.png',
+            'alt'       => 'php'
+        );
+
+        return $lien;
+    }
+
     // METIER : Contrôle alertes équipes
     // RETOUR : Booléen
     function getAlerteEquipes()

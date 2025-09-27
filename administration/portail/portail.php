@@ -38,7 +38,8 @@
             $nombreEvols = getNombreBugsEvolutions('E');
 
             // Création du portail administrateur
-            $portail = getPortail($alerteEquipes, $alerteUsers, $alerteFilms, $alerteVacances, $alerteCalendars, $alerteAnnexes, $alerteParcours, $alerteCron, $nombreBugs, $nombreEvols);
+            $portail       = getPortail($alerteEquipes, $alerteUsers, $alerteFilms, $alerteVacances, $alerteCalendars, $alerteAnnexes, $alerteParcours, $alerteCron, $nombreBugs, $nombreEvols);
+            $phpMyAdminUrl = getPhpMyAdminUrl();
             break;
 
         case 'doExtraireBase':
@@ -64,6 +65,11 @@
             }
 
             unset($lienPortail);
+
+            $phpMyAdminUrl['lien']  = htmlspecialchars($phpMyAdminUrl['lien']);
+            $phpMyAdminUrl['title'] = htmlspecialchars($phpMyAdminUrl['title']);
+            $phpMyAdminUrl['image'] = htmlspecialchars($phpMyAdminUrl['image']);
+            $phpMyAdminUrl['alt']   = htmlspecialchars($phpMyAdminUrl['alt']);
             break;
 
         case 'doExtraireBase':

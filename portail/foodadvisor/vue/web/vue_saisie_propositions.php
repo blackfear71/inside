@@ -111,10 +111,13 @@
                 echo '</div>';
 
                 // Bouton
-                echo '<div class="zone_boutons_saisie_propositions">';
-                    // Soumettre
-                    echo '<input type="submit" name="submit_choices" value="Soumettre les propositions" id="bouton_saisie_propositions" class="bouton_saisie_propositions" />';
-                echo '</div>';
+                if (!empty($listeRestaurants))
+                {
+                    echo '<div class="zone_boutons_saisie_propositions">';
+                        // Soumettre
+                        echo '<input type="submit" name="submit_choices" value="Soumettre les propositions" id="bouton_saisie_propositions" class="bouton_saisie_propositions" />';
+                    echo '</div>';
+                }
             echo '</form>';
         echo '</div>';
     echo '</div>';

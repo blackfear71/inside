@@ -983,6 +983,19 @@ aside
     font-size: 3vh;
 }
 
+.bouton_saisie_complet
+{
+    display: inline-block;
+    vertical-align: middle;
+    width: 100%;
+    height: 6vh;
+    line-height: 6vh;
+    background-color: #ff1937;
+    font-family: inside_font_light, Verdana, sans-serif;
+    color: white;
+    font-size: 3vh;
+}
+
 /*** Image ***/
 .fond_zoom_image
 {

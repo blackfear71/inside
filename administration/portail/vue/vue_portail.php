@@ -72,15 +72,15 @@
                         }
 
                         // Accès phpMyAdmin
-                        echo '<a href="/phpmyadmin/" title="phpMyAdmin" target="_blank" class="lien_portail">';
+                        echo '<a href="' . $phpMyAdminUrl['lien'] . '" title="' . $phpMyAdminUrl['title'] . '" target="_blank" class="lien_portail">';
                             // Logo
                             echo '<div class="zone_image_portail">';
-                                echo '<img src="../../includes/icons/admin/php.png" alt="php" class="image_lien_portail" />';
+                                echo '<img src="' . $phpMyAdminUrl['image'] . '" alt="' . $phpMyAdminUrl['alt'] . '" class="image_lien_portail" />';
                             echo '</div>';
 
                             // Titre
                             echo '<div class="zone_texte_portail">';
-                                echo '<div class="texte_portail">PHPMYADMIN</div>';
+                                echo '<div class="texte_portail">' . $phpMyAdminUrl['categorie'] . '</div>';
                             echo '</div>';
                         echo '</a>';
 
