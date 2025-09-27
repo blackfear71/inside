@@ -1478,11 +1478,7 @@ function setCookie(cookieName, cookieValue)
 
     expires.setTime(today.getTime() + (1000 * 60 * 60 * 24 * 365));
 
-    // Cookie global (path=/)
-    if (location.host.toLowerCase().includes('localhost'))
-        document.cookie = cookieName + '=' + encodeURIComponent(cookieValue) + ';expires=' + expires.toGMTString() + ';path=/;SameSite=Lax';
-    else
-        document.cookie = cookieName + '=' + encodeURIComponent(cookieValue) + ';expires=' + expires.toGMTString() + ';path=/;domain=' + location.host + ';SameSite=Lax';
+    document.cookie = cookieName + '=' + encodeURIComponent(cookieValue) + ';expires=' + expires.toGMTString() + ';path=/;SameSite=Lax';
 }
 
 // Lecture d'un cookie
@@ -1511,8 +1507,5 @@ function getCookie(cookieName)
 // Suppression d'un cookie
 function deleteCookie(cookieName)
 {
-    if (location.host.toLowerCase().includes('localhost'))
-        document.cookie = cookieName + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;path=/';
-    else
-        document.cookie = cookieName + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;path=/;domain=' + location.host;
+    document.cookie = cookieName + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;path=/;SameSite=Lax';
 }

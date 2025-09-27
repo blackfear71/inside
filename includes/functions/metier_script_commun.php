@@ -12,16 +12,61 @@
         // Destruction de la session (pas bon dans ce cas sinon la page index ne trouve plus les variables dont elle a besoin et affiche un message d'erreur)
         //session_destroy();
 
-        // Réinitialisation des cookies de connexion
-        setcookie('index[identifiant]', '', -1, '/');
-        setcookie('index[password]', '', -1, '/');
-        setcookie('index[page]', '', -1, '/');
+        // Réinitialisation des cookies
+        $listeCookies = array('celsius[positionX]',
+                              'celsius[positionY]',
+                              'chat[identifiant]',
+                              'chat[showChat]',
+                              'chat[windowChat]',
+                              'index[identifiant]',
+                              'index[page]',
+                              'index[password]'
+                            );
+
+        foreach ($listeCookies as $cookie)
+        {
+            deleteCookie($cookie);
+        }
 
         // Après avoir détruit la variable de connexion, on la réinitialise pour éviter les erreurs au retour sur index.php
         $_SESSION['index']['connected'] = false;
 
         // Retour sur index.php
         header('location: /index.php?action=goConsulter');
+    }
+
+    // METIER : Supprime un cookie
+    // RETOUR : Aucun
+    function deleteCookie($name)
+    {
+        // Expiration dans le passé
+        $expire = time() - 3600;
+
+        // Valeurs de base
+        $params = [
+            ['path' => '/', 'domain' => '', 'secure' => false],
+            ['path' => '/', 'domain' => $_SERVER['HTTP_HOST'], 'secure' => false],
+            ['path' => '/', 'domain' => '.' . $_SERVER['HTTP_HOST'], 'secure' => false],
+        ];
+
+        // Supprime en host-only et les variantes avec domaine explicite
+        foreach ($params as $p)
+        {
+            setcookie(
+                $name,
+                '',
+                [
+                    'expires' => $expire,
+                    'path'    => $p['path'],
+                    'domain'  => $p['domain'],
+                    'secure'  => $p['secure'],
+                    'samesite'=> 'Lax',
+                ]
+            );
+        }
+
+        // Nettoyage côté PHP
+        unset($_COOKIE[$name]);
     }
 
     // METIER : Bascule entre la version web et la version mobile

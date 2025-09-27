@@ -25,8 +25,10 @@
     {
         case 'goConsulter':
             // Si on n'est pas connecté et que les cookies de connexion sont présent, on lance la connexion automatique, sinon on affiche la page de connexion
-            if (isset($_SESSION['index']['connected']) AND $_SESSION['index']['connected'] != true
-            AND isset($_COOKIE['index'])               AND !empty($_COOKIE['index']))
+            if (isset($_SESSION['index']['connected'])  AND $_SESSION['index']['connected'] != true
+            AND isset($_COOKIE['index'])                AND !empty($_COOKIE['index'])
+            AND isset($_COOKIE['index']['identifiant']) AND !empty($_COOKIE['index']['identifiant'] AND $_COOKIE['index']['identifiant'] != 'deleted')
+            AND isset($_COOKIE['index']['password'])    AND !empty($_COOKIE['index']['password']    AND $_COOKIE['index']['password']    != 'deleted'))
                 $connected = connectUser($_COOKIE['index'], true);
 
             // Initialisation de la sauvegarde en session
