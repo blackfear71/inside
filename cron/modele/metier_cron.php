@@ -585,14 +585,24 @@
             $mail->Subject = 'Inside - Gestion du site';
 
             // Contenu du mail
-            $message = getModeleMailAdministration($tableauDemandes);
+            $imagesMail = array();
+            $message = getModeleMailAdministration($tableauDemandes, $imagesMail);
             $mail->MsgHTML($message);
 
             // Création d'un fichier (extraction BDD)
             $cheminExtractionBdd = createExtractBdd();
 
+            // Images du mail
+            if (!empty($imagesMail))
+            {
+                foreach ($imagesMail as $image)
+                {
+                    $mail->AddEmbeddedImage($_SERVER['DOCUMENT_ROOT'] . $image['path'], $image['cid']);
+                }
+            }
+
             // Pièce jointe (extraction BDD)
-            $mail->addAttachment($cheminExtractionBdd, '', 'Binary', 'application/octet-stream', 'attachment');
+            $mail->addAttachment($cheminExtractionBdd, '', 'base64', 'application/octet-stream', 'attachment');
 
             // Envoi du mail
             if (!$mail->Send())

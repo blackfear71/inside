@@ -63,7 +63,7 @@
                     /***************/
                     /* Modèle mail */
                     /***************/
-                    $modeleMail = getModeleMailFilm($detailsFilm, $listeEtoiles);
+                    $modeleMail = getModeleMailFilm($detailsFilm, $listeEtoiles, true);
                     echo $modeleMail;
 
                     /*************************/

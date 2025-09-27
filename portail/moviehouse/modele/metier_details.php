@@ -460,7 +460,8 @@
         unset($participant);
 
         // Récupération du contenu du mail
-        $message = getModeleMailFilm($details, $participants);
+        $imagesMail = array();
+        $message = getModeleMailFilm($details, $participants, false, $imagesMail);
 
         // Envoi d'un mail par personne
         foreach ($participants as $participant)
@@ -481,6 +482,15 @@
 
                     // Contenu du mail
                     $mail->MsgHTML($message);
+
+                    // Images du mail
+                    if (!empty($imagesMail))
+                    {
+                        foreach ($imagesMail as $image)
+                        {
+                            $mail->AddEmbeddedImage($_SERVER['DOCUMENT_ROOT'] . $image['path'], $image['cid']);
+                        }
+                    }                    
 
                     // Envoi du mail avec message d'alerte
                     if (!$mail->Send())

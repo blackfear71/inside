@@ -1,7 +1,7 @@
 <?php
     // MODELE : Edition modèle de mail pour sortie film
     // RETOUR : Modèle de mail
-    function getModeleMailFilm($details, $participants)
+    function getModeleMailFilm($details, $participants, $apercu, &$imagesMail = array())
     {
         // Initialisations
         $modele = '';
@@ -163,7 +163,13 @@
                         // Logo et lien
                         $modele .= '<div class="zone_bandeau_mail_left">';
                             $modele .= '<a href="https://inside.ddns.net/index.php?action=goConsulter">';
-                                $modele .= '<img src="../../includes/icons/common/inside.png" alt="inside" class="logo_bandeau_mail" />';
+                                if ($apercu == true)
+                                    $modele .= '<img src="/includes/icons/common/inside.png" alt="inside" class="logo_bandeau_mail" />';
+                                else
+                                {
+                                    array_push($imagesMail, array('path' => '/includes/icons/common/inside.png', 'cid' => 'inside'));
+                                    $modele .= '<img src="cid:inside" alt="inside" class="logo_bandeau_mail" />';
+                                }
                             $modele .= '</a>';
                         $modele .= '</div>';
 
@@ -206,9 +212,18 @@
                                 foreach ($participants as $participant)
                                 {
                                     $modele .= '<div class="participant_mail">';
-                                        $avatarFormatted = formatAvatar($participant->getAvatar(), $participant->getPseudo(), 2, 'avatar');
+                                        $avatarFormatted = formatAvatar($participant->getAvatar(), $participant->getPseudo(), 0, 'avatar');
 
-                                        $modele .= '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_mail" />';
+                                        if ($apercu == true)
+                                            $modele .= '<img src="' . $avatarFormatted['path'] . '" alt="' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_mail" />';
+                                        else
+                                        {
+                                            if (array_search($avatarFormatted['path'], array_column($imagesMail, 'cid')) === false)
+                                                array_push($imagesMail, array('path' => $avatarFormatted['path'], 'cid' => $avatarFormatted['alt']));                                        
+
+                                            $modele .= '<img src="cid:' . $avatarFormatted['alt'] . '" title="' . $avatarFormatted['title'] . '" class="avatar_mail" />';
+                                        }
+
                                         $modele .= '<div class="pseudo_mail">' . $participant->getPseudo() . '</div>';
                                     $modele .= '</div>';
                                 }
@@ -221,9 +236,19 @@
                             $modele .= '<div class="zone_contenu_mail_right">';
                                 $modele .= '<div class="zone_poster_mail">';
                                     if (!empty($details->getPoster()))
+                                    {
                                         $modele .= '<img src="' . $details->getPoster() . '" alt="poster" title="' . $details->getFilm() . '" class="poster_mail" />';
+                                    }
                                     else
-                                        $modele .= '<img src="../../includes/images/moviehouse/cinema.jpg" alt="poster" title="' . $details->getFilm() . '" class="poster_mail" />';
+                                    {
+                                        if ($apercu == true)
+                                            $modele .= '<img src="/includes/images/moviehouse/cinema.jpg" alt="poster" title="' . $details->getFilm() . '" class="poster_mail" />';
+                                        else
+                                        {
+                                            array_push($imagesMail, array('path' => '/includes/images/moviehouse/cinema.jpg', 'cid' => 'cinema'));
+                                            $modele .= '<img src="cid:cinema" alt="poster" title="' . $details->getFilm() . '" class="poster_mail" />';
+                                        }
+                                    }
                                 $modele .= '</div>';
                             $modele .= '</div>';
                         $modele .= '</div>';
@@ -243,10 +268,13 @@
 
     // MODELE : Edition modèle de mail pour gestion du site
     // RETOUR : Modèle de mail
-    function getModeleMailAdministration($demandes)
+    function getModeleMailAdministration($demandes, &$imagesMail = array())
     {
         // Initialisations
         $modele = '';
+
+        // Images du mail
+        array_push($imagesMail, array('path' => '/includes/icons/common/inside.png', 'cid' => 'inside'));
 
         // Contenu
         $modele .= '<html lang="fr">';
@@ -423,7 +451,7 @@
                         // Logo et lien
                         $modele .= '<div class="zone_bandeau_mail_left">';
                             $modele .= '<a href="https://inside.ddns.net/index.php?action=goConsulter">';
-                                $modele .= '<img src="../includes/icons/common/inside.png" alt="inside" class="logo_bandeau_mail" />';
+                                $modele .= '<img src="cid:inside" alt="inside" class="logo_bandeau_mail" />';
                             $modele .= '</a>';
                         $modele .= '</div>';
 
@@ -447,8 +475,12 @@
                     $modele .= '<article>';
                         foreach ($demandes as $demande)
                         {
+                            // Images du mail
+                            if (array_search($demande['icone'], array_column($imagesMail, 'cid')) === false)
+                                array_push($imagesMail, array('path' => '/includes/icons/admin/' . $demande['icone'] . '.png', 'cid' => $demande['icone']));
+
                             // Titre
-                            $modele .= '<div class="titre_section_mail"><img src="../includes/icons/admin/' . $demande['icone'] . '.png" alt="' . $demande['icone'] . '" class="logo_titre_section_mail" /><div class="texte_titre_section_mail">' . $demande['titre'] . '</div></div>';
+                            $modele .= '<div class="titre_section_mail"><img src="cid:' . $demande['icone'] . '" alt="' . $demande['icone'] . '" class="logo_titre_section_mail" /><div class="texte_titre_section_mail">' . $demande['titre'] . '</div></div>';
 
                             // Contenu
                             $modele .= '<div class="zone_contenu_mail">';
