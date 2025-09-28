@@ -1,5 +1,14 @@
 <?php
-    include_once('../includes/functions/appel_bdd.php');
+    if (isset($_SERVER['DOCUMENT_ROOT']) AND !empty($_SERVER['DOCUMENT_ROOT']))
+    {
+        // Inclusions Web
+        include_once('../includes/functions/appel_bdd.php');
+    }
+    else
+    {
+        // Inclusions CRON
+        include_once(__DIR__ . '/../../includes/functions/appel_bdd.php');
+    }
 
     /****************************************************************************/
     /********************************** SELECT **********************************/

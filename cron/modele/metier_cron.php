@@ -1,9 +1,22 @@
 <?php
-    include_once('../includes/functions/modeles_mails.php');
-    include_once('../includes/classes/expenses.php');
-    include_once('../includes/classes/missions.php');
-    include_once('../includes/classes/movies.php');
-    include_once('../includes/classes/profile.php');
+    if (isset($_SERVER['DOCUMENT_ROOT']) AND !empty($_SERVER['DOCUMENT_ROOT']))
+    {
+        // Inclusions Web
+        include_once('../includes/functions/modeles_mails.php');
+        include_once('../includes/classes/expenses.php');
+        include_once('../includes/classes/missions.php');
+        include_once('../includes/classes/movies.php');
+        include_once('../includes/classes/profile.php');
+    }
+    else
+    {
+        // Inclusions CRON
+        include_once(__DIR__ . '/../../includes/functions/modeles_mails.php');
+        include_once(__DIR__ . '/../../includes/classes/expenses.php');
+        include_once(__DIR__ . '/../../includes/classes/missions.php');
+        include_once(__DIR__ . '/../../includes/classes/movies.php');
+        include_once(__DIR__ . '/../../includes/classes/profile.php');
+    }
 
     // METIER : Insertion notifications sortie cinéma du jour
     // RETOUR : Compte-rendu traitement
@@ -132,7 +145,7 @@
         {
             // Ajout des données au log
             $log['status'] = 'OK';
-            $log['infos']  = 'Pas de sorties organisées';
+            $log['infos']  = 'Pas de missions en cours';
         }
 
         // Retour
@@ -145,9 +158,11 @@
     {
         // Initialisations
         $chaineExecutee    = false;
-        $dossierQuotidien  = '../cron/logs/daily';
         $listeLogsMissions = array();
-
+        
+        // Dossier Web ou CRON
+        $dossierQuotidien  = (isset($_SERVER['DOCUMENT_ROOT']) AND !empty($_SERVER['DOCUMENT_ROOT'])) ? 'logs/daily' : __DIR__ . '/../logs/daily';
+        
         // Scan des fichiers présents par ordre décroissant
         if (is_dir($dossierQuotidien))
         {
@@ -349,7 +364,7 @@
         );
 
         // Lecture des fichiers temporaires
-        $dossierTemporaire = '../includes/images/calendars/temp';
+        $dossierTemporaire  = (isset($_SERVER['DOCUMENT_ROOT']) AND !empty($_SERVER['DOCUMENT_ROOT'])) ? '../includes/images/calendars/temp' : __DIR__ . '/../../includes/images/calendars/temp';
 
         if (is_dir($dossierTemporaire))
         {
@@ -575,7 +590,16 @@
             );
 
             // Connexion au serveur de mails et initialisations
-            include_once('../includes/functions/appel_mail.php');
+            if (isset($_SERVER['DOCUMENT_ROOT']) AND !empty($_SERVER['DOCUMENT_ROOT']))
+            {
+                // Inclusions Web
+                include_once('../includes/functions/appel_mail.php');
+            }
+            else
+            {
+                // Inclusions CRON
+                include_once(__DIR__ . '/../../includes/functions/appel_mail.php');
+            }
 
             // Destinataire du mail
             $mail->clearAddresses();
@@ -597,7 +621,14 @@
             {
                 foreach ($imagesMail as $image)
                 {
-                    $mail->AddEmbeddedImage($_SERVER['DOCUMENT_ROOT'] . $image['path'], $image['cid']);
+                    if (isset($_SERVER['DOCUMENT_ROOT']) AND !empty($_SERVER['DOCUMENT_ROOT']))
+                    {
+                        $mail->AddEmbeddedImage($_SERVER['DOCUMENT_ROOT'] . $image['path'], $image['cid']);
+                    }
+                    else
+                    {
+                        $mail->AddEmbeddedImage(__DIR__ . '/../..' . $image['path'], $image['cid']);
+                    }
                 }
             }
 
@@ -661,8 +692,10 @@
     // RETOUR : Aucun
     function generateLog($typeLog, $traitements, $heureDebut, $heureFin)
     {
+        // Dossier Web ou CRON
+        $dossier = (isset($_SERVER['DOCUMENT_ROOT']) AND !empty($_SERVER['DOCUMENT_ROOT'])) ? 'logs' : __DIR__ . '/../logs';
+        
         // On vérifie la présence des dossiers, sinon on les créé
-        $dossier                 = 'logs';
         $sousDossierQuotidien    = 'daily';
         $sousDossierHebdomadaire = 'weekly';
 
@@ -713,9 +746,9 @@
 
         // Création et ouverture du fichier
         if ($typeLog == 'j')
-            $log = fopen('logs/daily/' . $typeLog . 'log_(' . date('d-m-Y') . '_' . date('H-i-s') . ')_' . rand(1, 11111111) . '.txt', 'a+');
+            $log = fopen($dossier . '/' . $sousDossierQuotidien . '/' . $typeLog . 'log_(' . date('d-m-Y') . '_' . date('H-i-s') . ')_' . rand(1, 11111111) . '.txt', 'a+');
         elseif ($typeLog == 'h')
-            $log = fopen('logs/weekly/' . $typeLog . 'log_(' . date('d-m-Y') . '_' . date('H-i-s') . ')_' . rand(1, 11111111) . '.txt', 'a+');
+            $log = fopen($dossier . '/' . $sousDossierHebdomadaire . '/' . $typeLog . 'log_(' . date('d-m-Y') . '_' . date('H-i-s') . ')_' . rand(1, 11111111) . '.txt', 'a+');
 
         // Repositionnement du curseur au début du fichier
         fseek($log, 0);

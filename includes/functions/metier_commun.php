@@ -1,9 +1,22 @@
 <?php
-    include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/classes/alerts.php');
-    include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/classes/missions.php');
-    include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/classes/success.php');
-    include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/classes/teams.php');
-    include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/classes/themes.php');
+    if (isset($_SERVER['DOCUMENT_ROOT']) AND !empty($_SERVER['DOCUMENT_ROOT']))
+    {
+        // Inclusions Web
+        include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/classes/alerts.php');
+        include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/classes/missions.php');
+        include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/classes/success.php');
+        include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/classes/teams.php');
+        include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/classes/themes.php');
+    }
+    else
+    {
+        // Inclusions CRON
+        include_once(__DIR__ . '/../classes/alerts.php');
+        include_once(__DIR__ . '/../classes/missions.php');
+        include_once(__DIR__ . '/../classes/success.php');
+        include_once(__DIR__ . '/../classes/teams.php');
+        include_once(__DIR__ . '/../classes/themes.php');
+    }
 
     // METIER : Contrôles Index, initialisation session
     // RETOUR : Aucun

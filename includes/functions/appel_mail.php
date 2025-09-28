@@ -5,7 +5,7 @@
 
     if (isset($_SERVER['DOCUMENT_ROOT']) AND !empty($_SERVER['DOCUMENT_ROOT']))
     {
-        // Inclusions web
+        // Inclusions Web
         require($_SERVER['DOCUMENT_ROOT'] . '/includes/libraries/php/PHPMailer/src/DSNConfigurator.php');
         require($_SERVER['DOCUMENT_ROOT'] . '/includes/libraries/php/PHPMailer/src/Exception.php');
         require($_SERVER['DOCUMENT_ROOT'] . '/includes/libraries/php/PHPMailer/src/OAuthTokenProvider.php');
@@ -17,13 +17,13 @@
     else
     {
         // Inclusions CRON
-        require('../includes/libraries/php/PHPMailer/src/DSNConfigurator.php');
-        require('../includes/libraries/php/PHPMailer/src/Exception.php');
-        require('../includes/libraries/php/PHPMailer/src/OAuthTokenProvider.php');
-        require('../includes/libraries/php/PHPMailer/src/OAuth.php');
-        require('../includes/libraries/php/PHPMailer/src/PHPMailer.php');
-        require('../includes/libraries/php/PHPMailer/src/POP3.php');
-        require('../includes/libraries/php/PHPMailer/src/SMTP.php');
+        require(__DIR__ . '/../libraries/php/PHPMailer/src/DSNConfigurator.php');
+        require(__DIR__ . '/../libraries/php/PHPMailer/src/Exception.php');
+        require(__DIR__ . '/../libraries/php/PHPMailer/src/OAuthTokenProvider.php');
+        require(__DIR__ . '/../libraries/php/PHPMailer/src/OAuth.php');
+        require(__DIR__ . '/../libraries/php/PHPMailer/src/PHPMailer.php');
+        require(__DIR__ . '/../libraries/php/PHPMailer/src/POP3.php');
+        require(__DIR__ . '/../libraries/php/PHPMailer/src/SMTP.php');
     }
 
     $mail = new PHPMailer(true);

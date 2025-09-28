@@ -1,19 +1,19 @@
 <?php
-    /***************************
-    **** CRON Hebdomadaire *****
-    ****************************
+    /*****************************
+    ***** CRON Hebdomadaire ******
+    ******************************
     Fonctionnalités :
     - Réinitialisation dépenses
     - Génération de log
-    ***************************/
-    /** TOUS LES LUNDIS A 7H **/
-    /**************************/
+    *****************************/
+    /* TOUS LES LUNDIS A MINUIT */
+    /****************************/
 
     // Fonctions communes
-    include_once('../includes/functions/metier_commun.php');
-    include_once('../includes/functions/physique_commun.php');
-    include_once('../includes/functions/fonctions_dates.php');
-    include_once('../includes/functions/fonctions_regex.php');
+    include_once(__DIR__ . '/../includes/functions/metier_commun.php');
+    include_once(__DIR__ . '/../includes/functions/physique_commun.php');
+    include_once(__DIR__ . '/../includes/functions/fonctions_dates.php');
+    include_once(__DIR__ . '/../includes/functions/fonctions_regex.php');
 
     // Contrôles communs CRON
     controlsCron();

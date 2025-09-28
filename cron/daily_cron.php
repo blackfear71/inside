@@ -10,13 +10,13 @@
     - Ajout expérience gagnants mission
     - Génération de log
     ************************************/
-    /******* TOUS LES JOURS A 7H *******/
+    /***** TOUS LES JOURS A MINUIT *****/
     /***********************************/
 
     // Fonctions communes
-    include_once('../includes/functions/metier_commun.php');
-    include_once('../includes/functions/physique_commun.php');
-    include_once('../includes/functions/fonctions_dates.php');
+    include_once(__DIR__ . '/../includes/functions/metier_commun.php');
+    include_once(__DIR__ . '/../includes/functions/physique_commun.php');
+    include_once(__DIR__ . '/../includes/functions/fonctions_dates.php');
 
     // Contrôles communs CRON
     controlsCron();
