@@ -27,17 +27,20 @@
 
             // Décompte du nombre de notifications du jour
             case 'countNotifications':
-                countNotifications($_SESSION['user']);
+                if (isset($_SESSION['user']))
+                    countNotifications($_SESSION['user']);
                 break;
 
             // Récupère le détail des notifications
             case 'getDetailsNotifications':
-                getDetailsNotifications($_SESSION['user']);
+                if (isset($_SESSION['user']))
+                    getDetailsNotifications($_SESSION['user']);
                 break;
 
             // Décompte du nombre de bugs en temps réel
             case 'countBugs':
-                countBugs($_SESSION['user']);
+                if (isset($_SESSION['user']))
+                    countBugs($_SESSION['user']);
                 break;
 
             // Action par défaut
