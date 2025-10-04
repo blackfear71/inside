@@ -82,7 +82,7 @@
                     echo '<div class="zone_forms_index">';
                         echo '<div class="zone_form_index">';
                             // Connexion
-                            if ($erreursIndex['erreurInscription'] == true OR $erreursIndex['erreurPassword'] == true)
+                            if (isset($erreursIndex) AND ($erreursIndex['erreurInscription'] == true OR $erreursIndex['erreurPassword'] == true))
                                 echo '<form method="post" action="index.php?action=doConnecter" id="formConnexion" class="form_index" style="display: none;">';
                             else
                                 echo '<form method="post" action="index.php?action=doConnecter" id="formConnexion" class="form_index">';
@@ -97,7 +97,7 @@
                             echo '</form>';
 
                             // Inscription
-                            if ($erreursIndex['erreurInscription'] == true AND $erreursIndex['erreurPassword'] == false)
+                            if (isset($erreursIndex) AND ($erreursIndex['erreurInscription'] == true AND $erreursIndex['erreurPassword'] == false))
                                 echo '<form method="post" action="index.php?action=doDemanderInscription" id="formInscription" class="form_index">';
                             else
                                 echo '<form method="post" action="index.php?action=doDemanderInscription" id="formInscription" class="form_index" style="display: none;">';
@@ -144,7 +144,7 @@
                             echo '</form>';
 
                             // Réinitialisation mot de passe
-                            if ($erreursIndex['erreurInscription'] == false AND $erreursIndex['erreurPassword'] == true)
+                            if (isset($erreursIndex) AND ($erreursIndex['erreurInscription'] == false AND $erreursIndex['erreurPassword'] == true))
                                 echo '<form method="post" action="index.php?action=doDemanderMotDePasse" id="formPassword" class="form_index">';
                             else
                                 echo '<form method="post" action="index.php?action=doDemanderMotDePasse" id="formPassword" class="form_index" style="display: none;">';
@@ -166,21 +166,21 @@
                     // Boutons
                     echo '<div class="zone_boutons_index">';
                         // Lien connexion
-                        if ($erreursIndex['erreurInscription'] == true OR $erreursIndex['erreurPassword'] == true)
+                        if (isset($erreursIndex) AND ($erreursIndex['erreurInscription'] == true OR $erreursIndex['erreurPassword'] == true))
                             echo '<a id="afficherConnexion" class="lien_index lien_index_margin_right">Se connecter</a>';
                         else
                             echo '<a id="afficherConnexion" class="lien_index lien_index_margin_right" style="display: none;">Se connecter</a>';
 
                         // Lien inscription
-                        if ($erreursIndex['erreurInscription'] == false AND $erreursIndex['erreurPassword'] == false)
+                        if (isset($erreursIndex) AND ($erreursIndex['erreurInscription'] == false AND $erreursIndex['erreurPassword'] == false))
                             echo '<a id="afficherInscription" class="lien_index lien_index_margin_right">Inscription</a>';
-                        else if ($erreursIndex['erreurInscription'] == true AND $erreursIndex['erreurPassword'] == false)
+                        else if (isset($erreursIndex) AND ($erreursIndex['erreurInscription'] == true AND $erreursIndex['erreurPassword'] == false))
                             echo '<a id="afficherInscription" class="lien_index" style="display: none;">Inscription</a>';
                         else
                             echo '<a id="afficherInscription" class="lien_index">Inscription</a>';
 
                         // Lien mot de passe perdu
-                        if ($erreursIndex['erreurInscription'] == false AND $erreursIndex['erreurPassword'] == true)
+                        if (isset($erreursIndex) AND ($erreursIndex['erreurInscription'] == false AND $erreursIndex['erreurPassword'] == true))
                             echo '<a id="afficherPassword" class="lien_index" style="display: none;">Mot de passe oublié</a>';
                         else
                             echo '<a id="afficherPassword" class="lien_index">Mot de passe oublié</a>';

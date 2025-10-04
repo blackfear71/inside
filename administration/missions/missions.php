@@ -28,7 +28,7 @@
     {
         case 'goConsulter':
             // Initialisation de la sauvegarde en session et récupération erreur
-            $erreurMission = initializeSaveSession();
+            $erreurMission = initializeSaveSessionMission();
 
             // Récupération de la liste des missions
             $listeMissions = getMissions();
@@ -36,7 +36,7 @@
 
         case 'goAjouter':
             // Initialisation de la sauvegarde en session et récupération erreur
-            $erreurMission = initializeSaveSession();
+            $erreurMission = initializeSaveSessionMission();
 
             // Initialisation de l'écran d'ajout de mission
             if (isset($erreurMission) AND $erreurMission == true)
@@ -55,7 +55,7 @@
             else
             {
                 // Initialisation de la sauvegarde en session et récupération erreur
-                $erreurMission = initializeSaveSession();
+                $erreurMission = initializeSaveSessionMission();
 
                 // Initialisation de l'écran de modification de mission
                 if (isset($erreurMission) AND $erreurMission == true)

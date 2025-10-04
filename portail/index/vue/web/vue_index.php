@@ -75,7 +75,7 @@
                     // Formulaires
                     echo '<div class="zone_index">';
                         // Connexion
-                        if ($erreursIndex['erreurInscription'] == true OR $erreursIndex['erreurPassword'] == true)
+                        if (isset($erreursIndex) AND ($erreursIndex['erreurInscription'] == true OR $erreursIndex['erreurPassword'] == true))
                             echo '<div id="formConnexion" class="zone_form_index" style="display: none;">';
                         else
                             echo '<div id="formConnexion" class="zone_form_index">';
@@ -98,7 +98,7 @@
                         echo '</div>';
 
                         // Inscription
-                        if ($erreursIndex['erreurInscription'] == true AND $erreursIndex['erreurPassword'] == false)
+                        if (isset($erreursIndex) AND ($erreursIndex['erreurInscription'] == true AND $erreursIndex['erreurPassword'] == false))
                             echo '<div id="formInscription" class="zone_form_index">';
                         else
                             echo '<div id="formInscription" class="zone_form_index" style="display: none;">';
@@ -157,7 +157,7 @@
                         echo '</div>';
 
                         // Réinitialisation mot de passe
-                        if ($erreursIndex['erreurInscription'] == false AND $erreursIndex['erreurPassword'] == true)
+                        if (isset($erreursIndex) AND ($erreursIndex['erreurInscription'] == false AND $erreursIndex['erreurPassword'] == true))
                             echo '<div id="formPassword" class="zone_form_index">';
                         else
                             echo '<div id="formPassword" class="zone_form_index" style="display: none;">';

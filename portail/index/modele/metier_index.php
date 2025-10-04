@@ -4,8 +4,8 @@
     include_once('includes/classes/teams.php');
 
     // METIER : Initialise les données de sauvegarde en session
-    // RETOUR : Aucun
-    function initializeSaveSession()
+    // RETOUR : Erreur
+    function initializeSaveSessionIndex()
     {
         // Initialisation
         $erreursIndex = array(

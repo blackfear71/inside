@@ -32,7 +32,7 @@
                 $connected = connectUser($_COOKIE['index'], true);
 
             // Initialisation de la sauvegarde en session
-            $erreursIndex = initializeSaveSession();
+            $erreursIndex = initializeSaveSessionIndex();
 
             // Récupération de la liste des équipes
             $listeEquipes = getListeEquipes();

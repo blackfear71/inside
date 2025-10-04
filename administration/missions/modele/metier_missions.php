@@ -4,7 +4,7 @@
 
     // METIER : Initialise les données de sauvegarde en session
     // RETOUR : Erreur
-    function initializeSaveSession()
+    function initializeSaveSessionMission()
     {
         // Initialisations
         $erreurMission = false;

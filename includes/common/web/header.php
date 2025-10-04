@@ -103,19 +103,19 @@
                 // Boutons
                 echo '<div class="zone_liens_index">';
                     // Connexion
-                    if ($erreursIndex['erreurInscription'] == true OR $erreursIndex['erreurPassword'] == true)
+                    if (isset($erreursIndex) AND ($erreursIndex['erreurInscription'] == true OR $erreursIndex['erreurPassword'] == true))
                         echo '<a id="afficherConnexion" class="lien_index">Connexion</a>';
                     else
                         echo '<a id="afficherConnexion" class="lien_index lien_index_selected">Connexion</a>';
 
                     // Inscription
-                    if ($erreursIndex['erreurInscription'] == true AND $erreursIndex['erreurPassword'] == false)
+                    if (isset($erreursIndex) AND ($erreursIndex['erreurInscription'] == true AND $erreursIndex['erreurPassword'] == false))
                         echo '<a id="afficherInscription" class="lien_index lien_index_selected">Inscription</a>';
                     else
                         echo '<a id="afficherInscription" class="lien_index">Inscription</a>';
 
                     // Mot de passe
-                    if ($erreursIndex['erreurInscription'] == false AND $erreursIndex['erreurPassword'] == true)
+                    if (isset($erreursIndex) AND ($erreursIndex['erreurInscription'] == false AND $erreursIndex['erreurPassword'] == true))
                         echo '<a id="afficherPassword" class="lien_index lien_index_selected">Mot de passe oublié</a>';
                     else
                         echo '<a id="afficherPassword" class="lien_index">Mot de passe oublié</a>';
