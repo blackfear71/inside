@@ -81,36 +81,38 @@
                     /********************/
                     /* Boutons d'action */
                     /********************/
-                    // Saisie idée
-                    echo '<a id="afficherSaisieIdee" title="Proposer un idée" class="lien_red lien_demi margin_lien">';
-                        echo '<img src="../../includes/icons/ideas/ideas_grey.png" alt="ideas_grey" class="image_lien" />';
-                        echo '<div class="titre_lien">PROPOSER</div>';
-                    echo '</a>';
+                    echo '<div class="zone_actions">';
+                        // Saisie idée
+                        echo '<a id="afficherSaisieIdee" title="Proposer un idée" class="lien_red">';
+                            echo '<img src="../../includes/icons/ideas/ideas_grey.png" alt="ideas_grey" class="image_lien" />';
+                            echo '<div class="titre_lien">PROPOSER</div>';
+                        echo '</a>';
 
-                    // Vues
-                    echo '<a id="afficherSaisieVue" title="Changer de vue" class="lien_green lien_demi">';
-                        echo '<img src="../../includes/icons/ideas/view_grey.png" alt="view_grey" class="image_lien" />';
+                        // Vues
+                        echo '<a id="afficherSaisieVue" title="Changer de vue" class="lien_green">';
+                            echo '<img src="../../includes/icons/ideas/view_grey.png" alt="view_grey" class="image_lien" />';
 
-                        switch ($_GET['view'])
-                        {
-                            case 'inprogress':
-                                echo '<div class="titre_lien">EN COURS</div>';
-                                break;
+                            switch ($_GET['view'])
+                            {
+                                case 'inprogress':
+                                    echo '<div class="titre_lien">EN COURS</div>';
+                                    break;
 
-                            case 'mine':
-                                echo '<div class="titre_lien">EN CHARGE</div>';
-                                break;
+                                case 'mine':
+                                    echo '<div class="titre_lien">EN CHARGE</div>';
+                                    break;
 
-                            case 'done':
-                                echo '<div class="titre_lien">TERMINÉES</div>';
-                                break;
+                                case 'done':
+                                    echo '<div class="titre_lien">TERMINÉES</div>';
+                                    break;
 
-                            case 'all':
-                            default:
-                                echo '<div class="titre_lien">TOUTES</div>';
-                                break;
-                        }
-                    echo '</a>';
+                                case 'all':
+                                default:
+                                    echo '<div class="titre_lien">TOUTES</div>';
+                                    break;
+                            }
+                        echo '</a>';
+                    echo '</div>';
 
                     /***********/
                     /* Contenu */

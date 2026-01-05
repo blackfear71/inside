@@ -76,15 +76,17 @@
                     /********************/
                     /* Boutons d'action */
                     /********************/
-                    // Vues
-                    echo '<a id="afficherSaisieVue" title="Changer de vue" class="lien_green">';
-                        echo '<img src="../../includes/icons/changelog/view_grey.png" alt="view_grey" class="image_lien" />';
+                    echo '<div class="zone_actions">';
+                        // Vues
+                        echo '<a id="afficherSaisieVue" title="Changer de vue" class="lien_green">';
+                            echo '<img src="../../includes/icons/changelog/view_grey.png" alt="view_grey" class="image_lien" />';
 
-                        if ($_GET['action'] == 'goConsulterHistoire')
-                            echo '<div class="titre_lien">HISTOIRE DU SITE</div>';
-                        else
-                            echo '<div class="titre_lien">ANNÉE - ' . $_GET['year'] . '</div>';
-                    echo '</a>';
+                            if ($_GET['action'] == 'goConsulterHistoire')
+                                echo '<div class="titre_lien">HISTOIRE DU SITE</div>';
+                            else
+                                echo '<div class="titre_lien">ANNÉE - ' . $_GET['year'] . '</div>';
+                        echo '</a>';
+                    echo '</div>';
 
                     /***********/
                     /* Contenu */

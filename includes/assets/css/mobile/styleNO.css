@@ -3,13 +3,22 @@
 /*********************/
 
 /*** Nombre notifications ***/
+.zone_nombres_notifications
+{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2vh;
+    margin-bottom: 2vh;
+}
+
 .zone_nombre_notifications
 {
+    flex: 1 1 calc(50% - 2vh);
+    box-sizing: border-box;
     display: inline-block;
     vertical-align: middle;
     width: calc(50% - 1vh);
     height: 8.5vh;
-    margin-bottom: 2vh;
     text-align: center;
     border-radius: 0.5vh;
     box-shadow: 0 0 0.5vh #7c7c7c;
@@ -17,11 +26,6 @@
     background-color: #ff1937;
     border: 0;
     overflow: hidden;
-}
-
-.zone_nombre_margin
-{
-    margin-right: 2vh;
 }
 
 .nombre_notifications

@@ -91,38 +91,40 @@
                     /********************/
                     /* Boutons d'action */
                     /********************/
-                    // Vues
-                    echo '<a id="afficherSaisieVue" title="Changer de vue" class="lien_green lien_demi margin_lien">';
-                        echo '<img src="../../includes/icons/moviehouse/view_grey.png" alt="view_grey" class="image_lien" />';
+                    echo '<div class="zone_actions">';
+                        // Vues
+                        echo '<a id="afficherSaisieVue" title="Changer de vue" class="lien_green">';
+                            echo '<img src="../../includes/icons/moviehouse/view_grey.png" alt="view_grey" class="image_lien" />';
 
-                        switch ($_GET['view'])
-                        {
-                            case 'home':
-                                echo '<div class="titre_lien">ACCUEIL</div>';
-                                break;
+                            switch ($_GET['view'])
+                            {
+                                case 'home':
+                                    echo '<div class="titre_lien">ACCUEIL</div>';
+                                    break;
 
-                            case 'cards':
-                            default:
-                                echo '<div class="titre_lien">FICHES</div>';
-                                break;
-                        }
-                    echo '</a>';
+                                case 'cards':
+                                default:
+                                    echo '<div class="titre_lien">FICHES</div>';
+                                    break;
+                            }
+                        echo '</a>';
 
-                    // Années
-                    echo '<a id="afficherSaisieAnnee" title="Changer d\'année" class="lien_green lien_demi">';
-                        echo '<img src="../../includes/icons/moviehouse/recent_grey.png" alt="recent_grey" class="image_lien" />';
+                        // Années
+                        echo '<a id="afficherSaisieAnnee" title="Changer d\'année" class="lien_green">';
+                            echo '<img src="../../includes/icons/moviehouse/recent_grey.png" alt="recent_grey" class="image_lien" />';
 
-                        if ($_GET['year'] == 'none')
-                            echo '<div class="titre_lien">ANNÉE - N. C.</div>';
-                        else
-                            echo '<div class="titre_lien">ANNÉE - ' . $_GET['year'] . '</div>';
-                    echo '</a>';
+                            if ($_GET['year'] == 'none')
+                                echo '<div class="titre_lien">ANNÉE - N. C.</div>';
+                            else
+                                echo '<div class="titre_lien">ANNÉE - ' . $_GET['year'] . '</div>';
+                        echo '</a>';
 
-                    // Saisie film
-                    echo '<a id="afficherSaisieFilm" title="Saisir un film" class="lien_red">';
-                        echo '<img src="../../includes/icons/moviehouse/movie_house_grey.png" alt="movie_house_grey" class="image_lien" />';
-                        echo '<div class="titre_lien">AJOUTER UN FILM</div>';
-                    echo '</a>';
+                        // Saisie film
+                        echo '<a id="afficherSaisieFilm" title="Saisir un film" class="lien_red">';
+                            echo '<img src="../../includes/icons/moviehouse/movie_house_grey.png" alt="movie_house_grey" class="image_lien" />';
+                            echo '<div class="titre_lien">AJOUTER UN FILM</div>';
+                        echo '</a>';
+                    echo '</div>';
 
                     /*********/
                     /* Films */

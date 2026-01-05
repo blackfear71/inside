@@ -76,10 +76,9 @@
                     /********************/
                     /* Boutons d'action */
                     /********************/
-                    if ($preferences->getManage_calendars() == 'Y')
-                    {
+                    echo '<div class="zone_actions">';
                         // Vues
-                        echo '<a id="afficherSaisieVue" title="Changer de vue" class="lien_red lien_demi margin_lien">';
+                        echo '<a id="afficherSaisieVue" title="Changer de vue" class="lien_red">';
                             echo '<img src="../../includes/icons/calendars/year_grey.png" alt="year_grey" class="image_lien" />';
 
                             if ($_GET['action'] == 'goConsulterAnnexes')
@@ -88,24 +87,15 @@
                                 echo '<div class="titre_lien">ANNÉE - ' . $_GET['year'] . '</div>';
                         echo '</a>';
 
-                        // Créer calendrier ou annexe
-                        echo '<a href="calendars_generator.php?action=goConsulter" title="Créer un calendrier ou une annexe" class="lien_green lien_demi">';
-                            echo '<img src="../../includes/icons/common/edit_grey.png" alt="edit_grey" class="image_lien" />';
-                            echo '<div class="titre_lien">CRÉER</div>';
-                        echo '</a>';
-                    }
-                    else
-                    {
-                        // Vues
-                        echo '<a id="afficherSaisieVue" title="Changer de vue" class="lien_red margin_lien">';
-                            echo '<img src="../../includes/icons/calendars/year_grey.png" alt="year_grey" class="image_lien" />';
-
-                            if ($_GET['action'] == 'goConsulterAnnexes')
-                                echo '<div class="titre_lien">ANNEXES</div>';
-                            else
-                                echo '<div class="titre_lien">ANNÉE - ' . $_GET['year'] . '</div>';
-                        echo '</a>';
-                    }
+                        if ($preferences->getManage_calendars() == 'Y')
+                        {
+                            // Créer calendrier ou annexe
+                            echo '<a href="calendars_generator.php?action=goConsulter" title="Créer un calendrier ou une annexe" class="lien_green">';
+                                echo '<img src="../../includes/icons/common/edit_grey.png" alt="edit_grey" class="image_lien" />';
+                                echo '<div class="titre_lien">CRÉER</div>';
+                            echo '</a>';
+                        }
+                    echo '</div>';
 
                     /***********/
                     /* Contenu */

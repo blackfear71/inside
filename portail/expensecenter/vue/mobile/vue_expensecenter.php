@@ -87,45 +87,47 @@
                     /********************/
                     /* Boutons d'action */
                     /********************/
-                    // Saisie dépense
-                    echo '<a id="afficherSaisieDepense" title="Saisir une dépense" class="lien_green lien_demi margin_lien">';
-                        echo '<img src="../../includes/icons/expensecenter/expense_center_grey.png" alt="expense_center_grey" class="image_lien" />';
-                        echo '<div class="titre_lien">DÉPENSE</div>';
-                    echo '</a>';
+                    echo '<div class="zone_actions">';
+                        // Saisie dépense
+                        echo '<a id="afficherSaisieDepense" title="Saisir une dépense" class="lien_green">';
+                            echo '<img src="../../includes/icons/expensecenter/expense_center_grey.png" alt="expense_center_grey" class="image_lien" />';
+                            echo '<div class="titre_lien">DÉPENSE</div>';
+                        echo '</a>';
 
-                    // Saisie montants
-                    echo '<a id="afficherSaisieMontants" title="Saisir des montants" class="lien_green lien_demi">';
-                        echo '<img src="../../includes/icons/expensecenter/expenses_grey.png" alt="expenses_grey" class="image_lien" />';
-                        echo '<div class="titre_lien">MONTANTS</div>';
-                    echo '</a>';
+                        // Saisie montants
+                        echo '<a id="afficherSaisieMontants" title="Saisir des montants" class="lien_green">';
+                            echo '<img src="../../includes/icons/expensecenter/expenses_grey.png" alt="expenses_grey" class="image_lien" />';
+                            echo '<div class="titre_lien">MONTANTS</div>';
+                        echo '</a>';
 
-                    // Années
-                    echo '<a id="afficherSaisieAnnee" title="Changer d\'année" class="lien_red lien_demi margin_lien">';
-                        echo '<img src="../../includes/icons/expensecenter/year_grey.png" alt="year_grey" class="image_lien" />';
-                        echo '<div class="titre_lien">ANNÉE - ' . $_GET['year'] . '</div>';
-                    echo '</a>';
+                        // Années
+                        echo '<a id="afficherSaisieAnnee" title="Changer d\'année" class="lien_red">';
+                            echo '<img src="../../includes/icons/expensecenter/year_grey.png" alt="year_grey" class="image_lien" />';
+                            echo '<div class="titre_lien">ANNÉE - ' . $_GET['year'] . '</div>';
+                        echo '</a>';
 
-                    // Filtres
-                    echo '<a id="afficherSaisieFiltre" title="Changer de filtre" class="lien_red lien_demi">';
-                        echo '<img src="../../includes/icons/expensecenter/filter_grey.png" alt="filter_grey" class="image_lien" />';
-                        echo '<div class="titre_lien">';
-                            switch ($_GET['filter'])
-                            {
-                                case 'myExpenses':
-                                    echo 'MES DÉPENSES';
-                                    break;
+                        // Filtres
+                        echo '<a id="afficherSaisieFiltre" title="Changer de filtre" class="lien_red">';
+                            echo '<img src="../../includes/icons/expensecenter/filter_grey.png" alt="filter_grey" class="image_lien" />';
+                            echo '<div class="titre_lien">';
+                                switch ($_GET['filter'])
+                                {
+                                    case 'myExpenses':
+                                        echo 'MES DÉPENSES';
+                                        break;
 
-                                case 'myParts':
-                                    echo 'MES PARTS';
-                                    break;
+                                    case 'myParts':
+                                        echo 'MES PARTS';
+                                        break;
 
-                                case 'all':
-                                default:
-                                    echo 'TOUTES';
-                                    break;
-                            }
-                        echo '</div>';
-                    echo '</a>';
+                                    case 'all':
+                                    default:
+                                        echo 'TOUTES';
+                                        break;
+                                }
+                            echo '</div>';
+                        echo '</a>';
+                    echo '</div>';
 
                     /**********/
                     /* Bilans */

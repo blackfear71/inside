@@ -583,13 +583,26 @@ aside
 }
 
 /*** Boutons d'action ***/
+.zone_actions
+{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2vh;
+    margin-bottom: 2vh;
+}
+
+.zone_actions a, .zone_actions form
+{
+    flex: 1 1 calc(50% - 2vh);
+    box-sizing: border-box;
+}
+
 .lien_green, .lien_red
 {
     display: inline-block;
     vertical-align: middle;
     width: 100%;
     height: 8.5vh;
-    margin-bottom: 2vh;
     text-align: center;
     border-radius: 0.5vh;
     box-shadow: 0 0 0.5vh #7c7c7c;
@@ -606,16 +619,6 @@ aside
 .lien_red:active, .lien_form:active .lien_red
 {
     background-color: #ff1937;
-}
-
-.margin_lien
-{
-    margin-right: 2vh;
-}
-
-.lien_demi
-{
-    width: calc(50% - 1vh);
 }
 
 .lien_form

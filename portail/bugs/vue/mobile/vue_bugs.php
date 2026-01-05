@@ -80,28 +80,30 @@
                     /********************/
                     /* Boutons d'action */
                     /********************/
-                    // Saisie idée
-                    echo '<a id="afficherSaisieRapport" title="Rapporter un bug ou une évolution" class="lien_red lien_demi margin_lien">';
-                        echo '<img src="../../includes/icons/common/alert_grey.png" alt="alert_grey" class="image_lien" />';
-                        echo '<div class="titre_lien">RAPPORTER</div>';
-                    echo '</a>';
+                    echo '<div class="zone_actions">';
+                        // Saisie idée
+                        echo '<a id="afficherSaisieRapport" title="Rapporter un bug ou une évolution" class="lien_red">';
+                            echo '<img src="../../includes/icons/common/alert_grey.png" alt="alert_grey" class="image_lien" />';
+                            echo '<div class="titre_lien">RAPPORTER</div>';
+                        echo '</a>';
 
-                    // Vues
-                    echo '<a id="afficherSaisieVue" title="Changer de vue" class="lien_green lien_demi">';
-                        echo '<img src="../../includes/icons/reports/view_grey.png" alt="view_grey" class="image_lien" />';
+                        // Vues
+                        echo '<a id="afficherSaisieVue" title="Changer de vue" class="lien_green">';
+                            echo '<img src="../../includes/icons/reports/view_grey.png" alt="view_grey" class="image_lien" />';
 
-                        switch ($_GET['view'])
-                        {
-                            case 'resolved':
-                                echo '<div class="titre_lien">RÉSOLU(E)S</div>';
-                                break;
+                            switch ($_GET['view'])
+                            {
+                                case 'resolved':
+                                    echo '<div class="titre_lien">RÉSOLU(E)S</div>';
+                                    break;
 
-                            case 'unresolved':
-                            default:
-                                echo '<div class="titre_lien">EN COURS</div>';
-                                break;
-                        }
-                    echo '</a>';
+                                case 'unresolved':
+                                default:
+                                    echo '<div class="titre_lien">EN COURS</div>';
+                                    break;
+                            }
+                        echo '</a>';
+                    echo '</div>';
 
                     /***********/
                     /* Contenu */

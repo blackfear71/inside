@@ -80,11 +80,13 @@
                     /********************/
                     /* Boutons d'action */
                     /********************/
-                    // Saisie parcours
-                    echo '<a id="afficherSaisieParcours" title="Saisir un parcours" class="lien_green">';
-                        echo '<img src="../../includes/icons/petitspedestres/parcours_grey.png" alt="parcours_grey" class="image_lien" />';
-                        echo '<div class="titre_lien">AJOUTER UN PARCOURS</div>';
-                    echo '</a>';
+                    echo '<div class="zone_actions">';
+                        // Saisie parcours
+                        echo '<a id="afficherSaisieParcours" title="Saisir un parcours" class="lien_green">';
+                            echo '<img src="../../includes/icons/petitspedestres/parcours_grey.png" alt="parcours_grey" class="image_lien" />';
+                            echo '<div class="titre_lien">AJOUTER UN PARCOURS</div>';
+                        echo '</a>';
+                    echo '</div>';
 
                     /***********/
                     /* Contenu */

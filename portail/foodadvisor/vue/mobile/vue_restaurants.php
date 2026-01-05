@@ -76,17 +76,19 @@
                     /********************/
                     /* Boutons d'action */
                     /********************/
-                    // Ajouter un restaurant
-                    echo '<a id="afficherSaisieRestaurant" title="Saisir un restaurant" class="lien_green lien_demi margin_lien">';
-                        echo '<img src="../../includes/icons/foodadvisor/restaurants_grey.png" alt="restaurants_grey" class="image_lien" />';
-                        echo '<div class="titre_lien">AJOUTER</div>';
-                    echo '</a>';
+                    echo '<div class="zone_actions">';
+                        // Ajouter un restaurant
+                        echo '<a id="afficherSaisieRestaurant" title="Saisir un restaurant" class="lien_green">';
+                            echo '<img src="../../includes/icons/foodadvisor/restaurants_grey.png" alt="restaurants_grey" class="image_lien" />';
+                            echo '<div class="titre_lien">AJOUTER</div>';
+                        echo '</a>';
 
-                    // Propositions
-                    echo '<a href="foodadvisor.php?date=' . date('Ymd') . '&action=goConsulter" title="Les propositions" class="lien_green lien_demi">';
-                        echo '<img src="../../includes/icons/foodadvisor/propositions_grey.png" alt="propositions_grey" class="image_lien" />';
-                        echo '<div class="titre_lien">PROPOSITIONS</div>';
-                    echo '</a>';
+                        // Propositions
+                        echo '<a href="foodadvisor.php?date=' . date('Ymd') . '&action=goConsulter" title="Les propositions" class="lien_green">';
+                            echo '<img src="../../includes/icons/foodadvisor/propositions_grey.png" alt="propositions_grey" class="image_lien" />';
+                            echo '<div class="titre_lien">PROPOSITIONS</div>';
+                        echo '</a>';
+                    echo '</div>';
 
                     /***********/
                     /* Détails */

@@ -80,23 +80,25 @@
                     /********************/
                     /* Boutons d'action */
                     /********************/
-                    // Modification parcours
-                    echo '<a id="afficherModificationParcours" title="Modifier le parcours" class="lien_green lien_demi margin_lien">';
-                        echo '<img src="../../includes/icons/common/edit_grey.png" alt="edit_grey" class="image_lien" />';
-                        echo '<div class="titre_lien">MODIFIER</div>';
-                    echo '</a>';
+                    echo '<div class="zone_actions">';
+                        // Modification parcours
+                        echo '<a id="afficherModificationParcours" title="Modifier le parcours" class="lien_green">';
+                            echo '<img src="../../includes/icons/common/edit_grey.png" alt="edit_grey" class="image_lien" />';
+                            echo '<div class="titre_lien">MODIFIER</div>';
+                        echo '</a>';
 
-                    // Suppression parcours
-                    echo '<form id="delete_parcours" method="post" action="details.php?action=doSupprimerParcours" title="Supprimer le parcours" class="lien_green lien_demi">';
-                        echo '<div class="eventConfirm">';
-                            echo '<img src="../../includes/icons/common/delete_grey.png" alt="delete_grey" class="image_lien" />';
+                        // Suppression parcours
+                        echo '<form id="delete_parcours" method="post" action="details.php?action=doSupprimerParcours" title="Supprimer le parcours" class="lien_green">';
+                            echo '<div class="eventConfirm">';
+                                echo '<img src="../../includes/icons/common/delete_grey.png" alt="delete_grey" class="image_lien" />';
 
-                            echo '<input type="hidden" name="id_parcours" value="' . $detailsParcours->getId() . '" />';
-                            echo '<input type="hidden" name="team_parcours" value="' . $detailsParcours->getTeam() . '" />';
-                            echo '<input type="submit" name="delete_parcours" value="SUPPRIMER" title="Supprimer le parcours" class="titre_lien_formulaire eventConfirm" />';
-                            echo '<input type="hidden" value="Demander la suppression de ce parcours ?" class="eventMessage" />';
-                        echo '</div>';
-                    echo '</form>';
+                                echo '<input type="hidden" name="id_parcours" value="' . $detailsParcours->getId() . '" />';
+                                echo '<input type="hidden" name="team_parcours" value="' . $detailsParcours->getTeam() . '" />';
+                                echo '<input type="submit" name="delete_parcours" value="SUPPRIMER" title="Supprimer le parcours" class="titre_lien_formulaire eventConfirm" />';
+                                echo '<input type="hidden" value="Demander la suppression de ce parcours ?" class="eventMessage" />';
+                            echo '</div>';
+                        echo '</form>';
+                    echo '</div>';
 
                     /***********/
                     /* Contenu */

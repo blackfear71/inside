@@ -76,55 +76,59 @@
                     /********************/
                     /* Boutons d'action */
                     /********************/
-                    // Vues
-                    echo '<a id="afficherSaisieVue" title="Changer de vue" class="lien_green">';
-                        echo '<img src="../../includes/icons/notifications/notifications_grey.png" alt="notifications_grey" class="image_lien" />';
+                    echo '<div class="zone_actions">';
+                        // Vues
+                        echo '<a id="afficherSaisieVue" title="Changer de vue" class="lien_green">';
+                            echo '<img src="../../includes/icons/notifications/notifications_grey.png" alt="notifications_grey" class="image_lien" />';
 
-                        switch ($_GET['view'])
-                        {
-                            case 'me':
-                                echo '<div class="titre_lien">MOI</div>';
-                                break;
+                            switch ($_GET['view'])
+                            {
+                                case 'me':
+                                    echo '<div class="titre_lien">MOI</div>';
+                                    break;
 
-                            case 'today':
-                                echo '<div class="titre_lien">AUJOURD\'HUI</div>';
-                                break;
+                                case 'today':
+                                    echo '<div class="titre_lien">AUJOURD\'HUI</div>';
+                                    break;
 
-                            case 'week':
-                                echo '<div class="titre_lien">7 JOURS</div>';
-                                break;
+                                case 'week':
+                                    echo '<div class="titre_lien">7 JOURS</div>';
+                                    break;
 
-                            case 'all':
-                            default:
-                                echo '<div class="titre_lien">TOUTES</div>';
-                                break;
-                        }
-                    echo '</a>';
+                                case 'all':
+                                default:
+                                    echo '<div class="titre_lien">TOUTES</div>';
+                                    break;
+                            }
+                        echo '</a>';
+                    echo '</div>';
 
                     /****************************/
                     /* Nombres de notifications */
                     /****************************/
-                    // Nombre de notification du jour
-                    echo '<div class="zone_nombre_notifications zone_nombre_margin">';
-                        echo '<div class="nombre_notifications">' . $nombresNotifications['nombreNotificationsJour'] . '</div>';
+                    echo '<div class="zone_nombres_notifications">';
+                        // Nombre de notification du jour
+                        echo '<div class="zone_nombre_notifications">';
+                            echo '<div class="nombre_notifications">' . $nombresNotifications['nombreNotificationsJour'] . '</div>';
 
-                        echo '<div class="zone_titre_nombre_notifications">';
-                            if ($nombresNotifications['nombreNotificationsJour'] == 1)
-                                echo '<div class="titre_nombre_notifications">NOTIFICATION AUJOURD\'HUI</div>';
-                            else
-                                echo '<div class="titre_nombre_notifications">NOTIFICATIONS AUJOURD\'HUI</div>';
+                            echo '<div class="zone_titre_nombre_notifications">';
+                                if ($nombresNotifications['nombreNotificationsJour'] == 1)
+                                    echo '<div class="titre_nombre_notifications">NOTIFICATION AUJOURD\'HUI</div>';
+                                else
+                                    echo '<div class="titre_nombre_notifications">NOTIFICATIONS AUJOURD\'HUI</div>';
+                            echo '</div>';
                         echo '</div>';
-                    echo '</div>';
 
-                    // Nombre de notifications de la semaine
-                    echo '<div class="zone_nombre_notifications">';
-                        echo '<div class="nombre_notifications">' . $nombresNotifications['nombreNotificationsSemaine'] . '</div>';
+                        // Nombre de notifications de la semaine
+                        echo '<div class="zone_nombre_notifications">';
+                            echo '<div class="nombre_notifications">' . $nombresNotifications['nombreNotificationsSemaine'] . '</div>';
 
-                        echo '<div class="zone_titre_nombre_notifications">';
-                            if ($nombresNotifications['nombreNotificationsSemaine'] == 1)
-                                echo '<div class="titre_nombre_notifications">NOTIFICATION CETTE SEMAINE</div>';
-                            else
-                                echo '<div class="titre_nombre_notifications">NOTIFICATIONS CETTE SEMAINE</div>';
+                            echo '<div class="zone_titre_nombre_notifications">';
+                                if ($nombresNotifications['nombreNotificationsSemaine'] == 1)
+                                    echo '<div class="titre_nombre_notifications">NOTIFICATION CETTE SEMAINE</div>';
+                                else
+                                    echo '<div class="titre_nombre_notifications">NOTIFICATIONS CETTE SEMAINE</div>';
+                            echo '</div>';
                         echo '</div>';
                     echo '</div>';
 
